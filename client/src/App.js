@@ -1,4 +1,4 @@
-import './App.css';
+/* import './App.css'; */
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 import AboutMe from './components/AboutMe/AboutMe';
@@ -14,13 +14,9 @@ import { grey , blue } from '@mui/material/colors';
 function App() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', width: '100vw', height: '100vh', backgroundColor: grey[400]}} >
-      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh'  , margin: '1.5vw', backgroundColor: '#000000'}} >
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh'  , margin: '1.5vw',background: 'linear-gradient(to bottom right, black 49.9%,white 50.1%)'}} >
 
-          <Box sx={{display: 'flex' , backgroundColor: 'none', borderLeft: '97vw solid transparent', borderBottom: '94vh solid #FFFFFF'}} >
-          </Box>
-
-          <Box sx={{display: 'flex', position: 'fixed' , flexDirection: 'column', width: '97vw', backgroundColor:'none', height: '94vh'}}>
-
+          {/* <Box sx={{ background: 'inherit' , display: 'flex', position: 'fixed' , flexDirection: 'column', width: '97vw', backgroundColor:'none', height: '94vh' }}> */}
             <BrowserRouter>
               <Routes>
 
@@ -28,7 +24,7 @@ function App() {
                   <Box sx={{display: 'flex' , flexDirection: 'column', justify: 'right', marginRight: '0.5vw', marginTop: '0.5vw' }}>
                     <NavBar />
                   </Box>
-                  <Box sx={{display: 'flex' , flexDirection: 'column' }}>
+                  <Box >
                     <Home/>
                   </Box>
 
@@ -44,7 +40,7 @@ function App() {
                 <Route path="/Contact" element={<><Contact/></>}/>
               </Routes>
             </BrowserRouter>
-          </Box>
+          {/* </Box> */}
       </Box>
     </Box>
   );

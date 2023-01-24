@@ -8,10 +8,11 @@ import { grey , blue } from '@mui/material/colors';
 function NavBar() {
 
   return (
-    <Box sx={{display: 'flex', flexDirection: 'row', justifyContent:"space-between"}}>
+    <Box sx={{zIndex: 1,display: 'flex', flexDirection: 'row', justifyContent:"space-between"}}>
       <Box sx={{display: 'flex', flexDirection: 'row', color: 'white', alignItems: 'center', marginLeft: '2vw'}}>
         <Typography sx={{ fontSize: '2.5rem'}}>{`< `}</Typography>
         <Typography sx={{ fontFamily: 'Allura', fontSize: '4rem', color: blue[600], fontWeight: 600}}>{`Pablo Azambuyo`}</Typography>
+        <Typography sx={{ fontSize: '3rem', fontWeight: '300', animation: 'blink 1s linear infinite', '@keyframes blink': {'0%': {opacity: '0'}, '49%': {opacity: '0'}, '50%': {opacity: '1'}}}}>{`I`}</Typography>
         <Typography sx={{ fontSize: '2.5rem'}}>{` />`}</Typography>
       </Box>
       <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'right',backgroundColor: 'none', width: '60vw'}}>
