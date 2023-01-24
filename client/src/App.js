@@ -20,7 +20,7 @@ function App() {
             <BrowserRouter>
               <Routes>
 
-                <Route path="/" element={<>
+                <Route path="/portfolio" element={<>
                   <Box sx={{display: 'flex' , flexDirection: 'column', justify: 'right', marginRight: '0.5vw', marginTop: '0.5vw' }}>
                     <NavBar />
                   </Box>
@@ -33,11 +33,11 @@ function App() {
                 </>}/>
 
 
-                <Route path="/AboutMe" element={<><AboutMe/></>}/>
-                <Route path="/Skills" element={<><Skills/></>}/>
-                <Route path="/Achievements" element={<><Achievements/></>}/>
-                <Route path="/Certifications" element={<><Certifications/></>}/>
-                <Route path="/Contact" element={<><Contact/></>}/>
+                <Route path="/portfolio/AboutMe" element={<><AboutMe/></>}/>
+                <Route path="/portfolio/Skills" element={<><Skills/></>}/>
+                <Route path="/portfolio/Achievements" element={<><Achievements/></>}/>
+                <Route path="/portfolio/Certifications" element={<><Certifications/></>}/>
+                <Route path="/portfolio/Contact" element={<><Contact/></>}/>
               </Routes>
             </BrowserRouter>
           {/* </Box> */}
