@@ -60,7 +60,7 @@ function Home() {
 
 
         </Box>
-        <Link style={{ textDecoration: 'none' }} to="/AboutMe"><Button sx={{color:'#FFFFFF', width: '15rem', marginLeft: '10vw', marginTop: '1.5vw'}} variant='outlined'>Know about me</Button></Link>
+        <Link style={{ textDecoration: 'none' }} to="/portfolio/AboutMe"><Button sx={{color:'#FFFFFF', width: '15rem', marginLeft: '10vw', marginTop: '1.5vw'}} variant='outlined'>Know about me</Button></Link>
 
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column' ,justifyContent: 'center', marginLeft: '2vw'}} >

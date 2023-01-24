@@ -17,11 +17,11 @@ function NavBar() {
       </Box>
       <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'right',backgroundColor: 'none', width: '60vw'}}>
 
-          <Link style={{ textDecoration: 'none' }} to="/AboutMe" ><Button  variant="text" sx={{ color: '#FFFFFF' , textTransform: 'none', fontSize: 'larger'}} >About Me</Button></Link>
-          <Link style={{ textDecoration: 'none' }} to="/Skills" ><Button variant="text" sx={{ color: '#FFFFFF', textTransform: 'none' , fontSize: 'larger'}} >Skills</Button></Link>
-          <Link style={{ textDecoration: 'none' }} to="/Achievements" ><Button variant="text" sx={{ color: '#FFFFFF', textTransform: 'none', fontSize: 'larger'}}>Achievements</Button></Link>
-          <Link style={{ textDecoration: 'none' }} to="/Certifications" ><Button  variant="text" sx={{ color: '#FFFFFF', textTransform: 'none', fontSize: 'larger'}}>Certifications</Button></Link>
-          <Link style={{ textDecoration: 'none' }} to="/Contact" ><Button  variant="text" sx={{ color: '#FFFFFF', textTransform: 'none', fontSize: 'larger', marginRight: '3vw'}}>Contact</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/portfolio/AboutMe" ><Button  variant="text" sx={{ color: '#FFFFFF' , textTransform: 'none', fontSize: 'larger'}} >About Me</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/portfolio/Skills" ><Button variant="text" sx={{ color: '#FFFFFF', textTransform: 'none' , fontSize: 'larger'}} >Skills</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/portfolio/Projects" ><Button variant="text" sx={{ color: '#FFFFFF', textTransform: 'none', fontSize: 'larger'}}>Projects</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/portfolio/Certifications" ><Button  variant="text" sx={{ color: '#FFFFFF', textTransform: 'none', fontSize: 'larger'}}>Certifications</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/portfolio/Contact" ><Button  variant="text" sx={{ color: '#FFFFFF', textTransform: 'none', fontSize: 'larger', marginRight: '3vw'}}>Contact</Button></Link>
           <Button variant="contained"  sx={{maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><WbSunnyIcon /></Button>
 
 

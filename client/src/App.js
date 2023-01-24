@@ -3,7 +3,7 @@ import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 import AboutMe from './components/AboutMe/AboutMe';
 import Skills from './components/Skills/Skills';
-import Achievements from './components/Achievements/Achievements';
+import Projects from './components/Projects/Projects';
 import Certifications from './components/Certifications/Certifications';
 import Contact from './components/Contact/Contact';
 import { Box, Button, Link,  Typography} from '@mui/material';
@@ -35,7 +35,9 @@ function App() {
 
                 <Route path="/portfolio/AboutMe" element={<><AboutMe/></>}/>
                 <Route path="/portfolio/Skills" element={<><Skills/></>}/>
-                <Route path="/portfolio/Achievements" element={<><Achievements/></>}/>
+                <Route path="/portfolio/Projects" element={<>
+                  <Projects/>
+                </>}/>
                 <Route path="/portfolio/Certifications" element={<><Certifications/></>}/>
                 <Route path="/portfolio/Contact" element={<><Contact/></>}/>
               </Routes>
