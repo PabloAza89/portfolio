@@ -69,9 +69,7 @@ function Projects() {
   return (
     <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', backgroundColor: 'none'}}>
       <Link style={{ textDecoration: 'none' }} to="/portfolio"><Button variant="contained"  sx={{position: 'absolute', top: '5vh', left: '5vh', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ForwardIcon sx={{transform: 'rotate(180deg)'}} /></Button></Link>
-      {/* <StyledBox sx={{...row(),...{background:'blue'}}}> */}
-      {/* <StyledBox onScroll={e => console.log(e.currentTarget.scrollLeft)} style={{ overflow: "auto" }} sx={{...row(),...{background:'blue'}}}> */}
-      <Box /* onScroll={e => setScroll(e.currentTarget.scrollLeft)} */ ref={useHorizontalScroll()} style={{ overflow: "auto" }} sx={{...row(),...{background:'blue'}}}>
+      <Box ref={useHorizontalScroll()} style={{ overflow: "auto" }} sx={{...row(),...{background:'blue'}}}>
         <Box sx={{...column(),...{ marginLeft: '1vw' , marginTop: '1vh', background: 'red'}}}>
           <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw'}}>
             <Typography sx={{ color: '#FFFFFF', fontSize: '3rem'}}>Weather App</Typography>
