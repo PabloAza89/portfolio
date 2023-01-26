@@ -36,7 +36,9 @@ function App() {
                 <Route path="/portfolio/AboutMe" element={<><AboutMe/></>}/>
                 <Route path="/portfolio/Skills" element={<><Skills/></>}/>
                 <Route path="/portfolio/Projects" element={<>
-                  <Projects/>
+                  <Box>
+                    <Projects/>
+                  </Box>
                 </>}/>
                 <Route path="/portfolio/Certifications" element={<><Certifications/></>}/>
                 <Route path="/portfolio/Contact" element={<><Contact/></>}/>

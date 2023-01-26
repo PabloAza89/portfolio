@@ -1,5 +1,5 @@
 import React, { useState , useRef, useEffect} from 'react';
-import {Box, Button,CardMedia, Typography} from '@mui/material';
+import {Box, Button,CardMedia, Typography, Table} from '@mui/material';
 import { BrowserRouter, Navigate, Route, Routes , Link, NavLink} from "react-router-dom";
 import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
@@ -10,7 +10,7 @@ import ForwardIcon from '@mui/icons-material/Forward';
 import Dialog from '@mui/material/Dialog';
 import { DialogTitle } from '@mui/material';
 import ReplyIcon from '@mui/icons-material/Reply';
-import { grey , blue , cyan, lime} from '@mui/material/colors';
+import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
 import { row, column, jc , as}from '../../styles/styles.js'
 /* import styled from "@emotion/styled"; */
 /* import { styled } from '@material-ui/styles'; */
@@ -27,22 +27,7 @@ function Projects() {
   const [show, setShow] = useState(false)
   const [name, setName] = useState("")
   const [scrollSpeed, setScrollSpeed] = useState(30)
-  /* let scrollSpeed = 30 */
-  
   const [scrollName, setScrollName] = useState("3x");
-  
-  /* const handleChange = (event) => {
-    setScroll(event.target.value);
-    console.log("SCROLL", scroll)
-    console.log("event", event.target.value)
-  }; */
-  /* const StyledBox = styled(Box) */
-
- /*  const StyledBox= styled(Box)({
-    
-}); */
-
-  let aaa = 200
 
   function useHorizontalScroll() {
     const elRef = useRef();
@@ -65,33 +50,49 @@ function Projects() {
     return elRef;
   }
 
-
   return (
-    <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', backgroundColor: 'none'}}>
-      <Link style={{ textDecoration: 'none' }} to="/portfolio"><Button variant="contained"  sx={{position: 'absolute', top: '5vh', left: '5vh', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ForwardIcon sx={{transform: 'rotate(180deg)'}} /></Button></Link>
-      <Box ref={useHorizontalScroll()} style={{ overflow: "auto" }} sx={{...row(),...{background:'blue'}}}>
-        <Box sx={{...column(),...{ marginLeft: '1vw' , marginTop: '1vh', background: 'red'}}}>
-          <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw'}}>
-            <Typography sx={{ color: '#FFFFFF', fontSize: '3rem'}}>Weather App</Typography>
-            <a href="https://pabloaza89.github.io/weather-app/" target="_blank" rel="noopener noreferrer"><Button variant="contained"  sx={{position: 'relative', left: '1vw', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ReplyIcon sx={{transform: 'scaleX(-1)'}} /></Button></a>
-          </Box>      
-          <Box sx={{background: lime[400], height: '32vh', width: '62vw', display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
-            <CardMedia onClick={(e) => setName(weatherify1) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${weatherify1})`, width: '100%', height: '100%' ,backgroundSize: '98%'}}></CardMedia>
-            <CardMedia onClick={(e) => setName(weatherify2) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${weatherify2})`, width: '100%', height: '100%' ,backgroundSize: '98%'}}></CardMedia>
-          </Box>
-        </Box>
+    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', backgroundColor: 'none'}}>
 
-        <Box sx={{...column(),...{ marginLeft: '1vw' , marginTop: '1vh', background: 'red'}}}>
-          <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw'}}>
-            <Typography sx={{ color: '#FFFFFF', fontSize: '3rem'}}>Food App</Typography>
-            <a href="https://pabloaza89.github.io/PI-Food-GH/" target="_blank" rel="noopener noreferrer"><Button variant="contained"  sx={{position: 'relative', left: '1vw', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ReplyIcon sx={{transform: 'scaleX(-1)'}} /></Button></a>
-          </Box>      
-          <Box sx={{background: lime[400], height: '32vh', width: '93vw', display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
-            <CardMedia onClick={(e) => setName(food1) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${food1})`, width: '100%', height: '100%' ,backgroundSize: '98%'}}></CardMedia>
-            <CardMedia onClick={(e) => setName(food2) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${food2})`, width: '100%', height: '100%' ,backgroundSize: '98%'}}></CardMedia>
-            <CardMedia onClick={(e) => setName(food3) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${food3})`, width: '100%', height: '100%' ,backgroundSize: '98%'}}></CardMedia>
+      <Link style={{ textDecoration: 'none' }} to="/portfolio"><Button variant="contained"  sx={{position: 'absolute', top: '5vh', left: '5vh', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ForwardIcon sx={{transform: 'rotate(180deg)'}} /></Button></Link>
+
+      <Box ref={useHorizontalScroll()} sx={{...column(),...{'::-webkit-scrollbar': { color: 'transparent' , height: '0px'}, overflow: "auto", backgroundColor: 'none', opacity: '0.8', marginBottom: '1vh'}}}>
+
+
+          <Box sx={{...column(),...{ backgroundColor: 'none', width: '158vw', height: '6vh', marginBottom: '0px'}}}>
+            <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
+            <Box sx={{...row(),...{'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)', 'background-blend-mode': 'difference', 'background-size': '7vw 7vw', width: '158vw', height: '6vh'}}}></Box>
+            <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
           </Box>
-        </Box>
+          <Box sx={{...row(),...{background: brown[700], width: '158vw'}}} >
+            <Box sx={{...column(),...{  marginLeft: '1vw' , background: red[800]}}}>
+
+              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw'}}>
+
+                <Typography sx={{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: '3rem'}}>Weather App</Typography>
+                <a href="https://pabloaza89.github.io/weather-app/" target="_blank" rel="noopener noreferrer"><Button variant="contained"  sx={{position: 'relative', left: '1vw', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ReplyIcon sx={{transform: 'scaleX(-1)'}} /></Button></a>
+              </Box>
+              <Box sx={{background: lime[400], height: '32vh', width: '62vw',  display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
+                <CardMedia onClick={(e) => setName(weatherify1) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${weatherify1})`, width: '100%', height: '100%' ,backgroundSize: '98%', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
+                <CardMedia onClick={(e) => setName(weatherify2) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${weatherify2})`, width: '100%', height: '100%' ,backgroundSize: '98%', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
+              </Box>
+            </Box>
+            <Box sx={{...column(),...{ marginLeft: '1vw' ,marginBottom: '0vw', background: red[800]}}}>
+              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw'}}>
+                <Typography sx={{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: '3rem'}}>Food App</Typography>
+                <a href="https://pabloaza89.github.io/PI-Food-GH/" target="_blank" rel="noopener noreferrer"><Button variant="contained"  sx={{position: 'relative', left: '1vw', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ReplyIcon sx={{transform: 'scaleX(-1)'}} /></Button></a>
+              </Box>
+              <Box sx={{background: lime[400], height: '32vh', width: '93vw', display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
+                <CardMedia onClick={(e) => setName(food1) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${food1})`, width: '100%', height: '100%' ,backgroundSize: '98%', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
+                <CardMedia onClick={(e) => setName(food2) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${food2})`, width: '100%', height: '100%' ,backgroundSize: '98%', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
+                <CardMedia onClick={(e) => setName(food3) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${food3})`, width: '100%', height: '100%' ,backgroundSize: '98%', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
+              </Box>
+            </Box>
+          </Box>
+          <Box sx={{...column(),...{ backgroundColor: 'none', width: '158vw', height: '6vh'}}}>
+            <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
+            <Box sx={{...row(),...{ 'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)', 'background-blend-mode': 'difference', 'background-size': '7vw 7vw', width: '158vw', height: '6vh'}}}></Box>
+            <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
+          </Box>
       </Box>
 
         <Dialog
@@ -105,19 +106,19 @@ function Projects() {
 
             </Dialog>
 
-      <Box sx={{...row(),...jc(),...{ backgroundColor: 'blue'}}}>
-        <Typography sx={{...row(),...jc(),...as(),...{color: '#FFFFFF'}}}>Scroll Speed:</Typography>
-        <Box sx={{...row(),...{  backgroundColor: 'blue', minWidth: '4vw' , background: 'gray'}}}>
-          <FormControl fullWidth>
+      <Box sx={{...row(),...as(),...{ backgroundColor: 'none', width: '12vw'}}}>
+        <Typography sx={{...row(),...jc(),...as(),...{color: '#000000', fontSize: '1.25rem', top: '0.1vh'}}}>Scroll Speed:  </Typography>
+        <Box sx={{...row(),...{  backgroundColor: 'blue', minWidth: '3vw' , background: blue[500]}}}>
+          <FormControl /* fullWidth */>
             <InputLabel id="demo-simple-select-label"></InputLabel>
             <Select
-              
+              sx={{color: '#FFFFFF', fontSize: '1.1rem' }}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={scrollSpeed}
               label="Scroll"
               onChange={function(e) {setScrollSpeed(e.target.value) ; setScrollName(e.target.value); console.log(scrollSpeed) ; console.log(scrollName)}}
-              
+
               /* onChange={e => console.log(e.target.value)} */
             >
               <MenuItem value={10} >1x</MenuItem>
@@ -129,7 +130,7 @@ function Projects() {
             </Select>
           </FormControl>
         </Box>
-      </Box>  
+      </Box>
     </Box>
   )
 }
