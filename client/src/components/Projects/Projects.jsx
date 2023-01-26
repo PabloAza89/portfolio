@@ -1,6 +1,6 @@
 import React, { useState , useRef, useEffect} from 'react';
-import {Box, Button,CardMedia, Typography, Table, Droppable} from '@mui/material';
-import { BrowserRouter, Navigate, Route, Routes , Link, NavLink} from "react-router-dom";
+import {Box, Button,CardMedia, Typography } from '@mui/material';
+import { Link } from "react-router-dom";
 import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
 import food1 from '../../images/food1.png';
@@ -10,14 +10,17 @@ import ForwardIcon from '@mui/icons-material/Forward';
 import Dialog from '@mui/material/Dialog';
 import ReplyIcon from '@mui/icons-material/Reply';
 import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
-import { row, column, jc , as, noSelect}from '../../styles/styles.js'
+import { row, column, jc , as, noSelect }from '../../styles/styles.js'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import { useSelector } from 'react-redux';
 
 function Projects() {
+
+  const english = useSelector( state => state.english )
 
   const [show, setShow] = useState(false)
   const [name, setName] = useState("")
@@ -60,7 +63,7 @@ function Projects() {
 
               <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw'}}>
 
-                <Typography sx={{...noSelect(),...{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: '3rem'}}}>Weather App</Typography>
+                <Typography sx={{...noSelect(),...{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: '3rem'}}}>{ english ? `Weather App` : `Aplicación del Clima` }</Typography>
                 <a href="https://pabloaza89.github.io/weather-app/" target="_blank" rel="noopener noreferrer"><Button variant="contained"  sx={{position: 'relative', left: '1vw', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ReplyIcon sx={{transform: 'scaleX(-1)'}} /></Button></a>
               </Box>
               <Box sx={{background: lime[400], height: '32vh', width: '62vw',  display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
@@ -70,7 +73,7 @@ function Projects() {
             </Box>
             <Box sx={{...column(),...{ marginLeft: '1vw' ,marginBottom: '0vw', background: red[800]}}}>
               <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw'}}>
-                <Typography sx={{...noSelect(),...{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: '3rem'}}}>Food App</Typography>
+                <Typography sx={{...noSelect(),...{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: '3rem'}}}>{ english ? `Food App` : `Aplicación de Comidas` }</Typography>
                 <a href="https://pabloaza89.github.io/PI-Food-GH/" target="_blank" rel="noopener noreferrer"><Button variant="contained"  sx={{position: 'relative', left: '1vw', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ReplyIcon sx={{transform: 'scaleX(-1)'}} /></Button></a>
               </Box>
               <Box sx={{background: lime[400], height: '32vh', width: '93vw', display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
@@ -97,8 +100,8 @@ function Projects() {
                 <CardMedia sx={{ display: 'flex', flexDirection: 'row', justifyItems: 'center', backgroundImage: `url(${name})`, width: '70vw', height: '100vw' ,backgroundSize: '98%', backgroundRepeat: 'no-repeat',}}></CardMedia>
             </Dialog>
 
-      <Box sx={{...row(),...as(),...{ backgroundColor: 'none', width: '14vw'}}}>
-        <Typography sx={{...row(),...jc(),...as(),...noSelect(),...{color: '#000000', fontSize: '1.25rem', top: '0.1vh'}}}>Scroll Wheel Speed:  </Typography>
+      <Box sx={{...row(),...as(),...{ backgroundColor: 'none', minWidth: '10vw'}}}>
+        <Typography sx={{...row(),...jc(),...as(),...noSelect(),...{color: '#000000', fontSize: '1.25rem', top: '0.1vh'}}}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
         <Box sx={{...row(),...{  backgroundColor: 'blue', minWidth: '3vw' , background: blue[500]}}}>
           <FormControl >
             <InputLabel id="demo-simple-select-label"></InputLabel>

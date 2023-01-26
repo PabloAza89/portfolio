@@ -1,20 +1,28 @@
 import React from 'react';
-import {Box, Button,CardMedia, Typography} from '@mui/material';
-import { BrowserRouter, Navigate, Route, Routes , Link} from "react-router-dom";
-import gear from '../../images/gear.png';
+import {Box, Button, Typography } from '@mui/material';
+import { Link } from "react-router-dom";
+import profile from '../../images/profile.png';
 import ForwardIcon from '@mui/icons-material/Forward';
+import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
+import { row, column, jc , as, noSelect}from '../../styles/styles.js'
+import Avatar from '@mui/material/Avatar';
+import { useSelector } from 'react-redux';
 
 function AboutMe() {
 
+  const english = useSelector( state => state.english )
+
   return (
-    <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', backgroundColor: 'none'}}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', backgroundColor: 'none'}}>
       <Link style={{ textDecoration: 'none' }} to="/portfolio"><Button variant="contained"  sx={{position: 'absolute', top: '5vh', left: '5vh', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ForwardIcon sx={{transform: 'rotate(180deg)'}} /></Button></Link>
-      <Typography sx={{fontFamily: 'Lucida Console', fontSize: '1.5rem' , color: 'white', position: 'absolute', fontWeight: 600, top: '20vh', left: '9vw'}}>SECTION UNDER CONSTRUCTION !</Typography>
-      <CardMedia sx={{ left: '30vw',  border: 'none', position: 'absolute', backgroundRepeat: 'no-repeat', backgroundImage: `url(${gear})`, width: '26rem', height: '26rem' , animation: 'spinRight 5s linear infinite', '@keyframes spinRight': {'100%': {transform: 'rotate(360deg)'},'0%': {transform: 'rotate(0deg)'}}}}></CardMedia>
-      <CardMedia sx={{ left: '49vw', top: '20vh', border: 'none', position: 'absolute', backgroundRepeat: 'no-repeat', backgroundImage: `url(${gear})`, width: '15rem', height: '15rem' , animation: 'spinLeft 5s linear infinite', '@keyframes spinLeft': {'0%': {transform: 'rotate(360deg)'},'100%': {transform: 'rotate(0deg)'}}}}></CardMedia>
-      <CardMedia sx={{ left: '47.7vw', top: '62vh', border: 'none', position: 'absolute', backgroundRepeat: 'no-repeat', backgroundImage: `url(${gear})`, width: '9rem', height: '9rem' , animation: 'spinLeft 2.5s linear infinite', '@keyframes spinLeft': {'0%': {transform: 'rotate(360deg)'},'100%': {transform: 'rotate(0deg)'}}}}></CardMedia>
-      <Typography sx={{fontFamily: 'Monaco', fontSize: '1.1rem' , color: 'white', position: 'absolute', fontWeight: 600, top: '11vh', left: '78vw', 'mix-blend-mode': 'difference'}}>SECTION UNDER CONSTRUCTION !</Typography>
-      <Typography sx={{fontFamily: 'Verdana', fontSize: '1.8rem' , color: 'white', position: 'absolute', fontWeight: 400, top: '88vh', left: '50vw', 'mix-blend-mode': 'difference'}}>Section Under Construction !</Typography>
+      <Box sx={{...row(),...as(),...{ backgroundColor: 'gray', width: '70vw', height: '60vh'}}}>
+        <Avatar
+          alt="Pablo Azambuyo"
+          src={profile}
+          sx={{ width: '20vh', height: '20vh', top: '-8vh' , left: '2vw'}}
+        />
+        <Typography sx={{...noSelect(),...as(),...{color: '#FFFFFF', paddingRight: '10vw', paddingTop: '3vw',fontSize: '1.8rem'}}}>{ english ? `Hi ! Im Pablo ! I worked almost 10 years on a paint selling shop. I was working as store manager and also as sales consultant in almost 5 years. In february of 2022 I wanted to give a turn on my life introducing in the world of programming, and I studied proudly on Henry ! On this academy I studied Fullstack Developer career, learning Javascript as my first language, including Node JS, React, Redux and Sequelize technologies. Other of my passions is the music, particullary play the piano, I consider myself as a melomaniac person !` : `Hola ! Soy Pablo ! Trabajé 10 años en una pinturería. Me desempeñé como encargado de la misma, atendiendo al público, desde hace 5 años. Desde febrero de 2022 quise darle un cambio de rumbo a mi vida incursionando en el mundo de la programación, por lo cual estudié orgullosamente en Henry ! En la misma academia estudié para ser Fullstack Developer, aprendiendo el principal lenguaje Javascript junto con tecnologías como Node JS, React, Redux y Sequelize. Otra de mis pasiones es la musica, particularmente tocar el piano, me considero una persona melómana !`}</Typography>
+      </Box>
     </Box>
   )
 }
