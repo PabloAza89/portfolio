@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/portfolio/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/portfolio/static/js/main.f42318ab.chunk.js",
-    "main.js.map": "/portfolio/static/js/main.f42318ab.chunk.js.map",
-    "runtime-main.js": "/portfolio/static/js/runtime-main.08f332ff.js",
-    "runtime-main.js.map": "/portfolio/static/js/runtime-main.08f332ff.js.map",
-    "static/js/2.bec5d7ac.chunk.js": "/portfolio/static/js/2.bec5d7ac.chunk.js",
-    "static/js/2.bec5d7ac.chunk.js.map": "/portfolio/static/js/2.bec5d7ac.chunk.js.map",
-    "static/js/3.b1cca454.chunk.js": "/portfolio/static/js/3.b1cca454.chunk.js",
-    "static/js/3.b1cca454.chunk.js.map": "/portfolio/static/js/3.b1cca454.chunk.js.map",
+    "main.js": "/portfolio/static/js/main.e131ae6c.chunk.js",
+    "main.js.map": "/portfolio/static/js/main.e131ae6c.chunk.js.map",
+    "runtime-main.js": "/portfolio/static/js/runtime-main.ee3509bc.js",
+    "runtime-main.js.map": "/portfolio/static/js/runtime-main.ee3509bc.js.map",
+    "static/js/2.ffbb856f.chunk.js": "/portfolio/static/js/2.ffbb856f.chunk.js",
+    "static/js/2.ffbb856f.chunk.js.map": "/portfolio/static/js/2.ffbb856f.chunk.js.map",
+    "static/js/3.565ec6ae.chunk.js": "/portfolio/static/js/3.565ec6ae.chunk.js",
+    "static/js/3.565ec6ae.chunk.js.map": "/portfolio/static/js/3.565ec6ae.chunk.js.map",
     "index.html": "/portfolio/index.html",
     "static/css/main.6dea0f05.chunk.css.map": "/portfolio/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.bec5d7ac.chunk.js.LICENSE.txt": "/portfolio/static/js/2.bec5d7ac.chunk.js.LICENSE.txt",
+    "static/js/2.ffbb856f.chunk.js.LICENSE.txt": "/portfolio/static/js/2.ffbb856f.chunk.js.LICENSE.txt",
     "static/media/food1.7713b38e.png": "/portfolio/static/media/food1.7713b38e.png",
     "static/media/food2.1c86c9e6.png": "/portfolio/static/media/food2.1c86c9e6.png",
     "static/media/food3.199146d2.png": "/portfolio/static/media/food3.199146d2.png",
@@ -27,9 +27,9 @@
     "static/media/weatherify2.59461bab.png": "/portfolio/static/media/weatherify2.59461bab.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.08f332ff.js",
-    "static/js/2.bec5d7ac.chunk.js",
+    "static/js/runtime-main.ee3509bc.js",
+    "static/js/2.ffbb856f.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.f42318ab.chunk.js"
+    "static/js/main.e131ae6c.chunk.js"
   ]
 }
