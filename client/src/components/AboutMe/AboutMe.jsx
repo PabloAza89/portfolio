@@ -15,7 +15,7 @@ function AboutMe() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', backgroundColor: 'none'}}>
       <Link style={{ textDecoration: 'none' }} to="/portfolio"><Button variant="contained"  sx={{position: 'absolute', top: '5vh', left: '5vh', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ForwardIcon sx={{transform: 'rotate(180deg)'}} /></Button></Link>
-      <Box sx={{...row(),...as(),...{ backgroundColor: 'gray', width: '70vw', height: '60vh'}}}>
+      <Box sx={{...row(),...as(),...{ backgroundColor: '#3C6478', width: '70vw', height: '60vh'}}}>
         <Avatar
           alt="Pablo Azambuyo"
           src={profile}

@@ -18,7 +18,7 @@ function Home() {
   return (
     <Box sx={{  display: 'flex', flexDirection: 'row'}}>
       <Box sx={{   display: 'flex', flexDirection: 'column', backgroundColor:'none' , height: '80vh', width: '60vw',justifyContent: 'center', marginLeft: '3vw'}}>
-        <Typography sx={{...noSelect(),...{color:'#FFFFFF', fontSize: '5rem' }}}>{english ? `Hi ! I'm Pablo Azambuyo` : `Hola ! Soy Pablo Azambuyo`}</Typography>
+        <Typography sx={{...noSelect(),...{color:'#FFFFFF', fontSize: '5rem' , 'mix-blend-mode': 'difference'}}}>{english ? `Hi ! I'm Pablo Azambuyo` : `Hola ! Soy Pablo Azambuyo`}</Typography>
         <Typography sx={{...noSelect(),...{color:'#FFFFFF', fontSize: '2.5rem', marginLeft: '6vw'}}}>{english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
         <Box sx={{   display: 'flex', flexDirection: 'column', backgroundColor: 'none', height: '8vh', width: '40vw' , marginTop: '2.2vh', marginBottom: '1.5vh'}}>
           <Box sx={{  display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>

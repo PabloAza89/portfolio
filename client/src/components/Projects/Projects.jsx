@@ -97,8 +97,8 @@ function Projects() {
               fullWidth={true}
               fullScreen={true}
             >
-                <CardMedia sx={{ display: 'flex', flexDirection: 'row', justifyItems: 'center', backgroundImage: `url(${name})`, width: '70vw', height: '100vw' ,backgroundSize: '98%', backgroundRepeat: 'no-repeat',}}></CardMedia>
-            </Dialog>
+          <CardMedia sx={{ display: 'flex', flexDirection: 'row', justifyItems: 'center', backgroundImage: `url(${name})`, width: '70vw', height: '100vw' ,backgroundSize: '98%', backgroundRepeat: 'no-repeat',}}></CardMedia>
+        </Dialog>
 
       <Box sx={{...row(),...as(),...{ backgroundColor: 'none', minWidth: '10vw'}}}>
         <Typography sx={{...row(),...jc(),...as(),...noSelect(),...{color: '#000000', fontSize: '1.25rem', top: '0.1vh'}}}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
@@ -114,11 +114,8 @@ function Projects() {
               onChange={function(e) {setScrollSpeed(e.target.value) ; setScrollName(e.target.value); console.log(scrollSpeed) ; console.log(scrollName)}}
             >
               <MenuItem value={10} >1x</MenuItem>
-              <MenuItem value={20} >2x</MenuItem>
-              <MenuItem value={30} >3x</MenuItem>
-              <MenuItem value={40} >4x</MenuItem>
-              <MenuItem value={50} >5x</MenuItem>
-              <MenuItem value={60} >6x</MenuItem>
+              <MenuItem value={30} >2x</MenuItem>
+              <MenuItem value={50} >3x</MenuItem>
             </Select>
           </FormControl>
         </Box>
