@@ -15,28 +15,24 @@ import { grey , blue } from '@mui/material/colors';
 
 function App() {
   return (
-    <Box sx={{ position: 'relative', display: 'flex', flexDirection: 'column', width: '100vw', height: '100vh', backgroundColor: grey[400]}} >
-      <Box sx={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100vh'  , margin: '1.5vw',background: 'linear-gradient(to bottom right, black 49.9%,white 50.1%)'}} >
+    <Box sx={{ position: 'relative', display: 'flex', width: '100vw', height: '100vh', backgroundColor: grey[400]}} >
+      <Box sx={{ position: 'relative', display: 'flex', width: '100vw', flexDirection: 'column', margin: '1.5vw',  background: 'linear-gradient(to bottom right, black 49.9%,white 50.1%)'}} >
 
           {/* <Box sx={{ background: 'inherit' , display: 'flex', position: 'fixed' , flexDirection: 'column', width: '97vw', backgroundColor:'none', height: '94vh' }}> */}
             <BrowserRouter>
               <Routes>
 
                 <Route path="/portfolio" element={<>
-                  <Box sx={{display: 'flex' , flexDirection: 'column'/* , justify: 'right' */, marginRight: '0.5vw', marginTop: '0.5vw' }}>
+                  <Box /* sx={{ marginRight: '0.5vw', marginTop: '0.5vw' }} */>
                     <NavBar />
                   </Box>
                   <Box >
                     <Home/>
-                  </Box>
-                  <Box sx={{display: 'grid'/* , position: 'relative' */}} >
+                  </Box >
+                  <Box sx={{display: 'grid'}} >
                     <Language />
                   </Box>
-
-
-
                 </>}/>
-
 
                 <Route path="/portfolio/AboutMe" element={<>
                   <Box>
