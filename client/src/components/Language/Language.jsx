@@ -27,7 +27,7 @@ function Language() {
         return () => {window.removeEventListener("resize", handleResizeWindow)};
   },[]);
 
-  console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT CEL: " , size.celPort, " | LANDSCAPE CEL: ", size.celLand, " | PORTRAIT PC: ", size.pcPort, " | LANDSCAPE PC: ", size.pcLand)
+  // console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT CEL: " , size.celPort, " | LANDSCAPE CEL: ", size.celLand, " | PORTRAIT PC: ", size.pcPort, " | LANDSCAPE PC: ", size.pcLand)
 
   return (
       <Box sx={{ display: 'flex', flexDirection: 'row', justifySelf: 'center', justifyContent: 'center',position: 'absolute' , background: 'none', width: size.celPort ? '45vh' : size.celLand ? '40vw' : '14vw', height: size.celPort ? '14vh' : size.celLand ? '16vh' : '4.5vh', bottom: '0.3vh'}}>

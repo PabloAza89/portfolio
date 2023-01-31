@@ -5,23 +5,43 @@ import { row, column, jc , as, noSelect, prtr, wi, he, or}from '../../Styles/Sty
 
 function GoToLinkButton({link}) {
 
-    const [size, setSize] = useState({
-        width: window.screen.width,
-        height: window.screen.height,
-        celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-        celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false
-      });
+  const [size, setSize] = useState({
+    width: window.screen.width,
+    height: window.screen.height,
+    celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+    celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+    pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+    pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+  });
 
-      useEffect(() => {
-          const handleResizeWindow = () => setSize({width: window.screen.width, height: window.screen.height, celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false });
-            window.addEventListener("resize", handleResizeWindow);
-            return () => {window.removeEventListener("resize", handleResizeWindow)};
-      },[]);
+  useEffect(() => {
+      const handleResizeWindow = () => setSize({width: window.screen.width, height: window.screen.height, celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false, pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false });
+        window.addEventListener("resize", handleResizeWindow);
+        return () => {window.removeEventListener("resize", handleResizeWindow)};
+  },[]);
 
-      // console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT: " , size.celPort, " | LANDSCAPE: ", size.celLand)
+  console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT CEL: " , size.celPort, " | LANDSCAPE CEL: ", size.celLand, " | PORTRAIT PC: ", size.pcPort, " | LANDSCAPE PC: ", size.pcLand)
+  // size.celPort ? '' : size.celLand ? '' : size.pcPort ? '' : '',
 
     return (
-        <a href={link} target="_blank" rel="noopener noreferrer"><Button variant="contained"  sx={{padding: '0vw !important', 'min-width': size.celPort ? '9vw !important' : size.celLand ? '7vh !important' : size.pcPort ? '5vh !important' : '4vh !important', 'max-width': '8.1vw !important', 'min-height': size.celPort ? '9vw !important' : size.celLand ? '7vh !important' : size.pcPort ? '5vh !important' : '4vh !important', 'max-height': '3.1vw !important', position: 'relative', maxWidth: wi()< he()? '3vh' : '2vw', maxHeight: wi()< he()? '3vh' : '2vw', minWidth: wi()< he()? '3vh' : '2vw', minHeight: wi()< he()? '3vh' : '2vw', justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column'}}><ReplyIcon sx={{transform: 'scaleX(-1)', padding: '0vw !important', 'min-width': size.celPort ? '6vw !important' : size.celLand ? '5vh !important' : '3.5vh !important', 'max-width': '8.1vw !important', 'min-height': size.celPort ? '6vw !important' : size.celLand ? '5vh !important' : '3.5vh !important', 'max-height': '3.1vw !important'}} /></Button></a>
+        <a href={link} target="_blank" rel="noopener noreferrer">
+          <Button variant="contained"  sx={{
+              padding: '0vw !important',
+              minWidth: size.celPort ? '0vh !important' : size.celLand ? '0vh !important' : size.pcPort ? '0vh !important' : '0vh !important',
+              width: size.celPort ? '4.5vw !important' : size.celLand ? '6vh !important' : size.pcPort ? '4.5vw !important' : '4vh !important',
+              height: size.celPort ? '4.5vw !important' : size.celLand ? '6vh !important' : size.pcPort ? '4.5vw !important' : '4vh !important',
+              position: 'relative',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column'
+          }}>
+            <ReplyIcon sx={{
+              transform: 'scaleX(-1)',
+              padding: '0vw !important',
+              width: size.celPort ? '4vw !important' : size.celLand ? '5vh !important' : size.pcPort ? '3vw !important' : '3.5vh !important'
+            }} />
+          </Button>
+        </a>
     )
 }
 

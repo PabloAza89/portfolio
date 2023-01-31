@@ -68,21 +68,21 @@ function Projects() {
   }
 
   return (
-    <Box sx={{ display: 'flex', marginTop: size.celPort ? '23vh' : size.celLand ? '17vh' : size.pcPort ? '24vh' : '12vh', flexDirection: 'column', justifyContent: 'center', height: size.celPort ? '50vh' : size.celLand ? '60vh' : size.pcPort ? '53vh' : '73vh' , width: '97vw', background: 'red'}}>
+    <Box sx={{ display: 'flex', marginTop: size.celPort ? '23vh' : size.celLand ? '17vh' : size.pcPort ? '24vh' : '12vh', flexDirection: 'column', justifyContent: 'center', height: size.celPort ? '50vh' : size.celLand ? '60vh' : size.pcPort ? '53vh' : '73vh' , width: '97vw', background: 'none'}}>
         <BackButton />
-        <ScrollContainer innerRef={useHorizontalScroll()} style={{overflow: 'auto', background: 'gray', opacity: '0.8', marginBottom: size.celPort ? '0vh' : size.celLand ? '0vh' : '1vh' }}>
+        <ScrollContainer innerRef={useHorizontalScroll()} style={{overflow: 'auto', background: 'none', opacity: '0.8', marginBottom: size.celPort ? '0vh' : size.celLand ? '0vh' : '1vh' }}>
 
-          <Box sx={{...column(),...{ background: 'blue', width: '158vw', height: size.celPort ? '3vh' : size.pcPort ? '3vh' : '6vh', marginBottom: '0px'}}}>
+          <Box sx={{...column(),...{ background: 'none', width: '158vw', height: size.celPort ? '3vh' : size.pcPort ? '3vh' : '6vh', marginBottom: '0px'}}}>
             <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
             <Box sx={{...row(),...{'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)', 'background-blend-mode': 'difference', 'background-size': size.celPort ? '13vw 7vw' : size.pcPort ? '11vw 7vw' : '7vw 7vw', width: '158vw', height: '6vh'}}}></Box>
             <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
           </Box>
           <Box sx={{...row(),...{background: brown[700], width: '158vw'}}} >
 
-            <Box sx={{...column(),...{  marginLeft: '1vw' , background: red[800], height: size.celPort ? '20vh' : size.celLand ? '45vh' : size.pcPort ? '20vh' : '40vh' }}}>
-              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw', background: 'gray', height: size.celPort ? '8vh' : size.celLand ? '8vh' : size.pcPort ? '5vh' : '8vh' }}>
-                <Typography sx={{...noSelect(),...{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: size.celPort ? '4.5vw' : size.celLand ? '5vh' : size.pcPort ? '3.6vw' : '5vh' }}}>{ english ? `Weather App` : `Aplicación del Clima` }</Typography>
-                    <GoToLinkButton link={"https://pabloaza89.github.io/weather-app/"}/>
+            <Box sx={{...column(),...{  marginLeft: '1vw' , background: red[800], height: size.celPort ? '20vh' : size.celLand ? '44vh' : size.pcPort ? '20vh' : '40vh' }}}>
+              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw', background: 'none', height: size.celPort ? '8vh' : size.celLand ? '8vh' : size.pcPort ? '5vh' : '8vh' }}>
+                <Typography sx={{...noSelect(),...{ marginRight: size.celPort ? '1.3vw' : size.celLand ? '0.9vw' : size.pcPort ? '1.3vw' : '0.9vw', fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: size.celPort ? '4.5vw' : size.celLand ? '5vh' : size.pcPort ? '3.6vw' : '5vh' }}}>{ english ? `Weather App` : `Aplicación del Clima` }</Typography>
+                <GoToLinkButton link={"https://pabloaza89.github.io/weather-app/"}/>
               </Box>
               <Box sx={{background: lime[400], height: size.celPort ? '32vh' : size.celLand ? '36vh' : size.pcPort ? '15vh' : '32vh', width: '62vw',  display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
                 <CardMedia onClick={(e) => setName(weatherify1) + setShow(!show)} sx={{ cursor: 'pointer', alignSelf:'center', backgroundImage: `url(${weatherify1})`, width: '100%', height: '100%' ,backgroundSize: size.celPort ? '30vw 15vh' : size.celLand ? '30vw 33vh' : size.pcPort ? '30vw 14vh' : '30vw 30vh', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
@@ -90,10 +90,10 @@ function Projects() {
               </Box>
             </Box>
 
-            <Box sx={{...column(),...{  marginLeft: '1vw' , background: red[800], height: size.celPort ? '20vh' : size.celLand ? '45vh' : size.pcPort ? '20vh' : '40vh' }}}>
-              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw', background: 'gray', height: size.celPort ? '8vh' : size.celLand ? '8vh' : size.pcPort ? '5vh' : '8vh' }}>
-                <Typography sx={{...noSelect(),...{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: size.celPort ? '4.5vw' : size.celLand ? '5vh' : size.pcPort ? '3.6vw' : '5vh' }}}>{ english ? `Food App` : `Aplicación de Comidas` }</Typography>
-                    <GoToLinkButton link={"https://pabloaza89.github.io/PI-Food-GH/"}/>
+            <Box sx={{...column(),...{  marginLeft: '1vw' , background: red[800], height: size.celPort ? '20vh' : size.celLand ? '44vh' : size.pcPort ? '20vh' : '40vh' }}}>
+              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw', background: 'none', height: size.celPort ? '8vh' : size.celLand ? '8vh' : size.pcPort ? '5vh' : '8vh' }}>
+              <Typography sx={{...noSelect(),...{ marginRight: size.celPort ? '1.3vw' : size.celLand ? '0.9vw' : size.pcPort ? '1.3vw' : '0.9vw', fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: size.celPort ? '4.5vw' : size.celLand ? '5vh' : size.pcPort ? '3.6vw' : '5vh' }}}>{ english ? `Food App` : `Aplicación de Comidas` }</Typography>
+                <GoToLinkButton link={"https://pabloaza89.github.io/PI-Food-GH/"}/>
               </Box>
               <Box sx={{background: lime[400], height: size.celPort ? '32vh' : size.celLand ? '36vh' : size.pcPort ? '15vh' : '32vh', width: '93vw',  display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
                 <CardMedia onClick={(e) => setName(food1) + setShow(!show)} sx={{ cursor: 'pointer', alignSelf:'center', backgroundImage: `url(${food1})`, width: '100%', height: '100%' ,backgroundSize: size.celPort ? '30vw 15vh' : size.celLand ? '30vw 33vh' :size.pcPort ? '30vw 14vh' : '30vw 30vh', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
@@ -103,7 +103,7 @@ function Projects() {
             </Box>
 
           </Box>
-          <Box sx={{...column(),...{ background: 'blue', width: '158vw', height: size.celPort ? '3vh' : size.pcPort ? '3vh' : '6vh', marginBottom: '0px'}}}>
+          <Box sx={{...column(),...{ background: 'none', width: '158vw', height: size.celPort ? '3vh' : size.pcPort ? '3vh' : '6vh', marginBottom: '0px'}}}>
             <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
             <Box sx={{...row(),...{ 'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)', 'background-blend-mode': 'difference', 'background-size': size.celPort ? '13vw 7vw' : size.pcPort ? '11vw 7vw' : '7vw 7vw', width: '158vw', height: '6vh'}}}></Box>
             <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
@@ -137,12 +137,15 @@ function Projects() {
         onClick={() => setShow(false)}
         style={{ maxWidth: "100%", maxHeight: "100vh", '&::-webkit-scrollbar': {display: 'none'} }}
       >
-        <DialogContent sx={{ 'justify-content': 'center', 'align-items': 'center', padding: '0vh 8vw 0vh 8vw', display: 'flex', 'flexDirection': 'row', background: 'white', height: '72vh', overflow: "hidden", '&::-webkit-scrollbar': {display: 'none'} }}>
+        <DialogContent sx={{ 'justify-content': 'center', 'align-items': 'center', padding: '0vh 8vw 0vh 8vw', display: 'flex', 'flexDirection': 'row', background: 'white', height: 'calc((30vw - 64px) + (72vh - 64px))', overflow: "hidden", '&::-webkit-scrollbar': {display: 'none'} }}>
+        
+        
           <img
-            style={{ width: 'calc(76vh - 64px)', height: '70vw', transform: 'rotate(-90deg)' , margin: '0vh 0vw 0vh 0vw', '&::-webkit-scrollbar': {display: 'none'}}}
-            src={name}
-            alt="project"
-          />
+            style={{ width: 'calc(72vh - 64px)', height: '70vw', transform: 'rotate(-90deg)' , margin: '0vh 0vw 0vh 0vw', '&::-webkit-scrollbar': {display: 'none'}}}
+            
+             src={name}
+           alt="project"
+           /> 
         </DialogContent>
       </Dialog>
 
