@@ -55,7 +55,7 @@ export function CelPort() {
          };
     }, []);
 
-    return width < 415 && window.screen.orientation.type === "portrait-primary"
+    return width <= 415 && window.screen.orientation.type === "portrait-primary"
 }
 
 export function CelLand() {
@@ -70,7 +70,7 @@ export function CelLand() {
          };
        }, []);
 
-    return height < 415 &&window.screen.orientation.type === "landscape-primary"
+    return height <= 415 &&window.screen.orientation.type === "landscape-primary"
 }
 
 

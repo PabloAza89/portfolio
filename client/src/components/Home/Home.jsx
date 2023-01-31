@@ -24,12 +24,12 @@ function Home() {
   });
 
   useEffect(() => {
-      const handleResizeWindow = () => setSize({width: window.screen.width, height: window.screen.height, celPort: window.screen.width < 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, celLand: window.screen.height < 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false });
+      const handleResizeWindow = () => setSize({width: window.screen.width, height: window.screen.height, celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false });
         window.addEventListener("resize", handleResizeWindow);
         return () => {window.removeEventListener("resize", handleResizeWindow)};
   },[]);
 
-  console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT: " , size.celPort, " | LANDSCAPE: ", size.celLand)
+  // console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT: " , size.celPort, " | LANDSCAPE: ", size.celLand)
 
   return (
     <Box sx={{ position: 'relative', justifyContent: 'center', display: 'flex', flexDirection: size.celPort ? 'column' : size.celLand ? 'row' : 'row', width: size.celPort ? '97vw' : size.celLand ? '97vw' : '97vw', background: 'none', height: size.celPort ? '65vh' : size.celLand ? '60vh' : '71vh' }}>

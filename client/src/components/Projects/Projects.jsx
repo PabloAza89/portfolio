@@ -10,17 +10,37 @@ import ForwardIcon from '@mui/icons-material/Forward';
 import Dialog from '@mui/material/Dialog';
 import ReplyIcon from '@mui/icons-material/Reply';
 import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
-import { row, column, jc , as, noSelect }from '../../Styles/Styles'
+import { row, column, jc , as, noSelect, prtr, wi, he, or}from '../../Styles/Styles'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
+import BackButton from '../BackButton/BackButton';
+import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
+import DialogContent from '@mui/material/DialogContent';
 
 function Projects() {
 
   const english = useSelector( state => state.english )
+
+  const [size, setSize] = useState({
+    width: window.screen.width,
+    height: window.screen.height,
+    celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+    celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+    pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+    pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+  });
+
+  useEffect(() => {
+      const handleResizeWindow = () => setSize({width: window.screen.width, height: window.screen.height, celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false, pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false });
+        window.addEventListener("resize", handleResizeWindow);
+        return () => {window.removeEventListener("resize", handleResizeWindow)};
+  },[]);
+
+  // console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT CEL: " , size.celPort, " | LANDSCAPE CEL: ", size.celLand, " | PORTRAIT PC: ", size.pcPort, " | LANDSCAPE PC: ", size.pcLand)
 
   const [show, setShow] = useState(false)
   const [name, setName] = useState("")
@@ -48,77 +68,102 @@ function Projects() {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', backgroundColor: 'none'}}>
+    <Box sx={{ display: 'flex', marginTop: size.celPort ? '23vh' : size.celLand ? '17vh' : size.pcPort ? '24vh' : '12vh', flexDirection: 'column', justifyContent: 'center', height: size.celPort ? '50vh' : size.celLand ? '60vh' : size.pcPort ? '53vh' : '73vh' , width: '97vw', background: 'red'}}>
+        <BackButton />
+        <ScrollContainer innerRef={useHorizontalScroll()} style={{overflow: 'auto', background: 'gray', opacity: '0.8', marginBottom: size.celPort ? '0vh' : size.celLand ? '0vh' : '1vh' }}>
 
-      <Link style={{ textDecoration: 'none' }} to="/portfolio"><Button variant="contained"  sx={{position: 'absolute', top: '5vh', left: '5vh', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ForwardIcon sx={{transform: 'rotate(180deg)'}} /></Button></Link>
-        <ScrollContainer innerRef={useHorizontalScroll()} style={{overflow: 'auto', backgroundColor: 'none', opacity: '0.8', marginBottom: '1vh'}}>
-
-          <Box sx={{...column(),...{ backgroundColor: 'none', width: '158vw', height: '6vh', marginBottom: '0px'}}}>
+          <Box sx={{...column(),...{ background: 'blue', width: '158vw', height: size.celPort ? '3vh' : size.pcPort ? '3vh' : '6vh', marginBottom: '0px'}}}>
             <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
-            <Box sx={{...row(),...{'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)', 'background-blend-mode': 'difference', 'background-size': '7vw 7vw', width: '158vw', height: '6vh'}}}></Box>
+            <Box sx={{...row(),...{'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)', 'background-blend-mode': 'difference', 'background-size': size.celPort ? '13vw 7vw' : size.pcPort ? '11vw 7vw' : '7vw 7vw', width: '158vw', height: '6vh'}}}></Box>
             <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
           </Box>
           <Box sx={{...row(),...{background: brown[700], width: '158vw'}}} >
-            <Box sx={{...column(),...{  marginLeft: '1vw' , background: red[800]}}}>
 
-              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw'}}>
-
-                <Typography sx={{...noSelect(),...{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: '3rem'}}}>{ english ? `Weather App` : `Aplicación del Clima` }</Typography>
-                <a href="https://pabloaza89.github.io/weather-app/" target="_blank" rel="noopener noreferrer"><Button variant="contained"  sx={{position: 'relative', left: '1vw', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ReplyIcon sx={{transform: 'scaleX(-1)'}} /></Button></a>
+            <Box sx={{...column(),...{  marginLeft: '1vw' , background: red[800], height: size.celPort ? '20vh' : size.celLand ? '45vh' : size.pcPort ? '20vh' : '40vh' }}}>
+              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw', background: 'gray', height: size.celPort ? '8vh' : size.celLand ? '8vh' : size.pcPort ? '5vh' : '8vh' }}>
+                <Typography sx={{...noSelect(),...{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: size.celPort ? '4.5vw' : size.celLand ? '5vh' : size.pcPort ? '3.6vw' : '5vh' }}}>{ english ? `Weather App` : `Aplicación del Clima` }</Typography>
+                    <GoToLinkButton link={"https://pabloaza89.github.io/weather-app/"}/>
               </Box>
-              <Box sx={{background: lime[400], height: '32vh', width: '62vw',  display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
-                <CardMedia onClick={(e) => setName(weatherify1) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${weatherify1})`, width: '100%', height: '100%' ,backgroundSize: '98%', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
-                <CardMedia onClick={(e) => setName(weatherify2) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${weatherify2})`, width: '100%', height: '100%' ,backgroundSize: '98%', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
+              <Box sx={{background: lime[400], height: size.celPort ? '32vh' : size.celLand ? '36vh' : size.pcPort ? '15vh' : '32vh', width: '62vw',  display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
+                <CardMedia onClick={(e) => setName(weatherify1) + setShow(!show)} sx={{ cursor: 'pointer', alignSelf:'center', backgroundImage: `url(${weatherify1})`, width: '100%', height: '100%' ,backgroundSize: size.celPort ? '30vw 15vh' : size.celLand ? '30vw 33vh' : size.pcPort ? '30vw 14vh' : '30vw 30vh', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
+                <CardMedia onClick={(e) => setName(weatherify2) + setShow(!show)} sx={{ cursor: 'pointer', alignSelf:'center', backgroundImage: `url(${weatherify2})`, width: '100%', height: '100%' ,backgroundSize: size.celPort ? '30vw 15vh' : size.celLand ? '30vw 33vh' : size.pcPort ? '30vw 14vh' : '30vw 30vh', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
               </Box>
             </Box>
-            <Box sx={{...column(),...{ marginLeft: '1vw' ,marginBottom: '0vw', background: red[800]}}}>
-              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw'}}>
-                <Typography sx={{...noSelect(),...{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: '3rem'}}}>{ english ? `Food App` : `Aplicación de Comidas` }</Typography>
-                <a href="https://pabloaza89.github.io/PI-Food-GH/" target="_blank" rel="noopener noreferrer"><Button variant="contained"  sx={{position: 'relative', left: '1vw', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ReplyIcon sx={{transform: 'scaleX(-1)'}} /></Button></a>
+
+            <Box sx={{...column(),...{  marginLeft: '1vw' , background: red[800], height: size.celPort ? '20vh' : size.celLand ? '45vh' : size.pcPort ? '20vh' : '40vh' }}}>
+              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '1vw', background: 'gray', height: size.celPort ? '8vh' : size.celLand ? '8vh' : size.pcPort ? '5vh' : '8vh' }}>
+                <Typography sx={{...noSelect(),...{ fontFamily: 'Century Gothic', color: '#FFFFFF', fontSize: size.celPort ? '4.5vw' : size.celLand ? '5vh' : size.pcPort ? '3.6vw' : '5vh' }}}>{ english ? `Food App` : `Aplicación de Comidas` }</Typography>
+                    <GoToLinkButton link={"https://pabloaza89.github.io/PI-Food-GH/"}/>
               </Box>
-              <Box sx={{background: lime[400], height: '32vh', width: '93vw', display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
-                <CardMedia onClick={(e) => setName(food1) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${food1})`, width: '100%', height: '100%' ,backgroundSize: '98%', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
-                <CardMedia onClick={(e) => setName(food2) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${food2})`, width: '100%', height: '100%' ,backgroundSize: '98%', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
-                <CardMedia onClick={(e) => setName(food3) + setShow(!show)} sx={{ alignSelf:'center', backgroundImage: `url(${food3})`, width: '100%', height: '100%' ,backgroundSize: '98%', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
+              <Box sx={{background: lime[400], height: size.celPort ? '32vh' : size.celLand ? '36vh' : size.pcPort ? '15vh' : '32vh', width: '93vw',  display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} >
+                <CardMedia onClick={(e) => setName(food1) + setShow(!show)} sx={{ cursor: 'pointer', alignSelf:'center', backgroundImage: `url(${food1})`, width: '100%', height: '100%' ,backgroundSize: size.celPort ? '30vw 15vh' : size.celLand ? '30vw 33vh' :size.pcPort ? '30vw 14vh' : '30vw 30vh', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
+                <CardMedia onClick={(e) => setName(food2) + setShow(!show)} sx={{ cursor: 'pointer', alignSelf:'center', backgroundImage: `url(${food2})`, width: '100%', height: '100%' ,backgroundSize: size.celPort ? '30vw 15vh' : size.celLand ? '30vw 33vh' :size.pcPort ? '30vw 14vh' : '30vw 30vh', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
+                <CardMedia onClick={(e) => setName(food3) + setShow(!show)} sx={{ cursor: 'pointer', alignSelf:'center', backgroundImage: `url(${food3})`, width: '100%', height: '100%' ,backgroundSize: size.celPort ? '30vw 15vh' :  size.celLand ? '30vw 33vh' :size.pcPort ? '30vw 14vh' : '30vw 30vh', ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}}}></CardMedia>
               </Box>
             </Box>
+
           </Box>
-          <Box sx={{...column(),...{ backgroundColor: 'none', width: '158vw', height: '6vh'}}}>
+          <Box sx={{...column(),...{ background: 'blue', width: '158vw', height: size.celPort ? '3vh' : size.pcPort ? '3vh' : '6vh', marginBottom: '0px'}}}>
             <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
-            <Box sx={{...row(),...{ 'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)', 'background-blend-mode': 'difference', 'background-size': '7vw 7vw', width: '158vw', height: '6vh'}}}></Box>
+            <Box sx={{...row(),...{ 'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)', 'background-blend-mode': 'difference', 'background-size': size.celPort ? '13vw 7vw' : size.pcPort ? '11vw 7vw' : '7vw 7vw', width: '158vw', height: '6vh'}}}></Box>
             <Box sx={{...row(),...{ background: brown[700], width: '158vw', height: '2vh'}}}></Box>
           </Box>
+
         </ScrollContainer>
 
-        <Dialog
-              sx={{height: '71vh',  display: 'flex', flexDirection: 'row', position: 'fixed', justifyContent: 'center', top: '15vh'}}
-              open={show}
+         <Dialog
+         sx={{ minHeight: size.celPort ? '70%' : 'none', maxHeight: size.celPort ? '70%' : 'none', minWidth: size.celPort ? '80vw' : 'none', maxWidth: size.celPort ? '80vw' : 'none', height: size.celPort ? '71%' : '71vh', width: size.celPort ? '100%' : 'none', display: 'flex', flexDirection: size.celPort ? 'row' : 'row', position: 'fixed', top: size.celPort ? '15vh' : '15vh', left: size.celPort ? '10vw' : '15vw' }} 
+               /* sx={{ minHeight: size.celPort ? '90%' : 'none', maxHeight: size.celPort ? '90%' : 'none', minWidth: size.celPort ? '70vw' : 'none', maxWidth: size.celPort ? '90vw' : 'none', height: size.celPort ? '71%' : '71vh', width: size.celPort ? '90vw' : 'none', display: 'flex', flexDirection: size.celPort ? 'column' : 'row', position: 'fixed', top: size.celPort ? '5vh' : '15vh', left: size.celPort ? '5vw' : '15vw' }}  */
+              
+              open={size.celLand || size.pcPort || size.pcLand ? show : null}
+              /* align="end" */
               onClick={() => setShow(false)}
               fullWidth={true}
-              fullScreen={true}
-            >
-          <CardMedia sx={{ display: 'flex', flexDirection: 'row', justifyItems: 'center', backgroundImage: `url(${name})`, width: '70vw', height: '100vw' ,backgroundSize: '98%', backgroundRepeat: 'no-repeat',}}></CardMedia>
+              fullScreen={true} 
+            > 
+          <CardMedia sx={{ 'margin-block': size.celPort ? 'auto' : 'none', transform: size.celPort ? 'rotate(-90deg)' : 'none', display: 'flex', flexDirection: 'row', justifyItems: 'center' , backgroundImage: `url(${name})`, width: size.celPort ? '80vw' : '70vw', height: size.celPort ? '35vh' : '100vh', backgroundSize: size.celPort ? '78vw 30vh' : size.pcPort ? '67vw 68vh' : '68vw 68vh', backgroundRepeat: 'no-repeat',}}></CardMedia>
+          {/* <CardMedia sx={{ 'margin-block': size.celPort ? 'auto' : 'none',  margin: '32vh 4vh 8vh 2vh',  display: 'flex', flexDirection: 'row', transform: 'rotate(-90deg)', background: size.celPort ? `url(${name})` : 'none', backgroundSize: '83vw 45vh', width: size.celPort ? '88vw' : '70vw', height: size.celPort ? '47vh' : '100vh', backgroundRepeat: 'no-repeat',}}></CardMedia> */}
         </Dialog>
 
-      <Box sx={{...row(),...as(),...{ backgroundColor: 'none', minWidth: '10vw'}}}>
-        <Typography sx={{...row(),...jc(),...as(),...noSelect(),...{color: '#000000', fontSize: '1.25rem', top: '0.1vh'}}}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
-        <Box sx={{...row(),...{  backgroundColor: 'blue', minWidth: '3vw' , background: blue[500]}}}>
-          <FormControl >
-            <InputLabel id="demo-simple-select-label"></InputLabel>
-            <Select
-              sx={{color: '#FFFFFF', fontSize: '1.1rem' }}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={scrollSpeed}
-              label="Scroll"
-              onChange={function(e) {setScrollSpeed(e.target.value) ; setScrollName(e.target.value); console.log(scrollSpeed) ; console.log(scrollName)}}
-            >
-              <MenuItem value={10} >1x</MenuItem>
-              <MenuItem value={30} >2x</MenuItem>
-              <MenuItem value={50} >3x</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
+
+
+
+       
+      
+
+      
+      <Dialog
+        open={size.celPort ? show : null}
+        onClick={() => setShow(false)}
+        style={{ maxWidth: "100%", maxHeight: "100vh", '&::-webkit-scrollbar': {display: 'none'} }}
+      >
+        <DialogContent sx={{ 'justify-content': 'center', 'align-items': 'center', padding: '0vh 8vw 0vh 8vw', display: 'flex', 'flexDirection': 'row', background: 'white', height: '72vh', overflow: "hidden", '&::-webkit-scrollbar': {display: 'none'} }}>
+          <img
+            style={{ width: 'calc(76vh - 64px)', height: '70vw', transform: 'rotate(-90deg)' , margin: '0vh 0vw 0vh 0vw', '&::-webkit-scrollbar': {display: 'none'}}}
+            src={name}
+            alt="project"
+          />
+        </DialogContent>
+      </Dialog>
+
+
+      <Box sx={{...row(),...as(),...{ backgroundColor: 'gray', minWidth: size.pcPort ? '10vw' : size.pclLand ? '10vw' : size.pcPort ? '35vw' : '10vw', height: size.pcPort ? '8vh' : '6vh', display: size.celLand ? 'none' : size.celPort ? 'none' : 'flex' }}}>
+        <Typography sx={{...row(),...jc(),...as(),...noSelect(),...{color: '#000000', fontSize: size.pcPort ? '2.5vh' : '1.5vw', top: '0.1vh'}}}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
+        <FormControl >
+          <InputLabel id="demo-simple-select-label"></InputLabel>
+          <Select
+            sx={{color: '#FFFFFF', fontSize: '1.1rem', background: blue[500], height: size.pcPort ? '5vh' : '6vh', width: size.pcPort ? '11vw' : '4.0vw', fontSize: size.pcPort ? '2vh': '1vw' }}
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={scrollSpeed}
+            label="Scroll"
+            onChange={function(e) {setScrollSpeed(e.target.value) ; setScrollName(e.target.value)}}
+          >
+            <MenuItem value={10} >1x</MenuItem>
+            <MenuItem value={30} >2x</MenuItem>
+            <MenuItem value={50} >3x</MenuItem>
+          </Select>
+        </FormControl>
       </Box>
     </Box>
   )

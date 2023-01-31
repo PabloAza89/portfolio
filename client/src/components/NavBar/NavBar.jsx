@@ -6,10 +6,8 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { grey , blue } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
 import { row, column, jc , as, noSelect, prtr, wi, he, or} from '../../Styles/Styles'
-import s from "./NavBar.module.css";
 
 function NavBar() {
-  // width: wi() < '415' ? '90vw' :
 
   const english = useSelector( state => state.english )
 
@@ -21,12 +19,12 @@ function NavBar() {
   });
 
   useEffect(() => {
-      const handleResizeWindow = () => setSize({width: window.screen.width, height: window.screen.height, celPort: window.screen.width < 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, celLand: window.screen.height < 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false });
+      const handleResizeWindow = () => setSize({width: window.screen.width, height: window.screen.height, celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false });
         window.addEventListener("resize", handleResizeWindow);
         return () => {window.removeEventListener("resize", handleResizeWindow)};
   },[]);
 
-  console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT: " , size.celPort, " | LANDSCAPE: ", size.celLand)
+  // console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT: " , size.celPort, " | LANDSCAPE: ", size.celLand)
 
   return (
     <Box sx={{display: 'flex', flexDirection: size.celPort ? 'column' : size.celLand ? 'row' : 'row', justifyContent:"space-between", background: 'none', marginTop: '1vh', height: size.celPort ? '30vw' : size.celLand ? '7vw' :'15vh'}}>

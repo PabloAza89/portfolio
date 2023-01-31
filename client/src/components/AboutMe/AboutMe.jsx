@@ -7,6 +7,7 @@ import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
 import { row, column, jc , as, noSelect, prtr, wi, he, or}from '../../Styles/Styles'
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
+import BackButton from '../BackButton/BackButton';
 
 function AboutMe() {
 
@@ -20,16 +21,16 @@ function AboutMe() {
   });
 
   useEffect(() => {
-      const handleResizeWindow = () => setSize({width: window.screen.width, height: window.screen.height, celPort: window.screen.width < 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, celLand: window.screen.height < 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false });
+      const handleResizeWindow = () => setSize({width: window.screen.width, height: window.screen.height, celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false });
         window.addEventListener("resize", handleResizeWindow);
         return () => {window.removeEventListener("resize", handleResizeWindow)};
   },[]);
 
-  console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT: " , size.celPort, " | LANDSCAPE: ", size.celLand)
+  console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT CEL: " , size.celPort, " | LANDSCAPE CEL: ", size.celLand)
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', backgroundColor: 'none'}}>
-      <Link style={{ textDecoration: 'none' }} to="/portfolio"><Button variant="contained"  sx={{padding: '0vw !important', 'min-width': size.celPort ? '8vh !important' : size.celLand ? '11vh !important' : '3.1vw !important', 'max-width': '8.1vw !important', 'min-height': size.celPort ? '8vh !important' : size.celLand ? '11vh !important' : '3.1vw !important', 'max-height': '3.1vw !important', position: 'absolute', top: size.celPort ? '3vh' : size.celLand ? '6vh' : '5vh', left: size.celPort ? '76vw' : size.celLand ? '88vw' : '6vh', maxWidth: wi()< he()? '3vh' : '2vw', maxHeight: wi()< he()? '3vh' : '2vw', minWidth: wi()< he()? '3vh' : '2vw', minHeight: wi()< he()? '3vh' : '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ForwardIcon sx={{transform: 'rotate(180deg)'}} /></Button></Link>
+      <BackButton />
       <Box sx={{...row(),...as(),...{ backgroundColor: '#3C6478', width: size.celPort ? '90vw' : size.celLand ? '70vw' : '70vw', height: size.celPort ? '70vh' : size.celLand ? '60vh' : '60vh', top: wi() < he() ? '2vh' : null}}}>
         <Avatar
           alt="Pablo Azambuyo"

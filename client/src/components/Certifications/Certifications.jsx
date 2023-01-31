@@ -9,6 +9,7 @@ import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
 import { row, column, jc , as, noSelect }from '../../Styles/Styles'
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
+import BackButton from '../BackButton/BackButton';
 
 function Certifications() {
 
@@ -76,7 +77,7 @@ function Certifications() {
           <Box component="span" style={{'animation-duration': `calc(125s / 28)`}}></Box>
         </Box>
 
-        <Link style={{ textDecoration: 'none' }} to="/portfolio"><Button variant="contained"  sx={{position: 'absolute', top: '5vh', left: '5vh', maxWidth: '2vw', maxHeight: '2vw', minWidth: '2vw', minHeight: '2vw', justifyItems: 'center', alignContent: 'center', display: 'flex', flexDirection: 'column'}}><ForwardIcon sx={{transform: 'rotate(180deg)'}} /></Button></Link>
+        <BackButton />
 
         <Box sx={{...row(),...jc(),...{ justifyItems: 'center', width: '80vw', height: '80vh' , background: 'none'}}}>
           <Box sx={{...column(),...jc(),...as(),...{ backgroundColor: 'none', width: '29vw', height: '39vh'}}}>
