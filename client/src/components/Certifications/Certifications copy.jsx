@@ -11,7 +11,6 @@ import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
 import BackButton from '../BackButton/BackButton';
 import Bubbles from '../Bubbles/Bubbles';
-import DialogContent from '@mui/material/DialogContent';
 
 function Certifications() {
 
@@ -165,30 +164,13 @@ function Certifications() {
 
         <Dialog
           sx={{height: '83vh', width: '60vw', backgroundColor: 'none', display: 'flex', position: 'absolute', justifySelf: 'center', top: '8vh', left: '14vw'}}
-          open={size.celLand || size.pcPort || size.pcLand ? show : null}
+          open={show}
           onClick={() => setShow(false)}
           fullWidth={true}
           fullScreen={true}
         >
           <CardMedia sx={{ display: 'flex', position: 'relative', flexDirection: 'column', justifyItems: 'center', backgroundImage: `url(${name})`, width: '72.1vw', height: '84vh' ,backgroundSize: '70vw 80vh', backgroundRepeat: 'no-repeat'}}></CardMedia>
         </Dialog>
-
-
-
-        <Dialog
-          open={size.celPort ? show : null}
-          onClick={() => setShow(false)}
-          style={{ maxWidth: "100%", maxHeight: "100vh", '&::-webkit-scrollbar': {display: 'none'} }}
-        >
-          <DialogContent sx={{ 'justify-content': 'center', 'align-items': 'center', padding: '0vh 8vw 0vh 8vw', display: 'flex', 'flexDirection': 'row', background: 'white', height: 'calc((30vw - 64px) + (72vh - 64px))', overflow: "hidden", '&::-webkit-scrollbar': {display: 'none'} }}>
-            <img
-              style={{ width: 'calc(72vh - 64px)', height: '70vw', transform: 'rotate(-90deg)' , margin: '0vh 0vw 0vh 0vw', '&::-webkit-scrollbar': {display: 'none'}}}
-              src={name}
-              alt="project"
-            /> 
-          </DialogContent>
-        </Dialog>
-
       </Box>
   )
 }

@@ -36,7 +36,7 @@ function App() {
 
                 <Route path="/portfolio/AboutMe" element={<>
                   <Box>
-                    <AboutMe/>
+                    <AboutMe />
                   </Box>
                   <Box sx={{display: 'grid'/* , position: 'relative' */}} >
                     <Language />
@@ -45,14 +45,21 @@ function App() {
                 <Route path="/portfolio/Skills" element={<><Skills/></>}/>
                 <Route path="/portfolio/Projects" element={<>
                   <Box>
-                    <Projects/>
+                    <Projects />
                   </Box>
                   <Box sx={{display: 'grid'/* , position: 'relative' */}} >
                     <Language />
                   </Box>
                 </>}/>
-                <Route path="/portfolio/Certifications" element={<><Certifications/></>}/>
-                <Route path="/portfolio/Contact" element={<><Contact/></>}/>
+                <Route path="/portfolio/Certifications" element={<>
+                  <Box>
+                    <Certifications />
+                  </Box>
+                  <Box sx={{display: 'grid'}}>
+                    <Language />
+                  </Box>
+                </>}/>
+                <Route path="/portfolio/Contact" element={<><Contact /></>}/>
               </Routes>
             </BrowserRouter>
           {/* </Box> */}

@@ -120,13 +120,6 @@ function Projects() {
         > 
           <CardMedia sx={{ 'margin-block': size.celPort ? 'auto' : 'none', transform: size.celPort ? 'rotate(-90deg)' : 'none', display: 'flex', flexDirection: 'row', justifyItems: 'center' , backgroundImage: `url(${name})`, width: size.celPort ? '80vw' : '70vw', height: size.celPort ? '35vh' : '100vh', backgroundSize: size.celPort ? '78vw 30vh' : size.pcPort ? '67vw 68vh' : '68vw 68vh', backgroundRepeat: 'no-repeat',}}></CardMedia>
         </Dialog>
-
-
-
-
-       
-      
-
       
       <Dialog
         open={size.celPort ? show : null}
@@ -134,14 +127,11 @@ function Projects() {
         style={{ maxWidth: "100%", maxHeight: "100vh", '&::-webkit-scrollbar': {display: 'none'} }}
       >
         <DialogContent sx={{ 'justify-content': 'center', 'align-items': 'center', padding: '0vh 8vw 0vh 8vw', display: 'flex', 'flexDirection': 'row', background: 'white', height: 'calc((30vw - 64px) + (72vh - 64px))', overflow: "hidden", '&::-webkit-scrollbar': {display: 'none'} }}>
-        
-        
           <img
             style={{ width: 'calc(72vh - 64px)', height: '70vw', transform: 'rotate(-90deg)' , margin: '0vh 0vw 0vh 0vw', '&::-webkit-scrollbar': {display: 'none'}}}
-            
-             src={name}
-           alt="project"
-           /> 
+            src={name}
+            alt="project"
+          /> 
         </DialogContent>
       </Dialog>
 
