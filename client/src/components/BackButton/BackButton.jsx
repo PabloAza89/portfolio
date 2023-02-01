@@ -39,9 +39,13 @@ function BackButton() {
             flexDirection: 'column'
           }}>
             <ForwardIcon sx={{
+              display: 'flex',
+              position: 'absolute',
+              padding: '0vw 0vw 0vw 0vw !important',
               transform: 'rotate(180deg)',
-              padding: '0vw !important',
-              width: size.celPort ? '6vw !important' : size.celLand ? '4.5vh !important' : size.pcPort ? '3vw !important' : '2.5vh !important'
+              minWidth: size.celPort ? '0vh !important' : size.celLand ? '0vh !important' : size.pcPort ? '0vh !important' : '0vh !important',
+              width: size.celPort ? '6.5vw !important' : size.celLand ? '4.5vh !important' : size.pcPort ? '4vw !important' : '2.5vh !important',
+              height: size.celPort ? '6.5vw !important' : size.celLand ? '4.5vh !important' : size.pcPort ? '4vw !important' : '2.5vh !important'
             }}/>
           </Button>
         </Link> 

@@ -23,15 +23,15 @@ function App() {
               <Routes>
 
                 <Route path="/portfolio" element={<>
-                  <Box /* sx={{ marginRight: '0.5vw', marginTop: '0.5vw' }} */>
-                    <NavBar />
-                  </Box>
-                  <Box >
-                    <Home/>
-                  </Box >
-                  <Box sx={{display: 'grid'}} >
+                  
+                  <NavBar />
+                  
+                  
+                  <Home/>
+                  
+                  
                     <Language />
-                  </Box>
+                  
                 </>}/>
 
                 <Route path="/portfolio/AboutMe" element={<>
