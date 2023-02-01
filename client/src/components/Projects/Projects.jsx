@@ -111,18 +111,14 @@ function Projects() {
 
         </ScrollContainer>
 
-         <Dialog
-         sx={{ minHeight: size.celPort ? '70%' : 'none', maxHeight: size.celPort ? '70%' : 'none', minWidth: size.celPort ? '80vw' : 'none', maxWidth: size.celPort ? '80vw' : 'none', height: size.celPort ? '71%' : '71vh', width: size.celPort ? '100%' : 'none', display: 'flex', flexDirection: size.celPort ? 'row' : 'row', position: 'fixed', top: size.celPort ? '15vh' : '15vh', left: size.celPort ? '10vw' : '15vw' }} 
-               /* sx={{ minHeight: size.celPort ? '90%' : 'none', maxHeight: size.celPort ? '90%' : 'none', minWidth: size.celPort ? '70vw' : 'none', maxWidth: size.celPort ? '90vw' : 'none', height: size.celPort ? '71%' : '71vh', width: size.celPort ? '90vw' : 'none', display: 'flex', flexDirection: size.celPort ? 'column' : 'row', position: 'fixed', top: size.celPort ? '5vh' : '15vh', left: size.celPort ? '5vw' : '15vw' }}  */
-              
-              open={size.celLand || size.pcPort || size.pcLand ? show : null}
-              /* align="end" */
-              onClick={() => setShow(false)}
-              fullWidth={true}
-              fullScreen={true} 
-            > 
+        <Dialog
+          sx={{ minHeight: size.celPort ? '70%' : 'none', maxHeight: size.celPort ? '70%' : 'none', minWidth: size.celPort ? '80vw' : 'none', maxWidth: size.celPort ? '80vw' : 'none', height: size.celPort ? '71%' : '71vh', width: size.celPort ? '100%' : 'none', display: 'flex', flexDirection: size.celPort ? 'row' : 'row', position: 'fixed', top: size.celPort ? '15vh' : '15vh', left: size.celPort ? '10vw' : '15vw' }} 
+          open={size.celLand || size.pcPort || size.pcLand ? show : null}
+          onClick={() => setShow(false)}
+          fullWidth={true}
+          fullScreen={true} 
+        > 
           <CardMedia sx={{ 'margin-block': size.celPort ? 'auto' : 'none', transform: size.celPort ? 'rotate(-90deg)' : 'none', display: 'flex', flexDirection: 'row', justifyItems: 'center' , backgroundImage: `url(${name})`, width: size.celPort ? '80vw' : '70vw', height: size.celPort ? '35vh' : '100vh', backgroundSize: size.celPort ? '78vw 30vh' : size.pcPort ? '67vw 68vh' : '68vw 68vh', backgroundRepeat: 'no-repeat',}}></CardMedia>
-          {/* <CardMedia sx={{ 'margin-block': size.celPort ? 'auto' : 'none',  margin: '32vh 4vh 8vh 2vh',  display: 'flex', flexDirection: 'row', transform: 'rotate(-90deg)', background: size.celPort ? `url(${name})` : 'none', backgroundSize: '83vw 45vh', width: size.celPort ? '88vw' : '70vw', height: size.celPort ? '47vh' : '100vh', backgroundRepeat: 'no-repeat',}}></CardMedia> */}
         </Dialog>
 
 
@@ -150,8 +146,8 @@ function Projects() {
       </Dialog>
 
 
-      <Box sx={{...row(),...as(),...{ backgroundColor: 'gray', minWidth: size.pcPort ? '10vw' : size.pclLand ? '10vw' : size.pcPort ? '35vw' : '10vw', height: size.pcPort ? '8vh' : '6vh', display: size.celLand ? 'none' : size.celPort ? 'none' : 'flex' }}}>
-        <Typography sx={{...row(),...jc(),...as(),...noSelect(),...{color: '#000000', fontSize: size.pcPort ? '2.5vh' : '1.5vw', top: '0.1vh'}}}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
+      <Box sx={{...row(),...as(),...{ background: 'none', minWidth: size.pcPort ? '10vw' : size.pclLand ? '10vw' : size.pcPort ? '35vw' : '10vw', display: size.celLand ? 'none' : size.celPort ? 'none' : 'flex' }}}>
+        <Typography sx={{...row(),...jc(),...as(),...noSelect(),...{color: '#FFFFFF', fontSize: size.pcPort ? '2.5vh' : '1.5vw', top: '0.1vh', 'mix-blend-mode': 'difference' }}}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
         <FormControl >
           <InputLabel id="demo-simple-select-label"></InputLabel>
           <Select
