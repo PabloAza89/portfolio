@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState , useRef, useEffect} from 'react';
 import {Box, Button, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
 import profile from '../../images/profile.png';
@@ -13,38 +13,53 @@ function AboutMe() {
 
   const english = useSelector( state => state.english )
 
-  const [size, setSize] = useState({
-    width: window.screen.width,
-    height: window.screen.height,
-    celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-    celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-    pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-    pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-    staticRefWidth: window.screen.width / 100,
-    staticRefHeight: window.screen.height / 100,
-    currentWidth: window.innerWidth,
-    currentHeight: window.innerHeight
-  });
 
-  useEffect(() => {
-      const handleResizeWindow = () => setSize({
-        width: window.screen.width,
-        height: window.screen.height,
-        celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-        celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-        pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-        pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-        staticRefWidth: window.screen.width / 100,
-        staticRefHeight: window.screen.height / 100,
-        currentWidth: window.innerWidth,
-        currentHeight: window.innerHeight
-      });
-        window.addEventListener("resize", handleResizeWindow);
-        return () => {window.removeEventListener("resize", handleResizeWindow)};
-  },[]);
 
-  console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT CEL: " , size.celPort, " | LANDSCAPE CEL: ", size.celLand, " | PORTRAIT PC: ", size.pcPort, " | LANDSCAPE PC: ", size.pcLand)
-  // size.celPort ? '' : size.celLand ? '' : size.pcPort ? '' : '',
+    const [size, setSize] = useState({
+      width: window.screen.width,
+      height: window.screen.height,
+      minPort: window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+      minLand: window.screen.height < 425 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+      medPort: window.screen.width >= 425 && window.screen.width <= 825 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+      medLand: window.screen.height >= 425 && window.screen.height <= 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+      larPort: window.screen.width > 825 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+      larLand: window.screen.height > 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+      staticRefWidth: window.screen.width / 100,
+      staticRefHeight: window.screen.height / 100,
+      maxStaticReference: ( window.screen.width >= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100,
+      currentWidth: window.innerWidth,
+      currentHeight: window.innerHeight,
+      percentageResizedHeight: window.innerHeight / window.screen.height,
+      percentageResizedWidth: window.innerWidth / window.screen.width
+    });
+  
+    useEffect(() => {
+        const handleResizeWindow = () => setSize({
+          width: window.screen.width,
+          height: window.screen.height,
+          minPort: window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+          minLand: window.screen.height < 425 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+          medPort: window.screen.width >= 425 && window.screen.width <= 825 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+          medLand: window.screen.height >= 425 && window.screen.height <= 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+          larPort: window.screen.width > 825 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+          larLand: window.screen.height > 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+          staticRefWidth: window.screen.width / 100,
+          staticRefHeight: window.screen.height / 100,
+          maxStaticReference: ( window.screen.width >= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100,
+          currentWidth: window.innerWidth,
+          currentHeight: window.innerHeight,
+          percentageResizedHeight: window.innerHeight / window.screen.height,
+          percentageResizedWidth: window.innerWidth / window.screen.width
+        });
+          window.addEventListener("resize", handleResizeWindow);
+          return () => {window.removeEventListener("resize", handleResizeWindow)};
+    },[]);
+
+   // console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT CEL: " , size.minPort, " | LANDSCAPE CEL: ", size.minLand, " | PORTRAIT PC: ", size.larPort, " | LANDSCAPE PC: ", size.larLand)
+  // size.minPort ? '' : size.minLand ? '' : size.medPort ? '' : size.medLand ? '' : size.larPort ? '' : '',
+  // console.log("MAX REFERENCE", size.staticRefWidth, "MAX STATIC", size.maxStaticReference)
+
+  
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
@@ -57,32 +72,32 @@ function AboutMe() {
         display: 'flex',
         flexDirection: 'row',
         'justify-content': 'space-evenly',
-        width: size.celPort ? '90vw' : size.celLand ? '70vw' : size.pcPort ? '70vw' : '70vw',
-        height: size.celPort ? '70vh' : size.celLand ? '60vh' : size.pcPort ? '60vh' : '60vh',
-        top: size.pcPort ? '2vh' : 'null'
+        width: size.minPort ? '90vw' : size.minLand ? '70vw' : size.larPort ? '70vw' : '70vw',
+        height: size.minPort ? '70vh' : size.minLand ? '60vh' : size.larPort ? '60vh' : '60vh',
+        top: size.larPort ? '2vh' : 'null'
       }} >
         <Avatar
           alt="Pablo Azambuyo"
           src={profile}
           sx={{
             position: 'absolute',
-            /* width: size.celPort ? '2.1vh' : size.celLand ? '3.3vh' : size.pcPort ? '2.4vh' : `${size.staticRefWidth * 8.5}px`,
-            height: size.celPort ? '2.1vh' : size.celLand ? '3.3vh' : size.pcPort ? '2.4vh' : `${size.staticRefWidth * 8.5}px`, */
-            width: size.celPort ? '2.1vh' : size.celLand ? '3.3vh' : size.pcPort ? '16.5vh' : '16.5vh',
-            height: size.celPort ? '2.1vh' : size.celLand ? '3.3vh' : size.pcPort ? '16.5vh' : '16.5vh',
+            /* width: size.minPort ? '2.1vh' : size.minLand ? '3.3vh' : size.larPort ? '2.4vh' : `${size.staticRefWidth * 8.5}px`,
+            height: size.minPort ? '2.1vh' : size.minLand ? '3.3vh' : size.larPort ? '2.4vh' : `${size.staticRefWidth * 8.5}px`, */
+            width: size.minPort ? '2.1vh' : size.minLand ? '3.3vh' : size.larPort ? '16.5vh' : '16.5vh',
+            height: size.minPort ? '2.1vh' : size.minLand ? '3.3vh' : size.larPort ? '16.5vh' : '16.5vh',
             maxWidth: `${size.staticRefHeight * 13.7}px`,
             maxHeight: `${size.staticRefHeight * 13.7}px`,
 
-            transform: size.pcLand && size.currentHeight < 330 ? 'scale(0.0001) translate(100vw, -100vw)' : 'null',
-            /* transform : size.pcLand && size.currentHeight < 330 ? 'translateX(10px) rotate(10deg) translateY(5px)' : 'null', */
+            transform: size.larLand && size.currentHeight < 330 ? 'scale(0.0001) translate(100vw, -100vw)' : 'null',
+            /* transform : size.larLand && size.currentHeight < 330 ? 'translateX(10px) rotate(10deg) translateY(5px)' : 'null', */
             transition: 'all .5s',
             
 
             top: '8vh' ,
-            left: size.pcPort ? '18vw' : '16vw',
+            left: size.larPort ? '18vw' : '16vw',
 
             /* transition: 'opacity .01s ease-in-out',
-            opacity: size.pcLand && size.currentHeight < 330 ? '0' : '1',
+            opacity: size.larLand && size.currentHeight < 330 ? '0' : '1',
             'active': {
               'opacity': '0',
               'display': 'flex'
@@ -94,21 +109,21 @@ function AboutMe() {
             'justify-content': 'flex-start',
             display: 'flex',
             flexDirection: 'column',
-            background: 'none',
+            background: 'red',
             alignSelf: 'center',
-            marginTop: '3vh',
+            /* marginTop: '3vh', */
             /* padding: '200px', */
             width: '65vw',
-            height: '28vh',
+            height: size.minPort ? '38vh' : size.minLand ? '38vh' : size.larPort ? '28vh' : '28vh',
             'text-align': 'center',
             /* margin: '100px auto', */
-            fontSize: size.celPort ? '2.1vh' : size.celLand ? '3.3vh' : size.pcPort ? `${size.staticRefWidth * 1.38}px` : `${size.staticRefWidth * 1.38}px`,
+            fontSize: size.minPort ? `${size.maxStaticReference * 3.0}px` : size.minLand ? `${size.maxStaticReference * 3.0}px` : size.medPort ? `${size.maxStaticReference * 2.3}px` : size.medLand ? `${size.maxStaticReference * 2.3}px` :  size.larPort ? `${size.maxStaticReference * 1.5}px` : `${size.maxStaticReference * 1.5}px`,
             /* 'border-radius': '30px', */
             overflow: 'auto',
             color: 'rgba(0, 0, 0, 0)',
             '-webkit-text-fill-color': 'white',
             transition: 'color .8s',
-            '::-webkit-scrollbar': { 
+            '::-webkit-scrollbar': {
               width: '8px' },
             '*::-webkit-scrollbar-thumb': {
               'background-clip': 'padding-box',

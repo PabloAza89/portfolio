@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState , useRef, useEffect} from 'react';
 import { Box, Button,  Typography, View, TextareaAutosize} from '@mui/material';
 import { BrowserRouter, Navigate, Route, Routes , Link} from "react-router-dom";
 import SendIcon from '@mui/icons-material/Send';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { grey , blue } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
+import ScrollContainer from 'react-indiana-drag-scroll';
 import { row, column, jc , as, noSelect, prtr, wi, he, or} from '../../Styles/Styles'
 
 function NavBar() {
@@ -33,7 +34,12 @@ function NavBar() {
     celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
     pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
     pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-    staticFont: window.screen.width / 100
+    staticRefWidth: window.screen.width / 100,
+    staticRefHeight: window.screen.height / 100,
+    maxStaticReference: window.screen.width / 100 >= window.screen.height / 100 ? window.screen.width / 100 : window.screen.height / 100,
+    currentWidth: window.innerWidth,
+    currentHeight: window.innerHeight,
+    
   });
 
   useEffect(() => {
@@ -44,7 +50,11 @@ function NavBar() {
         celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
         pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
         pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-        staticFont: window.screen.width / 100
+        staticRefWidth: window.screen.width / 100,
+        staticRefHeight: window.screen.height / 100,
+        maxStaticReference: window.screen.width / 100 >= window.screen.height / 100 ? window.screen.width / 100 : window.screen.height / 100,
+        currentWidth: window.innerWidth,
+        currentHeight: window.innerHeight
       });
         window.addEventListener("resize", handleResizeWindow);
         return () => {window.removeEventListener("resize", handleResizeWindow)};
@@ -53,8 +63,28 @@ function NavBar() {
   console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT CEL: " , size.celPort, " | LANDSCAPE CEL: ", size.celLand, " | PORTRAIT PC: ", size.pcPort, " | LANDSCAPE PC: ", size.pcLand)
   // size.celPort ? '' : size.celLand ? '' : size.pcPort ? '' : '',
   /* console.log("TEST 123", size.width > size.height ? 'true' : 'false') */
-  console.log("STATIC WIDTH FONT", (size.staticFont))
+  console.log("MAX REFERENCE", size.staticRefWidth, "MAX STATIC", size.maxStaticReference)
   /* console.log("AAAAAA", 2 + 'px'.toString()) */
+
+  function useHorizontalScroll() {
+    const elRef = useRef();
+    useEffect(() => {
+      const el = elRef.current;
+      if (el) {
+        const onWheel = e => {
+          if (e.deltaY == 0) return;
+          e.preventDefault();
+          el.scrollTo({
+            left: el.scrollLeft + e.deltaY * 4,
+            behavior: "smooth"
+          });
+        };
+        el.addEventListener("wheel", onWheel);
+        return () => el.removeEventListener("wheel", onWheel);
+      }
+    }, [/* scrollSpeed */]);
+    return elRef;
+  }
 
   return (
     <Box sx={{
@@ -64,7 +94,9 @@ function NavBar() {
       flexDirection: size.celPort ? 'column' : size.celLand ? 'row' : size.pcPort ? 'column' : 'row',
       marginTop: '1vh',
       height: size.celPort ? '30vw' : size.celLand ? '7vw' : size.pcPort ? '20vh' : '15vh',
+      
       /* minHeight: size.pcLand ? '11vw' : '15vw' */
+
     }}>
       <Box sx={{ 
         display: 'flex',
@@ -94,9 +126,9 @@ function NavBar() {
           fontWeight: '300',
           animation: 'blink 1s linear infinite',
           '@keyframes blink': {
-            '0%': { opacity: '0'},
-            '49%': {opacity: '0'},
-            '50%': {opacity: '1'}
+            '0%': { opacity: '0' },
+            '49%': { opacity: '0' },
+            '50%': { opacity: '1' }
           }
         }}}>{`I`}</Typography>
         <Typography sx={{...noSelect(),...{
@@ -104,21 +136,39 @@ function NavBar() {
           marginLeft: size.celPort ? '0.2vw' : size.celLand ? '1.0vw' : size.pcPort ? '0.8vw' : '0.3vw'
         }}}>{`/>`}</Typography>
       </Box>
-      <Box sx={{ background: 'green', 'align-self': 'center', display: 'flex', flexDirection: 'row', justifyContent: size.celPort ? 'space-around' : size.celLand ? 'space-evenly' : size.pcPort ? 'space-evenly' : 'space-evenly', alignItems: 'center', width: size.celPort ? '96vw' : size.celLand ? '58vw' : size.pcPort ? '96vw' : '60vw', height: size.celPort ? '7vh' : size.celLand ? '7vh' : size.pcPort ? '10vh' : '13vh' }}>
+      <ScrollContainer style={{
+        background: 'green',
+        // overflow: 'auto', background: 'none', opacity: '0.8', marginBottom: size.celPort ? '0vh' : size.celLand ? '0vh' : '1vh' 
+        overflow: 'auto',
+        'align-self': 'center',
+        display: 'flex',
+        /* flexDirection: 'row', */
+        justifyContent: size.celPort ? 'space-around' : size.celLand ? 'space-evenly' : size.pcPort ? 'space-evenly' : 'flex-start',
+        alignItems: 'center',
+        width: size.celPort ? '96vw' : size.celLand ? '58vw' : size.pcPort ? '96vw' : '60vw',
+        height: size.celPort ? '7vh' : size.celLand ? '7vh' : size.pcPort ? '10vh' : '13vh'
+        }}
+        innerRef={useHorizontalScroll()}
+      >
         <Link style={{ 
           background: 'none',
+          marginLeft: `${size.staticRefWidth * 0.5}px`,
+          marginRight: `${size.staticRefWidth * 0.5}px`,
+          'min-width': 'fit-content',
           textDecoration: 'none', color: '#FFFFFF',
-          fontSize: size.celPort ? '3.2vw' : size.celLand ? '1.3vw' : size.pcPort ? '2.6vw' : /* '1.3vw' */ `${size.staticFont * 1.2}px`,
+          fontSize: size.celPort ? '3.2vw' : size.celLand ? '1.3vw' : size.pcPort ? '2.6vw' : /* '1.3vw' */ `${size.staticRefWidth * 1.2}px`,
           fontFamily: 'Roboto',
           fontWeight: '600',
           'mix-blend-mode': 'difference'
-        }} to="/portfolio/AboutMe" >{ english ? `About Me` : `Acerca De Mi` }</Link>
-        <Link style={{ background: 'none', textDecoration: 'none', color: '#FFFFFF', fontSize: size.celPort ? '3.2vw' : size.celLand ? '1.3vw' : size.pcPort ? '2.6vw' : '1.3vw', fontFamily: 'Roboto', fontWeight: '600', 'mix-blend-mode': 'difference' }} to="/portfolio/Skills" >{ english ? `Skills` : `Habilidades` } </Link>
-        <Link style={{ background: 'none', textDecoration: 'none', color: '#FFFFFF', fontSize: size.celPort ? '3.2vw' : size.celLand ? '1.3vw' : size.pcPort ? '2.6vw' : '1.3vw', fontFamily: 'Roboto', fontWeight: '600', 'mix-blend-mode': 'difference' }} to="/portfolio/Projects" >{ english ? `Projects` : `Proyectos` }</Link>
-        <Link style={{ background: 'none', textDecoration: 'none', color: '#FFFFFF', fontSize: size.celPort ? '3.2vw' : size.celLand ? '1.3vw' : size.pcPort ? '2.6vw' : '1.3vw', fontFamily: 'Roboto', fontWeight: '600', 'mix-blend-mode': 'difference' }} to="/portfolio/Certifications" >{ english ? `Certifications` : `Certificaciones`}</Link>
-        <Link style={{ background: 'none', textDecoration: 'none', color: '#FFFFFF', fontSize: size.celPort ? '3.2vw' : size.celLand ? '1.3vw' : size.pcPort ? '2.6vw' : '1.3vw', fontFamily: 'Roboto', fontWeight: '600', 'mix-blend-mode': 'difference' }} to="/portfolio/Contact" >{ english ? `Contact` : `Contacto`}</Link>
+        }}
+        to="/portfolio/AboutMe"
+      >{ english ? `About Me` : `Acerca De Mi` }</Link>
+        <Link style={{ background: 'none', marginLeft: `${size.staticRefWidth * 0.5}px`, marginRight: `${size.staticRefWidth * 0.5}px`, 'min-width': 'fit-content', textDecoration: 'none', color: '#FFFFFF', fontSize: size.celPort ? '3.2vw' : size.celLand ? '1.3vw' : size.pcPort ? '2.6vw' : `${size.staticRefWidth * 1.2}px`, fontFamily: 'Roboto', fontWeight: '600', 'mix-blend-mode': 'difference' }} to="/portfolio/Skills" >{ english ? `Skills` : `Habilidades` } </Link>
+        <Link style={{ background: 'none', marginLeft: `${size.staticRefWidth * 0.5}px`, marginRight: `${size.staticRefWidth * 0.5}px`, 'min-width': 'fit-content', textDecoration: 'none', color: '#FFFFFF', fontSize: size.celPort ? '3.2vw' : size.celLand ? '1.3vw' : size.pcPort ? '2.6vw' : `${size.staticRefWidth * 1.2}px`, fontFamily: 'Roboto', fontWeight: '600', 'mix-blend-mode': 'difference' }} to="/portfolio/Projects" >{ english ? `Projects` : `Proyectos` }</Link>
+        <Link style={{ background: 'none', marginLeft: `${size.staticRefWidth * 0.5}px`, marginRight: `${size.staticRefWidth * 0.5}px`, 'min-width': 'fit-content', textDecoration: 'none', color: '#FFFFFF', fontSize: size.celPort ? '3.2vw' : size.celLand ? '1.3vw' : size.pcPort ? '2.6vw' : `${size.staticRefWidth * 1.2}px`, fontFamily: 'Roboto', fontWeight: '600', 'mix-blend-mode': 'difference' }} to="/portfolio/Certifications" >{ english ? `Certifications` : `Certificaciones`}</Link>
+        <Link style={{ background: 'none', marginLeft: `${size.staticRefWidth * 0.5}px`, marginRight: `${size.staticRefWidth * 0.5}px`, 'min-width': 'fit-content', textDecoration: 'none', color: '#FFFFFF', fontSize: size.celPort ? '3.2vw' : size.celLand ? '1.3vw' : size.pcPort ? '2.6vw' : `${size.staticRefWidth * 1.2}px`, fontFamily: 'Roboto', fontWeight: '600', 'mix-blend-mode': 'difference' }} to="/portfolio/Contact" >{ english ? `Contact` : `Contacto`}</Link>
         {/* <Button variant="contained" sx={{ position: wi() < '415' ? 'absolute' : 'null', top: wi() < '415' ? '2vh' : null, padding: '0px !important', 'min-width': '2.1vw !important', 'max-width': '2.1vw !important', 'min-height': '2.1vw !important', 'max-height': '2.1vw !important'}}><WbSunnyIcon sx={{width: '1.6vw'}}/></Button> */}
-      </Box>
+      </ScrollContainer>
     </Box>
   )
 }
