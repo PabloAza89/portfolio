@@ -36,12 +36,12 @@ function Home() {
   // size.celPort ? '' : size.celLand ? '' : size.pcPort ? '' : '',
 
   return (
-    <Box sx={{ background: 'none', position: 'relative', justifyContent: 'center', display: 'flex', flexDirection: size.celPort ? 'column' : size.celLand ? 'row' : 'row', width: size.celPort ? '97vw' : size.celLand ? '97vw' : '97vw', height: size.celPort ? '71vh' : size.celLand ? '60vh' : size.pcPort ? '66vh' : '71vh' }}>
-      <Box sx={{ background: 'none', position: 'relative', justifyContent: 'center', display: size.celPort || size.celLand ? 'contents' : 'flex', flexDirection: size.celPort ? 'column' : size.celLand ? 'row' : 'column', width: size.celPort ? '97vw' : size.celLand ? '97vw' : '50vw', height: size.celPort ? '40vh' : size.celLand ? '60vh' : size.pcPort ? '66vh' : '71vh' }}>
+    <Box sx={{ background: 'gray', position: 'relative', justifyContent: 'center', display: 'flex', flexDirection: size.celPort ? 'column' : size.celLand ? 'row' : 'row', width: size.celPort ? '97vw' : size.celLand ? '97vw' : '97vw', height: size.celPort ? '71vh' : size.celLand ? '60vh' : size.pcPort ? '60vh' : '71vh' }}>
+      <Box sx={{ background: 'darkblue', position: 'relative', justifyContent: 'center', display: size.celPort || size.celLand ? 'contents' : 'flex', flexDirection: size.celPort ? 'column' : size.celLand ? 'row' : 'column', width: size.celPort ? '97vw' : size.celLand ? '97vw' : '50vw', height: size.celPort ? '40vh' : size.celLand ? '60vh' : size.pcPort ? '60vh' : '71vh' }}>
         <Box sx={ { position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignSelf: 'center', background:'none' , height: size.celPort ? '50vh' : size.celLand ? '55vh' : '35vh', width: size.celPort ? '90vw' : size.celLand ? '45vw' : '40vw' /* ,justifyContent: 'center' */}}>
-          <Typography sx={{...noSelect(),...{color:'#FFFFFF', fontSize: size.celPort  ? '11.5vw' : size.celLand ? '4.9vw' : size.pcPort ? '5.6vw' : '6.1vh', 'mix-blend-mode': 'difference'}}}>{english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
-          <Typography sx={{...noSelect(),...{color:'#FFFFFF', fontSize: size.celPort  ? '11.5vw' : size.celLand ? '5.4vw' : size.pcPort ? '5.6vw' : '6.1vh', 'mix-blend-mode': 'difference'}}}>{english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
-          <Typography sx={{...noSelect(),...{color:'#FFFFFF', fontSize: size.celPort  ? '11.5vw' : size.celLand ? '2.9vw' : size.pcPort ? '3.6vw' : '4.1vh', 'mix-blend-mode': 'difference'/* , marginLeft: '6vw' */}}}>{english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
+          <Typography sx={{...noSelect(),...{color:'#FFFFFF', fontSize: size.celPort  ? '11.5vw' : size.celLand ? '4.9vw' : size.pcPort ? '6.9vw' : '6.1vh', 'mix-blend-mode': 'difference'}}}>{english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
+          <Typography sx={{...noSelect(),...{color:'#FFFFFF', fontSize: size.celPort  ? '11.5vw' : size.celLand ? '5.4vw' : size.pcPort ? '7.6vw' : '6.1vh', 'mix-blend-mode': 'difference'}}}>{english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
+          <Typography sx={{...noSelect(),...{color:'#FFFFFF', fontSize: size.celPort  ? '11.5vw' : size.celLand ? '2.9vw' : size.pcPort ? '4.2vw' : '4.1vh', 'mix-blend-mode': 'difference'/* , marginLeft: '6vw' */}}}>{english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
         </Box>
         <Box sx={{ background: 'none', left: size.celPort ? '-0.5vw' : size.celLand ? '0vw' : size.pcPort ? '0vw' : '0vw', 'justify-content': 'center', position: 'relative', display: size.pcPort ? 'none' : 'flex', flexDirection: 'column', alignSelf: 'center', height: size.celPort ? '11vh' : size.celLand ? '8vh' : '11vh', width: size.celPort ? '97vw' : size.celLand ? '50vw' : size.pcPort ? '48vw' : '40vw' }}>
           
@@ -80,16 +80,26 @@ function Home() {
             
             
 
-      <Box sx={{background: 'none', display: size.celPort ? 'none' : size.celLand ? 'none' : 'flex', width: '46vw', justifyContent: 'center'}}> 
+      <Box sx={{ 
+        background: 'brown',
+        display: size.celPort ? 'none' : size.celLand ? 'none' : 'flex',
+        width: '46vw',
+        justifyContent: 'center',
+        'align-items': 'center'
+      }}>
         <SvgIcon
-          style={{display: 'flex', height: '70vh', width: '40vw'}}
+          style={{
+            display: 'flex',
+            width: size.pcPort ? '42vw' : size.pcLand ? '50vh' : '40vw',
+            height: size.pcPort ? '42vw' : size.pcLand ? '50vh' : '70vh'
+          }}
           preserveAspectRatio="none"
         >
           <MySvg/>
         </SvgIcon>
       </Box>
 
-      <Box sx={{ display: size.pcPort ? 'flex' : 'none', position: 'absolute', width: '85vw', height: '10vh', flexDirection: 'column', top: '33.9vh'}} >
+      <Box sx={{ display: size.pcPort ? 'flex' : 'none', position: 'absolute', width: '85vw', height: '10vh', flexDirection: 'column', top: '31.5vh'}} >
         <Technologies />
       </Box>
 
