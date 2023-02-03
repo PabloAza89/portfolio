@@ -1,5 +1,20 @@
 const initialState = {
-  english: true
+  english: true,
+  width: window.screen.width,
+  height: window.screen.height,
+  minPort: window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+  minLand: window.screen.height < 425 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+  medPort: window.screen.width >= 425 && window.screen.width <= 825 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+  medLand: window.screen.height >= 425 && window.screen.height <= 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+  larPort: window.screen.width > 825 && window.matchMedia("(orientation: portrait)").matches ? true : false,
+  larLand: window.screen.height > 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
+  staticRefWidth: window.screen.width / 100,
+  staticRefHeight: window.screen.height / 100,
+  maxStaticReference: ( window.screen.width >= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100,
+  currentWidth: window.innerWidth,
+  currentHeight: window.innerHeight,
+  percentageResizedHeight: window.innerHeight / window.screen.height,
+  percentageResizedWidth: window.innerWidth / window.screen.width
 }
 
 const reducer = (state = initialState, action) => {
@@ -8,7 +23,82 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         english: action.payload
-      }
+      };
+    case 'SET_WIDTH':
+      return {
+        ...state,
+        width: action.payload
+      };
+    case 'SET_HEIGHT':
+      return {
+        ...state,
+        height: action.payload
+      };
+    case 'MIN_PORT':
+      return {
+        ...state,
+        minPort: action.payload
+      };
+    case 'MIN_LAND':
+      return {
+        ...state,
+        minLand: action.payload
+      };
+    case 'MED_PORT':
+      return {
+        ...state,
+        medPort: action.payload
+      };
+    case 'MED_LAND':
+      return {
+        ...state,
+        medLand: action.payload
+      };
+    case 'LAR_PORT':
+      return {
+        ...state,
+        larPort: action.payload
+      };
+    case 'LAR_LAND':
+      return {
+        ...state,
+        larLand: action.payload
+      };
+    case 'STATIC_REF_WIDTH':
+        return {
+          ...state,
+          staticRefWidth: action.payload
+        };
+    case 'STATIC_REF_HEIGHT':
+      return {
+        ...state,
+        staticRefHeight: action.payload
+      };
+    case 'MAX_STATIC_REFERENCE':
+      return {
+        ...state,
+        maxStaticReference: action.payload
+      };
+    case 'CURRENT_WIDTH':
+      return {
+        ...state,
+        currentWidth: action.payload
+      };
+    case 'CURRENT_HEIGHT':
+      return {
+        ...state,
+        currentHeight: action.payload
+      };
+    case 'PERCENTAGE_RESIZED_HEIGHT':
+      return {
+        ...state,
+        percentageResizedHeight: action.payload
+      };
+    case 'PERCENTAGE_RESIZED_WIDTH':
+      return {
+        ...state,
+        percentageResizedWidth: action.payload
+      };
     default:
       return state
   }
