@@ -14,66 +14,54 @@ import { ReactComponent as MySvg } from '../../images/home.svg';
 
 function Technologies() {
 
-  const english = useSelector( state => state.english )
-
-  const [size, setSize] = useState({
-    width: window.screen.width,
-    height: window.screen.height,
-    celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-    celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-    pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-    pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-  });
-
-  useEffect(() => {
-      const handleResizeWindow = () => setSize({width: window.screen.width, height: window.screen.height, celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false, pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false });
-        window.addEventListener("resize", handleResizeWindow);
-        return () => {window.removeEventListener("resize", handleResizeWindow)};
-  },[]);
-
-  // console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT CEL: " , size.celPort, " | LANDSCAPE CEL: ", size.celLand, " | PORTRAIT PC: ", size.pcPort, " | LANDSCAPE PC: ", size.pcLand)
-  // size.celPort ? '' : size.celLand ? '' : size.pcPort ? '' : '',sx={{display: 'grid'}}
-
-    return (    
+  const english = useSelector(state => state.english)
+  const minPort = useSelector(state => state.minPort)
+  const minLand = useSelector(state => state.minLand)
+  const medPort = useSelector(state => state.medPort)
+  const medLand = useSelector(state => state.medLand)
+  const larPort = useSelector(state => state.larPort)
+  const larLand = useSelector(state => state.larLand)
+  
+    return (
         <Box sx={{ all: 'inherit' }}>
           <Box sx={{ background: 'none', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw'}}>
-              <CardMedia sx={{ alignSelf:'center',border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${react})`, width: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw', height: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw' }}></CardMedia>
+            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
+              <CardMedia sx={{ alignSelf:'center',border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${react})`, width: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw', height: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw' }}></CardMedia>
             </Box>
-            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw'}}>
-              <CardMedia sx={{ alignSelf:'center',border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${redux})`, width: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw', height: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw' }}></CardMedia>
+            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
+              <CardMedia sx={{ alignSelf:'center',border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${redux})`, width: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw', height: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw' }}></CardMedia>
             </Box>
-            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw'}}>
-              <CardMedia sx={{ alignSelf:'center',border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${javascript})`,width: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw', height: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw' }}></CardMedia>
+            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
+              <CardMedia sx={{ alignSelf:'center',border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${javascript})`,width: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw', height: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw' }}></CardMedia>
             </Box>
-            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw'}}>
-              <CardMedia sx={{ alignSelf:'center',border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${node})`, width: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw', height: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw' }}></CardMedia>
+            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
+              <CardMedia sx={{ alignSelf:'center',border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${node})`, width: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw', height: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw' }}></CardMedia>
             </Box>
-            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw'}}>
-              <CardMedia sx={{ alignSelf:'center',border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${sequelize})`, width: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw', height: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw' }}></CardMedia>
+            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
+              <CardMedia sx={{ alignSelf:'center',border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${sequelize})`, width: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw', height: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw' }}></CardMedia>
             </Box>
-            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw' }}>
-              <CardMedia sx={{ alignSelf:'center', border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${material})`, width: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw', height: size.celPort ? '10vw' : size.celLand ? '3.5vw' : size.pcPort ? '5.5vw' : '3.5vw', 'background-size': 'contain' }}></CardMedia>
+            <Box sx={{ background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw' }}>
+              <CardMedia sx={{ alignSelf:'center', border: 'none', position: 'relative', backgroundRepeat: 'no-repeat', backgroundImage: `url(${material})`, width: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw', height: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw', 'background-size': 'contain' }}></CardMedia>
             </Box>
           </Box >
           <Box sx={{ background: 'none', display: 'flex', flexDirection: 'row',justifyContent: 'space-between'}}>
-            <Box sx={{ alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: size.celPort ? '2.9vw' : size.celLand ? '2.40vh' : size.pcPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>React</Typography>
+            <Box sx={{ alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>React</Typography>
             </Box>
-            <Box sx={{ alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: size.celPort ? '2.9vw' : size.celLand ? '2.40vh' : size.pcPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Redux</Typography>
+            <Box sx={{ alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Redux</Typography>
             </Box>
-            <Box sx={{ alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: size.celPort ? '2.9vw' : size.celLand ? '2.40vh' : size.pcPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Javascript</Typography>
+            <Box sx={{ alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Javascript</Typography>
             </Box>
-            <Box sx={{alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: size.celPort ? '2.9vw' : size.celLand ? '2.40vh' : size.pcPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}} >Node.js</Typography>
+            <Box sx={{alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}} >Node.js</Typography>
             </Box>
-            <Box sx={{ justifyContent: 'center', alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: size.celPort ? '2.9vw' : size.celLand ? '2.40vh' : size.pcPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Sequelize</Typography>
+            <Box sx={{ justifyContent: 'center', alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Sequelize</Typography>
             </Box>
-            <Box sx={{ justifyContent: 'center', alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: size.celPort ? '15vw' : size.celLand ? '7vw' : size.pcPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: size.celPort ? '2.9vw' : size.celLand ? '2.40vh' : size.pcPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Material UI</Typography>
+            <Box sx={{ justifyContent: 'center', alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Material UI</Typography>
             </Box>
           </Box>
         </Box>

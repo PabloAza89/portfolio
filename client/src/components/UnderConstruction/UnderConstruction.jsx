@@ -5,95 +5,85 @@ import gear from '../../images/gear.png';
 import ForwardIcon from '@mui/icons-material/Forward';
 import BackButton from '../BackButton/BackButton';
 import { row, column, jc , as, noSelect, prtr, wi, he, or} from '../../Styles/Styles';
+import { useSelector } from 'react-redux';
 
 function UnderConstruction() {
 
-  const [size, setSize] = useState({
-    width: window.screen.width,
-    height: window.screen.height,
-    celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-    celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-    pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-    pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-  });
-
-  useEffect(() => {
-      const handleResizeWindow = () => setSize({width: window.screen.width, height: window.screen.height, celPort: window.screen.width <= 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, celLand: window.screen.height <= 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false, pcPort: window.screen.width > 415 && window.matchMedia("(orientation: portrait)").matches ? true : false, pcLand: window.screen.height > 415 && !window.matchMedia("(orientation: portrait)").matches ? true : false });
-        window.addEventListener("resize", handleResizeWindow);
-        return () => {window.removeEventListener("resize", handleResizeWindow)};
-  },[]);
-
-  // console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT CEL: " , size.celPort, " | LANDSCAPE CEL: ", size.celLand, " | PORTRAIT PC: ", size.pcPort, " | LANDSCAPE PC: ", size.pcLand)
-  // size.celPort ? '' : size.celLand ? '' : size.pcPort ? '' : '',
+  const minPort = useSelector(state => state.minPort)
+  const minLand = useSelector(state => state.minLand)
+  const medPort = useSelector(state => state.medPort)
+  const medLand = useSelector(state => state.medLand)
+  const larPort = useSelector(state => state.larPort)
+  const larLand = useSelector(state => state.larLand)
 
   return (
     <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
-      <Typography sx={{...noSelect(),...{ // CENTER LEFT 
+      <Typography sx={{...noSelect(),...{ // CENTER LEFT
         fontFamily: 'Lucida Console',
-        fontSize: size.celPort ? '7vw' : size.celLand ? '3vw' : size.pcPort ? '6vw' : '2.1vw',
+        fontSize: minPort ? '7vw' : minLand ? '3vw' : larPort ? '6vw' : '2.1vw',
         color: 'white',
         position: 'absolute',
         fontWeight: 600,
-        top: size.celPort ? '25vh' : size.celLand ? '25vh' : size.pcPort ? '23vh' : '10vh',
-        left: size.celPort ? '5vw' : size.celLand ? '5vw' : size.pcPort ? '5vw' : '15vw',
+        top: minPort ? '25vh' : minLand ? '25vh' : larPort ? '23vh' : '10vh',
+        left: minPort ? '5vw' : minLand ? '5vw' : larPort ? '5vw' : '15vw',
         'mix-blend-mode': 'difference'
       }}}>SECTION UNDER CONSTRUCTION !</Typography>
-      <Typography sx={{...noSelect(),...{ // UPPPER RIGHT 
+      <Typography sx={{...noSelect(),...{ // UPPPER RIGHT
         fontFamily: 'Monaco',
-        fontSize: size.celPort ? '2.8vw' : size.celLand ? '2.8vw' : size.pcPort ? '2.8vw' : '1.5vw',
+        fontSize: minPort ? '2.8vw' : minLand ? '2.8vw' : larPort ? '2.8vw' : '1.5vw',
         color: 'white',
         position: 'absolute',
         fontWeight: 600,
-        top: size.celPort ? '14vh' : size.celLand ? '14vh' : size.pcPort ? '14vh' : '11vh',
-        left: size.celPort ? '67vw' : size.celLand ? '69vw' : size.pcPort ? '67vw' : '78vw',
+        top: minPort ? '14vh' : minLand ? '14vh' : larPort ? '14vh' : '11vh',
+        left: minPort ? '67vw' : minLand ? '69vw' : larPort ? '67vw' : '78vw',
         'mix-blend-mode': 'difference'
       }}}>SECTION UNDER CONSTRUCTION !</Typography>
       <Typography sx={{...noSelect(),...{ // RIGHT LOWER
         fontFamily: 'Verdana',
-        fontSize: size.celPort ? '4vw' : size.celLand ? '4vw' : size.pcPort ? '4vw' : '1.2vw',
+        fontSize: minPort ? '4vw' : minLand ? '4vw' : larPort ? '4vw' : '1.2vw',
         color: 'white',
         position: 'absolute',
         fontWeight: 400,
-        top: size.celPort ? '88vh' : size.celLand ? '80vh' : size.pcPort ? '88vh' : '85vh',
-        left: size.celPort ? '30vw' : size.celLand ? '30vw' : size.pcPort ? '30vw' : '60vw',
+        top: minPort ? '88vh' : minLand ? '80vh' : larPort ? '88vh' : '85vh',
+        left: minPort ? '30vw' : minLand ? '30vw' : larPort ? '30vw' : '60vw',
         'mix-blend-mode': 'difference'
       }}}>Section Under Construction !</Typography>
       <CardMedia sx={{ // CENTER LEFT
-        left: size.celPort ? '3vh' : size.celLand ? '70vh' : size.pcPort ? '13vh' : '30vh',
-        top: size.celPort ? '47vh' : size.celLand ? '47vh' : size.pcPort ? '47vh' : '30vh',
+        left: minPort ? '3vh' : minLand ? '70vh' : larPort ? '13vh' : '30vh',
+        top: minPort ? '47vh' : minLand ? '47vh' : larPort ? '47vh' : '30vh',
         border: 'none',
         position: 'absolute',
         backgroundRepeat: 'no-repeat',
         backgroundImage: `url(${gear})`,
-        width: size.celPort ? '28vh' : size.celLand ? '28vh' : size.pcPort ? '28vh' : '43vh',
-        height: size.celPort ? '28vh' : size.celLand ? '28vh' : size.pcPort ? '28vh' : '43vh',
+        width: minPort ? '28vh' : minLand ? '28vh' : larPort ? '28vh' : '43vh',
+        height: minPort ? '28vh' : minLand ? '28vh' : larPort ? '28vh' : '43vh',
         animation: 'spinRight 5s linear infinite',
         '@keyframes spinRight': {'100%': {transform: 'rotate(360deg)'},'0%': {transform: 'rotate(0deg)'}}
       }} />
       <CardMedia sx={{ // UPPER RIGHT
-        left: size.celPort ? '27.5vh' : size.celLand ? '94.5vh' : size.pcPort ? '37.3vh' : '67.3vh',
-        top: size.celPort ? '45vh' : size.celLand ? '45vh' : size.pcPort ? '45vh' : '21vh',
+        left: minPort ? '27.5vh' : minLand ? '94.5vh' : larPort ? '37.3vh' : '67.3vh',
+        top: minPort ? '45vh' : minLand ? '45vh' : larPort ? '45vh' : '21vh',
         border: 'none',
         position: 'absolute',
         backgroundRepeat: 'no-repeat',
         backgroundImage: `url(${gear})`,
-        width: size.celPort ? '11vh' : size.celLand ? '11vh' : size.pcPort ? '11vh' : '25vh',
-        height: size.celPort ? '11vh' : size.celLand ? '11vh' : size.pcPort ? '11vh' : '25vh',
+        width: minPort ? '11vh' : minLand ? '11vh' : larPort ? '11vh' : '25vh',
+        height: minPort ? '11vh' : minLand ? '11vh' : larPort ? '11vh' : '25vh',
         animation: 'spinLeft 2.5s linear infinite',
         '@keyframes spinLeft': {'0%': {transform: 'rotate(360deg)'},'100%': {transform: 'rotate(0deg)'}}
       }} />
       <CardMedia sx={{ // LOWER RIGHT
-        left: size.celPort ? '25vh' : size.celLand ? '92vh' : size.pcPort ? '35.2vh' : '65.9vh',
-        top: size.celPort ? '70.3vh' : size.celLand ? '70.3vh' : size.pcPort ? '70.3vh' : '62vh',
-        border: 'none', 
+        left: minPort ? '25vh' : minLand ? '92vh' : larPort ? '35.2vh' : '65.9vh',
+        top: minPort ? '70.3vh' : minLand ? '70.3vh' : larPort ? '70.3vh' : '62vh',
+        border: 'none',
         position: 'absolute',
         backgroundRepeat: 'no-repeat',
         backgroundImage: `url(${gear})`,
-        width: size.celPort ? '7vh' : size.celLand ? '7vh' : size.pcPort ? '7vh' : '17vh',
-        height: size.celPort ? '7vh' : size.celLand ? '7vh' : size.pcPort ? '7vh' : '17vh',
+        width: minPort ? '7vh' : minLand ? '7vh' : larPort ? '7vh' : '17vh',
+        height: minPort ? '7vh' : minLand ? '7vh' : larPort ? '7vh' : '17vh',
         animation: 'spinLeft 2.5s linear infinite',
         '@keyframes spinLeft': {'0%': {transform: 'rotate(360deg)'},'100%': {transform: 'rotate(0deg)'}}
-      }} />      
+      }} />
     </Box>
   )
 }

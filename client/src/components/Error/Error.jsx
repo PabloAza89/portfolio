@@ -6,7 +6,6 @@ function Error() {
   return (
     <Box sx={{display: 'flex', flexDirection: 'column'}}>
       <Typography>This is error</Typography>
-      
     </Box>
   )
 }

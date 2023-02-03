@@ -6,98 +6,65 @@ import ForwardIcon from '@mui/icons-material/Forward';
 import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
 import { row, column, jc , as, noSelect, prtr, wi, he, or}from '../../Styles/Styles'
 import Avatar from '@mui/material/Avatar';
-import { useSelector } from 'react-redux';
 import BackButton from '../BackButton/BackButton';
+import { useSelector, useDispatch } from 'react-redux';
 
 function AboutMe() {
 
-  const english = useSelector( state => state.english )
-
-
-
-    const [size, setSize] = useState({
-      width: window.screen.width,
-      height: window.screen.height,
-      minPort: window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-      minLand: window.screen.height < 425 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-      medPort: window.screen.width >= 425 && window.screen.width <= 825 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-      medLand: window.screen.height >= 425 && window.screen.height <= 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-      larPort: window.screen.width > 825 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-      larLand: window.screen.height > 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-      staticRefWidth: window.screen.width / 100,
-      staticRefHeight: window.screen.height / 100,
-      maxStaticReference: ( window.screen.width >= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100,
-      currentWidth: window.innerWidth,
-      currentHeight: window.innerHeight,
-      percentageResizedHeight: window.innerHeight / window.screen.height,
-      percentageResizedWidth: window.innerWidth / window.screen.width
-    });
-  
-    useEffect(() => {
-        const handleResizeWindow = () => setSize({
-          width: window.screen.width,
-          height: window.screen.height,
-          minPort: window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-          minLand: window.screen.height < 425 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-          medPort: window.screen.width >= 425 && window.screen.width <= 825 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-          medLand: window.screen.height >= 425 && window.screen.height <= 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-          larPort: window.screen.width > 825 && window.matchMedia("(orientation: portrait)").matches ? true : false,
-          larLand: window.screen.height > 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-          staticRefWidth: window.screen.width / 100,
-          staticRefHeight: window.screen.height / 100,
-          maxStaticReference: ( window.screen.width >= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100,
-          currentWidth: window.innerWidth,
-          currentHeight: window.innerHeight,
-          percentageResizedHeight: window.innerHeight / window.screen.height,
-          percentageResizedWidth: window.innerWidth / window.screen.width
-        });
-          window.addEventListener("resize", handleResizeWindow);
-          return () => {window.removeEventListener("resize", handleResizeWindow)};
-    },[]);
-
-   // console.log("ANCHO: ", size.width, " | ALTO: ", size.height, " | PORTRAIT CEL: " , size.minPort, " | LANDSCAPE CEL: ", size.minLand, " | PORTRAIT PC: ", size.larPort, " | LANDSCAPE PC: ", size.larLand)
-  // size.minPort ? '' : size.minLand ? '' : size.medPort ? '' : size.medLand ? '' : size.larPort ? '' : '',
-  // console.log("MAX REFERENCE", size.staticRefWidth, "MAX STATIC", size.maxStaticReference)
-
-  
+  const english = useSelector(state => state.english)
+  const width = useSelector(state => state.width)
+  const height = useSelector(state => state.height)
+  const minPort = useSelector(state => state.minPort)
+  const minLand = useSelector(state => state.minLand)
+  const medPort = useSelector(state => state.medPort)
+  const medLand = useSelector(state => state.medLand)
+  const larPort = useSelector(state => state.larPort)
+  const larLand = useSelector(state => state.larLand)
+  const staticRefWidth = useSelector(state => state.staticRefWidth)
+  const staticRefHeight = useSelector(state => state.staticRefHeight)
+  const maxStaticReference = useSelector(state => state.maxStaticReference)
+  const currentWidth = useSelector(state => state.currentWidth)
+  const currentHeight = useSelector(state => state.currentHeight)
+  const percentageResizedHeight = useSelector(state => state.percentageResizedHeight)
+  const percentageResizedWidth = useSelector(state => state.percentageResizedWidth)
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
       <BackButton />
       <Box sx={{
         background: '#3C6478',
-        'border-radius': `${size.staticRefWidth * 1}px`,
+        'border-radius': `${staticRefWidth * 1}px`,
         /* background: 'brown', */
         alignSelf: 'center',
         display: 'flex',
         flexDirection: 'row',
         'justify-content': 'space-evenly',
-        width: size.minPort ? '90vw' : size.minLand ? '70vw' : size.larPort ? '70vw' : '70vw',
-        height: size.minPort ? '70vh' : size.minLand ? '60vh' : size.larPort ? '60vh' : '60vh',
-        top: size.larPort ? '2vh' : 'null'
+        width: minPort ? '90vw' : minLand ? '70vw' : larPort ? '70vw' : '70vw',
+        height: minPort ? '70vh' : minLand ? '60vh' : larPort ? '60vh' : '60vh',
+        top: larPort ? '2vh' : 'null'
       }} >
         <Avatar
           alt="Pablo Azambuyo"
           src={profile}
           sx={{
             position: 'absolute',
-            /* width: size.minPort ? '2.1vh' : size.minLand ? '3.3vh' : size.larPort ? '2.4vh' : `${size.staticRefWidth * 8.5}px`,
-            height: size.minPort ? '2.1vh' : size.minLand ? '3.3vh' : size.larPort ? '2.4vh' : `${size.staticRefWidth * 8.5}px`, */
-            width: size.minPort ? '2.1vh' : size.minLand ? '3.3vh' : size.larPort ? '16.5vh' : '16.5vh',
-            height: size.minPort ? '2.1vh' : size.minLand ? '3.3vh' : size.larPort ? '16.5vh' : '16.5vh',
-            maxWidth: `${size.staticRefHeight * 13.7}px`,
-            maxHeight: `${size.staticRefHeight * 13.7}px`,
+            /* width: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '2.4vh' : `${staticRefWidth * 8.5}px`,
+            height: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '2.4vh' : `${staticRefWidth * 8.5}px`, */
+            width: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '16.5vh' : '16.5vh',
+            height: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '16.5vh' : '16.5vh',
+            maxWidth: `${staticRefHeight * 13.7}px`,
+            maxHeight: `${staticRefHeight * 13.7}px`,
 
-            transform: size.larLand && size.currentHeight < 330 ? 'scale(0.0001) translate(100vw, -100vw)' : 'null',
-            /* transform : size.larLand && size.currentHeight < 330 ? 'translateX(10px) rotate(10deg) translateY(5px)' : 'null', */
+            transform: larLand && currentHeight < 330 ? 'scale(0.0001) translate(100vw, -100vw)' : 'null',
+            /* transform : larLand && currentHeight < 330 ? 'translateX(10px) rotate(10deg) translateY(5px)' : 'null', */
             transition: 'all .5s',
-            
+
 
             top: '8vh' ,
-            left: size.larPort ? '18vw' : '16vw',
+            left: larPort ? '18vw' : '16vw',
 
             /* transition: 'opacity .01s ease-in-out',
-            opacity: size.larLand && size.currentHeight < 330 ? '0' : '1',
+            opacity: larLand && currentHeight < 330 ? '0' : '1',
             'active': {
               'opacity': '0',
               'display': 'flex'
@@ -114,10 +81,10 @@ function AboutMe() {
             /* marginTop: '3vh', */
             /* padding: '200px', */
             width: '65vw',
-            height: size.minPort ? '38vh' : size.minLand ? '38vh' : size.larPort ? '28vh' : '28vh',
+            height: minPort ? '38vh' : minLand ? '38vh' : larPort ? '28vh' : '28vh',
             'text-align': 'center',
             /* margin: '100px auto', */
-            fontSize: size.minPort ? `${size.maxStaticReference * 3.0}px` : size.minLand ? `${size.maxStaticReference * 3.0}px` : size.medPort ? `${size.maxStaticReference * 2.3}px` : size.medLand ? `${size.maxStaticReference * 2.3}px` :  size.larPort ? `${size.maxStaticReference * 1.5}px` : `${size.maxStaticReference * 1.5}px`,
+            fontSize: minPort ? `${maxStaticReference * 3.0}px` : minLand ? `${maxStaticReference * 3.0}px` : medPort ? `${maxStaticReference * 2.3}px` : medLand ? `${maxStaticReference * 2.3}px` :  larPort ? `${maxStaticReference * 1.5}px` : `${maxStaticReference * 1.5}px`,
             /* 'border-radius': '30px', */
             overflow: 'auto',
             color: 'rgba(0, 0, 0, 0)',
