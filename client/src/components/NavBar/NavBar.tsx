@@ -49,12 +49,12 @@ function NavBar() {
 
   return (
     <Box sx={{
-      background: 'red',
-      zIndex: 10,
+      background: 'none',
       justifyContent: 'space-evenly',
       display: 'flex',
       flexDirection: minPort ? 'column' : minLand ? 'row' : larPort ? 'column' : 'row',
       marginTop: '1vh',
+      color: '#FFFFFF',
       height: minPort ? '30vw' : minLand ? '7vw' : larPort ? '20vh' : '15vh',
       minHeight: larPort ? '11vw' : `${staticRefWidth * 3.5}px`
 
@@ -62,9 +62,9 @@ function NavBar() {
       <Box sx={{
         display: 'flex',
         flexDirection: 'row',
-        background: 'blue',
+        background: 'none',
         width: minPort ? '60vw' : minLand ? '35vw' : larPort ? '58vw' : '33vw',
-        color: 'white',
+        color: '#FFFFFF',
         alignItems: 'center',
         'align-self': minPort ? 'start' : larPort ? 'start' : 'center',
         height: minPort ? '7vh' : minLand ? '13vh' : larPort ? '13vh' : '13vh',
@@ -99,11 +99,12 @@ function NavBar() {
         }}}>{`/>`}</Typography>
       </Box>
       <ScrollContainer style={{
-        background: 'green',
+        background: 'none',
         // overflow: 'auto', background: 'none', opacity: '0.8', marginBottom: minPort ? '0vh' : minLand ? '0vh' : '1vh'
         overflow: 'auto',
         minHeight: larPort ? '11vw' : `${staticRefWidth * 2.9}px`,
         alignSelf: 'center',
+        color: '#FFFFFF',
         display: 'flex',
         /* flexDirection: 'row', */
         justifyContent:
@@ -174,10 +175,11 @@ function NavBar() {
           marginLeft: `${staticRefWidth * 0.5}px`,
           marginRight: `${staticRefWidth * 0.5}px`, minWidth: 'fit-content',
           textDecoration: 'none',
-          color: '#FFFFFF',
+          color:'#FFFFFF',
           fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : larPort ? `${staticRefWidth * 1.2}px` : `${staticRefWidth * 1.2}px`,
           fontFamily: 'Roboto',
-          fontWeight: '600', mixBlendMode: 'difference' }}
+          fontWeight: '600',
+          mixBlendMode: 'difference' }}
           to="/portfolio/Contact"
         >{ english ? `Contact` : `Contacto`}</Link>
         {/* <Button variant="contained" sx={{ position: wi() < '415' ? 'absolute' : 'null', top: wi() < '415' ? '2vh' : null, padding: '0px !important', minWidth: '2.1vw !important', 'max-width': '2.1vw !important', 'min-height': '2.1vw !important', 'max-height': '2.1vw !important'}}><WbSunnyIcon sx={{width: '1.6vw'}}/></Button> */}

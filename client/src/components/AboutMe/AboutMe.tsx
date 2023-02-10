@@ -76,7 +76,7 @@ function AboutMe() {
             'justify-content': 'flex-start',
             display: 'flex',
             flexDirection: 'column',
-            background: 'red',
+            background: 'none',
             alignSelf: 'center',
             /* marginTop: '3vh', */
             /* padding: '200px', */

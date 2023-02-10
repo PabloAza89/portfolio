@@ -36,7 +36,7 @@ function Home() {
 
    return (
     <Box sx={{
-      background: 'gray',
+      background: 'none',
       position: 'relative',
       justifyContent: 'center',
       display: 'flex',
@@ -45,7 +45,7 @@ function Home() {
       height: minPort ? '71vh' : minLand ? '60vh' : larPort ? '45vh' : '71vh'
     }}>
       <Box sx={{
-        background: 'darkblue',
+        background: 'none',
         position: 'relative',
         justifyContent: medPort ? 'space-evenly' : 'center',
         display: minPort || minLand ? 'contents' : 'flex',
@@ -55,7 +55,7 @@ function Home() {
       }}>
         <Box sx={{
           background:'none',
-          border: '1px solid black',
+          border: 'none',
           position: 'relative',
           display: 'flex',
           flexDirection: 'column',
@@ -123,7 +123,7 @@ function Home() {
       </Box>
 
       <Box sx={{
-        background: 'brown',
+        background: 'none',
         display:
           minPort ? 'none' :
           minLand ? 'none' :

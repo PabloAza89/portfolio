@@ -19,12 +19,7 @@ const initialState = {
   minRatioReference: window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width)
 }
 
-interface actionI {
-  type: string;
-  payload: any
- }
-
-const reducer = (state = initialState, action: actionI) => {
+const reducer = (state = initialState, action: {type: string; payload: any}) => {
   switch (action.type) {
     case 'LANGUAGE_CHANGER':
       return {

@@ -1,24 +1,3 @@
-/* interface AppPropss {
-  languageChanger: boolean,
-  setWidth: number,
-  setHeight: number,
-  setMinPort: boolean,
-  setMinLand: boolean,
-  setMedPort: boolean,
-  setMedLand: boolean,
-  setLarPort: boolean,
-  setLarLand: boolean,
-  setStaticRefWidth: number,
-  setStaticRefHeight: number,
-  setMaxStaticReference: number,
-  setMinStaticReference: number,
-  setCurrentWidth: number,
-  setCurrentHeight: number,
-  setPercentageResizedHeight: number,
-  setPercentageResizedWidth: number,
-  setMinRatioReference: number,
-} */
-
 export function languageChanger(languageChanger:boolean) {
   return {
     type: 'LANGUAGE_CHANGER',
