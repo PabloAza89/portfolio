@@ -11,22 +11,22 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function AboutMe() {
 
-  const english = useSelector(state => state.english)
-  const width = useSelector(state => state.width)
-  const height = useSelector(state => state.height)
-  const minPort = useSelector(state => state.minPort)
-  const minLand = useSelector(state => state.minLand)
-  const medPort = useSelector(state => state.medPort)
-  const medLand = useSelector(state => state.medLand)
-  const larPort = useSelector(state => state.larPort)
-  const larLand = useSelector(state => state.larLand)
-  const staticRefWidth = useSelector(state => state.staticRefWidth)
-  const staticRefHeight = useSelector(state => state.staticRefHeight)
-  const maxStaticReference = useSelector(state => state.maxStaticReference)
-  const currentWidth = useSelector(state => state.currentWidth)
-  const currentHeight = useSelector(state => state.currentHeight)
-  const percentageResizedHeight = useSelector(state => state.percentageResizedHeight)
-  const percentageResizedWidth = useSelector(state => state.percentageResizedWidth)
+  const english = useSelector((state: {english:boolean}) => state.english)
+  const width = useSelector((state: {width: number}) => state.width)
+  const height = useSelector((state: {height: number}) => state.height)
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
+  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
+  const maxStaticReference = useSelector((state: {maxStaticReference: number}) => state.maxStaticReference)
+  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
+  const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
+  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
+  const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>

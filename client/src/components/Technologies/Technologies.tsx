@@ -14,13 +14,13 @@ import { ReactComponent as MySvg } from '../../images/home.svg';
 
 function Technologies() {
 
-  const english = useSelector(state => state.english)
-  const minPort = useSelector(state => state.minPort)
-  const minLand = useSelector(state => state.minLand)
-  const medPort = useSelector(state => state.medPort)
-  const medLand = useSelector(state => state.medLand)
-  const larPort = useSelector(state => state.larPort)
-  const larLand = useSelector(state => state.larLand)
+  const english = useSelector((state: {english:boolean}) => state.english)
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
+  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
   
     return (
         <Box sx={{ all: 'inherit' }}>
@@ -46,22 +46,22 @@ function Technologies() {
           </Box >
           <Box sx={{ background: 'none', display: 'flex', flexDirection: 'row',justifyContent: 'space-between'}}>
             <Box sx={{ alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>React</Typography>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, mixBlendMode: 'difference'}}}>React</Typography>
             </Box>
             <Box sx={{ alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Redux</Typography>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, mixBlendMode: 'difference'}}}>Redux</Typography>
             </Box>
             <Box sx={{ alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Javascript</Typography>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, mixBlendMode: 'difference'}}}>Javascript</Typography>
             </Box>
             <Box sx={{alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}} >Node.js</Typography>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, mixBlendMode: 'difference'}}} >Node.js</Typography>
             </Box>
             <Box sx={{ justifyContent: 'center', alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Sequelize</Typography>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, mixBlendMode: 'difference'}}}>Sequelize</Typography>
             </Box>
             <Box sx={{ justifyContent: 'center', alignItems: 'center', background: 'none', display: 'flex', flexDirection: 'column', position: 'relative', border: 'none', width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'}}>
-              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, 'mix-blend-mode': 'difference'}}}>Material UI</Typography>
+              <Typography sx={{...noSelect(),...{fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw', border: 'none', color: '#FFFFFF', fontWeight: 600, mixBlendMode: 'difference'}}}>Material UI</Typography>
             </Box>
           </Box>
         </Box>

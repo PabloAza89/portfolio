@@ -8,31 +8,25 @@ import Projects from './components/Projects/Projects';
 import Certifications from './components/Certifications/Certifications';
 import Contact from './components/Contact/Contact';
 import Language from './components/Language/Language';
-
 import { Box, Button, Link,  Typography} from '@mui/material';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { grey , blue } from '@mui/material/colors';
 import {
-  setWidth,
-  setHeight,
-  setMinPort,
-  setMinLand,
-  setMedPort,
-  setMedLand,
-  setLarPort,
-  setLarLand,
-  setStaticRefWidth,
-  setStaticRefHeight,
-  setMaxStaticReference,
-  setCurrentWidth,
-  setCurrentHeight,
-  setPercentageResizedHeight,
-  setPercentageResizedWidth
+  setWidth, setHeight, setMinPort, setMinLand,
+  setMedPort, setMedLand, setLarPort, setLarLand,
+  setStaticRefWidth, setStaticRefHeight, setMaxStaticReference,
+  setMinStaticReference, setCurrentWidth, setCurrentHeight,
+  setPercentageResizedHeight, setPercentageResizedWidth, setMinRatioReference
 } from './actions';
 import { useSelector, useDispatch } from 'react-redux';
 
 
+
 function App() {
+
+ /*  public get height() {
+    return window.innerHeight;
+  } */
 
   const dispatch = useDispatch()
 
@@ -49,28 +43,33 @@ function App() {
             dispatch(setStaticRefWidth(window.screen.width / 100))
             dispatch(setStaticRefHeight(window.screen.height / 100))
             dispatch(setMaxStaticReference((window.screen.width >= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100))
+            dispatch(setMinStaticReference(( window.screen.width <= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100))
             dispatch(setCurrentWidth(window.innerWidth))
             dispatch(setCurrentHeight(window.innerHeight))
             dispatch(setPercentageResizedHeight(window.innerHeight / window.screen.height))
             dispatch(setPercentageResizedWidth(window.innerWidth / window.screen.width))
+            dispatch(setMinRatioReference(window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width)))
           }
           window.addEventListener("resize", handleResize);
           handleResize();
           return () => window.removeEventListener("resize", handleResize);
         }, []);
 
-        const minPort = useSelector(state => state.minPort)
-        const minLand = useSelector(state => state.minLand)
-        const medPort = useSelector(state => state.medPort)
-        const medLand = useSelector(state => state.medLand)
-        const larPort = useSelector(state => state.larPort)
-        const larLand = useSelector(state => state.larLand)
-        const staticRefWidth = useSelector(state => state.staticRefWidth)
+        /* const minPort = useSelector((state: {minPort:boolean}) => state.minPort) */
+        const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+        const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+        const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+        const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
+        const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+        const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+        const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+        const minRatioReference = useSelector((state: {minRatioReference:number}) => state.minRatioReference)
 
         console.log(" MIN PORT: " , minPort, " | MIN LAND: ", minLand, " | MED PORT: ", medPort, " | MED LAND: ", medLand, " | LAR PORT: ", larPort, " | LAR LAND: ", larLand)
+        console.log('A VER AHORAA', minRatioReference)
 
   return (
-    <Box sx={{ position: 'relative', display: 'flex', width: '100vw', height: '100vh', backgroundColor: grey[400]}} >
+    <Box sx={{ backgroundColor: grey[400], position: 'relative', overflow: 'hidden', display: 'flex', width: '100vw', height: '100vh' }} >
 
         <Box sx={{ position: 'relative', display: 'flex', width: '100vw', flexDirection: 'column', margin: `${staticRefWidth * 0.6}px`,  background: 'linear-gradient(to bottom right, black 49.9%,white 50.1%)'}} >
 

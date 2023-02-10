@@ -3,23 +3,25 @@ import {Box, CardMedia } from '@mui/material';
 import lanEn from '../../images/lanEn.png';
 import lanEs from '../../images/lanEs.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { BrowserRouter, Navigate, Route, Routes , Link} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, Link, useLocation } from "react-router-dom";
 import { languageChanger } from '../../actions';
-import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
+import { grey , blue , cyan, lime, brown, red } from '@mui/material/colors';
 
 function Language() {
 
   const dispatch = useDispatch()
   
-  const english = useSelector( state => state.english )
-  const minPort = useSelector(state => state.minPort)
-  const minLand = useSelector(state => state.minLand)
-  const medPort = useSelector(state => state.medPort)
-  const medLand = useSelector(state => state.medLand)
-  const larPort = useSelector(state => state.larPort)
-  const larLand = useSelector(state => state.larLand)
-  const percentageResizedHeight = useSelector(state => state.percentageResizedHeight)
-  const maxStaticReference = useSelector(state => state.maxStaticReference)
+  const english = useSelector( (state: {english:boolean}) => state.english )
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
+  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
+  const maxStaticReference = useSelector((state: {maxStaticReference: number}) => state.maxStaticReference)
+
+  const location = useLocation()
 
   return (
       <Box sx={{
@@ -28,7 +30,12 @@ function Language() {
         display: 'flex',
         'pointer-events':  larPort && percentageResizedHeight < 0.272 ? 'none' : larLand && percentageResizedHeight < 0.272 ? 'none' : 'null',
         transition: 'opacity .1s ease-in-out',
-        opacity: larPort && percentageResizedHeight < 0.272 ? '0' : larLand && percentageResizedHeight < 0.272 ? '0' : '1',
+        opacity:
+          larPort && location.pathname.split('/').join('') === 'portfolio' && percentageResizedHeight < 0.33 ? '0' :
+          larLand && location.pathname.split('/').join('') === 'portfolio' && percentageResizedHeight < 0.33 ? '0' :
+          larPort && percentageResizedHeight < 0.272 ? '0' :
+          larLand && percentageResizedHeight < 0.272 ? '0' :
+          '1',
         'active': {
           'opacity': '0',
           'display': 'flex'

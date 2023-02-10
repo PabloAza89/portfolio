@@ -11,13 +11,20 @@ const initialState = {
   staticRefWidth: window.screen.width / 100,
   staticRefHeight: window.screen.height / 100,
   maxStaticReference: ( window.screen.width >= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100,
+  minStaticReference: ( window.screen.width <= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100,
   currentWidth: window.innerWidth,
   currentHeight: window.innerHeight,
   percentageResizedHeight: window.innerHeight / window.screen.height,
-  percentageResizedWidth: window.innerWidth / window.screen.width
+  percentageResizedWidth: window.innerWidth / window.screen.width,
+  minRatioReference: window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width)
 }
 
-const reducer = (state = initialState, action) => {
+interface actionI {
+  type: string;
+  payload: any
+ }
+
+const reducer = (state = initialState, action: actionI) => {
   switch (action.type) {
     case 'LANGUAGE_CHANGER':
       return {
@@ -79,6 +86,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         maxStaticReference: action.payload
       };
+    case 'MIN_STATIC_REFERENCE':
+      return {
+        ...state,
+        minStaticReference: action.payload
+      };
     case 'CURRENT_WIDTH':
       return {
         ...state,
@@ -99,10 +111,16 @@ const reducer = (state = initialState, action) => {
         ...state,
         percentageResizedWidth: action.payload
       };
+    case 'SET_MIN_RATIO_REFERENCE':
+      return {
+        ...state,
+        minRatioReference: action.payload
+      };
     default:
       return state
   }
 };
 
-export default reducer;
+//export default reducer
+export default reducer
 

@@ -9,12 +9,12 @@ import { useSelector } from 'react-redux';
 
 function UnderConstruction() {
 
-  const minPort = useSelector(state => state.minPort)
-  const minLand = useSelector(state => state.minLand)
-  const medPort = useSelector(state => state.medPort)
-  const medLand = useSelector(state => state.medLand)
-  const larPort = useSelector(state => state.larPort)
-  const larLand = useSelector(state => state.larLand)
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
+  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
   return (
     <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
@@ -26,7 +26,7 @@ function UnderConstruction() {
         fontWeight: 600,
         top: minPort ? '25vh' : minLand ? '25vh' : larPort ? '23vh' : '10vh',
         left: minPort ? '5vw' : minLand ? '5vw' : larPort ? '5vw' : '15vw',
-        'mix-blend-mode': 'difference'
+        mixBlendMode: 'difference'
       }}}>SECTION UNDER CONSTRUCTION !</Typography>
       <Typography sx={{...noSelect(),...{ // UPPPER RIGHT
         fontFamily: 'Monaco',
@@ -36,7 +36,7 @@ function UnderConstruction() {
         fontWeight: 600,
         top: minPort ? '14vh' : minLand ? '14vh' : larPort ? '14vh' : '11vh',
         left: minPort ? '67vw' : minLand ? '69vw' : larPort ? '67vw' : '78vw',
-        'mix-blend-mode': 'difference'
+        mixBlendMode: 'difference'
       }}}>SECTION UNDER CONSTRUCTION !</Typography>
       <Typography sx={{...noSelect(),...{ // RIGHT LOWER
         fontFamily: 'Verdana',
@@ -46,7 +46,7 @@ function UnderConstruction() {
         fontWeight: 400,
         top: minPort ? '88vh' : minLand ? '80vh' : larPort ? '88vh' : '85vh',
         left: minPort ? '30vw' : minLand ? '30vw' : larPort ? '30vw' : '60vw',
-        'mix-blend-mode': 'difference'
+        mixBlendMode: 'difference'
       }}}>Section Under Construction !</Typography>
       <CardMedia sx={{ // CENTER LEFT
         left: minPort ? '3vh' : minLand ? '70vh' : larPort ? '13vh' : '30vh',
