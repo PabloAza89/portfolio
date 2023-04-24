@@ -4,7 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes , Link} from "react-router-dom";
 import gear from '../../images/gear.png';
 import ForwardIcon from '@mui/icons-material/Forward';
 import BackButton from '../BackButton/BackButton';
-import { row, column, jc , as, noSelect, prtr, wi, he, or} from '../../Styles/Styles';
+import { row, column, jc , as, noSelect, prtr, wi, he, or} from '../../styles/styles';
 import { useSelector } from 'react-redux';
 
 function UnderConstruction() {

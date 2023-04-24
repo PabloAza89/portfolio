@@ -9,7 +9,7 @@ import sequelize from '../../images/sequelize.png';
 import material from '../../images/material.png';
 import { BrowserRouter, Navigate, Route, Routes , Link, useLocation} from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { row, column, jc , as, noSelect, prtr, wi, he, or}from '../../Styles/Styles';
+import { row, column, jc , as, noSelect, prtr, wi, he, or}from '../../styles/styles';
 import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
 

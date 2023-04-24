@@ -2,8 +2,6 @@ import React from 'react';
 import { Box } from '@mui/material';
 
 function Bubbles() {
-  
-     // <Box sx={{...row(),...jc(),...{ justifyItems: 'center', width: '80vw', height: '80vh' , background: 'linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%)'}}}>
 
     return (
         <Box component="span" sx={{ 

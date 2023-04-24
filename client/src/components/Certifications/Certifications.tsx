@@ -6,7 +6,7 @@ import efSet from '../../images/efSet.png';
 import henry from '../../images/henry.png';
 import ForwardIcon from '@mui/icons-material/Forward';
 import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
-import { row, column, jc , as, noSelect }from '../../Styles/Styles'
+import { row, column, jc , as, noSelect }from '../../styles/styles'
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
 import BackButton from '../BackButton/BackButton';

@@ -10,7 +10,7 @@ import ForwardIcon from '@mui/icons-material/Forward';
 import Dialog from '@mui/material/Dialog';
 import ReplyIcon from '@mui/icons-material/Reply';
 import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
-import { row, column, jc , as, noSelect, prtr, wi, he, or}from '../../Styles/Styles'
+import { row, column, jc , as, noSelect, prtr, wi, he, or}from '../../styles/styles'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';

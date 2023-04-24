@@ -2,7 +2,7 @@ import React, { useState , useRef, useEffect} from 'react';
 import {Box, Button,CardMedia, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
 import ForwardIcon from '@mui/icons-material/Forward';
-import { row, column, jc , as, noSelect, prtr, wi, he, or}from '../../Styles/Styles'
+import { row, column, jc , as, noSelect, prtr, wi, he, or}from '../../styles/styles'
 import { useSelector, useDispatch } from 'react-redux';
 
 function BackButton() {

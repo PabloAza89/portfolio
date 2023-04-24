@@ -19,6 +19,8 @@ const initialState = {
   minRatioReference: window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width)
 }
 
+
+
 const reducer = (state = initialState, action: {type: string; payload: any}) => {
   switch (action.type) {
     case 'LANGUAGE_CHANGER':

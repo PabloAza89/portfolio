@@ -6,7 +6,7 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { grey , blue } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
-import { row, column, jc , as, noSelect, prtr, wi, he, or} from '../../Styles/Styles'
+import { row, column, jc , as, noSelect, prtr, wi, he, or} from '../../styles/styles'
 
 function NavBar() {
 
