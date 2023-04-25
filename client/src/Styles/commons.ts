@@ -53,6 +53,10 @@ const jcc = {
   justifyContent: 'center'
 }
 
+const jsc = {
+  justifySelf: 'center'
+}
+
 const bgNone = {
   background: 'none'
 }
@@ -80,6 +84,7 @@ export {
   aic,
   asc,
   jcc,
+  jsc,
   bgNone,
   bgRed,
   noSelect

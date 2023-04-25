@@ -13,7 +13,7 @@ import {
   bgRed, absolute,
   relative, aic,
   jcc, asc,
-  noSelect,
+  noSelect, jsc,
 } from './commons';
 
   const background = Object.assign(
@@ -40,10 +40,10 @@ import {
 
   const card = Object.assign(
     {},
-    jcc, asc,
+    flex, asc, column,
     {
-     'text-align': 'center',
-      'justify-content': 'space-evenly',
+      'text-align': 'center',
+      'justifyContent': 'space-evenly',
       background: 'none',
       width: minPort ? '87vw' : minLand ? '33vw' : larPort ? '59vw' : '29vw',
       height: minPort ? '25vh' : minLand ? '59vh' : larPort ? '39vh' : '39vh'
@@ -64,17 +64,17 @@ import {
     },
   )
 
-  const media = Object.assign(
-    {},
-    asc,
-    {
-      backgroundImage: `url(${fccCertJS})`,
+  const media = (url: string) => {
+    return {
+      backgroundImage: `url(${url})`,
+      'zIndex': 10,
+      'align-self': 'center',
       width: minPort ? '35vw' : minLand ? '32vw' : larPort ? '35vw' : '15vw',
       height: minLand ? '36vh' : '15vh',
       backgroundSize: minPort ? '35vw 15vh' : minLand ? '32vw 36vh' : larPort ? '35vw 15vh' : '15vw 15vh',
       ':hover': { '-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)', cursor: 'pointer' }
-    },
-  )
+    }
+  }
 
   const url = Object.assign(
     {},
@@ -94,10 +94,36 @@ import {
     {
       'textDecoration': 'none',
       color: '#FFFFFF',
-      'mixBlendMode': 'difference'
+      'mix-blend-mode': 'difference'
     },
   )
 
+  const dialog = Object.assign(
+    {},
+    flex, absolute, jsc,
+    {
+      height: '83vh',
+      width: '60vw',
+      backgroundColor: 'none',
+      top: '8vh',
+      left: '14vw'
+    },
+  )
+
+  const dialogMedia = (url: string) => {
+    return {
+      flex,
+      relative,
+      column,
+      justifyItems: 'center',
+      backgroundImage: `url(${url})`,
+      width: '72.1vw',
+      height: '84vh',
+      backgroundSize: '70vw 80vh',
+      backgroundRepeat: 'no-repeat'
+    }
+  }
 
 
-  export { background, boxUpper, card, title, media, url, anchor }
+
+  export { background, boxUpper, card, title, media, url, anchor, dialog, dialogMedia }
