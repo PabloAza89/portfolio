@@ -53,6 +53,10 @@ const jcc = {
   justifyContent: 'center'
 }
 
+const jcsb = {
+  justifyContent: 'space-between'
+}
+
 const jsc = {
   justifySelf: 'center'
 }
@@ -87,5 +91,6 @@ export {
   jsc,
   bgNone,
   bgRed,
-  noSelect
+  noSelect,
+  jcsb
 }
