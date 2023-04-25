@@ -42,9 +42,6 @@ const avatar = Object.assign(
 
 const typography = Object.assign(
   {},
-  /* flex,
-  column,
-  bgNone, */
   {
     '-webkit-touch-callout': 'none',
     '-webkit-user-select': 'none',
@@ -53,58 +50,27 @@ const typography = Object.assign(
     '-ms-user-select': 'none',
     'user-select': 'none',
     'justify-content': 'flex-start',
-
-
+    display: 'flex',
+    flexDirection: 'column',
     alignSelf: 'center',
     width: '65vw',
-
     height: minPort ? '38vh' : minLand ? '38vh' : larPort ? '28vh' : '28vh',
     'text-align': 'center',
     fontSize: minPort ? `${maxStaticReference * 3.0}px` : minLand ? `${maxStaticReference * 3.0}px` : medPort ? `${maxStaticReference * 2.3}px` : medLand ? `${maxStaticReference * 2.3}px` :  larPort ? `${maxStaticReference * 1.5}px` : `${maxStaticReference * 1.5}px`,
-
-    /* 'background-image': 'linear-gradient(white, white)', */
-      /* 'background-color': 'transparent', */
-      
-      margin: 'auto',
-      'margin-top': '50px',
-      /* 'height: '500px', */
-      /* width: '400px', */
-      padding: '20px',
-      'box-sizing': 'border-box',
-      'overflow-y': 'auto',
-      border: '1px solid gray',
-      
-      
-
-    '::-webkit-scrollbar-button': {
-      /* width: 0,
-      height: 0, */
-      display: 'none'
-    },
-    
-    
-      
-      
-    
-    
-    ':hover': {
-      'color': 'rgba(0, 0, 0, 0.18)',
-      
-      'transition': 'color 0.3s ease',
-    },
-    
+    '::-webkit-scrollbar': { width: '10px' },
     '::-webkit-scrollbar-thumb': {
-      /* 'background-color': 'inherit', */
-      'background-color': 'red',
-      'border-radius': '8px',
-      'border': '4px solid transparent',
-      'background-clip': 'content-box',
-      
-      /* 'transition': 'background-color 0.3s ease', */
-    }
-  
-
-
+      'border': '10px solid',
+      'border-radius': '10px'
+    },
+    ':hover': {
+      color: 'rgba(0, 0, 0, 0.18)'
+    },
+    padding: '20px',
+    margin: '100px auto',
+    overflow: 'auto',
+    color: 'transparent',
+    '-webkit-text-fill-color': 'white',
+    'transition': 'color 0.3s ease',
   },
 )
 
