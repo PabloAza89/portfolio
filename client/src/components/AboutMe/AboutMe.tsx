@@ -1,23 +1,20 @@
 import React, { useState , useRef, useEffect} from 'react';
 import {Box, Button, Typography } from '@mui/material';
-import { Link } from "react-router-dom";
 import profile from '../../images/profile.png';
-import ForwardIcon from '@mui/icons-material/Forward';
 import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
 import BackButton from '../BackButton/BackButton';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { avatar, typography, background } from '../../styles/aboutMe';
 import {
   minPort, minLand,
   medPort, medLand,
   larPort, larLand,
-  currentHeight,
+  currentHeight, bgRed,
   staticRefWidth, staticRefHeight,
   maxStaticReference,
   flex, column,
   row, bgNone,
-  bgRed
 } from '../../styles/commons';
 
 function AboutMe() {
@@ -33,7 +30,6 @@ function AboutMe() {
           src={profile}
           sx={avatar}
         />
-        
         <Typography sx={typography}>
           { english ?
             `Hi ! Im Pablo ! I worked almost 10 years on a paint selling shop. I was working as store manager and also as sales consultant in almost 5 years. In february of 2022 I wanted to give a turn on my life introducing in the world of programming, and I studied proudly on Henry ! On this academy I studied Fullstack Developer career, learning Javascript as my first language, including Node JS, React, Redux and Sequelize technologies. Other of my passions is the music, particullary play the piano, I consider myself as a melomaniac person !`

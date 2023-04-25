@@ -17,16 +17,40 @@ const currentHeight = store.getState().currentHeight;
 const percentageResizedHeight = store.getState().percentageResizedHeight;
 const percentageResizedWidth = store.getState().percentageResizedWidth;
 
+const noSelect = () => {
+  return {'-webkit-touch-callout': 'none', '-webkit-user-select': 'none', '-khtml-user-select': 'none', '-moz-user-select': 'none', '-ms-user-select': 'none', 'user-select': 'none'}
+}
+
 const flex = {
   display: 'flex'
+}
+
+const relative = {
+  position: 'relative'
+}
+
+const absolute = {
+  position: 'absolute'
 }
 
  const column = {
   flexDirection: 'column'
 }
 
- const row = {
+const row = {
   flexDirection: 'row'
+}
+
+const aic = {
+  alignItems: 'center'
+}
+
+const asc = {
+  alignSelf: 'center'
+}
+
+const jcc = {
+  justifyContent: 'center'
 }
 
 const bgNone = {
@@ -49,8 +73,14 @@ export {
   staticRefHeight,
   maxStaticReference,
   flex,
+  absolute,
+  relative,
   column,
   row,
+  aic,
+  asc,
+  jcc,
   bgNone,
-  bgRed
+  bgRed,
+  noSelect
 }

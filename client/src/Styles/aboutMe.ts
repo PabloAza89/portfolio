@@ -7,7 +7,7 @@ import {
   maxStaticReference,
   flex, column,
   row, bgNone,
-  bgRed
+  bgRed, noSelect
 } from './commons';
 
 const background = Object.assign(
@@ -42,14 +42,9 @@ const avatar = Object.assign(
 
 const typography = Object.assign(
   {},
+  noSelect(),
   {
-    '-webkit-touch-callout': 'none',
-    '-webkit-user-select': 'none',
-    '-khtml-user-select': 'none',
-    '-moz-user-select': 'none',
-    '-ms-user-select': 'none',
-    'user-select': 'none',
-    'justify-content': 'flex-start',
+   'justify-content': 'flex-start',
     display: 'flex',
     flexDirection: 'column',
     alignSelf: 'center',
