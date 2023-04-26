@@ -1,25 +1,15 @@
-import React, { useState , useRef, useEffect, WheelEvent} from 'react';
-import {Box, Button,CardMedia, Typography } from '@mui/material';
-import { Link } from "react-router-dom";
+import React, { useState, useEffect} from 'react';
+import { Box, CardMedia, Typography } from '@mui/material';
 import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
 import food1 from '../../images/food1.png';
 import food2 from '../../images/food2.png';
 import food3 from '../../images/food3.png';
-import ForwardIcon from '@mui/icons-material/Forward';
-import Dialog from '@mui/material/Dialog';
-import ReplyIcon from '@mui/icons-material/Reply';
-import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
-import { jc , as, noSelect, prtr, wi, he, or}from '../../styles/styles'
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { Dialog, InputLabel, MenuItem, FormControl, Select } from '@mui/material/';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
 import BackButton from '../BackButton/BackButton';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
-import DialogContent from '@mui/material/DialogContent';
 import { background, scroll, boxUpperStripe, solid, intercalated, mainStripe, card, boxTitle,
   title, boxMedia, cardMedia, dialog, dialogMedia, boxLower, textLower, select
 } from '../../styles/projects';
