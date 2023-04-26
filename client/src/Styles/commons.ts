@@ -1,10 +1,28 @@
-import { useSelector, useDispatch } from 'react-redux';
+/* import React, { useState , useRef, useEffect} from 'react'; */
+/* import { useSelector, useDispatch } from 'react-redux'; */
 import store from '../store/store'
+
+import {
+  setWidth, setHeight, setMinPort, setMinLand,
+  setMedPort, setMedLand, setLarPort, setLarLand,
+  setStaticRefWidth, setStaticRefHeight, setMaxStaticReference,
+  setMinStaticReference, setCurrentWidth, setCurrentHeight,
+  setPercentageResizedHeight, setPercentageResizedWidth, setMinRatioReference
+} from '../actions';
+
+
+  /* store.dispatch(setMinPort(window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false)) */
+
 
 const width = store.getState().width;
 const height = store.getState().height;
-const minPort = store.getState().minPort;
+
+let minPort = store.getState();
+
 const minLand = store.getState().minLand;
+
+
+
 const medPort = store.getState().medPort;
 const medLand = store.getState().medLand;
 const larPort = store.getState().larPort;
@@ -16,6 +34,11 @@ const currentWidth = store.getState().currentWidth;
 const currentHeight = store.getState().currentHeight;
 const percentageResizedHeight = store.getState().percentageResizedHeight;
 const percentageResizedWidth = store.getState().percentageResizedWidth;
+const minRatioReference = store.getState().minRatioReference;
+
+const MMinLand = () => {
+
+}
 
 const noSelect = () => {
   return {'-webkit-touch-callout': 'none', '-webkit-user-select': 'none', '-khtml-user-select': 'none', '-moz-user-select': 'none', '-ms-user-select': 'none', 'user-select': 'none'}
@@ -78,8 +101,11 @@ const bgRed = {
 }
 
 export {
+  width,
+  height,
   minPort,
   minLand,
+  MMinLand,
   medPort,
   medLand,
   larPort,
@@ -102,5 +128,8 @@ export {
   bgNone,
   bgRed,
   noSelect,
-  jcsb
+  jcsb,
+  percentageResizedHeight,
+  percentageResizedWidth,
+  minRatioReference
 }

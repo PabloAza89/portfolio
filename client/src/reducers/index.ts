@@ -118,6 +118,5 @@ const reducer = (state = initialState, action: {type: string; payload: any}) => 
   }
 };
 
-//export default reducer
 export default reducer
 

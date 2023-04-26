@@ -8,18 +8,32 @@ import Projects from './components/Projects/Projects';
 import Certifications from './components/Certifications/Certifications';
 import Contact from './components/Contact/Contact';
 import Language from './components/Language/Language';
+/* import { abc } from './styles/ResizeController'; */
 import { Box, Button, Link,  Typography} from '@mui/material';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { grey , blue } from '@mui/material/colors';
-import {
+/* import ResizeController from './styles/ResizeController'; */
+/* import Setter from './resizeController/setter'; */
+import Set from './resizeController/Set';
+import Get from './resizeController/Get';
+/* import {
   setWidth, setHeight, setMinPort, setMinLand,
   setMedPort, setMedLand, setLarPort, setLarLand,
   setStaticRefWidth, setStaticRefHeight, setMaxStaticReference,
   setMinStaticReference, setCurrentWidth, setCurrentHeight,
   setPercentageResizedHeight, setPercentageResizedWidth, setMinRatioReference
-} from './actions';
+} from './actions'; */
 import { useSelector, useDispatch } from 'react-redux';
+/* import store from './store/store'; */
 
+/* import {
+  minPort, minLand, MMinLand, medPort, medLand, larPort, larLand,
+  currentHeight, bgRed, staticRefWidth, staticRefHeight,
+  maxStaticReference, flex, column, row, bgNone, width, height,
+  percentageResizedHeight, percentageResizedWidth, minRatioReference
+} from './styles/commons'; */
+
+/* import { minPort } from './styles/commons'; */
 
 
 function App() {
@@ -28,9 +42,9 @@ function App() {
     return window.innerHeight;
   } */
 
-  const dispatch = useDispatch()
+  /* const dispatch = useDispatch() */
 
-        useEffect(() => {
+       /*  useEffect(() => {
           function handleResize() {
             dispatch(setWidth(window.screen.width))
             dispatch(setHeight(window.screen.height))
@@ -53,20 +67,20 @@ function App() {
           window.addEventListener("resize", handleResize);
           handleResize();
           return () => window.removeEventListener("resize", handleResize);
-        }, []);
+        }, []); */
 
         /* const minPort = useSelector((state: {minPort:boolean}) => state.minPort) */
-        const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-        const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-        const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-        const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
-        const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-        const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-        const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
-        const minRatioReference = useSelector((state: {minRatioReference:number}) => state.minRatioReference)
+       /*  const minPort = useSelector((state: {minPort:boolean}) => state.minPort) */
 
-        console.log(" MIN PORT: " , minPort, " | MIN LAND: ", minLand, " | MED PORT: ", medPort, " | MED LAND: ", medLand, " | LAR PORT: ", larPort, " | LAR LAND: ", larLand)
-        console.log('A VER AHORAA', minRatioReference)
+        
+
+        /* console.log(" MIN PORT: " , Get().minPort, " | MIN LAND: ", Get().minLand, " | MED PORT: ", Get().medPort, " | MED LAND: ", Get().medLand, " | LAR PORT: ", Get().larPort, " | LAR LAND: ", Get().larLand) */
+        
+        /* console.log("QUE PASA ACA", Get()) */
+        
+        /* Setter() */
+        /* Set() */
+        /* Get() */
 
   return (
     <Box sx={{ backgroundColor: grey[400], position: 'relative', overflow: 'hidden', display: 'flex', width: '100vw', height: '100vh' }} >
