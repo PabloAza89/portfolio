@@ -33,6 +33,10 @@ const absolute = {
   position: 'absolute'
 }
 
+const fixed = {
+  position: 'fixed'
+}
+
  const column = {
   flexDirection: 'column'
 }
@@ -61,6 +65,10 @@ const jsc = {
   justifySelf: 'center'
 }
 
+const jic = {
+  justifyItems: 'center'
+}
+
 const bgNone = {
   background: 'none'
 }
@@ -83,12 +91,14 @@ export {
   flex,
   absolute,
   relative,
+  fixed,
   column,
   row,
   aic,
   asc,
   jcc,
   jsc,
+  jic,
   bgNone,
   bgRed,
   noSelect,

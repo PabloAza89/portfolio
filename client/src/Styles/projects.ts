@@ -15,7 +15,8 @@ import {
   relative, aic,
   jcc, asc,
   noSelect, jsc,
-  jcsb
+  jcsb, fixed,
+  jic
 } from './commons';
 
   const background = Object.assign(
@@ -23,8 +24,8 @@ import {
     flex, column, jcc,
     {
       marginTop: minPort ? '23vh' : minLand ? '17vh' : larPort ? '24vh' : '12vh',
-      height: minPort ? '50vh' : minLand ? '60vh' : larPort ? '53vh' : '73vh',
-      width: '97vw',
+      height: minPort ? '50vh' : minLand ? '60vh' : larPort ? '53vh' : '74vh',
+      width: '98.8vw',
       background: 'none'
     },
   )
@@ -56,7 +57,7 @@ import {
     {
       background: brown[700],
       width: '158vw',
-      height: '2vh'
+      height: '1.3vh'
     },
   )
 
@@ -68,7 +69,7 @@ import {
       'background-blend-mode': 'difference',
       'background-size': minPort ? '13vw 7vw' : larPort ? '11vw 7vw' : '7vw 7vw',
       width: '158vw',
-      height: '6vh'
+      height: '3.5vh'
     },
   )
 
@@ -112,15 +113,87 @@ import {
     },
   )
 
-  const boxMedia = Object.assign(
-    {},
-    row, jcsb, flex,
-    {
+  const boxMedia = (length: number) => {
+    return {
+      row, jcsb, flex,
       background: lime[400],
       height: minPort ? '32vh' : minLand ? '36vh' : larPort ? '15vh' : '32vh',
-      width: '62vw',
-      display: 'none'
+      width: `${length * 31}vw`
+    }
+  }
+
+  const cardMedia = (url: string) => {
+    return {
+      asc,
+      'cursor': 'pointer',
+      'backgroundImage': `url(${url})`,
+      width: '100%', height: '100%',
+      backgroundSize: minPort ? '30vw 15vh' : minLand ? '30vw 33vh' : larPort ? '30vw 14vh' : '30vw 30vh',
+      ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}
+    }
+  }
+
+  const dialog = Object.assign(
+    {},
+    flex, fixed, row,
+    {
+      minHeight: minPort ? '70%' : 'none',
+      maxHeight: minPort ? '70%' : 'none',
+      minWidth: minPort ? '80vw' : 'none',
+      maxWidth: minPort ? '80vw' : 'none',
+      height: minPort ? '71%' : '71vh',
+      width: minPort ? '100%' : 'none',
+      top: minPort ? '15vh' : '15vh',
+      left: minPort ? '10vw' : '15vw'
     },
   )
 
-  export { background, scroll, boxUpperStripe, solid, intercalated, mainStripe, card, boxTitle, title, boxMedia }
+  const dialogMedia = (name: string) => {
+    return {
+      flex, row, jic,
+      'margin-block': minPort ? 'auto' : 'none',
+      transform: minPort ? 'rotate(-90deg)' : 'none',
+      backgroundImage: `url(${name})`,
+      width: minPort ? '80vw' : '70vw',
+      height: minPort ? '35vh' : '100vh',
+      backgroundSize: minPort ? '78vw 30vh' : larPort ? '67vw 68vh' : '68vw 68vh',
+      backgroundRepeat: 'no-repeat'
+    }
+  }
+
+  const boxLower = Object.assign(
+    {},
+    asc, row, noSelect(),
+    {
+      background: 'none',
+      minWidth: larPort ? '10vw' : larLand ? '10vw' : larPort ? '35vw' : '10vw',
+      display: minLand ? 'none' : minPort ? 'none' : 'flex'
+    },
+  )
+
+  const textLower = Object.assign(
+    {},
+    jcc, asc, row,
+    {
+      color: '#FFFFFF',
+      fontSize: larPort ? '2.5vh' : '1.5vw',
+      top: '0.1vh',
+      mixBlendMode: 'difference'
+    },
+  )
+
+  const select = Object.assign(
+    {},
+    {
+      color: '#FFFFFF',
+      background: blue[500],
+      height: larPort ? '5vh' : '6vh',
+      width: larPort ? '11vw' : '4.0vw',
+      fontSize: larPort ? '2vh': '1vw'
+    },
+  )
+
+  export {
+    background, scroll, boxUpperStripe, solid, intercalated, mainStripe, card,
+    boxTitle, title, boxMedia, cardMedia, dialog, dialogMedia, boxLower, textLower, select
+  }
