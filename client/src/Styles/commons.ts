@@ -17,7 +17,24 @@ import {
 const width = store.getState().width;
 const height = store.getState().height;
 
-let minPort = store.getState();
+
+
+
+function select(state: any) {
+  return state
+}
+
+const minPortx = () => { 
+  let currentValue = select(store.getState())
+  return currentValue
+}
+
+let unsubscribe = store.subscribe(minPortx)
+
+
+
+
+const minPort = store.getState().minPort
 
 const minLand = store.getState().minLand;
 
@@ -131,5 +148,6 @@ export {
   jcsb,
   percentageResizedHeight,
   percentageResizedWidth,
-  minRatioReference
+  minRatioReference,
+  minPortx
 }

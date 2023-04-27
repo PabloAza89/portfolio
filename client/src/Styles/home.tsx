@@ -1,4 +1,7 @@
 import { useSelector } from 'react-redux';
+import Get , { minPorttt, unsubscribe } from '../resizeController/Get';
+import store from '../store/store'
+import { useAppSelector } from '../resizeController/hooks';
 
 import {
   minPort, minLand, MMinLand,
@@ -11,12 +14,59 @@ import {
   row, bgNone,
   bgRed, noSelect,
   relative, jcc, asc,
-  percentageResizedHeight, percentageResizedWidth
+  percentageResizedHeight, percentageResizedWidth,minPortx
 } from './commons';
 
-console.log("LA VERGA", minPort, minLand, medPort, medLand, larPort, larLand)
+/* console.log("AVER", Get().minPort, Get().minLand, Get().medPort, Get().medLand, Get().larPort, Get().larLand) */
+/* console.log("AVER", Get) */
 
+console.log("PROBANDO", minPortx())
 
+function AAA () {
+  const products = useAppSelector((state) => state)
+  return products
+}
+
+/* AAA() */
+console.log("TEST 2", AAA)
+
+/* const MMinPPort = useSelector((state: {minPort:boolean}) => state.minPort) */
+
+/* const unsubscribe = store.subscribe(() =>
+  store.getState().minPort
+  
+)
+
+function testFunc(data) {
+  return (dispatch, getState) => {
+    dispatch(test(data))
+    console.log('GLOBAL STATE IS :', getState())
+  };
+} */
+
+/* const products = useAppSelector((state) => state)
+
+  console.log("VAMAA", products) */
+
+  // function select(state: any) {
+  //   return state
+  // }
+  
+  // /* let currentValue: any */
+  // function handleChange() {
+  //   /* let previousValue = currentValue */
+  //   let currentValue: any = select(store.getState())
+  
+  //   /* if (previousValue !== currentValue) { */
+  //     /* console.log('Some deep nested property changed from', previousValue, 'to', currentValue) */
+  //     console.log("ASD", currentValue)
+  //   /* } */
+  // }
+  
+  // let unsubscribe = store.subscribe(handleChange)
+  // /* store.subscribe(handleChange) */
+  // handleChange()
+  
 
 const background = Object.assign(
   {},

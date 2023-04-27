@@ -1,4 +1,3 @@
-/* import './App.css'; */
 import React, { useState , useRef, useEffect} from 'react';
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
@@ -38,49 +37,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
 
- /*  public get height() {
-    return window.innerHeight;
-  } */
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
 
-  /* const dispatch = useDispatch() */
+  /* console.log(" MIN PORT: " , Get().minPort, " | MIN LAND: ", Get().minLand, " | MED PORT: ", Get().medPort, " | MED LAND: ", Get().medLand, " | LAR PORT: ", Get().larPort, " | LAR LAND: ", Get().larLand) */
 
-       /*  useEffect(() => {
-          function handleResize() {
-            dispatch(setWidth(window.screen.width))
-            dispatch(setHeight(window.screen.height))
-            dispatch(setMinPort(window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false))
-            dispatch(setMinLand(window.screen.height < 425 && !window.matchMedia("(orientation: portrait)").matches ? true : false))
-            dispatch(setMedPort(window.screen.width >= 425 && window.screen.width <= 825 && window.matchMedia("(orientation: portrait)").matches ? true : false))
-            dispatch(setMedLand(window.screen.height >= 425 && window.screen.height <= 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false))
-            dispatch(setLarPort(window.screen.width > 825 && window.matchMedia("(orientation: portrait)").matches ? true : false))
-            dispatch(setLarLand(window.screen.height > 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false))
-            dispatch(setStaticRefWidth(window.screen.width / 100))
-            dispatch(setStaticRefHeight(window.screen.height / 100))
-            dispatch(setMaxStaticReference((window.screen.width >= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100))
-            dispatch(setMinStaticReference(( window.screen.width <= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100))
-            dispatch(setCurrentWidth(window.innerWidth))
-            dispatch(setCurrentHeight(window.innerHeight))
-            dispatch(setPercentageResizedHeight(window.innerHeight / window.screen.height))
-            dispatch(setPercentageResizedWidth(window.innerWidth / window.screen.width))
-            dispatch(setMinRatioReference(window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width)))
-          }
-          window.addEventListener("resize", handleResize);
-          handleResize();
-          return () => window.removeEventListener("resize", handleResize);
-        }, []); */
+  Set()
 
-        /* const minPort = useSelector((state: {minPort:boolean}) => state.minPort) */
-       /*  const minPort = useSelector((state: {minPort:boolean}) => state.minPort) */
-
-        
-
-        /* console.log(" MIN PORT: " , Get().minPort, " | MIN LAND: ", Get().minLand, " | MED PORT: ", Get().medPort, " | MED LAND: ", Get().medLand, " | LAR PORT: ", Get().larPort, " | LAR LAND: ", Get().larLand) */
-        
-        /* console.log("QUE PASA ACA", Get()) */
-        
-        /* Setter() */
-        /* Set() */
-        /* Get() */
 
   return (
     <Box sx={{ backgroundColor: grey[400], position: 'relative', overflow: 'hidden', display: 'flex', width: '100vw', height: '100vh' }} >

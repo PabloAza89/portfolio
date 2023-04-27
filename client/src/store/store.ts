@@ -17,4 +17,5 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
 );
 
+export type RootState = ReturnType<typeof store.getState>
 export default store;

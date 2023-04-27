@@ -12,6 +12,8 @@ import { useSelector } from 'react-redux';
 import { jc , as, noSelect, prtr, wi, he, or}from '../../styles/styles';
 import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
+import Get from '../../resizeController/Get';
+import { useAppSelector } from '../../resizeController/hooks';
 import {
   background, bgLeft, bgLeftUpper, bgLeftUpperTextOne, bgLeftUpperTextTwo,
   bgLeftUpperTextThree, bgLeftLower, minLandRightLower
@@ -26,6 +28,12 @@ import {
 function Home() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
+
+  /* console.log("HOME", " MIN PORT: " , Get().minPort, " | MIN LAND: ", Get().minLand, " | MED PORT: ", Get().medPort, " | MED LAND: ", Get().medLand, " | LAR PORT: ", Get().larPort, " | LAR LAND: ", Get().larLand) */
+
+  const products = useAppSelector((state) => state)
+
+  console.log("VAMAA", products)
 
    return (
     <Box sx={background}>
