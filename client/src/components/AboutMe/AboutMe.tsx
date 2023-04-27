@@ -8,11 +8,7 @@ import { useSelector } from 'react-redux';
 //import { avatar, typography, background } from '../../styles/aboutMe';
 import AboutMeSX from '../../styles/AboutMeSX';
 import {
-  MinPort, MinLand, MedPort, MedLand, LarPort, LarLand,
-  CurrentHeight, bgRed, StaticRefWidth, StaticRefHeight,
-  MaxStaticReference, flex, column, row, bgNone, Width, Height,
-  PercentageResizedHeight, PercentageResizedWidth, English
-} from '../../styles/CommonsSX';
+ bgRed, flex, column, row, bgNone } from '../../styles/CommonsSX';
 
 function AboutMe() {
 

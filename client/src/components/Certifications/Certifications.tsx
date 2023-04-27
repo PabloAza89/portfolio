@@ -6,13 +6,9 @@ import henry from '../../images/henry.png';
 import { useSelector } from 'react-redux';
 import BackButton from '../BackButton/BackButton';
 import Bubbles from '../Bubbles/Bubbles';
-import { background, boxUpper, card, anchor, title, media, url, dialog, dialogMedia } from '../../styles/CertificationsSX';
+import CertificationsSX from '../../styles/CertificationsSX';
 import {
-  MinPort, MedPort, MedLand,
-  CurrentHeight, bgRed, StaticRefWidth, StaticRefHeight,
-  MaxStaticReference, flex, column, row, bgNone, Width, Height,
-  PercentageResizedHeight, PercentageResizedWidth
-} from '../../styles/CommonsSX';
+   bgRed, flex, column, row, bgNone } from '../../styles/CommonsSX';
 
 function Certifications() {
 
@@ -25,10 +21,10 @@ function Certifications() {
   const [name, setName] = useState("")
 
   return (
-    <Box sx={ background }>
+    <Box sx={CertificationsSX().background}>
       <Bubbles />
       <BackButton />
-      <Box sx={boxUpper}>
+      <Box sx={CertificationsSX().boxUpper}>
         {[{
             title: english ? `JavaScript Algorithms and Data Structures` : `Algoritmos Javascript y Estructura de Datos`,
             media: fccCertJS,
@@ -48,11 +44,11 @@ function Certifications() {
             url: `https://efset.org`
           }].map((e) => {
             return (
-              <Box sx={card}>
-                <Typography sx={title}>{e.title}</Typography>
-                <CardMedia onClick={() => {setName(e.media); setShow(!show)}} sx={media(e.media)} />
-                <Typography sx={url}>
-                  <a style={anchor()}
+              <Box sx={CertificationsSX().card}>
+                <Typography sx={CertificationsSX().title}>{e.title}</Typography>
+                <CardMedia onClick={() => {setName(e.media); setShow(!show)}} sx={CertificationsSX().media(e.media)} />
+                <Typography sx={CertificationsSX().url}>
+                  <a style={CertificationsSX().anchor()}
                     href={e.href}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -63,13 +59,13 @@ function Certifications() {
       </Box>
 
       <Dialog
-        sx={dialog}
+        sx={CertificationsSX().dialog}
         open={minLand || larPort || larLand ? show : false}
         onClick={() => setShow(false)}
         fullWidth={true}
         fullScreen={true}
       >
-        <CardMedia sx={dialogMedia(name)}></CardMedia>
+        <CardMedia sx={CertificationsSX().dialogMedia(name)}></CardMedia>
       </Dialog>
 
     </Box>

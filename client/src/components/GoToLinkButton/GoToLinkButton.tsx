@@ -1,7 +1,6 @@
 import React, { useState , useRef, useEffect} from 'react';
 import {Box, Button,CardMedia, Typography } from '@mui/material';
 import ReplyIcon from '@mui/icons-material/Reply';
-import { row, column, jc , as, noSelect, prtr, wi, he, or}from '../../styles/StylesSX';
 import { useSelector } from 'react-redux';
 
 interface AppProps {

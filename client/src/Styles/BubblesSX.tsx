@@ -1,8 +1,5 @@
 import {
-  MinPort, MinLand, MedPort, MedLand, LarPort, LarLand,
-  CurrentHeight, bgRed, StaticRefWidth, StaticRefHeight,
-  MaxStaticReference, flex, column, row, bgNone, Width, Height,
-  PercentageResizedHeight, PercentageResizedWidth, absolute,
+   bgRed,  flex, column, row, bgNone, absolute,
   relative,
 } from './CommonsSX';
   

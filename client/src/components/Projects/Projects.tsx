@@ -10,19 +10,32 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
 import BackButton from '../BackButton/BackButton';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
-import { background, scroll, boxUpperStripe, solid, intercalated, mainStripe, card, boxTitle,
-  title, boxMedia, cardMedia, dialog, dialogMedia, boxLower, textLower, select
-} from '../../styles/ProjectsSX';
+import ProjectsSX from '../../styles/ProjectsSX';
 import {
-  MinPort, /* MinLand, */ MedPort, MedLand, /* LarPort, LarLand, */
-  CurrentHeight, bgRed, StaticRefWidth, StaticRefHeight,
-  MaxStaticReference, flex, column, row, bgNone, Width, Height,
-  PercentageResizedHeight, PercentageResizedWidth
+ 
+  bgRed, flex, column, row, bgNone
 } from '../../styles/CommonsSX';
 
 function Projects() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
+  const width = useSelector((state: {width: number}) => state.width)
+  const height = useSelector((state: {height: number}) => state.height)
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
+  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
+  const maxStaticReference = useSelector((state: {maxStaticReference: number}) => state.maxStaticReference)
+  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
+  const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
+  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
+  const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
+
+
   const [show, setShow] = useState<boolean>(false)
   const [name, setName] = useState<string>("")
   const [scrollSpeed, setScrollSpeed] = useState<any>(30)
@@ -48,15 +61,15 @@ function Projects() {
   }
 
   return (
-    <Box sx={background}>
+    <Box sx={ProjectsSX().background}>
       <BackButton />
-      <ScrollContainer innerRef={useHorizontalScroll()} style={scroll()}>
-        <Box sx={boxUpperStripe}>
-          <Box sx={solid}></Box>
-          <Box sx={intercalated}></Box>
-          <Box sx={solid}></Box>
+      <ScrollContainer innerRef={useHorizontalScroll()} style={ProjectsSX().scroll()}>
+        <Box sx={ProjectsSX().boxUpperStripe}>
+          <Box sx={ProjectsSX().solid}></Box>
+          <Box sx={ProjectsSX().intercalated}></Box>
+          <Box sx={ProjectsSX().solid}></Box>
         </Box>
-        <Box sx={mainStripe} >
+        <Box sx={ProjectsSX().mainStripe} >
           {[{
             title: english ? `Weather App` : `Aplicación del Clima`,
             media: [ weatherify1, weatherify2 ],
@@ -68,42 +81,42 @@ function Projects() {
             href: `https://pabloaza89.github.io/PI-Food-GH/`
           }].map((e) => {
             return (
-          <Box sx={card}>
-            <Box sx={boxTitle}>
-              <Typography sx={title}>{e.title}</Typography>
+          <Box sx={ProjectsSX().card}>
+            <Box sx={ProjectsSX().boxTitle}>
+              <Typography sx={ProjectsSX().title}>{e.title}</Typography>
               <GoToLinkButton link={e.href}/>
             </Box>
-            <Box sx={boxMedia(e.media.length)}>
+            <Box sx={ProjectsSX().boxMedia(e.media.length)}>
               {e.media.map((m) =>{
-                return <CardMedia onClick={() => {setName(m); setShow(!show)}} sx={cardMedia(m)}></CardMedia>
+                return <CardMedia onClick={() => {setName(m); setShow(!show)}} sx={ProjectsSX().cardMedia(m)}></CardMedia>
               })}
             </Box>
           </Box>)
         })}
         </Box>
-        <Box sx={boxUpperStripe}>
-          <Box sx={solid}></Box>
-          <Box sx={intercalated}></Box>
-          <Box sx={solid}></Box>
+        <Box sx={ProjectsSX().boxUpperStripe}>
+          <Box sx={ProjectsSX().solid}></Box>
+          <Box sx={ProjectsSX().intercalated}></Box>
+          <Box sx={ProjectsSX().solid}></Box>
         </Box>
       </ScrollContainer>
 
       <Dialog
-        sx={dialog}
-        open={MinLand() || LarPort() || LarLand() ? show : false}
+        sx={ProjectsSX().dialog}
+        open={minLand || larPort || larLand ? show : false}
         onClick={() => {setShow(false)}}
         fullWidth={true}
         fullScreen={true}
       >
-        <CardMedia sx={dialogMedia(name)}></CardMedia>
+        <CardMedia sx={ProjectsSX().dialogMedia(name)}></CardMedia>
       </Dialog>
 
-      <Box sx={boxLower}>
-        <Typography sx={textLower}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
+      <Box sx={ProjectsSX().boxLower}>
+        <Typography sx={ProjectsSX().textLower}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
         <FormControl>
           <InputLabel id="demo-simple-select-label"></InputLabel>
           <Select
-            sx={select}
+            sx={ProjectsSX().select}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={scrollSpeed}

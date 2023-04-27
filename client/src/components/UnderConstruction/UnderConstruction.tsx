@@ -4,7 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes , Link} from "react-router-dom";
 import gear from '../../images/gear.png';
 import ForwardIcon from '@mui/icons-material/Forward';
 import BackButton from '../BackButton/BackButton';
-import { row, column, jc , as, noSelect, prtr, wi, he, or} from '../../styles/StylesSX';
+//import { row, column, jc , as, noSelect, prtr, wi, he, or} from '../../styles/StylesSX';
 import { useSelector } from 'react-redux';
 
 function UnderConstruction() {
@@ -18,7 +18,7 @@ function UnderConstruction() {
 
   return (
     <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
-      <Typography sx={{...noSelect(),...{ // CENTER LEFT
+      <Typography sx={{/*...noSelect(),*/...{ // CENTER LEFT
         fontFamily: 'Lucida Console',
         fontSize: minPort ? '7vw' : minLand ? '3vw' : larPort ? '6vw' : '2.1vw',
         color: 'white',
@@ -28,7 +28,7 @@ function UnderConstruction() {
         left: minPort ? '5vw' : minLand ? '5vw' : larPort ? '5vw' : '15vw',
         mixBlendMode: 'difference'
       }}}>SECTION UNDER CONSTRUCTION !</Typography>
-      <Typography sx={{...noSelect(),...{ // UPPPER RIGHT
+      <Typography sx={{/*...noSelect(),*/...{ // UPPPER RIGHT
         fontFamily: 'Monaco',
         fontSize: minPort ? '2.8vw' : minLand ? '2.8vw' : larPort ? '2.8vw' : '1.5vw',
         color: 'white',
@@ -38,7 +38,7 @@ function UnderConstruction() {
         left: minPort ? '67vw' : minLand ? '69vw' : larPort ? '67vw' : '78vw',
         mixBlendMode: 'difference'
       }}}>SECTION UNDER CONSTRUCTION !</Typography>
-      <Typography sx={{...noSelect(),...{ // RIGHT LOWER
+      <Typography sx={{/*...noSelect(),*/...{ // RIGHT LOWER
         fontFamily: 'Verdana',
         fontSize: minPort ? '4vw' : minLand ? '4vw' : larPort ? '4vw' : '1.2vw',
         color: 'white',

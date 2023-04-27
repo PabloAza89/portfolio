@@ -7,14 +7,11 @@ import Projects from './components/Projects/Projects';
 import Certifications from './components/Certifications/Certifications';
 import Contact from './components/Contact/Contact';
 import Language from './components/Language/Language';
-/* import { abc } from './styles/ResizeController'; */
+
 import { Box, Button, Link,  Typography} from '@mui/material';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { grey , blue } from '@mui/material/colors';
-/* import ResizeController from './styles/ResizeController'; */
-/* import Setter from './resizeController/setter'; */
-import Set from './resizeController/Set';
-import Get from './resizeController/Get';
+
 import {
   setWidth, setHeight, setMinPort, setMinLand,
   setMedPort, setMedLand, setLarPort, setLarLand,
@@ -23,25 +20,10 @@ import {
   setPercentageResizedHeight, setPercentageResizedWidth, setMinRatioReference
 } from './actions';
 import { useSelector, useDispatch } from 'react-redux';
-/* import store from './store/store'; */
-
-/* import {
-  minPort, minLand, MMinLand, medPort, medLand, larPort, larLand,
-  currentHeight, bgRed, staticRefWidth, staticRefHeight,
-  maxStaticReference, flex, column, row, bgNone, width, height,
-  percentageResizedHeight, percentageResizedWidth, minRatioReference
-} from './styles/commons'; */
-
-/* import { minPort } from './styles/commons'; */
-
 
 function App() {
 
-  
-  //  Set()
-
   const dispatch = useDispatch()
-
 
   useEffect(() => {
           function handleResize() {

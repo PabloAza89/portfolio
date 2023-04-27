@@ -6,7 +6,7 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { grey , blue } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
-import { row, column, jc , as, noSelect, prtr, wi, he, or} from '../../styles/StylesSX'
+//import { row, column, jc , as, noSelect, prtr, wi, he, or} from '../../styles/StylesSX'
 
 function NavBar() {
 
@@ -71,18 +71,18 @@ function NavBar() {
         minHeight: larPort ? '11vw' : `${staticRefWidth * 2.9}px`,
         marginLeft: '2vw'
       }}>
-        <Typography sx={{...noSelect(),...{
+        <Typography sx={{/* ...noSelect(), */...{
           fontSize: minPort ? '6vw' : minLand ? '2.8vw' : larPort ? '3.8vw' : '2.8vw',
           marginRight: minPort ? '1.5vw' : minLand ? '1.4vw' : larPort ? '1.1vw' : '1.1vw'
         }}}>{`<`}</Typography>
-        <Typography sx={{...noSelect(),...{
+        <Typography sx={{/*...noSelect(),*/...{
           marginTop: '0.5vh',
           fontFamily: 'Allura',
           fontSize: minPort ? '7.5vw' : minLand ? '3.8vw' : larPort ? '6.1vw' : '3.8vw',
           color: blue[600],
           fontWeight: 600
         }}}>{`Pablo Azambuyo`}</Typography>
-        <Typography sx={{...noSelect(),...{
+        <Typography sx={{/*...noSelect(),*/...{
           marginTop: '0.5vh',
           fontSize: minPort ? '6vw' : minLand ? '2.8vw' : larPort ? '4.5vw' : '2.8vw',
           fontWeight: '300',
@@ -93,7 +93,7 @@ function NavBar() {
             '50%': { opacity: '1' }
           }
         }}}>{`I`}</Typography>
-        <Typography sx={{...noSelect(),...{
+        <Typography sx={{/*...noSelect(),*/...{
           fontSize: minPort ? '6vw' : minLand ? '2.8vw' : larPort ? '3.8vw' : '2.8vw',
           marginLeft: minPort ? '0.2vw' : minLand ? '1.0vw' : larPort ? '0.8vw' : '0.3vw'
         }}}>{`/>`}</Typography>

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { bgRed, flex, column, row, bgNone, noSelect } from './CommonsSX';
 import store from '../store/store'
 
-function AboutMeSX() {
+function UnderConstructionSX() {
   
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
@@ -73,5 +73,5 @@ function AboutMeSX() {
   return { background, avatar, typography }
 }
 
-export default AboutMeSX
+export default UnderConstructionSX
 

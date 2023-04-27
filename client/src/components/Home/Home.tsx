@@ -9,11 +9,9 @@ import sequelize from '../../images/sequelize.png';
 import material from '../../images/material.png';
 import { BrowserRouter, Navigate, Route, Routes , Link, useLocation} from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { jc , as, noSelect, prtr, wi, he, or}from '../../styles/StylesSX';
 import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
-import Get from '../../resizeController/Get';
-import { useAppSelector } from '../../resizeController/hooks';
+
 import HomeSX from '../../styles/HomeSX';
 import {
   bgRed, flex, column, row, bgNone

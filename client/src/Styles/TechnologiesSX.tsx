@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import fccCertJS from '../images/fccCertJS.png';
 import efSet from '../images/efSet.png';
 import henry from '../images/henry.png';
@@ -6,47 +7,60 @@ import {
   bgRed,flex, column, row, bgNone, jcsb, relative, aic, asc, jcc, noSelect,
 } from './CommonsSX';
 
-  export const mainBox = () => {
+function TechnologiesSX() {
+  
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const MedLand = useSelector((state: {medLand:boolean}) => state.medLand)
+  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)  // OJO staticRefWidth
+  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)  // OJO QUE FUNC CON {store.getState().staticRefHeight TAMBIEN
+  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference) // OJO store.getState().maxStaticReference
+  const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
+
+  const mainBox = () => {
     return {
       flex, row, jcsb,
       background: 'none'
     }
   }
 
-  export const iconBox = () => {
+  const iconBox = () => {
     return {
       flex, column, relative, aic,
       background: 'none',
       border: 'none',
-      width: MinPort() ? '15vw' : MinLand() ? '7vw' : LarPort() ? '10vw' : '6vw'
+      width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'
     }
   }
 
-  export const iconMedia = (url: string) => {
+  const iconMedia = (url: string) => {
     return {
       asc, relative,
       border: 'none',
       backgroundRepeat: 'no-repeat',
       backgroundImage: `url(${url})`,
-      width: MinPort() ? '10vw' : MinLand() ? '3.5vw' : LarPort() ? '5.5vw' : '3.5vw',
-      height: MinPort() ? '10vw' : MinLand() ? '3.5vw' : LarPort() ? '5.5vw' : '3.5vw' ,
+      width: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw',
+      height: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw' ,
       'background-size': 'contain'
     }
   }
 
-  export const textBox = () => {
+  const textBox = () => {
     return {
       jcc, aic, flex, column, relative,
       background: 'none',
       border: 'none',
-      width: MinPort() ? '15vw' : MinLand() ? '7vw' : LarPort() ? '10vw' : '6vw'
+      width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'
     }
   }
 
-  export const title = () => {
+  const title = () => {
     return {
       ...noSelect(),
-      fontSize: MinPort() ? '2.9vw' : MinLand() ? '2.40vh' : LarPort() ? '1.85vw' : '0.95vw',
+      fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw',
       border: 'none',
       color: '#FFFFFF',
       'fontWeight': 600,
@@ -54,6 +68,8 @@ import {
     }
   }
 
-  // export {
-  //   mainBox, iconBox, iconMedia, textBox, title
-  // }
+  return { mainBox, iconBox, iconMedia, textBox, title }
+
+}
+
+export default TechnologiesSX;

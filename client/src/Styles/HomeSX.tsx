@@ -1,16 +1,14 @@
 import { useSelector } from 'react-redux';
 //import Get , { MinPorttt, unsubscribe } from '../resizeController/Get';
 import store from '../store/store'
-import { useAppSelector } from '../resizeController/hooks';
 
 import {
-  
    bgRed, flex, column, row, bgNone,
   aic, jcc, asc,
   noSelect, absolute, jsc, relative,
 } from './CommonsSX';
 
-function HomeSX (){
+function HomeSX() {
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
@@ -23,12 +21,9 @@ function HomeSX (){
   const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
   const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
 
-
-
-
 const background = () => {
   return {
-    flex, relative, jcc,
+    ...flex, ...relative, ...jcc,
     background: 'none',
     flexDirection: minPort ? 'column' : minLand ? 'row' : 'row',
     width: minPort ? '97vw' : minLand ? '97vw' : '97vw',
@@ -38,7 +33,7 @@ const background = () => {
 
 const bgLeft = () => {
   return {
-    relative,
+    ...relative,
     background: 'none',
     justifyContent: medPort ? 'space-evenly' : 'center',
     display: minPort || minLand ? 'contents' : 'flex',
@@ -50,7 +45,7 @@ const bgLeft = () => {
 
 const bgLeftUpper = () => {
   return {
-    relative, flex, column, jcc, asc,
+    ...relative, ...flex, ...column, ...jcc, ...asc,
     background:'none',
     border: 'none',
     height: minPort ? '50vh' : minLand ? '55vh' : larPort ? '28vh' : '35vh',
@@ -60,7 +55,7 @@ const bgLeftUpper = () => {
 
 const bgLeftUpperTextOne = () => {
   return {
-  ...noSelect(),
+    ...noSelect(),
     color:'#FFFFFF',
     fontSize: minPort  ? '11.5vw' : minLand ? '4.9vw' : larPort ? '5.0vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.7}px` : '6.9vh',
     mixBlendMode: 'difference'
@@ -88,8 +83,8 @@ const bgLeftUpperTextThree = () => {
 
 const bgLeftLower = () => {
   return {
-    jcc, relative, column, asc,
-    background: 'nonew',
+    ...jcc, ...relative, ...column, ...asc,
+    background: 'none',
     left: minPort ? '-0.5vw' : minLand ? '0vw' : larPort ? '0vw' : '0vw',
     display: larPort ? 'none' : larLand && percentageResizedHeight < 0.381 ? 'none' : 'flex',
     height: minPort ? '11vh' : minLand ? '8vh' : '11vh',
@@ -99,7 +94,7 @@ const bgLeftLower = () => {
 
 const minLandRightLower = () => {
   return {
-    jcc,
+    ...jcc,
     background: 'red',
     display: minLand ? 'flex' : 'none',
     justifyContent: 'center'
