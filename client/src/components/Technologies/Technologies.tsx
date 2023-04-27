@@ -6,7 +6,7 @@ import node from '../../images/node.png';
 import redux from '../../images/redux.png';
 import sequelize from '../../images/sequelize.png';
 import material from '../../images/material.png';
-import { mainBox, iconBox, iconMedia, textBox, title } from '../../styles/technologies';
+import { mainBox, iconBox, iconMedia, textBox, title } from '../../styles/TechnologiesSX';
 
 function Technologies() {
 

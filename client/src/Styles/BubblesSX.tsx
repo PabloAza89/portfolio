@@ -1,15 +1,10 @@
 import {
-  minPort, minLand,
-  medPort, medLand,
-  larPort, larLand,
-  currentHeight,
-  staticRefWidth, staticRefHeight,
-  maxStaticReference,
-  flex, column,
-  row, bgNone,
-  bgRed, absolute,
-  relative
-} from './commons';
+  MinPort, MinLand, MedPort, MedLand, LarPort, LarLand,
+  CurrentHeight, bgRed, StaticRefWidth, StaticRefHeight,
+  MaxStaticReference, flex, column, row, bgNone, Width, Height,
+  PercentageResizedHeight, PercentageResizedWidth, absolute,
+  relative,
+} from './CommonsSX';
   
   const background = Object.assign(
     {},

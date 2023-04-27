@@ -4,7 +4,7 @@ import {
   row,
   bgNone,
   bgRed
-} from './commons';
+} from './CommonsSX';
 
 const contact = Object.assign(
   {},

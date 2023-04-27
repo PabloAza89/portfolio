@@ -5,7 +5,7 @@ import { BrowserRouter, Navigate, Route, Routes , Link} from "react-router-dom";
 /* import ForwardIcon from '@mui/icons-material/Forward'; */
 import BackButton from '../BackButton/BackButton';
 import UnderConstruction from '../UnderConstruction/UnderConstruction';
-import contact from '../../styles/contact'
+import contact from '../../styles/ContactSX'
 
 
 function Contact() {

@@ -1,14 +1,19 @@
 import React, { useState , useRef, useEffect} from 'react';
+
 import { setWidth, setHeight, setMinPort, setMinLand,
   setMedPort, setMedLand, setLarPort, setLarLand,
   setStaticRefWidth, setStaticRefHeight, setMaxStaticReference,
   setMinStaticReference, setCurrentWidth, setCurrentHeight,
   setPercentageResizedHeight, setPercentageResizedWidth, setMinRatioReference } from '../actions';
 import { useSelector, useDispatch } from 'react-redux';
+import store from '../store/store'
+
+
 
 function Set() {
 
   const dispatch = useDispatch()
+
 
   useEffect(() => {
     function handleResize() {
@@ -32,8 +37,12 @@ function Set() {
     }
     window.addEventListener("resize", handleResize);
     handleResize();
+    /* minPort = store.getState().minPort */
+
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 }
+
 
 export default Set;

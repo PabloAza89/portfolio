@@ -6,7 +6,7 @@ import { setWidth, setHeight, setMinPort, setMinLand,
   setMinStaticReference, setCurrentWidth, setCurrentHeight,
   setPercentageResizedHeight, setPercentageResizedWidth, setMinRatioReference } from '../actions';
 import { useSelector, useDispatch } from 'react-redux';
-import { larPort, medPort } from './commons';
+//import { larPort, medPort } from './commons';
 
 /* import {
   minPort, minLand, MMinLand, medPort, medLand, larPort, larLand,
@@ -49,21 +49,21 @@ function ResizeController() {
   }, []); */
 
         /* const minPort = useSelector((state: {minPort:boolean}) => state.minPort) */
-        const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-        const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-        const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-        const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
-        const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-        const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-        const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
-        const minRatioReference = useSelector((state: {minRatioReference:number}) => state.minRatioReference)
+        // const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+        // const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+        // const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+        // const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
+        // const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+        // const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+        //const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+        //const minRatioReference = useSelector((state: {minRatioReference:number}) => state.minRatioReference)
 
-        console.log("OTRO", " MIN PORT: " , minPort, " | MIN LAND: ", minLand, " | MED PORT: ", medPort, " | MED LAND: ", medLand, " | LAR PORT: ", larPort, " | LAR LAND: ", larLand)
+        //console.log("OTRO", " MIN PORT: " , minPort, " | MIN LAND: ", minLand, " | MED PORT: ", medPort, " | MED LAND: ", medLand, " | LAR PORT: ", larPort, " | LAR LAND: ", larLand)
 
   /* return {minPort: minPort, minLand : minLand, medPort : medPort,
     medLand: medLand, larPort: larPort, larLand : larLand} */
 
-    return {minPort, minLand, medPort,medLand, larPort, larLand}
+    return /* {minPort, minLand, medPort,medLand, larPort, larLand} */
 }
 
 export default ResizeController;

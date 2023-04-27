@@ -2,19 +2,15 @@ import React from 'react';
 import {Box, Button,CardMedia, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
 import ForwardIcon from '@mui/icons-material/Forward';
-import { jc , as, noSelect, prtr, wi, he, or}from '../../styles/styles'
+import { jc , as, noSelect, prtr, wi, he, or}from '../../styles/StylesSX'
 import { useSelector, useDispatch } from 'react-redux';
-import { background, icon } from '../../styles/backButton';
+import { background, icon } from '../../styles/BackButtonSX';
 import {
-  minPort, minLand,
-  medPort, medLand,
-  larPort, larLand,
-  currentHeight, bgRed,
-  staticRefWidth, staticRefHeight,
-  maxStaticReference,
-  flex, column,
-  row, bgNone,
-} from '../../styles/commons';
+  MinPort, MinLand, MedPort, MedLand, LarPort, LarLand,
+  CurrentHeight, bgRed, StaticRefWidth, StaticRefHeight,
+  MaxStaticReference, flex, column, row, bgNone, Width, Height,
+  PercentageResizedHeight, PercentageResizedWidth
+} from '../../styles/CommonsSX';
 
 function BackButton() {
 

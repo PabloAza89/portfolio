@@ -9,45 +9,50 @@ import sequelize from '../../images/sequelize.png';
 import material from '../../images/material.png';
 import { BrowserRouter, Navigate, Route, Routes , Link, useLocation} from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { jc , as, noSelect, prtr, wi, he, or}from '../../styles/styles';
+import { jc , as, noSelect, prtr, wi, he, or}from '../../styles/StylesSX';
 import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
 import Get from '../../resizeController/Get';
 import { useAppSelector } from '../../resizeController/hooks';
+import HomeSX from '../../styles/HomeSX';
 import {
-  background, bgLeft, bgLeftUpper, bgLeftUpperTextOne, bgLeftUpperTextTwo,
-  bgLeftUpperTextThree, bgLeftLower, minLandRightLower
- } from '../../styles/home';
-import {
-  minPort, minLand, MMinLand, medPort, medLand, larPort, larLand,
-  currentHeight, bgRed, staticRefWidth, staticRefHeight,
-  maxStaticReference, flex, column, row, bgNone, width, height,
-  percentageResizedHeight, percentageResizedWidth
-} from '../../styles/commons';
+  bgRed, flex, column, row, bgNone
+} from '../../styles/CommonsSX';
 
 function Home() {
 
+  const width = useSelector((state: {width: number}) => state.width)
+  const height= useSelector((state: {height: number}) => state.height)
   const english = useSelector((state: {english:boolean}) => state.english)
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
+  const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
+
+  //const english = useSelector((state: {english:boolean}) => state.english)
 
   /* console.log("HOME", " MIN PORT: " , Get().minPort, " | MIN LAND: ", Get().minLand, " | MED PORT: ", Get().medPort, " | MED LAND: ", Get().medLand, " | LAR PORT: ", Get().larPort, " | LAR LAND: ", Get().larLand) */
 
-  const products = useAppSelector((state) => state)
+  //const products = useAppSelector((state) => state)
 
-  console.log("VAMAA", products)
+  //console.log("VAMAA", products)
 
    return (
-    <Box sx={background}>
-      <Box sx={bgLeft}>
-        <Box sx={bgLeftUpper}>
-          <Typography sx={bgLeftUpperTextOne}>{english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
-          <Typography sx={bgLeftUpperTextTwo}>{english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
-          <Typography sx={bgLeftUpperTextThree}>{english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
+    <Box sx={HomeSX().background}>
+      <Box sx={HomeSX().bgLeft}>
+        <Box sx={HomeSX().bgLeftUpper}>
+          <Typography sx={HomeSX().bgLeftUpperTextOne}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
+          <Typography sx={HomeSX().bgLeftUpperTextTwo}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
+          <Typography sx={HomeSX().bgLeftUpperTextThree}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
         </Box>
-        <Box sx={bgLeftLower}>
+        <Box sx={HomeSX().bgLeftLower}>
 
           <Technologies />
 
-          <Box sx={minLandRightLower}>
+          <Box sx={HomeSX().minLandRightLower}>
             <Link style={{ textDecoration: 'none' }} to="/portfolio/AboutMe">
               <Button sx={{ padding: '0px !important', minWidth: minPort ? '53vw !important' : minLand ? '25vw !important' : '9vw !important', 'max-width': '19vw !important', 'min-height': minPort ? '10vw !important' : minLand ? '7.5vh !important' : '2.1vh !important', 'max-height': '2.1vw !important', color:'#FFFFFF', width: minPort ? '19vw' : minLand ? '19vw' : '19vw', marginLeft: minPort ? '0vw' : minLand ? '0vw' : '16vw', marginTop: minPort ? '1.5vw' : minLand ? '4.5vh' : '1.9vw', fontSize: minPort ? '4vw' : minLand ? '1.65vw' : '1.05vw', mixBlendMode: 'difference'}} variant='outlined'>{ english ? `Know about me` : `Conoceme` }
               </Button>
@@ -74,7 +79,7 @@ function Home() {
               width: minPort ? '19vw' : minLand ? '19vw' : medPort ? '29vw' : larPort ? '29vw' : '19vw',
               marginLeft: minPort ? '0vw' : minLand ? '10vw' : '16vw',
               marginTop: minPort ? '1.5vw' : minLand ? '1.5vw' : '1.9vw',
-              /* fontSize: minPort ? '3.8vw' : minLand ? '1.05vw' : larPort ? `${staticRefWidth * 0.559}px` : larLand && percentageResizedWidth < 0.559 ? `${staticRefWidth * 0.559}px` : `${percentageResizedWidth * 22.5}px`, */
+              /* fontSize: minPort ? '3.8vw' : minLand ? '1.05vw' : larPort ? `${staticRefWidth * 0.559}px` : larLand&& percentageResizedWidth< 0.559 ? `${staticRefWidth * 0.559}px` : `${percentageResizedWidth* 22.5}px`, */
               fontSize: larPort ? '2.2vw' : '1.8vw',
 
               mixBlendMode: 'difference'
@@ -90,20 +95,20 @@ function Home() {
         display:
           minPort ? 'none' :
           minLand ? 'none' :
-          /* larLand &&  percentageResizedHeight < 0.313 ? 'none' : */
+          /* larLand&&  percentageResizedHeight< 0.313 ? 'none' : */
           'flex',
         width: '46vw',   
         justifyContent: 'center',
         height: larPort ? '45vh' : '71vh',
         'align-items': 'center',
-        /* 'min-height': larLand &&  percentageResizedHeight < 0.313 ? 'none' : 'null'  */
+        /* 'min-height': larLand&&  percentageResizedHeight< 0.313 ? 'none' : 'null'  */
       }}>
         <SvgIcon
           style={{
             display: 'flex',
             position: 'fixed',
-            width: medPort ? '35vw' : larPort && width < height ? '33vw' : larPort && percentageResizedWidth < 0.410 ? '29vh' : larPort && percentageResizedWidth < 0.544 ? '38vh' : larLand && percentageResizedWidth < 0.544 ? '38vh' : larLand && percentageResizedWidth < 0.777 ? '50vh' : '70vh',
-            height: medPort ? '35vw' : larPort && width < height ? '33vw' : larPort && percentageResizedWidth < 0.410 ? '29vh' : larPort && percentageResizedWidth < 0.544 ? '38vh' : larLand && percentageResizedWidth < 0.544 ? '38vh' : larLand && percentageResizedWidth < 0.777 ? '50vh' : '70vh',
+            width: medPort ? '35vw' : larPort && width < height ? '33vw' : larPort && percentageResizedWidth < 0.410 ? '29vh' : larPort && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.777 ? '50vh' : '70vh',
+            height: medPort ? '35vw' : larPort && width < height ? '33vw' : larPort && percentageResizedWidth < 0.410 ? '29vh' : larPort && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.777 ? '50vh' : '70vh',
             minWidth: percentageResizedHeight < 0.250 ? '110px' : 'null',
             minHeight: percentageResizedHeight < 0.250 ? '110px' : 'null',
             

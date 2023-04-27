@@ -15,13 +15,13 @@ import { grey , blue } from '@mui/material/colors';
 /* import Setter from './resizeController/setter'; */
 import Set from './resizeController/Set';
 import Get from './resizeController/Get';
-/* import {
+import {
   setWidth, setHeight, setMinPort, setMinLand,
   setMedPort, setMedLand, setLarPort, setLarLand,
   setStaticRefWidth, setStaticRefHeight, setMaxStaticReference,
   setMinStaticReference, setCurrentWidth, setCurrentHeight,
   setPercentageResizedHeight, setPercentageResizedWidth, setMinRatioReference
-} from './actions'; */
+} from './actions';
 import { useSelector, useDispatch } from 'react-redux';
 /* import store from './store/store'; */
 
@@ -37,11 +37,51 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
 
-  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+  
+  //  Set()
 
+  const dispatch = useDispatch()
+
+
+  useEffect(() => {
+          function handleResize() {
+            dispatch(setWidth(window.screen.width))
+            dispatch(setHeight(window.screen.height))
+            dispatch(setMinPort(window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false))
+            dispatch(setMinLand(window.screen.height < 425 && !window.matchMedia("(orientation: portrait)").matches ? true : false))
+            dispatch(setMedPort(window.screen.width >= 425 && window.screen.width <= 825 && window.matchMedia("(orientation: portrait)").matches ? true : false))
+            dispatch(setMedLand(window.screen.height >= 425 && window.screen.height <= 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false))
+            dispatch(setLarPort(window.screen.width > 825 && window.matchMedia("(orientation: portrait)").matches ? true : false))
+            dispatch(setLarLand(window.screen.height > 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false))
+            dispatch(setStaticRefWidth(window.screen.width / 100))
+            dispatch(setStaticRefHeight(window.screen.height / 100))
+            dispatch(setMaxStaticReference((window.screen.width >= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100))
+            dispatch(setMinStaticReference(( window.screen.width <= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100))
+            dispatch(setCurrentWidth(window.innerWidth))
+            dispatch(setCurrentHeight(window.innerHeight))
+            dispatch(setPercentageResizedHeight(window.innerHeight / window.screen.height))
+            dispatch(setPercentageResizedWidth(window.innerWidth / window.screen.width))
+            dispatch(setMinRatioReference(window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width)))
+          }
+          window.addEventListener("resize", handleResize);
+          handleResize();
+          return () => window.removeEventListener("resize", handleResize);
+        }, []);
+  
+
+        const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+        const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+        const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+        const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
+        const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+        const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+        const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+        const minRatioReference = useSelector((state: {minRatioReference:number}) => state.minRatioReference)
+
+  
   /* console.log(" MIN PORT: " , Get().minPort, " | MIN LAND: ", Get().minLand, " | MED PORT: ", Get().medPort, " | MED LAND: ", Get().medLand, " | LAR PORT: ", Get().larPort, " | LAR LAND: ", Get().larLand) */
 
-  Set()
+  
 
 
   return (
@@ -72,7 +112,7 @@ function App() {
                     <AboutMe />
                   </Box>
                   <Box sx={{display: 'grid'/* , position: 'relative' */}} >
-                    <Language />
+                    {/* <Language /> */}
                   </Box>
                 </>}/>
                 <Route path="/portfolio/Skills" element={<><Skills/></>}/>

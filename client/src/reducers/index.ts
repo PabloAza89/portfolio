@@ -1,5 +1,26 @@
-const initialState = {
-  english: true,
+interface initialStateI {
+  english: boolean,
+  width: number,
+  height: number,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
+  staticRefWidth: number,
+  staticRefHeight: number,
+  maxStaticReference: number,
+  minStaticReference: number,
+  currentWidth: number,
+  currentHeight: number,
+  percentageResizedHeight: number,
+  percentageResizedWidth: number,
+  minRatioReference: number,
+}
+
+const initialState: initialStateI = {
+  english:  true,
   width: window.screen.width,
   height: window.screen.height,
   minPort: window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false,

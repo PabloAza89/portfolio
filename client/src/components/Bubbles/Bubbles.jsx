@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { background, duration } from '../../styles/bubbles';
+import { background, duration } from '../../styles/BubblesSX';
 
 function Bubbles() {
 

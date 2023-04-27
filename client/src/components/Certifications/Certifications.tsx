@@ -6,21 +6,20 @@ import henry from '../../images/henry.png';
 import { useSelector } from 'react-redux';
 import BackButton from '../BackButton/BackButton';
 import Bubbles from '../Bubbles/Bubbles';
-import { background, boxUpper, card, anchor, title, media, url, dialog, dialogMedia } from '../../styles/certifications';
+import { background, boxUpper, card, anchor, title, media, url, dialog, dialogMedia } from '../../styles/CertificationsSX';
 import {
-  minPort, minLand,
-  medPort, medLand,
-  larPort, larLand,
-  currentHeight, bgRed,
-  staticRefWidth, staticRefHeight,
-  maxStaticReference,
-  flex, column,
-  row, bgNone,
-} from '../../styles/commons';
+  MinPort, MedPort, MedLand,
+  CurrentHeight, bgRed, StaticRefWidth, StaticRefHeight,
+  MaxStaticReference, flex, column, row, bgNone, Width, Height,
+  PercentageResizedHeight, PercentageResizedWidth
+} from '../../styles/CommonsSX';
 
 function Certifications() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
+  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
   const [show, setShow] = useState(false)
   const [name, setName] = useState("")
@@ -53,7 +52,7 @@ function Certifications() {
                 <Typography sx={title}>{e.title}</Typography>
                 <CardMedia onClick={() => {setName(e.media); setShow(!show)}} sx={media(e.media)} />
                 <Typography sx={url}>
-                  <a style={anchor}
+                  <a style={anchor()}
                     href={e.href}
                     target="_blank"
                     rel="noopener noreferrer"

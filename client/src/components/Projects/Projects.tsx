@@ -12,12 +12,13 @@ import BackButton from '../BackButton/BackButton';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 import { background, scroll, boxUpperStripe, solid, intercalated, mainStripe, card, boxTitle,
   title, boxMedia, cardMedia, dialog, dialogMedia, boxLower, textLower, select
-} from '../../styles/projects';
+} from '../../styles/ProjectsSX';
 import {
-  minPort, minLand, medPort, medLand, larPort, larLand,
-  currentHeight, bgRed, staticRefWidth, staticRefHeight,
-  maxStaticReference, flex, column, row, bgNone
-} from '../../styles/commons';
+  MinPort, /* MinLand, */ MedPort, MedLand, /* LarPort, LarLand, */
+  CurrentHeight, bgRed, StaticRefWidth, StaticRefHeight,
+  MaxStaticReference, flex, column, row, bgNone, Width, Height,
+  PercentageResizedHeight, PercentageResizedWidth
+} from '../../styles/CommonsSX';
 
 function Projects() {
 
@@ -49,7 +50,7 @@ function Projects() {
   return (
     <Box sx={background}>
       <BackButton />
-      <ScrollContainer innerRef={useHorizontalScroll()} style={scroll}>
+      <ScrollContainer innerRef={useHorizontalScroll()} style={scroll()}>
         <Box sx={boxUpperStripe}>
           <Box sx={solid}></Box>
           <Box sx={intercalated}></Box>
@@ -89,7 +90,7 @@ function Projects() {
 
       <Dialog
         sx={dialog}
-        open={minLand || larPort || larLand ? show : false}
+        open={MinLand() || LarPort() || LarLand() ? show : false}
         onClick={() => {setShow(false)}}
         fullWidth={true}
         fullScreen={true}
