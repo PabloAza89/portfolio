@@ -94,7 +94,7 @@ function App() {
                     <AboutMe />
                   </Box>
                   <Box sx={{display: 'grid'/* , position: 'relative' */}} >
-                    {/* <Language /> */}
+                    <Language />
                   </Box>
                 </>}/>
                 <Route path="/portfolio/Skills" element={<><Skills/></>}/>

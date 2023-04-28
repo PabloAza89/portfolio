@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
-import { bgRed, flex, column, row, bgNone, noSelect } from './CommonsSX';
+import { bgRed, flex, column, row, bgNone, noSelect, absolute } from './CommonsSX';
 import store from '../store/store'
+import gear from '../images/gear.png';
 
 function UnderConstructionSX() {
-  
+
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
@@ -15,63 +16,98 @@ function UnderConstructionSX() {
   const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference) // OJO store.getState().maxStaticReference
   const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
 
-   const background = () => {
+   const textUpperOneLine = () => {
     return {
-      ...flex, ...row,
-      background: '#3C6478',
-      'borderRadius': `${staticRefWidth * 1}px`,
-      alignSelf: 'center',
-      'justify-content': 'space-evenly',
-      width: minPort ? '90vw' : minLand ? '70vw' : larPort ? '70vw' : '70vw',
-      height: minPort ? '70vh' : minLand ? '60vh' : larPort ? '60vh' : '60vh',
-      top: larPort ? '2vh' : 'null'
+        ...noSelect(), ...absolute,
+        fontFamily: 'Lucida Console',
+        fontSize: minPort ? '7vw' : minLand ? '3vw' : larPort ? '6vw' : '2.1vw',
+        color: 'white',
+        fontWeight: 600,
+        top: minPort ? '25vh' : minLand ? '25vh' : larPort ? '23vh' : '10vh',
+        left: minPort ? '5vw' : minLand ? '5vw' : larPort ? '5vw' : '15vw',
+        mixBlendMode: 'difference'
+
     }
    }
 
-  const avatar = () => {
+   const textUpperTwoLines = () => {
     return {
-      position: 'absolute',
-      width: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '16.5vh' : '16.5vh',
-      height: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '16.5vh' : '16.5vh',
-      maxWidth: `${staticRefHeight * 13.7}px`,
-      maxHeight: `${staticRefHeight * 13.7}px`,
-      transform: larLand && currentHeight < 330 ? 'scale(0.0001) translate(100vw, -100vw)' : 'null',
-      transition: 'all .5s',
-      top: '8vh' ,
-      left: larPort ? '18vw' : '16vw',
+          ...noSelect(), ...absolute,
+          fontFamily: 'Monaco',
+          fontSize: minPort ? '2.8vw' : minLand ? '2.8vw' : larPort ? '2.8vw' : '1.5vw',
+          color: 'white',
+          fontWeight: 600,
+          top: minPort ? '14vh' : minLand ? '14vh' : larPort ? '14vh' : '11vh',
+          left: minPort ? '67vw' : minLand ? '69vw' : larPort ? '67vw' : '78vw',
+          mixBlendMode: 'difference'
     }
-  }
+   }
 
-  const typography = () => {
+   const textLowerOneLine = () => {
     return {
-      ...noSelect(),
-     'justify-content': 'flex-start',
-      display: 'flex',
-      flexDirection: 'column',
-      alignSelf: 'center',
-      width: '65vw',
-      height: minPort ? '38vh' : minLand ? '38vh' : larPort ? '28vh' : '28vh',
-      'text-align': 'center',
-      fontSize: minPort ? `${maxStaticReference * 3.0}px` : minLand ? `${maxStaticReference * 3.0}px` : MedPort ? `${maxStaticReference * 2.3}px` : MedLand ? `${maxStaticReference * 2.3}px` :  larPort ? `${maxStaticReference * 1.5}px` : `${maxStaticReference * 1.5}px`,
-      '::-webkit-scrollbar': { width: '10px' },
-      '::-webkit-scrollbar-thumb': {
-        'border': '10px solid',
-        'border-radius': '10px'
-      },
-      ':hover': {
-        color: 'rgba(0, 0, 0, 0.18)'
-      },
-      padding: '20px',
-      margin: '100px auto',
-      overflow: 'auto',
-      color: 'transparent',
-      '-webkit-text-fill-color': 'white',
-      'transition': 'color 0.3s ease',
+          ...noSelect(), ...absolute,
+        fontFamily: 'Verdana',
+        fontSize: minPort ? '4vw' : minLand ? '4vw' : larPort ? '4vw' : '1.2vw',
+        color: 'white',
+        fontWeight: 400,
+        top: minPort ? '88vh' : minLand ? '80vh' : larPort ? '88vh' : '85vh',
+        left: minPort ? '30vw' : minLand ? '30vw' : larPort ? '30vw' : '60vw',
+        mixBlendMode: 'difference'
     }
-  }
+   }
 
-  return { background, avatar, typography }
+   const gearBig = () => {
+    return {
+        ...absolute,
+        left: minPort ? '3vh' : minLand ? '70vh' : larPort ? '13vh' : '30vh',
+        top: minPort ? '47vh' : minLand ? '47vh' : larPort ? '47vh' : '30vh',
+        border: 'none',
+        backgroundRepeat: 'no-repeat',
+        backgroundImage: `url(${gear})`,
+        width: minPort ? '28vh' : minLand ? '28vh' : larPort ? '28vh' : '43vh',
+        height: minPort ? '28vh' : minLand ? '28vh' : larPort ? '28vh' : '43vh',
+        animation: 'spinRight 5s linear infinite',
+        '@keyframes spinRight': {'100%': {transform: 'rotate(360deg)'},'0%': {transform: 'rotate(0deg)'}}
+      }
+    }
+
+    const gearMed = () => {
+      return {
+          ...absolute,
+          left: minPort ? '27.5vh' : minLand ? '94.5vh' : larPort ? '37.3vh' : '67.3vh',
+          top: minPort ? '45vh' : minLand ? '45vh' : larPort ? '45vh' : '21vh',
+          border: 'none',
+          backgroundRepeat: 'no-repeat',
+          backgroundImage: `url(${gear})`,
+          width: minPort ? '11vh' : minLand ? '11vh' : larPort ? '11vh' : '25vh',
+          height: minPort ? '11vh' : minLand ? '11vh' : larPort ? '11vh' : '25vh',
+          animation: 'spinLeft 2.5s linear infinite',
+          '@keyframes spinLeft': {'0%': {transform: 'rotate(360deg)'},'100%': {transform: 'rotate(0deg)'}}
+
+      }
+    }
+
+    const gearMin = () => {
+      return {
+          ...absolute,
+          left: minPort ? '25vh' : minLand ? '92vh' : larPort ? '35.2vh' : '65.9vh',
+          top: minPort ? '70.3vh' : minLand ? '70.3vh' : larPort ? '70.3vh' : '62vh',
+          border: 'none',
+          backgroundRepeat: 'no-repeat',
+          backgroundImage: `url(${gear})`,
+          width: minPort ? '7vh' : minLand ? '7vh' : larPort ? '7vh' : '17vh',
+          height: minPort ? '7vh' : minLand ? '7vh' : larPort ? '7vh' : '17vh',
+          animation: 'spinLeft 2.5s linear infinite',
+          '@keyframes spinLeft': {'0%': {transform: 'rotate(360deg)'},'100%': {transform: 'rotate(0deg)'}}
+      }
+    }
+
+    return { textUpperOneLine, textUpperTwoLines, textLowerOneLine, gearBig, gearMed, gearMin }
+
 }
+
+
+
 
 export default UnderConstructionSX
 

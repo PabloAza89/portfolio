@@ -1,12 +1,14 @@
+import { useSelector } from 'react-redux';
 import {
    bgRed,  flex, column, row, bgNone, absolute,
   relative,
 } from './CommonsSX';
-  
-  const background = Object.assign(
-    {},
-    flex, relative,
-    {
+
+function BubblesSX() {
+
+  const background = () => {
+    return {
+      ...flex, ...relative,
       span: {
         width: '1.5vw',
         height: '1.5vw',
@@ -24,11 +26,17 @@ import {
         background: '#ff2d75',
         'box-shadow': '0 0 0 0.49vw #4fc3dc44, 0 0 2.49vw #ff2d75, 0 0 4.99vw #ff2d75'
       }
-    },
-  )
+    }
+  }
 
   const duration = (secs: number) => {
-    return {'animation-duration': `calc(125s / ${secs})`}
+    return {
+      'animationDuration': `calc(125s / ${secs})`
+    }
   }
-  
-  export { background , duration }
+
+  return { background , duration }
+
+}
+
+export default BubblesSX;
