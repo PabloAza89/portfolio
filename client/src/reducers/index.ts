@@ -1,5 +1,6 @@
 interface initialStateI {
   english: boolean,
+  darkMode: boolean,
   width: number,
   height: number,
   minPort: boolean,
@@ -21,6 +22,7 @@ interface initialStateI {
 
 const initialState: initialStateI = {
   english:  true,
+  darkMode: false,
   width: window.screen.width,
   height: window.screen.height,
   minPort: window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false,
@@ -49,6 +51,11 @@ const reducer = (state = initialState, action: {type: string; payload: any}) => 
         ...state,
         english: action.payload
       };
+    case 'DARK_MODE':
+      return {
+        ...state,
+        darkMode: action.payload
+    };
     case 'SET_WIDTH':
       return {
         ...state,

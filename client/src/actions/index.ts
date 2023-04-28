@@ -5,6 +5,13 @@ export function languageChanger(languageChanger:boolean) {
   }
 };
 
+export function darkMode(darkMode:boolean) {
+  return {
+    type: 'DARK_MODE',
+    payload: darkMode
+  }
+};
+
 export function setWidth(setWidth:number) {
   return {
     type: 'SET_WIDTH',

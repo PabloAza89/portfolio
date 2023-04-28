@@ -3,7 +3,7 @@ import { bgRed, flex, column, row, bgNone, noSelect } from './CommonsSX';
 import store from '../store/store'
 
 function DarkModeSX() {
-  
+
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
@@ -18,8 +18,11 @@ function DarkModeSX() {
 
   const background = () => {
     return {
-      position: currentWidth < 415 ? 'absolute' : 'null',
-      top: currentWidth < 415 ? '2vh' : null,
+      //position: currentWidth < 415 ? 'absolute' : 'null',
+      position: 'absolute',
+      right: '0.5vw',
+      //top: currentWidth < 415 ? '2vh' : null,
+      top: '0.5vw',
       padding: '0px !important',
       minWidth: '2.1vw !important',
       'max-width': '2.1vw !important',
@@ -27,15 +30,20 @@ function DarkModeSX() {
       'max-height': '2.1vw !important'
     }
   }
-  
-  
-   const icon = () => {
+
+  const iconDay = () => {
     return {
       width: '1.6vw'
     }
   }
-  
-    return { background, icon}
+
+  const iconNight = () => {
+    return {
+      width: '1.6vw'
+    }
+  }
+
+    return { background, iconDay, iconNight }
 }
 
 export default DarkModeSX

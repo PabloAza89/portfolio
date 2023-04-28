@@ -80,17 +80,22 @@ function App() {
                   <Language /></>}/>
                 <Route path="/portfolio/AboutMe" element={<>
                   <AboutMe />
+                  <DarkMode />
                   <Language /></>}/>
                 <Route path="/portfolio/Skills" element={<>
-                  <Skills /></>}/>
+                  <Skills />
+                  <DarkMode /></>}/>
                 <Route path="/portfolio/Projects" element={<>
                   <Projects />
+                  <DarkMode />
                   <Language /></>}/>
                 <Route path="/portfolio/Certifications" element={<>
                   <Certifications />
+                  <DarkMode />
                   <Language /></>}/>
                 <Route path="/portfolio/Contact" element={<>
-                  <Contact /></>}/>
+                  <Contact />
+                  <DarkMode /></>}/>
               </Routes>
             </BrowserRouter>
         </Box>
