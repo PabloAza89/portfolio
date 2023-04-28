@@ -22,7 +22,7 @@ interface initialStateI {
 
 const initialState: initialStateI = {
   english:  true,
-  darkMode: true,
+  darkMode: false,
   width: window.screen.width,
   height: window.screen.height,
   minPort: window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false,
