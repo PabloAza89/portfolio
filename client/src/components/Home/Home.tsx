@@ -19,13 +19,7 @@ function Home() {
   const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
   const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
 
-  //const english = useSelector((state: {english:boolean}) => state.english)
-
-  /* console.log("HOME", " MIN PORT: " , Get().minPort, " | MIN LAND: ", Get().minLand, " | MED PORT: ", Get().medPort, " | MED LAND: ", Get().medLand, " | LAR PORT: ", Get().larPort, " | LAR LAND: ", Get().larLand) */
-
-  //const products = useAppSelector((state) => state)
-
-  //console.log("VAMAA", products)
+  /* console.log(" MIN PORT: " , Get().minPort, " | MIN LAND: ", Get().minLand, " | MED PORT: ", Get().medPort, " | MED LAND: ", Get().medLand, " | LAR PORT: ", Get().larPort, " | LAR LAND: ", Get().larLand) */
 
    return (
     <Box sx={HomeSX().background}>
@@ -84,7 +78,7 @@ function Home() {
           minLand ? 'none' :
           /* larLand&&  percentageResizedHeight< 0.313 ? 'none' : */
           'flex',
-        width: '46vw',   
+        width: '46vw',
         justifyContent: 'center',
         height: larPort ? '45vh' : '71vh',
         'align-items': 'center',
@@ -98,7 +92,7 @@ function Home() {
             height: medPort ? '35vw' : larPort && width < height ? '33vw' : larPort && percentageResizedWidth < 0.410 ? '29vh' : larPort && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.777 ? '50vh' : '70vh',
             minWidth: percentageResizedHeight < 0.250 ? '110px' : 'null',
             minHeight: percentageResizedHeight < 0.250 ? '110px' : 'null',
-            
+
           }}
           preserveAspectRatio="none"
         >
