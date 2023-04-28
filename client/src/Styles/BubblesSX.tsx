@@ -6,6 +6,8 @@ import {
 
 function BubblesSX() {
 
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
+
   const background = () => {
     return {
       ...flex, ...relative,
@@ -25,7 +27,9 @@ function BubblesSX() {
       'span:nth-child(even)': {
         background: '#ff2d75',
         'box-shadow': '0 0 0 0.49vw #4fc3dc44, 0 0 2.49vw #ff2d75, 0 0 4.99vw #ff2d75'
-      }
+      },
+       '-webkit-filter': darkMode ? 'brightness(.55)' : 'none',
+      'filter': darkMode ? 'brightness(.55)' : 'none'
     }
   }
 
