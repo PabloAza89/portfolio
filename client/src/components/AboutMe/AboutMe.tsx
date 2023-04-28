@@ -1,14 +1,9 @@
-import React, { useState , useRef, useEffect} from 'react';
-import {Box, Button, Typography } from '@mui/material';
-import profile from '../../images/profile.png';
-import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
+import { Box, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
-import BackButton from '../BackButton/BackButton';
 import { useSelector } from 'react-redux';
-//import { avatar, typography, background } from '../../styles/aboutMe';
+import profile from '../../images/profile.png';
+import BackButton from '../BackButton/BackButton';
 import AboutMeSX from '../../styles/AboutMeSX';
-import {
- bgRed, flex, column, row, bgNone } from '../../styles/CommonsSX';
 
 function AboutMe() {
 

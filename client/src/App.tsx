@@ -1,27 +1,24 @@
-import React, { useState , useRef, useEffect} from 'react';
-import Home from './components/Home/Home';
-import NavBar from './components/NavBar/NavBar';
+import { useEffect } from 'react';
 import AboutMe from './components/AboutMe/AboutMe';
-import Skills from './components/Skills/Skills';
-import Projects from './components/Projects/Projects';
 import Certifications from './components/Certifications/Certifications';
 import Contact from './components/Contact/Contact';
-import Language from './components/Language/Language';
 import DarkMode from './components/DarkMode/DarkMode';
+import Home from './components/Home/Home';
+import Language from './components/Language/Language';
+import NavBar from './components/NavBar/NavBar';
+import Projects from './components/Projects/Projects';
+import Skills from './components/Skills/Skills';
 import AppSX from './styles/AppSX';
-
-import { Box, Button, Link,  Typography} from '@mui/material';
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { grey , blue } from '@mui/material/colors';
-
+import { Box } from '@mui/material';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  setWidth, setHeight, setMinPort, setMinLand,
-  setMedPort, setMedLand, setLarPort, setLarLand,
-  setStaticRefWidth, setStaticRefHeight, setMaxStaticReference,
-  setMinStaticReference, setCurrentWidth, setCurrentHeight,
-  setPercentageResizedHeight, setPercentageResizedWidth, setMinRatioReference
+  setCurrentHeight, setCurrentWidth, setHeight, setLarLand,
+  setLarPort, setMaxStaticReference, setMedLand, setMedPort,
+  setMinLand, setMinPort, setMinRatioReference, setMinStaticReference,
+  setPercentageResizedHeight, setPercentageResizedWidth,
+  setStaticRefHeight, setStaticRefWidth, setWidth
 } from './actions';
-import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
 

@@ -1,11 +1,6 @@
+import { blue, brown, lime, red } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
-import fccCertJS from '../images/fccCertJS.png';
-import efSet from '../images/efSet.png';
-import henry from '../images/henry.png';
-import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
-import {
- bgRed, flex, column, row, bgNone,
- jcc, aic, noSelect, jcsb, asc, fixed, jic
+import { aic, asc, column, fixed, flex, jcc, jcsb, jic, noSelect, row
 } from './CommonsSX';
 
 function ProjectsSX() {

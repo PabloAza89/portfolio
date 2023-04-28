@@ -1,10 +1,5 @@
-import { 
- bgRed,flex, column, row, bgNone, absolute
-} from '../styles/CommonsSX';
-import store from '../store/store'
 import { useSelector } from 'react-redux';
-import BackButton from '../components/BackButton/BackButton';
-
+import { absolute, column, flex} from '../styles/CommonsSX';
 
 function BackButtonSX() {
 

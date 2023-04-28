@@ -1,7 +1,6 @@
+import { grey } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
-import { bgRed, flex, column, row, bgNone, noSelect, relative } from './CommonsSX';
-import store from '../store/store'
-import { grey , blue } from '@mui/material/colors';
+import { column, flex, relative } from './CommonsSX';
 
 function AppSX() {
 

@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
-import { bgRed, flex, column, row, bgNone, noSelect, absolute } from './CommonsSX';
-import store from '../store/store'
 import gear from '../images/gear.png';
+import { absolute, noSelect } from './CommonsSX';
 
 function UnderConstructionSX() {
 

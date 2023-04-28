@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import { Box, CardMedia, Typography, Dialog } from '@mui/material';
-import fccCertJS from '../../images/fccCertJS.png';
-import efSet from '../../images/efSet.png';
-import henry from '../../images/henry.png';
+import { Box, CardMedia, Dialog, Typography } from '@mui/material';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import efSet from '../../images/efSet.png';
+import fccCertJS from '../../images/fccCertJS.png';
+import henry from '../../images/henry.png';
+import CertificationsSX from '../../styles/CertificationsSX';
 import BackButton from '../BackButton/BackButton';
 import Bubbles from '../Bubbles/Bubbles';
-import CertificationsSX from '../../styles/CertificationsSX';
-import {
-   bgRed, flex, column, row, bgNone } from '../../styles/CommonsSX';
 
 function Certifications() {
 

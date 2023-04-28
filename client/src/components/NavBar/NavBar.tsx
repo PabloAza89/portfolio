@@ -1,11 +1,8 @@
-import React, { useEffect} from 'react';
-import { Box, Typography, TextareaAutosize} from '@mui/material';
-import { Link} from "react-router-dom";
-import SendIcon from '@mui/icons-material/Send';
-
-import { grey , blue } from '@mui/material/colors';
-import { useSelector } from 'react-redux';
+import { Box, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Link } from "react-router-dom";
 import ScrollContainer from 'react-indiana-drag-scroll';
+import { useSelector } from 'react-redux';
 import NavBarSX from '../../styles/NavBarSX';
 
 function NavBar() {

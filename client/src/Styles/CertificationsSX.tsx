@@ -1,10 +1,5 @@
 import { useSelector } from 'react-redux';
-import fccCertJS from '../images/fccCertJS.png';
-import efSet from '../images/efSet.png';
-import henry from '../images/henry.png';
-import {
-  bgRed, flex, column, row, bgNone, aic, jcc, asc, jic,
-  noSelect, absolute, jsc, relative,
+import { absolute, aic, asc, column, flex, jcc, jic, jsc, noSelect, relative
 } from './CommonsSX';
 
 function CertificationsSX() {

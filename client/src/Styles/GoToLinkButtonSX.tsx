@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
-import { bgRed, flex, column, row, bgNone, noSelect, aic, jcc, relative } from './CommonsSX';
-import store from '../store/store'
+import { aic, column, jcc, relative } from './CommonsSX';
 
 function GoToLinkButtonSX() {
 

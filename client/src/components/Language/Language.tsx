@@ -1,11 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {Box, CardMedia } from '@mui/material';
+import { Box, CardMedia } from '@mui/material';
+import { cyan } from '@mui/material/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from "react-router-dom";
+import { languageChanger } from '../../actions';
 import lanEn from '../../images/lanEn.png';
 import lanEs from '../../images/lanEs.png';
-import { useSelector, useDispatch } from 'react-redux';
-import { BrowserRouter, Navigate, Route, Routes, Link, useLocation } from "react-router-dom";
-import { languageChanger } from '../../actions';
-import { grey , blue , cyan, lime, brown, red } from '@mui/material/colors';
 
 function Language() {
 

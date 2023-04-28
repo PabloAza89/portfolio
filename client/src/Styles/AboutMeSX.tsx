@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
-import { bgRed, flex, column, row, bgNone, noSelect } from './CommonsSX';
-import store from '../store/store'
+import { flex, noSelect, row } from './CommonsSX';
 
 function AboutMeSX() {
 

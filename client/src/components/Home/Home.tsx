@@ -1,21 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {Box, Button,CardMedia, Typography, SvgIcon} from '@mui/material';
-import home from '../../images/home.svg';
-import react from '../../images/react.png';
-import javascript from '../../images/javascript.png';
-import node from '../../images/node.png';
-import redux from '../../images/redux.png';
-import sequelize from '../../images/sequelize.png';
-import material from '../../images/material.png';
-import { BrowserRouter, Navigate, Route, Routes , Link, useLocation} from "react-router-dom";
+import { Box, Button, SvgIcon, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
 
 import HomeSX from '../../styles/HomeSX';
-import {
-  bgRed, flex, column, row, bgNone
-} from '../../styles/CommonsSX';
 
 function Home() {
 

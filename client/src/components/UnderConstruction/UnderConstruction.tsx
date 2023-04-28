@@ -1,6 +1,5 @@
-import {Box, CardMedia, Typography} from '@mui/material';
+import { Box, CardMedia, Typography } from '@mui/material';
 import UnderConstructionSX from '../../styles/UnderConstructionSX';
-import { useSelector } from 'react-redux';
 
 function UnderConstruction() {
 

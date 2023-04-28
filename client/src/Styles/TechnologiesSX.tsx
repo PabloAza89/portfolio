@@ -1,10 +1,5 @@
 import { useSelector } from 'react-redux';
-import fccCertJS from '../images/fccCertJS.png';
-import efSet from '../images/efSet.png';
-import henry from '../images/henry.png';
-import { grey , blue , cyan, lime, brown, red} from '@mui/material/colors';
-import {
-  bgRed,flex, column, row, bgNone, jcsb, relative, aic, asc, jcc, noSelect,
+import { aic, asc, column, flex, jcc, jcsb, noSelect, relative, row
 } from './CommonsSX';
 
 function TechnologiesSX() {

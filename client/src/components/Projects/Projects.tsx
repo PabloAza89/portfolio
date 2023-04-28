@@ -1,20 +1,16 @@
-import React, { useState, useEffect} from 'react';
 import { Box, CardMedia, Typography } from '@mui/material';
-import weatherify1 from '../../images/weatherify1.png';
-import weatherify2 from '../../images/weatherify2.png';
+import { Dialog, FormControl, InputLabel, MenuItem, Select } from '@mui/material/';
+import React, { useEffect, useState } from 'react';
+import ScrollContainer from 'react-indiana-drag-scroll';
+import { useSelector } from 'react-redux';
 import food1 from '../../images/food1.png';
 import food2 from '../../images/food2.png';
 import food3 from '../../images/food3.png';
-import { Dialog, InputLabel, MenuItem, FormControl, Select } from '@mui/material/';
-import ScrollContainer from 'react-indiana-drag-scroll';
-import { useSelector } from 'react-redux';
+import weatherify1 from '../../images/weatherify1.png';
+import weatherify2 from '../../images/weatherify2.png';
+import ProjectsSX from '../../styles/ProjectsSX';
 import BackButton from '../BackButton/BackButton';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
-import ProjectsSX from '../../styles/ProjectsSX';
-import {
- 
-  bgRed, flex, column, row, bgNone
-} from '../../styles/CommonsSX';
 
 function Projects() {
 

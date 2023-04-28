@@ -1,11 +1,5 @@
 import { useSelector } from 'react-redux';
-//import Get , { MinPorttt, unsubscribe } from '../resizeController/Get';
-import store from '../store/store'
-
-import {
-   bgRed, flex, column, row, bgNone,
-  aic, jcc, asc,
-  noSelect, absolute, jsc, relative,
+import { asc, column, flex, jcc, noSelect, relative
 } from './CommonsSX';
 
 function HomeSX() {

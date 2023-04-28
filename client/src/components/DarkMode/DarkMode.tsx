@@ -1,13 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { setDarkMode } from '../../actions';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-//import NightlightIcon from '@mui/icons-material/Nightlight';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import DarkModeSX from '../../styles/DarkModeSX';
-import {
-  bgRed, flex, column, row, bgNone } from '../../styles/CommonsSX';
 
 function DarkMode() {
 

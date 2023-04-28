@@ -1,16 +1,6 @@
-import {
-  flex,
-  column,
-  row,
-  bgNone,
-  bgRed
-} from './CommonsSX';
-
+import { bgNone, column, flex } from './CommonsSX';
 const contact = Object.assign(
   {},
-  flex,
-  column,
-  bgNone,
+  flex, column, bgNone,
 )
-
 export default contact

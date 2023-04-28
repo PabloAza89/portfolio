@@ -1,6 +1,6 @@
+import { blue } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
-import { bgRed, flex, column, row, bgNone, noSelect, jcse, aic, asc, noDeco } from './CommonsSX';
-import { grey , blue } from '@mui/material/colors';
+import { aic, asc, flex, jcse, noDeco, noSelect, row } from './CommonsSX';
 
 function NavBarSX() {
   

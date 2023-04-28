@@ -1,11 +1,7 @@
-import React from 'react';
-import {Box, Button,CardMedia, Typography } from '@mui/material';
-import { Link } from "react-router-dom";
 import ForwardIcon from '@mui/icons-material/Forward';
-import { useSelector, useDispatch } from 'react-redux';
+import { Button } from '@mui/material';
+import { Link } from "react-router-dom";
 import BackButtonSX from '../../styles/BackButtonSX';
-import {
-  bgRed, flex, column, row, bgNone } from '../../styles/CommonsSX';
 
 function BackButton() {
 

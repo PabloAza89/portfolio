@@ -1,8 +1,5 @@
 import { useSelector } from 'react-redux';
-import {
-   bgRed,  flex, column, row, bgNone, absolute,
-  relative,
-} from './CommonsSX';
+import { flex, relative } from './CommonsSX';
 
 function BubblesSX() {
 
