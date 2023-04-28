@@ -7,6 +7,8 @@ import Projects from './components/Projects/Projects';
 import Certifications from './components/Certifications/Certifications';
 import Contact from './components/Contact/Contact';
 import Language from './components/Language/Language';
+import DarkMode from './components/DarkMode/DarkMode';
+import AppSX from './styles/AppSX';
 
 import { Box, Button, Link,  Typography} from '@mui/material';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -49,7 +51,7 @@ function App() {
           handleResize();
           return () => window.removeEventListener("resize", handleResize);
         }, []);
-  
+
 
         const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
         const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
@@ -60,64 +62,37 @@ function App() {
         const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
         const minRatioReference = useSelector((state: {minRatioReference:number}) => state.minRatioReference)
 
-  
+
   /* console.log(" MIN PORT: " , Get().minPort, " | MIN LAND: ", Get().minLand, " | MED PORT: ", Get().medPort, " | MED LAND: ", Get().medLand, " | LAR PORT: ", Get().larPort, " | LAR LAND: ", Get().larLand) */
 
-  
+
 
 
   return (
-    <Box sx={{ backgroundColor: grey[400], position: 'relative', overflow: 'hidden', display: 'flex', width: '100vw', height: '100vh' }} >
-
-        <Box sx={{ position: 'relative', display: 'flex', width: '100vw', flexDirection: 'column', margin: `${staticRefWidth * 0.6}px`,  background: 'linear-gradient(to bottom right, black 49.9%,white 50.1%)'}} >
-
-
-
-
+    <Box sx={AppSX().background} >
+        <Box sx={AppSX().blackWhite} >
             <BrowserRouter>
               <Routes>
-
                 <Route path="/portfolio" element={<>
-
                   <NavBar />
-
-
-                  <Home/>
-
-
-                    <Language />
-
-                </>}/>
-
+                  <DarkMode />
+                  <Home />
+                  <Language /></>}/>
                 <Route path="/portfolio/AboutMe" element={<>
-                  <Box>
-                    <AboutMe />
-                  </Box>
-                  <Box sx={{display: 'grid'/* , position: 'relative' */}} >
-                    <Language />
-                  </Box>
-                </>}/>
-                <Route path="/portfolio/Skills" element={<><Skills/></>}/>
+                  <AboutMe />
+                  <Language /></>}/>
+                <Route path="/portfolio/Skills" element={<>
+                  <Skills /></>}/>
                 <Route path="/portfolio/Projects" element={<>
-                  <Box>
-                    <Projects />
-                  </Box>
-                  <Box sx={{display: 'grid'/* , position: 'relative' */}} >
-                    <Language />
-                  </Box>
-                </>}/>
+                  <Projects />
+                  <Language /></>}/>
                 <Route path="/portfolio/Certifications" element={<>
-                  <Box>
-                    <Certifications />
-                  </Box>
-                  <Box sx={{display: 'grid'}}>
-                    <Language />
-                  </Box>
-                </>}/>
-                <Route path="/portfolio/Contact" element={<><Contact /></>}/>
+                  <Certifications />
+                  <Language /></>}/>
+                <Route path="/portfolio/Contact" element={<>
+                  <Contact /></>}/>
               </Routes>
             </BrowserRouter>
-
         </Box>
     </Box>
   );
