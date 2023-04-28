@@ -9,6 +9,8 @@ import {
 } from './CommonsSX';
 
 function HomeSX() {
+
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
@@ -56,7 +58,7 @@ const bgLeftUpper = () => {
 const bgLeftUpperTextOne = () => {
   return {
     ...noSelect(),
-    color:'#FFFFFF',
+    color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort  ? '11.5vw' : minLand ? '4.9vw' : larPort ? '5.0vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.7}px` : '6.9vh',
     mixBlendMode: 'difference'
   }
@@ -65,7 +67,7 @@ const bgLeftUpperTextOne = () => {
 const bgLeftUpperTextTwo = () => {
   return {
     ...noSelect(),
-    color:'#FFFFFF',
+    color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort  ? '11.5vw' : minLand ? '5.4vw' : larPort ? '5.2vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.75}px` : '7.2vh',
     mixBlendMode: 'difference',
     'inline-size': 'max-content'
@@ -75,7 +77,7 @@ const bgLeftUpperTextTwo = () => {
 const bgLeftUpperTextThree = () => {
   return {
     ...noSelect(),
-    color:'#FFFFFF',
+    color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort  ? '11.5vw' : minLand ? '2.9vw' : larPort ? '3.8vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.1}px` : '4.5vh',
     mixBlendMode: 'difference'
   }

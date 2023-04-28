@@ -58,11 +58,11 @@ function NavBar() {
       <ScrollContainer style={NavBarSX().scroll()}
         innerRef={useHorizontalScroll()}
       >
-        <Link style={NavBarSX().AboutMe()} to="/portfolio/AboutMe">{ english ? `About Me` : `Acerca De Mi` }</Link>
-        <Link style={NavBarSX().Skills()} to="/portfolio/Skills">{ english ? `Skills` : `Habilidades` } </Link>
-        <Link style={NavBarSX().Projects()} to="/portfolio/Projects">{ english ? `Projects` : `Proyectos` }</Link>
-        <Link style={NavBarSX().Certifications()} to="/portfolio/Certifications">{ english ? `Certifications` : `Certificaciones`}</Link>
-        <Link style={NavBarSX().Contact()} to="/portfolio/Contact">{ english ? `Contact` : `Contacto` }</Link>
+        <Link style={NavBarSX().textItem()} to="/portfolio/AboutMe">{ english ? `About Me` : `Acerca De Mi` }</Link>
+        <Link style={NavBarSX().textItem()} to="/portfolio/Skills">{ english ? `Skills` : `Habilidades` } </Link>
+        <Link style={NavBarSX().textItem()} to="/portfolio/Projects">{ english ? `Projects` : `Proyectos` }</Link>
+        <Link style={NavBarSX().textItem()} to="/portfolio/Certifications">{ english ? `Certifications` : `Certificaciones`}</Link>
+        <Link style={NavBarSX().textItem()} to="/portfolio/Contact">{ english ? `Contact` : `Contacto` }</Link>
       </ScrollContainer>
     </Box>
   )

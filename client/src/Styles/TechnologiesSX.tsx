@@ -8,7 +8,8 @@ import {
 } from './CommonsSX';
 
 function TechnologiesSX() {
-  
+
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
@@ -62,7 +63,7 @@ function TechnologiesSX() {
       ...noSelect(),
       fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw',
       border: 'none',
-      color: '#FFFFFF',
+      color: darkMode ? '#b5b3b3' : '#FFFFFF',
       'fontWeight': 600,
       'mixBlendMode': 'difference'
     }

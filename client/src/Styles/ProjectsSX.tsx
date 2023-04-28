@@ -10,6 +10,7 @@ import {
 
 function ProjectsSX() {
 
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const english = useSelector((state: {english:boolean}) => state.english)
   const width = useSelector((state: {width: number}) => state.width)
   const height = useSelector((state: {height: number}) => state.height)
@@ -88,7 +89,7 @@ const scroll = () => {
     return {
       ...column, ...flex,
       marginLeft: '1vw' ,
-      background: red[800],
+      background: darkMode ? '#6e1b1b' : red[800], 
       height: minPort ? '20vh' : minLand ? '44vh' : larPort ? '20vh' : '40vh'
     }
   }
@@ -107,7 +108,7 @@ const scroll = () => {
       ...noSelect(),
       marginRight: minPort ? '1.3vw' : minLand ? '0.9vw' : larPort ? '1.3vw' : '0.9vw',
       fontFamily: 'Century Gothic',
-      color: '#FFFFFF',
+      color: darkMode ? '#b5b3b3' : '#FFFFFF',
       fontSize: minPort ? '4.5vw' : minLand ? '5vh' : larPort ? '3.6vw' : '5vh'
     }
   }
@@ -115,7 +116,7 @@ const scroll = () => {
   const boxMedia = (length: number) => {
     return {
       ...row, ...jcsb, ...flex,
-      background: lime[400],
+      background: darkMode ? '#6a6e2e' : lime[400],
       height: minPort ? '32vh' : minLand ? '36vh' : larPort ? '15vh' : '32vh',
       width: `${length * 31}vw`
     }
@@ -128,7 +129,11 @@ const scroll = () => {
       'backgroundImage': `url(${url})`,
       width: '100%', height: '100%',
       backgroundSize: minPort ? '30vw 15vh' : minLand ? '30vw 33vh' : larPort ? '30vw 14vh' : '30vw 30vh',
-      ':hover': {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'}
+      ':hover':
+        darkMode ? {'-webkit-filter': 'brightness(.65)', 'filter': 'brightness(.65)'}
+        : {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'},
+      '-webkit-filter': darkMode ? 'brightness(.6)' : 'none',
+      'filter': darkMode ? 'brightness(.6)' : 'none'
     }
   }
 
@@ -181,7 +186,7 @@ const scroll = () => {
   const select = () => {
     return {
       color: '#FFFFFF',
-      background: blue[500],
+      background: darkMode ? '#48555e' : blue[500],
       height: larPort ? '5vh' : '6vh',
       width: larPort ? '11vw' : '4.0vw',
       fontSize: larPort ? '2vh': '1vw'

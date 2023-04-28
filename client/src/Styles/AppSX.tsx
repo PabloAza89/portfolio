@@ -4,7 +4,8 @@ import store from '../store/store'
 import { grey , blue } from '@mui/material/colors';
 
 function AppSX() {
-  
+
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
@@ -31,7 +32,7 @@ function AppSX() {
       ...relative, ...flex, ...column,
       width: '100vw',
       margin: `${staticRefWidth * 0.6}px`,
-      background: 'linear-gradient(to bottom right, black 49.9%,white 50.1%)'
+      background: darkMode ? 'linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%)' : 'linear-gradient(to bottom right, black 49.9%,white 50.1%)'
     }
   }
 

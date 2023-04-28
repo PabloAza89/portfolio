@@ -3,7 +3,8 @@ import { bgRed, flex, column, row, bgNone, noSelect } from './CommonsSX';
 import store from '../store/store'
 
 function AboutMeSX() {
-  
+
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
@@ -18,7 +19,7 @@ function AboutMeSX() {
    const background = () => {
     return {
       ...flex, ...row,
-      background: '#3C6478',
+      background: darkMode ? '#253740' : '#3C6478',
       'borderRadius': `${staticRefWidth * 1}px`,
       alignSelf: 'center',
       'justify-content': 'space-evenly',
@@ -65,7 +66,7 @@ function AboutMeSX() {
       margin: '100px auto',
       overflow: 'auto',
       color: 'transparent',
-      '-webkit-text-fill-color': 'white',
+      '-webkit-text-fill-color': darkMode ? '#b5b3b3' : 'white',
       'transition': 'color 0.3s ease',
     }
   }

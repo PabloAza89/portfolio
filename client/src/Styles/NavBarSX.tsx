@@ -4,6 +4,7 @@ import { grey , blue } from '@mui/material/colors';
 
 function NavBarSX() {
   
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
@@ -106,70 +107,15 @@ function NavBarSX() {
     }
    }
 
-   const AboutMe = () => {
+   const textItem = () => {
     return {
       ...noDeco, ...noSelect(),
         background: 'none',
         marginLeft: `${staticRefWidth * 0.5}px`,
         marginRight: `${staticRefWidth * 0.5}px`,
         minWidth: 'fit-content',
-        textDecoration: 'none', color: '#FFFFFF',
-        fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : larPort ? `${staticRefWidth * 1.2}px` : `${staticRefWidth * 1.2}px`,
-        fontFamily: 'Roboto',
-        fontWeight: '600',
-        'mix-blend-mode': 'difference'
-    }
-   }
-
-   const Skills = () => {
-    return {
-        ...noDeco, ...noSelect(),
-        background: 'none',
-        marginLeft: `${staticRefWidth * 0.5}px`,
-        marginRight: `${staticRefWidth * 0.5}px`, minWidth: 'fit-content',
-        color: '#FFFFFF',
-        fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : larPort ? `${staticRefWidth * 1.2}px` : `${staticRefWidth * 1.2}px`,
-        fontFamily: 'Roboto',
-        fontWeight: '600',
-        'mix-blend-mode': 'difference'
-    }
-   }
-
-   const Projects = () => {
-    return {
-        ...noDeco, ...noSelect(),
-        background: 'none',
-        marginLeft: `${staticRefWidth * 0.5}px`,
-        marginRight: `${staticRefWidth * 0.5}px`, minWidth: 'fit-content',
-        color: '#FFFFFF',
-        fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : larPort ? `${staticRefWidth * 1.2}px` : `${staticRefWidth * 1.2}px`,
-        fontFamily: 'Roboto',
-        fontWeight: '600', 
-        'mix-blend-mode': 'difference'
-    }
-   }
-
-  const Certifications = () => {
-    return {
-        ...noDeco, ...noSelect(),
-        background: 'none',
-        marginLeft: `${staticRefWidth * 0.5}px`,
-        marginRight: `${staticRefWidth * 0.5}px`, minWidth: 'fit-content',
-        color: '#FFFFFF',
-        fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : larPort ? `${staticRefWidth * 1.2}px` : `${staticRefWidth * 1.2}px`,
-        fontFamily: 'Roboto',
-        fontWeight: '600',
-        'mix-blend-mode': 'difference'
-    }
-  }
-
-     const Contact = () => {
-    return {
-        ...noDeco, ...noSelect(),
-        background: 'none',
-        marginLeft: `${staticRefWidth * 0.5}px`,
-        marginRight: `${staticRefWidth * 0.5}px`, minWidth: 'fit-content',
-        color:'#FFFFFF',
+        /* color: , */
+        color: darkMode ? '#b5b3b3' : '#FFFFFF',
         fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : larPort ? `${staticRefWidth * 1.2}px` : `${staticRefWidth * 1.2}px`,
         fontFamily: 'Roboto',
         fontWeight: '600',
@@ -178,7 +124,7 @@ function NavBarSX() {
    }
 
   return { background, mainLeft, lessThan, name, blink, greaterThan, scroll,
-    AboutMe, Skills, Projects, Certifications, Contact }
+    textItem }
 }
 
 export default NavBarSX;

@@ -6,55 +6,15 @@ function Bubbles() {
 
   return (
     <Box component="span" sx={BubblesSX().background}>
-      <Box component="span" style={BubblesSX().duration(11)}></Box>
-      <Box component="span" style={BubblesSX().duration(12)}></Box>
-      <Box component="span" style={BubblesSX().duration(24)}></Box>
-      <Box component="span" style={BubblesSX().duration(10)}></Box>
-      <Box component="span" style={BubblesSX().duration(14)}></Box>
-      <Box component="span" style={BubblesSX().duration(23)}></Box>
-      <Box component="span" style={BubblesSX().duration(18)}></Box>
-      <Box component="span" style={BubblesSX().duration(16)}></Box>
-      <Box component="span" style={BubblesSX().duration(19)}></Box>
-      <Box component="span" style={BubblesSX().duration(20)}></Box>
-      <Box component="span" style={BubblesSX().duration(22)}></Box>
-      <Box component="span" style={BubblesSX().duration(25)}></Box>
-      <Box component="span" style={BubblesSX().duration(18)}></Box>
-      <Box component="span" style={BubblesSX().duration(21)}></Box>
-      <Box component="span" style={BubblesSX().duration(15)}></Box>
-      <Box component="span" style={BubblesSX().duration(13)}></Box>
-      <Box component="span" style={BubblesSX().duration(26)}></Box>
-      <Box component="span" style={BubblesSX().duration(17)}></Box>
-      <Box component="span" style={BubblesSX().duration(13)}></Box>
-      <Box component="span" style={BubblesSX().duration(22.5)}></Box>
-      <Box component="span" style={BubblesSX().duration(24.5)}></Box>
-      <Box component="span" style={BubblesSX().duration(12.5)}></Box>
-      <Box component="span" style={BubblesSX().duration(15.5)}></Box>
-      <Box component="span" style={BubblesSX().duration(28)}></Box>
-      <Box component="span" style={BubblesSX().duration(20.5)}></Box> {/* center */}
-      <Box component="span" style={BubblesSX().duration(11)}></Box>
-      <Box component="span" style={BubblesSX().duration(12)}></Box>
-      <Box component="span" style={BubblesSX().duration(24)}></Box>
-      <Box component="span" style={BubblesSX().duration(10)}></Box>
-      <Box component="span" style={BubblesSX().duration(14)}></Box>
-      <Box component="span" style={BubblesSX().duration(23)}></Box>
-      <Box component="span" style={BubblesSX().duration(18)}></Box>
-      <Box component="span" style={BubblesSX().duration(16)}></Box>
-      <Box component="span" style={BubblesSX().duration(19)}></Box>
-      <Box component="span" style={BubblesSX().duration(20)}></Box>
-      <Box component="span" style={BubblesSX().duration(22)}></Box>
-      <Box component="span" style={BubblesSX().duration(25)}></Box>
-      <Box component="span" style={BubblesSX().duration(18)}></Box>
-      <Box component="span" style={BubblesSX().duration(21)}></Box>
-      <Box component="span" style={BubblesSX().duration(15)}></Box>
-      <Box component="span" style={BubblesSX().duration(13)}></Box>
-      <Box component="span" style={BubblesSX().duration(26)}></Box>
-      <Box component="span" style={BubblesSX().duration(17)}></Box>
-      <Box component="span" style={BubblesSX().duration(13)}></Box>
-      <Box component="span" style={BubblesSX().duration(22.5)}></Box>
-      <Box component="span" style={BubblesSX().duration(24.5)}></Box>
-      <Box component="span" style={BubblesSX().duration(12.5)}></Box>
-      <Box component="span" style={BubblesSX().duration(15.5)}></Box>
-      <Box component="span" style={BubblesSX().duration(28)}></Box>
+      {[  11, 12, 24, 10, 14, 23, 18, 16, 19, 20, 22, 25, 18, 21, 15, 13, 26, 17, 13,
+          22.5, 24.5, 12.5, 15.5, 28, 20.5, 11, 12, 24, 10, 14, 23, 18, 16, 19, 20,
+          22, 25, 18, 21, 15, 13, 26, 17, 13, 22.5, 24.5, 12.5, 15.5, 28 // 20.5 MIDDLE
+      ].map((e) => {
+          return (
+            <Box component="span" style={BubblesSX().duration(e)}></Box>
+          )
+        })
+      }
     </Box>
   )
 }
