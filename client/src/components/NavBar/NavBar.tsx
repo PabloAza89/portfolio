@@ -63,7 +63,7 @@ function NavBar() {
         <Link style={NavBarSX().Projects()} to="/portfolio/Projects">{ english ? `Projects` : `Proyectos` }</Link>
         <Link style={NavBarSX().Certifications()} to="/portfolio/Certifications">{ english ? `Certifications` : `Certificaciones`}</Link>
         <Link style={NavBarSX().Contact()} to="/portfolio/Contact">{ english ? `Contact` : `Contacto` }</Link>
-        {/* <Button variant="contained" sx={{ position: wi() < '415' ? 'absolute' : 'null', top: wi() < '415' ? '2vh' : null, padding: '0px !important', minWidth: '2.1vw !important', 'max-width': '2.1vw !important', 'min-height': '2.1vw !important', 'max-height': '2.1vw !important'}}><WbSunnyIcon sx={{width: '1.6vw'}}/></Button> */}
+        <Button variant="contained" sx={{ position: wi() < '415' ? 'absolute' : 'null', top: wi() < '415' ? '2vh' : null, padding: '0px !important', minWidth: '2.1vw !important', 'max-width': '2.1vw !important', 'min-height': '2.1vw !important', 'max-height': '2.1vw !important'}}><WbSunnyIcon sx={{width: '1.6vw'}}/></Button>
       </ScrollContainer>
     </Box>
   )
