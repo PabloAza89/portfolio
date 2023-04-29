@@ -78,7 +78,8 @@ function App() {
                   <Language /></>}/>
                 <Route path="/portfolio/Contact" element={<>
                   <Contact />
-                  <DarkMode /></>}/>
+                  <DarkMode />
+                  <Language /></>}/>
               </Routes>
             </BrowserRouter>
         </Box>

@@ -1,6 +1,5 @@
 import ReplyIcon from '@mui/icons-material/Reply';
 import { Button } from '@mui/material';
-import { useSelector } from 'react-redux';
 import GoToLinkButtonSX from '../../styles/GoToLinkButtonSX';
 
 interface AppProps {

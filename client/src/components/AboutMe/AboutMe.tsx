@@ -1,5 +1,4 @@
-import { Box, Typography } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
+import { Box, Typography, Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
 import AboutMeSX from '../../styles/AboutMeSX';

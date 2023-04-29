@@ -11,14 +11,14 @@ function TechnologiesSX() {
 
   const mainBox = () => {
     return {
-      flex, row, jcsb,
+      ...flex, ...row, ...jcsb,
       background: 'none'
     }
   }
 
   const iconBox = () => {
     return {
-      flex, column, relative, aic,
+      ...flex, ...column, ...relative, ...aic,
       background: 'none',
       border: 'none',
       width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'
@@ -27,7 +27,7 @@ function TechnologiesSX() {
 
   const iconMedia = (url: string) => {
     return {
-      asc, relative,
+      ...asc, ...relative,
       border: 'none',
       backgroundRepeat: 'no-repeat',
       backgroundImage: `url(${url})`,
@@ -39,7 +39,7 @@ function TechnologiesSX() {
 
   const textBox = () => {
     return {
-      jcc, aic, flex, column, relative,
+      ...jcc, ...aic, ...flex, ...column, ...relative,
       background: 'none',
       border: 'none',
       width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'
