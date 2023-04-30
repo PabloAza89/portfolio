@@ -8,6 +8,7 @@ import Language from './components/Language/Language';
 import NavBar from './components/NavBar/NavBar';
 import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
+import MessageMe from './components/MessageMe/MessageMe';
 import AppSX from './styles/AppSX';
 import { Box } from '@mui/material';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -78,6 +79,10 @@ function App() {
                   <Language /></>}/>
                 <Route path="/portfolio/Contact" element={<>
                   <Contact />
+                  <DarkMode />
+                  <Language /></>}/>
+                <Route path="/portfolio/MessageMe" element={<>
+                  <MessageMe />
                   <DarkMode />
                   <Language /></>}/>
               </Routes>

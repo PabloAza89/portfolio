@@ -13,7 +13,11 @@
     "@testing-library/user-event": "^13.1.1",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^17.0.2",
+    "dotenv": "^16.0.3",
+    "firebase": "^9.21.0",
+    "firebase-functions": "^4.3.1",
     "ngx-drag-scroll": "^14.0.1",
+    "nodemailer": "^6.9.1",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.1",
     "react-indiana-drag-scroll": "^2.2.0",
@@ -51,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@types/nodemailer": "^6.4.7",
     "gh-pages": "^5.0.0"
   }
 }
