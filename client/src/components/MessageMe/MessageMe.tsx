@@ -1,19 +1,19 @@
 import { Box, Typography, Avatar } from '@mui/material';
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 import MessageMeSX from '../../styles/MessageMeSX';
 import BackButton from '../BackButton/BackButton';
-import nodemailer from 'nodemailer';
-require('dotenv').config();
-const functions = require("firebase-functions");
-const { USER, PASS } = process.env;
+//import nodemailer from 'nodemailer';
+//require('dotenv').config();
+//const functions = require("firebase-functions");
+//const { USER, PASS } = process.env;
 
 function MessageMe() {
 
-  const english = useSelector((state: {english:boolean}) => state.english)
+  //const english = useSelector((state: {english:boolean}) => state.english)
 
-  const shareSpeechWithEmail = functions.firestore
+/*   const shareSpeechWithEmail = functions.firestore
   .document("/sharedSpeeches/{userId}")
-  .onCreate(async (snapshot, context) => {
+  .onCreate(async (snapshot: any, context: any) => {
     // const userId = context.params.userId;
     // const data = snapshot.data();
     const mailTransport = nodemailer.createTransport(
@@ -31,7 +31,7 @@ function MessageMe() {
       console.log(err);
       return Promise.reject(err);
     }
-  });
+  }); */
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
