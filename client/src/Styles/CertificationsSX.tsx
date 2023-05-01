@@ -41,14 +41,14 @@ const card = () => {
 
 const title = () => {
     return {
-    ...asc, ...noSelect(),
+    ...asc, /* ...noSelect(), */
       background: 'none',
       height: minLand ? '13vh' : 'none',
       color: '#FFFFFF',
       paddingRight: '0vw',
       paddingTop: '0vw',
       fontSize: minPort ? '3.85vw' : minLand ? '2.1vw' : larPort ? '2.65vw' : '1.25vw',
-      mixBlendMode: 'difference'
+      'mix-blend-mode': 'difference'
     }
   }
 
@@ -56,7 +56,7 @@ const media = (url: string) => {
     return {
       backgroundImage: `url(${url})`,
       'zIndex': 10,
-      'align-self': 'center',
+      'alignSelf': 'center',
       width: minPort ? '35vw' : minLand ? '32vw' : larPort ? '35vw' : '15vw',
       height: minLand ? '36vh' : '15vh',
       backgroundSize: minPort ? '35vw 15vh' : minLand ? '32vw 36vh' : larPort ? '35vw 15vh' : '15vw 15vh',
@@ -77,7 +77,7 @@ const url = () => {
 
 const anchor = () => {
     return {
-      asc, ...noSelect(),
+      asc, /* ...noSelect(), */
       'textDecoration': 'none',
       color: '#FFFFFF',
       'mix-blend-mode': 'difference'

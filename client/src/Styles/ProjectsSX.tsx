@@ -162,7 +162,7 @@ const scroll = () => {
       color: '#FFFFFF',
       fontSize: larPort ? '2.5vh' : '1.5vw',
       top: '0.1vh',
-      mixBlendMode: 'difference'
+      'mix-blend-mode': 'difference'
     }
   }
 

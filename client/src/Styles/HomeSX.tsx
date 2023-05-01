@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { asc, column, flex, jcc, noSelect, relative
+import { asc, column, flex, jcc, noSelect, relative, row
 } from './CommonsSX';
 
 function HomeSX() {
@@ -45,12 +45,13 @@ const bgLeftUpper = () => {
   }
 }
 
-const bgLeftUpperTextOne = () => {
+let bgLeftUpperTextOne = () => {
   return {
     ...noSelect(),
-    color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort  ? '11.5vw' : minLand ? '4.9vw' : larPort ? '5.0vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.7}px` : '6.9vh',
-    mixBlendMode: 'difference'
+    'color': darkMode ? '#b5b3b3' : '#FFFFFF',
+    'fontSize': minPort  ? '11.5vw' : minLand ? '4.9vw' : larPort ? '5.0vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.7}px` : '6.9vh',
+    'mix-blend-mode': 'difference',
+    /* display: 'none' */
   }
 }
 
@@ -59,7 +60,7 @@ const bgLeftUpperTextTwo = () => {
     ...noSelect(),
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort  ? '11.5vw' : minLand ? '5.4vw' : larPort ? '5.2vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.75}px` : '7.2vh',
-    mixBlendMode: 'difference',
+    'mix-blend-mode': 'difference',
     'inline-size': 'max-content'
   }
 }
@@ -69,7 +70,7 @@ const bgLeftUpperTextThree = () => {
     ...noSelect(),
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort  ? '11.5vw' : minLand ? '2.9vw' : larPort ? '3.8vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.1}px` : '4.5vh',
-    mixBlendMode: 'difference'
+    'mix-blend-mode': 'difference'
   }
 }
 

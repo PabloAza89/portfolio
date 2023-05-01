@@ -71,7 +71,7 @@ function Projects() {
             </Box>
             <Box sx={ProjectsSX().boxMedia(e.media.length)}>
               {e.media.map((m) =>{
-                return <CardMedia onClick={() => {setName(m); setShow(!show)}} sx={ProjectsSX().cardMedia(m)}></CardMedia>
+                return <CardMedia src={""} onClick={() => {setName(m); setShow(!show)}} sx={ProjectsSX().cardMedia(m)}></CardMedia>
               })}
             </Box>
           </Box>)
@@ -91,7 +91,7 @@ function Projects() {
         fullWidth={true}
         fullScreen={true}
       >
-        <CardMedia sx={ProjectsSX().dialogMedia(name)}></CardMedia>
+        <CardMedia src={""} sx={ProjectsSX().dialogMedia(name)}></CardMedia>
       </Dialog>
 
       <Box sx={ProjectsSX().boxLower}>

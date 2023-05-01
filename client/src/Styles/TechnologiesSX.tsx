@@ -53,7 +53,7 @@ function TechnologiesSX() {
       border: 'none',
       color: darkMode ? '#b5b3b3' : '#FFFFFF',
       'fontWeight': 600,
-      'mixBlendMode': 'difference'
+      'mix-blend-mode': 'difference'
     }
   }
 

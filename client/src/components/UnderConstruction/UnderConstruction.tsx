@@ -8,9 +8,9 @@ function UnderConstruction() {
       <Typography sx={UnderConstructionSX().textUpperOneLine}>SECTION UNDER CONSTRUCTION !</Typography>
       <Typography sx={UnderConstructionSX().textUpperTwoLines}>SECTION UNDER CONSTRUCTION !</Typography>
       <Typography sx={UnderConstructionSX().textLowerOneLine}>Section Under Construction !</Typography>
-      <CardMedia sx={UnderConstructionSX().gearBig} />
-      <CardMedia sx={UnderConstructionSX().gearMed} />
-      <CardMedia sx={UnderConstructionSX().gearMin} />
+      <CardMedia src={""} sx={UnderConstructionSX().gearBig} />
+      <CardMedia src={""} sx={UnderConstructionSX().gearMed} />
+      <CardMedia src={""} sx={UnderConstructionSX().gearMin} />
     </Box>
   )
 }

@@ -18,7 +18,7 @@ function UnderConstructionSX() {
         fontWeight: 600,
         top: minPort ? '25vh' : minLand ? '25vh' : larPort ? '23vh' : '10vh',
         left: minPort ? '5vw' : minLand ? '5vw' : larPort ? '5vw' : '15vw',
-        mixBlendMode: 'difference'
+        'mix-blend-mode': 'difference'
 
     }
    }
@@ -32,7 +32,7 @@ function UnderConstructionSX() {
           fontWeight: 600,
           top: minPort ? '14vh' : minLand ? '14vh' : larPort ? '14vh' : '11vh',
           left: minPort ? '67vw' : minLand ? '69vw' : larPort ? '67vw' : '78vw',
-          mixBlendMode: 'difference'
+          'mix-blend-mode': 'difference'
     }
    }
 
@@ -45,7 +45,7 @@ function UnderConstructionSX() {
         fontWeight: 400,
         top: minPort ? '88vh' : minLand ? '80vh' : larPort ? '88vh' : '85vh',
         left: minPort ? '30vw' : minLand ? '30vw' : larPort ? '30vw' : '60vw',
-        mixBlendMode: 'difference'
+        'mix-blend-mode': 'difference'
     }
    }
 

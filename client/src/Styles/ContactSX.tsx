@@ -81,7 +81,7 @@ function ContactSX() {
         fontSize: minPort ? '7vw' : minLand ? '3vw' : larPort ? '6vw' : '2.1vw',
         color: darkMode ? '#b5b3b3' : 'white',
         padding: '1vw',
-        mixBlendMode: 'difference'
+        'mix-blend-mode': 'difference'
     }
    }
 

@@ -30,7 +30,7 @@ function NavBarSX() {
         background: 'none',
         width: minPort ? '60vw' : minLand ? '35vw' : larPort ? '58vw' : '33vw',
         color: '#FFFFFF',
-        'align-self': minPort ? 'start' : larPort ? 'start' : 'center',
+        'alignSelf': minPort ? 'start' : larPort ? 'start' : 'center',
         height: minPort ? '7vh' : minLand ? '13vh' : larPort ? '13vh' : '13vh',
         minHeight: larPort ? '11vw' : `${staticRefWidth * 2.9}px`,
         marginLeft: '2vw'

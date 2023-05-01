@@ -15,7 +15,7 @@ function Technologies() {
         {[react,redux,javascript,node,sequelize,material].map((e) => {
           return (
             <Box sx={TechnologiesSX().iconBox}>
-              <CardMedia sx={TechnologiesSX().iconMedia(e)}></CardMedia>
+              <CardMedia key={2} src={""} sx={TechnologiesSX().iconMedia(e)}></CardMedia>
             </Box>
           )
         })}

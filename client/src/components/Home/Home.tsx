@@ -35,7 +35,7 @@ function Home() {
 
           <Box sx={HomeSX().minLandRightLower}>
             <Link style={{ textDecoration: 'none' }} to="/portfolio/AboutMe">
-              <Button sx={{ padding: '0px !important', minWidth: minPort ? '53vw !important' : minLand ? '25vw !important' : '9vw !important', 'max-width': '19vw !important', 'min-height': minPort ? '10vw !important' : minLand ? '7.5vh !important' : '2.1vh !important', 'max-height': '2.1vw !important', color:'#FFFFFF', width: minPort ? '19vw' : minLand ? '19vw' : '19vw', marginLeft: minPort ? '0vw' : minLand ? '0vw' : '16vw', marginTop: minPort ? '1.5vw' : minLand ? '4.5vh' : '1.9vw', fontSize: minPort ? '4vw' : minLand ? '1.65vw' : '1.05vw', mixBlendMode: 'difference'}} variant='outlined'>{ english ? `Know about me` : `Conoceme` }
+              <Button sx={{ padding: '0px !important', minWidth: minPort ? '53vw !important' : minLand ? '25vw !important' : '9vw !important', 'max-width': '19vw !important', 'min-height': minPort ? '10vw !important' : minLand ? '7.5vh !important' : '2.1vh !important', 'max-height': '2.1vw !important', color:'#FFFFFF', width: minPort ? '19vw' : minLand ? '19vw' : '19vw', marginLeft: minPort ? '0vw' : minLand ? '0vw' : '16vw', marginTop: minPort ? '1.5vw' : minLand ? '4.5vh' : '1.9vw', fontSize: minPort ? '4vw' : minLand ? '1.65vw' : '1.05vw', 'mix-blend-mode': 'difference'}} variant='outlined'>{ english ? `Message me` : `Envíame un mensaje` }
               </Button>
             </Link>
           </Box>
@@ -49,7 +49,7 @@ function Home() {
           position: 'relative',
           height: '10vh'
         }}>
-          <Link style={{ textDecoration: 'none' }} to="/portfolio/NodeMailer">
+          <Link style={{ textDecoration: 'none' }} to="/portfolio/MessageMe">
             <Button sx={{
               padding: '0px !important',
               minWidth: minPort ? '53vw !important' : minLand ? '9vw !important' : '2vw !important',
@@ -63,9 +63,9 @@ function Home() {
               /* fontSize: minPort ? '3.8vw' : minLand ? '1.05vw' : larPort ? `${staticRefWidth * 0.559}px` : larLand&& percentageResizedWidth< 0.559 ? `${staticRefWidth * 0.559}px` : `${percentageResizedWidth* 22.5}px`, */
               fontSize: larPort ? '2.2vw' : '1.8vw',
 
-              mixBlendMode: 'difference'
+              'mix-blend-mode': 'difference'
               }}
-              variant='outlined'>{ english ? `Know about me` : `Conoceme` }
+              variant='outlined'>{ english ? `Message Me` : `Envíame un mensaje` }
             </Button>
           </Link>
         </Box>

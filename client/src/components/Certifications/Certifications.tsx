@@ -44,7 +44,7 @@ function Certifications() {
             return (
               <Box sx={CertificationsSX().card}>
                 <Typography sx={CertificationsSX().title}>{e.title}</Typography>
-                <CardMedia onClick={() => {setName(e.media); setShow(!show)}} sx={CertificationsSX().media(e.media)} />
+                <CardMedia src={""} onClick={() => {setName(e.media); setShow(!show)}} sx={CertificationsSX().media(e.media)} />
                 <Typography sx={CertificationsSX().url}>
                   <a style={CertificationsSX().anchor()}
                     href={e.href}
@@ -63,7 +63,7 @@ function Certifications() {
         fullWidth={true}
         fullScreen={true}
       >
-        <CardMedia sx={CertificationsSX().dialogMedia(name)}></CardMedia>
+        <CardMedia src={""} sx={CertificationsSX().dialogMedia(name)}></CardMedia>
       </Dialog>
 
     </Box>
