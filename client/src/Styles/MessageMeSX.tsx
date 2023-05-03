@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { flex, noSelect, row } from './CommonsSX';
+import { flex, noSelect, row, column } from './CommonsSX';
 
 function MessageMeSX() {
 
@@ -28,7 +28,24 @@ function MessageMeSX() {
     }
    }
 
-  return { background }
+   const test = () => {
+    return {
+      color: 'white',
+      backgroundColor: 'white',
+      /* 'mix-blend-mode': 'difference' */
+    }
+   }
+
+   const messageBackground = () => {
+    return {
+      ...flex, ...column,
+      color: 'white',
+      backgroundColor: 'white',
+      /* 'mix-blend-mode': 'difference' */
+    }
+   }
+
+  return { background, test, messageBackground }
 }
 
 export default MessageMeSX
