@@ -24,14 +24,9 @@ function MessageMeSX() {
       alignSelf: 'center',  
       width: minPort ? '90vw' : minLand ? '70vw' : larPort ? '70vw' : '70vw',
       height: minPort ? '70vh' : minLand ? '60vh' : larPort ? '60vh' : '60vh',
-      /* height: '90vh', */
       top: larPort ? '2vh' : 'null'
     }
    }
-
-   
-
-   
 
    const formContainer = () => {
     return {
@@ -40,7 +35,6 @@ function MessageMeSX() {
       'borderRadius': `${staticRefWidth * 1}px`,
       backgroundColor: '#5f9ea0',
       opacity: '0.95',
-      /* 'mix-blend-mode': 'difference', */
       width: '50vw',
       height: '70vh'
     }
@@ -48,7 +42,7 @@ function MessageMeSX() {
 
    const clearButton = () => {
     return {
-      ...flex, ...column, /* ...asc, */
+      ...flex, ...column,
       color: 'white',
       alignSelf: 'flex-end',
       backgroundColor: 'gray',
@@ -80,15 +74,10 @@ function MessageMeSX() {
       opacity: '0.90',
       width: '47vw',
       'margin-bottom': '2vh',
-      'borderRadius': `${staticRefWidth * 0.3}px`,
-     
+      'borderRadius': `${staticRefWidth * 0.3}px`
       }
-
    }
-
- 
    
-
    const sendMessageButton = () => {
     return {
       ...flex, ...asc,

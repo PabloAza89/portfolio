@@ -69,7 +69,7 @@ function MessageMe() {
 
   const handleSubmit = (e: any) => {
     function fetchData() {
-      fetch("http://localhost:3001/test", {
+      fetch("http://localhost:3001/message", {
         method: "POST",
         body: JSON.stringify({name: name, text: text}),
         headers: {
