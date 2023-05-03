@@ -1,3 +1,4 @@
+
 import { useSelector } from 'react-redux';
 import { flex, noSelect, row, column } from './CommonsSX';
 
@@ -30,8 +31,9 @@ function MessageMeSX() {
 
    const test = () => {
     return {
-      color: 'white',
-      backgroundColor: 'white',
+      /* color: 'white',
+      backgroundColor: 'white', */
+      'font-family': "Open Sans"
       /* 'mix-blend-mode': 'difference' */
     }
    }

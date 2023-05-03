@@ -6,7 +6,7 @@ const { G_USER, G_PASS, G_TO } = process.env;
 const router = Router();
 
 router.post("/test", async (req, res) => {
-    const { subject, text } = req.body;
+    const { name, text } = req.body;
 
 
       var transporter = nodemailer.createTransport({
@@ -21,8 +21,8 @@ router.post("/test", async (req, res) => {
 
       var mailOptions = {
         to: G_TO,
-        subject: "La compra se ha realizado correctamenteee 123",
-        text: "NUEVO",
+        subject: name,
+        text: text,
       }
 
       transporter.sendMail(mailOptions, (error, info) => {
