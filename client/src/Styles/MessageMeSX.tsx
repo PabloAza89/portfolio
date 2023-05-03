@@ -1,6 +1,6 @@
 
 import { useSelector } from 'react-redux';
-import { flex, noSelect, row, column } from './CommonsSX';
+import { flex, noSelect, row, column, asc, jsc, jcse, jcc } from './CommonsSX';
 
 function MessageMeSX() {
 
@@ -21,33 +21,89 @@ function MessageMeSX() {
       ...flex, ...row,
       background: darkMode ? '#253740' : '#3C6478',
       'borderRadius': `${staticRefWidth * 1}px`,
-      alignSelf: 'center',
-      'justify-content': 'space-evenly',
+      alignSelf: 'center',  
       width: minPort ? '90vw' : minLand ? '70vw' : larPort ? '70vw' : '70vw',
       height: minPort ? '70vh' : minLand ? '60vh' : larPort ? '60vh' : '60vh',
+      /* height: '90vh', */
       top: larPort ? '2vh' : 'null'
     }
    }
 
-   const test = () => {
+   
+
+   
+
+   const formContainer = () => {
     return {
-      /* color: 'white',
-      backgroundColor: 'white', */
-      'font-family': "Open Sans"
-      /* 'mix-blend-mode': 'difference' */
+      ...flex, ...column, ...asc, ...jcc,
+      color: 'white',
+      'borderRadius': `${staticRefWidth * 1}px`,
+      backgroundColor: '#5f9ea0',
+      opacity: '0.95',
+      /* 'mix-blend-mode': 'difference', */
+      width: '50vw',
+      height: '70vh'
     }
    }
 
-   const messageBackground = () => {
+   const clearButton = () => {
     return {
-      ...flex, ...column,
+      ...flex, ...column, /* ...asc, */
+      color: 'white',
+      alignSelf: 'flex-end',
+      backgroundColor: 'gray',
+      ':hover': { backgroundColor: 'gray', '-webkit-filter': 'brightness(.95)', 'filter': 'brightness(.95)'},
+      /* 'mix-blend-mode': 'difference', */
+      width: '10vw',
+      'margin-right': '1.5vw',
+      'margin-bottom': '2vh'
+    }
+   }
+
+   const nameBox = () => {
+    return {
+      ...flex, ...column, ...asc,
       color: 'white',
       backgroundColor: 'white',
-      /* 'mix-blend-mode': 'difference' */
+      opacity: '0.90',
+      width: '47vw',
+      'margin-bottom': '2vh',
+      'borderRadius': `${staticRefWidth * 0.3}px`,
     }
    }
 
-  return { background, test, messageBackground }
+   const messageBox = () => {
+    return {
+      ...flex, ...column, ...asc,
+      color: 'white',
+      backgroundColor: 'white',
+      opacity: '0.90',
+      width: '47vw',
+      'margin-bottom': '2vh',
+      'borderRadius': `${staticRefWidth * 0.3}px`,
+     
+      }
+
+   }
+
+ 
+   
+
+   const sendMessageButton = () => {
+    return {
+      ...flex, ...asc,
+      color: 'white',
+      backgroundColor: 'gray',
+      ':hover': { backgroundColor: 'gray', '-webkit-filter': 'brightness(.95)', 'filter': 'brightness(.95)'},
+      /* 'mix-blend-mode': 'difference', */
+      width: '10vw'
+    }
+   }
+
+  return { background, nameBox, formContainer,
+    clearButton, sendMessageButton, messageBox,
+
+   }
 }
 
 export default MessageMeSX
