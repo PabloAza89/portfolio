@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/portfolio/static/css/main.e163b49c.chunk.css",
+    "main.js": "/portfolio/static/js/main.ce790ff8.chunk.js",
+    "main.js.map": "/portfolio/static/js/main.ce790ff8.chunk.js.map",
+    "runtime-main.js": "/portfolio/static/js/runtime-main.359c9c16.js",
+    "runtime-main.js.map": "/portfolio/static/js/runtime-main.359c9c16.js.map",
+    "static/js/2.c9affea3.chunk.js": "/portfolio/static/js/2.c9affea3.chunk.js",
+    "static/js/2.c9affea3.chunk.js.map": "/portfolio/static/js/2.c9affea3.chunk.js.map",
+    "static/js/3.eceaf35d.chunk.js": "/portfolio/static/js/3.eceaf35d.chunk.js",
+    "static/js/3.eceaf35d.chunk.js.map": "/portfolio/static/js/3.eceaf35d.chunk.js.map",
+    "index.html": "/portfolio/index.html",
+    "static/css/main.e163b49c.chunk.css.map": "/portfolio/static/css/main.e163b49c.chunk.css.map",
+    "static/js/2.c9affea3.chunk.js.LICENSE.txt": "/portfolio/static/js/2.c9affea3.chunk.js.LICENSE.txt",
+    "static/media/efSet.70a4ba20.png": "/portfolio/static/media/efSet.70a4ba20.png",
+    "static/media/fccCertJS.2398854b.png": "/portfolio/static/media/fccCertJS.2398854b.png",
+    "static/media/food1.7713b38e.png": "/portfolio/static/media/food1.7713b38e.png",
+    "static/media/food2.1c86c9e6.png": "/portfolio/static/media/food2.1c86c9e6.png",
+    "static/media/food3.199146d2.png": "/portfolio/static/media/food3.199146d2.png",
+    "static/media/gear.2bac0e98.png": "/portfolio/static/media/gear.2bac0e98.png",
+    "static/media/henry.bc6cc884.png": "/portfolio/static/media/henry.bc6cc884.png",
+    "static/media/home.d6b02146.svg": "/portfolio/static/media/home.d6b02146.svg",
+    "static/media/javascript.cf7522f4.png": "/portfolio/static/media/javascript.cf7522f4.png",
+    "static/media/material.5955eca0.png": "/portfolio/static/media/material.5955eca0.png",
+    "static/media/node.07d152a8.png": "/portfolio/static/media/node.07d152a8.png",
+    "static/media/profile.7f49b905.png": "/portfolio/static/media/profile.7f49b905.png",
+    "static/media/react.2f2532db.png": "/portfolio/static/media/react.2f2532db.png",
+    "static/media/redux.b426d97d.png": "/portfolio/static/media/redux.b426d97d.png",
+    "static/media/sequelize.844fb918.png": "/portfolio/static/media/sequelize.844fb918.png",
+    "static/media/weatherify1.4eda5ee7.png": "/portfolio/static/media/weatherify1.4eda5ee7.png",
+    "static/media/weatherify2.59461bab.png": "/portfolio/static/media/weatherify2.59461bab.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.359c9c16.js",
+    "static/js/2.c9affea3.chunk.js",
+    "static/css/main.e163b49c.chunk.css",
+    "static/js/main.ce790ff8.chunk.js"
+  ]
+}

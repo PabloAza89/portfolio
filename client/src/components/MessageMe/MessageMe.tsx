@@ -69,7 +69,7 @@ function MessageMe() {
 
   const handleSubmit = (e: any) => {
     function fetchData() {
-      fetch(`https://oval-transparent-ornament.glitch.me/`, {
+        fetch("http://localhost:3001/", {
         method: "POST",
         body: JSON.stringify({name: name, text: text}),
         headers: {
