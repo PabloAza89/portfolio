@@ -85,36 +85,6 @@ function MessageMe() {
     else {emptyMessage()}
   };
 
-  let intervalID: any
-
-  const handleStart = () => {
-
-    
-    intervalID = setInterval(myCallback, 1000);
-  };
-
-  function myCallback() {
-    console.log("TIMER")
-    
-   // console.log("TEST", sent)
-    
-}
-
-
-
-  const handleStop = () => {
-
-    clearInterval(intervalID);
-    // liberar nuestro inervalId de la variable
-    intervalID = null;
-    /* setSent(!sent)
-    myCallback() */
-  };
-
-
-
-  
-
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
       <BackButton />
@@ -153,26 +123,10 @@ function MessageMe() {
         <Button
           disabled={sentButtonDisabled}
           variant="contained"
-          onClick={() => handleSubmit()}
+          onClick={(e) => handleSubmit(e)}
           sx={MessageMeSX().sendMessageButton}
         >
           {english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
-        </Button>
-        <Button
-          disabled={sentButtonDisabled}
-          variant="contained"
-          onClick={(e) => handleStart(e)}
-          sx={MessageMeSX().sendMessageButton}
-        >
-          {english ? 'START' : 'START' }
-        </Button>
-        <Button
-          disabled={sentButtonDisabled}
-          variant="contained"
-          onClick={() => handleStop()}
-          sx={MessageMeSX().sendMessageButton}
-        >
-          {english ? 'STOP' : 'STOP' }
         </Button>
       </Box>
     </Box>
