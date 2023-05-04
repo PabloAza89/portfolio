@@ -69,7 +69,7 @@ function MessageMe() {
 
   const handleSubmit = (e: any) => {
     function fetchData() {
-      fetch("http://localhost:3001/message", {
+      fetch(`https://oval-transparent-ornament.glitch.me/`, {
         method: "POST",
         body: JSON.stringify({name: name, text: text}),
         headers: {
@@ -78,7 +78,7 @@ function MessageMe() {
       }).then(response => response.json())
       .then(response => console.log("Success:", JSON.stringify(response)))
       .then(() => {setSent(true); sentNotif(); setSentButtonDisabled(false)})
-      .catch(error => {console.error("Error:", error); noSentNotif()})
+      .catch(error => {console.error("Error:", error); noSentNotif(); setSentButtonDisabled(false)})
     }
     e.preventDefault();
     if (name.length !== 0 && text.length !== 0) {setSentButtonDisabled(true); fetchData()}
