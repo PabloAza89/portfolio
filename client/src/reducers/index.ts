@@ -19,7 +19,8 @@ interface initialStateI {
   percentageResizedWidth: number,
   minRatioReference: number,
   timer: number,
-  numberTimer: number | undefined
+  numberTimer: number | undefined,
+  timerEnabled: boolean
 }
 
 const initialState: initialStateI = {
@@ -42,8 +43,9 @@ const initialState: initialStateI = {
   percentageResizedHeight: window.innerHeight / window.screen.height,
   percentageResizedWidth: window.innerWidth / window.screen.width,
   minRatioReference: window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width),
-  timer: 0,
-  numberTimer: undefined
+  timer: 15,
+  numberTimer: undefined,
+  timerEnabled: false
 }
 
 
@@ -147,7 +149,7 @@ const reducer = (state = initialState, action: {type: string; payload: any}) => 
     case 'SET_TIMER':
       return {
         ...state,
-        timer: state.timer += action.payload
+        timer: state.timer -= action.payload
       };
     case 'STOP_TIMER':
       return {
@@ -158,6 +160,11 @@ const reducer = (state = initialState, action: {type: string; payload: any}) => 
       return {
         ...state,
         numberTimer: action.payload
+      };
+    case 'SET_TIMER_ENABLED':
+      return {
+        ...state,
+        timerEnabled: action.payload
       };
     default:
       return state

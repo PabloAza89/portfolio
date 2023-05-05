@@ -6,7 +6,8 @@ import BackButton from '../BackButton/BackButton';
 import TextField from '@mui/material/TextField';
 import Swal from 'sweetalert2'
 import "../../styles/MessageMeSX.css";
-import { setTimer, stopTimer, setNumberTimer } from '../../actions';
+import { setTimer, stopTimer, setNumberTimer, setTimerEnabled } from '../../actions';
+import store from '../../store/store';
 
 function MessageMe() {
 
@@ -15,12 +16,14 @@ function MessageMe() {
   const english = useSelector((state: {english:boolean}) => state.english)
   const timer = useSelector((state: {timer:number}) => state.timer)
   const numberTimer = useSelector((state: {numberTimer:number}) => state.numberTimer)
+  const timerEnabled = useSelector((state: {timerEnabled:boolean}) => state.timerEnabled)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)  // OJO staticRefWidth
   const [name, setName] = useState<string>("")
   const [text, setText] = useState<string>("")
-  const [sent, setSent] = useState<boolean>(false)
-  const [ttimer, setTtimer] = useState<number>(0)
+  
+
   const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
+
 
   //dispatch(setDarkMode(!darkMode))
 
@@ -30,7 +33,6 @@ function MessageMe() {
   const clearBoth = () => {
     setName("");
     setText("");
-    setSent(false)
   }
 
   const sentNotif = () => {
@@ -78,7 +80,73 @@ function MessageMe() {
     })
   }
 
+  //let timerNotifID: any
+
+  // const actualTimerForNotif = () => {
+  //   setLocalTimerForNotif(timer)
+  // }
+
+  // const actualTimerForNotifCB = () => {
+  //   //return store.getState().timer
+  //   return store.getState().timer
+  // }
+
+  // useEffect(() => {
+  //   setLocalTimerForNotif(timer)
+  // }, [timer])
+
+  // let [localTimerForNotif, setLocalTimerForNotif] = useState<number>(timer)
+  
+
+  // const MustWait = () => {
+
+
+  //   let timerInterval
+
+  //   Swal.fire({
+  //     showConfirmButton: false,
+  //     timer: 20500,
+  //     timerProgressBar: true,
+  //     icon: 'error',
+  //     title: english ? 'You must wait to send another message!' : 'Debes esperar para enviar otro mensaje',
+  //     text: english ? `Please, wait ${3} seconds.` : `Por favor, espera ${3} segundos.`
+  //   })
+
+  // }
+
+  const MustWait: any = () => {
+
+
+    let timerInterval: any
+    
+    Swal.fire({
+      showConfirmButton: false,
+      icon: 'error',
+      title: english ? 'You must wait to send another message!' : 'Debes esperar para enviar otro mensaje',
+      timerProgressBar: true,
+      html: english ? `Please, wait <strong></strong> seconds.<br/><br/>` : `Por favor, espera <strong></strong> segundos.<br/><br/>`,
+      //text: 'I will close in <strong></strong> seconds.<br/><br/>',
+      //timer: store.getState().timer * 1000,
+      timer: 2500,
+      didOpen: () => {
+        const content: any = Swal.getHtmlContainer()
+        const $: any = content.querySelector.bind(content) 
+        
+        timerInterval = setInterval(() => {
+          Swal.getHtmlContainer().querySelector('strong')
+            .textContent = (store.getState().timer === 15 ? 0 : store.getState().timer)
+              .toFixed(0)
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    })
+
+  }
+
   const handleSubmit = (e: any) => {
+    if (store.getState().timerEnabled) return MustWait()
     function fetchData() {
         fetch("http://localhost:3001/", {
         method: "POST",
@@ -88,7 +156,7 @@ function MessageMe() {
         }
       }).then(response => response.json())
       .then(response => console.log("Success:", JSON.stringify(response)))
-      .then(() => {setSent(true); sentNotif(); setSentButtonDisabled(false)})
+      .then(() => {sentNotif(); handleTimerStart(); setSentButtonDisabled(false)})
       .catch(error => {console.error("Error:", error); noSentNotif(); setSentButtonDisabled(false)})
     }
     e.preventDefault();
@@ -96,77 +164,34 @@ function MessageMe() {
     else {emptyMessage()}
   };
 
-  //var intervalID: number | any
+  let timerID: any
 
-  // var handleStart = () => {
+  const handleTimerStart = () => {
+      timerID = setInterval(handleTimerStartCB, 1000);
+      dispatch(setNumberTimer(timerID))
+      dispatch(setTimerEnabled(true))
+  }
 
+  const handleTimerStartCB = (qq: number) => {
+    if (store.getState().timerEnabled) dispatch(setTimer(1))
+    if (store.getState().timer === 0) {
+      dispatch(setTimerEnabled(false))
+      clearInterval(store.getState().numberTimer);
+      dispatch(stopTimer(15))
+    }
+  }
 
-  // let reference = 0
-
-  // function timerHandler() {
-  //   setTimeout(Callback, 1000)
-
-  // }
-
-  // var timerr: any
-
-  // const handleStart = () => {
-  //   timerr = setTimeout(Callback, 1000, timerr)
-  // };
-
-
-  // simple, working
-  // const handleStart = () => {
-  //   dispatch(setTimer(1))
-  //   setTimeout(() => {
-  //     dispatch(stopTimer(0))
-  //   }, 1000)
-  // };
-
-
-// funciona, tb simple
-//   const doing = () => {
-//     dispatch(setTimer(1))
-//     setInterval(() => {
-//       /* dispatch(stopTimer(0)) */
-//     }, 1000)
-//   };
-
-//   const handleStop = () => {
-//     dispatch(stopTimer(0));
-// };
-
-
-//let identificadorDeTemporizador: ReturnType<typeof setInterval> /* = setTimeout(() => { ... }); */
-let identificadorDeTemporizador: any
-
-function temporizadorDeRetraso() {
-  identificadorDeTemporizador = setInterval(funcionConRetraso, 1000);
-  dispatch(setNumberTimer(identificadorDeTemporizador))
-  console.log("numero X",identificadorDeTemporizador)
-}
-
-function funcionConRetraso() {
-  console.log("test 123");
-  console.log("numero EL SIGUIENTE",identificadorDeTemporizador)
-  dispatch(setTimer(1))
-}
-
-function borrarAlerta() {
-  //clearTimeout(identificadorDeTemporizador);
-  clearTimeout(numberTimer);
-}
-
-
-
-
-
+  const handleTimerStop = () => {
+      setTimerEnabled(false)
+      clearInterval(store.getState().numberTimer);
+      dispatch(stopTimer(5))
+  }
 
   console.log("TIMER VALUE", timer)
   console.log('NUMBER TIMER ABAJO', numberTimer)
-  //console.log("OUTER INTERCAL ID", intervalID)
-
-
+  console.log('TEST TIMER ABAJO', store.getState().timer)
+  //console.log('ABAJO localTimerForNotif', localTimerForNotif)
+  
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
@@ -214,12 +239,7 @@ function borrarAlerta() {
         <Button
           disabled={sentButtonDisabled}
           variant="contained"
-          /* onClick={() => handleStart()} */
-          /* onClick={() => doing()} */
-          /* onClick={() => doWhile()} */
-          /* onClick={() => BucleFor()} */
-          onClick={() => temporizadorDeRetraso()}
-          /* onClick={() => timerHandler()} */
+          onClick={() => handleTimerStart()}
           sx={MessageMeSX().sendMessageButton}
         >
           {english ? 'START' : 'START' }
@@ -227,8 +247,7 @@ function borrarAlerta() {
         <Button
           disabled={sentButtonDisabled}
           variant="contained"
-          /* onClick={() => handleStop()} */
-          onClick={() => borrarAlerta()}
+          onClick={() => handleTimerStop()}
           sx={MessageMeSX().sendMessageButton}
         >
           {english ? 'STOP' : 'STOP' }

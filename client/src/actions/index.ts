@@ -151,3 +151,10 @@ export function setNumberTimer(setNumberTimer:number) {
     payload: setNumberTimer
   }
 };
+
+export function setTimerEnabled(setTimerEnabled:boolean) {
+  return {
+    type: 'SET_TIMER_ENABLED',
+    payload: setTimerEnabled
+  }
+};
