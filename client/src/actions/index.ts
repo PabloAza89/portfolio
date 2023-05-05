@@ -130,3 +130,24 @@ export function setMinRatioReference(setMinRatioReference:number) {
     payload: setMinRatioReference
   }
 };
+
+export function setTimer(setTimer:number) {
+  return {
+    type: 'SET_TIMER',
+    payload: setTimer
+  }
+};
+
+export function stopTimer(stopTimer:number) {
+  return {
+    type: 'STOP_TIMER',
+    payload: stopTimer
+  }
+};
+
+export function setNumberTimer(setNumberTimer:number) {
+  return {
+    type: 'SET_NUMBER_TIMER',
+    payload: setNumberTimer
+  }
+};

@@ -1,20 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Button } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MessageMeSX from '../../styles/MessageMeSX';
 import BackButton from '../BackButton/BackButton';
 import TextField from '@mui/material/TextField';
 import Swal from 'sweetalert2'
 import "../../styles/MessageMeSX.css";
+import { setTimer, stopTimer, setNumberTimer } from '../../actions';
 
 function MessageMe() {
 
+  const dispatch = useDispatch()
+
   const english = useSelector((state: {english:boolean}) => state.english)
+  const timer = useSelector((state: {timer:number}) => state.timer)
+  const numberTimer = useSelector((state: {numberTimer:number}) => state.numberTimer)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)  // OJO staticRefWidth
   const [name, setName] = useState<string>("")
   const [text, setText] = useState<string>("")
   const [sent, setSent] = useState<boolean>(false)
+  const [ttimer, setTtimer] = useState<number>(0)
   const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
+
+  //dispatch(setDarkMode(!darkMode))
+
+
+
 
   const clearBoth = () => {
     setName("");
@@ -85,35 +96,77 @@ function MessageMe() {
     else {emptyMessage()}
   };
 
-  let intervalID: any
+  //var intervalID: number | any
 
-  const handleStart = () => {
+  // var handleStart = () => {
 
-    
-    intervalID = setInterval(myCallback, 1000);
-  };
 
-  function myCallback() {
-    console.log("TIMER")
-    
-   // console.log("TEST", sent)
-    
+  // let reference = 0
+
+  // function timerHandler() {
+  //   setTimeout(Callback, 1000)
+
+  // }
+
+  // var timerr: any
+
+  // const handleStart = () => {
+  //   timerr = setTimeout(Callback, 1000, timerr)
+  // };
+
+
+  // simple, working
+  // const handleStart = () => {
+  //   dispatch(setTimer(1))
+  //   setTimeout(() => {
+  //     dispatch(stopTimer(0))
+  //   }, 1000)
+  // };
+
+
+// funciona, tb simple
+//   const doing = () => {
+//     dispatch(setTimer(1))
+//     setInterval(() => {
+//       /* dispatch(stopTimer(0)) */
+//     }, 1000)
+//   };
+
+//   const handleStop = () => {
+//     dispatch(stopTimer(0));
+// };
+
+
+//let identificadorDeTemporizador: ReturnType<typeof setInterval> /* = setTimeout(() => { ... }); */
+let identificadorDeTemporizador: any
+
+function temporizadorDeRetraso() {
+  identificadorDeTemporizador = setInterval(funcionConRetraso, 1000);
+  dispatch(setNumberTimer(identificadorDeTemporizador))
+  console.log("numero X",identificadorDeTemporizador)
+}
+
+function funcionConRetraso() {
+  console.log("test 123");
+  console.log("numero EL SIGUIENTE",identificadorDeTemporizador)
+  dispatch(setTimer(1))
+}
+
+function borrarAlerta() {
+  //clearTimeout(identificadorDeTemporizador);
+  clearTimeout(numberTimer);
 }
 
 
 
-  const handleStop = () => {
-
-    clearInterval(intervalID);
-    // liberar nuestro inervalId de la variable
-    intervalID = null;
-    /* setSent(!sent)
-    myCallback() */
-  };
 
 
 
-  
+  console.log("TIMER VALUE", timer)
+  console.log('NUMBER TIMER ABAJO', numberTimer)
+  //console.log("OUTER INTERCAL ID", intervalID)
+
+
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
@@ -153,7 +206,7 @@ function MessageMe() {
         <Button
           disabled={sentButtonDisabled}
           variant="contained"
-          onClick={() => handleSubmit()}
+          onClick={(e) => handleSubmit(e)}
           sx={MessageMeSX().sendMessageButton}
         >
           {english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
@@ -161,7 +214,12 @@ function MessageMe() {
         <Button
           disabled={sentButtonDisabled}
           variant="contained"
-          onClick={(e) => handleStart(e)}
+          /* onClick={() => handleStart()} */
+          /* onClick={() => doing()} */
+          /* onClick={() => doWhile()} */
+          /* onClick={() => BucleFor()} */
+          onClick={() => temporizadorDeRetraso()}
+          /* onClick={() => timerHandler()} */
           sx={MessageMeSX().sendMessageButton}
         >
           {english ? 'START' : 'START' }
@@ -169,7 +227,8 @@ function MessageMe() {
         <Button
           disabled={sentButtonDisabled}
           variant="contained"
-          onClick={() => handleStop()}
+          /* onClick={() => handleStop()} */
+          onClick={() => borrarAlerta()}
           sx={MessageMeSX().sendMessageButton}
         >
           {english ? 'STOP' : 'STOP' }
