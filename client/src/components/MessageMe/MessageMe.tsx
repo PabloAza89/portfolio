@@ -13,6 +13,8 @@ function MessageMe() {
 
   const dispatch = useDispatch()
 
+  var Toast: any = Swal
+
   const english = useSelector((state: {english:boolean}) => state.english)
   const timer = useSelector((state: {timer:number}) => state.timer)
   const numberTimer = useSelector((state: {numberTimer:number}) => state.numberTimer)
@@ -20,15 +22,8 @@ function MessageMe() {
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)  // OJO staticRefWidth
   const [name, setName] = useState<string>("")
   const [text, setText] = useState<string>("")
-  
 
   const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
-
-
-  //dispatch(setDarkMode(!darkMode))
-
-
-
 
   const clearBoth = () => {
     setName("");
@@ -36,29 +31,21 @@ function MessageMe() {
   }
 
   const sentNotif = () => {
-
-    const Toast = Swal.mixin({
+    Swal.fire({
       showConfirmButton: false,
       timer: 3500,
-      timerProgressBar: true
-    })
-
-    Toast.fire({
+      timerProgressBar: true,
       icon: 'success',
       title: 'Message sent!',
       text: 'The message was received.',
     })
-
   }
 
   const noSentNotif = () => {
-    const Toast = Swal.mixin({
+    Swal.fire({
       showConfirmButton: false,
       timer: 3500,
-      timerProgressBar: true
-    })
-
-    Toast.fire({
+      timerProgressBar: true,
       icon: 'error',
       title: english ? 'Message not sent!' : 'Mensaje enviado!',
       text: english ? 'There was an error.. Please try Again.' : 'Hubo un error.. por favor intentá de nuevo.'
@@ -66,74 +53,30 @@ function MessageMe() {
   }
 
   const emptyMessage = () => {
-
-    const Toast = Swal.mixin({
+    Swal.fire({
       showConfirmButton: false,
       timer: 3500,
-      timerProgressBar: true
-    })
-
-    Toast.fire({
+      timerProgressBar: true,
       icon: 'error',
       title: english ? 'Fields cannot be empty!' : 'Los campos no pueden estar vacíos',
       text: english ? 'Please, fill all fields.' : 'Por favor, llena todos los campos.'
     })
   }
 
-  //let timerNotifID: any
-
-  // const actualTimerForNotif = () => {
-  //   setLocalTimerForNotif(timer)
-  // }
-
-  // const actualTimerForNotifCB = () => {
-  //   //return store.getState().timer
-  //   return store.getState().timer
-  // }
-
-  // useEffect(() => {
-  //   setLocalTimerForNotif(timer)
-  // }, [timer])
-
-  // let [localTimerForNotif, setLocalTimerForNotif] = useState<number>(timer)
-  
-
-  // const MustWait = () => {
-
-
-  //   let timerInterval
-
-  //   Swal.fire({
-  //     showConfirmButton: false,
-  //     timer: 20500,
-  //     timerProgressBar: true,
-  //     icon: 'error',
-  //     title: english ? 'You must wait to send another message!' : 'Debes esperar para enviar otro mensaje',
-  //     text: english ? `Please, wait ${3} seconds.` : `Por favor, espera ${3} segundos.`
-  //   })
-
-  // }
-
   const MustWait: any = () => {
 
+    let timerInterval: any;
 
-    let timerInterval: any
-    
-    Swal.fire({
+    Toast.fire({
       showConfirmButton: false,
       icon: 'error',
       title: english ? 'You must wait to send another message!' : 'Debes esperar para enviar otro mensaje',
       timerProgressBar: true,
       html: english ? `Please, wait <strong></strong> seconds.<br/><br/>` : `Por favor, espera <strong></strong> segundos.<br/><br/>`,
-      //text: 'I will close in <strong></strong> seconds.<br/><br/>',
-      //timer: store.getState().timer * 1000,
       timer: 2500,
       didOpen: () => {
-        const content: any = Swal.getHtmlContainer()
-        const $: any = content.querySelector.bind(content) 
-        
         timerInterval = setInterval(() => {
-          Swal.getHtmlContainer().querySelector('strong')
+          Toast.getHtmlContainer().querySelector('strong')
             .textContent = (store.getState().timer === 15 ? 0 : store.getState().timer)
               .toFixed(0)
         }, 100)
@@ -142,34 +85,34 @@ function MessageMe() {
         clearInterval(timerInterval)
       }
     })
-
   }
 
   const handleSubmit = (e: any) => {
     if (store.getState().timerEnabled) return MustWait()
     function fetchData() {
-        fetch("http://localhost:3001/", {
-        method: "POST",
-        body: JSON.stringify({name: name, text: text}),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(response => response.json())
+      //fetch("http://localhost:3001/", {
+      fetch(`https://oval-transparent-ornament.glitch.me/`, {
+      method: "POST",
+      body: JSON.stringify({name: name, text: text}),
+      headers: {
+        "Content-Type": "application/json"
+      }})
+      .then(response => response.json())
       .then(response => console.log("Success:", JSON.stringify(response)))
       .then(() => {sentNotif(); handleTimerStart(); setSentButtonDisabled(false)})
       .catch(error => {console.error("Error:", error); noSentNotif(); setSentButtonDisabled(false)})
-    }
+    };
     e.preventDefault();
-    if (name.length !== 0 && text.length !== 0) {setSentButtonDisabled(true); fetchData()}
-    else {emptyMessage()}
+    if (name.length === 0 || name.trim() === "" || text.length === 0 || text.trim() === "") emptyMessage()
+    else {setSentButtonDisabled(true); fetchData()}
   };
 
   let timerID: any
 
   const handleTimerStart = () => {
-      timerID = setInterval(handleTimerStartCB, 1000);
-      dispatch(setNumberTimer(timerID))
-      dispatch(setTimerEnabled(true))
+    timerID = setInterval(handleTimerStartCB, 1000);
+    dispatch(setNumberTimer(timerID))
+    dispatch(setTimerEnabled(true))
   }
 
   const handleTimerStartCB = (qq: number) => {
@@ -182,16 +125,14 @@ function MessageMe() {
   }
 
   const handleTimerStop = () => {
-      setTimerEnabled(false)
-      clearInterval(store.getState().numberTimer);
-      dispatch(stopTimer(5))
+    setTimerEnabled(false)
+    clearInterval(store.getState().numberTimer);
+    dispatch(stopTimer(5))
   }
 
   console.log("TIMER VALUE", timer)
   console.log('NUMBER TIMER ABAJO', numberTimer)
   console.log('TEST TIMER ABAJO', store.getState().timer)
-  //console.log('ABAJO localTimerForNotif', localTimerForNotif)
-  
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
