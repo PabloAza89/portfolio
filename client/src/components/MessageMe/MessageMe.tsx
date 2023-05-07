@@ -13,21 +13,26 @@ function MessageMe() {
 
   const dispatch = useDispatch()
 
-  var Toast: any = Swal
+  const [name, setName] = useState<string | null>("")
+  const [text, setText] = useState<string | null>("")
+  const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
+
+  useEffect(() => {
+    let name: string | null = localStorage.getItem('name');
+    let text: string | null = localStorage.getItem('text');
+    if (name !== "") setName(name)
+    if (text !== "") setText(text)
+  },[])
 
   const english = useSelector((state: {english:boolean}) => state.english)
-  const timer = useSelector((state: {timer:number}) => state.timer)
-  const numberTimer = useSelector((state: {numberTimer:number}) => state.numberTimer)
-  const timerEnabled = useSelector((state: {timerEnabled:boolean}) => state.timerEnabled)
-  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)  // OJO staticRefWidth
-  const [name, setName] = useState<string>("")
-  const [text, setText] = useState<string>("")
-
-  const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+  var Toast: any = Swal
 
   const clearBoth = () => {
     setName("");
+    localStorage.setItem('name', "");
     setText("");
+    localStorage.setItem('text', "");
   }
 
   const sentNotif = () => {
@@ -66,23 +71,29 @@ function MessageMe() {
   const MustWait: any = () => {
 
     let timerInterval: any;
+    let timerIntervalTwo: any;
 
     Toast.fire({
       showConfirmButton: false,
       icon: 'error',
       title: english ? 'You must wait to send another message!' : 'Debes esperar para enviar otro mensaje',
       timerProgressBar: true,
-      html: english ? `Please, wait <strong></strong> seconds.<br/><br/>` : `Por favor, espera <strong></strong> segundos.<br/><br/>`,
+      html: english ? `Please, wait <strong></strong> <sec-handler>seconds</sec-handler>.<br/><br/>` : `Por favor, espera <strong></strong> segundos.<br/><br/>`,
       timer: 2500,
       didOpen: () => {
         timerInterval = setInterval(() => {
           Toast.getHtmlContainer().querySelector('strong')
-            .textContent = (store.getState().timer === 15 ? 0 : store.getState().timer)
+            .textContent = (store.getState().timer === 5 ? 0 : store.getState().timer)
               .toFixed(0)
+        }, 100)
+        timerIntervalTwo = setInterval(() => {
+          Toast.getHtmlContainer().querySelector('sec-handler')
+            .textContent = (store.getState().timer === 1 ? "second" : "seconds")
         }, 100)
       },
       willClose: () => {
-        clearInterval(timerInterval)
+        clearInterval(timerInterval);
+        clearInterval(timerIntervalTwo)
       }
     })
   }
@@ -90,21 +101,22 @@ function MessageMe() {
   const handleSubmit = (e: any) => {
     if (store.getState().timerEnabled) return MustWait()
     function fetchData() {
-      //fetch("http://localhost:3001/", {
-      fetch(`https://oval-transparent-ornament.glitch.me/`, {
+      fetch("http://localhost:3001/", {
+      //fetch(`https://oval-transparent-ornament.glitch.me/`, {
       method: "POST",
       body: JSON.stringify({name: name, text: text}),
       headers: {
         "Content-Type": "application/json"
       }})
-      .then(response => response.json())
-      .then(response => console.log("Success:", JSON.stringify(response)))
-      .then(() => {sentNotif(); handleTimerStart(); setSentButtonDisabled(false)})
+      .then(res => res.json())
+      .then(res => { if(!res.success) throw new Error(); return res })
+      .then(() => {sentNotif(); handleTimerStart(); setSentButtonDisabled(false); clearBoth()})
       .catch(error => {console.error("Error:", error); noSentNotif(); setSentButtonDisabled(false)})
     };
     e.preventDefault();
-    if (name.length === 0 || name.trim() === "" || text.length === 0 || text.trim() === "") emptyMessage()
-    else {setSentButtonDisabled(true); fetchData()}
+
+    if (name?.length !== 0 && name?.trim() !== "" && text?.length !== 0 && text?.trim() !== "") {setSentButtonDisabled(true); fetchData()}
+    else emptyMessage()
   };
 
   let timerID: any
@@ -120,19 +132,9 @@ function MessageMe() {
     if (store.getState().timer === 0) {
       dispatch(setTimerEnabled(false))
       clearInterval(store.getState().numberTimer);
-      dispatch(stopTimer(15))
+      dispatch(stopTimer(5))
     }
   }
-
-  const handleTimerStop = () => {
-    setTimerEnabled(false)
-    clearInterval(store.getState().numberTimer);
-    dispatch(stopTimer(5))
-  }
-
-  console.log("TIMER VALUE", timer)
-  console.log('NUMBER TIMER ABAJO', numberTimer)
-  console.log('TEST TIMER ABAJO', store.getState().timer)
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
@@ -155,7 +157,7 @@ function MessageMe() {
             style: { background: 'white', paddingTop: '0.1vw', width: english ? `${staticRefWidth * 7}px` : `${staticRefWidth * 7}px`, textAlign: 'center', 'borderRadius': `${staticRefWidth * 0.2}px`, left: '-0.2vw' }
           }}
           sx={MessageMeSX().nameBox}
-          onChange={e => setName(e.target.value)}
+          onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
         />
         <TextField
           id="outlined-multiline-static"
@@ -166,7 +168,7 @@ function MessageMe() {
           InputLabelProps={{
             style: { background: 'white', paddingTop: '0.1vw', width: english ? `${staticRefWidth * 8}px` : `${staticRefWidth * 7}px`, textAlign: 'center', 'borderRadius': `${staticRefWidth * 0.2}px`, left: '-0.2vw'}
           }}
-          onChange={e => setText(e.target.value)}
+          onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
           sx={MessageMeSX().messageBox}
         />
         <Button
@@ -176,22 +178,6 @@ function MessageMe() {
           sx={MessageMeSX().sendMessageButton}
         >
           {english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
-        </Button>
-        <Button
-          disabled={sentButtonDisabled}
-          variant="contained"
-          onClick={() => handleTimerStart()}
-          sx={MessageMeSX().sendMessageButton}
-        >
-          {english ? 'START' : 'START' }
-        </Button>
-        <Button
-          disabled={sentButtonDisabled}
-          variant="contained"
-          onClick={() => handleTimerStop()}
-          sx={MessageMeSX().sendMessageButton}
-        >
-          {english ? 'STOP' : 'STOP' }
         </Button>
       </Box>
     </Box>
