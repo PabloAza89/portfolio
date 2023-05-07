@@ -83,7 +83,7 @@ function MessageMe() {
       didOpen: () => {
         timerInterval = setInterval(() => {
           Toast.getHtmlContainer().querySelector('strong')
-            .textContent = (store.getState().timer === 5 ? 0 : store.getState().timer)
+            .textContent = (store.getState().timer === 60 ? 0 : store.getState().timer)
               .toFixed(0)
         }, 100)
         timerIntervalTwo = setInterval(() => {
@@ -132,7 +132,7 @@ function MessageMe() {
     if (store.getState().timer === 0) {
       dispatch(setTimerEnabled(false))
       clearInterval(store.getState().numberTimer);
-      dispatch(stopTimer(5))
+      dispatch(stopTimer(60))
     }
   }
 

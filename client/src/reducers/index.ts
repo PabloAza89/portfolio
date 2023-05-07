@@ -43,7 +43,7 @@ const initialState: initialStateI = {
   percentageResizedHeight: window.innerHeight / window.screen.height,
   percentageResizedWidth: window.innerWidth / window.screen.width,
   minRatioReference: window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width),
-  timer: 5,
+  timer: 60,
   numberTimer: undefined,
   timerEnabled: false
 }
