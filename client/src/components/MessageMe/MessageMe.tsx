@@ -5,7 +5,7 @@ import MessageMeSX from '../../styles/MessageMeSX';
 import BackButton from '../BackButton/BackButton';
 import TextField from '@mui/material/TextField';
 import Swal from 'sweetalert2'
-import "../../styles/MessageMeSX.css";
+//import "../../styles/MessageMeSX.css";
 import { setTimer, stopTimer, setNumberTimer, setTimerEnabled } from '../../actions';
 import store from '../../store/store';
 
@@ -83,12 +83,12 @@ function MessageMe() {
       didOpen: () => {
         timerInterval = setInterval(() => {
           Toast.getHtmlContainer().querySelector('strong')
-            .textContent = (store.getState().timer === 60 ? 0 : store.getState().timer)
+            .textContent = (store.getState()?.timer === 60 ? 0 : store.getState()?.timer)
               .toFixed(0)
         }, 100)
         timerIntervalTwo = setInterval(() => {
           Toast.getHtmlContainer().querySelector('sec-handler')
-            .textContent = (store.getState().timer === 1 ? "second" : "seconds")
+            .textContent = (store.getState()?.timer === 1 ? "second" : "seconds")
         }, 100)
       },
       willClose: () => {
@@ -101,8 +101,8 @@ function MessageMe() {
   const handleSubmit = (e: any) => {
     if (store.getState().timerEnabled) return MustWait()
     function fetchData() {
-      //fetch("http://localhost:3001/", {
-      fetch(`https://oval-transparent-ornament.glitch.me/`, {
+      fetch("http://localhost:3001/", {
+      //fetch(`https://oval-transparent-ornament.glitch.me/`, {
       method: "POST",
       body: JSON.stringify({name: name, text: text}),
       headers: {

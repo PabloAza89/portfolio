@@ -41,7 +41,7 @@ const card = () => {
 
 const title = () => {
     return {
-    ...asc, /* ...noSelect(), */
+    ...asc, ...noSelect(),
       background: 'none',
       height: minLand ? '13vh' : 'none',
       color: '#FFFFFF',
@@ -77,7 +77,7 @@ const url = () => {
 
 const anchor = () => {
     return {
-      asc, /* ...noSelect(), */
+      asc, ...noSelect(),
       'textDecoration': 'none',
       color: '#FFFFFF',
       'mix-blend-mode': 'difference'

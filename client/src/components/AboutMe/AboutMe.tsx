@@ -9,7 +9,7 @@ function AboutMe() {
   const english = useSelector((state: {english:boolean}) => state.english)
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '94vw', background: 'red', margin: 'auto' }}>
       <BackButton />
       <Box sx={AboutMeSX().background}>
         <Avatar
