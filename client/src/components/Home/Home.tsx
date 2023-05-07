@@ -57,7 +57,7 @@ function Home() {
               minHeight: minPort ? '10vw !important' : minLand ? '2.1vw !important' : '4.1vh !important',
               /* 'max-height': '2.1vw !important', */
               color:'#FFFFFF',
-              width: minPort ? '19vw' : minLand ? '19vw' : medPort ? '29vw' : larPort ? '29vw' : '19vw',
+              width: minPort ? '19vw' : minLand ? '19vw' : medPort ? '29vw' : larPort ? '29vw' : '24vw',
               marginLeft: minPort ? '0vw' : minLand ? '10vw' : '16vw',
               marginTop: minPort ? '1.5vw' : minLand ? '1.5vw' : '1.9vw',
               /* fontSize: minPort ? '3.8vw' : minLand ? '1.05vw' : larPort ? `${staticRefWidth * 0.559}px` : larLand&& percentageResizedWidth< 0.559 ? `${staticRefWidth * 0.559}px` : `${percentageResizedWidth* 22.5}px`, */
