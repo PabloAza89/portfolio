@@ -2,16 +2,14 @@ import { Box, Typography, Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
 import AboutMeSX from '../../styles/AboutMeSX';
-import BackButton from '../BackButton/BackButton';
 
 function AboutMe() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '94vw', background: 'red', margin: 'auto' }}>
-      <BackButton />
-      <Box sx={AboutMeSX().background}>
+    <Box sx={AboutMeSX().background}>
+      <Box sx={AboutMeSX().blueBox}>
         <Avatar
           alt="Pablo Azambuyo"
           src={profile}

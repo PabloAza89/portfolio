@@ -45,7 +45,6 @@ function Projects() {
 
   return (
     <Box sx={ProjectsSX().background}>
-      <BackButton />
       <ScrollContainer innerRef={useHorizontalScroll()} style={ProjectsSX().scroll()}>
         <Box sx={ProjectsSX().boxUpperStripe}>
           <Box sx={ProjectsSX().solid}></Box>

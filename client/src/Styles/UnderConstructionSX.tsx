@@ -8,8 +8,9 @@ function UnderConstructionSX() {
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth) 
 
-   const textUpperOneLine = () => {
+  const textUpperOneLine = () => {
     return {
         ...noSelect(), ...absolute,
         fontFamily: 'Lucida Console',
@@ -23,6 +24,7 @@ function UnderConstructionSX() {
     }
    }
 
+  
    const textUpperTwoLines = () => {
     return {
           ...noSelect(), ...absolute,

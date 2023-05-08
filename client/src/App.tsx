@@ -8,6 +8,7 @@ import Language from './components/Language/Language';
 import NavBar from './components/NavBar/NavBar';
 import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
+import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
 import AppSX from './styles/AppSX';
 import { Box } from '@mui/material';
@@ -64,21 +65,26 @@ function App() {
                   <Language /></>}/>
                 <Route path="/portfolio/AboutMe" element={<>
                   <AboutMe />
+                  <BackButton />
                   <DarkMode />
                   <Language /></>}/>
                 <Route path="/portfolio/Skills" element={<>
                   <Skills />
+                  <BackButton />
                   <DarkMode /></>}/>
                 <Route path="/portfolio/Projects" element={<>
                   <Projects />
+                  <BackButton />
                   <DarkMode />
                   <Language /></>}/>
                 <Route path="/portfolio/Certifications" element={<>
                   <Certifications />
+                  <BackButton />
                   <DarkMode />
                   <Language /></>}/>
                 <Route path="/portfolio/Contact" element={<>
                   <Contact />
+                  <BackButton />
                   <DarkMode />
                   <Language /></>}/>
                 <Route path="/portfolio/MessageMe" element={<>

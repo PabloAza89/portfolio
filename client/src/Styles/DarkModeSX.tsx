@@ -1,14 +1,19 @@
 import { useSelector } from 'react-redux';
+import { useLocation } from "react-router-dom";
 import { absolute, column, flex} from '../styles/CommonsSX';
 
 function DarkModeSX() {
+
+  const location = useLocation()
 
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference) 
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference)
+  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
 
   const background = () => {
     return {
@@ -29,6 +34,17 @@ function DarkModeSX() {
       right: minPort ? '84.5vw' : minLand ? '88vw' : '0.9vh',
       justifyContent: 'center',
       alignItems: 'center',
+      transition: 'opacity .1s ease-in-out',
+        opacity:
+          larPort && location.pathname === '/portfolio' && percentageResizedHeight < 0.33 ? '0' :
+          larLand && location.pathname === '/portfolio' && percentageResizedHeight < 0.33 ? '0' :
+          larPort && location.pathname === '/portfolio/Projects' && percentageResizedHeight < 0.272 ? '0' :
+          larLand && location.pathname === '/portfolio/Projects' && percentageResizedHeight < 0.272 ? '0' :
+          '1',
+        'active': {
+          'opacity': '0',
+          'display': 'flex'
+        },
     }
   }
 

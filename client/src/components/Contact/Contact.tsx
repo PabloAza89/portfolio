@@ -1,7 +1,6 @@
 import { Box, Typography, Avatar } from '@mui/material';
 import contact from '../../styles/ContactSX';
 import profile from '../../images/profile.png';
-import BackButton from '../BackButton/BackButton';
 import UnderConstruction from '../UnderConstruction/UnderConstruction';
 import ContactSX from '../../styles/ContactSX';
 
@@ -9,7 +8,6 @@ function Contact() {
 
   return (
     <Box sx={ContactSX().background}>
-      <BackButton />
       <Box sx={ContactSX().left}>
         <Avatar
           alt="Pablo Azambuyo"

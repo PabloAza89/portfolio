@@ -138,7 +138,6 @@ function MessageMe() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
-      <BackButton />
       <Box sx={MessageMeSX().formContainer}>
         <Button
           variant="contained"

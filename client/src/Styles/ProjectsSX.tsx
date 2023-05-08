@@ -10,14 +10,18 @@ function ProjectsSX() {
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
 
 const background = () => {
     return {
-      ...flex, ...column, ...jcc,
+      ...flex, ...column, ...jcc, ...fixed,
       marginTop: minPort ? '23vh' : minLand ? '17vh' : larPort ? '24vh' : '12vh',
       height: minPort ? '50vh' : minLand ? '60vh' : larPort ? '53vh' : '74vh',
-      width: '98.8vw',
-      background: 'none'
+      //width: '98.8vw',
+      right: `${staticRefWidth * 0.5}px`,
+      left: `${staticRefWidth * 0.5}px`,
+      //width: '97vw',
+      background: 'darkslateblue'
     }
   }
 

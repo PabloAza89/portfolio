@@ -22,6 +22,8 @@ function Language() {
 
   const location = useLocation()
 
+  console.log('location.pathname', location.pathname)
+
   return (
       <Box sx={{
         background: 'none',
@@ -30,10 +32,10 @@ function Language() {
         'pointer-events':  larPort && percentageResizedHeight < 0.272 ? 'none' : larLand && percentageResizedHeight < 0.272 ? 'none' : 'null',
         transition: 'opacity .1s ease-in-out',
         opacity:
-          larPort && location.pathname.split('/').join('') === 'portfolio' && percentageResizedHeight < 0.33 ? '0' :
-          larLand && location.pathname.split('/').join('') === 'portfolio' && percentageResizedHeight < 0.33 ? '0' :
-          larPort && percentageResizedHeight < 0.272 ? '0' :
-          larLand && percentageResizedHeight < 0.272 ? '0' :
+          larPort && location.pathname === '/portfolio' && percentageResizedHeight < 0.33 ? '0' :
+          larLand && location.pathname === '/portfolio' && percentageResizedHeight < 0.33 ? '0' :
+          larPort && location.pathname === '/portfolio/Projects' && percentageResizedHeight < 0.272 ? '0' :
+          larLand && location.pathname === '/portfolio/Projects' && percentageResizedHeight < 0.272 ? '0' :
           '1',
         'active': {
           'opacity': '0',

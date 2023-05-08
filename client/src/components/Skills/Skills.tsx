@@ -1,12 +1,12 @@
 import { Box } from '@mui/material';
 import BackButton from '../BackButton/BackButton';
 import UnderConstruction from '../UnderConstruction/UnderConstruction';
+import SkillsSX from '../../styles/SkillsSX';
 
 function Skills() {
   
   return (
-    <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
-      <BackButton />
+    <Box sx={SkillsSX().background}>
       <UnderConstruction />
     </Box>
   )

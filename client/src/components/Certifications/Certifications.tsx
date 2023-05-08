@@ -5,7 +5,6 @@ import efSet from '../../images/efSet.png';
 import fccCertJS from '../../images/fccCertJS.png';
 import henry from '../../images/henry.png';
 import CertificationsSX from '../../styles/CertificationsSX';
-import BackButton from '../BackButton/BackButton';
 import Bubbles from '../Bubbles/Bubbles';
 
 function Certifications() {
@@ -21,7 +20,6 @@ function Certifications() {
   return (
     <Box sx={CertificationsSX().background}>
       <Bubbles />
-      <BackButton />
       <Box sx={CertificationsSX().boxUpper}>
         {[{
             title: english ? `JavaScript Algorithms and Data Structures` : `Algoritmos Javascript y Estructura de Datos`,

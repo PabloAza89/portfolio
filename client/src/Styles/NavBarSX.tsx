@@ -9,7 +9,7 @@ function NavBarSX() {
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)  // OJO staticRefWidth
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)  //  staticRefWidth
   const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
 
    const background = () => {
