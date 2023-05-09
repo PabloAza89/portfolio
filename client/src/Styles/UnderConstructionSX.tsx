@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import gear from '../images/gear.png';
-import { absolute, noSelect } from './CommonsSX';
+import { absolute, noSelect, flex, column, jcc, fixed } from './CommonsSX';
 
 function UnderConstructionSX() {
 
@@ -9,6 +9,20 @@ function UnderConstructionSX() {
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth) 
+
+  let background = () => {
+    return {
+      ...flex, ...column, ...jcc, ...fixed,
+      top: `${staticRefWidth * 0.5}px`,
+     right: `${staticRefWidth * 0.5}px`,
+     bottom: `${staticRefWidth * 0.5}px`,
+     left: `${staticRefWidth * 0.5}px`,
+     background: 'none',
+     //minHeight: '30vh'
+     height: '30'
+
+    }
+   }
 
   const textUpperOneLine = () => {
     return {
@@ -100,7 +114,7 @@ function UnderConstructionSX() {
       }
     }
 
-    return { textUpperOneLine, textUpperTwoLines, textLowerOneLine, gearBig, gearMed, gearMin }
+    return { background, textUpperOneLine, textUpperTwoLines, textLowerOneLine, gearBig, gearMed, gearMin }
 
 }
 

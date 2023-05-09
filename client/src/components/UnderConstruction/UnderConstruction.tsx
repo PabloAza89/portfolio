@@ -4,7 +4,7 @@ import UnderConstructionSX from '../../styles/UnderConstructionSX';
 function UnderConstruction() {
 
   return (
-    <Box >
+    <Box sx={UnderConstructionSX().background}>
       <Typography sx={UnderConstructionSX().textUpperOneLine}>SECTION UNDER CONSTRUCTION !</Typography>
       <Typography sx={UnderConstructionSX().textUpperTwoLines}>SECTION UNDER CONSTRUCTION !</Typography>
       <Typography sx={UnderConstructionSX().textLowerOneLine}>Section Under Construction !</Typography>

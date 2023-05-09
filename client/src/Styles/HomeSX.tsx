@@ -10,7 +10,7 @@ function HomeSX() {
   const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)  //  QUE FUNC CON {store.getState().staticRefHeight TAMBIEN
+  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)  
   const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
 
 const background = () => {

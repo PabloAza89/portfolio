@@ -10,9 +10,9 @@ function ContactSX() {
   const MedLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)  //  staticRefWidth
-  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)  //  QUE FUNC CON {store.getState().staticRefHeight TAMBIEN
-  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference) //  store.getState().maxStaticReference
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)  
+  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)  
+  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference) 
   const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
 
    const background = () => {

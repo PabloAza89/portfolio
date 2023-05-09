@@ -17,7 +17,7 @@ function AppSX() {
     }
    }
 
-  const blackWhite = () => {
+ const blackWhite = () => {
     return {
       //...relative, ...flex, ...column,
       display: 'flex',
@@ -31,6 +31,7 @@ function AppSX() {
      top: `${staticRefWidth * 0.5}px`,
      right: `${staticRefWidth * 0.5}px`,
      bottom: `${staticRefWidth * 0.5}px`,
+     height: '40vh',
      left: `${staticRefWidth * 0.5}px`,
       //right: '0.5vw',
       //bottom: '0.5vw',

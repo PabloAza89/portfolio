@@ -1,5 +1,31 @@
 import { useSelector } from 'react-redux';
+import { useEffect,  useState } from 'react';
 import { flex, noSelect, row, absolute, column, jcc, fixed } from './CommonsSX';
+import store from '../store/store';
+import TEST from './TEST'
+
+const abc = store.getState().staticRefWidth
+//console.log("A VER QUE TIENE", staticRefWidth);
+
+let user;
+
+// useEffect(() => {
+//   //   //...
+// },[])
+
+
+const ABC = () => {
+ //...
+  //const user = useSelector(state => state.staticRefWidth);
+    
+  // useEffect(() => {
+  //   //...
+  // },[])
+  // return user
+ 
+} 
+
+
 
 function AboutMeSX() {
 
@@ -10,30 +36,34 @@ function AboutMeSX() {
   const MedLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)  //  staticRefWidth
-  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)  //  QUE FUNC CON {store.getState().staticRefHeight TAMBIEN
-  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference) //  store.getState().maxStaticReference
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
+  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference)
   const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
 
-  const background = () => {
-    return {
+  const background = 
+     {
       ...flex, ...column, ...jcc, ...fixed,
-      top: `${staticRefWidth * 0.5}px`,
-     right: `${staticRefWidth * 0.5}px`,
-     bottom: `${staticRefWidth * 0.5}px`,
-     left: `${staticRefWidth * 0.5}px`,
+    //   top: `${staticRefWidth * 0.5}px`,
+    //  right: `${staticRefWidth * 0.5}px`,
+    //  bottom: `${staticRefWidth * 0.5}px`,
+    //  left: `${staticRefWidth * 0.5}px`,
+     top: `10px`,
+     right: `10px`,
+     bottom: `10px`,
+     left: `10px`,
       //height: '93vh',
       /* width: '95vw', */
-      background: 'none',
+      background: 'blue',
       /* margin: 'auto'  */
-    }
+    
    }
 
    const blueBox = () => {
     return {
       ...flex, ...row, ...absolute,
       background: darkMode ? '#253740' : '#3C6478',
-      'borderRadius': `${staticRefWidth * 1}px`,
+      //'borderRadius': `${staticRefWidth * 1}px`,
       alignSelf: 'center',
       'justify-content': 'space-evenly',
       width: minPort ? '90vw' : minLand ? '70vw' : larPort ? '70vw' : '70vw',
@@ -85,8 +115,31 @@ function AboutMeSX() {
       'transition': 'color 0.3s ease',
     }
   }
+  
 
   return { background, blueBox, avatar, typography }
+}
+
+console.log("PRUEBA",store.getState().currentWidth )
+console.log("PRUEBA 2", user)
+
+export const background = (currentWidth: number) => {
+  console.log("ACHALAY", currentWidth)
+let asd = {
+ ...flex, ...column, ...jcc, ...fixed,
+   top: `${currentWidth * 0.5}px`,
+     right: `${currentWidth * 0.5}px`,
+     bottom: `${currentWidth * 0.5}px`,
+     left: `${currentWidth  * 0.5}px`,
+  // top: '10px',
+  // right: '10px',
+  // bottom: `10px`,
+  // left: `10px`,
+
+  background: 'red',
+}
+return asd
+
 }
 
 export default AboutMeSX

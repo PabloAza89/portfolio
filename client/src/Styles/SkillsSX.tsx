@@ -19,9 +19,10 @@ function SkillsSX() {
       right: `${staticRefWidth * 0.5}px`,
       bottom: `${staticRefWidth * 0.5}px`,
       left: `${staticRefWidth * 0.5}px`,
+
       /* height: '93vh', */
       /* width: '95vw', */
-      background: 'blue',
+      background: 'none',
       margin: 'auto' 
     }
    }
