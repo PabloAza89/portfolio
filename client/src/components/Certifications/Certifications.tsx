@@ -4,23 +4,37 @@ import { useSelector } from 'react-redux';
 import efSet from '../../images/efSet.png';
 import fccCertJS from '../../images/fccCertJS.png';
 import henry from '../../images/henry.png';
-import CertificationsSX from '../../styles/CertificationsSX';
+import {
+  background, boxUpper, card, anchor,
+  title, media, url, dialog, dialogMedia
+} from '../../styles/CertificationsSX';
 import Bubbles from '../Bubbles/Bubbles';
 
 function Certifications() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
+  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const MedLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
+  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference)
+  const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
+  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
+  const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
 
   const [show, setShow] = useState(false)
   const [name, setName] = useState("")
 
   return (
-    <Box sx={CertificationsSX().background}>
+    <Box sx={background}>
       <Bubbles />
-      <Box sx={CertificationsSX().boxUpper}>
+      <Box sx={boxUpper({ minPort, minLand, larPort })}>
         {[{
             title: english ? `JavaScript Algorithms and Data Structures` : `Algoritmos Javascript y Estructura de Datos`,
             media: fccCertJS,
@@ -40,11 +54,11 @@ function Certifications() {
             url: `https://efset.org`
           }].map((e) => {
             return (
-              <Box key={e.title} sx={CertificationsSX().card}>
-                <Typography sx={CertificationsSX().title}>{e.title}</Typography>
-                <CardMedia /* component='img' src={e.media} image={e.media} children="" */ onClick={() => {setName(e.media); setShow(!show)}} sx={CertificationsSX().media(e.media)} />
-                <Typography sx={CertificationsSX().url}>
-                  <a style={CertificationsSX().anchor()}
+              <Box key={e.title} sx={card({ minPort, minLand, larPort })}>
+                <Typography sx={title({ minPort, minLand, larPort })}>{e.title}</Typography>
+                <CardMedia component="div" onClick={() => {setName(e.media); setShow(!show)}} sx={media({ url:e.media, minPort, minLand, larPort })} />
+                <Typography sx={url({ minPort, minLand, larPort })}>
+                  <a style={anchor()}
                     href={e.href}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -55,13 +69,13 @@ function Certifications() {
       </Box>
 
       <Dialog
-        sx={CertificationsSX().dialog}
+        sx={dialog}
         open={minLand || larPort || larLand ? show : false}
         onClick={() => setShow(false)}
         fullWidth={true}
         fullScreen={true}
       >
-        <CardMedia src={""} sx={CertificationsSX().dialogMedia(name)}></CardMedia>
+        <CardMedia component="div" sx={dialogMedia({ url:name })}></CardMedia>
       </Dialog>
 
     </Box>
