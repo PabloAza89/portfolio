@@ -11,7 +11,7 @@ const background = ({ staticRefWidth }: backgroundProps) => {
     right: `${staticRefWidth * 0.5}px`,
     bottom: `${staticRefWidth * 0.5}px`,
     left: `${staticRefWidth  * 0.5}px`,
-    background: 'red'
+    background: 'none'
   }
 }
 

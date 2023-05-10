@@ -1,7 +1,7 @@
 import { blue, brown, lime, red } from '@mui/material/colors';
 import {
   aic, asc, column, mix, fixed, flex,
-  jcc, jcsb, jic, noSelect, row
+  jcc, jcsb, jic, noSelect, row, relative
 } from './CommonsSX';
 
 interface backgroundI {
@@ -13,14 +13,10 @@ interface backgroundI {
 
 const background = ({ minPort, minLand, larPort, staticRefWidth }: backgroundI) => {
   return {
-    ...flex, ...column, ...jcc, ...fixed,
+    ...flex, ...column, ...jcc, ...relative,
     marginTop: minPort ? '23vh' : minLand ? '17vh' : larPort ? '24vh' : '12vh',
     height: minPort ? '50vh' : minLand ? '60vh' : larPort ? '53vh' : '74vh',
-    //width: '98.8vw',
-    right: `${staticRefWidth * 0.5}px`,
-    left: `${staticRefWidth * 0.5}px`,
-    //width: '97vw',
-    background: 'darkslateblue'
+    background: 'none'
   }
 }
 

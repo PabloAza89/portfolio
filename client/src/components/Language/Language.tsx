@@ -22,8 +22,6 @@ function Language() {
 
   const location = useLocation()
 
-  console.log('location.pathname', location.pathname)
-
   return (
       <Box sx={{
         background: 'none',

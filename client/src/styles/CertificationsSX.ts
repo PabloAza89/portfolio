@@ -1,4 +1,4 @@
-import { 
+import {
   absolute, mix, noDeco, aic, asc, column,
   flex, jcc, jic, jsc, noSelect, relative
 } from './CommonsSX';
@@ -105,7 +105,6 @@ interface dialogMediaI {
 }
 
 const dialogMedia = ({ url }: dialogMediaI) => {
-  console.log("URL", url)
   return {
     ...flex, ...relative, ...column, ...jic,
     backgroundImage: `url(${url})`,
