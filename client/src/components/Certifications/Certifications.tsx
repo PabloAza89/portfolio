@@ -40,9 +40,9 @@ function Certifications() {
             url: `https://efset.org`
           }].map((e) => {
             return (
-              <Box sx={CertificationsSX().card}>
+              <Box key={e.title} sx={CertificationsSX().card}>
                 <Typography sx={CertificationsSX().title}>{e.title}</Typography>
-                <CardMedia src={""} onClick={() => {setName(e.media); setShow(!show)}} sx={CertificationsSX().media(e.media)} />
+                <CardMedia /* component='img' src={e.media} image={e.media} children="" */ onClick={() => {setName(e.media); setShow(!show)}} sx={CertificationsSX().media(e.media)} />
                 <Typography sx={CertificationsSX().url}>
                   <a style={CertificationsSX().anchor()}
                     href={e.href}

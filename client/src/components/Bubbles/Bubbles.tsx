@@ -8,9 +8,9 @@ function Bubbles() {
       {[  11, 12, 24, 10, 14, 23, 18, 16, 19, 20, 22, 25, 18, 21, 15, 13, 26, 17, 13,
           22.5, 24.5, 12.5, 15.5, 28, 20.5, 11, 12, 24, 10, 14, 23, 18, 16, 19, 20,
           22, 25, 18, 21, 15, 13, 26, 17, 13, 22.5, 24.5, 12.5, 15.5, 28 // 20.5 MIDDLE
-      ].map((e) => {
+      ].map((e, idx) => {
           return (
-            <Box component="span" style={BubblesSX().duration(e)}></Box>
+            <Box key={idx} component="span" style={BubblesSX().duration(e)}></Box>
           )
         })
       }

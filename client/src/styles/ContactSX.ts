@@ -31,8 +31,8 @@ function ContactSX() {
       width: '40vw',
       height: '40vh',
       /* left: '3vw', */
-      'align-items': 'center',
-      'justify-content': 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
       /* 'margin-bottom': '2vh' */
     }
    }
@@ -55,9 +55,9 @@ function ContactSX() {
       width: '1.1vw',
       height: '40vh',
       /* right: '2vw', */
-      /* 'align-items': 'center', */
-      /* 'justify-content': 'center', */
-      'mix-blend-mode': 'difference'
+      /* alignItems: 'center', */
+      /* justifyContent: 'center', */
+      mixBlendMode: 'difference'
     }
    }
 
@@ -68,20 +68,20 @@ function ContactSX() {
       width: '30vw',
       height: '60vh',
       /* right: '2vw', */
-      'align-items': 'center',
-      'justify-content': 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
 
     }
    }
 
    const text = () => {
     return {
-        ...noSelect(), ...relative,
+        ...noSelect, ...relative,
         fontFamily: 'Lucida Console',
         fontSize: minPort ? '7vw' : minLand ? '3vw' : larPort ? '6vw' : '2.1vw',
         color: darkMode ? '#b5b3b3' : 'white',
         padding: '1vw',
-        'mix-blend-mode': 'difference'
+        mixBlendMode: 'difference'
     }
    }
 

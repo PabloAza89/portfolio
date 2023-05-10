@@ -46,8 +46,8 @@ function MessageMeSX() {
       color: 'white',
       alignSelf: 'flex-end',
       backgroundColor: 'gray',
-      ':hover': { backgroundColor: 'gray', '-webkit-filter': 'brightness(.95)', 'filter': 'brightness(.95)'},
-      /* 'mix-blend-mode': 'difference', */
+      ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
+      /* mixBlendMode: 'difference', */
       width: '10vw',
       'margin-right': '1.5vw',
       'margin-bottom': '2vh'
@@ -83,8 +83,8 @@ function MessageMeSX() {
       ...flex, ...asc,
       color: 'white',
       backgroundColor: 'gray',
-      ':hover': { backgroundColor: 'gray', '-webkit-filter': 'brightness(.95)', 'filter': 'brightness(.95)'},
-      /* 'mix-blend-mode': 'difference', */
+      ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
+      /* mixBlendMode: 'difference', */
       width: '10vw'
     }
    }

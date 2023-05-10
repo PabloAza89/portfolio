@@ -1,9 +1,22 @@
-import store from '../store/store';
-
-export const noSelect = () => { return {'-webkitTouchCallout': 'none', '-webkitUserSelect': 'none', '-khtmlUserSelect': 'none', '-mozUserSelect': 'none', '-msUserSelect': 'none', '-userSelect': 'none'}}
+// export const noSelect = () => { 
+//   return { WebkitTouchCallout: 'none',
+//   WebkitUserSelect: 'none',
+//   khtmlUserSelect: 'none',
+//  //MozUserSelect: 'none',
+//   MsUserSelect: 'none',
+//   UserSelect: 'none'}
+// }
+export const noSelect: any = {
+  WebkitTouchCallout: 'none',
+  WebkitUserSelect: 'none',
+  khtmlUserSelect: 'none',
+ //MozUserSelect: 'none',
+  MsUserSelect: 'none',
+  UserSelect: 'none'
+}
 export const flex = { display: 'flex' }
 export const relative = { position: 'relative' }
-export const absolute = { position: 'absolute' }
+export const absolute = { position: 'absolute' } 
 export const fixed = { position: 'fixed' }
 export const column = { flexDirection: 'column' }
 export const row = { flexDirection: 'row' }
@@ -17,4 +30,3 @@ export const jic = { justifyItems: 'center' }
 export const bgNone = { background: 'none' }
 export const bgRed = { background: 'Red' }
 export const noDeco = { textDecoration: 'none' }
-export const staticRefWidth = store.getState().staticRefWidth

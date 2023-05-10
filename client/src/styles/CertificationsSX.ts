@@ -31,7 +31,7 @@ const boxUpper = () => {
 const card = () => {
   return {
       ...flex, ...asc, ...column,
-      'text-align': 'center',
+      textAlign: 'center',
       'justifyContent': 'space-evenly',
       background: 'none',
       width: minPort ? '87vw' : minLand ? '33vw' : larPort ? '59vw' : '29vw',
@@ -41,14 +41,14 @@ const card = () => {
 
 const title = () => {
     return {
-    ...asc, ...noSelect(),
+    ...asc, ...noSelect,
       background: 'none',
       height: minLand ? '13vh' : 'none',
       color: '#FFFFFF',
       paddingRight: '0vw',
       paddingTop: '0vw',
       fontSize: minPort ? '3.85vw' : minLand ? '2.1vw' : larPort ? '2.65vw' : '1.25vw',
-      'mix-blend-mode': 'difference'
+      mixBlendMode: 'difference'
     }
   }
 
@@ -60,7 +60,7 @@ const media = (url: string) => {
       width: minPort ? '35vw' : minLand ? '32vw' : larPort ? '35vw' : '15vw',
       height: minLand ? '36vh' : '15vh',
       backgroundSize: minPort ? '35vw 15vh' : minLand ? '32vw 36vh' : larPort ? '35vw 15vh' : '15vw 15vh',
-      ':hover': { '-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)', cursor: 'pointer' }
+      ':hover': { webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)', cursor: 'pointer' }
     }
   }
 
@@ -77,10 +77,10 @@ const url = () => {
 
 const anchor = () => {
     return {
-      asc, ...noSelect(),
+      asc, /* ...noSelect, */
       'textDecoration': 'none',
       color: '#FFFFFF',
-      'mix-blend-mode': 'difference'
+      //mixBlendMode: 'difference'
     }
 }
 

@@ -57,8 +57,8 @@ const scroll = () => {
     return {
       ...row,
       'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)',
-      'background-blend-mode': 'difference',
-      'background-size': minPort ? '13vw 7vw' : larPort ? '11vw 7vw' : '7vw 7vw',
+      backgroundBlendMode: 'difference',
+      backgroundSize: minPort ? '13vw 7vw' : larPort ? '11vw 7vw' : '7vw 7vw',
       width: '158vw',
       height: '3.5vh'
     }
@@ -92,7 +92,7 @@ const scroll = () => {
 
   const title = () => {
     return {
-      ...noSelect(),
+      ...noSelect,
       marginRight: minPort ? '1.3vw' : minLand ? '0.9vw' : larPort ? '1.3vw' : '0.9vw',
       fontFamily: 'Century Gothic',
       color: darkMode ? '#b5b3b3' : '#FFFFFF',
@@ -117,9 +117,9 @@ const scroll = () => {
       width: '100%', height: '100%',
       backgroundSize: minPort ? '30vw 15vh' : minLand ? '30vw 33vh' : larPort ? '30vw 14vh' : '30vw 30vh',
       ':hover':
-        darkMode ? {'-webkit-filter': 'brightness(.65)', 'filter': 'brightness(.65)'}
-        : {'-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'},
-      '-webkit-filter': darkMode ? 'brightness(.6)' : 'none',
+        darkMode ? {webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)'}
+        : {webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)'},
+      webkitFilter: darkMode ? 'brightness(.6)' : 'none',
       'filter': darkMode ? 'brightness(.6)' : 'none'
     }
   }
@@ -153,7 +153,7 @@ const scroll = () => {
 
   const boxLower = () => {
     return {
-      ...asc, ...row, ...noSelect(),
+      ...asc, ...row, ...noSelect,
       background: 'none',
       minWidth: larPort ? '10vw' : larLand ? '10vw' : larPort ? '35vw' : '10vw',
       display: minLand ? 'none' : minPort ? 'none' : 'flex'
@@ -166,7 +166,7 @@ const scroll = () => {
       color: '#FFFFFF',
       fontSize: larPort ? '2.5vh' : '1.5vw',
       top: '0.1vh',
-      'mix-blend-mode': 'difference'
+      mixBlendMode: 'difference'
     }
   }
 

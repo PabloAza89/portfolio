@@ -29,7 +29,7 @@ function Language() {
         background: 'none',
         /* display: larLand && size.currentHeight < 300 ? 'none' : 'flex', */
         display: 'flex',
-        'pointer-events':  larPort && percentageResizedHeight < 0.272 ? 'none' : larLand && percentageResizedHeight < 0.272 ? 'none' : 'null',
+        pointerEvents:  larPort && percentageResizedHeight < 0.272 ? 'none' : larLand && percentageResizedHeight < 0.272 ? 'none' : 'null',
         transition: 'opacity .1s ease-in-out',
         opacity:
           larPort && location.pathname === '/portfolio' && percentageResizedHeight < 0.33 ? '0' :
@@ -42,7 +42,7 @@ function Language() {
           'display': 'flex'
          },
         flexDirection: 'row',
-        'justify-content': 'center',
+        justifyContent: 'center',
         position: 'absolute',
         width: minPort ? '97vw' : minLand ? '97vw' : larPort ? '97vw' : '97vw',
         height: minPort ? '9vh' : minLand ? '16vh' : larPort ? '15vh' : '15vh',
@@ -80,7 +80,7 @@ function Language() {
             height: minPort ? '13vh' : minLand ? '9vh' : medPort ? `${maxStaticReference * 7.3}px` : medLand ? `${maxStaticReference * 7.3}px` : larPort ? `${maxStaticReference * 2.6}px` : `${maxStaticReference * 2.6}px`,
             backgroundSize: minPort ? '13vw 4.1vh' : minLand ? '6.5vw 8vh' : medPort ? `${maxStaticReference * 6.7}px` : medLand ? `${maxStaticReference * 6.7}px` : larPort ? `${maxStaticReference * 2.5}px ${maxStaticReference * 1.6}px` : `${maxStaticReference * 2.5}px ${maxStaticReference * 1.6}px`,
             ':hover': {
-              '-webkit-filter': 'brightness(.9)',
+              webkitFilter: 'brightness(.9)',
               'filter': 'brightness(.9)'
             }
           }}></CardMedia>
@@ -115,7 +115,7 @@ function Language() {
             width: minPort ? '20vw' : minLand ? '9vw' : medPort ? `${maxStaticReference * 7.3}px` : medLand ? `${maxStaticReference * 7.3}px` : larPort ? `${maxStaticReference * 2.5}px` : `${maxStaticReference * 2.5}px`,
             height: minPort ? '13vh' : minLand ? '9vh' : medPort ? `${maxStaticReference * 7.3}px` : medLand ? `${maxStaticReference * 7.3}px` : larPort ? `${maxStaticReference * 2.6}px` : `${maxStaticReference * 2.6}px`,
             backgroundSize: minPort ? '13vw 4.1vh' : minLand ? '6.5vw 8vh' : medPort ? `${maxStaticReference * 6.7}px` : medLand ? `${maxStaticReference * 6.7}px` : larPort ? `${maxStaticReference * 2.5}px ${maxStaticReference * 1.6}px` : `${maxStaticReference * 2.5}px ${maxStaticReference * 1.6}px`,
-            ':hover': { '-webkit-filter': 'brightness(.9)', 'filter': 'brightness(.9)'
+            ':hover': { webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)'
           }}}></CardMedia>
         </Box>
       </Box>

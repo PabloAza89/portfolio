@@ -63,14 +63,14 @@ function Projects() {
             href: `https://pabloaza89.github.io/PI-Food-GH/`
           }].map((e) => {
             return (
-          <Box sx={ProjectsSX().card}>
+          <Box key={e.title} sx={ProjectsSX().card}>
             <Box sx={ProjectsSX().boxTitle}>
               <Typography sx={ProjectsSX().title}>{e.title}</Typography>
               <GoToLinkButton link={e.href}/>
             </Box>
             <Box sx={ProjectsSX().boxMedia(e.media.length)}>
               {e.media.map((m) =>{
-                return <CardMedia src={""} onClick={() => {setName(m); setShow(!show)}} sx={ProjectsSX().cardMedia(m)}></CardMedia>
+                return <CardMedia key={m} component="div" onClick={() => {setName(m); setShow(!show)}} sx={ProjectsSX().cardMedia(m)}></CardMedia>
               })}
             </Box>
           </Box>)
@@ -90,7 +90,7 @@ function Projects() {
         fullWidth={true}
         fullScreen={true}
       >
-        <CardMedia src={""} sx={ProjectsSX().dialogMedia(name)}></CardMedia>
+        <CardMedia component="div" sx={ProjectsSX().dialogMedia(name)}></CardMedia>
       </Dialog>
 
       <Box sx={ProjectsSX().boxLower}>
@@ -105,9 +105,9 @@ function Projects() {
             label="Scroll"
             onChange={(e) => setScrollSpeed(parseInt(e.target.value))}
           >
-            <MenuItem value={10} >1x</MenuItem>
-            <MenuItem value={30} >2x</MenuItem>
-            <MenuItem value={50} >3x</MenuItem>
+            <MenuItem value={10}>1x</MenuItem>
+            <MenuItem value={30}>2x</MenuItem>
+            <MenuItem value={50}>3x</MenuItem>
           </Select>
         </FormControl>
       </Box>

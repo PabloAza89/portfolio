@@ -35,7 +35,7 @@ function Home() {
 
           <Box sx={HomeSX().minLandRightLower}>
             <Link style={{ textDecoration: 'none' }} to="/portfolio/AboutMe">
-              <Button sx={{ padding: '0px !important', minWidth: minPort ? '53vw !important' : minLand ? '25vw !important' : '9vw !important', 'max-width': '19vw !important', 'min-height': minPort ? '10vw !important' : minLand ? '7.5vh !important' : '2.1vh !important', 'max-height': '2.1vw !important', color:'#FFFFFF', width: minPort ? '19vw' : minLand ? '19vw' : '19vw', marginLeft: minPort ? '0vw' : minLand ? '0vw' : '16vw', marginTop: minPort ? '1.5vw' : minLand ? '4.5vh' : '1.9vw', fontSize: minPort ? '4vw' : minLand ? '1.65vw' : '1.05vw', 'mix-blend-mode': 'difference'}} variant='outlined'>{ english ? `Message me` : `Envíame un mensaje` }
+              <Button sx={{ padding: '0px !important', minWidth: minPort ? '53vw !important' : minLand ? '25vw !important' : '9vw !important', maxWidth: '19vw !important', minHeight: minPort ? '10vw !important' : minLand ? '7.5vh !important' : '2.1vh !important', maxHeight: '2.1vw !important', color:'#FFFFFF', width: minPort ? '19vw' : minLand ? '19vw' : '19vw', marginLeft: minPort ? '0vw' : minLand ? '0vw' : '16vw', marginTop: minPort ? '1.5vw' : minLand ? '4.5vh' : '1.9vw', fontSize: minPort ? '4vw' : minLand ? '1.65vw' : '1.05vw', mixBlendMode: 'difference'}} variant='outlined'>{ english ? `Message me` : `Envíame un mensaje` }
               </Button>
             </Link>
           </Box>
@@ -53,9 +53,9 @@ function Home() {
             <Button sx={{
               padding: '0px !important',
               minWidth: minPort ? '53vw !important' : minLand ? '9vw !important' : '2vw !important',
-              /* 'max-width': '29vw !important', */
+              /* maxWidth: '29vw !important', */
               minHeight: minPort ? '10vw !important' : minLand ? '2.1vw !important' : '4.1vh !important',
-              /* 'max-height': '2.1vw !important', */
+              /* maxHeight: '2.1vw !important', */
               color:'#FFFFFF',
               width: minPort ? '19vw' : minLand ? '19vw' : medPort ? '29vw' : larPort ? '29vw' : '24vw',
               marginLeft: minPort ? '0vw' : minLand ? '10vw' : '16vw',
@@ -63,7 +63,7 @@ function Home() {
               /* fontSize: minPort ? '3.8vw' : minLand ? '1.05vw' : larPort ? `${staticRefWidth * 0.559}px` : larLand&& percentageResizedWidth< 0.559 ? `${staticRefWidth * 0.559}px` : `${percentageResizedWidth* 22.5}px`, */
               fontSize: larPort ? '2.2vw' : '1.8vw',
 
-              'mix-blend-mode': 'difference'
+              mixBlendMode: 'difference'
               }}
               variant='outlined'>{ english ? `Message Me` : `Envíame un mensaje` }
             </Button>
@@ -81,8 +81,8 @@ function Home() {
         width: '46vw',
         justifyContent: 'center',
         height: larPort ? '45vh' : '71vh',
-        'align-items': 'center',
-        /* 'min-height': larLand&&  percentageResizedHeight< 0.313 ? 'none' : 'null'  */
+        alignItems: 'center',
+        /* minHeight: larLand&&  percentageResizedHeight< 0.313 ? 'none' : 'null'  */
       }}>
         <SvgIcon
           style={{

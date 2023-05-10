@@ -6,7 +6,7 @@ import SkillsSX from '../../styles/SkillsSX';
 function Skills() {
   
   return (
-    <Box sx={SkillsSX().background}>
+    <Box /* sx={SkillsSX().background} */>
       <UnderConstruction />
     </Box>
   )

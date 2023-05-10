@@ -10,7 +10,7 @@ import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
 import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
-import AppSX from './styles/AppSX';
+import { background, blackWhite } from './styles/AppSX';
 import { Box } from '@mui/material';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,11 +51,12 @@ function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  /* console.log(" MIN PORT: " , Get().minPort, " | MIN LAND: ", Get().minLand, " | MED PORT: ", Get().medPort, " | MED LAND: ", Get().medLand, " | LAR PORT: ", Get().larPort, " | LAR LAND: ", Get().larLand) */
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
 
   return (
-    <Box sx={AppSX().background} >
-        <Box sx={AppSX().blackWhite} >
+    <Box sx={background} >
+        <Box sx={blackWhite({ staticRefWidth, darkMode })} >
             <BrowserRouter>
               <Routes>
                 <Route path="/portfolio" element={<>

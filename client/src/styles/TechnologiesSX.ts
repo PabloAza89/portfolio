@@ -33,7 +33,7 @@ function TechnologiesSX() {
       backgroundImage: `url(${url})`,
       width: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw',
       height: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw' ,
-      'background-size': 'contain'
+      backgroundSize: 'contain'
     }
   }
 
@@ -48,12 +48,12 @@ function TechnologiesSX() {
 
   const title = () => {
     return {
-      ...noSelect(),
+      ...noSelect,
       fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw',
       border: 'none',
       color: darkMode ? '#b5b3b3' : '#FFFFFF',
       'fontWeight': 600,
-      'mix-blend-mode': 'difference'
+      mixBlendMode: 'difference'
     }
   }
 

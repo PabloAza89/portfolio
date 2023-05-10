@@ -47,30 +47,30 @@ const bgLeftUpper = () => {
 
 let bgLeftUpperTextOne = () => {
   return {
-    ...noSelect(),
+    ...noSelect,
     'color': darkMode ? '#b5b3b3' : '#FFFFFF',
     'fontSize': minPort  ? '11.5vw' : minLand ? '4.9vw' : larPort ? '5.0vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.7}px` : '6.9vh',
-    'mix-blend-mode': 'difference',
+    mixBlendMode: 'difference',
     /* display: 'none' */
   }
 }
 
 const bgLeftUpperTextTwo = () => {
   return {
-    ...noSelect(),
+    ...noSelect,
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort  ? '11.5vw' : minLand ? '5.4vw' : larPort ? '5.2vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.75}px` : '7.2vh',
-    'mix-blend-mode': 'difference',
-    'inline-size': 'max-content'
+    mixBlendMode: 'difference',
+    'inlineSize': 'max-content'
   }
 }
 
 const bgLeftUpperTextThree = () => {
   return {
-    ...noSelect(),
+    ...noSelect,
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort  ? '11.5vw' : minLand ? '2.9vw' : larPort ? '3.8vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.1}px` : '4.5vh',
-    'mix-blend-mode': 'difference'
+    mixBlendMode: 'difference'
   }
 }
 

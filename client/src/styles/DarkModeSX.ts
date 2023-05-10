@@ -22,9 +22,9 @@ function DarkModeSX() {
       //       top: '0.5vw',
       // padding: '0px !important',
       // minWidth: '2.1vw !important',
-      // 'max-width': '2.1vw !important',
-      // 'min-height': '2.1vw !important',
-      // 'max-height': '2.1vw !important'
+      // maxWidth: '2.1vw !important',
+      // minHeight: '2.1vw !important',
+      // maxHeight: '2.1vw !important'
       ...column, ...absolute,
       padding: '0vw !important',
       minWidth: '0vh !important',
