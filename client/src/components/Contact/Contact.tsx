@@ -18,7 +18,7 @@ function Contact() {
         <Avatar
           alt="Pablo Azambuyo"
           src={profile}
-          sx={avatar({ minPort, minLand, larPort, larLand, currentHeight })}
+          sx={avatar({ minPort, minLand, larPort })}
         />
       </Box>
       <Box sx={separator}></Box>

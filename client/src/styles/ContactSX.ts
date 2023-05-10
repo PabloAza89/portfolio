@@ -1,6 +1,6 @@
 import {
   flex, mix, noSelect, row, column,
-  absolute, relative, asc, jcc
+  relative, asc, jcc
 } from './CommonsSX';
 
 const background = () => {
@@ -18,40 +18,59 @@ const left = () => {
     'background': 'none',
     width: '40vw',
     height: '40vh',
-    /* left: '3vw', */
     alignItems: 'center',
     justifyContent: 'center',
-    /* 'margin-bottom': '2vh' */
   }
 }
 
 interface avatarI {
   minPort: boolean,
   minLand: boolean,
-  larPort: boolean,
-  larLand: boolean,
-  currentHeight: number
+  larPort: boolean
 }
 
-const avatar = ({ minPort, minLand, larPort, larLand, currentHeight }: avatarI) => {
+const avatar = ({ minPort, minLand, larPort }: avatarI) => {
   return {
     ...relative, ...flex,
     width: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '16.5vh' : '45vh',
     height: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '16.5vh' : '45vh',
-    transform: larLand && currentHeight < 330 ? 'scale(0.0001) translate(100vw, -100vw)' : 'null',
-    transition: 'all .5s'
+    animation: 'avatarContact 1s',
+    '@keyframes avatarContact': {
+      '0%': {
+        opacity: 0,
+        translate: '-100vw -0%',
+      },
+      '50%': {
+        opacity: 0,
+      },
+      '100%': {
+        opacity: 1,
+        translate: '0% 0vh',
+      }
+    }
   }
 }
 
 const separator = () => {
   return {
-    ...flex, /* ...column, */ ...relative, ...asc, ...mix,
+    ...flex, ...relative, ...asc, ...mix,
     'background': 'white',
     width: '1.1vw',
     height: '40vh',
-    /* right: '2vw', */
-    /* alignItems: 'center', */
-    /* justifyContent: 'center', */
+    animation: 'separatorContact 1s',
+    '@keyframes separatorContact': {
+      '0%': {
+        opacity: 0,
+        translate: '0% -100vh',
+      },
+      '50%': {
+        opacity: 0,
+      },
+      '100%': {
+        opacity: 1,
+        translate: '0% 0vh',
+      }
+    }
   }
 }
 
@@ -61,7 +80,6 @@ const right = () => {
     'background': 'none',
     width: '30vw',
     height: '60vh',
-    /* right: '2vw', */
     alignItems: 'center',
     justifyContent: 'center'
   }
@@ -80,7 +98,21 @@ const text = ({ darkMode, minPort, minLand, larPort }: textI) => {
     fontFamily: 'Lucida Console',
     fontSize: minPort ? '7vw' : minLand ? '3vw' : larPort ? '6vw' : '2.1vw',
     color: darkMode ? '#b5b3b3' : 'white',
-    padding: '1vw',
+    padding: '1vw', //
+    animation: 'textContact 1s',
+    '@keyframes textContact': {
+      '0%': {
+        opacity: 0,
+        translate: '0% 100vh',
+      },
+      '50%': {
+        opacity: 0,
+      },
+      '100%': {
+        opacity: 1,
+        translate: '0% 0vh',
+      }
+    }
   }
 }
 
