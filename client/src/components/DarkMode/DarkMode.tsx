@@ -24,7 +24,7 @@ function DarkMode() {
   return (
     <Link style={{ textDecoration: 'none' }} to="/portfolio">
       <Button onClick={(e) => {e.preventDefault(); dispatch(setDarkMode(!darkMode))}} variant="contained" sx={background({ minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location:location.pathname, percentageResizedHeight })}>
-        {darkMode ? <DarkModeIcon sx={iconNight({ minPort, minLand, medPort, medLand, larPort, maxStaticReference })}/> : <WbSunnyIcon sx={iconDay({ minPort, minLand, medPort, medLand, larPort, maxStaticReference })}/>}
+        { darkMode ? <WbSunnyIcon sx={iconDay({ minPort, minLand, medPort, medLand, larPort, maxStaticReference })}/> : <DarkModeIcon sx={iconNight({ minPort, minLand, medPort, medLand, larPort, maxStaticReference })}/> }
       </Button>
     </Link>
   )

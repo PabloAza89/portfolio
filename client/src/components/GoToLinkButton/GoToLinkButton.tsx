@@ -3,7 +3,11 @@ import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import { background, icon } from '../../styles/GoToLinkButtonSX';
 
-function GoToLinkButton( link: string ) {
+interface GoToLinkButtonI {
+  link: string
+}
+
+function GoToLinkButton({ link }: GoToLinkButtonI) {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)

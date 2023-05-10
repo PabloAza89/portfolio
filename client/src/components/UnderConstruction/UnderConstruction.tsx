@@ -22,7 +22,7 @@ function UnderConstruction() {
   const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
 
   return (
-    <Box sx={background({ staticRefWidth })}>
+    <Box sx={background( staticRefWidth )}>
       <Typography sx={textUpperOneLine({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{ english ? 'SECTION UNDER CONSTRUCTION !' : 'SECCIÓN BAJO CONSTRUCCIÓN !' }</Typography>
       <Typography sx={textUpperTwoLines({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{ english ? 'SECTION UNDER CONSTRUCTION !' : 'SECCIÓN BAJO CONSTRUCCIÓN !' }</Typography>
       <Typography sx={textLowerOneLine({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{ english ? 'Section Under Construction !' : 'Sección Bajo Construcción !' }</Typography>
