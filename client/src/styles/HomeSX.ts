@@ -1,19 +1,14 @@
-import { useSelector } from 'react-redux';
-import { asc, column, flex, jcc, noSelect, relative, row
+import {
+  asc, column, mix, flex, jcc, noSelect, relative, row
 } from './CommonsSX';
 
-function HomeSX() {
+interface backgroundI {
+  minPort: boolean,
+  minLand: boolean,
+  larPort: boolean
+}
 
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)  
-  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
-
-const background = () => {
+const background = ({ minPort, minLand, larPort }: backgroundI) => {
   return {
     ...flex, ...relative, ...jcc,
     background: 'none',
@@ -23,7 +18,14 @@ const background = () => {
   }
 }
 
-const bgLeft = () => {
+interface bgLeftI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  larPort: boolean
+}
+
+const bgLeft = ({ minPort, minLand, medPort, larPort }: bgLeftI) => {
   return {
     ...relative,
     background: 'none',
@@ -35,7 +37,13 @@ const bgLeft = () => {
   }
 }
 
-const bgLeftUpper = () => {
+interface bgLeftUpperI {
+  minPort: boolean,
+  minLand: boolean,
+  larPort: boolean
+}
+
+const bgLeftUpper = ({ minPort, minLand, larPort }: bgLeftUpperI) => {
   return {
     ...relative, ...flex, ...column, ...jcc, ...asc,
     background:'none',
@@ -45,36 +53,68 @@ const bgLeftUpper = () => {
   }
 }
 
-let bgLeftUpperTextOne = () => {
+interface bgLeftUpperTextOneI {
+  darkMode: boolean,
+  minPort: boolean,
+  minLand: boolean,
+  larPort: boolean,
+  percentageResizedHeight: number,
+  staticRefHeight: number
+}
+
+let bgLeftUpperTextOne = ({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight }: bgLeftUpperTextOneI) => {
   return {
-    ...noSelect,
+    ...noSelect, ...mix,
     'color': darkMode ? '#b5b3b3' : '#FFFFFF',
     'fontSize': minPort  ? '11.5vw' : minLand ? '4.9vw' : larPort ? '5.0vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.7}px` : '6.9vh',
-    mixBlendMode: 'difference',
     /* display: 'none' */
   }
 }
 
-const bgLeftUpperTextTwo = () => {
+interface bgLeftUpperTextTwoI {
+  darkMode: boolean,
+  minPort: boolean,
+  minLand: boolean,
+  larPort: boolean,
+  percentageResizedHeight: number,
+  staticRefHeight: number
+}
+
+const bgLeftUpperTextTwo = ({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight }: bgLeftUpperTextTwoI) => {
   return {
-    ...noSelect,
+    ...noSelect, ...mix,
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort  ? '11.5vw' : minLand ? '5.4vw' : larPort ? '5.2vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.75}px` : '7.2vh',
-    mixBlendMode: 'difference',
     'inlineSize': 'max-content'
   }
 }
 
-const bgLeftUpperTextThree = () => {
+interface bgLeftUpperTextThreeI {
+  darkMode: boolean,
+  minPort: boolean,
+  minLand: boolean,
+  larPort: boolean,
+  percentageResizedHeight: number,
+  staticRefHeight: number
+}
+
+const bgLeftUpperTextThree = ({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight }: bgLeftUpperTextThreeI) => {
   return {
-    ...noSelect,
+    ...noSelect, ...mix,
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort  ? '11.5vw' : minLand ? '2.9vw' : larPort ? '3.8vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.1}px` : '4.5vh',
-    mixBlendMode: 'difference'
   }
 }
 
-const bgLeftLower = () => {
+interface bgLeftLowerI { 
+  minPort: boolean,
+  minLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
+  percentageResizedHeight: number
+}
+
+const bgLeftLower = ({ minPort, minLand, larPort, larLand, percentageResizedHeight }: bgLeftLowerI) => {
   return {
     ...jcc, ...relative, ...column, ...asc,
     background: 'none',
@@ -85,7 +125,7 @@ const bgLeftLower = () => {
   }
 }
 
-const minLandRightLower = () => {
+const minLandRightLower = ( minLand: boolean ) => {
   return {
     ...jcc,
     background: 'red',
@@ -94,9 +134,8 @@ const minLandRightLower = () => {
   }
 }
 
-return { background, bgLeft, bgLeftUpper, bgLeftUpperTextOne,
-  bgLeftUpperTextTwo, bgLeftUpperTextThree, bgLeftLower,minLandRightLower }
-
+export {
+  background, bgLeft, bgLeftUpper, bgLeftUpperTextOne,
+  bgLeftUpperTextTwo, bgLeftUpperTextThree, bgLeftLower,
+  minLandRightLower
 }
-
-export default HomeSX;

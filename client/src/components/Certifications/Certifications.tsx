@@ -1,4 +1,5 @@
 import { Box, CardMedia, Dialog, Typography } from '@mui/material';
+import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import efSet from '../../images/efSet.png';
@@ -58,11 +59,11 @@ function Certifications() {
                 <Typography sx={title({ minPort, minLand, larPort })}>{e.title}</Typography>
                 <CardMedia component="div" onClick={() => {setName(e.media); setShow(!show)}} sx={media({ url:e.media, minPort, minLand, larPort })} />
                 <Typography sx={url({ minPort, minLand, larPort })}>
-                  <a style={anchor()}
-                    href={e.href}
+                  <Link style={anchor()}
+                    to={e.href}
                     target="_blank"
-                    rel="noopener noreferrer"
-                  >{e.url}</a>
+                    /* rel="noopener noreferrer" */
+                  >{e.url}</Link>
                 </Typography>
               </Box>)
         })}

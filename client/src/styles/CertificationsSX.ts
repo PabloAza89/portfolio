@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
-import { absolute, aic, asc, column, flex, jcc, jic, jsc, noSelect, relative
+import { 
+  absolute, mix, noDeco, aic, asc, column,
+  flex, jcc, jic, jsc, noSelect, relative
 } from './CommonsSX';
 
 const background = () => {
@@ -41,14 +42,13 @@ const card = ({ minPort, minLand, larPort }: genI) => {
 
 const title = ({ minPort, minLand, larPort }: genI) => {
   return {
-    ...asc, ...noSelect,
+    ...asc, ...noSelect, ...mix,
     background: 'none',
     height: minLand ? '13vh' : 'none',
     color: '#FFFFFF',
     paddingRight: '0vw',
     paddingTop: '0vw',
-    fontSize: minPort ? '3.85vw' : minLand ? '2.1vw' : larPort ? '2.65vw' : '1.25vw',
-    mixBlendMode: 'difference'
+    fontSize: minPort ? '3.85vw' : minLand ? '2.1vw' : larPort ? '2.65vw' : '1.25vw'
   }
 }
 
@@ -84,10 +84,8 @@ const url = ({ minPort, minLand, larPort }: genI) => {
 
 const anchor = () => {
   return {
-    asc, /* ...noSelect, */
-    'textDecoration': 'none',
+    ...asc, ...noSelect,...noDeco, ...mix,
     color: '#FFFFFF',
-    //mixBlendMode: 'difference'
   }
 }
 

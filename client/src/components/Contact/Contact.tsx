@@ -1,29 +1,34 @@
 import { Box, Typography, Avatar } from '@mui/material';
-import contact from '../../styles/ContactSX';
+import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
-import UnderConstruction from '../UnderConstruction/UnderConstruction';
-import ContactSX from '../../styles/ContactSX';
+import { background, right, text, left, avatar, separator } from '../../styles/ContactSX';
 
 function Contact() {
 
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
+
   return (
-    <Box sx={ContactSX().background}>
-      <Box sx={ContactSX().left}>
+    <Box sx={background}>
+      <Box sx={left}>
         <Avatar
           alt="Pablo Azambuyo"
           src={profile}
-          sx={ContactSX().avatar}
+          sx={avatar({ minPort, minLand, larPort, larLand, currentHeight })}
         />
       </Box>
-      <Box sx={ContactSX().separator}></Box>
-      <Box sx={ContactSX().right}>
-        <Typography sx={ContactSX().text}>LinkedIn</Typography>
-        <Typography sx={ContactSX().text}>Email</Typography>
-        <Typography sx={ContactSX().text}>Whatsapp</Typography>
-        <Typography sx={ContactSX().text}>Twitter</Typography>
-        <Typography sx={ContactSX().text}>Instagram</Typography>
+      <Box sx={separator}></Box>
+      <Box sx={right}>
+        <Typography sx={text({ darkMode, minPort, minLand, larPort })}>LinkedIn</Typography>
+        <Typography sx={text({ darkMode, minPort, minLand, larPort })}>Email</Typography>
+        <Typography sx={text({ darkMode, minPort, minLand, larPort })}>Whatsapp</Typography>
+        <Typography sx={text({ darkMode, minPort, minLand, larPort })}>Twitter</Typography>
+        <Typography sx={text({ darkMode, minPort, minLand, larPort })}>Instagram</Typography>
       </Box>
-
     </Box>
   )
 }

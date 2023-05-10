@@ -1,6 +1,5 @@
 import { blue } from '@mui/material/colors';
-import { useSelector } from 'react-redux';
-import { aic, asc, flex, jcse, noDeco, noSelect, row } from './CommonsSX';
+import { aic, asc, mix, flex, jcse, noDeco, noSelect, row } from './CommonsSX';
 
 interface genI {
   staticRefWidth: number,
@@ -20,8 +19,6 @@ const background = ({ staticRefWidth, minPort, minLand, larPort }: genI) => {
     minHeight: larPort ? '11vw' : `${staticRefWidth * 3.5}px`
   }
 }
-
-
 
 const mainLeft = ({ staticRefWidth, minPort, minLand, larPort }: genI) => {
   return {
@@ -126,7 +123,7 @@ interface textItemI {
 
 const textItem = ({ staticRefWidth, darkMode, minPort, minLand, larPort }: textItemI) => {
   return {
-    ...noDeco, ...noSelect,
+    ...noDeco, ...noSelect, ...mix,
     background: 'none',
     marginLeft: `${staticRefWidth * 0.5}px`,
     marginRight: `${staticRefWidth * 0.5}px`,
@@ -135,8 +132,7 @@ const textItem = ({ staticRefWidth, darkMode, minPort, minLand, larPort }: textI
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : larPort ? `${staticRefWidth * 1.2}px` : `${staticRefWidth * 1.2}px`,
     fontFamily: 'Roboto',
-    fontWeight: '600',
-    //mixBlendMode: 'difference'
+    fontWeight: '600'
   }
 }
 

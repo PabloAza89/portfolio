@@ -1,16 +1,8 @@
-// export const noSelect = () => { 
-//   return { WebkitTouchCallout: 'none',
-//   WebkitUserSelect: 'none',
-//   khtmlUserSelect: 'none',
-//  //MozUserSelect: 'none',
-//   MsUserSelect: 'none',
-//   UserSelect: 'none'}
-// }
 export const noSelect: any = {
   WebkitTouchCallout: 'none',
   WebkitUserSelect: 'none',
   khtmlUserSelect: 'none',
- //MozUserSelect: 'none',
+  MozUserSelect: 'none',
   MsUserSelect: 'none',
   UserSelect: 'none'
 }
@@ -30,3 +22,4 @@ export const jic = { justifyItems: 'center' }
 export const bgNone = { background: 'none' }
 export const bgRed = { background: 'Red' }
 export const noDeco = { textDecoration: 'none' }
+export const mix = { mixBlendMode: 'difference' }

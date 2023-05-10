@@ -1,12 +1,10 @@
-import { useSelector } from 'react-redux';
 import gear from '../images/gear.png';
-import { absolute, noSelect, flex, column, jcc, fixed, relative } from './CommonsSX';
+import {
+  absolute, noSelect, mix, flex,
+  column, jcc, fixed, relative
+} from './CommonsSX';
 
-interface backgroundProps {
-  staticRefWidth: number
-}
-
-const background = ({ staticRefWidth }: backgroundProps) => {
+const background = ( staticRefWidth: number ) => {
   return {
     ...flex, ...column, ...jcc, ...relative,
     top: `${staticRefWidth * 0.5}px`,
@@ -19,7 +17,7 @@ const background = ({ staticRefWidth }: backgroundProps) => {
   }
 }
 
-interface genInterface {
+interface genI {
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
@@ -28,34 +26,32 @@ interface genInterface {
   larPort: boolean
 }
 
-const textUpperOneLine = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genInterface) => {
+const textUpperOneLine = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
   return {
-    ...noSelect, ...absolute,
+    ...noSelect, ...absolute, ...mix,
     fontFamily: 'Lucida Console',
     fontSize: minPort ? '7vw' : minLand ? '3vw' : larPort ? '6vw' : '2.1vw',
     color: darkMode ? '#b5b3b3' : 'white',
     fontWeight: 600,
     top: minPort ? '25vh' : minLand ? '25vh' : larPort ? '23vh' : '10vh',
-    left: minPort ? '5vw' : minLand ? '5vw' : larPort ? '5vw' : '15vw',
-    mixBlendMode: 'difference'
+    left: minPort ? '5vw' : minLand ? '5vw' : larPort ? '5vw' : '15vw'
   }
 }
 
 
-const textUpperTwoLines = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genInterface) => {
+const textUpperTwoLines = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
   return {
-    ...noSelect, ...absolute,
+    ...noSelect, ...absolute, ...mix,
     fontFamily: 'Monaco',
     fontSize: minPort ? '2.8vw' : minLand ? '2.8vw' : larPort ? '2.8vw' : '1.5vw',
     color: darkMode ? '#b5b3b3' : 'white',
     fontWeight: 600,
     top: minPort ? '14vh' : minLand ? '14vh' : larPort ? '14vh' : '11vh',
-    left: minPort ? '67vw' : minLand ? '69vw' : larPort ? '67vw' : '78vw',
-    mixBlendMode: 'difference'
+    left: minPort ? '67vw' : minLand ? '69vw' : larPort ? '67vw' : '78vw'
   }
 }
 
-const textLowerOneLine = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genInterface) => {
+const textLowerOneLine = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
   return {
       ...noSelect, ...absolute,
     fontFamily: 'Verdana',
@@ -68,7 +64,7 @@ const textLowerOneLine = ({ darkMode, minPort, minLand, medPort, medLand, larPor
   }
 }
 
-const gearBig = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genInterface) => {
+const gearBig = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
   return {
     ...absolute,
     left: minPort ? '3vh' : minLand ? '70vh' : larPort ? '13vh' : '30vh',
@@ -84,7 +80,7 @@ const gearBig = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI
   }
 }
 
-const gearMed = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genInterface) => {
+const gearMed = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
   return {
     ...absolute,
     left: minPort ? '27.5vh' : minLand ? '94.5vh' : larPort ? '37.3vh' : '67.3vh',
@@ -100,7 +96,7 @@ const gearMed = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI
   }
 }
 
-const gearMin = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genInterface) => {
+const gearMin = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
   return {
     ...absolute,
     left: minPort ? '25vh' : minLand ? '92vh' : larPort ? '35.2vh' : '65.9vh',

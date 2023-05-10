@@ -1,17 +1,34 @@
 import { useState, useEffect } from 'react';
 import { Box, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import MessageMeSX from '../../styles/MessageMeSX';
+import {
+  background, nameBox, formContainer,
+  clearButton, sendMessageButton, messageBox
+} from '../../styles/MessageMeSX';
 import BackButton from '../BackButton/BackButton';
 import TextField from '@mui/material/TextField';
 import Swal from 'sweetalert2'
-//import "../../styles/MessageMeSX.css";
 import { setTimer, stopTimer, setNumberTimer, setTimerEnabled } from '../../actions';
 import store from '../../store/store';
 
 function MessageMe() {
 
   const dispatch = useDispatch()
+  const english = useSelector((state: {english:boolean}) => state.english)
+  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const MedLand = useSelector((state: {medLand:boolean}) => state.medLand)
+  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
+  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference)
+  const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
+  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
+  const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
 
   const [name, setName] = useState<string | null>("")
   const [text, setText] = useState<string | null>("")
@@ -23,9 +40,7 @@ function MessageMe() {
     if (name !== "") setName(name)
     if (text !== "") setText(text)
   },[])
-
-  const english = useSelector((state: {english:boolean}) => state.english)
-  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+  
   var Toast: any = Swal
 
   const clearBoth = () => {
@@ -138,11 +153,11 @@ function MessageMe() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '93vh', width: '97vw', background: 'none'}}>
-      <Box sx={MessageMeSX().formContainer}>
+      <Box sx={formContainer({ staticRefWidth })}>
         <Button
           variant="contained"
           onClick={() => clearBoth()}
-          sx={MessageMeSX().clearButton}
+          sx={clearButton}
         >
           { english ? 'CLEAR' : 'LIMPIAR' }
         </Button>
@@ -155,12 +170,12 @@ function MessageMe() {
           InputLabelProps={{
             style: { background: 'white', paddingTop: '0.1vw', width: english ? `${staticRefWidth * 7}px` : `${staticRefWidth * 7}px`, textAlign: 'center', 'borderRadius': `${staticRefWidth * 0.2}px`, left: '-0.2vw' }
           }}
-          sx={MessageMeSX().nameBox}
+          sx={nameBox({ staticRefWidth })}
           onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
         />
         <TextField
           id="outlined-multiline-static"
-          label={english ? "Your message here" : "Tu mensaje aquí"}
+          label={ english ? "Your message here" : "Tu mensaje aquí"}
           multiline
           rows={10}
           value={text}
@@ -168,15 +183,15 @@ function MessageMe() {
             style: { background: 'white', paddingTop: '0.1vw', width: english ? `${staticRefWidth * 8}px` : `${staticRefWidth * 7}px`, textAlign: 'center', 'borderRadius': `${staticRefWidth * 0.2}px`, left: '-0.2vw'}
           }}
           onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
-          sx={MessageMeSX().messageBox}
+          sx={messageBox({ staticRefWidth })}
         />
         <Button
           disabled={sentButtonDisabled}
           variant="contained"
           onClick={(e) => handleSubmit(e)}
-          sx={MessageMeSX().sendMessageButton}
+          sx={sendMessageButton}
         >
-          {english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
+          { english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
         </Button>
       </Box>
     </Box>

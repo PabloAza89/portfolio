@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
 import { background, blueBox, avatar, typography } from '../../styles/AboutMeSX';
 
-
-
 function AboutMe() {
 
   const english = useSelector((state: {english:boolean}) => state.english)

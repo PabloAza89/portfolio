@@ -10,7 +10,7 @@ function Language() {
 
   const dispatch = useDispatch()
   
-  const english = useSelector( (state: {english:boolean}) => state.english )
+  const english = useSelector((state: {english:boolean}) => state.english)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const medPort = useSelector((state: {medPort:boolean}) => state.medPort)

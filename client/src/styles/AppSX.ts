@@ -11,12 +11,12 @@ const background = () => {
   }
 }
 
-interface blackWhiteProps {
+interface blackWhiteI {
   staticRefWidth: number,
   darkMode: boolean
 }
 
-const blackWhite = ( { staticRefWidth, darkMode }: blackWhiteProps ) => {
+const blackWhite = ( { staticRefWidth, darkMode }: blackWhiteI ) => {
   return {
     ...fixed, ...flex, ...column,
     top: `${staticRefWidth * 0.5}px`,

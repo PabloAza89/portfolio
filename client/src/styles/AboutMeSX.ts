@@ -1,4 +1,4 @@
-import { flex, noSelect, row, absolute, column, jcc, fixed} from './CommonsSX';
+import { flex, noSelect, row, absolute, column, jcc, fixed } from './CommonsSX';
 
 interface backgroundProps {
   staticRefWidth: number
