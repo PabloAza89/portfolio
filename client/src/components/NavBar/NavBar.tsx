@@ -42,7 +42,7 @@ function NavBar() {
         el.addEventListener("wheel", onWheel);
         return () => el.removeEventListener("wheel", onWheel);
       }
-    }, [/* scrollSpeed */]);
+    }, []);
     return elRef;
   }
 

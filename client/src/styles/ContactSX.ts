@@ -1,6 +1,6 @@
 import {
   flex, mix, noSelect, row, column,
-  relative, asc, jcc
+  relative, asc, jcc, noDeco
 } from './CommonsSX';
 
 const background = () => {
@@ -98,7 +98,8 @@ const text = ({ darkMode, minPort, minLand, larPort }: textI) => {
     fontFamily: 'Lucida Console',
     fontSize: minPort ? '7vw' : minLand ? '3vw' : larPort ? '6vw' : '2.1vw',
     color: darkMode ? '#b5b3b3' : 'white',
-    padding: '1vw', //
+    padding: '1vw',
+    cursor: 'pointer', //
     animation: 'textContact 1s',
     '@keyframes textContact': {
       '0%': {
@@ -116,6 +117,17 @@ const text = ({ darkMode, minPort, minLand, larPort }: textI) => {
   }
 }
 
-export { background, right, text, left, avatar, separator }
+const textNoDeco = () => {
+  return {
+    ...noSelect, ...relative, ...mix, ...noDeco,
+    fontFamily: 'Lucida Console',
+    color: 'white',
+  }
+}
+
+export {
+  background, right, text, left,
+  avatar, separator, textNoDeco
+}
 
 
