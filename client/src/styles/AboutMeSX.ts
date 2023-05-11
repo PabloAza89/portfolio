@@ -1,10 +1,10 @@
 import { flex, noSelect, row, absolute, column, jcc, fixed } from './CommonsSX';
 
-interface backgroundProps {
+interface backgroundI {
   staticRefWidth: number
 }
 
-const background = ({ staticRefWidth }: backgroundProps) => {
+const background = ({ staticRefWidth }: backgroundI) => {
   return {
     ...flex,...column,...jcc, ...fixed,
     top: `${staticRefWidth * 0.5}px`,
@@ -15,7 +15,7 @@ const background = ({ staticRefWidth }: backgroundProps) => {
   }
 }
 
-interface blueBoxProps {
+interface blueBoxI {
   staticRefWidth: number,
   darkMode: boolean,
   minPort: boolean,
@@ -23,7 +23,7 @@ interface blueBoxProps {
   larPort: boolean
 }
 
-const blueBox = ({ darkMode, minPort, minLand, larPort, staticRefWidth }: blueBoxProps) => {
+const blueBox = ({ darkMode, minPort, minLand, larPort, staticRefWidth }: blueBoxI) => {
   return {
     ...flex, ...row, ...absolute,
     background: darkMode ? '#253740' : '#3C6478',
@@ -36,7 +36,7 @@ const blueBox = ({ darkMode, minPort, minLand, larPort, staticRefWidth }: blueBo
   }
  }
 
-interface avatarProps {
+interface avatarI {
   darkMode: boolean,
   currentHeight: number,
   minPort: boolean,
@@ -46,7 +46,7 @@ interface avatarProps {
   staticRefHeight: number
 }
 
-const avatar = ({ darkMode, currentHeight, minPort, minLand, larPort, larLand, staticRefHeight }: avatarProps) => {
+const avatar = ({ darkMode, currentHeight, minPort, minLand, larPort, larLand, staticRefHeight }: avatarI) => {
   return {
     ...flex, ...row, ...absolute,
     width: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '16.5vh' : '16.5vh',
@@ -60,7 +60,7 @@ const avatar = ({ darkMode, currentHeight, minPort, minLand, larPort, larLand, s
   }
 }
 
-interface typographyProps {
+interface typographyI {
   maxStaticReference: number,
   darkMode: boolean,
   minPort: boolean,
@@ -70,7 +70,7 @@ interface typographyProps {
   larPort: boolean,
 }
 
-const typography = ({ maxStaticReference, darkMode, minPort, minLand, MedPort, MedLand, larPort }: typographyProps) => {
+const typography = ({ maxStaticReference, darkMode, minPort, minLand, MedPort, MedLand, larPort }: typographyI) => {
   return {
     ...noSelect,
    justifyContent: 'flex-start',
