@@ -128,9 +128,8 @@ const textItem = ({ staticRefWidth, darkMode, minPort, minLand, larPort }: textI
     marginLeft: `${staticRefWidth * 0.5}px`,
     marginRight: `${staticRefWidth * 0.5}px`,
     minWidth: 'fit-content',
-    /* color: , */
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : larPort ? `${staticRefWidth * 1.2}px` : `${staticRefWidth * 1.2}px`,
+    fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : larPort ? '3vw' : `${staticRefWidth * 1.2}px`,
     fontFamily: 'Roboto',
     fontWeight: '600'
   }

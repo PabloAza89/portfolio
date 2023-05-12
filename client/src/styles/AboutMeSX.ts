@@ -37,7 +37,6 @@ const blueBox = ({ darkMode, minPort, minLand, larPort, staticRefWidth }: blueBo
  }
 
 interface avatarI {
-  darkMode: boolean,
   currentHeight: number,
   minPort: boolean,
   minLand: boolean,
@@ -46,17 +45,17 @@ interface avatarI {
   staticRefHeight: number
 }
 
-const avatar = ({ darkMode, currentHeight, minPort, minLand, larPort, larLand, staticRefHeight }: avatarI) => {
+const avatar = ({ currentHeight, minPort, minLand, larPort, larLand, staticRefHeight }: avatarI) => {
   return {
     ...flex, ...row, ...absolute,
-    width: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '16.5vh' : '16.5vh',
-    height: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '16.5vh' : '16.5vh',
+    width: minPort ? '18vh' : minLand ? '20vh' : larPort ? '16.5vh' : '16.5vh',
+    height: minPort ? '18vh' : minLand ? '20vh' : larPort ? '16.5vh' : '16.5vh',
     maxWidth: `${staticRefHeight * 13.7}px`,
     maxHeight: `${staticRefHeight * 13.7}px`,
     transform: larLand && currentHeight < 330 ? 'scale(0.0001) translate(100vw, -100vw)' : 'null',
     transition: 'all .5s',
-    top: '-9vh' ,
-    left: larPort ? '18vw' : '4vw',
+    top: minPort ? '-7vh' : minLand ? '-7vh' : '-9vh' ,
+    left: minPort ? '8vw' : minLand ? '7vw' : larPort ? '18vw' : '4vw',
   }
 }
 

@@ -6,15 +6,17 @@ import { asc, relative, flex, noSelect, row, absolute, column, jcc, fixed } from
 interface backgroundI {
   minPort: boolean,
   minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
   larPort: boolean,
   larLand: boolean,
   percentageResizedHeight: number,
   location: string
 }
 
-const background = ({ minPort, minLand, larPort, larLand, location, percentageResizedHeight }: backgroundI) => {
+const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, location, percentageResizedHeight }: backgroundI) => {
   return {
-    ...asc, ...relative,
+    ...asc, ...absolute,
     background: 'red',
     display: 'flex',
     pointerEvents:  larPort && percentageResizedHeight < 0.272 ? 'none' : larLand && percentageResizedHeight < 0.272 ? 'none' : 'null',
@@ -31,8 +33,8 @@ const background = ({ minPort, minLand, larPort, larLand, location, percentageRe
       },
     flexDirection: 'row',
     justifyContent: 'center',
-    width: minPort ? '40vw' : minLand ? '30vw' : '30vw',
-    height: minPort ? '9vh' : minLand ? '16vh' : larPort ? '15vh' : '15vh',
+    width: minPort ? '40vw' : minLand ? '30vw' : medPort ? '40vw' : medLand ? '30vw' : larPort ? '40vw' :' 30vw',
+    height: minPort ? '9vh' : minLand ? '16vh' : medPort ? '20vw' : larPort ? '15vh' : '15vh',
     bottom: minPort ? '0vh' : '0.3vh'
   }
 }
@@ -56,9 +58,9 @@ const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxSt
     background: `url(${lanEn})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    border: english ? `solid ${cyan[100]} ${maxStaticReference * 0.4}px` : `solid transparent ${maxStaticReference * 0.4}px`,
-    width: minPort ? '15vw' : minLand ? '7.5vw' : medPort ? `${maxStaticReference * 7.3}px` : medLand ? `${maxStaticReference * 7.3}px` : larPort ? `${maxStaticReference * 2.5}px` : `${maxStaticReference * 2.5}px`,
-    height: minPort ? '10vw' : minLand ? '5vw' : medPort ? `${maxStaticReference * 7.3}px` : medLand ? `${maxStaticReference * 7.3}px` : larPort ? `${maxStaticReference * 2.6}px` : `${maxStaticReference * 2.6}px`,
+    border: english ? `solid ${cyan[100]} ${maxStaticReference * 0.3}px` : `solid transparent ${maxStaticReference * 0.3}px`,
+    height: minPort ? '10vw' : minLand ? '5.2vw' : medPort ? '8vw' : medLand ? '6vw' : larPort ? '4.9vw' : '3.1vw',
+    width: minPort ? '15vw' : minLand ? '7.6vw' : medPort ? '11.7vw' : medLand ? '9vw' : larPort ? '7.1vw' : '4.4vw',
     ':hover': {
       webkitFilter: 'brightness(.9)',
       'filter': 'brightness(.9)'
@@ -75,9 +77,9 @@ const lanEsFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxSt
     background: `url(${lanEs})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    border: english ? `solid transparent ${maxStaticReference * 0.4}px` : `solid ${cyan[100]} ${maxStaticReference * 0.4}px`,
-    width: minPort ? '15vw' : minLand ? '7.5vw' : medPort ? `${maxStaticReference * 7.3}px` : medLand ? `${maxStaticReference * 7.3}px` : larPort ? `${maxStaticReference * 2.5}px` : `${maxStaticReference * 2.5}px`,
-    height: minPort ? '10vw' : minLand ? '5vw' : medPort ? `${maxStaticReference * 7.3}px` : medLand ? `${maxStaticReference * 7.3}px` : larPort ? `${maxStaticReference * 2.6}px` : `${maxStaticReference * 2.6}px`,
+    border: english ? `solid transparent ${maxStaticReference * 0.3}px` : `solid ${cyan[100]} ${maxStaticReference * 0.3}px`,
+    height: minPort ? '10vw' : minLand ? '5.2vw' : medPort ? '8vw' : medLand ? '6vw' : larPort ? '4.9vw' : '3.1vw',
+    width: minPort ? '15vw' : minLand ? '7.6vw' : medPort ? '11.7vw' : medLand ? '9vw' : larPort ? '7.1vw' : '4.4vw',
     ':hover': {
       webkitFilter: 'brightness(.9)',
       'filter': 'brightness(.9)'

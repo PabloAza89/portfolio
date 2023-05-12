@@ -11,10 +11,10 @@ interface backgroundI {
 const background = ({ minPort, minLand, larPort }: backgroundI) => {
   return {
     ...flex, ...relative, ...jcc,
-    background: 'none',
+    background: 'red',
     flexDirection: minPort ? 'column' : minLand ? 'row' : 'row',
     width: minPort ? '97vw' : minLand ? '97vw' : '97vw',
-    height: minPort ? '71vh' : minLand ? '60vh' : larPort ? '45vh' : '71vh'
+    height: minPort ? '71vh' : minLand ? '65vh' : larPort ? '60vh' : '71vh'
   }
 }
 
@@ -29,7 +29,7 @@ const bgLeft = ({ minPort, minLand, medPort, larPort }: bgLeftI) => {
   return {
     ...relative,
     background: 'none',
-    justifyContent: medPort ? 'space-evenly' : 'center',
+    justifyContent: medPort ? 'space-evenly' : 'space-evenly',
     display: minPort || minLand ? 'contents' : 'flex',
     flexDirection: minPort ? 'column' : minLand ? 'row' : 'column',
     width: minPort ? '97vw' : minLand ? '97vw' : '50vw',
@@ -125,12 +125,12 @@ const bgLeftLower = ({ minPort, minLand, larPort, larLand, percentageResizedHeig
   }
 }
 
-const minLandRightLower = ( minLand: boolean ) => {
+const boxMessageMinLand = ( minLand: boolean ) => {
   return {
     ...jcc,
-    background: 'red',
+    background: 'yellow',
     display: minLand ? 'flex' : 'none',
-    justifyContent: 'center'
+    justifyContent: 'center',
   }
 }
 
@@ -170,7 +170,7 @@ const buttonMessage = ({ minPort, minLand, medPort, larPort }: buttonMessageI ) 
     marginLeft: minPort ? '0vw' : minLand ? '10vw' : '16vw',
     marginTop: minPort ? '1.5vw' : minLand ? '1.5vw' : '1.9vw',
     /* fontSize: minPort ? '3.8vw' : minLand ? '1.05vw' : larPort ? `${staticRefWidth * 0.559}px` : larLand&& percentageResizedWidth< 0.559 ? `${staticRefWidth * 0.559}px` : `${percentageResizedWidth* 22.5}px`, */
-    fontSize: larPort ? '2.2vw' : '1.8vw',
+    fontSize: minPort ? '4vw' : larPort ? '2.2vw' : '1.8vw',
 
     mixBlendMode: 'difference'
   }
@@ -227,13 +227,14 @@ const boxTechnologies = ({ larPort }: boxTechnologiesI ) => {
     width: '85vw',
     height: '10vh',
     flexDirection: 'column',
-    top: larPort ? '26.5vh' : '21.5vh'
+    top: larPort ? '46.5vh' : '21.5vh',
+    justifyContent: larPort ? 'center' : 'none',
   }
 }
 
 export {
   background, bgLeft, bgLeftUpper, bgLeftUpperTextOne,
   bgLeftUpperTextTwo, bgLeftUpperTextThree, bgLeftLower,
-  minLandRightLower, boxMessage, buttonMessage, boxRightSVG,
+  boxMessageMinLand, boxMessage, buttonMessage, boxRightSVG,
   SVG, boxTechnologies
 }

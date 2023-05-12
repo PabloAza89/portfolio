@@ -1,5 +1,4 @@
 import { Box, CardMedia } from '@mui/material';
-import { cyan } from '@mui/material/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from "react-router-dom";
 import { languageChanger } from '../../actions';
@@ -22,7 +21,7 @@ function Language() {
   const location = useLocation()
 
   return (
-    <Box sx={background({ minPort, minLand, larPort, larLand, location:location.pathname, percentageResizedHeight })}>
+    <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname, percentageResizedHeight })}>
       <CardMedia component="div" onClick={() => dispatch(languageChanger(true))} sx={lanEnFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></CardMedia>
       <CardMedia component="div" onClick={() => dispatch(languageChanger(false))} sx={lanEsFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></CardMedia>
     </Box>

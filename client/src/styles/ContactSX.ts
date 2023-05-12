@@ -32,8 +32,8 @@ interface avatarI {
 const avatar = ({ minPort, minLand, larPort }: avatarI) => {
   return {
     ...relative, ...flex,
-    width: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '16.5vh' : '45vh',
-    height: minPort ? '2.1vh' : minLand ? '3.3vh' : larPort ? '16.5vh' : '45vh',
+    width: minPort ? '20vh' : minLand ? '40vh' : larPort ? '16.5vh' : '45vh',
+    height: minPort ? '20vh' : minLand ? '40vh' : larPort ? '16.5vh' : '45vh',
     animation: 'avatarContact 1s',
     '@keyframes avatarContact': {
       '0%': {

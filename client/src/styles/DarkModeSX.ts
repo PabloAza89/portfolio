@@ -14,22 +14,14 @@ interface backgroundI {
 
 const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location, percentageResizedHeight }: backgroundI) => {
   return {
-    // position: 'absolute',
-    // right: '0.5vw',
-    //       top: '0.5vw',
-    // padding: '0px !important',
-    // minWidth: '2.1vw !important',
-    // maxWidth: '2.1vw !important',
-    // minHeight: '2.1vw !important',
-    // maxHeight: '2.1vw !important'
     ...column, ...absolute,
     padding: '0vw !important',
     minWidth: '0vh !important',
     width: minPort ? `${maxStaticReference * 5.2}px !important` : minLand ? `${maxStaticReference * 5.2}px !important`  : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `${maxStaticReference * 2.1}px !important`  : `${maxStaticReference * 2.1}px !important` ,
     height: minPort ? `${maxStaticReference * 5.2}px !important`  : minLand ? `${maxStaticReference * 5.2}px !important`  : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `${maxStaticReference * 2.1}px !important`  : `${maxStaticReference * 2.1}px !important` ,
-    top: minPort ? '4.5vw' : minLand ? 'none' : '0.9vh',
+    top: minPort ? 'none' : minLand ? 'none' : '0.9vh',
     right: minPort ? '4.5vw' : minLand ? '2.5vw' : '0.9vh',
-    bottom: minLand ? '2.5vw' : 'none',
+    bottom: minPort ? '4.5vw' : minLand ? '2.5vw' : 'none',
     justifyContent: 'center',
     alignItems: 'center',
     transition: 'opacity .1s ease-in-out',

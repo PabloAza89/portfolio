@@ -6,7 +6,7 @@ import Technologies from '../Technologies/Technologies';
 import {
   background, bgLeft, bgLeftUpper, bgLeftUpperTextOne,
   bgLeftUpperTextTwo, bgLeftUpperTextThree, bgLeftLower,
-  minLandRightLower, boxMessage, buttonMessage, boxRightSVG,
+  boxMessageMinLand, boxMessage, buttonMessage, boxRightSVG,
   SVG, boxTechnologies
 } from '../../styles/HomeSX';
 
@@ -37,7 +37,7 @@ function Home() {
 
           <Technologies />
 
-          <Box sx={minLandRightLower( minLand )}>
+          <Box sx={boxMessageMinLand( minLand )}>
             <Link style={{ textDecoration: 'none' }} to="/portfolio/AboutMe">
               <Button sx={{ padding: '0px !important', minWidth: minPort ? '53vw !important' : minLand ? '25vw !important' : '9vw !important', maxWidth: '19vw !important', minHeight: minPort ? '10vw !important' : minLand ? '7.5vh !important' : '2.1vh !important', maxHeight: '2.1vw !important', color:'#FFFFFF', width: minPort ? '19vw' : minLand ? '19vw' : '19vw', marginLeft: minPort ? '0vw' : minLand ? '0vw' : '16vw', marginTop: minPort ? '1.5vw' : minLand ? '4.5vh' : '1.9vw', fontSize: minPort ? '4vw' : minLand ? '1.65vw' : '1.05vw', mixBlendMode: 'difference'}} variant='outlined'>{ english ? `Message me` : `Envíame un mensaje` }
               </Button>
@@ -47,8 +47,10 @@ function Home() {
 
         <Box sx={boxMessage({ minLand, medPort })}>
           <Link style={{ textDecoration: 'none' }} to="/portfolio/MessageMe">
-            <Button sx={buttonMessage({ minPort, minLand, medPort, larPort })}
-              variant='outlined'>{ english ? `Message Me` : `Envíame un mensaje` }
+            <Button
+              sx={buttonMessage({ minPort, minLand, medPort, larPort })}
+              variant='outlined'
+            >{ english ? `Message Me` : `Envíame un mensaje` }
             </Button>
           </Link>
         </Box>
