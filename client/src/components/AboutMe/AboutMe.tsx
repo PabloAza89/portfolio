@@ -25,7 +25,7 @@ function AboutMe() {
         <Avatar
           alt="Pablo Azambuyo"
           src={profile}
-          sx={avatar({ darkMode, minPort, minLand, larPort, larLand, currentHeight, staticRefHeight })}
+          sx={avatar({ minPort, minLand, larPort, larLand, currentHeight, staticRefHeight })}
         />
         <Typography sx={typography({ maxStaticReference, darkMode, minPort, minLand, MedPort, MedLand, larPort })}>
           { english ?
