@@ -10,7 +10,7 @@ interface backgroundI {
 
 const background = ({ minPort, minLand, larPort }: backgroundI) => {
   return {
-    ...flex, ...relative, ...jcc,
+    ...flex, ...relative, ...jcc, ...asc,
     background: 'red',
     flexDirection: minPort ? 'column' : minLand ? 'row' : 'row',
     width: minPort ? '97vw' : minLand ? '97vw' : '97vw',
@@ -18,23 +18,11 @@ const background = ({ minPort, minLand, larPort }: backgroundI) => {
   }
 }
 
-interface bgLeftI {
+interface leftBoxI {
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
   larPort: boolean
-}
-
-const bgLeft = ({ minPort, minLand, medPort, larPort }: bgLeftI) => {
-  return {
-    ...relative,
-    background: 'none',
-    justifyContent: medPort ? 'space-evenly' : 'space-evenly',
-    display: minPort || minLand ? 'contents' : 'flex',
-    flexDirection: minPort ? 'column' : minLand ? 'row' : 'column',
-    width: minPort ? '97vw' : minLand ? '97vw' : '50vw',
-    height: minPort ? '40vh' : minLand ? '60vh' : larPort ? '45vh' : '71vh'
-  }
 }
 
 interface bgLeftUpperI {
@@ -46,14 +34,28 @@ interface bgLeftUpperI {
 const bgLeftUpper = ({ minPort, minLand, larPort }: bgLeftUpperI) => {
   return {
     ...relative, ...flex, ...column, ...jcc, ...asc,
-    background:'none',
+    background: 'yellow',
     border: 'none',
     height: minPort ? '50vh' : minLand ? '55vh' : larPort ? '28vh' : '35vh',
     width: minPort ? '90vw' : minLand ? '45vw' : larPort ? '40vw' : '40vw'
   }
 }
 
-interface bgLeftUpperTextOneI {
+const leftBox = ({ minPort, minLand, medPort, larPort }: leftBoxI) => {
+  return {
+    /* ...relative, */ /* ...flex, ...column, */ /* ...jcc, ...asc, */
+    background: 'none',
+    justifyContent: 'space-evenly',
+    display: minPort ? 'contents' : minLand ? 'flex' : 'flex',
+    flexDirection: minLand ? 'column' : 'column',
+    width: minPort || minLand ? '50vw' : '50vw',
+    height: minPort ? '40vh' : minLand ? '60vh' : larPort ? '45vh' : '71vh'
+  }
+}
+
+
+
+interface textOneI {
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
@@ -62,16 +64,16 @@ interface bgLeftUpperTextOneI {
   staticRefHeight: number
 }
 
-let bgLeftUpperTextOne = ({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight }: bgLeftUpperTextOneI) => {
+const textOne = ({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight }: textOneI) => {
   return {
-    ...noSelect, ...mix,
+    ...noSelect, ...mix, ...relative, ...flex,
     'color': darkMode ? '#b5b3b3' : '#FFFFFF',
     'fontSize': minPort  ? '11.5vw' : minLand ? '4.9vw' : larPort ? '5.0vw' : percentageResizedHeight < 0.238 ? `${staticRefHeight * 1.7}px` : '6.9vh',
     /* display: 'none' */
   }
 }
 
-interface bgLeftUpperTextTwoI {
+interface textTwoI {
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
@@ -80,7 +82,7 @@ interface bgLeftUpperTextTwoI {
   staticRefHeight: number
 }
 
-const bgLeftUpperTextTwo = ({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight }: bgLeftUpperTextTwoI) => {
+const textTwo = ({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight }: textTwoI) => {
   return {
     ...noSelect, ...mix,
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
@@ -89,7 +91,7 @@ const bgLeftUpperTextTwo = ({ darkMode, minPort, minLand, larPort, percentageRes
   }
 }
 
-interface bgLeftUpperTextThreeI {
+interface textThreeI {
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
@@ -98,7 +100,7 @@ interface bgLeftUpperTextThreeI {
   staticRefHeight: number
 }
 
-const bgLeftUpperTextThree = ({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight }: bgLeftUpperTextThreeI) => {
+const textThree = ({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight }: textThreeI) => {
   return {
     ...noSelect, ...mix,
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
@@ -106,33 +108,54 @@ const bgLeftUpperTextThree = ({ darkMode, minPort, minLand, larPort, percentageR
   }
 }
 
-interface bgLeftLowerI { 
+interface boxTechnologiesI {
   minPort: boolean,
   minLand: boolean,
+  medPort: boolean,
   larPort: boolean,
   larLand: boolean,
   percentageResizedHeight: number
 }
 
-const bgLeftLower = ({ minPort, minLand, larPort, larLand, percentageResizedHeight }: bgLeftLowerI) => {
+// const boxTechnologiesCenter = ({ medPort, larPort }: boxTechnologiesCenterI ) => {
+//   return {
+//     background: 'yellow',
+//     display: larPort || medPort ? 'flex' : 'none',
+//     position: 'absolute',
+//     width: '85vw',
+//     height: '10vh',
+//     flexDirection: 'column',
+//     //top: larPort ? '46.5vh' : 'none',
+//     bottom: '0vh',
+//     justifyContent: larPort ? 'center' : 'none',
+//   }
+// }
+
+const boxTechnologies = ({ minPort, minLand, medPort, larPort, larLand, percentageResizedHeight }: boxTechnologiesI) => {
   return {
-    ...jcc, ...relative, ...column, ...asc,
-    background: 'none',
-    left: minPort ? '-0.5vw' : minLand ? '0vw' : larPort ? '0vw' : '0vw',
-    display: larPort ? 'none' : larLand && percentageResizedHeight < 0.381 ? 'none' : 'flex',
-    height: minPort ? '11vh' : minLand ? '8vh' : '11vh',
-    width: minPort ? '97vw' : minLand ? '50vw' : larPort ? '48vw' : '40vw'
+    ...jcc, /* ...relative, */ ...column, ...asc,
+
+    position: minPort || minLand || larPort ? 'relative' : 'absolute',
+    background: 'darkBlue',
+    //left: minPort ? '-0.5vw' : minLand ? '0vw' : larPort ? '0vw' : '0vw',
+    //display: larPort ? 'none' : 'flex',
+    display: 'flex',
+    bottom: medPort ? '0vh' : 'none',
+    //display: medlarPort ? 'none' : larLand  ? 'flex' : 'flex',
+    height: minPort ? '11vh' : minLand ? '20vh' : '11vh',
+    //justifyContent: 'center',
+    width: minPort ? '97vw' : minLand ? '50vw' : medPort || larPort ? '85vw' : '40vw'
   }
 }
 
-const boxMessageMinLand = ( minLand: boolean ) => {
-  return {
-    ...jcc,
-    background: 'yellow',
-    display: minLand ? 'flex' : 'none',
-    justifyContent: 'center',
-  }
-}
+// const boxMessageMinLand = ( minLand: boolean ) => {
+//   return {
+//     ...jcc,
+//     background: 'yellow',
+//     display: minLand ? 'flex' : 'none',
+//     justifyContent: 'center',
+//   }
+// }
 
 interface boxMessageI {
   minLand: boolean,
@@ -143,7 +166,7 @@ const boxMessage = ({ minLand, medPort }: boxMessageI ) => {
   return {
     background: 'red',
     alignItems: medPort ? 'flex-start' : 'center',
-    display: minLand ? 'none' : 'flex',
+    display: minLand ? 'flex' : 'flex',
     justifyContent: 'center',
     position: 'relative',
     height: '10vh'
@@ -184,8 +207,9 @@ interface boxRightSVGI {
 
 const boxRightSVG = ({ minPort, minLand, larPort }: boxRightSVGI ) => {
   return {
-    background: 'blue',
-    display: minPort ? 'none' : minLand ? 'none' : 'flex',
+    background: 'darkGray',
+    display: minPort ? 'none' : minLand ? 'flex' : 'flex',
+    flexDirection: minLand ? 'column' : 'none',
     width: '46vw',
     justifyContent: 'center',
     height: larPort ? '45vh' : '71vh',
@@ -197,6 +221,7 @@ const boxRightSVG = ({ minPort, minLand, larPort }: boxRightSVGI ) => {
 interface SVGI {
   width: number,
   height: number,
+  minLand: boolean,
   medPort: boolean,
   larPort: boolean,
   larLand: boolean,
@@ -204,9 +229,9 @@ interface SVGI {
   percentageResizedWidth: number
 }
 
-const SVG = ({ width, height, medPort, larPort, larLand, percentageResizedHeight, percentageResizedWidth }: SVGI ) => {
+const SVG = ({ width, height, minLand, medPort, larPort, larLand, percentageResizedHeight, percentageResizedWidth }: SVGI ) => {
   return {
-    display: 'flex',
+    display: minLand ? 'none' : 'flex',
     position: 'fixed',
     width: medPort ? '35vw' : larPort && width < height ? '33vw' : larPort && percentageResizedWidth < 0.410 ? '29vh' : larPort && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.777 ? '50vh' : '70vh',
     height: medPort ? '35vw' : larPort && width < height ? '33vw' : larPort && percentageResizedWidth < 0.410 ? '29vh' : larPort && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.777 ? '50vh' : '70vh',
@@ -215,26 +240,16 @@ const SVG = ({ width, height, medPort, larPort, larLand, percentageResizedHeight
   }
 }
 
-interface boxTechnologiesI {
-  larPort: boolean
-}
+// interface boxTechnologiesCenterI {
+//   medPort: boolean,
+//   larPort: boolean
+// }
 
-const boxTechnologies = ({ larPort }: boxTechnologiesI ) => {
-  return {
-    background: 'yellow',
-    display: larPort ? 'flex' : 'none',
-    position: 'absolute',
-    width: '85vw',
-    height: '10vh',
-    flexDirection: 'column',
-    top: larPort ? '46.5vh' : '21.5vh',
-    justifyContent: larPort ? 'center' : 'none',
-  }
-}
+
 
 export {
-  background, bgLeft, bgLeftUpper, bgLeftUpperTextOne,
-  bgLeftUpperTextTwo, bgLeftUpperTextThree, bgLeftLower,
-  boxMessageMinLand, boxMessage, buttonMessage, boxRightSVG,
-  SVG, boxTechnologies
+  background, leftBox, bgLeftUpper, textOne,
+  textTwo, textThree, boxTechnologies,
+ /*  boxMessageMinLand, */ boxMessage, buttonMessage, boxRightSVG,
+  SVG, //boxTechnologiesCenter
 }
