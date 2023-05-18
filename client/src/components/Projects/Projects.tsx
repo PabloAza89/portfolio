@@ -49,25 +49,29 @@ function Projects() {
     return elRef;
   }
 
+  const array = [{
+      title: english ? `Weather App` : `Aplicación del Clima`,
+      media: [ weatherify1, weatherify2 ],
+      href: `https://pabloaza89.github.io/weather-app/`
+    },
+    {
+      title: english ? `Food App` : `Aplicación de Comidas`,
+      media: [ food1, food2, food3 ],
+      href: `https://pabloaza89.github.io/PI-Food-GH/`
+    }]
+
+    
+
   return (
     <Box sx={background({ minPort, minLand, larPort, staticRefWidth })}>
       <ScrollContainer innerRef={useHorizontalScroll()} style={scroll({ minPort, minLand })}>
         <Box sx={boxUpperStripe({ minPort, larPort })}>
-          <Box sx={solid}></Box>
+          <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
           <Box sx={intercalated({ minPort, larPort })}></Box>
-          <Box sx={solid}></Box>
+          <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
         </Box>
         <Box sx={mainStripe} >
-          {[{
-            title: english ? `Weather App` : `Aplicación del Clima`,
-            media: [ weatherify1, weatherify2 ],
-            href: `https://pabloaza89.github.io/weather-app/`
-          },
-          {
-            title: english ? `Food App` : `Aplicación de Comidas`,
-            media: [ food1, food2, food3 ],
-            href: `https://pabloaza89.github.io/PI-Food-GH/`
-          }].map((e) => {
+          {array.map((e) => {
             return (
           <Box key={e.title} sx={card({ darkMode, minPort, minLand, larPort })}>
             <Box sx={boxTitle({ minPort, minLand, larPort })}>
@@ -83,9 +87,9 @@ function Projects() {
         })}
         </Box>
         <Box sx={boxUpperStripe({ minPort, larPort })}>
-          <Box sx={solid}></Box>
+          <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
           <Box sx={intercalated({ minPort, larPort })}></Box>
-          <Box sx={solid}></Box>
+          <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
         </Box>
       </ScrollContainer>
 

@@ -18,10 +18,10 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxS
     
     padding: '0vw !important',
     minWidth: '0vh !important',
-    width: minPort ? `30px !important` : minLand ? `30px !important`  : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `${maxStaticReference * 2.1}px !important`  : `${maxStaticReference * 2.1}px !important` ,
-    height: minPort ? `30px !important`  : minLand ? `30px !important`  : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `${maxStaticReference * 2.1}px !important`  : `${maxStaticReference * 2.1}px !important` ,
-    top: minPort ? '4vw' : minLand ? '4vh' : '5vh',
-    left: minPort ? '4vw' : minLand ? '4vh' : '6vh',
+    width: minPort ? `30px !important` : minLand ? `30px !important`  : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `${maxStaticReference * 2.1}px !important`  : `35px !important` ,
+    height: minPort ? `30px !important`  : minLand ? `30px !important`  : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `${maxStaticReference * 2.1}px !important`  : `35px !important` ,
+    top: minPort ? '4vw' : minLand ? '4vh' : '33px',
+    left: minPort ? '4vw' : minLand ? '4vh' : '33px',
     justifyContent: 'center',
     alignItems: 'center',
     transition: 'opacity .1s ease-in-out',
@@ -50,8 +50,8 @@ const icon = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference 
     ...flex, ...absolute, ...column,
     transform: 'rotate(180deg)',
     minWidth: '0vh',
-    width: minPort ? `15px !important`  : minLand ? `15px !important`  : medPort ? `${maxStaticReference * 2.1}px !important`  : medLand ? `${maxStaticReference * 2.1}px !important`  : larPort ? `${maxStaticReference * 1.3}px !important`  : `${maxStaticReference * 1.3}px !important` ,
-    height: minPort ? `15px !important`  : minLand ? `15px !important`  : medPort ? `${maxStaticReference * 2.1}px !important`  : medLand ? `${maxStaticReference * 2.1}px !important`  : larPort ? `${maxStaticReference * 1.3}px !important`  : `${maxStaticReference * 1.3}px !important`
+    width: minPort ? `15px !important`  : minLand ? `15px !important`  : medPort ? `${maxStaticReference * 2.1}px !important`  : medLand ? `${maxStaticReference * 2.1}px !important`  : larPort ? `${maxStaticReference * 1.3}px !important`  : `25px !important` ,
+    height: minPort ? `15px !important`  : minLand ? `15px !important`  : medPort ? `${maxStaticReference * 2.1}px !important`  : medLand ? `${maxStaticReference * 2.1}px !important`  : larPort ? `${maxStaticReference * 1.3}px !important`  : `25px !important`
   }
 }
 

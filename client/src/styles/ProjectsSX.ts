@@ -14,9 +14,8 @@ interface backgroundI {
 const background = ({ minPort, minLand, larPort, staticRefWidth }: backgroundI) => {
   return {
     ...flex, ...column, ...jcc, ...relative,
-    marginTop: minPort ? '23vh' : minLand ? '17vh' : larPort ? '24vh' : '12vh',
-    height: minPort ? '50vh' : minLand ? '60vh' : larPort ? '53vh' : '74vh',
-    background: 'none'
+    height: minPort ? '50vh' : minLand ? '60vh' : larPort ? '53vh' : '650px',
+    background: 'yellow'
   }
 }
 
@@ -28,7 +27,7 @@ interface scrollI {
 const scroll = ({ minPort, minLand }: scrollI) => {
   return {
     overflow: 'auto',
-    background: 'none',
+    background: 'orange',
     opacity: '0.8',
     marginBottom: minPort ? '0vh' : minLand ? '0vh' : '1vh'
   }
@@ -41,20 +40,24 @@ interface boxUpperStripeI {
 
 const boxUpperStripe = ({ minPort, larPort }: boxUpperStripeI) => {
   return {
-    ...column,
-    background: 'none',
-    width: '158vw',
-    height: minPort ? '3vh' : larPort ? '3vh' : '6vh',
-    marginBottom: '0px',
+    // ...column,
+    // background: 'none',
+    // width: '300vw',
+    // height: minPort ? '3vh' : larPort ? '3vh' : '54px',
+    // marginBottom: '0px',
   }
 }
 
-const solid = () => {
+interface solidI {
+  length: number
+}
+
+const solid = ({ length }: solidI) => {
   return {
     ...row,
     background: brown[700],
-    width: '158vw',
-    height: '1.3vh'
+    width: `calc(${length} * 530px)`,
+    height: '12px'
   }
 }
 
@@ -68,9 +71,9 @@ const intercalated =  ({ minPort, larPort }: intercalatedI) => {
     ...row,
     'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)',
     backgroundBlendMode: 'difference',
-    backgroundSize: minPort ? '13vw 7vw' : larPort ? '11vw 7vw' : '7vw 7vw',
+    backgroundSize: minPort ? '13vw 7vw' : larPort ? '11vw 7vw' : '100px',
     width: '158vw',
-    height: '3.5vh'
+    height: '30px'
   }
 }
 
@@ -78,7 +81,7 @@ const mainStripe = () => {
   return {
     ...row, ...flex,
     background: brown[700],
-    width: '158vw'
+    width: '20px'
   }
 }
 
@@ -94,7 +97,7 @@ const card = ({ darkMode, minPort, minLand, larPort }: cardI) => {
     ...column, ...flex,
     marginLeft: '1vw' ,
     background: darkMode ? '#6e1b1b' : red[800],
-    height: minPort ? '20vh' : minLand ? '44vh' : larPort ? '20vh' : '40vh'
+    height: minPort ? '20vh' : minLand ? '44vh' : larPort ? '20vh' : '347px'
   }
 }
 
@@ -109,7 +112,7 @@ const boxTitle = ({ minPort, minLand, larPort }: boxTitleI) => {
     ...flex, ...row, ...aic,
     marginLeft: '1vw',
     background: 'none',
-    height: minPort ? '8vh' : minLand ? '8vh' : larPort ? '5vh' : '8vh'
+    height: minPort ? '8vh' : minLand ? '8vh' : larPort ? '5vh' : '60px'
   }
 }
 
@@ -126,7 +129,7 @@ const title = ({ darkMode, minPort, minLand, larPort }: titleI) => {
     marginRight: minPort ? '1.3vw' : minLand ? '0.9vw' : larPort ? '1.3vw' : '0.9vw',
     fontFamily: 'Century Gothic',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort ? '4.5vw' : minLand ? '5vh' : larPort ? '3.6vw' : '5vh'
+    fontSize: minPort ? '4.5vw' : minLand ? '5vh' : larPort ? '3.6vw' : '40px'
   }
 }
 
@@ -142,8 +145,8 @@ const boxMedia = ({ length, darkMode, minPort, minLand, larPort }: boxMediaI) =>
   return {
     ...row, ...jcsb, ...flex,
     background: darkMode ? '#6a6e2e' : lime[400],
-    height: minPort ? '32vh' : minLand ? '36vh' : larPort ? '15vh' : '32vh',
-    width: `${length * 31}vw`
+    height: minPort ? '32vh' : minLand ? '36vh' : larPort ? '15vh' : '280px',
+    width: `${length * 560}px`
   }
 }
 
@@ -160,8 +163,10 @@ const cardMedia = ({ url, darkMode, minPort, minLand, larPort }: cardMediaI) => 
     ...asc,
     'cursor': 'pointer',
     'backgroundImage': `url(${url})`,
-    width: '100%', height: '100%',
-    backgroundSize: minPort ? '30vw 15vh' : minLand ? '30vw 33vh' : larPort ? '30vw 14vh' : '30vw 30vh',
+    //width: '100%', height: '100%',
+    
+    width: '560px', height: '280px',
+    //backgroundSize: minPort ? '30vw 15vh' : minLand ? '30vw 33vh' : larPort ? '30vw 14vh' : '30vw 30vh',
     ':hover':
       darkMode ? {webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)'}
       : {webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)'},

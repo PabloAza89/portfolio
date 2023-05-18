@@ -58,10 +58,10 @@ const nameBox = ({ minPort, minLand, staticRefWidth }: nameBoxI) => {
     color: 'white',
     backgroundColor: 'white',
     opacity: '0.90',
-    width: minPort ? '75vw' : minLand ? '60vw' : '10vw',
+    width: minPort ? '75vw' : minLand ? '60vw' : '47vw',
     marginBottom: minLand ? 'none' : '2vh',
     borderRadius: `${staticRefWidth * 0.3}px`,
-    height: minPort ? '50px' : minLand ? '13vh' : 'none'
+    height: minPort ? '50px' : minLand ? '13vh' : '60px'
   }
 }
 

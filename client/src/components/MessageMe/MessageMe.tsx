@@ -170,7 +170,7 @@ function MessageMe() {
         value={name}
         inputProps={{
           style: {
-            height: minPort ? '19px' : '5vh'
+            height: minPort ? '19px' : '29px'
         }}}
         InputLabelProps={{
           style: {
@@ -179,7 +179,7 @@ function MessageMe() {
             width: (minPort || minLand) && english ? `130px` : `130px`,
             textAlign: 'center',
             'borderRadius': `${staticRefWidth * 0.2}px`,
-            left: (minPort || minLand) && english ? '-5px' : (minPort || minLand) && !english ? '-5px' : '-0.2vw'
+            left: (minPort || minLand) && english ? '-5px' : (minPort || minLand) && !english ? '-5px' : '-5px'
         }}}
         sx={nameBox({ minPort, minLand, staticRefWidth })}
         onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
@@ -198,10 +198,10 @@ function MessageMe() {
           style: {
             background: 'white',
             paddingTop: '0.1vw',
-            width: (minPort || minLand) && english ? `155px` : (minPort || minLand) && !english ? `130px` : '130px',
+            width: (minPort || minLand) && english ? `155px` : (minPort || minLand) && !english ? `130px` : larLand && english ? '155px' : larLand && !english ? '140px' : '155px',
             textAlign: 'center',
             'borderRadius': `${staticRefWidth * 0.2}px`,
-            left: (minPort || minLand) && english ? '-6px' : (minPort || minLand) && !english ? '-5px' : '-3px'
+            left: (minPort || minLand) && english ? '-6px' : (minPort || minLand) && !english ? '-5px' : larLand && english ? '-6px' : larLand && !english ? '-6px' : '-3px'
         }}}
         onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
         sx={messageBox({ minPort, minLand, staticRefWidth })}
