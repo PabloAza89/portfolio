@@ -3,21 +3,30 @@ import {
   relative, asc, jcc, noDeco
 } from './CommonsSX';
 
-const background = () => {
+interface backgroundI {
+  minPort: boolean
+}
+
+const background = ({ minPort }: backgroundI) => {
   return {
-    ...flex, ...row, ...jcc,
+    ...flex, ...jcc,
+    flexDirection: minPort ? 'column' : 'row',
     'background': 'none',
     width: '98.8vw',
     height: '97.6vh'
   }
 }
 
-const left = () => {
+interface leftI {
+  minPort: boolean
+}
+
+const left = ({ minPort }: leftI) => {
   return {
     ...flex, ...column, ...relative, ...asc,
     'background': 'none',
     width: '40vw',
-    height: '40vh',
+    height: minPort ? '30vh' : '40vh',
     alignItems: 'center',
     justifyContent: 'center',
   }
@@ -38,7 +47,7 @@ const avatar = ({ minPort, minLand, larPort }: avatarI) => {
     '@keyframes avatarContact': {
       '0%': {
         opacity: 0,
-        translate: '-100vw -0%',
+        translate: minPort ? '0% -100vh' : '-100vw -0%',
       },
       '50%': {
         opacity: 0,
@@ -51,14 +60,19 @@ const avatar = ({ minPort, minLand, larPort }: avatarI) => {
   }
 }
 
-const separator = () => {
+interface separatorYI {
+  minPort: boolean,
+}
+
+const separatorY = ({ minPort }: separatorYI) => {
   return {
-    ...flex, ...relative, ...asc, ...mix,
+    ...relative, ...asc, ...mix,
+    display: minPort ? 'none' : 'flex',
     'background': 'white',
     width: '1.1vw',
     height: '40vh',
-    animation: 'separatorContact 1s',
-    '@keyframes separatorContact': {
+    animation: 'separatorYContact 1s',
+    '@keyframes separatorYContact': {
       '0%': {
         opacity: 0,
         translate: '0% -100vh',
@@ -74,12 +88,44 @@ const separator = () => {
   }
 }
 
-const right = () => {
+interface separatorXI {
+  minPort: boolean,
+}
+
+const separatorX = ({ minPort }: separatorXI) => {
+  return {
+    ...relative, ...asc, ...mix,
+    display: minPort ? 'flex' : 'none',
+    'background': 'white',    
+    width: '60vw',
+    height: '1.1vw',
+    animation: 'separatorXContact 1s',
+    '@keyframes separatorXContact': {
+      '0%': {
+        opacity: 0,
+        translate: '-100vw 0%',
+      },
+      '50%': {
+        opacity: 0,
+      },
+      '100%': {
+        opacity: 1,
+        translate: '0% 0vh',
+      }
+    }
+  }
+}
+
+interface rightI {
+  minPort: boolean,
+}
+
+const right = ({ minPort }: rightI) => {
   return {
     ...flex, ...column, ...relative, ...asc,
     'background': 'none',
     width: '30vw',
-    height: '60vh',
+    height: minPort ? '40vh' : '60vh',
     alignItems: 'center',
     justifyContent: 'center'
   }
@@ -127,7 +173,7 @@ const textNoDeco = () => {
 
 export {
   background, right, text, left,
-  avatar, separator, textNoDeco
+  avatar, separatorY, separatorX, textNoDeco
 }
 
 

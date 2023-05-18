@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import profile from '../../images/profile.png';
 import Swal from 'sweetalert2';
-import { background, right, text, left, avatar, separator, textNoDeco } from '../../styles/ContactSX';
+import { background, right, text, left, avatar, separatorY, separatorX, textNoDeco } from '../../styles/ContactSX';
 import '../../styles/ContactSX.css';
 
 function Contact() {
@@ -67,16 +67,17 @@ function Contact() {
   }
 
   return (
-    <Box sx={background}>
-      <Box sx={left}>
+    <Box sx={background({ minPort })}>
+      <Box sx={left({ minPort })}>
         <Avatar
           alt="Pablo Azambuyo"
           src={profile}
           sx={avatar({ minPort, minLand, larPort })}
         />
       </Box>
-      <Box sx={separator}></Box>
-      <Box sx={right}>
+      <Box sx={separatorY({ minPort })}></Box>
+      <Box sx={separatorX({ minPort })}></Box>
+      <Box sx={right({ minPort })}>
         <Typography sx={text({ darkMode, minPort, minLand, larPort })}>
           <Link
             style={textNoDeco()}
