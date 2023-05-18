@@ -17,7 +17,7 @@ interface backgroundI {
 const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, location, percentageResizedHeight }: backgroundI) => {
   return {
     ...asc, ...absolute,
-    background: 'red',
+    background: 'none',
     display: 'flex',
     pointerEvents:  larPort && percentageResizedHeight < 0.272 ? 'none' : larLand && percentageResizedHeight < 0.272 ? 'none' : 'null',
     transition: 'opacity .1s ease-in-out',
