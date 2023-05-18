@@ -51,7 +51,7 @@ const leftBoxOrTop = ({ minPort, minLand, medPort, medLand, larPort, larLand }: 
     justifyContent:  larPort ? 'end' : 'space-evenly',
     display: minPort ? 'flex' : minLand ? 'flex' : 'flex',
     flexDirection: minLand ? 'column' : 'column',
-    width: minPort ? '92vw' : minLand ? '50vw' : '50vw',
+    width: minPort ? '92vw' : minLand ? '50vw' : larLand ? '40vw' : '50vw',
     height: minPort ? '45vh' : minLand ? '60vh' : medPort ? '45vh' : medLand ? '45vh' : larPort ? '35vh' : '45vh'
   }
 }
