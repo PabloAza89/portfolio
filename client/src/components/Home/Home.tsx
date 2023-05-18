@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
 import {
-  background, leftBox, bgLeftUpper, textOne,
+  background, leftBoxOrTop, bgLeftUpper, textOne,
   textTwo, textThree, boxTechnologies,
-  /* boxMessageMinLand, */ boxMessage, buttonMessage, boxRightSVG,
+  /* boxMessageMinLand, */ boxMessage, buttonMessage, boxRightOrBotton,
   SVG, //boxTechnologiesCenter
 } from '../../styles/HomeSX';
 
@@ -20,6 +20,7 @@ function Home() {
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
   const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
@@ -27,7 +28,7 @@ function Home() {
 
   return (
     <Box sx={background({ minPort, minLand, larPort })}>
-      <Box sx={leftBox({ minPort, minLand, medPort, larPort })}>
+      <Box sx={leftBoxOrTop({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         {/* <Box sx={bgLeftUpper({ minPort, minLand, larPort })}> */}
           <Typography sx={textOne({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
           <Typography sx={textTwo({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
@@ -47,11 +48,11 @@ function Home() {
         
       </Box>
 
-      <Box sx={boxRightSVG({ minPort, minLand, larPort })}>
-        <Box sx={boxTechnologies({ minPort, minLand, medPort, larPort, larLand, percentageResizedHeight })}>
+      <Box sx={boxRightOrBotton({ minPort, minLand, medPort, larPort })}>
+        <Box sx={boxTechnologies({ minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight })}>
           <Technologies />
         </Box>
-        <Box sx={boxMessage({ minLand, medPort })}>
+        <Box sx={boxMessage({ minLand, medPort, medLand, larPort, larLand })}>
           <Link style={{ textDecoration: 'none' }} to="/portfolio/MessageMe">
             <Button
               sx={buttonMessage({ minPort, minLand, medPort, larPort })}
@@ -63,7 +64,7 @@ function Home() {
 
 
         <SvgIcon
-          sx={SVG({ width, height, minLand, medPort, larPort, larLand, percentageResizedHeight, percentageResizedWidth })}
+          sx={SVG({ width, height, minPort, minLand, medPort, larPort, larLand, percentageResizedHeight, percentageResizedWidth })}
           preserveAspectRatio="none"
         >
           <MySvg/>
