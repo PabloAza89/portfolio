@@ -10,9 +10,10 @@ import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
 import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
+//import StaticBackground from './components/StaticBackground/StaticBackground';
 import { background, blackWhite } from './styles/AppSX';
 import { Box } from '@mui/material';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setCurrentHeight, setCurrentWidth, setHeight, setLarLand,
@@ -25,6 +26,7 @@ import {
 function App() {
 
   const dispatch = useDispatch()
+  const location = useLocation()
 
   useEffect(() => {
     function handleResize() {
@@ -56,46 +58,51 @@ function App() {
 
   return (
     <Box sx={background} >
-        <Box sx={blackWhite({ staticRefWidth, darkMode })} >
-            <BrowserRouter>
-              <Routes>
-                <Route path="/portfolio" element={<>
-                  <NavBar />
-                  <DarkMode />
-                  <Home />
-                  <Language /></>}/>
-                <Route path="/portfolio/AboutMe" element={<>
-                  <AboutMe />
-                  <BackButton />
-                  <DarkMode />
-                  <Language /></>}/>
-                <Route path="/portfolio/Skills" element={<>
-                  <Skills />
-                  <BackButton />
-                  <DarkMode /></>}/>
-                <Route path="/portfolio/Projects" element={<>
-                  <Projects />
-                  <BackButton />
-                  <DarkMode />
-                  <Language /></>}/>
-                <Route path="/portfolio/Certifications" element={<>
-                  <Certifications />
-                  <BackButton />
-                  <DarkMode />
-                  <Language /></>}/>
-                <Route path="/portfolio/Contact" element={<>
-                  <Contact />
-                  <BackButton />
-                  <DarkMode />
-                  <Language /></>}/>
-                <Route path="/portfolio/MessageMe" element={<>
-                  <MessageMe />
-                  <BackButton />
-                  <DarkMode />
-                  <Language /></>}/>
-              </Routes>
-            </BrowserRouter>
-        </Box>
+      <Box sx={blackWhite({ staticRefWidth, darkMode, location:location.pathname })} >
+        <Routes>
+          <Route path="/portfolio" element={<>
+            <NavBar />
+            <DarkMode />
+            <Home />
+            <Language />
+          </>}/>
+          <Route path="/portfolio/AboutMe" element={<>
+            <AboutMe />
+            <BackButton />
+            <DarkMode />
+            <Language />
+          </>}/>
+          <Route path="/portfolio/Skills" element={<>
+            <Skills />
+            <BackButton />
+            <DarkMode />
+          </>}/>
+          <Route path="/portfolio/Projects" element={<>
+            <Projects />
+            <BackButton />
+            <DarkMode />
+            <Language />
+          </>}/>
+          <Route path="/portfolio/Certifications" element={<>
+            <Certifications />
+            <BackButton />
+            <DarkMode />
+            <Language />
+          </>}/>
+          <Route path="/portfolio/Contact" element={<>
+            <Contact />
+            <BackButton />
+            <DarkMode />
+            <Language />
+          </>}/>
+          <Route path="/portfolio/MessageMe" element={<>
+            <MessageMe />
+            <BackButton />
+            <DarkMode />
+            <Language />
+          </>}/>
+        </Routes>
+      </Box>
     </Box>
   );
 }

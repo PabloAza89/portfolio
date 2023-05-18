@@ -14,16 +14,18 @@ const background = () => {
 
 interface blackWhiteI {
   staticRefWidth: number,
-  darkMode: boolean
+  darkMode: boolean,
+  location: string
 }
 
-const blackWhite = ( { staticRefWidth, darkMode }: blackWhiteI ) => {
+const blackWhite = ( { staticRefWidth, darkMode, location }: blackWhiteI ) => {
   return {
     /* ...fixed, */ ...flex, ...column,
     position: 'relative',
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)',
     alignSelf: 'center',
+    justifyContent: location === '/portfolio/AboutMe' ? 'center' : 'none',
 /*     top: `${staticRefWidth * 0.5}px`,
     right: `${staticRefWidth * 0.5}px`,
     bottom: `${staticRefWidth * 0.5}px`,

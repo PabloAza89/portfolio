@@ -1,4 +1,4 @@
-import { flex, noSelect, row, absolute, column, jcc, fixed } from './CommonsSX';
+import { flex, noSelect, row, absolute, relative, column, jcc, fixed } from './CommonsSX';
 
 interface backgroundI {
   staticRefWidth: number
@@ -6,12 +6,20 @@ interface backgroundI {
 
 const background = ({ staticRefWidth }: backgroundI) => {
   return {
-    ...flex,...column,...jcc, ...fixed,
-    top: `${staticRefWidth * 0.5}px`,
+     /* ...flex, */  ...column, ...jcc, /*  ...relative, */
+    background: 'none',
+    display: 'flex',
+    position: 'relative',
+    width: '95vw',
+    height: '80vh',
+    /* top: `${staticRefWidth * 0.5}px`,
     right: `${staticRefWidth * 0.5}px`,
     bottom: `${staticRefWidth * 0.5}px`,
-    left: `${staticRefWidth  * 0.5}px`,
-    background: 'none'
+    left: `${staticRefWidth  * 0.5}px`, */
+    
+    alignSelf: 'center',
+    //justifySelf: 'center',
+    
   }
 }
 
@@ -25,7 +33,7 @@ interface blueBoxI {
 
 const blueBox = ({ darkMode, minPort, minLand, larPort, staticRefWidth }: blueBoxI) => {
   return {
-    ...flex, ...row, ...absolute,
+    ...flex, ...row, ...relative,
     background: darkMode ? '#253740' : '#3C6478',
     'borderRadius': `${staticRefWidth * 1}px`,
     alignSelf: 'center',
@@ -72,14 +80,15 @@ interface typographyI {
 const typography = ({ maxStaticReference, darkMode, minPort, minLand, MedPort, MedLand, larPort }: typographyI) => {
   return {
     ...noSelect,
-   justifyContent: 'flex-start',
+    background: 'none',
+    justifyContent: 'flex-start',
     display: 'flex',
     flexDirection: 'column',
     alignSelf: 'center',
-    width: '65vw',
+    width: minPort ? '75vw' : '65vw',
     height: minPort ? '38vh' : minLand ? '38vh' : larPort ? '28vh' : '28vh',
     textAlign: 'center',
-    fontSize: minPort ? `${maxStaticReference * 3.0}px` : minLand ? `${maxStaticReference * 3.0}px` : MedPort ? `${maxStaticReference * 2.3}px` : MedLand ? `${maxStaticReference * 2.3}px` :  larPort ? `${maxStaticReference * 1.5}px` : `${maxStaticReference * 1.5}px`,
+    fontSize: minPort ? `16px` : minLand ? `16px` : MedPort ? `${maxStaticReference * 2.3}px` : MedLand ? `${maxStaticReference * 2.3}px` :  larPort ? `${maxStaticReference * 1.5}px` : `${maxStaticReference * 1.5}px`,
     '::-webkit-scrollbar': { width: '10px' },
     '::-webkit-scrollbar-thumb': {
       'border': '10px solid',
@@ -92,7 +101,6 @@ const typography = ({ maxStaticReference, darkMode, minPort, minLand, MedPort, M
     padding: '0vw 1vw 0vw 1vw',
     //margin: '100px auto',
     overflow: 'auto',
-    background: 'none',
     color: 'transparent',
     WebkitTextFillColor: darkMode ? '#b5b3b3' : 'white',
     'transition': 'color 0.3s ease',

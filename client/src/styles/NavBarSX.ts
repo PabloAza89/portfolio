@@ -16,7 +16,8 @@ const background = ({ staticRefWidth, minPort, minLand, larPort }: genI) => {
     marginTop: '1vh',
     color: '#FFFFFF',
     height: minPort ? '30vw' : minLand ? '7vw' : larPort ? '20vh' : '15vh',
-    minHeight: larPort ? '11vw' : `${staticRefWidth * 3.5}px`
+    minHeight: larPort ? '11vw' : `${staticRefWidth * 3.5}px`,
+    justifyContent: minLand ? 'left' : 'none'
   }
 }
 
@@ -108,7 +109,7 @@ const scroll = ({ staticRefWidth, percentageResizedWidth, minPort, minLand, larP
       'flex-start' :
       'space-evenly',
       // percentageResizedWidth 0.504
-    width: minPort ? '96vw' : minLand ? '58vw' : larPort ? '96vw' : '60vw',
+    width: minPort ? '96vw' : minLand ? '55vw' : larPort ? '96vw' : '60vw',
     height: minPort ? '7vh' : minLand ? '7vh' : larPort ? '10vh' : '13vh'
   }
 }

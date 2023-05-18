@@ -60,8 +60,8 @@ const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxSt
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid ${cyan[100]} 2px` : `solid transparent 2px`,
-    height: minPort ? '10vw' : minLand ? '5.2vw' : medPort ? '8vw' : medLand ? '6vw' : larPort ? '4.9vw' : '42px',
-    width: minPort ? '15vw' : minLand ? '7.6vw' : medPort ? '11.7vw' : medLand ? '9vw' : larPort ? '7.1vw' : '60px',
+    height: minPort ? '25px' : minLand ? '25px' : medPort ? '8vw' : medLand ? '6vw' : larPort ? '4.9vw' : '42px',
+    width: minPort ? '37px' : minLand ? '37px' : medPort ? '11.7vw' : medLand ? '9vw' : larPort ? '7.1vw' : '60px',
     ':hover': {
       webkitFilter: 'brightness(.9)',
       'filter': 'brightness(.9)'
@@ -80,8 +80,8 @@ const lanEsFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxSt
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid transparent 2px` : `solid ${cyan[100]} 2px`,
-    height: minPort ? '10vw' : minLand ? '5.2vw' : medPort ? '8vw' : medLand ? '6vw' : larPort ? '4.9vw' : '42px',
-    width: minPort ? '15vw' : minLand ? '7.6vw' : medPort ? '11.7vw' : medLand ? '9vw' : larPort ? '7.1vw' : '60px',
+    height: minPort ? '25px' : minLand ? '25px' : medPort ? '8vw' : medLand ? '6vw' : larPort ? '4.9vw' : '42px',
+    width: minPort ? '37px' : minLand ? '37px' : medPort ? '11.7vw' : medLand ? '9vw' : larPort ? '7.1vw' : '60px',
     ':hover': {
       webkitFilter: 'brightness(.9)',
       'filter': 'brightness(.9)'
