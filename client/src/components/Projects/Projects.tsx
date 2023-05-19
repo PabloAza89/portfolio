@@ -19,11 +19,14 @@ function Projects() {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+  const height = useSelector((state: {height:number}) => state.height)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+  const staticRefHeigth = useSelector((state: {staticRefHeigth:number}) => state.staticRefHeigth)
   const english = useSelector((state: {english:boolean}) => state.english)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
 
   const [show, setShow] = useState<boolean>(false)
   const [name, setName] = useState<string>("")
@@ -63,7 +66,7 @@ function Projects() {
     
 
   return (
-    <Box sx={background({ minPort, minLand, larPort, staticRefWidth })}>
+    <Box sx={background({ minPort, minLand, larPort, staticRefWidth, staticRefHeigth, percentageResizedHeight, height })}>
       <ScrollContainer innerRef={useHorizontalScroll()} style={scroll({ minPort, minLand })}>
         <Box sx={boxUpperStripe({ minPort, larPort })}>
           <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>

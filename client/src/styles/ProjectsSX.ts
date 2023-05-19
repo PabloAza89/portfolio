@@ -8,14 +8,20 @@ interface backgroundI {
   minPort: boolean,
   minLand: boolean,
   larPort: boolean,
-  staticRefWidth: number
+  staticRefWidth: number,
+  staticRefHeigth: number,
+  percentageResizedHeight: number,
+  height: number
 }
 
-const background = ({ minPort, minLand, larPort, staticRefWidth }: backgroundI) => {
+const background = ({ minPort, minLand, larPort, staticRefWidth, staticRefHeigth, percentageResizedHeight, height }: backgroundI) => {
   return {
     ...flex, ...column, ...jcc, ...relative,
-    height: minPort ? '50vh' : minLand ? '60vh' : larPort ? '53vh' : '650px',
-    background: 'yellow'
+    height: minPort ? '50vh' : minLand ? '60vh' : larPort ? '600px' : `calc(${staticRefHeigth * 60}px)`,
+    background: 'yellow',
+    top: `calc((1080 / 100) * 11px)`
+    
+    
   }
 }
 
@@ -26,6 +32,7 @@ interface scrollI {
 
 const scroll = ({ minPort, minLand }: scrollI) => {
   return {
+    
     overflow: 'auto',
     background: 'orange',
     opacity: '0.8',
@@ -40,6 +47,7 @@ interface boxUpperStripeI {
 
 const boxUpperStripe = ({ minPort, larPort }: boxUpperStripeI) => {
   return {
+    
     // ...column,
     // background: 'none',
     // width: '300vw',
@@ -71,7 +79,7 @@ const intercalated =  ({ minPort, larPort }: intercalatedI) => {
     ...row,
     'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)',
     backgroundBlendMode: 'difference',
-    backgroundSize: minPort ? '13vw 7vw' : larPort ? '11vw 7vw' : '100px',
+    backgroundSize: minPort ? '13vw 7vw' : larPort ? '100px' : '100px',
     width: '158vw',
     height: '30px'
   }
@@ -97,7 +105,7 @@ const card = ({ darkMode, minPort, minLand, larPort }: cardI) => {
     ...column, ...flex,
     marginLeft: '1vw' ,
     background: darkMode ? '#6e1b1b' : red[800],
-    height: minPort ? '20vh' : minLand ? '44vh' : larPort ? '20vh' : '347px'
+    height: minPort ? '20vh' : minLand ? '44vh' : larPort ? '347px' : '347px'
   }
 }
 
@@ -112,7 +120,7 @@ const boxTitle = ({ minPort, minLand, larPort }: boxTitleI) => {
     ...flex, ...row, ...aic,
     marginLeft: '1vw',
     background: 'none',
-    height: minPort ? '8vh' : minLand ? '8vh' : larPort ? '5vh' : '60px'
+    height: minPort ? '8vh' : minLand ? '8vh' : larPort ? '60px' : '60px'
   }
 }
 
@@ -129,7 +137,7 @@ const title = ({ darkMode, minPort, minLand, larPort }: titleI) => {
     marginRight: minPort ? '1.3vw' : minLand ? '0.9vw' : larPort ? '1.3vw' : '0.9vw',
     fontFamily: 'Century Gothic',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort ? '4.5vw' : minLand ? '5vh' : larPort ? '3.6vw' : '40px'
+    fontSize: minPort ? '4.5vw' : minLand ? '5vh' : larPort ? '40px' : '40px'
   }
 }
 
@@ -145,7 +153,7 @@ const boxMedia = ({ length, darkMode, minPort, minLand, larPort }: boxMediaI) =>
   return {
     ...row, ...jcsb, ...flex,
     background: darkMode ? '#6a6e2e' : lime[400],
-    height: minPort ? '32vh' : minLand ? '36vh' : larPort ? '15vh' : '280px',
+    height: minPort ? '32vh' : minLand ? '36vh' : larPort ? '280px' : '280px',
     width: `${length * 560}px`
   }
 }
@@ -165,7 +173,7 @@ const cardMedia = ({ url, darkMode, minPort, minLand, larPort }: cardMediaI) => 
     'backgroundImage': `url(${url})`,
     //width: '100%', height: '100%',
     
-    width: '560px', height: '280px',
+    width: '550px', height: '270px',
     //backgroundSize: minPort ? '30vw 15vh' : minLand ? '30vw 33vh' : larPort ? '30vw 14vh' : '30vw 30vh',
     ':hover':
       darkMode ? {webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)'}
@@ -218,8 +226,9 @@ interface boxLowerI {
 const boxLower = ({ minPort, minLand, larPort, larLand }: boxLowerI) => {
   return {
     ...asc, ...row, ...noSelect,
-    background: 'none',
-    minWidth: larPort ? '10vw' : larLand ? '10vw' : larPort ? '35vw' : '10vw',
+    background: 'gray',
+    //minWidth: larPort ? '10vw' : larLand ? '10vw' : larPort ? '35vw' : '20vw',
+    //width: larPort ? '10vw' : larLand ? '10vw' : larPort ? '35vw' : '00vw',
     display: minLand ? 'none' : minPort ? 'none' : 'flex'
   }
 }
@@ -228,8 +237,8 @@ const textLower = ( larPort: boolean ) => {
   return {
     ...jcc, ...asc, ...row, ...mix,
     color: '#FFFFFF',
-    fontSize: larPort ? '2.5vh' : '1.5vw',
-    top: '0.1vh'
+    fontSize: larPort ? '2.5vh' : '23px',
+    //top: '0px'
   }
 }
 
@@ -242,9 +251,9 @@ const select = ({ darkMode, larPort }: selectI) => {
   return {
     color: '#FFFFFF',
     background: darkMode ? '#48555e' : blue[500],
-    height: larPort ? '5vh' : '6vh',
-    width: larPort ? '11vw' : '4.0vw',
-    fontSize: larPort ? '2vh': '1vw'
+    height: larPort ? '5vh' : '45px',
+    width: larPort ? '11vw' : '65px',
+    fontSize: larPort ? '2vh': '17px'
   }
 }
 
