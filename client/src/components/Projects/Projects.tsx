@@ -9,7 +9,7 @@ import food3 from '../../images/food3.png';
 import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
 import {
-  background, scroll, boxUpperStripe, solid, intercalated,
+  background, scroll, solid, intercalated,
   centerStripe, card, boxTitle, title, boxMedia, cardMedia,
   dialog, dialogMedia, boxLower, textLower, select
 } from '../../styles/ProjectsSX';
@@ -63,40 +63,41 @@ function Projects() {
       href: `https://pabloaza89.github.io/PI-Food-GH/`
     }]
 
-
+console.log("TEST", array.map(e => e.media.length))
 
   return (
+  <Box sx={{  flexDirection: 'column' }}>
+    <Box sx={{ display: 'flex', width: '20px', height: '20vh', minHeight: '100px', background: 'orange', position: 'relative' }}></Box>
     <Box sx={background({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height })}>
+      
       <ScrollContainer innerRef={useHorizontalScroll()} style={scroll({ minPort, minLand })}>
 
         <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
-        <Box sx={intercalated({ minPort, larPort })}></Box>
+        <Box sx={intercalated({ length:array.map(e => e.media).flat().length, minPort, larPort })}></Box>
         <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
 
         <Box sx={centerStripe} >
-
           {array.map((e) => {
             return (
-
               <Box key={e.title} sx={card({ darkMode, minPort, minLand, larPort })}>
-                <Box sx={{ background: 'blue', width: '20px', height: '2px' }}></Box>
-                <Box sx={boxTitle({ minPort, minLand, larPort })}>
-
-                  <Typography sx={title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
-                  <GoToLinkButton link={e.href}/>
-                </Box>
-                <Box sx={boxMedia({ length:e.media.length, darkMode, minPort, minLand, larPort })}>
-                  {e.media.map((m) =>{
-                    return <Box key={m} src={m} component="img" onClick={() => {setName(m); setShow(!show)}} sx={cardMedia({ url:m, darkMode, minPort, minLand, larPort })}></Box>
-                  })}
+                <Box sx={{ background: 'blue', width: '20px' }}></Box>
+                <Box sx={{ display: 'flex', flexDirection: 'column', }}>
+                  <Box sx={boxTitle({ length:e.media.length, minPort, minLand, larPort })}>
+                    <Typography sx={title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
+                    <GoToLinkButton link={e.href}/>
+                  </Box>
+                  <Box sx={boxMedia({ length:e.media.length, darkMode, minPort, minLand, larPort })}>
+                    {e.media.map((m) =>{
+                      return <Box key={m} src={m} component="img" onClick={() => {setName(m); setShow(!show)}} sx={cardMedia({ url:m, darkMode, minPort, minLand, larPort })}></Box>
+                    })}
+                  </Box>
                 </Box>
               </Box>
-
-        )})}
+          )})}
         </Box>
 
         <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
-        <Box sx={intercalated({ minPort, larPort })}></Box>
+        <Box sx={intercalated({ length:array.map(e => e.media).flat().length, minPort, larPort })}></Box>
         <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
 
       </ScrollContainer>
@@ -129,7 +130,9 @@ function Projects() {
           </Select>
         </FormControl>
       </Box>
+      
     </Box>
+  </Box>
   )
 }
 
