@@ -63,13 +63,22 @@ function Projects() {
       href: `https://pabloaza89.github.io/PI-Food-GH/`
     }]
 
-console.log("TEST", array.map(e => e.media.length))
+/* console.log("TEST", array.map(e => e.media.length)) */
+
+// mediaMeasures:
+// total height: 340
+// titleheight: 60
+// image height: 280
+// image width: 550
+// separators width: 14
+// each width: 564
+
 
   return (
   <Box sx={{  flexDirection: 'column' }}>
     <Box sx={{ display: 'flex', width: '20px', height: '20vh', minHeight: '100px', background: 'orange', position: 'relative' }}></Box>
     <Box sx={background({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height })}>
-      
+
       <ScrollContainer innerRef={useHorizontalScroll()} style={scroll({ minPort, minLand })}>
 
         <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
@@ -80,16 +89,29 @@ console.log("TEST", array.map(e => e.media.length))
           {array.map((e) => {
             return (
               <Box key={e.title} sx={card({ darkMode, minPort, minLand, larPort })}>
-                <Box sx={{ background: 'blue', width: '20px' }}></Box>
+                <Box sx={{ background: 'blue', width: '14px' }}></Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', }}>
                   <Box sx={boxTitle({ length:e.media.length, minPort, minLand, larPort })}>
                     <Typography sx={title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
                     <GoToLinkButton link={e.href}/>
                   </Box>
                   <Box sx={boxMedia({ length:e.media.length, darkMode, minPort, minLand, larPort })}>
+
                     {e.media.map((m) =>{
-                      return <Box key={m} src={m} component="img" onClick={() => {setName(m); setShow(!show)}} sx={cardMedia({ url:m, darkMode, minPort, minLand, larPort })}></Box>
+                      /* console.log("TESTING", e.media.indexOf(m));
+                      console.log("BBB", e.media.length-1) */
+                      return (
+                        
+                        <Box key={m.toString()} sx={{ display: 'flex', flexDirection: 'row' }}>
+                          <Box key={m.toString().concat('A')} src={m} component="img" onClick={() => {setName(m); setShow(!show)}} sx={cardMedia({ url:m, darkMode, minPort, minLand, larPort })}></Box>
+                          {/* {console.log(array.indexOf(m))} */}
+                          
+                          <Box key={m.toString()} sx={{ display: e.media.indexOf(m) === e.media.length-1 ? 'none' : 'flex', background: 'blue', width: '14px' }}></Box>
+                        </Box>
+
+                      )
                     })}
+
                   </Box>
                 </Box>
               </Box>
@@ -130,7 +152,7 @@ console.log("TEST", array.map(e => e.media.length))
           </Select>
         </FormControl>
       </Box>
-      
+
     </Box>
   </Box>
   )

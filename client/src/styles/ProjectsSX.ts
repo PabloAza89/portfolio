@@ -80,9 +80,10 @@ const intercalated =  ({ length, minPort, larPort }: intercalatedI) => {
     //...row,
     display: 'flex',
     position: 'relative',
+    //'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)',
     'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)',
     backgroundBlendMode: 'difference',
-    backgroundSize: /* minPort ? '13vw 7vw' : larPort ? '100px' : */ '100px',
+    backgroundSize: /* minPort ? '13vw 7vw' : larPort ? '100px' : */ '94px', // 550+14/6 = 94
     width: `calc(${length}*600px)`,
     height: '30px'
   }
@@ -165,7 +166,7 @@ const boxMedia = ({ length, darkMode, minPort, minLand, larPort }: boxMediaI) =>
     ...row, ...jcsb, ...flex,
     background: darkMode ? '#6a6e2e' : lime[400],
     //height: minPort ? '32vh' : minLand ? '36vh' : larPort ? '280px' : '280px',
-    width: `${length * 560}px`
+    //width: `${length * 560}px`
   }
 }
 
@@ -181,7 +182,8 @@ const cardMedia = ({ url, darkMode, minPort, minLand, larPort }: cardMediaI) => 
   return {
     ...asc,
     'cursor': 'pointer',
-    width: '550px', height: '280px',
+    width: '550px',
+    height: '280px',
     ':hover':
       darkMode ? {webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)'}
       : {webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)'},
