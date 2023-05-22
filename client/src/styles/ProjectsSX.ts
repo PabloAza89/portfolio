@@ -9,19 +9,20 @@ interface backgroundI {
   minLand: boolean,
   larPort: boolean,
   staticRefWidth: number,
-  staticRefHeigth: number,
+  staticRefHeight: number,
   percentageResizedHeight: number,
   height: number
 }
 
-const background = ({ minPort, minLand, larPort, staticRefWidth, staticRefHeigth, percentageResizedHeight, height }: backgroundI) => {
+const background = ({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height }: backgroundI) => {
   return {
     ...flex, ...column, ...jcc, ...relative,
-    height: minPort ? '50vh' : minLand ? '60vh' : larPort ? '600px' : `calc(${staticRefHeigth * 60}px)`,
+
+    height: minPort ? '50vh' : minLand ? '60vh' : larPort ? '600px' : `calc(${staticRefHeight}*70px)`, // '80px' IS %
     background: 'yellow',
-    top: `calc((1080 / 100) * 11px)`
-    
-    
+    //top: `calc(${staticRefHeight}*10px)`
+    top: `100px`
+    //top: `calc((1080 / 100) * 11px)`
   }
 }
 
@@ -32,9 +33,9 @@ interface scrollI {
 
 const scroll = ({ minPort, minLand }: scrollI) => {
   return {
-    
+
     overflow: 'auto',
-    background: 'orange',
+    background: 'none',
     opacity: '0.8',
     marginBottom: minPort ? '0vh' : minLand ? '0vh' : '1vh'
   }
@@ -47,9 +48,10 @@ interface boxUpperStripeI {
 
 const boxUpperStripe = ({ minPort, larPort }: boxUpperStripeI) => {
   return {
-    
+
     // ...column,
-    // background: 'none',
+     background: 'red',
+     height: '40px',
     // width: '300vw',
     // height: minPort ? '3vh' : larPort ? '3vh' : '54px',
     // marginBottom: '0px',
@@ -85,11 +87,11 @@ const intercalated =  ({ minPort, larPort }: intercalatedI) => {
   }
 }
 
-const mainStripe = () => {
+const centerStripe = () => {
   return {
     ...row, ...flex,
     background: brown[700],
-    width: '20px'
+    width: '00px'
   }
 }
 
@@ -103,7 +105,7 @@ interface cardI {
 const card = ({ darkMode, minPort, minLand, larPort }: cardI) => {
   return {
     ...column, ...flex,
-    marginLeft: '1vw' ,
+    /* marginLeft: '1vw' , */
     background: darkMode ? '#6e1b1b' : red[800],
     height: minPort ? '20vh' : minLand ? '44vh' : larPort ? '347px' : '347px'
   }
@@ -118,7 +120,7 @@ interface boxTitleI {
 const boxTitle = ({ minPort, minLand, larPort }: boxTitleI) => {
   return {
     ...flex, ...row, ...aic,
-    marginLeft: '1vw',
+    /* marginLeft: '1vw', */
     background: 'none',
     height: minPort ? '8vh' : minLand ? '8vh' : larPort ? '60px' : '60px'
   }
@@ -134,7 +136,7 @@ interface titleI {
 const title = ({ darkMode, minPort, minLand, larPort }: titleI) => {
   return {
     ...noSelect,
-    marginRight: minPort ? '1.3vw' : minLand ? '0.9vw' : larPort ? '1.3vw' : '0.9vw',
+    //marginRight: minPort ? '1.3vw' : minLand ? '0.9vw' : larPort ? '1.3vw' : '0.9vw',
     fontFamily: 'Century Gothic',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort ? '4.5vw' : minLand ? '5vh' : larPort ? '40px' : '40px'
@@ -166,15 +168,28 @@ interface cardMediaI {
   larPort: boolean
 }
 
+// const cardMedia = ({ url, darkMode, minPort, minLand, larPort }: cardMediaI) => {
+//   return {
+//     ...asc,
+//     'cursor': 'pointer',
+//     'backgroundImage': `url(${url})`,
+//     //width: '100%', height: '100%',
+
+//     width: '550px', height: '270px',
+//     //backgroundSize: minPort ? '30vw 15vh' : minLand ? '30vw 33vh' : larPort ? '30vw 14vh' : '30vw 30vh',
+//     ':hover':
+//       darkMode ? {webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)'}
+//       : {webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)'},
+//     webkitFilter: darkMode ? 'brightness(.6)' : 'none',
+//     'filter': darkMode ? 'brightness(.6)' : 'none'
+//   }
+// }
+
 const cardMedia = ({ url, darkMode, minPort, minLand, larPort }: cardMediaI) => {
   return {
     ...asc,
     'cursor': 'pointer',
-    'backgroundImage': `url(${url})`,
-    //width: '100%', height: '100%',
-    
-    width: '550px', height: '270px',
-    //backgroundSize: minPort ? '30vw 15vh' : minLand ? '30vw 33vh' : larPort ? '30vw 14vh' : '30vw 30vh',
+    width: '550px', height: '280px',
     ':hover':
       darkMode ? {webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)'}
       : {webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)'},
@@ -259,6 +274,6 @@ const select = ({ darkMode, larPort }: selectI) => {
 
 export {
   background, scroll, boxUpperStripe, solid, intercalated,
-  mainStripe, card, boxTitle, title, boxMedia, cardMedia,
+  centerStripe, card, boxTitle, title, boxMedia, cardMedia,
   dialog, dialogMedia, boxLower, textLower, select
 }

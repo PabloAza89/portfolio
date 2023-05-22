@@ -10,7 +10,7 @@ import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
 import {
   background, scroll, boxUpperStripe, solid, intercalated,
-  mainStripe, card, boxTitle, title, boxMedia, cardMedia,
+  centerStripe, card, boxTitle, title, boxMedia, cardMedia,
   dialog, dialogMedia, boxLower, textLower, select
 } from '../../styles/ProjectsSX';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
@@ -21,7 +21,7 @@ function Projects() {
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const height = useSelector((state: {height:number}) => state.height)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
-  const staticRefHeigth = useSelector((state: {staticRefHeigth:number}) => state.staticRefHeigth)
+  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
   const english = useSelector((state: {english:boolean}) => state.english)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
@@ -63,37 +63,42 @@ function Projects() {
       href: `https://pabloaza89.github.io/PI-Food-GH/`
     }]
 
-    
+
 
   return (
-    <Box sx={background({ minPort, minLand, larPort, staticRefWidth, staticRefHeigth, percentageResizedHeight, height })}>
+    <Box sx={background({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height })}>
       <ScrollContainer innerRef={useHorizontalScroll()} style={scroll({ minPort, minLand })}>
-        <Box sx={boxUpperStripe({ minPort, larPort })}>
-          <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
-          <Box sx={intercalated({ minPort, larPort })}></Box>
-          <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
-        </Box>
-        <Box sx={mainStripe} >
+
+        <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
+        <Box sx={intercalated({ minPort, larPort })}></Box>
+        <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
+
+        <Box sx={centerStripe} >
+
           {array.map((e) => {
             return (
-          <Box key={e.title} sx={card({ darkMode, minPort, minLand, larPort })}>
-            <Box sx={boxTitle({ minPort, minLand, larPort })}>
-              <Typography sx={title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
-              <GoToLinkButton link={e.href}/>
-            </Box>
-            <Box sx={boxMedia({ length:e.media.length, darkMode, minPort, minLand, larPort })}>
-              {e.media.map((m) =>{
-                return <CardMedia key={m} component="div" onClick={() => {setName(m); setShow(!show)}} sx={cardMedia({ url:m, darkMode, minPort, minLand, larPort })}></CardMedia>
-              })}
-            </Box>
-          </Box>)
-        })}
+
+              <Box key={e.title} sx={card({ darkMode, minPort, minLand, larPort })}>
+                <Box sx={{ background: 'blue', width: '20px', height: '2px' }}></Box>
+                <Box sx={boxTitle({ minPort, minLand, larPort })}>
+
+                  <Typography sx={title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
+                  <GoToLinkButton link={e.href}/>
+                </Box>
+                <Box sx={boxMedia({ length:e.media.length, darkMode, minPort, minLand, larPort })}>
+                  {e.media.map((m) =>{
+                    return <Box key={m} src={m} component="img" onClick={() => {setName(m); setShow(!show)}} sx={cardMedia({ url:m, darkMode, minPort, minLand, larPort })}></Box>
+                  })}
+                </Box>
+              </Box>
+
+        )})}
         </Box>
-        <Box sx={boxUpperStripe({ minPort, larPort })}>
-          <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
-          <Box sx={intercalated({ minPort, larPort })}></Box>
-          <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
-        </Box>
+
+        <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
+        <Box sx={intercalated({ minPort, larPort })}></Box>
+        <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
+
       </ScrollContainer>
 
       <Dialog
