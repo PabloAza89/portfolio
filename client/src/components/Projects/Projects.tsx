@@ -1,5 +1,6 @@
 import { Box, CardMedia, Typography } from '@mui/material';
 import { Dialog, FormControl, InputLabel, MenuItem, Select, Paper } from '@mui/material/';
+import { grey } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
@@ -9,12 +10,11 @@ import food3 from '../../images/food3.png';
 import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
 import DialogContent from '@mui/material/DialogContent';
-
-
 import {
   background, scroll, solid, intercalated, topHelper,
   centerStripe, card, boxTitle, title, boxMedia, cardMedia,
-  dialog, dialogMedia, boxLower, textLower, select
+  dialog, dialogMedia, boxLower, textLower, select, cardLeft,
+  betweenMedia, lowerHelper
 } from '../../styles/ProjectsSX';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 
@@ -108,9 +108,9 @@ function Projects() {
           {array.map((e) => {
             return (
               <Box key={e.title} sx={card({ darkMode, minPort, minLand, larPort })}>
-                <Box sx={{ background: 'blue', width: '14px' }}></Box>
+                <Box sx={cardLeft}></Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', }}>
-                  <Box sx={boxTitle({ length:e.media.length, minPort, minLand, larPort })}>
+                  <Box sx={boxTitle({ length:e.media.length, minPort, minLand, larPort, darkMode })}>
                     <Typography sx={title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
                     <GoToLinkButton link={e.href}/>
                   </Box>
@@ -120,7 +120,7 @@ function Projects() {
                       return (
                         <Box key={m.toString()} sx={{ display: 'flex', flexDirection: 'row' }}>
                           <Box key={m.toString().concat('A')} src={m} component="img" onClick={() => {setName(m); setShow(!show)}} sx={cardMedia({ url:m, darkMode, minPort, minLand, larPort })}></Box>
-                          <Box key={m.toString()} sx={{ display: e.media.indexOf(m) === e.media.length-1 ? 'none' : 'flex', background: 'blue', width: '14px' }}></Box>
+                          <Box key={m.toString()} sx={betweenMedia({ darkMode, indexOf:e.media.indexOf(m), length:e.media.length-1 })}></Box>
                         </Box>
                       )
                     })}
@@ -138,39 +138,33 @@ function Projects() {
       </ScrollContainer>
 
       <Dialog
-        //open={minPort || minLand ? show : false}
-        open={true}
-        //onClick={() => {setShow(false)}}
+        open={show}
+        onClick={() => {setShow(false)}}
+        style={{ maxWidth: '100vw', maxHeight: '100vh', padding: '0px' }}
         PaperProps={{ sx: {
           overflow: 'hidden',
           padding: '0px',
           display: 'flex',
           maxWidth: '100vw',
           maxHeight: '100vh',
-          width: minPort ? '85vw' : minLand ? '85vw' : '85vw',
-          height: minPort ? '80vh' : minLand ? '80vh' : '80vh',
+          width: minPort ? '85vw' : minLand ? '85vw' : medPort ? '90vw' : medLand ? '80vw' : larPort ? '85vw' : '70vw',
+          height: minPort ? '80vh' : minLand ? '80vh' : medPort ? '35vh' : medLand ? '55vh' : larPort ? '45vh' : '65vh',
           justifyContent: 'center',
           alignItems: 'center',
           '&::-webkit-scrollbar': {display: 'none'}
-      } }}
-        style={{
-          maxWidth: '100vw', maxHeight: '100vh', padding: '0px',
-        }}
-      >
+      }}}>
         <Box
           component="img"
           sx={{
-            width: minPort ? 'calc(80vh - 32px)' : minLand ? 'calc(85vw - 32px)' : '70vh',
-            height: minPort ? 'calc(85vw - 32px)' : minLand ? 'calc(80vh - 32px)' : '70vw',
+            width: minPort ? 'calc(80vh - 32px)' : minLand ? 'calc(85vw - 32px)' : medPort ? 'calc(90vw - 32px)' : medLand ? 'calc(80vw - 32px)' : larPort ? 'calc(85vw - 32px)' : 'calc(70vw - 32px)',
+            height: minPort ? 'calc(85vw - 32px)' : minLand ? 'calc(80vh - 32px)' : medPort ? 'calc(35vh - 32px)' : medLand ? 'calc(55vh - 32px)' : larPort ? 'calc(45vh - 32px)' : 'calc(65vh - 32px)',
             transform: minPort ? 'rotate(-90deg)' : 'none',
             padding: '0px'
           }}
-          src={weatherify1}
+          src={name}
           alt="image"
         />
-
       </Dialog>
-
 
       <Box sx={boxLower({ minPort, minLand, larPort, larLand })}>
         <Typography sx={textLower( larPort )}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
@@ -192,6 +186,7 @@ function Projects() {
       </Box>
 
     </Box>
+    <Box sx={lowerHelper}></Box>
   </Box>
   )
 }

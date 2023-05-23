@@ -3,6 +3,7 @@ import {
   aic, asc, column, mix, fixed, flex,
   jcc, jcsb, jic, noSelect, row, relative
 } from './CommonsSX';
+import { grey } from '@mui/material/colors';
 
 interface topHelperI {
   minPort: boolean,
@@ -11,16 +12,15 @@ interface topHelperI {
   medLand: boolean,
   larPort: boolean,
   larLand: boolean
-  
 }
 
 const topHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topHelperI) => {
   return {
+    background: 'transparent',
     display: 'flex',
     width: '20px',
     height: minPort ? '26vh' : minLand ? '15vh' : medPort ? '26vh' : medLand ? '17vh' : larPort ? '28vh' : '22vh',
-    minHeight: '8px',
-    background: 'orange',
+    minHeight: larPort || larLand ? '100px' : '8px',
     position: 'relative'
   }
 }
@@ -37,11 +37,11 @@ interface backgroundI {
 
 const background = ({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height }: backgroundI) => {
   return {
+    background: 'none',
     display: 'flex',
     position: 'relative',
     flexDirection: 'column',
     height: minPort ? '370px' : minLand ? '270px' : larPort ? '550px' : '520px',
-    background: 'yellow'
   }
 }
 
@@ -52,12 +52,9 @@ interface scrollI {
 
 const scroll = ({ minPort, minLand }: scrollI) => {
   return {
-  /*   display: 'flex',
-    position: 'relative', */
     overflow: 'auto',
     background: 'none',
     opacity: '0.8',
-    //marginBottom: minPort ? '0vh' : minLand ? '0vh' : '1vh'
   }
 }
 
@@ -73,7 +70,6 @@ interface solidI {
 
 const solid = ({ minPort, minLand, medPort, medLand, larPort, larLand, length }: solidI) => {
   return {
-    //...row,
     display: 'flex',
     position: 'relative',
     background: brown[700],
@@ -111,7 +107,7 @@ interface centerStripeI {
   medLand: boolean,
   larPort: boolean,
   larLand: boolean
-  
+
 }
 
 const centerStripe = ({ minPort, minLand, medPort, medLand, larPort, larLand }: centerStripeI) => {
@@ -119,7 +115,6 @@ const centerStripe = ({ minPort, minLand, medPort, medLand, larPort, larLand }: 
     ...row, ...flex,
     background: brown[700],
     height: minPort ? '270px' : minLand ? '195px' : '340px',
-    //width: '100px'
   }
 }
 
@@ -133,12 +128,15 @@ interface cardI {
 const card = ({ darkMode, minPort, minLand, larPort }: cardI) => {
   return {
     ...row, ...flex,
-    /* marginLeft: '1vw' , */
-    /* zIndex: 1000, */
-    /* width: '500px', */
-    background: 'orange',
-    //background: darkMode ? '#6e1b1b' : red[800],
+    background: 'none',
     height: minPort ? '270px' : minLand ? '195px' : larPort ? '347px' : '340px'
+  }
+}
+
+const cardLeft = () => {
+  return {
+    background: brown[700],
+    width: '14px'
   }
 }
 
@@ -146,19 +144,16 @@ interface boxTitleI {
   minPort: boolean,
   minLand: boolean,
   larPort: boolean,
-  length: number
-
+  length: number,
+  darkMode: boolean
 }
 
-const boxTitle = ({ length, minPort, minLand, larPort }: boxTitleI) => {
+const boxTitle = ({ length, minPort, minLand, larPort, darkMode }: boxTitleI) => {
   return {
     ...flex, ...row, ...aic,
-    //marginLeft: '18px',
     paddingLeft: '18px',
-    //width: `calc(${length}*200px)`,
-    background: 'darkslateblue',
+    background: darkMode ? '#6e0f0f' : red[800],
     height: minPort ? '50px' : minLand ? '35px' : larPort ? '60px' : '60px'
-
   }
 }
 
@@ -172,7 +167,6 @@ interface titleI {
 const title = ({ darkMode, minPort, minLand, larPort }: titleI) => {
   return {
     ...noSelect,
-    //marginRight: minPort ? '1.3vw' : minLand ? '0.9vw' : larPort ? '1.3vw' : '0.9vw',
     marginRight: '18px',
     fontFamily: 'Century Gothic',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
@@ -190,10 +184,7 @@ interface boxMediaI {
 
 const boxMedia = ({ length, darkMode, minPort, minLand, larPort }: boxMediaI) => {
   return {
-    ...row, ...jcsb, ...flex,
-    background: darkMode ? '#6a6e2e' : lime[400],
-    //height: minPort ? '32vh' : minLand ? '36vh' : larPort ? '280px' : '280px',
-    //width: `${length * 560}px`
+    ...row, ...jcsb, ...flex
   }
 }
 
@@ -216,6 +207,20 @@ const cardMedia = ({ url, darkMode, minPort, minLand, larPort }: cardMediaI) => 
       : {webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)'},
     webkitFilter: darkMode ? 'brightness(.6)' : 'none',
     'filter': darkMode ? 'brightness(.6)' : 'none'
+  }
+}
+
+interface betweenMediaI {
+  indexOf: number,
+  length: number,
+  darkMode: boolean
+}
+
+const betweenMedia = ({ darkMode, indexOf, length }: betweenMediaI) => {
+  return {
+    display: indexOf === length ? 'none' : 'flex',
+    background: darkMode ? lime[900] : lime[400],
+    width: '14px'
   }
 }
 
@@ -264,8 +269,6 @@ const boxLower = ({ minPort, minLand, larPort, larLand }: boxLowerI) => {
     ...asc, ...row, ...noSelect,
     background: 'none',
     marginTop: '10px',
-    //minWidth: larPort ? '10vw' : larLand ? '10vw' : larPort ? '35vw' : '20vw',
-    //width: larPort ? '10vw' : larLand ? '10vw' : larPort ? '35vw' : '00vw',
     display: minLand ? 'none' : minPort ? 'none' : 'flex'
   }
 }
@@ -275,7 +278,6 @@ const textLower = ( larPort: boolean ) => {
     ...jcc, ...asc, ...row, ...mix,
     color: '#FFFFFF',
     fontSize: larPort ? '23px' : '23px',
-    //top: '0px'
   }
 }
 
@@ -294,8 +296,21 @@ const select = ({ darkMode, larPort }: selectI) => {
   }
 }
 
+const lowerHelper = () => {
+  return {
+    background: grey[400],
+    height: '6px',
+    width: 'calc(100vw - 12px)',
+    display: 'flex', 
+    position: 'fixed',
+    bottom: '0px', 
+    zIndex: 1000
+  }  
+}
+
 export {
-  background, scroll, solid, intercalated,
+  background, scroll, solid, intercalated, cardLeft,
   centerStripe, card, boxTitle, title, boxMedia, cardMedia,
-  dialog, dialogMedia, boxLower, textLower, select, topHelper
+  dialog, dialogMedia, boxLower, textLower, select, topHelper,
+  betweenMedia, lowerHelper
 }
