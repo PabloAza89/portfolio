@@ -1,5 +1,5 @@
 import { Box, CardMedia, Typography } from '@mui/material';
-import { Dialog, FormControl, InputLabel, MenuItem, Select } from '@mui/material/';
+import { Dialog, FormControl, InputLabel, MenuItem, Select, Paper } from '@mui/material/';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
@@ -8,8 +8,11 @@ import food2 from '../../images/food2.png';
 import food3 from '../../images/food3.png';
 import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
+import DialogContent from '@mui/material/DialogContent';
+
+
 import {
-  background, scroll, solid, intercalated,
+  background, scroll, solid, intercalated, topHelper,
   centerStripe, card, boxTitle, title, boxMedia, cardMedia,
   dialog, dialogMedia, boxLower, textLower, select
 } from '../../styles/ProjectsSX';
@@ -18,12 +21,15 @@ import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 function Projects() {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+
   const height = useSelector((state: {height:number}) => state.height)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
   const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
   const english = useSelector((state: {english:boolean}) => state.english)
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
   const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
@@ -63,29 +69,42 @@ function Projects() {
       href: `https://pabloaza89.github.io/PI-Food-GH/`
     }]
 
-/* console.log("TEST", array.map(e => e.media.length)) */
+// mediaMeasures MIN PORT:
+// total height: 270
+// titleheight: 50 **
+// image height: 220 **
+// image width: 400
+// separators width: 14
+// each width: 414 / 6 = 69
 
-// mediaMeasures:
+// mediaMeasures MIN LAND:
+// total height: 220
+// titleheight: 35
+// image height: 160
+// image width: 400
+// separators width: 14
+// each width: 414 / 6 = 69
+
+// mediaMeasures LAR:
 // total height: 340
 // titleheight: 60
 // image height: 280
 // image width: 550
 // separators width: 14
-// each width: 564
-
+// each width: 564 / 6 = 94
 
   return (
   <Box sx={{  flexDirection: 'column' }}>
-    <Box sx={{ display: 'flex', width: '20px', height: '20vh', minHeight: '100px', background: 'orange', position: 'relative' }}></Box>
+    <Box sx={topHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     <Box sx={background({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height })}>
 
       <ScrollContainer innerRef={useHorizontalScroll()} style={scroll({ minPort, minLand })}>
 
-        <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
-        <Box sx={intercalated({ length:array.map(e => e.media).flat().length, minPort, larPort })}></Box>
-        <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
+        <Box sx={solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
 
-        <Box sx={centerStripe} >
+        <Box sx={centerStripe({ minPort, minLand, medPort, medLand, larPort, larLand })} >
           {array.map((e) => {
             return (
               <Box key={e.title} sx={card({ darkMode, minPort, minLand, larPort })}>
@@ -98,17 +117,11 @@ function Projects() {
                   <Box sx={boxMedia({ length:e.media.length, darkMode, minPort, minLand, larPort })}>
 
                     {e.media.map((m) =>{
-                      /* console.log("TESTING", e.media.indexOf(m));
-                      console.log("BBB", e.media.length-1) */
                       return (
-                        
                         <Box key={m.toString()} sx={{ display: 'flex', flexDirection: 'row' }}>
                           <Box key={m.toString().concat('A')} src={m} component="img" onClick={() => {setName(m); setShow(!show)}} sx={cardMedia({ url:m, darkMode, minPort, minLand, larPort })}></Box>
-                          {/* {console.log(array.indexOf(m))} */}
-                          
                           <Box key={m.toString()} sx={{ display: e.media.indexOf(m) === e.media.length-1 ? 'none' : 'flex', background: 'blue', width: '14px' }}></Box>
                         </Box>
-
                       )
                     })}
 
@@ -118,21 +131,46 @@ function Projects() {
           )})}
         </Box>
 
-        <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
-        <Box sx={intercalated({ length:array.map(e => e.media).flat().length, minPort, larPort })}></Box>
-        <Box sx={solid({ length:array.map(e => e.media).flat().length })}></Box>
+        <Box sx={solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
 
       </ScrollContainer>
 
       <Dialog
-        sx={dialog( minPort )}
-        open={minLand || larPort || larLand ? show : false}
-        onClick={() => {setShow(false)}}
-        fullWidth={true}
-        fullScreen={true}
+        //open={minPort || minLand ? show : false}
+        open={true}
+        //onClick={() => {setShow(false)}}
+        PaperProps={{ sx: {
+          overflow: 'hidden',
+          padding: '0px',
+          display: 'flex',
+          maxWidth: '100vw',
+          maxHeight: '100vh',
+          width: minPort ? '85vw' : minLand ? '85vw' : '85vw',
+          height: minPort ? '80vh' : minLand ? '80vh' : '80vh',
+          justifyContent: 'center',
+          alignItems: 'center',
+          '&::-webkit-scrollbar': {display: 'none'}
+      } }}
+        style={{
+          maxWidth: '100vw', maxHeight: '100vh', padding: '0px',
+        }}
       >
-        <CardMedia component="div" sx={dialogMedia({ name, minPort, larPort })}></CardMedia>
+        <Box
+          component="img"
+          sx={{
+            width: minPort ? 'calc(80vh - 32px)' : minLand ? 'calc(85vw - 32px)' : '70vh',
+            height: minPort ? 'calc(85vw - 32px)' : minLand ? 'calc(80vh - 32px)' : '70vw',
+            transform: minPort ? 'rotate(-90deg)' : 'none',
+            padding: '0px'
+          }}
+          src={weatherify1}
+          alt="image"
+        />
+
       </Dialog>
+
 
       <Box sx={boxLower({ minPort, minLand, larPort, larLand })}>
         <Typography sx={textLower( larPort )}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>

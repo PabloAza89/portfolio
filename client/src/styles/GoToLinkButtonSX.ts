@@ -13,8 +13,8 @@ const background = ({ darkMode, minPort, minLand, larPort }: backgroundI) => {
     background: darkMode ? '#48555e' : null,
     padding: '0vw !important',
     minWidth: minPort ? '0vh !important' : minLand ? '0vh !important' : larPort ? '0vh !important' : '35px !important',
-    width: minPort ? '4.5vw !important' : minLand ? '6vh !important' : larPort ? '4.5vw !important' : '35px !important',
-    height: minPort ? '4.5vw !important' : minLand ? '6vh !important' : larPort ? '4.5vw !important' : '35px !important',
+    width: minPort ? `30px !important` : minLand ? `22px !important` : larPort ? '4.5vw !important' : '35px !important',
+    height: minPort ? `30px !important` : minLand ? `22px !important` : larPort ? '4.5vw !important' : '35px !important',
   }
 }
 
@@ -28,7 +28,7 @@ const icon = ({ minPort, minLand, larPort }: iconI) => {
   return {
     transform: 'scaleX(-1)',
     padding: '0vw !important',
-    width: minPort ? '4vw !important' : minLand ? '5vh !important' : larPort ? '3vw !important' : '25px !important'
+    width: minPort ? `19px !important` : minLand ? `17px !important` : larPort ? '3vw !important' : '25px !important'
   }
 }
 

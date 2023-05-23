@@ -35,9 +35,9 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
       },
     flexDirection: 'row',
     justifyContent: 'center',
-    width: minPort ? '40vw' : minLand ? '30vw' : medPort ? '40vw' : medLand ? '30vw' : larPort ? '30vw' :' 30vw',
-    height: minPort ? '9vh' : minLand ? '16vh' : medPort ? '20vw' : larPort ? '15vh' : '15vh',
-    bottom: minPort ? '0vh' : '0.3vh'
+    //width: minPort ? '40vw' : minLand ? '30vw' : medPort ? '40vw' : medLand ? '30vw' : larPort ? '30vw' :' 30vw',
+    //height: minPort ? '9vh' : minLand ? '16vh' : medPort ? '20vw' : larPort ? '15vh' : '15vh',
+    bottom: minPort || minLand ? '2vh' : medPort || medLand ? '3vh' : '3vh'
   }
 }
 
@@ -58,12 +58,12 @@ const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxSt
     display: 'flex',
     flexDirection: 'row',
     alignSelf: 'center',
-    background: `url(${lanEn})`,
+    //background: `url(${lanEn})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid ${cyan[100]} 2px` : `solid transparent 2px`,
-    height: minPort ? '25px' : minLand ? '25px' : medPort ? '8vw' : medLand ? '6vw' : larPort ? '42px' : '42px',
-    width: minPort ? '37px' : minLand ? '37px' : medPort ? '11.7vw' : medLand ? '9vw' : larPort ? '60px' : '60px',
+    height: minPort ? '25px' : minLand ? '25px' : medPort ? '45px' : medLand ? '45px' : larPort ? '42px' : '42px',
+    width: minPort ? '37px' : minLand ? '37px' : medPort ? '80px' : medLand ? '80px' : larPort ? '60px' : '60px',
     ':hover': {
       webkitFilter: 'brightness(.9)',
       'filter': 'brightness(.9)'
@@ -78,12 +78,12 @@ const lanEsFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxSt
     display: 'flex',
     flexDirection: 'row',
     alignSelf: 'center',
-    background: `url(${lanEs})`,
+    //background: `url(${lanEs})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid transparent 2px` : `solid ${cyan[100]} 2px`,
-    height: minPort ? '25px' : minLand ? '25px' : medPort ? '8vw' : medLand ? '6vw' : larPort ? '42px' : '42px',
-    width: minPort ? '37px' : minLand ? '37px' : medPort ? '11.7vw' : medLand ? '9vw' : larPort ? '60px' : '60px',
+    height: minPort ? '25px' : minLand ? '25px' : medPort ? '45px' : medLand ? '45px' : larPort ? '42px' : '42px',
+    width: minPort ? '37px' : minLand ? '37px' : medPort ? '80px' : medLand ? '80px' : larPort ? '60px' : '60px',
     ':hover': {
       webkitFilter: 'brightness(.9)',
       'filter': 'brightness(.9)'

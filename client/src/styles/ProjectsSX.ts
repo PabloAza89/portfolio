@@ -4,6 +4,27 @@ import {
   jcc, jcsb, jic, noSelect, row, relative
 } from './CommonsSX';
 
+interface topHelperI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+  
+}
+
+const topHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topHelperI) => {
+  return {
+    display: 'flex',
+    width: '20px',
+    height: minPort ? '26vh' : minLand ? '15vh' : medPort ? '26vh' : medLand ? '17vh' : larPort ? '28vh' : '22vh',
+    minHeight: '8px',
+    background: 'orange',
+    position: 'relative'
+  }
+}
+
 interface backgroundI {
   minPort: boolean,
   minLand: boolean,
@@ -16,25 +37,11 @@ interface backgroundI {
 
 const background = ({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height }: backgroundI) => {
   return {
-    //...flex, ...column, ...jcc, ...relative,
     display: 'flex',
-    //display: '-webkit-box',
     position: 'relative',
     flexDirection: 'column',
-
-    //height: minPort ? '50vh' : minLand ? '60vh' : larPort ? '600px' : `calc(${staticRefHeight}*50px)`, // '80px' IS %
-    //height: /* minPort ? '50vh' : minLand ? '60vh' : larPort ? '600px' : */ `350px`, // '80px' IS %
-    height: '550px',
-    background: 'yellow',
-    //top: '100px',
-    //marginTop: '-200px',
-    //paddingTop: '10px',
-    //bottom: 0,
-    //top: `calc(${staticRefHeight}*10px)`
-    //top: `100px`
-    //paddingTop: '100px',
-    //marginTop: '100px',
-    //top: `calc((1080 / 100) * 11px)`
+    height: minPort ? '370px' : minLand ? '270px' : larPort ? '550px' : '520px',
+    background: 'yellow'
   }
 }
 
@@ -55,45 +62,63 @@ const scroll = ({ minPort, minLand }: scrollI) => {
 }
 
 interface solidI {
-  length: number
+  length: number,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
 }
 
-const solid = ({ length }: solidI) => {
+const solid = ({ minPort, minLand, medPort, medLand, larPort, larLand, length }: solidI) => {
   return {
     //...row,
     display: 'flex',
     position: 'relative',
     background: brown[700],
-    width: `calc(${length} * 530px)`,
-    height: '12px'
+    width: minPort || minLand ? `calc(${length} * 414px)` : `calc(${length} * 564px)`,
+    height: minPort ? '9px' : minLand ? '7px' : '12px'
   }
 }
 
 interface intercalatedI {
   minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
   larPort: boolean,
+  larLand: boolean
   length: number
 }
 
-const intercalated =  ({ length, minPort, larPort }: intercalatedI) => {
+const intercalated =  ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: intercalatedI) => {
   return {
-    //...row,
     display: 'flex',
     position: 'relative',
-    //'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)',
     'background': 'linear-gradient(to right, transparent 70%, #5d4037 30%)',
     backgroundBlendMode: 'difference',
-    backgroundSize: /* minPort ? '13vw 7vw' : larPort ? '100px' : */ '94px', // 550+14/6 = 94
-    width: `calc(${length}*600px)`,
-    height: '30px'
+    backgroundSize: minPort || minLand ? '69px' : '94px',
+    width: minPort || minLand ? `calc(${length} * 414px)` : `calc(${length} * 564px)`,
+    height: minPort ? '20px' : minLand ? '15px' : '30px'
   }
 }
 
-const centerStripe = () => {
+interface centerStripeI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+  
+}
+
+const centerStripe = ({ minPort, minLand, medPort, medLand, larPort, larLand }: centerStripeI) => {
   return {
     ...row, ...flex,
     background: brown[700],
-    height: '340px',
+    height: minPort ? '270px' : minLand ? '195px' : '340px',
     //width: '100px'
   }
 }
@@ -111,9 +136,9 @@ const card = ({ darkMode, minPort, minLand, larPort }: cardI) => {
     /* marginLeft: '1vw' , */
     /* zIndex: 1000, */
     /* width: '500px', */
-    background: 'gray',
+    background: 'orange',
     //background: darkMode ? '#6e1b1b' : red[800],
-    height: minPort ? '20vh' : minLand ? '44vh' : larPort ? '347px' : '340px'
+    height: minPort ? '270px' : minLand ? '195px' : larPort ? '347px' : '340px'
   }
 }
 
@@ -128,10 +153,11 @@ interface boxTitleI {
 const boxTitle = ({ length, minPort, minLand, larPort }: boxTitleI) => {
   return {
     ...flex, ...row, ...aic,
-    /* marginLeft: '1vw', */
-    width: `calc(${length}*200px)`,
+    //marginLeft: '18px',
+    paddingLeft: '18px',
+    //width: `calc(${length}*200px)`,
     background: 'darkslateblue',
-    height: minPort ? '8vh' : minLand ? '8vh' : larPort ? '60px' : '60px'
+    height: minPort ? '50px' : minLand ? '35px' : larPort ? '60px' : '60px'
 
   }
 }
@@ -147,9 +173,10 @@ const title = ({ darkMode, minPort, minLand, larPort }: titleI) => {
   return {
     ...noSelect,
     //marginRight: minPort ? '1.3vw' : minLand ? '0.9vw' : larPort ? '1.3vw' : '0.9vw',
+    marginRight: '18px',
     fontFamily: 'Century Gothic',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort ? '4.5vw' : minLand ? '5vh' : larPort ? '40px' : '40px'
+    fontSize: minPort ? '30px' : minLand ? '5vh' : larPort ? '40px' : '40px'
   }
 }
 
@@ -182,8 +209,8 @@ const cardMedia = ({ url, darkMode, minPort, minLand, larPort }: cardMediaI) => 
   return {
     ...asc,
     'cursor': 'pointer',
-    width: '550px',
-    height: '280px',
+    width: minPort ? '400px' : minLand ? '400px' : '550px',
+    height: minPort ? '220px' : minLand ? '160px' : '280px',
     ':hover':
       darkMode ? {webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)'}
       : {webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)'},
@@ -235,7 +262,8 @@ interface boxLowerI {
 const boxLower = ({ minPort, minLand, larPort, larLand }: boxLowerI) => {
   return {
     ...asc, ...row, ...noSelect,
-    background: 'gray',
+    background: 'none',
+    marginTop: '10px',
     //minWidth: larPort ? '10vw' : larLand ? '10vw' : larPort ? '35vw' : '20vw',
     //width: larPort ? '10vw' : larLand ? '10vw' : larPort ? '35vw' : '00vw',
     display: minLand ? 'none' : minPort ? 'none' : 'flex'
@@ -246,7 +274,7 @@ const textLower = ( larPort: boolean ) => {
   return {
     ...jcc, ...asc, ...row, ...mix,
     color: '#FFFFFF',
-    fontSize: larPort ? '2.5vh' : '23px',
+    fontSize: larPort ? '23px' : '23px',
     //top: '0px'
   }
 }
@@ -260,14 +288,14 @@ const select = ({ darkMode, larPort }: selectI) => {
   return {
     color: '#FFFFFF',
     background: darkMode ? '#48555e' : blue[500],
-    height: larPort ? '5vh' : '45px',
-    width: larPort ? '11vw' : '65px',
-    fontSize: larPort ? '2vh': '17px'
+    height: larPort ? '45px' : '45px',
+    width: larPort ? '65px' : '65px',
+    fontSize: larPort ? '17px': '17px'
   }
 }
 
 export {
   background, scroll, solid, intercalated,
   centerStripe, card, boxTitle, title, boxMedia, cardMedia,
-  dialog, dialogMedia, boxLower, textLower, select
+  dialog, dialogMedia, boxLower, textLower, select, topHelper
 }

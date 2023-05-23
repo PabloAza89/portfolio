@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from "react-router-dom";
 import { languageChanger } from '../../actions';
 import { background, lanEnFlag, lanEsFlag } from '../../styles/LanguageSX';
+import lanEn from '../../images/lanEn.png';
+import lanEs from '../../images/lanEs.png';
 
 function Language() {
 
@@ -22,8 +24,10 @@ function Language() {
 
   return (
     <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname, percentageResizedHeight })}>
-      <CardMedia component="div" onClick={() => dispatch(languageChanger(true))} sx={lanEnFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></CardMedia>
-      <CardMedia component="div" onClick={() => dispatch(languageChanger(false))} sx={lanEsFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></CardMedia>
+      {/* <CardMedia component="div" onClick={() => dispatch(languageChanger(true))} sx={lanEnFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></CardMedia> */}
+      <Box component="img" src={lanEn} onClick={() => dispatch(languageChanger(true))} sx={lanEnFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></Box>
+      {/* <CardMedia component="div" onClick={() => dispatch(languageChanger(false))} sx={lanEsFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></CardMedia> */}
+      <Box component="img" src={lanEs} onClick={() => dispatch(languageChanger(false))} sx={lanEsFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></Box>
     </Box>
   )
 }
