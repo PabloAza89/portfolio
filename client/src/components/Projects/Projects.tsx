@@ -13,8 +13,8 @@ import DialogContent from '@mui/material/DialogContent';
 import {
   background, scroll, solid, intercalated, topHelper,
   centerStripe, card, boxTitle, title, boxMedia, cardMedia,
-  dialog, dialogMedia, boxLower, textLower, select, cardLeft,
-  betweenMedia, lowerHelper
+  dialogBox, dialogStyle, boxLower, textLower, select, cardLeft,
+  betweenMedia, lowerHelper, dialogPaper
 } from '../../styles/ProjectsSX';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 
@@ -140,27 +140,13 @@ function Projects() {
       <Dialog
         open={show}
         onClick={() => {setShow(false)}}
-        style={{ maxWidth: '100vw', maxHeight: '100vh', padding: '0px' }}
-        PaperProps={{ sx: {
-          overflow: 'hidden',
-          padding: '0px',
-          display: 'flex',
-          maxWidth: '100vw',
-          maxHeight: '100vh',
-          width: minPort ? '85vw' : minLand ? '85vw' : medPort ? '90vw' : medLand ? '80vw' : larPort ? '85vw' : '70vw',
-          height: minPort ? '80vh' : minLand ? '80vh' : medPort ? '35vh' : medLand ? '55vh' : larPort ? '45vh' : '65vh',
-          justifyContent: 'center',
-          alignItems: 'center',
-          '&::-webkit-scrollbar': {display: 'none'}
-      }}}>
+        style={dialogStyle()}
+        PaperProps={
+          dialogPaper({ minPort, minLand, medPort, medLand, larPort })
+      }>
         <Box
           component="img"
-          sx={{
-            width: minPort ? 'calc(80vh - 32px)' : minLand ? 'calc(85vw - 32px)' : medPort ? 'calc(90vw - 32px)' : medLand ? 'calc(80vw - 32px)' : larPort ? 'calc(85vw - 32px)' : 'calc(70vw - 32px)',
-            height: minPort ? 'calc(85vw - 32px)' : minLand ? 'calc(80vh - 32px)' : medPort ? 'calc(35vh - 32px)' : medLand ? 'calc(55vh - 32px)' : larPort ? 'calc(45vh - 32px)' : 'calc(65vh - 32px)',
-            transform: minPort ? 'rotate(-90deg)' : 'none',
-            padding: '0px'
-          }}
+          sx={dialogBox({ minPort, minLand, medPort, medLand, larPort })}
           src={name}
           alt="image"
         />

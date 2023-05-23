@@ -6,8 +6,8 @@ import efSet from '../../images/efSet.png';
 import fccCertJS from '../../images/fccCertJS.png';
 import henry from '../../images/henry.png';
 import {
-  background, boxUpper, card, anchor,
-  title, media, url, dialog, dialogMedia
+  background, boxUpper, card, anchor, dialogBox,
+  title, media, url, dialogStyle, dialogPaper
 } from '../../styles/CertificationsSX';
 import Bubbles from '../Bubbles/Bubbles';
 
@@ -18,8 +18,8 @@ function Certifications() {
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const MedLand = useSelector((state: {medLand:boolean}) => state.medLand)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
@@ -62,7 +62,6 @@ function Certifications() {
                   <Link style={anchor()}
                     to={e.href}
                     target="_blank"
-                    /* rel="noopener noreferrer" */
                   >{e.url}</Link>
                 </Typography>
               </Box>)
@@ -70,13 +69,18 @@ function Certifications() {
       </Box>
 
       <Dialog
-        sx={dialog}
-        open={minLand || larPort || larLand ? show : false}
-        onClick={() => setShow(false)}
-        fullWidth={true}
-        fullScreen={true}
-      >
-        <CardMedia component="div" sx={dialogMedia({ url:name })}></CardMedia>
+        open={show}
+        onClick={() => {setShow(false)}}
+        style={dialogStyle()}
+        PaperProps={
+          dialogPaper({ minPort, minLand, medPort, medLand, larPort })
+      }>
+        <Box
+          component="img"
+          sx={dialogBox({ minPort, minLand, medPort, medLand, larPort })}
+          src={name}
+          alt="image"
+        />
       </Dialog>
 
     </Box>

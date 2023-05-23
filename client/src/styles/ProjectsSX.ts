@@ -224,36 +224,52 @@ const betweenMedia = ({ darkMode, indexOf, length }: betweenMediaI) => {
   }
 }
 
-const dialog = ( minPort: boolean ) => {
+const dialogStyle = () => {
   return {
-    ...flex, ...fixed, ...row,
-    minHeight: minPort ? '70%' : 'none',
-    maxHeight: minPort ? '70%' : 'none',
-    minWidth: minPort ? '80vw' : 'none',
-    maxWidth: minPort ? '80vw' : 'none',
-    height: minPort ? '71%' : '71vh',
-    width: minPort ? '100%' : 'none',
-    top: minPort ? '15vh' : '15vh',
-    left: minPort ? '10vw' : '15vw'
+    maxWidth: '100vw',
+    maxHeight: '100vh',
+    padding: '0px'
   }
 }
 
-interface dialogMediaI {
-  name: string,
+interface dialogPaperI {
   minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
   larPort: boolean
 }
 
-const dialogMedia = ({ name, minPort, larPort }: dialogMediaI) => {
+const dialogPaper = ({ minPort, minLand, medPort, medLand, larPort }: dialogPaperI) => {
   return {
-    ...flex, ...row, ...jic,
-    'margin-block': minPort ? 'auto' : 'none',
+    sx: {  overflow: 'hidden',
+      padding: '0px',
+      display: 'flex',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width: minPort ? '85vw' : minLand ? '85vw' : medPort ? '90vw' : medLand ? '80vw' : larPort ? '85vw' : '70vw',
+      height: minPort ? '80vh' : minLand ? '80vh' : medPort ? '35vh' : medLand ? '55vh' : larPort ? '45vh' : '65vh',
+      justifyContent: 'center',
+      alignItems: 'center',
+      '&::-webkit-scrollbar': {display: 'none'}
+    }
+  }
+}
+
+interface dialogBoxI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean
+}
+
+const dialogBox = ({ minPort, minLand, medPort, medLand, larPort }: dialogBoxI) => {
+  return {
+    width: minPort ? 'calc(80vh - 32px)' : minLand ? 'calc(85vw - 32px)' : medPort ? 'calc(90vw - 32px)' : medLand ? 'calc(80vw - 32px)' : larPort ? 'calc(85vw - 32px)' : 'calc(70vw - 32px)',
+    height: minPort ? 'calc(85vw - 32px)' : minLand ? 'calc(80vh - 32px)' : medPort ? 'calc(35vh - 32px)' : medLand ? 'calc(55vh - 32px)' : larPort ? 'calc(45vh - 32px)' : 'calc(65vh - 32px)',
     transform: minPort ? 'rotate(-90deg)' : 'none',
-    backgroundImage: `url(${name})`,
-    width: minPort ? '80vw' : '70vw',
-    height: minPort ? '35vh' : '100vh',
-    backgroundSize: minPort ? '78vw 30vh' : larPort ? '67vw 68vh' : '68vw 68vh',
-    backgroundRepeat: 'no-repeat'
+    padding: '0px'
   }
 }
 
@@ -301,16 +317,16 @@ const lowerHelper = () => {
     background: grey[400],
     height: '6px',
     width: 'calc(100vw - 12px)',
-    display: 'flex', 
+    display: 'flex',
     position: 'fixed',
-    bottom: '0px', 
+    bottom: '0px',
     zIndex: 1000
-  }  
+  }
 }
 
 export {
   background, scroll, solid, intercalated, cardLeft,
   centerStripe, card, boxTitle, title, boxMedia, cardMedia,
-  dialog, dialogMedia, boxLower, textLower, select, topHelper,
-  betweenMedia, lowerHelper
+  dialogStyle, dialogBox, boxLower, textLower, select, topHelper,
+  betweenMedia, lowerHelper, dialogPaper
 }

@@ -89,33 +89,56 @@ const anchor = () => {
   }
 }
 
-const dialog = () => {
+const dialogStyle = () => {
   return {
-    ...flex, ...absolute, ...jsc,
-    height: '83vh',
-    width: '60vw',
-    backgroundColor: 'none',
-    top: '8vh',
-    left: '14vw'
+    maxWidth: '100vw',
+    maxHeight: '100vh',
+    padding: '0px'
   }
 }
 
-interface dialogMediaI {
-  url: string
+interface dialogPaperI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean
 }
 
-const dialogMedia = ({ url }: dialogMediaI) => {
+const dialogPaper = ({ minPort, minLand, medPort, medLand, larPort }: dialogPaperI) => {
   return {
-    ...flex, ...relative, ...column, ...jic,
-    backgroundImage: `url(${url})`,
-    width: '72.1vw',
-    height: '84vh',
-    backgroundSize: '70vw 80vh',
-    backgroundRepeat: 'no-repeat'
+    sx: {  overflow: 'hidden',
+      padding: '0px',
+      display: 'flex',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width: minPort ? '85vw' : minLand ? '85vw' : medPort ? '90vw' : medLand ? '80vw' : larPort ? '85vw' : '70vw',
+      height: minPort ? '80vh' : minLand ? '80vh' : medPort ? '35vh' : medLand ? '55vh' : larPort ? '45vh' : '65vh',
+      justifyContent: 'center',
+      alignItems: 'center',
+      '&::-webkit-scrollbar': {display: 'none'}
+    }  
+  }
+}
+
+interface dialogBoxI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean
+}
+
+const dialogBox = ({ minPort, minLand, medPort, medLand, larPort }: dialogBoxI) => {
+  return {
+    width: minPort ? 'calc(80vh - 32px)' : minLand ? 'calc(85vw - 32px)' : medPort ? 'calc(90vw - 32px)' : medLand ? 'calc(80vw - 32px)' : larPort ? 'calc(85vw - 32px)' : 'calc(70vw - 32px)',
+    height: minPort ? 'calc(85vw - 32px)' : minLand ? 'calc(80vh - 32px)' : medPort ? 'calc(35vh - 32px)' : medLand ? 'calc(55vh - 32px)' : larPort ? 'calc(45vh - 32px)' : 'calc(65vh - 32px)',
+    transform: minPort ? 'rotate(-90deg)' : 'none',
+    padding: '0px'
   }
 }
 
 export {
-  background, boxUpper, card, anchor,
-  title, media, url, dialog, dialogMedia
+  background, boxUpper, card, anchor, dialogBox,
+  title, media, url, dialogStyle, dialogPaper
 }

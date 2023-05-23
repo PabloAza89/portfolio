@@ -1,3 +1,15 @@
 .icon-class {
   border: 0 !important;
 }
+
+/* .swal2-container {
+  transform: rotate(-90deg);
+  max-width: max-content;
+} */
+
+..swal2-container.swal2-bottom, .swal2-container.swal2-center, .swal2-container.swal2-top {
+  transform: rotate(-90deg);
+  backgroun: red;
+  /* max-width: max-content;
+  grid-template-columns: none; */
+}
