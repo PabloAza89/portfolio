@@ -2,14 +2,92 @@
   border: 0 !important;
 }
 
-/* .swal2-container {
-  transform: rotate(-90deg);
-  max-width: max-content;
-} */
+.first-popup-minPort-email {
+  transform: rotate(-90deg) !important;
+  width: 450px !important;
+  max-width: 450px !important;
+  font-size: 12px !important;
+}
 
-..swal2-container.swal2-bottom, .swal2-container.swal2-center, .swal2-container.swal2-top {
-  transform: rotate(-90deg);
-  backgroun: red;
-  /* max-width: max-content;
-  grid-template-columns: none; */
+.first-popup-minPort-phone {
+  transform: rotate(-90deg) !important;
+  width: 320px !important;
+  max-width: 320px !important;
+  font-size: 12px !important;
+}
+
+.first-popup-minLand-email {
+  width: 420px !important;
+  max-width: 420px !important;
+  font-size: 12px !important;
+}
+
+.first-popup-minLand-phone {
+  width: 300px !important;
+  max-width: 300px !important;
+  font-size: 12px !important;
+}
+
+.first-popup-medPort-email {
+  width: 580px !important;
+  max-width: 580px !important;
+  font-size: 16px !important;
+}
+
+.first-popup-medPort-phone {
+  width: 380px !important;
+  max-width: 380px !important;
+  font-size: 16px !important;
+}
+
+.first-popup-medLand-email {
+  width: 580px !important;
+  max-width: 580px !important;
+  font-size: 16px !important;
+}
+
+.first-popup-medLand-phone {
+  width: 380px !important;
+  max-width: 380px !important;
+  font-size: 16px !important;
+}
+
+.first-popup-lar-email {
+  width: 650px !important;
+  min-width: 650px !important;
+  max-width: 650px !important;
+  font-size: 18px !important;
+}
+
+.first-popup-lar-phone {
+  width: 420px !important;
+  min-width: 420px !important;
+  max-width: 420px !important;
+  font-size: 18px !important;
+}
+
+.second-popup-minPort {
+  transform: rotate(-90deg) !important;
+  width: 330px !important;
+  max-width: 330px !important;
+  font-size: 12px !important;
+}
+
+.second-popup-minLand {
+  width: 330px !important;
+  max-width: 330px !important;
+  font-size: 12px !important;
+}
+
+.second-popup-med {
+  width: 450px !important;
+  max-width: 450px !important;
+  font-size: 16px !important;
+}
+
+.second-popup-lar {
+  width: 490px !important;
+  min-width: 490px !important;
+  max-width: 490px !important;
+  font-size: 18px !important;
 }

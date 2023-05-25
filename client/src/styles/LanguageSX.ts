@@ -22,6 +22,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
     pointerEvents:
       larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.773 ? 'none' :
       larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.731 ? 'none' :
+      (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.642 ? 'none' :
       'null',
     transition: 'opacity .1s ease-in-out',
     opacity:
