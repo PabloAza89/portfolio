@@ -26,6 +26,7 @@ const blackWhite = ( { staticRefWidth, darkMode, location }: blackWhiteI ) => {
     height: 'calc(100vh - 12px)',
     alignSelf: 'center',
     justifyContent: 
+      //location === '/portfolio/'  ? 'none' :
       location === '/portfolio/MessageMe'  ? 'center' :
       location === '/portfolio/Contact' ||  location === '/portfolio/AboutMe' ? 'space-between' :
       'none',
@@ -33,4 +34,31 @@ const blackWhite = ( { staticRefWidth, darkMode, location }: blackWhiteI ) => {
   }
 }
 
-export { background, blackWhite }
+const greyBottom = () => {
+  return {
+    background: grey[400],
+    height: '6px',
+    width: 'calc(100vw - 12px)',
+    display: 'flex',
+    position: 'fixed',
+    bottom: '0px',
+    zIndex: 1000
+  }
+}
+
+const greyRight = () => {
+  return {
+    background: grey[400],
+    //background: 'orange',
+    height: '100vh',
+    width: '6px',
+    display: 'flex',
+    position: 'absolute',
+    right: '0px',
+    zIndex: 1000
+  }
+}
+
+export {
+  background, blackWhite, greyBottom, greyRight
+}

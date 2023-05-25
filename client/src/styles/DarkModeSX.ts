@@ -24,10 +24,10 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxS
     bottom: minPort ? 'none' : minLand ? 'none' : larPort ? '33px' : '33px',
     justifyContent: 'center',
     alignItems: 'center',
-    transition: 'opacity .1s ease-in-out',
+    //transition: 'opacity .1s ease-in-out',
     opacity:
-      larPort && location === '/portfolio' && percentageResizedHeight < 0.33 ? '0' :
-      larLand && location === '/portfolio' && percentageResizedHeight < 0.33 ? '0' :
+    larPort && location === '/portfolio' && percentageResizedHeight < 0.844 ? '0' :
+    larLand && location === '/portfolio' && percentageResizedHeight < 0.660 ? '0' :
       //larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.272 ? '0' :
       //larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.272 ? '0' :
       '1',

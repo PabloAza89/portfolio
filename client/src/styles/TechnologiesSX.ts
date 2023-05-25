@@ -8,7 +8,8 @@ const background = () => {
     ...flex, ...column,
     background: 'blue',
     width: '800px',
-    minWidth: '800px'
+    minWidth: '800px',
+    height: '90px'
   }
 }
 
@@ -48,7 +49,7 @@ const iconMedia = ({ url, minPort, minLand, larPort }: iconMediaI) => {
     backgroundRepeat: 'no-repeat',
     backgroundImage: `url(${url})`,
     width: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '90px' : '90px',
-    height: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw' ,
+    height: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '65px' : '65px' ,
     backgroundSize: 'contain'
   }
 }
@@ -64,7 +65,8 @@ const textBox = ({ minPort, minLand, larPort }: textBoxI) => {
     ...jcc, ...aic, ...flex, ...column, ...relative,
     background: 'darkblue',
     border: 'none',
-    width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '90px' : '90px'
+    width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '90px' : '90px',
+    height: minPort ? '15vw' : minLand ? '7vw' : larPort ? '25px' : '25px'
   }
 }
 
@@ -78,7 +80,7 @@ interface titleI {
 const title = ({ darkMode, minPort, minLand, larPort }: titleI) => {
   return {
     ...noSelect, ...mix,
-    fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '1.85vw' : '0.95vw',
+    fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : larPort ? '16px' : '16px',
     border: 'none',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
     'fontWeight': 600

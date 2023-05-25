@@ -11,7 +11,9 @@ import Skills from './components/Skills/Skills';
 import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
 //import StaticBackground from './components/StaticBackground/StaticBackground';
-import { background, blackWhite } from './styles/AppSX';
+import { 
+  background, blackWhite, greyBottom, greyRight
+} from './styles/AppSX';
 import { Box } from '@mui/material';
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -103,6 +105,8 @@ function App() {
           </>}/>
         </Routes>
       </Box>
+      <Box sx={greyBottom} />
+      <Box sx={greyRight} />
     </Box>
   );
 }

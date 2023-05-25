@@ -11,17 +11,26 @@ interface backgroundI {
 
 const background = ({ minPort, minLand, larPort }: backgroundI) => {
   return {
-    ...flex, ...relative, ...jcc, ...asc,
-    background: 'none',
-    
-    flexDirection: minPort ? 'column' : minLand ? 'row' : 'row',
-    width: minPort ? '97vw' : minLand ? '97vw' : '97vw',
-    height: minPort ? '71vh' : minLand ? '65vh' : larPort ? '60vh' : '71vh',
+    display: 'flex',
+    position: 'relative',
+    justifyContent: larPort ? 'center' : 'none',
+    //justifyContent: 'space-between',
+    flexDirection: 'row',
+    minWidth: larPort ? '817px' : 'none',
+    width: 'calc(100vw - 12px)',
+    //height: 'calc(100vh - 12px)',
+    //...flex, ...relative, ...jcc, ...asc,
+    background: 'gray',
+    //flexDirection: minPort ? 'column' : minLand ? 'row' : 'row',
+    //width: minPort ? '97vw' : minLand ? '97vw' : '97vw',
+    height: minPort ? '71vh' : minLand ? '65vh' : larPort ? '75vh' : '75vh',
     
   }
 }
 
-interface leftBoxOrTopI {
+
+
+interface leftBoxI {
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -30,7 +39,30 @@ interface leftBoxOrTopI {
   larLand: boolean
 }
 
-const leftBoxOrTop = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftBoxOrTopI) => {
+const leftBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftBoxI) => {
+  return {
+    display: 'flex',
+    flexDirection: 'column',
+    background: 'maroon',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    minWidth: /* minPort ? '90vw' :  */'817px',
+    width: minPort ? '90vw' : '50%',
+    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '45vh' : larPort ? '500px' : '500px',
+    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '45vh' : larPort ? '75vh' : '75vh',
+  }
+}
+
+interface textLeftBoxOrTopI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+const textLeftBoxOrTop = ({ minPort, minLand, medPort, medLand, larPort, larLand }: textLeftBoxOrTopI) => {
   return {
     /* ...relative, */ /* ...flex, ...column, */ /* ...jcc, ...asc, */
     //alignSelf: medPort ? 'flex-start' : medLand ? 'flex-start' : larPort ? 'flex-start' : larLand ? 'flex-start' : 'center',
@@ -41,8 +73,8 @@ const leftBoxOrTop = ({ minPort, minLand, medPort, medLand, larPort, larLand }: 
     flexDirection: 'column',
     minWidth: minPort ? '92vw' : minLand ? '50vw' : larPort ? '460px' : '460px',
     width: minPort ? '92vw' : minLand ? '50vw' : larPort ? '700px' : '700px',
-    minHeight: minPort ? '45vh' : minLand ? '60vh' : medPort ? '45vh' : medLand ? '45vh' : larPort ? '35vh' : '280px',
-    height: minPort ? '45vh' : minLand ? '60vh' : medPort ? '45vh' : medLand ? '45vh' : larPort ? '35vh' : '380px'
+    minHeight: minPort ? '45vh' : minLand ? '60vh' : medPort ? '45vh' : medLand ? '45vh' : larPort ? '300px' : '300px',
+    height: minPort ? '45vh' : minLand ? '60vh' : medPort ? '45vh' : medLand ? '45vh' : larPort ? '300px' : '300px'
   }
 }
 
@@ -113,7 +145,7 @@ const boxTechnologies = ({ minPort, minLand, medPort, medLand, larPort, larLand,
   return {
     ...jcc, /* ...relative, */ ...column, ...asc,
     position: medPort ? 'absolute' : medLand ? 'absolute' : larPort ? 'absolute' : larLand ? 'absolute ' : 'relative',
-    background: 'none',
+    background: 'green',
     display: 'flex',
     bottom: medPort ? '2vh' : medLand ? '13vh' : larPort ? '0vh' : larLand ? '15vh' : 'none',
     height: minPort ? '11vh' : minLand ? '20vh' : '11vh',
@@ -132,7 +164,7 @@ interface boxMessageI {
 
 const boxMessage = ({ minLand, medPort, medLand, larPort, larLand }: boxMessageI ) => {
   return {
-    background: 'none',
+    background: 'teal',
     alignItems: medPort ? 'flex-start' : 'center',
     display: minLand ? 'flex' : 'flex',
     justifyContent: 'center',
@@ -157,8 +189,8 @@ const buttonMessage = ({ minPort, minLand, medPort, larPort }: buttonMessageI ) 
     minWidth: minPort ? '53vw !important' : minLand ? '9vw !important' : '2vw !important',
     minHeight: minPort ? '10vw !important' : minLand ? '2.1vw !important' : '4.1vh !important',
     color:'#FFFFFF',
-    width: minPort ? '19vw' : minLand ? '19vw' : medPort ? '29vw' : larPort ? '29vw' : '24vw',
-    fontSize: minPort ? '4vw' : larPort ? '2.2vw' : '1.8vw',
+    width: minPort ? '19vw' : minLand ? '19vw' : medPort ? '29vw' : larPort ? '370px' : '370px',
+    fontSize: minPort ? '4vw' : larPort ? '31px' : '31px',
     mixBlendMode: 'difference'
   }
 }
@@ -172,13 +204,17 @@ interface boxRightOrBottonI {
 
 const boxRightOrBotton = ({ minPort, minLand, medPort, larPort }: boxRightOrBottonI ) => {
   return {
-    background: 'none',
-    alignSelf: medPort ? 'flex-start' : 'center',
-    display: minPort ? 'flex' : minLand ? 'flex' : 'flex',
-    flexDirection: minPort ? 'column' : minLand ? 'column' : 'none',
-    width: minPort ? '90vw' : '46vw',
+    background: 'brown',
+    position: 'relative',
     justifyContent: 'center',
-    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '45vh' : larPort ? '45vh' : '71vh',
+    //alignSelf: medPort ? 'flex-start' : 'center',
+    display: larPort ? 'none' : 'flex',
+    //flexDirection: minPort ? 'column' : minLand ? 'column' : 'none',
+    minWidth: minPort ? '23vh' : minLand ? '60vh' : medPort ? '45vh' : larPort ? '75vh' : '500px',
+    width: minPort ? '90vw' : '50%',
+    //justifyContent: 'center',
+    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '45vh' : larPort ? '75vh' : '500px',
+    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '45vh' : larPort ? '75vh' : '75vh',
     alignItems: 'center'
   }
 }
@@ -198,11 +234,13 @@ interface SVGI {
 const SVG = ({ width, height, minPort, minLand, medPort, larPort, larLand, percentageResizedHeight, percentageResizedWidth }: SVGI ) => {
   return {
     display: minPort ? 'none' : minLand ? 'none' : 'flex',
-    position: 'fixed',
-    width: medPort ? '35vw' : larPort && width < height ? '33vw' : larPort && percentageResizedWidth < 0.410 ? '29vh' : larPort && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.777 ? '50vh' : '70vh',
-    height: medPort ? '35vw' : larPort && width < height ? '33vw' : larPort && percentageResizedWidth < 0.410 ? '29vh' : larPort && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.544 ? '38vh' : larLand && percentageResizedWidth< 0.777 ? '50vh' : '70vh',
-    minWidth: percentageResizedHeight < 0.250 ? '110px' : 'null',
-    minHeight: percentageResizedHeight < 0.250 ? '110px' : 'null'
+    background: 'red',
+    position: 'fixed',    
+    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '45vh' : larPort ? '75vh' : '500px',
+    //height: medPort ? '35vw' : larPort ? '600px' : '500px',
+    minWidth: '500px',
+    //width: medPort ? '35vw' : larPort ? '600px' : '500px',
+    //minHeight: percentageResizedHeight < 0.250 ? '110px' : 'null'
   }
 }
 
@@ -220,19 +258,20 @@ const greyBottom = () => {
 
 const greyRight = () => {
   return {
-    background: grey[400],
+    //background: grey[400],
+    background: 'blue',
     height: '100vh',
     width: '6px',
     display: 'flex',
-    position: 'fixed',
+    position: 'absolute',
     right: '0px',
     zIndex: 1000
   }
 }
 
 export {
-  background, leftBoxOrTop, textOne,
+  background, textLeftBoxOrTop, textOne,
   textTwo, textThree, boxTechnologies,
   boxMessage, buttonMessage, boxRightOrBotton,
-  SVG, greyBottom, greyRight
+  SVG, greyBottom, greyRight, leftBox
 }
