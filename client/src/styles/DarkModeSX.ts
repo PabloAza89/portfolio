@@ -19,7 +19,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxS
     minWidth: '0vh !important',
     width: minPort || minLand ? `30px !important` : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `35px !important`  : `35px !important` ,
     height: minPort || minLand ? `30px !important` : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `35px !important`  : `35px !important` ,
-    top: minPort ? '4vw' : minLand ? '4vh' : larPort || larLand ? 'none' : '33px',
+    //top: minPort ? '4vw' : minLand ? '4vh' : larPort || larLand ? 'none' : '33px',
     right: minPort ? '4vw' : minLand ? '4vh' : '33px',
     bottom: minPort ? 'none' : minLand ? 'none' : larPort ? '33px' : '33px',
     justifyContent: 'center',

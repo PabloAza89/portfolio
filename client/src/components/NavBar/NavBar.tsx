@@ -15,8 +15,8 @@ function NavBar() {
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const MedLand = useSelector((state: {medLand:boolean}) => state.medLand)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
@@ -47,21 +47,21 @@ function NavBar() {
   }
 
   return (
-    <Box sx={background({ staticRefWidth, minPort, minLand, larPort })}>
-      <Box sx={mainLeft({ staticRefWidth, minPort, minLand, larPort })}>
-        <Typography sx={lessThan({ minPort, minLand, larPort })}>{`<`}</Typography>
-        <Typography sx={name({ minPort, minLand, larPort })}>{`Pablo Azambuyo`}</Typography>
-        <Typography sx={blink({ minPort, minLand, larPort })}>{`I`}</Typography>
-        <Typography sx={greaterThan({ minPort, minLand, larPort })}>{`/>`}</Typography>
+    <Box sx={background({ staticRefWidth, minPort, minLand, medPort, medLand, larPort })}>
+      <Box sx={mainLeft({ staticRefWidth, minPort, minLand, medPort, medLand, larPort })}>
+        <Typography sx={lessThan({ minPort, minLand, medPort, medLand, larPort })}>{`<`}</Typography>
+        <Typography sx={name({ minPort, minLand, medPort, medLand, larPort })}>{`Pablo Azambuyo`}</Typography>
+        <Typography sx={blink({ minPort, minLand, medPort, medLand, larPort })}>{`I`}</Typography>
+        <Typography sx={greaterThan({ minPort, minLand, medPort, medLand, larPort })}>{`/>`}</Typography>
       </Box>
-      <ScrollContainer style={scroll({ staticRefWidth, percentageResizedWidth, minPort, minLand, larPort, larLand })}
+      <ScrollContainer style={scroll({ staticRefWidth, percentageResizedWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
         innerRef={useHorizontalScroll()}
       >
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, larPort })} to="/portfolio/AboutMe">{ english ? `About Me` : `Acerca De Mi` }</Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, larPort })} to="/portfolio/Skills">{ english ? `Skills` : `Habilidades` } </Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, larPort })} to="/portfolio/Projects">{ english ? `Projects` : `Proyectos` }</Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, larPort })} to="/portfolio/Certifications">{ english ? `Certifications` : `Certificaciones`}</Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, larPort })} to="/portfolio/Contact">{ english ? `Contact` : `Contacto` }</Link>
+        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort })} to="/portfolio/AboutMe">{ english ? `About Me` : `Acerca De Mi` }</Link>
+        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort })} to="/portfolio/Skills">{ english ? `Skills` : `Habilidades` } </Link>
+        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort })} to="/portfolio/Projects">{ english ? `Projects` : `Proyectos` }</Link>
+        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort })} to="/portfolio/Certifications">{ english ? `Certifications` : `Certificaciones`}</Link>
+        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort })} to="/portfolio/Contact">{ english ? `Contact` : `Contacto` }</Link>
       </ScrollContainer>
     </Box>
   )
