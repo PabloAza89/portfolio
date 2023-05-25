@@ -11,12 +11,12 @@ interface genI {
 const background = ({ staticRefWidth, minPort, minLand, larPort }: genI) => {
   return {
     ...jcse, ...flex,
-    background: 'none',
+    background: 'blue',
     flexDirection: minPort ? 'column' : minLand ? 'row' : larPort ? 'column' : 'row',
     marginTop: '1vh',
     color: '#FFFFFF',
-    height: minPort ? '30vw' : minLand ? '7vw' : larPort ? '20vh' : '15vh',
-    minHeight: larPort ? '11vw' : `${staticRefWidth * 3.5}px`,
+    minHeight: minPort ? '30vw' : minLand ? '7vw' : larPort ? '100px' : '100px',
+    //minHeight: larPort ? '11vw' : `${staticRefWidth * 3.5}px`,
     justifyContent: minLand ? 'left' : 'none'
   }
 }
@@ -24,12 +24,13 @@ const background = ({ staticRefWidth, minPort, minLand, larPort }: genI) => {
 const mainLeft = ({ staticRefWidth, minPort, minLand, larPort }: genI) => {
   return {
     ...flex, ...row, ...aic,
-    background: 'none',
-    width: minPort ? '60vw' : minLand ? '35vw' : larPort ? '58vw' : '33vw',
+    background: 'red',
+    alignItems: 'self-end',
+    minWidth: minPort ? '60vw' : minLand ? '35vw' : larPort ? '58vw' : '520px',
     color: '#FFFFFF',
     'alignSelf': minPort ? 'start' : larPort ? 'start' : 'center',
-    height: minPort ? '7vh' : minLand ? '13vh' : larPort ? '13vh' : '13vh',
-    minHeight: larPort ? '11vw' : `${staticRefWidth * 2.9}px`,
+    height: minPort ? '7vh' : minLand ? '13vh' : larPort ? '80px' : '80px',
+    //minHeight: larPort ? '11vw' : `${staticRefWidth * 2.9}px`,
     marginLeft: '2vw'
   }
 }
@@ -43,7 +44,7 @@ interface genII {
 const lessThan = ({ minPort, minLand, larPort }: genII) => {
   return {
     ...noSelect,
-    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : larPort ? '3.8vw' : '2.8vw',
+    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : larPort ? '50px' : '50px',
     marginRight: minPort ? '1.5vw' : minLand ? '1.4vw' : larPort ? '1.1vw' : '1.1vw'
   }
 }
@@ -53,9 +54,12 @@ const name = ({ minPort, minLand, larPort }: genII) => {
     ...noSelect,
     marginTop: '0.5vh',
     fontFamily: 'Allura',
-    fontSize: minPort ? '7.5vw' : minLand ? '3.8vw' : larPort ? '6.1vw' : '3.8vw',
+    fontSize: minPort ? '7.5vw' : minLand ? '3.8vw' : larPort ? '65px' : '65px',
     color: blue[600],
-    fontWeight: 600
+    fontWeight: 600,
+    minWidth: '410px',
+    height: '80px',
+    background: 'gray'
   }
 }
 
@@ -63,7 +67,7 @@ const blink = ({ minPort, minLand, larPort }: genII) => {
   return {
     ...noSelect,
     marginTop: '0.5vh',
-    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : larPort ? '4.5vw' : '2.8vw',
+    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : larPort ? '50px' : '50px',
     fontWeight: '300',
     animation: 'blink 1s linear infinite',
     '@keyframes blink': {
@@ -77,7 +81,7 @@ const blink = ({ minPort, minLand, larPort }: genII) => {
 const greaterThan = ({ minPort, minLand, larPort }: genII) => {
   return {
     ...noSelect,
-    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : larPort ? '3.8vw' : '2.8vw',
+    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : larPort ? '50px' : '50px',
     marginLeft: minPort ? '0.2vw' : minLand ? '1.0vw' : larPort ? '0.8vw' : '0.3vw'
   }
 }
@@ -94,10 +98,10 @@ interface scrollI {
 const scroll = ({ staticRefWidth, percentageResizedWidth, minPort, minLand, larPort, larLand }: scrollI) => {
   return {
     ...asc, ...flex, ...aic,
-    background: 'none',
+    background: 'yellow',
     // overflow: 'auto', background: 'none', opacity: '0.8', marginBottom: minPort ? '0vh' : minLand ? '0vh' : '1vh'
     overflow: 'auto',
-    minHeight: larPort ? '11vw' : `${staticRefWidth * 2.9}px`,
+    minHeight: larPort ? '80px' : `80px`,
     color: '#FFFFFF',
     /* flexDirection: 'row', */
     justifyContent:
@@ -109,8 +113,8 @@ const scroll = ({ staticRefWidth, percentageResizedWidth, minPort, minLand, larP
       'flex-start' :
       'space-evenly',
       // percentageResizedWidth 0.504
-    width: minPort ? '96vw' : minLand ? '55vw' : larPort ? '96vw' : '60vw',
-    height: minPort ? '7vh' : minLand ? '7vh' : larPort ? '10vh' : '13vh'
+    width: minPort ? '96vw' : minLand ? '55vw' : larPort ? '96vw' : '68vw',
+    //height: minPort ? '7vh' : minLand ? '7vh' : larPort ? '10vh' : '13vh'
   }
 }
 
@@ -130,7 +134,7 @@ const textItem = ({ staticRefWidth, darkMode, minPort, minLand, larPort }: textI
     marginRight: `${staticRefWidth * 0.5}px`,
     minWidth: 'fit-content',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : larPort ? '3vw' : `${staticRefWidth * 1.2}px`,
+    fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : larPort ? '24px' : `24px`,
     fontFamily: 'Roboto',
     fontWeight: '600'
   }

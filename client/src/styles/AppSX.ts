@@ -26,9 +26,9 @@ const blackWhite = ( { staticRefWidth, darkMode, location }: blackWhiteI ) => {
     height: 'calc(100vh - 12px)',
     alignSelf: 'center',
     justifyContent: 
-      location === '/portfolio/AboutMe' || location === '/portfolio/MessageMe'  ? 'center' :
-      location === '/portfolio/Contact' ? 'space-between' :
-       'none',
+      location === '/portfolio/MessageMe'  ? 'center' :
+      location === '/portfolio/Contact' ||  location === '/portfolio/AboutMe' ? 'space-between' :
+      'none',
     background: darkMode ? 'linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%)' : 'linear-gradient(to bottom right, black 49.9%,white 50.1%)'
   }
 }

@@ -3,6 +3,15 @@ import {
   jcsb, noSelect, relative, row
 } from './CommonsSX';
 
+const background = () => {
+  return {
+    ...flex, ...column,
+    background: 'blue',
+    width: '800px',
+    minWidth: '800px'
+  }
+}
+
 const mainBox = () => {
   return {
     ...flex, ...row, ...jcsb,
@@ -19,9 +28,9 @@ interface iconBoxI {
 const iconBox = ({ minPort, minLand, larPort }: iconBoxI) => {
   return {
     ...flex, ...column, ...relative, ...aic,
-    background: 'none',
+    background: 'yellow',
     border: 'none',
-    width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'
+    width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '90px' : '90px'
   }
 }
 
@@ -38,7 +47,7 @@ const iconMedia = ({ url, minPort, minLand, larPort }: iconMediaI) => {
     border: 'none',
     backgroundRepeat: 'no-repeat',
     backgroundImage: `url(${url})`,
-    width: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw',
+    width: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '90px' : '90px',
     height: minPort ? '10vw' : minLand ? '3.5vw' : larPort ? '5.5vw' : '3.5vw' ,
     backgroundSize: 'contain'
   }
@@ -53,9 +62,9 @@ interface textBoxI {
 const textBox = ({ minPort, minLand, larPort }: textBoxI) => {
   return {
     ...jcc, ...aic, ...flex, ...column, ...relative,
-    background: 'none',
+    background: 'darkblue',
     border: 'none',
-    width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '10vw' : '6vw'
+    width: minPort ? '15vw' : minLand ? '7vw' : larPort ? '90px' : '90px'
   }
 }
 
@@ -76,4 +85,7 @@ const title = ({ darkMode, minPort, minLand, larPort }: titleI) => {
   }
 }
 
-export { mainBox, iconBox, iconMedia, textBox, title }
+export {
+  mainBox, iconBox, iconMedia, textBox,
+  title, background
+ }

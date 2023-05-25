@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import profile from '../../images/profile.png';
 import Swal from 'sweetalert2';
 import {
-  background, right, text, avatar,
-  separatorY, separatorX, textNoDeco, topBottomHelper
+  background, right, text, avatar, greyBottom,
+  separatorY, separatorX, textNoDeco, topBottomHelper,
+  greyRight
 } from '../../styles/ContactSX';
 import '../../styles/ContactSX.css';
 import { blue, brown, lime, red, grey } from '@mui/material/colors';
@@ -106,11 +107,9 @@ function Contact() {
     })
   }
 
-  
-
   return (
       <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
-        <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })} />
         <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
 
           <Avatar
@@ -148,22 +147,8 @@ function Contact() {
           </Box>
         </Box>
         <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={{background: grey[400],
-          height: '6px',
-          width: 'calc(100vw - 12px)',
-          display: 'flex',
-          position: 'fixed',
-          bottom: '0px',
-          zIndex: 1000}}>
-        </Box>
-        <Box sx={{background: grey[400],
-          height: '100vh',
-          width: '6px',
-          display: 'flex',
-          position: 'fixed',
-          right: '0px',
-          zIndex: 1000}}>
-        </Box>
+        <Box sx={greyBottom} />
+        <Box sx={greyRight} />
       </Box>
   )
 }

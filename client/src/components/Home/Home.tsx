@@ -6,7 +6,8 @@ import Technologies from '../Technologies/Technologies';
 import {
   background, leftBoxOrTop, textOne,
   textTwo, textThree, boxTechnologies,
-  boxMessage, buttonMessage, boxRightOrBotton, SVG
+  boxMessage, buttonMessage, boxRightOrBotton,
+  SVG, greyBottom, greyRight
 } from '../../styles/HomeSX';
 
 function Home() {
@@ -52,6 +53,8 @@ function Home() {
           <MySvg/>
         </SvgIcon>
       </Box>
+      <Box sx={greyBottom} />
+      <Box sx={greyRight} />
   </Box>
   )
 }

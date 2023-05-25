@@ -1,25 +1,61 @@
 import { flex, noSelect, row, absolute, relative, column, jcc, fixed } from './CommonsSX';
+import { blue, brown, lime, red, grey } from '@mui/material/colors';
 
-interface backgroundI {
-  staticRefWidth: number
+interface topBottomHelperI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
 }
 
-const background = ({ staticRefWidth }: backgroundI) => {
+const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
-     /* ...flex, */  ...column, ...jcc, /*  ...relative, */
     background: 'none',
     display: 'flex',
-    position: 'relative',
-    width: '95vw',
-    height: '80vh',
-    /* top: `${staticRefWidth * 0.5}px`,
-    right: `${staticRefWidth * 0.5}px`,
-    bottom: `${staticRefWidth * 0.5}px`,
-    left: `${staticRefWidth  * 0.5}px`, */
-    
-    alignSelf: 'center',
-    //justifySelf: 'center',
-    
+    width: '20px',
+    minHeight: minPort ? '60px' : minLand ? '60px' : larPort || larLand ? '100px' : '100px',
+    position: 'relative'
+  }
+}
+
+interface blueBoxHelperI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+const blueBoxHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: blueBoxHelperI) => {
+  return {
+    background: 'none',
+    display: 'flex',
+    width: '20px',
+    minHeight: minPort ? '60px' : minLand ? '40px' : medPort || medLand ? '90px' : larPort || larLand ? '100px' : '100px',
+    position: 'relative'
+  }
+}
+
+interface backgroundI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
+  return {
+    ...flex, ...jcc,
+    flexDirection: minPort ? 'column' : 'row',
+    background: 'none',
+    width: 'calc(100vw - 12px)',
+    height: minPort ? '500px' : minLand ? '220px' : larPort ? '520px' : '520px',
+    alignItems: 'center'
   }
 }
 
@@ -33,14 +69,15 @@ interface blueBoxI {
 
 const blueBox = ({ darkMode, minPort, minLand, larPort, staticRefWidth }: blueBoxI) => {
   return {
-    ...flex, ...row, ...relative,
+    ...flex, ...column, ...relative,
     background: darkMode ? '#253740' : '#3C6478',
     'borderRadius': `${staticRefWidth * 1}px`,
     alignSelf: 'center',
     justifyContent: 'space-evenly',
-    width: minPort ? '90vw' : minLand ? '70vw' : larPort ? '70vw' : '70vw',
-    height: minPort ? '70vh' : minLand ? '60vh' : larPort ? '60vh' : '60vh',
-    //top: larPort ? 'null' : 'null'
+    minWidth: minPort ? '330px' : minLand ? '70vw' : larPort ? '200px' : '200px',
+    width: minPort ? '330px' : minLand ? '70vw' : larPort ? '70vw' : '70vw',
+    minHeight: minPort ? '500px' : minLand ? '220px' : larPort ? '520px' : '520px',
+    height: minPort ? '500px' : minLand ? '220px' : larPort ? '520px' : '520px',
   }
  }
 
@@ -48,22 +85,20 @@ interface avatarI {
   currentHeight: number,
   minPort: boolean,
   minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
   larPort: boolean,
   larLand: boolean,
   staticRefHeight: number
 }
 
-const avatar = ({ currentHeight, minPort, minLand, larPort, larLand, staticRefHeight }: avatarI) => {
+const avatar = ({ currentHeight, minPort, minLand, medPort, medLand, larPort, larLand, staticRefHeight }: avatarI) => {
   return {
-    ...flex, ...row, ...absolute,
-    width: minPort ? '18vh' : minLand ? '20vh' : larPort ? '16.5vh' : '16.5vh',
-    height: minPort ? '18vh' : minLand ? '20vh' : larPort ? '16.5vh' : '16.5vh',
-    maxWidth: `${staticRefHeight * 13.7}px`,
-    maxHeight: `${staticRefHeight * 13.7}px`,
-    transform: larLand && currentHeight < 330 ? 'scale(0.0001) translate(100vw, -100vw)' : 'null',
-    transition: 'all .5s',
-    top: minPort ? '-7vh' : minLand ? '-7vh' : '-9vh' ,
-    left: minPort ? '8vw' : minLand ? '7vw' : larPort ? '18vw' : '4vw',
+    ...flex, ...row, ...relative,
+    width: minPort || minLand ? '100px' : medPort || medLand || larPort ? '150px' : '150px',
+    height: minPort || minLand ? '100px' : medPort || medLand || larPort ? '150px' : '150px',
+    top: minPort || minLand ? '-60px' : medPort || medLand ? '-80px' : larPort ? '-70px' : '-70px',
+    left: minPort || minLand ? '40px' : larPort ? '50px' : '50px',
   }
 }
 
@@ -72,12 +107,12 @@ interface typographyI {
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
-  MedPort: boolean,
-  MedLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
   larPort: boolean,
 }
 
-const typography = ({ maxStaticReference, darkMode, minPort, minLand, MedPort, MedLand, larPort }: typographyI) => {
+const typography = ({ maxStaticReference, darkMode, minPort, minLand, medPort, medLand, larPort }: typographyI) => {
   return {
     ...noSelect,
     background: 'none',
@@ -85,10 +120,11 @@ const typography = ({ maxStaticReference, darkMode, minPort, minLand, MedPort, M
     display: 'flex',
     flexDirection: 'column',
     alignSelf: 'center',
-    width: minPort ? '75vw' : '65vw',
-    height: minPort ? '38vh' : minLand ? '38vh' : larPort ? '28vh' : '28vh',
+    marginTop: minPort || minLand ? '-40px' : medPort || medLand ? '-40px' : 'none',
+    width: minPort ? '290px' : '65vw',
+    height: minPort ? '350px' : minLand ? '110px' : medPort || medLand ? '300px' : larPort ? '250px' : '250px',
     textAlign: 'center',
-    fontSize: minPort ? `16px` : minLand ? `16px` : MedPort ? `${maxStaticReference * 2.3}px` : MedLand ? `${maxStaticReference * 2.3}px` :  larPort ? `${maxStaticReference * 1.5}px` : `${maxStaticReference * 1.5}px`,
+    fontSize: minPort || minLand ? `16px` : medPort || medLand ? `26px` :  larPort ? `27px` : `27px`,
     '::-webkit-scrollbar': { width: '10px' },
     '::-webkit-scrollbar-thumb': {
       'border': '10px solid',
@@ -107,5 +143,20 @@ const typography = ({ maxStaticReference, darkMode, minPort, minLand, MedPort, M
   }
 }
 
-export { background, blueBox, avatar, typography }
+const greyBottom = () => {
+  return {
+    background: grey[400],
+    height: '6px',
+    width: 'calc(100vw - 12px)',
+    display: 'flex',
+    position: 'fixed',
+    bottom: '0px',
+    zIndex: 1000
+  }
+}
+
+export {
+  background, blueBox, avatar, typography, topBottomHelper,
+  greyBottom, blueBoxHelper
+}
 

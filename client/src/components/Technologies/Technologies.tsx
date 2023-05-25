@@ -6,7 +6,10 @@ import node from '../../images/node.png';
 import react from '../../images/react.png';
 import redux from '../../images/redux.png';
 import sequelize from '../../images/sequelize.png';
-import { mainBox, iconBox, iconMedia, textBox, title } from '../../styles/TechnologiesSX';
+import { 
+  mainBox, iconBox, iconMedia, textBox,
+  title, background
+} from '../../styles/TechnologiesSX';
 
 function Technologies() {
 
@@ -16,7 +19,7 @@ function Technologies() {
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
 
   return (
-    <Box>
+    <Box sx={background}>
       <Box sx={mainBox}>
         {[react,redux,javascript,node,sequelize,material].map((e) => {
           return (

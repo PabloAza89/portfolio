@@ -2,6 +2,7 @@ import {
   flex, mix, noSelect, row, column,
   relative, asc, jcc, noDeco
 } from './CommonsSX';
+import { blue, brown, lime, red, grey } from '@mui/material/colors';
 
 interface topBottomHelperI {
   minPort: boolean,
@@ -197,7 +198,32 @@ const textNoDeco = () => {
   }
 }
 
+const greyBottom = () => {
+  return {
+    background: grey[400],
+    height: '6px',
+    width: 'calc(100vw - 12px)',
+    display: 'flex',
+    position: 'fixed',
+    bottom: '0px',
+    zIndex: 1000
+  }
+}
+
+const greyRight = () => {
+  return {
+    background: grey[400],
+    height: '100vh',
+    width: '6px',
+    display: 'flex',
+    position: 'fixed',
+    right: '0px',
+    zIndex: 1000
+  }
+}
+
 export {
   background, right, text, topBottomHelper,
-  avatar, separatorY, separatorX, textNoDeco
+  avatar, separatorY, separatorX, textNoDeco,
+  greyBottom, greyRight
 }

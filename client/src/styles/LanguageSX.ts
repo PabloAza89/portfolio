@@ -23,6 +23,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
       larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.773 ? 'none' :
       larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.731 ? 'none' :
       (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.642 ? 'none' :
+      (larPort || larLand) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.664 ? 'none' :
       'null',
     transition: 'opacity .1s ease-in-out',
     opacity:
@@ -31,7 +32,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
       larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.773 ? '0' :
       larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.731 ? '0' :
       (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.642 ? '0' :
-      //larLand && location === '/portfolio/Contact' && percentageResizedHeight < 0.642 ? '0' :
+      (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.664 ? '0' :
       '1',
     'active': {
       'opacity': '0',
@@ -39,8 +40,6 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
       },
     flexDirection: 'row',
     justifyContent: 'center',
-    //width: minPort ? '40vw' : minLand ? '30vw' : medPort ? '40vw' : medLand ? '30vw' : larPort ? '30vw' :' 30vw',
-    //height: minPort ? '9vh' : minLand ? '16vh' : medPort ? '20vw' : larPort ? '15vh' : '15vh',
     bottom: minPort || minLand ? '2vh' : medPort || medLand ? '3vh' : '3vh'
   }
 }
@@ -62,7 +61,6 @@ const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxSt
     display: 'flex',
     flexDirection: 'row',
     alignSelf: 'center',
-    //background: `url(${lanEn})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid ${cyan[100]} 2px` : `solid transparent 2px`,
@@ -82,7 +80,6 @@ const lanEsFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxSt
     display: 'flex',
     flexDirection: 'row',
     alignSelf: 'center',
-    //background: `url(${lanEs})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid transparent 2px` : `solid ${cyan[100]} 2px`,
