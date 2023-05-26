@@ -12,7 +12,7 @@ import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
 //import StaticBackground from './components/StaticBackground/StaticBackground';
 import { 
-  background, blackWhite, greyBottom, greyRight
+  background, blackWhite, greyBottom, greyRight, topBottomHelper
 } from './styles/AppSX';
 import { Box } from '@mui/material';
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
@@ -57,6 +57,8 @@ function App() {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
 
   return (
     <Box sx={background} >
@@ -67,6 +69,7 @@ function App() {
             <DarkMode />
             <Home />
             <Language />
+            <Box sx={topBottomHelper({ medPort, medLand })}></Box>
           </>}/>
           <Route path="/portfolio/AboutMe" element={<>
             <AboutMe />

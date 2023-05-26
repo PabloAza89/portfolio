@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
 import {
-  background, textLeftBoxOrTop, textOne,
-  textTwo, textThree, boxTechnologies,
-  boxMessage, buttonMessage, boxRightOrBotton,
-  SVG, greyBottom, greyRight, leftBox
+  background, boxTypography, textOne,
+  textTwo, textThree, buttonMessage, boxSVG,
+  SVG, greyBottom, greyRight, boxTextTechMessage,
 } from '../../styles/HomeSX';
 
 function Home() {
@@ -28,36 +27,30 @@ function Home() {
   const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
 
   return (
-    <Box sx={background({ minPort, minLand, larPort })}>
-      <Box sx={leftBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-        <Box sx={textLeftBoxOrTop({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-          <Typography sx={textOne({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
-          <Typography sx={textTwo({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
-          <Typography sx={textThree({ darkMode, minPort, minLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
+    <Box sx={background({ minPort, minLand, medPort, medLand, larPort })}>
+      <Box sx={boxTextTechMessage({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+        <Box sx={boxTypography({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+          <Typography sx={textOne({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
+          <Typography sx={textTwo({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
+          <Typography sx={textThree({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
         </Box>
-        {/* <Box sx={boxTechnologies({ minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight })}> */}
-          <Technologies />
-        {/* </Box> */}
-        {/* <Box sx={boxMessage({ minLand, medPort, medLand, larPort, larLand })}> */}
-          <Link style={{ textDecoration: 'none'/* , alignSelf: 'center' */ }} to="/portfolio/MessageMe">
-            <Button
-              sx={buttonMessage({ minPort, minLand, medPort, larPort })}
-              variant='outlined'
-            >{ english ? `Message Me` : `Envíame un mensaje` }
-            </Button>
-          </Link>
-        {/* </Box> */}
+        <Technologies />
+        <Link style={{ textDecoration: 'none' }} to="/portfolio/MessageMe">
+          <Button
+            sx={buttonMessage({ minPort, minLand, medPort, medLand, larPort })}
+            variant='outlined'
+          >{ english ? `Message Me` : `Envíame un mensaje` }
+          </Button>
+        </Link>
       </Box>
-      <Box sx={boxRightOrBotton({ minPort, minLand, medPort, larPort })}>
-        
+      <Box sx={boxSVG({ minPort, minLand, medPort, medLand, larPort })}>
         <SvgIcon
-          sx={SVG({ width, height, minPort, minLand, medPort, larPort, larLand, percentageResizedHeight, percentageResizedWidth })}
+          sx={SVG({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth })}
           preserveAspectRatio="none"
         >
           <MySvg/>
         </SvgIcon>
       </Box>
-      
   </Box>
   )
 }

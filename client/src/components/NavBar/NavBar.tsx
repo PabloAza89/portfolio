@@ -46,6 +46,9 @@ function NavBar() {
     return elRef;
   }
 
+  // MED HEIGHT 10 + 70
+  // LAR HEIGHT 10 + 87
+
   return (
     <Box sx={background({ staticRefWidth, minPort, minLand, medPort, medLand, larPort })}>
       <Box sx={mainLeft({ staticRefWidth, minPort, minLand, medPort, medLand, larPort })}>

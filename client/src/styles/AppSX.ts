@@ -26,11 +26,26 @@ const blackWhite = ( { staticRefWidth, darkMode, location }: blackWhiteI ) => {
     height: 'calc(100vh - 12px)',
     alignSelf: 'center',
     justifyContent: 
-      //location === '/portfolio/'  ? 'none' :
+      location === '/portfolio'  ? 'space-between' :
       location === '/portfolio/MessageMe'  ? 'center' :
       location === '/portfolio/Contact' ||  location === '/portfolio/AboutMe' ? 'space-between' :
       'none',
     background: darkMode ? 'linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%)' : 'linear-gradient(to bottom right, black 49.9%,white 50.1%)'
+  }
+}
+
+interface topBottomHelperI {
+  medPort: boolean,
+  medLand: boolean
+}
+
+const topBottomHelper = ({ medPort, medLand }: topBottomHelperI) => {
+  return {
+    background: 'orange',
+    display: 'flex',
+    width: '20px',
+    minHeight: medPort ? '60px' : medLand ? '60px' : '100px',
+    position: 'relative'
   }
 }
 
@@ -60,5 +75,6 @@ const greyRight = () => {
 }
 
 export {
-  background, blackWhite, greyBottom, greyRight
+  background, blackWhite, greyBottom, greyRight,
+  topBottomHelper
 }
