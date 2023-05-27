@@ -6,7 +6,7 @@ import Technologies from '../Technologies/Technologies';
 import {
   background, boxTypography, textOne,
   textTwo, textThree, buttonMessage, boxSVG,
-  SVG, greyBottom, greyRight, boxTextTechMessage,
+  SVG, boxTextTechMessage,
 } from '../../styles/HomeSX';
 
 function Home() {
@@ -28,7 +28,7 @@ function Home() {
 
   return (
     <Box sx={background({ minPort, minLand, medPort, medLand, larPort })}>
-      <Box sx={boxTextTechMessage({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+      {/* <Box sx={boxTextTechMessage({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Box sx={boxTypography({ minPort, minLand, medPort, medLand, larPort, larLand })}>
           <Typography sx={textOne({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
           <Typography sx={textTwo({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
@@ -50,7 +50,7 @@ function Home() {
         >
           <MySvg/>
         </SvgIcon>
-      </Box>
+      </Box> */}
   </Box>
   )
 }

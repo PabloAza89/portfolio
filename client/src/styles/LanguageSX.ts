@@ -28,8 +28,8 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
       'null',
     //transition: 'opacity .1s ease-in-out',
     opacity:
-      larPort && location === '/portfolio' && percentageResizedHeight < 0.844 ? '0' :
-      larLand && location === '/portfolio' && percentageResizedHeight < 0.660 ? '0' :
+      //larPort && location === '/portfolio' && percentageResizedHeight < 0.844 ? '0' :
+      //larLand && location === '/portfolio' && percentageResizedHeight < 0.660 ? '0' :
       larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.773 ? '0' :
       larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.731 ? '0' :
       (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.642 ? '0' :

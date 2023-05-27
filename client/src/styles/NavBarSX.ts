@@ -117,8 +117,7 @@ const scroll = ({ staticRefWidth, percentageResizedWidth, minPort, minLand, medP
   return {
     ...asc, ...flex, ...aic,
     background: 'yellow',
-    // overflow: 'auto', background: 'none', opacity: '0.8', marginBottom: minPort ? '0vh' : minLand ? '0vh' : '1vh'
-    overflow: 'auto', // calc(100vw - 12px)
+    overflow: 'auto', 
     width: minPort ? '96vw' : minLand ? '55vw' : medPort ? 'calc(100vw - 12px)' : larPort ? '96vw' : '68vw',
     minHeight: medPort || medLand ? '70px' : larPort ? '87px' : `87px`,
     color: '#FFFFFF',
