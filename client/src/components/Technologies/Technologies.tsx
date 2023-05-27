@@ -9,8 +9,7 @@ import redux from '../../images/redux.png';
 import sequelize from '../../images/sequelize.png';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import {
-  mainBox, iconBox, iconMedia, textBox,
-  title, background
+  iconBox, iconMedia, title, background
 } from '../../styles/TechnologiesSX';
 
 function Technologies() {
@@ -67,21 +66,22 @@ function Technologies() {
   ]
 
   return (
-    <Box>
+    
       <ScrollContainer style={background({ minPort, minLand, medPort, medLand, larPort, larLand })}
         innerRef={useHorizontalScroll()}
+/*         horizontal={true}
+        hideScrollbars={true} */
       >
-          {array.map((e: any) => {
-            return (
-              <Box key={e.icon} sx={iconBox({ minPort, minLand, medPort, medLand, larPort })}>
-                <CardMedia component="div" sx={iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}></CardMedia>
-                <Typography sx={title({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{e.title}</Typography>
-              </Box>
-            )
-          })}
+        {array.map((e) => {
+          return (
+            <Box key={e.icon} sx={iconBox({ minPort, minLand, medPort, medLand, larPort })}>
+              <CardMedia component="div" sx={iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}></CardMedia>
+              <Typography sx={title({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{e.title}</Typography>
+            </Box>
+          )
+        })}
       </ScrollContainer>
-    </Box>
-
+    
   )
 }
 

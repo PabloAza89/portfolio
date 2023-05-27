@@ -115,8 +115,8 @@ function App() {
           </>}/>
         </Routes>
       </Box>
-      {/* <Box sx={greyBottom} />
-      <Box sx={greyRight} /> */}
+      <Box sx={greyBottom} />
+      <Box sx={greyRight} />
     </Box>
   );
 }
