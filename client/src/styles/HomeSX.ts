@@ -15,12 +15,14 @@ const background = ({ minPort, minLand, medPort, medLand, larPort }: backgroundI
   return {
     display: 'flex',
     position: 'relative',
-    justifyContent: medPort || medLand ? 'space-evenly' : larPort ? 'center' : 'center',
-    alignItems: medPort ? 'center' : 'none',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
     flexDirection: medPort ? 'column-reverse' : 'row',
+    minWidth: larPort ? '1282px' : '1282px',
     width: 'calc(100vw - 12px)',
+    minHeight: minPort ? 'none' : minLand ? 'none' : medPort ? 'none' : medLand ? 'none' : larPort ? 'none' : '543px', // height
+    height: minPort ? '71vh' : minLand ? '65vh' : medPort ? '69vh' : medLand ? '69vh' : larPort ? '75vh' : '75vh', // height
     background: 'gray',
-    height: minPort ? '71vh' : minLand ? '65vh' : medPort ? '69vh' : medLand ? '69vh' : larPort ? '75vh' : '71vh',
   }
 }
 
@@ -40,9 +42,9 @@ const boxTextTechMessage = ({ minPort, minLand, medPort, medLand, larPort, larLa
     background: 'maroon',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    minWidth: medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : '817px', // minWidth
-    width:  minPort ? '90vw' : medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' :'50%', // width
-    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '35vh' : medLand ? '69vh' : larPort ? '75vh' : '70vh', // minHeight
+    minWidth: medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : '680px', // minWidth
+    width:  minPort ? '90vw' : medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' :'48vw', // width
+    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '35vh' : medLand ? '69vh' : larPort ? '524px' : '524px', // minHeight
     height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '35vh' : medLand ? '69vh' : larPort ? '75vh' : '70vh', // height
     flexFlow: medPort ? 'wrap' : 'none'
   }
@@ -63,8 +65,8 @@ const boxTypography = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
     justifyContent: 'space-around',
     display: 'flex',
     flexDirection: 'column',
-    minWidth: minPort ? '92vw' : minLand ? '50vw' : medPort ? '48vw' : medLand ? '48vw' : larPort ? '460px' : '460px', // minWidth
-    width: minPort ? '92vw' : minLand ? '50vw' : medPort ? '48vw' : medLand ? '48vw' : larPort ? '700px' : '700px', // width
+    minWidth: minPort ? '92vw' : minLand ? '50vw' : medPort ? '48vw' : medLand ? '48vw' : larPort ? '460px' : '600px', // minWidth
+    width: minPort ? '92vw' : minLand ? '50vw' : medPort ? '48vw' : medLand ? '48vw' : larPort ? '700px' : '44vw', // width
     minHeight: minPort ? '45vh' : minLand ? '60vh' : medPort ? '25vh' : medLand ? '45vh' : larPort ? '300px' : '300px', // minHeight
     height: minPort ? '45vh' : minLand ? '60vh' : medPort ? '25vh' : medLand ? '45vh' : larPort ? '300px' : '300px', // height
   }
@@ -84,8 +86,8 @@ interface textOneI {
 const textOne = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight }: textOneI) => {
   return {
     ...noSelect, ...mix, ...relative, ...flex,
-    'color': darkMode ? '#b5b3b3' : '#FFFFFF',
-    'fontSize': minPort  ? '11.5vw' : minLand ? '4.9vw' : medPort ? '7vw' : medLand ? '5.5vw' : larPort ? '50px' : '50px',
+    color: darkMode ? '#b5b3b3' : '#FFFFFF',
+    fontSize: minPort  ? '11.5vw' : minLand ? '4.9vw' : medPort ? '7vw' : medLand ? '5.5vw' : larPort ? '65px' : '65px', // fontSize
   }
 }
 
@@ -104,8 +106,8 @@ const textTwo = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percen
   return {
     ...noSelect, ...mix,
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort  ? '11.5vw' : minLand ? '5.4vw' : medPort ? '6vw' : medLand ? '6vw' : larPort ? '57px' : '57px',
-    'inlineSize': 'max-content',
+    fontSize: minPort  ? '11.5vw' : minLand ? '5.4vw' : medPort ? '6vw' : medLand ? '6vw' : larPort ? '67px' : '67px', // fontSize
+    inlineSize: 'max-content',
   }
 }
 
@@ -124,7 +126,7 @@ const textThree = ({ darkMode, minPort, minLand, medPort, medLand, larPort, perc
   return {
     ...noSelect, ...mix,
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort  ? '11.5vw' : minLand ? '2.9vw' : medPort ? '4vw' : medLand ? '3.7vw' : larPort ? '33px' : '33px',
+    fontSize: minPort  ? '11.5vw' : minLand ? '2.9vw' : medPort ? '4vw' : medLand ? '3.7vw' : larPort ? '42px' : '42px', // fontSize
   }
 }
 
@@ -140,11 +142,11 @@ const buttonMessage = ({ minPort, minLand, medPort, medLand, larPort }: buttonMe
   return {
     background: 'none',
     padding: '0px !important',
-    minWidth: minPort ? '53vw !important' : minLand ? '9vw !important' : medPort ? '48vw' : '2vw !important',
-    width: minPort ? '19vw' : minLand ? '19vw' : medPort ? '48vw' : medLand ? '290px' : larPort ? '370px' : '370px',
-    minHeight: minPort ? '10vw !important' : minLand ? '2.1vw !important' : '4.1vh !important',
+    minWidth: minPort ? '53vw !important' : minLand ? '9vw !important' : medPort ? '48vw' : '2vw !important', // minWidth
+    width: minPort ? '19vw' : minLand ? '19vw' : medPort ? '48vw' : medLand ? '290px' : larPort ? '370px' : '370px', // width
+    minHeight: minPort ? '10vw !important' : minLand ? '2.1vw !important' : '4.1vh !important', // minHeight
     color:'#FFFFFF',
-    fontSize: minPort ? '4vw' : medPort ? '20px' : medLand ? '22px' : larPort ? '25px' : '25px',
+    fontSize: minPort ? '4vw' : medPort ? '20px' : medLand ? '22px' : larPort ? '29px' : '29px', // fontSize
     mixBlendMode: 'difference',
   }
 }
@@ -162,16 +164,16 @@ const boxSVG = ({ minPort, minLand, medPort, medLand, larPort }: boxSVGI ) => {
     background: 'brown',
     position: 'relative',
     justifyContent: 'center',
-    display: larPort ? 'none' : 'flex',
-    minWidth: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '49vw' : larPort ? '75vh' : '500px', // minWidth
-    width: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '49vw' : larPort ? '75vh' : '500px', // width
-    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '69vh' : larPort ? '75vh' : '500px', // minHeight
-    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '69vh' : larPort ? '75vh' : '75vh', // height
+    display: 'flex',
+    minWidth: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '49vw' : larPort ? '75vh' : '524px', // minWidth
+    width: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '49vw' : larPort ? '75vh' : '70vh', // width
+    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '69vh' : larPort ? '75vh' : '524px', // minHeight
+    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '69vh' : larPort ? '75vh' : '70vh', // height
     alignItems: 'center'
   }
 }
 
-interface SVGI {
+interface imageSVGI {
   width: number,
   height: number,
   minPort: boolean,
@@ -184,18 +186,20 @@ interface SVGI {
   percentageResizedWidth: number
 }
 
-const SVG = ({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth }: SVGI ) => {
+const imageSVG = ({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth }: imageSVGI ) => {
   return {
     display: minPort ? 'none' : minLand ? 'none' : 'flex',
     background: 'red',
     position: 'relative',
-    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '65vh' : larPort ? '75vh' : '500px', // minHeight
-    minWidth: minPort ? '23vh' : minLand ? '60vh' : medPort ? '42vh' : medLand ? '65vh' : larPort ? '75vh' : '500px', // minWidth
+    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '65vh' : larPort ? '75vh' : '524px', // minHeight
+    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '65vh' : larPort ? '75vh' : '70vh', // height
+    minWidth: minPort ? '23vh' : minLand ? '60vh' : medPort ? '42vh' : medLand ? '65vh' : larPort ? '75vh' : '524px', // minWidth
+    width: minPort ? '23vh' : minLand ? '60vh' : medPort ? '42vh' : medLand ? '65vh' : larPort ? '75vh' : '70vh', // width
   }
 }
 
 export {
   background, boxTypography, textOne,
   textTwo, textThree, buttonMessage, boxSVG,
-  SVG, boxTextTechMessage
+  imageSVG, boxTextTechMessage
 }

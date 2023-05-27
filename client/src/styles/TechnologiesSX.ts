@@ -16,8 +16,8 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: ba
   return {
     ...flex, ...column,
     background: 'blue',
-    width: medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : '800px',
-    minWidth: medPort ? '95vw' : medLand ? '48vw' : '800px',
+    minWidth: medPort ? '95vw' : medLand ? '48vw' : '650px', // minWidth
+    width: medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : '48vw', // width
     height: medPort ? '70px' : medLand ? 'calc(5vw + 25px)' : '90px',
     order: medPort ? '1' : 'none',
   }

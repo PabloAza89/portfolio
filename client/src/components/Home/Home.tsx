@@ -6,7 +6,7 @@ import Technologies from '../Technologies/Technologies';
 import {
   background, boxTypography, textOne,
   textTwo, textThree, buttonMessage, boxSVG,
-  SVG, boxTextTechMessage,
+  imageSVG, boxTextTechMessage,
 } from '../../styles/HomeSX';
 
 function Home() {
@@ -28,7 +28,7 @@ function Home() {
 
   return (
     <Box sx={background({ minPort, minLand, medPort, medLand, larPort })}>
-      {/* <Box sx={boxTextTechMessage({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+      <Box sx={boxTextTechMessage({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Box sx={boxTypography({ minPort, minLand, medPort, medLand, larPort, larLand })}>
           <Typography sx={textOne({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
           <Typography sx={textTwo({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
@@ -45,12 +45,12 @@ function Home() {
       </Box>
       <Box sx={boxSVG({ minPort, minLand, medPort, medLand, larPort })}>
         <SvgIcon
-          sx={SVG({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth })}
+          sx={imageSVG({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth })}
           preserveAspectRatio="none"
         >
           <MySvg/>
         </SvgIcon>
-      </Box> */}
+      </Box>
   </Box>
   )
 }

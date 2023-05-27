@@ -20,7 +20,8 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
     background: 'none',
     display: 'flex',
     pointerEvents:
-      (larPort || larLand) && location === '/portfolio' && percentageResizedHeight < 0.660 ? 'none' :
+      //(larPort || larLand) && location === '/portfolio' && percentageResizedHeight < 0.660 ? 'none' :
+      (larPort || larLand) && location === '/portfolio' && percentageResizedHeight < 0.665 ? 'none' :
       larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.773 ? 'none' :
       larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.731 ? 'none' :
       (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.642 ? 'none' :
@@ -29,7 +30,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
     //transition: 'opacity .1s ease-in-out',
     opacity:
       //larPort && location === '/portfolio' && percentageResizedHeight < 0.844 ? '0' :
-      //larLand && location === '/portfolio' && percentageResizedHeight < 0.660 ? '0' :
+      (larPort || larLand) && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
       larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.773 ? '0' :
       larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.731 ? '0' :
       (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.642 ? '0' :

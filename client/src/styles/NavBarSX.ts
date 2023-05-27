@@ -7,32 +7,34 @@ interface genI {
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
-  larPort: boolean
+  larPort: boolean,
+  larLand: boolean
 }
 
-const background = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPort }: genI) => {
+const background = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand }: genI) => {
   return {
     ...jcse, ...flex,
     background: 'blue',
     flexDirection: minPort || medPort || larPort ? 'column' : 'row',
     paddingTop: '10px',
     color: '#FFFFFF',
-    height: minPort ? '30vw' : minLand ? '7vw' : medPort ? '140px' : medLand ? '70px' : larPort ? '174px' : '87px',
-    minHeight: medPort ? '140px' : medLand ? '70px' : larPort ? '174px' : `87px`,
-    justifyContent: minLand ? 'left' : 'none'
+    minHeight: medPort ? '140px' : medLand ? '70px' : larPort ? '100px' : '100px', // minHeight
+    height: minPort ? '30vw' : minLand ? '7vw' : medPort ? '140px' : medLand ? '70px' : larPort ? '100px' : '100px', //height
+    justifyContent: minLand ? 'left' : larLand ? 'space-between' : 'none'
   }
 }
 
-const mainLeft = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPort }: genI) => {
+const mainLeft = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand }: genI) => {
   return {
     ...flex, ...row, ...aic,
     background: 'red',
     alignItems: 'center',
-    minWidth: minPort ? '60vw' : minLand ? '35vw' : medPort ? '430px' : medLand ? '250px' : larPort ? '58vw' : '520px',
-    height: minPort ? '7vh' : minLand ? '13vh' : medPort || medLand ? '70px' : larPort ? '87px' : '87px',
+    minWidth: minPort ? '60vw' : minLand ? '35vw' : medPort ? '430px' : medLand ? '250px' : larPort ? '58vw' : '580px', // minWidth
+    height: minPort ? '7vh' : minLand ? '13vh' : medPort || medLand ? '70px' : larPort ? '100px' : '100px', // height
     color: '#FFFFFF',
     'alignSelf': minPort || medPort || larPort ? 'start' : 'center',
-    marginLeft: '2vw',
+    marginLeft: '25px',
+    //left: '25px',
   }
 }
 
@@ -47,10 +49,11 @@ interface genII {
 const lessThan = ({ minPort, minLand, medPort, medLand, larPort }: genII) => {
   return {
     ...noSelect,
-    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : medPort ? '45px' : medLand ? '30px' : larPort ? '50px' : '50px',
+    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : medPort ? '45px' : medLand ? '30px' : larPort ? '54px' : '54px', // fontSize
     marginRight: minPort ? '1.5vw' : minLand ? '1.4vw' : larPort ? '1.1vw' : '1.1vw',
-    height: medPort ? '70px' : medLand ? '40px' : '87px',
-    
+    width: medPort ? '70px' : medLand ? '40px' : larPort ? '80px' : '11px', // width
+    height: medPort ? '70px' : medLand ? '40px' : larPort ? '80px' : '80px', // height
+
   }
 }
 
@@ -67,11 +70,11 @@ const name = ({ minPort, minLand, medPort, medLand, larPort }: nameI) => {
     ...noSelect,
     //marginTop: '0.5vh',
     fontFamily: 'Allura',
-    fontSize: minPort ? '7.5vw' : minLand ? '3.8vw' : medPort ? '50px' : medLand ? '27px' : larPort ? '65px' : '65px',
+    fontSize: minPort ? '7.5vw' : minLand ? '3.8vw' : medPort ? '50px' : medLand ? '27px' : larPort ? '73px' : '73px', // fontSize
     color: blue[600],
     fontWeight: 600,
-    minWidth: medPort ? '330px' : medLand ? '180px' : '410px',
-    height: medPort ? '70px' : medLand ? '40px' : '87px',
+    minWidth: medPort ? '330px' : medLand ? '180px' : larPort ? '470px' : '470px',
+    height: medPort ? '70px' : medLand ? '40px' : larPort ? '100px' : '100px',
     background: 'gray',
     textAlign: 'center'
   }
@@ -80,9 +83,10 @@ const name = ({ minPort, minLand, medPort, medLand, larPort }: nameI) => {
 const blink = ({ minPort, minLand, medPort, medLand, larPort }: genII) => {
   return {
     ...noSelect,
-    marginTop: '0.5vh',
-    height: medPort ? '70px' : medLand ? '40px' : '87px',
-    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : medPort ? '45px' : medLand ? '30px' : larPort ? '50px' : '50px',
+    //marginTop: '0.5vh',
+    width: medPort ? '70px' : medLand ? '40px' : larPort ? '80px' : '11px', // width
+    height: medPort ? '70px' : medLand ? '40px' : larPort ? '80px' : '80px', // height
+    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : medPort ? '45px' : medLand ? '30px' : larPort ? '54px' : '54px', // fontSize
     fontWeight: '300',
     animation: 'blink 1s linear infinite',
     '@keyframes blink': {
@@ -96,13 +100,15 @@ const blink = ({ minPort, minLand, medPort, medLand, larPort }: genII) => {
 const greaterThan = ({ minPort, minLand, medPort, medLand, larPort }: genII) => {
   return {
     ...noSelect,
-    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : medPort ? '45px' : medLand ? '30px' : larPort ? '50px' : '50px',
+    background: 'yellow',
+    fontSize: minPort ? '6vw' : minLand ? '2.8vw' : medPort ? '45px' : medLand ? '30px' : larPort ? '54px' : '54px', // fontSize
     marginLeft: minPort ? '0.2vw' : minLand ? '1.0vw' : larPort ? '0.8vw' : '0.3vw',
-    height: medPort ? '70px' : medLand ? '40px' : '87px',
+    width: medPort ? '70px' : medLand ? '40px' : larPort ? '80px' : '55px', // width
+    height: medPort ? '70px' : medLand ? '40px' : larPort ? '80px' : '80px', // height
   }
 }
 
-interface scrollI {
+interface mainRightI {
   staticRefWidth: number,
   percentageResizedWidth: number,
   minPort: boolean,
@@ -113,26 +119,27 @@ interface scrollI {
   larLand: boolean
 }
 
-const scroll = ({ staticRefWidth, percentageResizedWidth, minPort, minLand, medPort, medLand, larPort, larLand }: scrollI) => {
+const mainRight = ({ staticRefWidth, percentageResizedWidth, minPort, minLand, medPort, medLand, larPort, larLand }: mainRightI) => {
   return {
     ...asc, ...flex, ...aic,
     background: 'yellow',
-    overflow: 'auto', 
-    width: minPort ? '96vw' : minLand ? '55vw' : medPort ? 'calc(100vw - 12px)' : larPort ? '96vw' : '68vw',
-    minHeight: medPort || medLand ? '70px' : larPort ? '87px' : `87px`,
+    overflow: 'auto',
+    //minWidth: minPort ? '96vw' : minLand ? '55vw' : medPort ? 'calc(100vw - 12px)' : larPort ? '96vw' : '640px', // width
+    width: minPort ? '96vw' : minLand ? '55vw' : medPort ? 'calc(100vw - 12px)' : larPort ? '96vw' : '50vw', // width
+    minHeight: medPort || medLand ? '70px' : larPort ? '87px' : `100px`, // minHeight
+    paddingLeft: '20px',
+    paddingRight: '25px',
+    marginRight: '50px',
     color: '#FFFFFF',
-    /* flexDirection: 'row', */
     justifyContent:
       minPort ? 'space-around' :
       minLand ? 'space-evenly' :
       larPort && percentageResizedWidth > 0.305 ? 'space-evenly' :
       larPort ? 'flex-start' :
-      larLand && percentageResizedWidth < 0.504 ?
-      'flex-start' :
+      //larLand && percentageResizedWidth < 0.504 ? 'flex-start' :
+      larLand ? 'space-between' :
+      //larLand ? 'space-evenly' :
       'space-evenly',
-      // percentageResizedWidth 0.504
-    
-    //height: minPort ? '7vh' : minLand ? '7vh' : larPort ? '10vh' : '13vh'
   }
 }
 
@@ -152,9 +159,9 @@ const textItem = ({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort
     background: 'none',
     marginLeft: `${staticRefWidth * 0.5}px`,
     marginRight: `${staticRefWidth * 0.5}px`,
-    minWidth: 'fit-content',
+    minWidth: 'max-content',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : medPort ? '20px' : medLand ? '18px' : larPort ? '24px' : `24px`,
+    fontSize: minPort ? '3.2vw' : minLand ? '1.3vw' : medPort ? '20px' : medLand ? '18px' : larPort ? '23px' : `23px`, // fontSize
     fontFamily: 'Roboto',
     fontWeight: '600'
   }
@@ -162,5 +169,5 @@ const textItem = ({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort
 
 export {
   background, mainLeft, lessThan, name,
-  blink, greaterThan, scroll, textItem
+  blink, greaterThan, mainRight, textItem
 }

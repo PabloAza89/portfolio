@@ -35,17 +35,20 @@ const blackWhite = ( { staticRefWidth, darkMode, location }: blackWhiteI ) => {
 }
 
 interface topBottomHelperI {
+  minPort: boolean,
+  minLand: boolean,
   medPort: boolean,
   medLand: boolean,
+  larPort: boolean,
   larLand: boolean,
 }
 
-const topBottomHelper = ({ medPort, medLand, larLand }: topBottomHelperI) => {
+const topBottomHelper = ({ medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
     background: 'orange',
     display: 'flex',
     width: '20px',
-    minHeight: medPort ? '60px' : medLand ? '60px' : larLand ? '70px' : '100px',
+    minHeight: medPort ? '60px' : medLand ? '60px' : larPort ? '85px' : '85px',
     position: 'relative'
   }
 }

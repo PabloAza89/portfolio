@@ -5,7 +5,7 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
 import { 
   background, mainLeft, lessThan, name,
-  blink, greaterThan, scroll, textItem
+  blink, greaterThan, mainRight, textItem
 } from '../../styles/NavBarSX';
 
 function NavBar() {
@@ -50,14 +50,14 @@ function NavBar() {
   // LAR HEIGHT 10 + 87
 
   return (
-    <Box sx={background({ staticRefWidth, minPort, minLand, medPort, medLand, larPort })}>
-      <Box sx={mainLeft({ staticRefWidth, minPort, minLand, medPort, medLand, larPort })}>
+    <Box sx={background({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand })}>
+      <Box sx={mainLeft({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Typography sx={lessThan({ minPort, minLand, medPort, medLand, larPort })}>{`<`}</Typography>
         <Typography sx={name({ minPort, minLand, medPort, medLand, larPort })}>{`Pablo Azambuyo`}</Typography>
         <Typography sx={blink({ minPort, minLand, medPort, medLand, larPort })}>{`I`}</Typography>
         <Typography sx={greaterThan({ minPort, minLand, medPort, medLand, larPort })}>{`/>`}</Typography>
       </Box>
-      <ScrollContainer style={scroll({ staticRefWidth, percentageResizedWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
+      <ScrollContainer style={mainRight({ staticRefWidth, percentageResizedWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
         innerRef={useHorizontalScroll()}
       >
         <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort })} to="/portfolio/AboutMe">{ english ? `About Me` : `Acerca De Mi` }</Link>
