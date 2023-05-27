@@ -60,11 +60,11 @@ function NavBar() {
       <ScrollContainer style={mainRight({ staticRefWidth, percentageResizedWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
         innerRef={useHorizontalScroll()}
       >
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort })} to="/portfolio/AboutMe">{ english ? `About Me` : `Acerca De Mi` }</Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort })} to="/portfolio/Skills">{ english ? `Skills` : `Habilidades` } </Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort })} to="/portfolio/Projects">{ english ? `Projects` : `Proyectos` }</Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort })} to="/portfolio/Certifications">{ english ? `Certifications` : `Certificaciones`}</Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort })} to="/portfolio/Contact">{ english ? `Contact` : `Contacto` }</Link>
+        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/AboutMe">{ english ? `About Me` : `Acerca De Mi` }</Link>
+        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Skills">{ english ? `Skills` : `Habilidades` } </Link>
+        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Projects">{ english ? `Projects` : `Proyectos` }</Link>
+        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Certifications">{ english ? `Certifications` : `Certificaciones`}</Link>
+        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Contact">{ english ? `Contact` : `Contacto` }</Link>
       </ScrollContainer>
     </Box>
   )

@@ -29,8 +29,8 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
       'null',
     //transition: 'opacity .1s ease-in-out',
     opacity:
-      //larPort && location === '/portfolio' && percentageResizedHeight < 0.844 ? '0' :
-      (larPort || larLand) && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
+      larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? '0' :
+      larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
       larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.773 ? '0' :
       larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.731 ? '0' :
       (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.642 ? '0' :
@@ -42,7 +42,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
       },
     flexDirection: 'row',
     justifyContent: 'center',
-    bottom: minPort || minLand ? '2vh' : medPort || medLand ? '3vh' : '3vh'
+    bottom: minPort || minLand ? '2vh' : medPort || medLand ? '3vh' : larPort ? '20px' : '20px'
   }
 }
 

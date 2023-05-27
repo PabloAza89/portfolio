@@ -5,7 +5,7 @@ import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
 import {
   background, boxTypography, textOne,
-  textTwo, textThree, buttonMessage, boxSVG,
+  textTwo, textThree, buttonMessage,
   imageSVG, boxTextTechMessage,
 } from '../../styles/HomeSX';
 
@@ -43,14 +43,12 @@ function Home() {
           </Button>
         </Link>
       </Box>
-      <Box sx={boxSVG({ minPort, minLand, medPort, medLand, larPort })}>
-        <SvgIcon
-          sx={imageSVG({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth })}
-          preserveAspectRatio="none"
-        >
-          <MySvg/>
-        </SvgIcon>
-      </Box>
+      <SvgIcon
+        sx={imageSVG({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth })}
+        preserveAspectRatio="none"
+      >
+        <MySvg/>
+      </SvgIcon>
   </Box>
   )
 }

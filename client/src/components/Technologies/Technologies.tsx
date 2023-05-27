@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { Box, CardMedia, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import javascript from '../../images/javascript.png';
@@ -6,6 +7,7 @@ import node from '../../images/node.png';
 import react from '../../images/react.png';
 import redux from '../../images/redux.png';
 import sequelize from '../../images/sequelize.png';
+import ScrollContainer from 'react-indiana-drag-scroll';
 import { 
   mainBox, iconBox, iconMedia, textBox,
   title, background
@@ -21,6 +23,26 @@ function Technologies() {
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
+  function useHorizontalScroll() {
+    const elRef = React.useRef<HTMLInputElement>(null);
+    useEffect(() => {
+      const el:any = elRef.current;
+      if (el) {
+        const onWheel = (e:any) => {
+          if (e.deltaY === 0) return;
+          e.preventDefault();
+          el.scrollTo({
+            left: el.scrollLeft + e.deltaY * 4,
+            behavior: "smooth"
+          });
+        };
+        el.addEventListener("wheel", onWheel);
+        return () => el.removeEventListener("wheel", onWheel);
+      }
+    }, []);
+    return elRef;
+  }
+
   // icon = 5vw MED LAND
   // text = 25px
 
@@ -31,7 +53,10 @@ function Technologies() {
   // text = 25 // 90 total
 
   return (
-    <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+    //<ScrollContainer innerRef={useHorizontalScroll()} style={background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+    <ScrollContainer style={background({ minPort, minLand, medPort, medLand, larPort, larLand })}
+      innerRef={useHorizontalScroll()}
+    >
       <Box sx={mainBox}>
         {[react,redux,javascript,node,sequelize,material].map((e) => {
           return (
@@ -50,7 +75,7 @@ function Technologies() {
           )
         })}
       </Box>
-    </Box>
+    </ScrollContainer>
   )
 }
 

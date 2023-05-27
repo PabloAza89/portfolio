@@ -14,12 +14,13 @@ interface backgroundI {
 
 const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
   return {
-    ...flex, ...column,
+    ...flex, /* ...column, */
+    'flexDirection': 'column', // DO NOT TOUCH !
     background: 'blue',
-    minWidth: medPort ? '95vw' : medLand ? '48vw' : '650px', // minWidth
+    //minWidth: medPort ? '95vw' : medLand ? '48vw' : larPort ? '650px' : '650px', // minWidth
     width: medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : '48vw', // width
     height: medPort ? '70px' : medLand ? 'calc(5vw + 25px)' : '90px',
-    order: medPort ? '1' : 'none',
+    order: medPort || larPort ? '1' : 'none',
   }
 }
 
@@ -101,7 +102,7 @@ const title = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: titleI
     fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : medPort ? '12px' : medLand ? '1.3vw' : larPort ? '16px' : '16px',
     border: 'none',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    'fontWeight': 600
+    fontWeight: 600
   }
 }
 

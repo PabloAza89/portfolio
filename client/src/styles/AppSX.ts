@@ -43,7 +43,7 @@ interface topBottomHelperI {
   larLand: boolean,
 }
 
-const topBottomHelper = ({ medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
     background: 'orange',
     display: 'flex',
