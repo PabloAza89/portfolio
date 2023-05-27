@@ -15,7 +15,9 @@ interface backgroundI {
 const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
   return {
     ...flex, /* ...column, */
-    'flexDirection': 'column', // DO NOT TOUCH !
+    //'flexDirection': 'column', // no !
+    // flexDirection: 'column', // rompe !
+    //flexDirection: 'column', // no !
     background: 'blue',
     //minWidth: medPort ? '95vw' : medLand ? '48vw' : larPort ? '650px' : '650px', // minWidth
     width: medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : '48vw', // width

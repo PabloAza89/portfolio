@@ -8,7 +8,7 @@ import react from '../../images/react.png';
 import redux from '../../images/redux.png';
 import sequelize from '../../images/sequelize.png';
 import ScrollContainer from 'react-indiana-drag-scroll';
-import {
+import { 
   mainBox, iconBox, iconMedia, textBox,
   title, background
 } from '../../styles/TechnologiesSX';
@@ -52,36 +52,31 @@ function Technologies() {
   // icon = 65 LAR
   // text = 25 // 90 total
 
-  interface arrayI {
-    icon: string,
-    title: string
-  }
-
-  const array: arrayI[] = [
-    { icon: react, title: `React` },
-    { icon: redux, title: `Redux` },
-    { icon: javascript, title: `Javascript` },
-    { icon: node, title: `Node.js` },
-    { icon: sequelize, title: `Sequelize` },
-    { icon: material, title: `Material UI` }
-  ]
-
   return (
-    <Box>
-      <ScrollContainer style={background({ minPort, minLand, medPort, medLand, larPort, larLand })}
-        innerRef={useHorizontalScroll()}
-      >
-          {array.map((e: any) => {
-            return (
-              <Box key={e.icon} sx={iconBox({ minPort, minLand, medPort, medLand, larPort })}>
-                <CardMedia component="div" sx={iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}></CardMedia>
-                <Typography sx={title({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{e.title}</Typography>
-              </Box>
-            )
-          })}
-      </ScrollContainer>
-    </Box>
-
+    //<ScrollContainer innerRef={useHorizontalScroll()} style={background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+    <ScrollContainer style={background({ minPort, minLand, medPort, medLand, larPort, larLand })}
+      innerRef={useHorizontalScroll()}
+      //horizontal={true}
+    >
+      <Box sx={mainBox}>
+        {[react,redux,javascript,node,sequelize,material].map((e) => {
+          return (
+            <Box key={e} sx={iconBox({ minPort, minLand, medPort, medLand, larPort })}>
+              <CardMedia component="div" sx={iconMedia({ url:e, minPort, minLand, medPort, medLand, larPort })}></CardMedia>
+            </Box>
+          )
+        })}
+      </Box >
+      <Box sx={mainBox}>
+        {[ `React`, `Redux`, `Javascript`, `Node.js`, `Sequelize`, `Material UI` ].map((e) => {
+          return (
+            <Box key={e} sx={textBox({ minPort, minLand, medPort, medLand, larPort })}>
+              <Typography sx={title({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{e}</Typography>
+            </Box>
+          )
+        })}
+      </Box>
+    </ScrollContainer>
   )
 }
 
