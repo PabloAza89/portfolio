@@ -6,7 +6,7 @@ import Technologies from '../Technologies/Technologies';
 import {
   background, boxTypography, textOne,
   textTwo, textThree, buttonMessage,
-  imageSVG, boxTextTechMessage,
+  imageSVG, boxTextTechMessage, boxSVG
 } from '../../styles/HomeSX';
 
 function Home() {
@@ -28,27 +28,32 @@ function Home() {
 
   return (
     <Box sx={background({ minPort, minLand, medPort, medLand, larPort })}>
+      {/* <Box sx={{ background: 'green', minWidth: '55px', width: '55px', height: '100%' }}></Box> */}
       <Box sx={boxTextTechMessage({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-        {/* <Box sx={boxTypography({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+        <Box sx={boxTypography({ minPort, minLand, medPort, medLand, larPort, larLand })}>
           <Typography sx={textOne({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
           <Typography sx={textTwo({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
           <Typography sx={textThree({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
-        </Box> */}
+        </Box>
         <Technologies />
-        {/* <Link style={{ textDecoration: 'none' }} to="/portfolio/MessageMe">
-          <Button
-            sx={buttonMessage({ minPort, minLand, medPort, medLand, larPort })}
-            variant='outlined'
-          >{ english ? `Message Me` : `Envíame un mensaje` }
-          </Button>
-        </Link> */}
+        <Box sx={{ width: '100%', background: 'gold', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+          <Link style={{ textDecoration: 'none' }} to="/portfolio/MessageMe">
+            <Button
+              sx={buttonMessage({ minPort, minLand, medPort, medLand, larPort })}
+              variant='outlined'
+            >{ english ? `Message Me` : `Envíame un mensaje` }
+            </Button>
+          </Link>
+        </Box>
       </Box>
-      {/* <SvgIcon
-        sx={imageSVG({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth })}
-        preserveAspectRatio="none"
-      >
-        <MySvg/>
-      </SvgIcon> */}
+      <Box sx={boxSVG({ minPort, minLand, medPort, medLand, larPort })}>
+        <SvgIcon
+          sx={imageSVG({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth })}
+          preserveAspectRatio="none"
+        >
+          <MySvg/>
+        </SvgIcon>
+      </Box>
   </Box>
   )
 }

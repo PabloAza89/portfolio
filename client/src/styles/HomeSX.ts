@@ -15,8 +15,9 @@ const background = ({ minPort, minLand, medPort, medLand, larPort }: backgroundI
   return {
     display: 'flex',
     position: 'relative',
-    //justifyContent: 'space-evenly',space-between
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    //justifyContent: 'space-evenly',
+    //justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: medPort || larPort ? 'column-reverse' : 'row',
     minWidth: larPort ? '666px' : '600px',
@@ -45,11 +46,35 @@ interface boxTextTechMessageI {
     justifyContent: 'flex-start',
     alignItems: 'center',
     minWidth: medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : larPort ? '666px' : '600px', // minWidth
-    width:  minPort ? '90vw' : medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : larPort ? 'calc(100vw - 12px)' : '48vw', // width
-    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '35vh' : medLand ? '69vh' : larPort ? '300px' : '524px', // minHeight
-    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '35vh' : medLand ? '69vh' : larPort ? '35vh' : '70vh', // height
-    //flexFlow: medPort || larPort ? 'wrap' : 'none'
-    flexFlow: 'wrap'
+    width:  minPort ? '90vw' : medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : larPort ? 'calc(100vw - 12px)' : '47%', // width
+    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '35vh' : medLand ? '69vh' : larPort ? '300px' : '546px', // minHeight
+    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '35vh' : medLand ? '69vh' : larPort ? '35vh' : '100%', // height
+    flexFlow: medPort || larPort ? 'wrap' : 'none'
+    //flexFlow: 'wrap',
+    //marginLeft: '2%'
+  }
+}
+
+interface boxSVGI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean
+}
+
+const boxSVG = ({ minPort, minLand, medPort, medLand, larPort }: boxSVGI ) => { // boxSVGI
+  return {
+    background: 'purple',
+    position: 'relative',
+    justifyContent: 'center',
+    display: larPort ? 'none' : 'flex',
+    minWidth: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '49vw' : larPort ? '75vh' : '631px', // minWidth
+    width: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '49vw' : larPort ? '75vh' : '50%', // width
+    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '69vh' : larPort ? '75vh' : '546px', // minHeight
+    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '69vh' : larPort ? '75vh' : '100%', // height
+    // display: 'flex',
+    alignItems: 'center'
   }
 }
 
@@ -71,9 +96,9 @@ const imageSVG = ({ width, height, minPort, minLand, medPort, medLand, larPort, 
     display: minPort ? 'none' : minLand ? 'none' : 'flex',
     background: 'red',
     position: 'relative',
-    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '65vh' : larPort ? '300px' : '524px', // minHeight
+    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '65vh' : larPort ? '300px' : '546px', // minHeight
     height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '65vh' : larPort ? '35vh' : '70vh', // height
-    minWidth: minPort ? '23vh' : minLand ? '60vh' : medPort ? '42vh' : medLand ? '65vh' : larPort ? '300px' : '524px', // minWidth
+    minWidth: minPort ? '23vh' : minLand ? '60vh' : medPort ? '42vh' : medLand ? '65vh' : larPort ? '300px' : '546px', // minWidth
     width: minPort ? '23vh' : minLand ? '60vh' : medPort ? '42vh' : medLand ? '65vh' : larPort ? '35vh' : '70vh', // width
   }
 }
@@ -95,7 +120,7 @@ const boxTypography = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
     flexDirection: 'column',
     minWidth: minPort ? '92vw' : minLand ? '50vw' : medPort ? '48vw' : medLand ? '48vw' : larPort ? '325px' : '600px', // minWidth
     //width: minPort ? '92vw' : minLand ? '50vw' : medPort ? '48vw' : medLand ? '48vw' : larPort ? '48vw' : '44vw', // width
-    width: minPort ? '92vw' : minLand ? '50vw' : medPort ? '48vw' : medLand ? '48vw' : larPort ? '48vw' : '44vw', // width
+    width: minPort ? '92vw' : minLand ? '50vw' : medPort ? '48vw' : medLand ? '48vw' : larPort ? '40vw' : '44vw', // width
     minHeight: minPort ? '45vh' : minLand ? '60vh' : medPort ? '25vh' : medLand ? '45vh' : larPort ? '200px' : '300px', // minHeight
     height: minPort ? '45vh' : minLand ? '60vh' : medPort ? '25vh' : medLand ? '45vh' : larPort ? '200px' : '300px', // height
   }
@@ -172,10 +197,10 @@ const buttonMessage = ({ minPort, minLand, medPort, medLand, larPort }: buttonMe
     background: 'none',
     padding: '0px !important',
     minWidth: minPort ? '53vw !important' : minLand ? '9vw !important' : medPort ? '48vw' : larPort ? '325px' : '2vw !important', // minWidth
-    width: minPort ? '19vw' : minLand ? '19vw' : medPort ? '48vw' : medLand ? '290px' : larPort ? '48vw' : '370px', // width
+    width: minPort ? '19vw' : minLand ? '19vw' : medPort ? '48vw' : medLand ? '290px' : larPort ? '40vw' : '370px', // width
     minHeight: minPort ? '10vw !important' : minLand ? '2.1vw !important' : '4.1vh !important', // minHeight
     color:'#FFFFFF',
-    fontSize: minPort ? '4vw' : medPort ? '20px' : medLand ? '22px' : larPort ? '29px' : '29px', // fontSize
+    fontSize: minPort ? '4vw' : medPort ? '20px' : medLand ? '22px' : larPort ? '28px' : '28px', // fontSize
     mixBlendMode: 'difference',
     //order: medPort || larPort ? '6' : 'none',
   }
@@ -184,5 +209,5 @@ const buttonMessage = ({ minPort, minLand, medPort, medLand, larPort }: buttonMe
 export {
   background, boxTypography, textOne,
   textTwo, textThree, buttonMessage,
-  imageSVG, boxTextTechMessage
+  imageSVG, boxTextTechMessage, boxSVG
 }

@@ -19,7 +19,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: ba
     background: 'blue',
     overflow: 'auto',
     //minWidth: minPort ? '96vw' : minLand ? '55vw' : medPort ? 'calc(100vw - 12px)' : larPort ? '96vw' : '600px', // minWidth
-    width: minPort ? '96vw' : minLand ? '55vw' : medPort ? 'calc(100vw - 12px)' : larPort ? 'calc(100vw - 12px)' : 'calc(100vw - 12px)', // width
+    width: minPort ? '96vw' : minLand ? '55vw' : medPort ? 'calc(100vw - 12px)' : larPort ? 'calc(100vw - 100px)' : 'calc(100vw - 67px)', // width
     minHeight: medPort || medLand ? '70px' : larPort ? '45px' : `89px`, // minHeight
     //paddingLeft: larLand ? '5px' : '20px',
     //marginRight: larPort ? 'calc(111px + 3px)' : 'null',

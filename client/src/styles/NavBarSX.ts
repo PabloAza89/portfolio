@@ -87,7 +87,7 @@ const lessThan = ({ minPort, minLand, medPort, medLand, larPort }: genII) => {
     background: 'darkgray',
     fontSize: minPort ? '6vw' : minLand ? '2.8vw' : medPort ? '45px' : medLand ? '30px' : larPort ? '54px' : '54px', // fontSize
     //marginRight: minPort ? '1.5vw' : minLand ? '1.4vw' : larPort ? '1.1vw' : '1.1vw',
-    width: medPort ? '70px' : medLand ? '40px' : larPort ? '30px' : '11px', // width
+    width: medPort ? '70px' : medLand ? '40px' : larPort ? '30px' : '27px', // width
     height: medPort ? '70px' : medLand ? '40px' : larPort ? '80px' : '80px', // height
     textAlign: 'center'
   }
