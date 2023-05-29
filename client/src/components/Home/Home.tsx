@@ -1,3 +1,4 @@
+import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { Box, Button, SvgIcon, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
@@ -13,6 +14,7 @@ function Home() {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
+  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
   const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference)
   const width = useSelector((state: {width: number}) => state.width)
   const height= useSelector((state: {height: number}) => state.height)
@@ -26,8 +28,17 @@ function Home() {
   const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
   const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
 
+/*   const ref = useRef<any>(null);
+  const [ parentWidth, setParentWidth ] = useState<number>(0);
+
+  useLayoutEffect(() => {
+    setParentWidth(ref.current.offsetWidth);
+  }, [currentWidth]); */
+
+  //console.log("TESTT", parentWidth)
+
   return (
-    <Box sx={background({ minPort, minLand, medPort, medLand, larPort })}>
+    <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
       {/* <Box sx={{ background: 'green', minWidth: '55px', width: '55px', height: '100%' }}></Box> */}
       <Box sx={boxTextTechMessage({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Box sx={boxTypography({ minPort, minLand, medPort, medLand, larPort, larLand })}>
@@ -36,7 +47,7 @@ function Home() {
           <Typography sx={textThree({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
         </Box>
         <Technologies />
-        <Box sx={{ width: '100%', background: 'gold', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+        <Box sx={{ width: '50%', background: 'gold', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
           <Link style={{ textDecoration: 'none' }} to="/portfolio/MessageMe">
             <Button
               sx={buttonMessage({ minPort, minLand, medPort, medLand, larPort })}

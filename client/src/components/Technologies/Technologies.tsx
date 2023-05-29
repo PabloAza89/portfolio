@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { Box, CardMedia, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import javascript from '../../images/javascript.png';
@@ -12,9 +12,14 @@ import {
   iconBox, iconMedia, title, background
 } from '../../styles/TechnologiesSX';
 
-function Technologies() {
+/* interface TechnologiesI {
+  parentWidth: number
+} */
+
+function Technologies( /* { parentWidth }: TechnologiesI */ ) {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
+  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
@@ -22,8 +27,18 @@ function Technologies() {
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
+  //const ref = useRef<any>(null);
+  const [ parentWidthh, setParentWidthh ] = useState<number>(0);
+
+  /* useLayoutEffect(() => {
+    setParentWidthh(ref.current.offsetWidth);
+  }, [currentWidth]); */
+
   function useHorizontalScroll() {
-    const elRef = React.useRef<HTMLInputElement>(null);
+    const elRef = useRef<any>(null);
+    useLayoutEffect(() => {
+      setParentWidthh(elRef.current.offsetWidth);
+    },[currentWidth]);
     useEffect(() => {
       const el:any = elRef.current;
       if (el) {
@@ -65,23 +80,23 @@ function Technologies() {
     { icon: material, title: `Material UI` }
   ]
 
+  console.log("currentWidth", currentWidth)
+
   return (
-    
-      <ScrollContainer style={background({ minPort, minLand, medPort, medLand, larPort, larLand })}
-        innerRef={useHorizontalScroll()}
-/*         horizontal={true}
-        hideScrollbars={true} */
-      >
-        {array.map((e) => {
-          return (
-            <Box key={e.icon} sx={iconBox({ minPort, minLand, medPort, medLand, larPort })}>
-              <CardMedia component="div" sx={iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}></CardMedia>
-              <Typography sx={title({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{e.title}</Typography>
-            </Box>
-          )
-        })}
-      </ScrollContainer>
-    
+    <ScrollContainer /* ref={ref}  */style={background({ currentWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
+      innerRef={useHorizontalScroll()}
+      //innerRef={ref}
+      horizontal={true}
+    >
+      {array.map((e) => {
+        return (
+          <Box key={e.icon} sx={iconBox({ minPort, minLand, medPort, medLand, larPort })}>
+            <CardMedia component="div" sx={iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}></CardMedia>
+            <Typography sx={title({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{e.title}</Typography>
+          </Box>
+        )
+      })}
+    </ScrollContainer>
   )
 }
 

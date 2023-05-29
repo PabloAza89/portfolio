@@ -21,7 +21,7 @@ const background = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPor
     minWidth: medPort ? 'none' : medLand ? 'none' : larPort ? 'calc(100vw - 12px)' : '677px', // minWidth 
     minHeight: medPort ? '140px' : medLand ? '70px' : larPort ? '127px' : '100px', // minHeight
     height: minPort ? '30vw' : minLand ? '7vw' : medPort ? '140px' : medLand ? '70px' : larPort ? '127px' : '100px', //height
-    justifyContent: minLand ? 'left' : larLand ? 'space-between' : 'none'
+    justifyContent: minLand ? 'left' : medLand || larLand ? 'space-between' : 'none'
   }
 }
 
@@ -56,7 +56,7 @@ const mainRight = ({ staticRefWidth, percentageResizedWidth, minPort, minLand, m
     background: 'yellow',
     overflow: 'auto',
     //minWidth: minPort ? '96vw' : minLand ? '55vw' : medPort ? 'calc(100vw - 12px)' : larPort ? '96vw' : '640px', // width
-    width: minPort ? '96vw' : minLand ? '55vw' : medPort ? 'calc(100vw - 12px)' : larPort ? '93vw' : '50vw', // width
+    width: minPort ? '96vw' : minLand ? '55vw' : medPort ? 'calc(100vw - 12px)' : medLand ? '30vw' : larPort ? '93vw' : '50vw', // width
     minHeight: medPort || medLand ? '70px' : larPort ? '45px' : `100px`, // minHeight
     paddingLeft: larLand ? '20px' : '20px',
     //paddingRight: larLand ? '25px' : '10px',

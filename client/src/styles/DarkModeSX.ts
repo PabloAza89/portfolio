@@ -26,7 +26,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxS
     alignItems: 'center',
     //transition: 'opacity .1s ease-in-out',
     opacity:
-    larPort && location === '/portfolio' && percentageResizedHeight < 0.844 ? '0' :
+    larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? '0' :
     larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
       //larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.272 ? '0' :
       //larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.272 ? '0' :
