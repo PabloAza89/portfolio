@@ -14,7 +14,7 @@ import {
   background, scroll, solid, intercalated, topHelper,
   centerStripe, card, boxTitle, title, boxMedia, cardMedia,
   dialogBox, dialogStyle, boxLower, textLower, select, cardLeft,
-  betweenMedia, lowerHelper, dialogPaper
+  betweenMedia, lowerHelper, dialogPaper, bottomHelper
 } from '../../styles/ProjectsSX';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 
@@ -94,8 +94,8 @@ function Projects() {
 // each width: 564 / 6 = 94
 
   return (
-  <Box sx={{  flexDirection: 'column' }}>
-    <Box sx={topHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+  <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
+    <Box sx={topHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     <Box sx={background({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height })}>
 
       <ScrollContainer innerRef={useHorizontalScroll()} style={scroll({ minPort, minLand })}>
@@ -152,7 +152,7 @@ function Projects() {
         />
       </Dialog>
 
-      <Box sx={boxLower({ minPort, minLand, larPort, larLand })}>
+      <Box sx={boxLower({ height, minPort, minLand, medLand, larPort, larLand })}>
         <Typography sx={textLower( larPort )}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
         <FormControl>
           <InputLabel id="demo-simple-select-label"></InputLabel>
@@ -172,7 +172,8 @@ function Projects() {
       </Box>
 
     </Box>
-    <Box sx={lowerHelper}></Box>
+    <Box sx={bottomHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+    {/* <Box sx={lowerHelper}></Box> */}
   </Box>
   )
 }

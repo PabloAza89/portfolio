@@ -42,7 +42,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
       },
     flexDirection: 'row',
     justifyContent: 'center',
-    bottom: minPort || minLand ? '20px' : medPort || medLand ? '20px' : larPort ? '20px' : '20px'
+    bottom: minPort ? '20px' : minLand ? '5px' : medPort || medLand ? '20px' : larPort ? '20px' : '20px'
   }
 }
 

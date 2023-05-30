@@ -19,7 +19,7 @@ const background = ({ currentWidth, minPort, minLand, medPort, medLand, larPort,
     ...asc, ...flex, ...aic,
     background: 'blue',
     overflow: 'auto',
-    width: minLand ? '55vw' : minPort || medPort ? '100%' : medLand ? '100%' : larPort ? 'calc(100vw - 12px)' : larLand && currentWidth <= 655 ? 'calc(100vw - 67px)' : '100%', // width
+    width: minPort || medPort ? '100%' : minLand || medLand ? '100%' : larPort ? 'calc(100vw - 12px)' : larLand && currentWidth <= 655 ? 'calc(100vw - 67px)' : '100%', // width
     color: '#FFFFFF',
     alignSelf: larPort ? 'flex-start' : 'flex-start',
     justifyContent:

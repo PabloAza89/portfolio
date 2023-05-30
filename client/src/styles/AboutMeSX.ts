@@ -12,10 +12,10 @@ interface topBottomHelperI {
 
 const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
-    background: 'none',
+    background: 'blue',
     display: 'flex',
     width: '20px',
-    minHeight: minPort ? '60px' : minLand ? '60px' : larPort || larLand ? '100px' : '100px',
+    minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : larPort || larLand ? '100px' : '100px',
     position: 'relative'
   }
 }
@@ -31,10 +31,10 @@ interface blueBoxHelperI {
 
 const blueBoxHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: blueBoxHelperI) => {
   return {
-    background: 'none',
+    background: 'darkblue',
     display: 'flex',
     width: '20px',
-    minHeight: minPort ? '60px' : minLand ? '40px' : medPort || medLand ? '90px' : larPort || larLand ? '100px' : '100px',
+    minHeight: minPort || minLand ? '90px' : medPort || medLand ? '90px' : larPort || larLand ? '100px' : '100px',
     position: 'relative'
   }
 }
@@ -50,16 +50,18 @@ interface backgroundI {
 
 const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
   return {
-    ...flex, ...jcc,
-    flexDirection: minPort ? 'column' : 'row',
-    background: 'none',
+    /* ...flex,  */...jcc,
+    display: 'flex',
+    flexDirection: minPort ? 'column' : 'column',
+    background: 'red',
     width: 'calc(100vw - 12px)',
-    height: minPort ? '500px' : minLand ? '220px' : larPort ? '520px' : '520px',
+    height: minPort ? '500px' : minLand ? '80vh' : larPort ? '520px' : '520px',
     alignItems: 'center'
   }
 }
 
 interface blueBoxI {
+  height: number,
   staticRefWidth: number,
   darkMode: boolean,
   minPort: boolean,
@@ -67,22 +69,22 @@ interface blueBoxI {
   larPort: boolean
 }
 
-const blueBox = ({ darkMode, minPort, minLand, larPort, staticRefWidth }: blueBoxI) => {
+const blueBox = ({ height, darkMode, minPort, minLand, larPort, staticRefWidth }: blueBoxI) => {
   return {
     ...flex, ...column, ...relative,
     background: darkMode ? '#253740' : '#3C6478',
     'borderRadius': `${staticRefWidth * 1}px`,
     alignSelf: 'center',
-    justifyContent: 'space-evenly',
-    minWidth: minPort ? '330px' : minLand ? '70vw' : larPort ? '200px' : '200px',
-    width: minPort ? '330px' : minLand ? '70vw' : larPort ? '70vw' : '70vw',
-    minHeight: minPort ? '500px' : minLand ? '220px' : larPort ? '520px' : '520px',
-    height: minPort ? '500px' : minLand ? '220px' : larPort ? '520px' : '520px',
+    justifyContent: minLand ? 'space-between' : 'space-evenly',
+    minWidth: minPort ? '85vw' : minLand ? '70vw' : larPort ? '200px' : '200px',
+    width: minPort ? '85vw' : minLand ? '70vw' : larPort ? '70vw' : '70vw',
+    minHeight: minPort ? '500px' : minLand && height <= 280 ? '150px' : minLand && height > 280 ? '220px' : larPort ? '520px' : '520px',
+    height: minPort ? '500px' : minLand && height <= 280 ? '150px' : minLand && height > 280 ? '220px' : larPort ? '520px' : '520px',
   }
  }
 
 interface avatarI {
-  currentHeight: number,
+  height: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -92,13 +94,13 @@ interface avatarI {
   staticRefHeight: number
 }
 
-const avatar = ({ currentHeight, minPort, minLand, medPort, medLand, larPort, larLand, staticRefHeight }: avatarI) => {
+const avatar = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, staticRefHeight }: avatarI) => {
   return {
     ...flex, ...row, ...relative,
-    width: minPort || minLand ? '100px' : medPort || medLand || larPort ? '150px' : '150px',
-    height: minPort || minLand ? '100px' : medPort || medLand || larPort ? '150px' : '150px',
-    top: minPort || minLand ? '-60px' : medPort || medLand ? '-80px' : larPort ? '-70px' : '-70px',
-    left: minPort || minLand ? '40px' : larPort ? '50px' : '50px',
+    width: minPort  ? '90px' : minLand && height <= 280 ? '65px' : minLand && height > 280 ? '90px' : medPort || medLand ? '120px' : larPort ? '150px' : '150px',
+    height: minPort ? '90px' : minLand && height <= 280 ? '65px' : minLand && height > 280 ? '90px' : medPort || medLand ? '120px' : larPort ? '150px' : '150px',
+    top: minPort ? '-50px' : minLand && height <= 280 ? '-35px' : minLand && height > 280 ? '-50px' : medPort || medLand ? '-80px' : larPort ? '-70px' : '-70px',
+    left: minPort ? '45px' : minLand && height <= 280 ? '45px' : minLand && height > 280 ? '45px' : larPort ? '50px' : '50px',
   }
 }
 
@@ -115,14 +117,14 @@ interface typographyI {
 const typography = ({ maxStaticReference, darkMode, minPort, minLand, medPort, medLand, larPort }: typographyI) => {
   return {
     ...noSelect,
-    background: 'none',
+    background: 'teal',
     justifyContent: 'flex-start',
     display: 'flex',
     flexDirection: 'column',
     alignSelf: 'center',
-    marginTop: minPort || minLand ? '-40px' : medPort || medLand ? '-40px' : 'none',
-    width: minPort ? '290px' : '65vw',
-    height: minPort ? '350px' : minLand ? '110px' : medPort || medLand ? '300px' : larPort ? '250px' : '250px',
+    //marginTop: minPort || minLand ? '-40px' : medPort || medLand ? '-40px' : 'none',
+    width: minPort ? '70vw' : minLand ? '60vw' : '65vw',
+    height: minPort ? '40vh' : minLand ? '30vh' : medPort || medLand ? '300px' : larPort ? '250px' : '250px',
     textAlign: 'center',
     fontSize: minPort || minLand ? `16px` : medPort || medLand ? `26px` :  larPort ? `27px` : `27px`,
     '::-webkit-scrollbar': { width: '10px' },

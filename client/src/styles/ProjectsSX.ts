@@ -6,6 +6,7 @@ import {
 import { grey } from '@mui/material/colors';
 
 interface topHelperI {
+  height: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -14,13 +15,35 @@ interface topHelperI {
   larLand: boolean
 }
 
-const topHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topHelperI) => {
+const topHelper = ({ height, minPort, minLand, medPort, medLand, larPort, larLand }: topHelperI) => {
   return {
-    background: 'transparent',
+    //background: 'transparent',
+    background: 'orange',
     display: 'flex',
     width: '20px',
-    height: minPort ? '26vh' : minLand ? '15vh' : medPort ? '26vh' : medLand ? '17vh' : larPort ? '28vh' : '22vh',
-    minHeight: larPort || larLand ? '100px' : '8px',
+    height: larPort || larLand ? '100px' : '1px',
+    minHeight: larPort || larLand ? '100px' : '1px',
+    position: 'relative'
+  }
+}
+
+interface bottomHelperI {
+  height: number,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+const bottomHelper = ({ height, minPort, minLand, medPort, medLand, larPort, larLand }: bottomHelperI) => {
+  return {
+    background: 'orange',
+    display: 'flex',
+    width: '20px',
+    height: larPort || larLand ? '100px' : '1px',
+    minHeight: larPort || larLand ? '100px' : '1px',
     position: 'relative'
   }
 }
@@ -37,11 +60,11 @@ interface backgroundI {
 
 const background = ({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height }: backgroundI) => {
   return {
-    background: 'none',
+    background: 'red',
     display: 'flex',
     position: 'relative',
     flexDirection: 'column',
-    height: minPort ? '370px' : minLand ? '270px' : larPort ? '550px' : '520px',
+    //height: minPort ? '370px' : minLand ? '270px' : larPort ? '550px' : '520px',
   }
 }
 
@@ -274,18 +297,20 @@ const dialogBox = ({ minPort, minLand, medPort, medLand, larPort }: dialogBoxI) 
 }
 
 interface boxLowerI {
+  height: number,
   minPort: boolean,
   minLand: boolean,
+  medLand: boolean,
   larPort: boolean,
   larLand: boolean
 }
 
-const boxLower = ({ minPort, minLand, larPort, larLand }: boxLowerI) => {
+const boxLower = ({ height, minPort, minLand, medLand, larPort, larLand }: boxLowerI) => {
   return {
     ...asc, ...row, ...noSelect,
     background: 'none',
     marginTop: '10px',
-    display: minLand ? 'none' : minPort ? 'none' : 'flex'
+    display: minLand || minPort ? 'none' : medLand && height <= 600 ? 'none' : 'flex'
   }
 }
 
@@ -315,7 +340,7 @@ const select = ({ darkMode, larPort }: selectI) => {
 const lowerHelper = () => {
   return {
     background: grey[400],
-    height: '6px',
+    height: '26px',
     width: 'calc(100vw - 12px)',
     display: 'flex',
     position: 'fixed',
@@ -328,5 +353,5 @@ export {
   background, scroll, solid, intercalated, cardLeft,
   centerStripe, card, boxTitle, title, boxMedia, cardMedia,
   dialogStyle, dialogBox, boxLower, textLower, select, topHelper,
-  betweenMedia, lowerHelper, dialogPaper
+  betweenMedia, lowerHelper, dialogPaper, bottomHelper
 }
