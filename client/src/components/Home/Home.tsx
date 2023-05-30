@@ -39,7 +39,6 @@ function Home() {
 
   return (
     <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-      {/* <Box sx={{ background: 'green', minWidth: '55px', width: '55px', height: '100%' }}></Box> */}
       <Box sx={boxTextTechMessage({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Box sx={boxTypography({ minPort, minLand, medPort, medLand, larPort, larLand })}>
           <Typography sx={textOne({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
@@ -47,7 +46,7 @@ function Home() {
           <Typography sx={textThree({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
         </Box>
         <Technologies />
-        <Box sx={{ width: '50%', background: 'gold', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+        <Box sx={{ width: '48%', background: 'gold', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
           <Link style={{ textDecoration: 'none' }} to="/portfolio/MessageMe">
             <Button
               sx={buttonMessage({ minPort, minLand, medPort, medLand, larPort })}

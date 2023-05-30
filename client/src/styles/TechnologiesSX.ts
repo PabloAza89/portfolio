@@ -15,11 +15,11 @@ interface backgroundI {
 
 const background = ({ currentWidth, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => { // background
   return {
-    order: medPort || larPort ? '1' : '0',
+    order: minPort || medPort || larPort ? '1' : '0',
     ...asc, ...flex, ...aic,
     background: 'blue',
     overflow: 'auto',
-    width: minPort ? '96vw' : minLand ? '55vw' : medPort ? '100%' : medLand ? '100%' : larPort ? 'calc(100vw - 12px)' : larLand && currentWidth <= 655 ? 'calc(100vw - 67px)' : '100%', // width
+    width: minLand ? '55vw' : minPort || medPort ? '100%' : medLand ? '100%' : larPort ? 'calc(100vw - 12px)' : larLand && currentWidth <= 655 ? 'calc(100vw - 67px)' : '100%', // width
     color: '#FFFFFF',
     alignSelf: larPort ? 'flex-start' : 'flex-start',
     justifyContent:
@@ -45,7 +45,7 @@ const iconBox = ({ minPort, minLand, medPort, medLand, larPort }: iconBoxI) => {
     ...flex, ...column, ...relative, ...aic,
     background: 'yellow',
     border: 'none',
-    width: minPort ? '15vw' : minLand ? '7vw' : medPort ? '70px' : medLand ? '7vw' : larPort ? '111px' : '100px' // width
+    width: minLand ? '7vw' : minPort || medPort ? '70px' : medLand ? '7vw' : larPort ? '111px' : '100px' // width
   }
 }
 

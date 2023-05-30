@@ -16,14 +16,14 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: ba
   return {
     display: 'flex',
     position: 'relative',
-    justifyContent: larPort ? 'center' : 'flex-start',
+    justifyContent: minPort || medPort || larPort ? 'center' : 'flex-start',
     paddingLeft: medLand ? '13px' : larLand ? '55px' : 'none',
     alignItems: 'center',
-    flexDirection: medPort || larPort ? 'column-reverse' : 'row',
-    minWidth: larPort ? '666px' : '600px',
-    width: 'calc(100vw - 12px)',
-    minHeight: minPort ? 'none' : minLand ? 'none' : medPort ? 'none' : medLand ? 'none' : larPort ? '624px' : '543px', // minHeight
-    height: minPort ? '71vh' : minLand ? '65vh' : medPort ? '69vh' : medLand ? '69vh' : larPort ? '73vh' : '75vh', // height
+    flexDirection: minPort || medPort || larPort ? 'column-reverse' : 'row',
+    minWidth: minPort || medPort ? 'none' : larPort ? '666px' : '600px', // minWidth
+    width: 'calc(100vw - 12px)', // width
+    minHeight: minLand ? 'none' : minPort || medPort ? '73vh' : medLand ? 'none' : larPort ? '624px' : '543px', // minHeight
+    height: minLand ? '65vh' : minPort || medPort ? '73vh' : medLand ? '69vh' : larPort ? '73vh' : '75vh', // height
     background: 'gray',
   }
 }
@@ -47,11 +47,11 @@ interface boxTextTechMessageI {
     justifyContent: larPort ? 'none' : 'space-evenly',
     //justifyContent: 'none',
     alignItems: 'center',
-    minWidth: medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : larPort ? '666px' : '600px', // minWidth
-    width:  minPort ? '90vw' : medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : larPort ? 'calc(100vw - 12px)' : '47%', // width
-    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '35vh' : medLand ? '69vh' : larPort ? '300px' : '546px', // minHeight
-    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '35vh' : medLand ? '69vh' : larPort ? '35vh' : '100%', // height
-    flexFlow: medPort || larPort ? 'wrap' : 'none'
+    minWidth: minLand ? 'calc(100vw - 12px)' : minPort || medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : larPort ? '666px' : '600px', // minWidth
+    width: minLand ? 'calc(100vw - 12px)' : minPort || medPort ? 'calc(100vw - 12px)' : medLand ? '48vw' : larPort ? 'calc(100vw - 12px)' : '47%', // width
+    minHeight: minLand ? '60vh' : minPort || medPort ? '38vh' : medLand ? '69vh' : larPort ? '300px' : '546px', // minHeight
+    height: minLand ? '60vh' : minPort || medPort ? '38vh' : medLand ? '69vh' : larPort ? '35vh' : '100%', // height
+    flexFlow: minPort || medPort || larPort ? 'wrap' : 'none'
     //flexFlow: 'wrap',
     //marginLeft: '2%'
   }
@@ -72,10 +72,10 @@ const boxSVG = ({ minPort, minLand, medPort, medLand, larPort }: boxSVGI ) => { 
     justifyContent: 'center',
     //display: larPort ? 'none' : 'flex',
     display: 'flex',
-    minWidth: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '49vw' : larPort ? '295px' : '631px', // minWidth
-    width: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '49vw' : larPort ? '35vh' : '50%', // width
-    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '69vh' : larPort ? '295px' : '546px', // minHeight
-    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '69vh' : larPort ? '35vh' : '100%', // height
+    minWidth: minLand ? '60vh' : minPort || medPort ? '38h' : medLand ? '49vw' : larPort ? '295px' : '631px', // minWidth
+    width: minLand ? '60vh' : minPort || medPort ? '38vh' : medLand ? '49vw' : larPort ? '35vh' : '50%', // width
+    minHeight: minLand ? '60vh' : minPort || medPort ? '32vh' : medLand ? '69vh' : larPort ? '295px' : '546px', // minHeight
+    height:minLand ? '60vh' : minPort || medPort ? '32vh' : medLand ? '69vh' : larPort ? '35vh' : '100%', // height
     // display: 'flex',
     alignItems: 'center'
   }
@@ -96,13 +96,13 @@ interface imageSVGI {
 
 const imageSVG = ({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth }: imageSVGI ) => { // imageSVG
   return {
-    display: minPort ? 'none' : minLand ? 'none' : 'flex',
+    display: 'flex',
     background: 'red',
     position: 'relative',
-    minHeight: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '63vh' : larPort ? '295px' : '546px', // minHeight
-    height: minPort ? '23vh' : minLand ? '60vh' : medPort ? '29vh' : medLand ? '63vh' : larPort ? '35vh' : '70vh', // height
-    minWidth: minPort ? '23vh' : minLand ? '60vh' : medPort ? '42vh' : medLand ? '63vh' : larPort ? '295px' : '546px', // minWidth
-    width: minPort ? '23vh' : minLand ? '60vh' : medPort ? '42vh' : medLand ? '63vh' : larPort ? '35vh' : '70vh', // width
+    minWidth: minLand ? '60vh' : minPort || medPort ? '38vh' : medLand ? '63vh' : larPort ? '295px' : '546px', // minWidth
+    width: minLand ? '60vh' : minPort || medPort ? '38vh' : medLand ? '63vh' : larPort ? '35vh' : '70vh', // width
+    minHeight: minLand ? '60vh' : minPort || medPort ? '32vh' : medLand ? '63vh' : larPort ? '295px' : '546px', // minHeight
+    height: minLand ? '60vh' : minPort || medPort ? '32vh' : medLand ? '63vh' : larPort ? '35vh' : '70vh', // height
   }
 }
 
@@ -121,11 +121,11 @@ const boxTypography = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
     justifyContent: 'space-around',    
     display: 'flex',
     flexDirection: 'column',
-    minWidth: minPort ? '92vw' : minLand ? '50vw' : medPort ? '48vw' : medLand ? '48vw' : larPort ? '325px' : '600px', // minWidth
+    minWidth: minLand ? '50vw' : minPort || medPort ? '48vw' : medLand ? '48vw' : larPort ? '325px' : '600px', // minWidth
     //width: minPort ? '92vw' : minLand ? '50vw' : medPort ? '48vw' : medLand ? '48vw' : larPort ? '48vw' : '44vw', // width
-    width: minPort ? '92vw' : minLand ? '50vw' : medPort ? '48vw' : medLand ? '48vw' : larPort ? '50%' : '44vw', // width
-    minHeight: minPort ? '45vh' : minLand ? '60vh' : medPort ? '25vh' : medLand ? '45vh' : larPort ? '200px' : '300px', // minHeight
-    height: minPort ? '45vh' : minLand ? '60vh' : medPort ? '25vh' : medLand ? '45vh' : larPort ? '200px' : '300px', // height
+    width: minLand ? '50vw' : minPort || medPort ? '48vw' : medLand ? '48vw' : larPort ? '50%' : '44vw', // width
+    minHeight: minLand ? '60vh' : minPort || medPort ? '25vh' : medLand ? '45vh' : larPort ? '200px' : '300px', // minHeight
+    height: minLand ? '60vh' : minPort || medPort ? '25vh' : medLand ? '45vh' : larPort ? '200px' : '300px', // height
   }
 }
 
@@ -145,7 +145,7 @@ const textOne = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percen
     ...noSelect, ...mix, ...relative, ...flex,
     paddingLeft: larPort ? '15px' : 'none',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort  ? '11.5vw' : minLand ? '4.9vw' : medPort ? '60px' : medLand ? '5.5vw' : larPort ? '30px' : '65px', // fontSize
+    fontSize: minLand ? '4.9vw' : minPort || medPort ? '5.5vw' : medLand ? '5.5vw' : larPort ? '30px' : '65px', // fontSize
   }
 }
 
@@ -165,7 +165,7 @@ const textTwo = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percen
     ...noSelect, ...mix,
     paddingLeft: larPort ? '15px' : 'none',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort  ? '11.5vw' : minLand ? '5.4vw' : medPort ? '70px' : medLand ? '6vw' : larPort ? '35px' : '67px', // fontSize
+    fontSize: minLand ? '5.4vw' : minPort || medPort ? '6vw' : medLand ? '6vw' : larPort ? '35px' : '67px', // fontSize
     inlineSize: 'max-content',
   }
 }
@@ -186,7 +186,7 @@ const textThree = ({ darkMode, minPort, minLand, medPort, medLand, larPort, perc
     ...noSelect, ...mix,
     paddingLeft: larPort ? '15px' : 'none',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
-    fontSize: minPort  ? '11.5vw' : minLand ? '2.9vw' : medPort ? '45px' : medLand ? '3.5vw' : larPort ? '24px' : '42px', // fontSize
+    fontSize: minLand ? '2.9vw' : minPort || medPort ? '4vw' : medLand ? '3.5vw' : larPort ? '24px' : '42px', // fontSize
   }
 }
 
@@ -198,15 +198,15 @@ interface buttonMessageI {
   larPort: boolean
 }
 
-const buttonMessage = ({ minPort, minLand, medPort, medLand, larPort }: buttonMessageI ) => {
+const buttonMessage = ({ minPort, minLand, medPort, medLand, larPort }: buttonMessageI ) => { //buttonMessage
   return {
     background: 'none',
     padding: '0px !important',
-    minWidth: minPort ? '53vw !important' : minLand ? '9vw !important' : medPort ? '48vw' : larPort ? '320px' : '2vw !important', // minWidth
-    width: minPort ? '19vw' : minLand ? '19vw' : medPort ? '48vw' : medLand ? '290px' : larPort ? '40%' : '370px', // width
-    minHeight: minPort ? '10vw !important' : minLand ? '2.1vw !important' : '4.1vh !important', // minHeight
+    minWidth: minLand ? '9vw !important' : minPort || medPort ? '48vw' : larPort ? '320px' : '2vw !important', // minWidth
+    width: minLand ? '19vw' : minPort || medPort ? '48vw' : medLand ? '290px' : larPort ? '40%' : '370px', // width
+    //minHeight: minPort ? '10vw !important' : minLand ? '2.1vw !important' : '4.1vh !important', // minHeight
     color:'#FFFFFF',
-    fontSize: minPort ? '4vw' : medPort ? '20px' : medLand ? '22px' : larPort ? '28px' : '28px', // fontSize
+    fontSize: minPort ? '3.5vw' : medPort || medLand ? '2.4vw' : larPort ? '28px' : '28px', // fontSize
     mixBlendMode: 'difference',
     //order: medPort || larPort ? '6' : 'none',
   }
