@@ -22,8 +22,8 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: ba
     flexDirection: minPort || medPort || larPort ? 'column-reverse' : 'row',
     minWidth: minPort || medPort ? 'none' : larPort ? '666px' : '600px', // minWidth
     width: 'calc(100vw - 12px)', // width
-    minHeight: minLand ? 'none' : minPort || medPort ? '73vh' : medLand ? 'none' : larPort ? '624px' : '543px', // minHeight
-    height: minLand ? '65vh' : minPort || medPort ? '73vh' : medLand ? '69vh' : larPort ? '73vh' : '75vh', // height
+    minHeight: minPort || medPort ? '73vh' : minLand ? '65vh' : medLand ? 'none' : larPort ? '624px' : '543px', // minHeight
+    height: minPort || medPort ? '73vh' : minLand ? '65vh' : medLand ? '69vh' : larPort ? '73vh' : '75vh', // height
     background: 'gray',
   }
 }
@@ -118,7 +118,7 @@ interface boxTypographyI {
 const boxTypography = ({ minPort, minLand, medPort, medLand, larPort, larLand }: boxTypographyI) => { // boxTypography
   return {
     background: 'teal',
-    justifyContent: 'space-around',    
+    justifyContent: 'space-evenly',    
     display: 'flex',
     flexDirection: 'column',
     minWidth: minLand ? '50vw' : minPort || medPort ? '48vw' : medLand ? '48vw' : larPort ? '325px' : '600px', // minWidth

@@ -48,7 +48,7 @@ const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand 
     background: 'orange',
     display: 'flex',
     width: '20px',
-    minHeight: minPort || minLand ? '60px' : medPort || medLand ? '65px' : larPort ? '85px' : '85px',
+    minHeight: minPort ? '60px' : minLand ? '50px' : medPort || medLand ? '65px' : larPort ? '85px' : '85px',
     position: 'relative'
   }
 }
