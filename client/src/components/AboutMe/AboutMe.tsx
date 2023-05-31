@@ -2,8 +2,8 @@ import { Box, Typography, Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
 import {
-  background, blueBox, avatar, typography, topBottomHelper,
-  greyBottom, blueBoxHelper
+  blueBox, avatar, typography, topBottomHelper,
+  greyBottom, blueBoxHelper, background, leftRightHelper
 } from '../../styles/AboutMeSX';
 
 function AboutMe() {
@@ -27,25 +27,29 @@ function AboutMe() {
     <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
       <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-        <Box sx={blueBox({ height, staticRefWidth, darkMode, minPort, minLand, larPort })}>
-          <Box sx={{ display: 'flex', background: 'yellow', height: '0px' }}>
-            <Avatar
-              alt="Pablo Azambuyo"
-              src={profile}
-              sx={avatar({ minPort, minLand, medPort, medLand, larPort, larLand, height, staticRefHeight })}
-            />
+        <Box sx={leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={{ background: 'blue', justifyContent: 'space-between', display: 'flex', flexDirection: 'column' }}>
+          <Box sx={{ display: 'flex', background: 'yellow', minHeight: '50px' }}></Box>
+          <Box sx={blueBox({ height, staticRefWidth, darkMode, minPort, minLand, medPort, medLand, larPort })}>
+            <Box sx={{ display: 'flex', background: 'yellow', height: '0px' }}>
+              <Avatar
+                alt="Pablo Azambuyo"
+                src={profile}
+                sx={avatar({ minPort, minLand, medPort, medLand, larPort, larLand, height, staticRefHeight })}
+              />
+            </Box>
+            <Typography sx={typography({ maxStaticReference, darkMode, minPort, minLand, medPort, medLand, larPort })}>
+              { english ?
+                `Hi ! Im Pablo ! I worked almost 10 years on a paint selling shop. I was working as store manager and also as sales consultant in almost 5 years. In february of 2022 I wanted to give a turn on my life introducing in the world of programming, and I studied proudly on Henry ! On this academy I studied Fullstack Developer career, learning Javascript as my first language, including Node JS, React, Redux and Sequelize technologies. Other of my passions is the music, particullary play the piano, I consider myself as a melomaniac person !`
+                : `Hola ! Soy Pablo ! Trabajé 10 años en una pinturería. Me desempeñé como encargado de la misma, atendiendo al público, desde hace 5 años. Desde febrero de 2022 quise darle un cambio de rumbo a mi vida incursionando en el mundo de la programación, por lo cual estudié orgullosamente en Henry ! En la misma academia estudié para ser Fullstack Developer, aprendiendo Javascript como lenguaje principal junto con tecnologías como Node JS, React, Redux y Sequelize. Otra de mis pasiones es la música, particularmente tocar el piano, me considero una persona melómana !`}
+            </Typography>
+            <Box sx={{ display: 'flex', background: 'yellow', height: '0px' }}></Box>
           </Box>
-          <Typography sx={typography({ maxStaticReference, darkMode, minPort, minLand, medPort, medLand, larPort })}>
-            { english ?
-              `Hi ! Im Pablo ! I worked almost 10 years on a paint selling shop. I was working as store manager and also as sales consultant in almost 5 years. In february of 2022 I wanted to give a turn on my life introducing in the world of programming, and I studied proudly on Henry ! On this academy I studied Fullstack Developer career, learning Javascript as my first language, including Node JS, React, Redux and Sequelize technologies. Other of my passions is the music, particullary play the piano, I consider myself as a melomaniac person !`
-              : `Hola ! Soy Pablo ! Trabajé 10 años en una pinturería. Me desempeñé como encargado de la misma, atendiendo al público, desde hace 5 años. Desde febrero de 2022 quise darle un cambio de rumbo a mi vida incursionando en el mundo de la programación, por lo cual estudié orgullosamente en Henry ! En la misma academia estudié para ser Fullstack Developer, aprendiendo Javascript como lenguaje principal junto con tecnologías como Node JS, React, Redux y Sequelize. Otra de mis pasiones es la música, particularmente tocar el piano, me considero una persona melómana !`}
-          </Typography>
-          <Box sx={{ display: 'flex', background: 'yellow', height: '0px' }}></Box>
-          {/* <Box sx={blueBoxHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box> */}
+          <Box sx={{ display: 'flex', background: 'yellow', minHeight: '50px' }}></Box>
         </Box>
+        <Box sx={leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       </Box>
       <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-      {/* <Box sx={greyBottom} /> */}
     </Box>
   )
 }

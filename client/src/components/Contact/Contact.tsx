@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 import profile from '../../images/profile.png';
 import Swal from 'sweetalert2';
 import {
-  background, right, text, avatar, greyBottom,
+  background, typographyBox, text, avatar,
   separatorY, separatorX, textNoDeco, topBottomHelper,
-  greyRight
 } from '../../styles/ContactSX';
 import '../../styles/ContactSX.css';
 import { blue, brown, lime, red, grey } from '@mui/material/colors';
@@ -120,7 +119,7 @@ function Contact() {
 
           <Box sx={separatorY({ minPort, minLand, medPort, medLand })}></Box>
           <Box sx={separatorX({ minPort })}></Box>
-          <Box sx={right({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+          <Box sx={typographyBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
             <Typography sx={text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>
               <Link
                 style={textNoDeco()}
@@ -147,8 +146,6 @@ function Contact() {
           </Box>
         </Box>
         <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={greyBottom} />
-        <Box sx={greyRight} />
       </Box>
   )
 }

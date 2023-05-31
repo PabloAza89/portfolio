@@ -28,6 +28,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxS
     opacity:
     larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? '0' :
     larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
+    (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.664 ? '0' :
       //larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.272 ? '0' :
       //larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.272 ? '0' :
       '1',

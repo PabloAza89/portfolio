@@ -135,7 +135,7 @@ const separatorX = ({ minPort }: separatorXI) => {
   }
 }
 
-interface rightI {
+interface typographyBoxI {
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -144,12 +144,12 @@ interface rightI {
   larLand: boolean
 }
 
-const right = ({ minPort, minLand, medPort, medLand, larPort, larLand }: rightI) => {
+const typographyBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }: typographyBoxI) => { // typographyBox
   return {
     ...flex, ...column, ...relative, ...asc,
-    'background': 'none',
-    width: minPort ? '250px' : minLand ? '150px' : medPort || medLand ? '250px' : '400px',
-    height: minPort ? '230px' : minLand ? '150px' : medPort || medLand ? '250px' : '400px',
+    'background': 'red',
+    width: minPort ? '250px' : minLand ? '150px' : medPort || medLand ? '160px' : '230px', // width
+    height: minPort ? '230px' : minLand ? '180px' : medPort || medLand ? '300px' : '400px', // height
     //alignItems: 'center',
     justifyContent: 'center',
     alignItems: minPort ? 'center' : 'flex-start'
@@ -198,32 +198,8 @@ const textNoDeco = () => {
   }
 }
 
-const greyBottom = () => {
-  return {
-    background: grey[400],
-    height: '6px',
-    width: 'calc(100vw - 12px)',
-    display: 'flex',
-    position: 'fixed',
-    bottom: '0px',
-    zIndex: 1000
-  }
-}
-
-const greyRight = () => {
-  return {
-    background: grey[400],
-    height: '100vh',
-    width: '6px',
-    display: 'flex',
-    position: 'fixed',
-    right: '0px',
-    zIndex: 1000
-  }
-}
 
 export {
-  background, right, text, topBottomHelper,
-  avatar, separatorY, separatorX, textNoDeco,
-  greyBottom, greyRight
+  background, typographyBox, text, topBottomHelper,
+  avatar, separatorY, separatorX, textNoDeco
 }
