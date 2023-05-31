@@ -15,10 +15,10 @@ interface topBottomHelperI {
 
 const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
-    background: 'transparent',
+    background: 'darkblue',
     display: 'flex',
     width: '20px',
-    minHeight: minPort ? '60px' : minLand ? '60px' : larPort || larLand ? '100px' : '100px',
+    minHeight: minPort || minLand || medPort || medLand ? '1px' : '100px',
     position: 'relative'
   }
 }
@@ -36,10 +36,10 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: ba
   return {
     ...flex, ...jcc,
     flexDirection: minPort ? 'column' : 'row',
-    background: 'none',
+    background: 'teal',
     width: 'calc(100vw - 12px)',
-    minWidth: minPort ? '375px' : minLand ? '375px' : medPort || medLand ? '768px' : larPort ? '1000px' : '1000px',
-    height: minLand ? '220px' : larPort ? '500px' : '500px',
+    minWidth: minPort || minLand || medPort || medLand ? 'none' : larPort ? '900px' : '900px',
+    height: minLand ? '220px' : medLand ? '350px' : larPort ? '500px' : '500px',
     alignItems: 'center'
   }
 }
@@ -55,8 +55,8 @@ interface avatarI {
 const avatar = ({ minPort, minLand, medPort, medLand, larPort }: avatarI) => {
   return {
     ...relative, ...flex,
-    width: minPort ? '180px' : minLand ? '180px' : medPort || medLand ? '300px' : larPort ? '400px' : '400px',
-    height: minPort ? '180px' : minLand ? '180px' : medPort || medLand ? '300px' : larPort ? '400px' : '400px',
+    width: minPort ? '180px' : minLand ? '180px' : medPort || medLand ? '250px' : larPort ? '400px' : '400px',
+    height: minPort ? '180px' : minLand ? '180px' : medPort || medLand ? '250px' : larPort ? '400px' : '400px',
     animation: 'avatarContact 1s',
     '@keyframes avatarContact': {
       '0%': {
@@ -86,7 +86,7 @@ const separatorY = ({ minPort, minLand, medPort, medLand }: separatorYI) => {
     ...relative, ...asc, ...mix,
     display: minPort ? 'none' : 'flex',
     'background': 'white',
-    margin: minLand || medPort || medLand? '0px 40px' : '0px 40px',
+    margin: minLand || medPort || medLand? '0px 4vw' : '0px 40px', // : larPort || larLand
     width: minLand ? '10px' : '15px',
     height: minLand ? '180px' : medPort || medLand ? '300px' : '400px',
     animation: 'separatorYContact 1s',
@@ -117,7 +117,7 @@ const separatorX = ({ minPort }: separatorXI) => {
     'background': 'white',
     width: '180px',
     height: '10px',
-    margin: '23px 0px',
+    margin: '4vw 0px', // only MinPort
     animation: 'separatorXContact 1s',
     '@keyframes separatorXContact': {
       '0%': {
@@ -148,7 +148,7 @@ const typographyBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
   return {
     ...flex, ...column, ...relative, ...asc,
     'background': 'red',
-    width: minPort ? '250px' : minLand ? '150px' : medPort || medLand ? '160px' : '230px', // width
+    width: minPort ? '160px' : minLand ? '120px' : medPort || medLand ? '160px' : '230px', // width
     height: minPort ? '230px' : minLand ? '180px' : medPort || medLand ? '300px' : '400px', // height
     //alignItems: 'center',
     justifyContent: 'center',

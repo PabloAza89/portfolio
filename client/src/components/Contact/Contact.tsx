@@ -107,7 +107,7 @@ function Contact() {
   }
 
   return (
-      <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
+      <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'orange', height: 'calc(100vh - 12px)' }}>
         <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })} />
         <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
 
