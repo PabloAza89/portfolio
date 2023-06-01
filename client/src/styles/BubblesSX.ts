@@ -13,24 +13,27 @@ interface backgroundI {
 }
 
 const background = ({ darkMode, width, height, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
-
+  console.log("ESTE ACTUALIZA ?", height)
   return {
     ...flex,
+    '--vpHeight': `calc(${height}px - 30px)`,
     left: '0px',
     position: 'fixed',
-    minWidth: `${width}px`,
-    minHeight: `${height}px`,
+    minWidth: `${width}px !important`,
+    width: `${width}px !important`,
+    minHeight: `${height}px !important`,
+    height: `${height}px !important`,
     justifyContent: 'space-evenly',
     span: {
-      width: minPort || minLand ? '10px' : medPort || medLand ? '18px' : '27px',
-      height: minPort || minLand ? '10px' : medPort || medLand ? '18px' : '27px',
+      width: minPort || minLand ? '10px' : medPort || medLand ? '18px' : '22px',
+      height: minPort || minLand ? '10px' : medPort || medLand ? '18px' : '22px',
       background: '#4fc3dc',
       borderRadius: '50%',
       boxShadow: '0 0 0 0.49vw #4fc3dc44, 0 0 2.49vw #4fc3dc, 0 0 4.99vw #4fc3dc',
       animation: `animate 17s linear infinite`,
       '@keyframes animate': {
-          '0%': { transform: `translateY(${height}px) scale(0)` },
-          '100%': { transform: 'translateY(0px) scale(1)' }
+          '0%': { transform: `translateY(var(--vpHeight)) scale(0)`  },
+          '100%': { transform: 'translateY(-30px) scale(1)' }
       }
     },
     'span:nth-of-type(even)': {

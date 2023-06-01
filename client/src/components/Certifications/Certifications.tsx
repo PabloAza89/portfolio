@@ -9,7 +9,7 @@ import {
   background, mainBox, card, anchor, dialogBox,
   title, boxMedia, url, dialogStyle, dialogPaper,
   greyTop, topBottomHelper, leftRightHelper,
-  cardContainer
+  cardContainer, greyLeft
 } from '../../styles/CertificationsSX';
 import Bubbles from '../Bubbles/Bubbles';
 
@@ -63,10 +63,10 @@ function Certifications() {
     }
   ]
 
-
   return (
     <Box sx={background}>
-      <Box sx={greyTop} />
+      {/* <Box sx={greyTop} /> */}
+      <Box sx={greyLeft} />
       <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       <Bubbles />
       <Box sx={mainBox({ minPort, minLand, medPort, medLand, larPort })}>

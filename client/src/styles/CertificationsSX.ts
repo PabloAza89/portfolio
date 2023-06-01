@@ -8,10 +8,22 @@ const greyTop = () => {
   return {
     background: grey[400],
     height: '6px',
-    width: 'calc(100vw - 12px)',
+    width: '100vw',
     display: 'flex',
     position: 'fixed',
     top: '0px',
+    zIndex: 1000
+  }
+}
+
+const greyLeft = () => {
+  return {
+    background: grey[400],
+    height: 'calc(100vh - 12px)',
+    width: '6px',
+    display: 'flex',
+    position: 'fixed',
+    left: '0px',
     zIndex: 1000
   }
 }
@@ -256,5 +268,5 @@ export {
   background, mainBox, card, anchor, dialogBox,
   title, boxMedia, url, dialogStyle, dialogPaper,
   greyTop, topBottomHelper, leftRightHelper,
-  cardContainer
+  cardContainer, greyLeft
 }
