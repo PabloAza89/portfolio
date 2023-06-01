@@ -42,7 +42,7 @@ interface boxTextTechMessageI {
     display: 'flex',
     flexDirection: 'column',
     background: 'maroon',
-    justifyContent: larPort ? 'none' : 'space-evenly',
+    justifyContent: larPort ? 'flex-start' : 'space-evenly',
     alignItems: 'center',
     minWidth: minPort || medPort ? 'calc(100vw - 12px)' : minLand || medLand ? '48vw' : larPort ? '666px' : '600px', // minWidth
     width: minPort || medPort ? 'calc(100vw - 12px)' : minLand || medLand ? '48vw' : larPort ? 'calc(100vw - 12px)' : '47%', // width
@@ -114,8 +114,8 @@ const boxTypography = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
     justifyContent: 'space-evenly',
     display: 'flex',
     flexDirection: 'column',
-    minWidth: minPort || medPort ? '48vw' : minLand || medLand ? '48vw' : larPort ? '325px' : '600px', // minWidth
-    width: minPort || medPort ? '48vw' : minLand || medLand ? '48vw' : larPort ? '50%' : '44vw', // width
+    minWidth: minPort || medPort ? '48vw' : minLand || medLand ? '48vw' : larPort ? '300px' : '600px', // minWidth
+    width: minPort || medPort ? '48vw' : minLand || medLand ? '48vw' : larPort ? '40%' : '44vw', // width
     minHeight: minPort || medPort ? '25vh' : minLand || medLand ? '45vh' : larPort ? '200px' : '300px', // minHeight
     height:minPort || medPort ? '25vh' : minLand || medLand ? '45vh' : larPort ? '200px' : '300px', // height
   }
@@ -185,6 +185,16 @@ const textThree = ({ darkMode, minPort, minLand, medPort, medLand, larPort, perc
   }
 }
 
+const boxButton = () => {
+  return {
+    width: '57%',
+    background: 'gold',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  }
+}
+
 interface buttonMessageI {
   minPort: boolean,
   minLand: boolean,
@@ -197,8 +207,8 @@ const buttonMessage = ({ minPort, minLand, medPort, medLand, larPort }: buttonMe
   return {
     background: 'none',
     padding: '0px !important',
-    //minWidth: minPort || medPort ? '48vw' : larPort ? '320px' : '2vw !important', // minWidth
-    width: minPort || medPort ? '48vw' : minLand || medLand ? '290px' : larPort ? '40%' : '370px', // width
+    //minWidth: minPort || medPort ? '48vw' : larPort ? '40% !important' : '370px !important', // minWidth
+    width: minPort || medPort ? '48vw' : minLand || medLand ? '290px' : larPort ? '350px' : '370px', // width
     color:'#FFFFFF',
     fontSize: minPort ? '4vw' : minLand ? '1.8vw' : medPort || medLand ? '2.4vw' : larPort ? '28px' : '28px', // fontSize
     mixBlendMode: 'difference',
@@ -208,5 +218,6 @@ const buttonMessage = ({ minPort, minLand, medPort, medLand, larPort }: buttonMe
 export {
   background, boxTypography, textOne,
   textTwo, textThree, buttonMessage,
-  imageSVG, boxTextTechMessage, boxSVG
+  imageSVG, boxTextTechMessage, boxSVG,
+  boxButton
 }

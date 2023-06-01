@@ -3,37 +3,32 @@ import { flex, relative } from './CommonsSX';
 interface backgroundI {
   darkMode: boolean,
   width: number,
-  height: number
+  height: number,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
 }
 
-const background = ({ darkMode, width, height }: backgroundI) => {
+const background = ({ darkMode, width, height, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
 
   return {
     ...flex,
     left: '0px',
     position: 'fixed',
     minWidth: `${width}px`,
-    //width: '1920px',
     minHeight: `${height}px`,
-    //height: '1080px',
     justifyContent: 'space-evenly',
     span: {
-      minWidth: '27px',
-      width: '27px',
-      //width: '1.5vw',
-      minHeight: '27px',
-      
-      height: '27px',
-      //height: '1.5vw',
+      width: minPort || minLand ? '10px' : medPort || medLand ? '18px' : '27px',
+      height: minPort || minLand ? '10px' : medPort || medLand ? '18px' : '27px',
       background: '#4fc3dc',
-      //margin: '0 0.19vw',
-      //margin: '0 1px',
       borderRadius: '50%',
       boxShadow: '0 0 0 0.49vw #4fc3dc44, 0 0 2.49vw #4fc3dc, 0 0 4.99vw #4fc3dc',
       animation: `animate 17s linear infinite`,
       '@keyframes animate': {
-          /* '0%': { transform: 'translateY(100vh) scale(0)' },
-          '100%': { transform: 'translateY(-30vh) scale(1)' } */
           '0%': { transform: `translateY(${height}px) scale(0)` },
           '100%': { transform: 'translateY(0px) scale(1)' }
       }

@@ -1,83 +1,197 @@
+import { grey } from '@mui/material/colors';
 import {
   absolute, mix, noDeco, aic, asc, column,
-  flex, jcc, jic, jsc, noSelect, relative
+  flex, jcc, jic, jsc, noSelect, relative,
 } from './CommonsSX';
+
+const greyTop = () => {
+  return {
+    background: grey[400],
+    height: '6px',
+    width: 'calc(100vw - 12px)',
+    display: 'flex',
+    position: 'fixed',
+    top: '0px',
+    zIndex: 1000
+  }
+}
+
+interface topBottomHelperI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+  return {
+    background: 'none',
+    display: 'flex',
+    width: '20px',
+    minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : '100px',
+    position: 'relative'
+  }
+}
 
 const background = () => {
   return {
-    ...flex, ...column, ...aic, ...jcc,
+    //...flex, /* ...aic, */ ...jcc,
+    ...flex, ...aic,
+    flexDirection: 'column',
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)',
     background: 'none',
-    overflow: 'hidden'
+    justifyContent: 'space-between'
+    //overflow: 'hidden'
   }
 }
 
 interface genI {
   minPort: boolean,
   minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
   larPort: boolean
 }
 
-const boxUpper = ({ minPort, minLand, larPort }: genI) => {
+const mainBox = ({ minPort, minLand, medPort, medLand, larPort }: genI) => {
   return {
-    ...flex, ...jcc,
-    width: minLand ? '97vw' : '80vw',
-    height: '80vh' ,
+    ...flex,
+    justifyContent: 'space-between',
+    width: 'calc(100vw - 12px)',
+    height: minPort || medPort || larPort ? '80vh' : '60vh',
     background: 'none',
-    flexDirection: minPort ? 'column' : minLand ? 'row' : larPort ? 'column' : 'row'
+    //flexDirection: minPort || larPort ? 'column' : minLand ? 'row' : 'row'
   }
 }
 
-const card = ({ minPort, minLand, larPort }: genI) => {
-  return {
-    ...flex, ...asc, ...column,
-    textAlign: 'center',
-    'justifyContent': 'space-evenly',
-    background: 'none',
-    width: minPort ? '87vw' : minLand ? '33vw' : larPort ? '59vw' : '29vw',
-    height: minPort ? '25vh' : minLand ? '59vh' : larPort ? '39vh' : '39vh'
-  }
-}
-
-const title = ({ minPort, minLand, larPort }: genI) => {
-  return {
-    ...asc, ...noSelect, ...mix,
-    background: 'none',
-    height: minLand ? '13vh' : 'none',
-    color: '#FFFFFF',
-    paddingRight: '0vw',
-    paddingTop: '0vw',
-    fontSize: minPort ? '3.85vw' : minLand ? '2.1vw' : larPort ? '2.65vw' : '1.25vw'
-  }
-}
-
-interface mediaI {
-  url: string,
+interface leftRightHelperI {
   minPort: boolean,
   minLand: boolean,
-  larPort: boolean
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
 }
 
-const media = ({ url, minPort, minLand, larPort }: mediaI) => {
+const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
   return {
-    backgroundImage: `url(${url})`,
-    'zIndex': 10,
-    'alignSelf': 'center',
-    width: minPort ? '35vw' : minLand ? '32vw' : larPort ? '35vw' : '15vw',
-    height: minLand ? '36vh' : '15vh',
-    backgroundSize: minPort ? '35vw 15vh' : minLand ? '32vw 36vh' : larPort ? '35vw 15vh' : '15vw 15vh',
-    ':hover': { webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)', cursor: 'pointer' }
+    display: larLand ? 'flex' : 'none',
+    background: 'none',
+    //minHeight: '635px',
+    minWidth: '20px'
   }
 }
 
-const url = ({ minPort, minLand, larPort }: genI) => {
+interface cardContainerI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+const cardContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: cardContainerI) => {
   return {
-    ...asc,
+    display: 'flex',
+    flexDirection: minPort || medPort || larPort ? 'column' : 'row',
+    background: 'none',
+    alignItems: 'center',
+
+    justifyContent: 'space-evenly',
+    minWidth: larLand ? '1200px' : 'none',
+    width: 'calc(100vw - 12px)',
+    minHeight: larPort ? '660px' : larLand ? '250px' : 'none',
+    height: minPort || medPort || larPort ? '80vh' : '60vh',
+    //height: '70vh'
+  }
+}
+
+interface cardI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+const card = ({ minPort, minLand, medPort, medLand, larPort, larLand }: cardI) => { // card
+  return {
+    ...flex,
+    display: 'flex',
+    //border: '1px solid',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    background: 'none',
+    alignItems: 'center',
+    minWidth: minPort ? '87vw' : minLand || medPort || medLand ? '32vw' : larPort ? '400px' : '400px', // minWidth
+    width: minPort ? '87vw' : medPort ? '50vw' : minLand || medLand ? '32vw' : larPort ? '400px' : '400px', // minWidth
+    height: minPort ? '25vh' : medPort ? '20vh' : minLand || medLand ? '35vh' : larPort ? '220px' : '250px' // height
+  }
+}
+
+interface titleI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+const title = ({ minPort, minLand, medPort, medLand, larPort, larLand }: titleI) => { // title
+  return {
+    ...noSelect, ...mix,
+    background: 'none',
+    //height: minLand ? '13vh' : 'none',
+    color: '#FFFFFF',
+    fontSize: minPort ? '4.1vw': medPort ? '2.5vw' : minLand || medLand ? '1.6vw' : larPort ? '20px' : '20px', // fontSize
+  }
+}
+
+interface boxMediaI {
+  darkMode: boolean,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean
+}
+
+const boxMedia = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: boxMediaI) => { // boxMedia
+  return {
+/*     ...asc, */
+    'cursor': 'pointer',
+    width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : larPort ? '220px' : '220px', // width
+    height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : larPort ? '120px' : '120px', // height
+    ':hover':
+      darkMode ? {webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)'}
+      : {webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)'},
+    webkitFilter: darkMode ? 'brightness(.6)' : 'none',
+    'filter': darkMode ? 'brightness(.6)' : 'none',
+    zIndex: 1000,
+  }
+}
+
+interface urlI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean
+}
+
+const url = ({ minPort, minLand, medPort, medLand, larPort }: urlI) => {
+  return {
+    /* ...asc, */
     color: '#FFFFFF',
     paddingRight: '0vw',
     paddingTop: '0vw',
-    fontSize: minPort ? '' : minLand ? '' : larPort ? '2.35vw' : '1.15vw',
+    fontSize: minPort ? '3.8vw' : medPort ? '2.3vw' : minLand || medLand ? '1.8vw' : larPort ? '20px' : '20px',
     background: 'none'
   }
 }
@@ -139,6 +253,8 @@ const dialogBox = ({ minPort, minLand, medPort, medLand, larPort }: dialogBoxI) 
 }
 
 export {
-  background, boxUpper, card, anchor, dialogBox,
-  title, media, url, dialogStyle, dialogPaper
+  background, mainBox, card, anchor, dialogBox,
+  title, boxMedia, url, dialogStyle, dialogPaper,
+  greyTop, topBottomHelper, leftRightHelper,
+  cardContainer
 }

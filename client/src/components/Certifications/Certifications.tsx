@@ -6,8 +6,10 @@ import efSet from '../../images/efSet.png';
 import fccCertJS from '../../images/fccCertJS.png';
 import henry from '../../images/henry.png';
 import {
-  background, boxUpper, card, anchor, dialogBox,
-  title, media, url, dialogStyle, dialogPaper
+  background, mainBox, card, anchor, dialogBox,
+  title, boxMedia, url, dialogStyle, dialogPaper,
+  greyTop, topBottomHelper, leftRightHelper,
+  cardContainer
 } from '../../styles/CertificationsSX';
 import Bubbles from '../Bubbles/Bubbles';
 
@@ -64,21 +66,27 @@ function Certifications() {
 
   return (
     <Box sx={background}>
+      <Box sx={greyTop} />
+      <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       <Bubbles />
-      {/* <Box sx={boxUpper({ minPort, minLand, larPort })}>
-        {array.map((e) => {
+      <Box sx={mainBox({ minPort, minLand, medPort, medLand, larPort })}>
+        <Box sx={leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={cardContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+          {array.map((e) => {
             return (
-              <Box key={e.title} sx={card({ minPort, minLand, larPort })}>
-                <Typography sx={title({ minPort, minLand, larPort })}>{e.title}</Typography>
-                <CardMedia component="div" onClick={() => {setName(e.media); setShow(!show)}} sx={media({ url:e.media, minPort, minLand, larPort })} />
-                <Typography sx={url({ minPort, minLand, larPort })}>
+              <Box key={e.title} sx={card({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                <Typography sx={title({ minPort, minLand, medPort, medLand, larPort, larLand })}>{e.title}</Typography>
+                <Box component="img" src={e.media} onClick={() => {setName(e.media); setShow(!show)}} sx={boxMedia({ darkMode, minPort, minLand, medPort, medLand, larPort })} />
+                <Typography sx={url({ minPort, minLand, medPort, medLand, larPort })}>
                   <Link style={anchor()}
                     to={e.href}
                     target="_blank"
                   >{e.url}</Link>
                 </Typography>
               </Box>)
-        })}
+          })}
+        </Box>
+        <Box sx={leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       </Box>
 
       <Dialog
@@ -94,7 +102,8 @@ function Certifications() {
           src={name}
           alt="image"
         />
-      </Dialog> */}
+      </Dialog>
+      <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
 
     </Box>
   )
