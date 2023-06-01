@@ -65,11 +65,11 @@ function Certifications() {
 
   return (
     <Box sx={background}>
-      {/* <Box sx={greyTop} /> */}
+      <Box sx={greyTop} />
       <Box sx={greyLeft} />
       <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       <Bubbles />
-      <Box sx={mainBox({ minPort, minLand, medPort, medLand, larPort })}>
+      <Box sx={mainBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Box sx={leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
         <Box sx={cardContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
           {array.map((e) => {

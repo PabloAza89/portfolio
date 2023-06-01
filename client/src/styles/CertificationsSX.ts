@@ -39,22 +39,21 @@ interface topBottomHelperI {
 
 const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
-    background: 'none',
+    //background: 'red',
     display: 'flex',
     width: '20px',
-    minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : '100px',
+    minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : '120px',
     position: 'relative'
   }
 }
 
 const background = () => {
   return {
-    //...flex, /* ...aic, */ ...jcc,
     ...flex, ...aic,
+    background: 'none',
     flexDirection: 'column',
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)',
-    background: 'none',
     justifyContent: 'space-between'
     //overflow: 'hidden'
   }
@@ -65,17 +64,18 @@ interface genI {
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
-  larPort: boolean
+  larPort: boolean,
+  larLand: boolean
 }
 
-const mainBox = ({ minPort, minLand, medPort, medLand, larPort }: genI) => {
+const mainBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }: genI) => {
   return {
     ...flex,
+    //background: 'darkred',
     justifyContent: 'space-between',
     width: 'calc(100vw - 12px)',
-    height: minPort || medPort || larPort ? '80vh' : '60vh',
-    background: 'none',
-    //flexDirection: minPort || larPort ? 'column' : minLand ? 'row' : 'row'
+    minHeight: larLand ? '220px' : 'none',
+    height: minPort || medPort || larPort ? '80vh' : '50vh',
   }
 }
 
@@ -91,9 +91,9 @@ interface leftRightHelperI {
 const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
   return {
     display: larLand ? 'flex' : 'none',
-    background: 'none',
-    //minHeight: '635px',
-    minWidth: '20px'
+        //background: 'yellow',
+    minWidth: '44px',
+    
   }
 }
 
@@ -110,15 +110,13 @@ const cardContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
   return {
     display: 'flex',
     flexDirection: minPort || medPort || larPort ? 'column' : 'row',
-    background: 'none',
+    //background: 'blue',
     alignItems: 'center',
-
     justifyContent: 'space-evenly',
     minWidth: larLand ? '1200px' : 'none',
     width: 'calc(100vw - 12px)',
-    minHeight: larPort ? '660px' : larLand ? '250px' : 'none',
-    height: minPort || medPort || larPort ? '80vh' : '60vh',
-    //height: '70vh'
+    minHeight: larPort ? '720px' : larLand ? '220px' : 'none',
+    height: minPort || medPort || larPort ? '80vh' : '50vh',
   }
 }
 
@@ -135,14 +133,14 @@ const card = ({ minPort, minLand, medPort, medLand, larPort, larLand }: cardI) =
   return {
     ...flex,
     display: 'flex',
+    //background: 'orange',
     //border: '1px solid',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
-    background: 'none',
     alignItems: 'center',
-    minWidth: minPort ? '87vw' : minLand || medPort || medLand ? '32vw' : larPort ? '400px' : '400px', // minWidth
-    width: minPort ? '87vw' : medPort ? '50vw' : minLand || medLand ? '32vw' : larPort ? '400px' : '400px', // minWidth
-    height: minPort ? '25vh' : medPort ? '20vh' : minLand || medLand ? '35vh' : larPort ? '220px' : '250px' // height
+    minWidth: minPort ? '87vw' : minLand || medPort || medLand ? '32vw' : '400px', // minWidth
+    width: minPort ? '87vw' : medPort ? '50vw' : minLand || medLand ? '32vw' : '400px', // minWidth
+    height: minPort ? '25vh' : medPort ? '20vh' : minLand || medLand ? '35vh' : '220px', // height
   }
 }
 
