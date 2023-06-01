@@ -5,7 +5,7 @@ import {
 } from './CommonsSX';
 import { grey } from '@mui/material/colors';
 
-interface topHelperI {
+interface topBottomHelperI {
   height: number,
   minPort: boolean,
   minLand: boolean,
@@ -15,31 +15,9 @@ interface topHelperI {
   larLand: boolean
 }
 
-const topHelper = ({ height, minPort, minLand, medPort, medLand, larPort, larLand }: topHelperI) => {
+const topBottomHelper = ({ height, minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
-    //background: 'transparent',
-    background: 'orange',
-    display: 'flex',
-    width: '20px',
-    height: larPort || larLand ? '100px' : '1px',
-    minHeight: larPort || larLand ? '100px' : '1px',
-    position: 'relative'
-  }
-}
-
-interface bottomHelperI {
-  height: number,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
-}
-
-const bottomHelper = ({ height, minPort, minLand, medPort, medLand, larPort, larLand }: bottomHelperI) => {
-  return {
-    background: 'orange',
+    //background: 'orange',
     display: 'flex',
     width: '20px',
     height: larPort || larLand ? '100px' : '1px',
@@ -60,11 +38,10 @@ interface backgroundI {
 
 const background = ({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height }: backgroundI) => {
   return {
-    background: 'red',
+    //background: 'red',
     display: 'flex',
     position: 'relative',
     flexDirection: 'column',
-    //height: minPort ? '370px' : minLand ? '270px' : larPort ? '550px' : '520px',
   }
 }
 
@@ -352,6 +329,6 @@ const lowerHelper = () => {
 export {
   background, scroll, solid, intercalated, cardLeft,
   centerStripe, card, boxTitle, title, boxMedia, cardMedia,
-  dialogStyle, dialogBox, boxLower, textLower, select, topHelper,
-  betweenMedia, lowerHelper, dialogPaper, bottomHelper
+  dialogStyle, dialogBox, boxLower, textLower, select, topBottomHelper,
+  betweenMedia, lowerHelper, dialogPaper
 }

@@ -1,6 +1,42 @@
 import { flex, noSelect, row, absolute, relative, column, jcc, fixed } from './CommonsSX';
 import { blue, brown, lime, red, grey } from '@mui/material/colors';
 
+const background = () => {
+  return {
+    //background: 'darkred',
+    display: 'flex',
+    position: 'relative',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    height: 'calc(100vh - 12px)'
+  }
+}
+
+const innerMainContainer = () => {
+  return {
+    //background: 'blue',
+    justifyContent: 'space-between',
+    display: 'flex',
+    flexDirection: 'column'
+  }
+}
+
+const innerTopBottomHelper = () => {
+  return {
+    display: 'flex', 
+    //background: 'yellow',
+    minHeight: '50px'
+  }
+}
+
+const innerBlueBoxHelper = () => {
+  return {
+    display: 'flex',
+    //background: 'yellow',
+    height: '0px'
+  }
+}
+
 interface topBottomHelperI {
   minPort: boolean,
   minLand: boolean,
@@ -12,21 +48,12 @@ interface topBottomHelperI {
 
 const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
-    background: 'blue',
+    //background: 'blue',
     display: 'flex',
     width: '20px',
     minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : larPort || larLand ? '50px' : '50px',
     position: 'relative'
   }
-}
-
-interface blueBoxHelperI {
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
 interface leftRightHelperI {
@@ -41,15 +68,24 @@ interface leftRightHelperI {
 const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
   return {
     display: larPort || larLand ? 'flex' : 'none',
-    background: 'red',
+    //background: 'red',
     minHeight: '635px',
     minWidth: '70px'
   }
 }
 
+interface blueBoxHelperI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
 const blueBoxHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: blueBoxHelperI) => {
   return {
-    background: 'darkblue',
+    //background: 'darkblue',
     display: 'flex',
     width: '20px',
     minHeight: minPort || minLand ? '90px' : medPort || medLand ? '90px' : larPort || larLand ? '100px' : '100px',
@@ -57,7 +93,7 @@ const blueBoxHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
   }
 }
 
-interface backgroundI {
+interface mainContainerI {
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -66,7 +102,7 @@ interface backgroundI {
   larLand: boolean,
 }
 
-const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
+const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainContainerI) => {
   return {
     //display: larPort || larLand ? 'flex' : 'none',
     display: 'flex',
@@ -174,6 +210,8 @@ const greyBottom = () => {
 
 export {
   blueBox, avatar, typography, topBottomHelper,
-  greyBottom, blueBoxHelper, background, leftRightHelper
+  greyBottom, blueBoxHelper, mainContainer, leftRightHelper,
+  background, innerMainContainer, innerTopBottomHelper,
+  innerBlueBoxHelper
 }
 

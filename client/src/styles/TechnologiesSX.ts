@@ -17,9 +17,9 @@ const background = ({ currentWidth, minPort, minLand, medPort, medLand, larPort,
   return {
     order: minPort || medPort || larPort ? '1' : '0',
     ...asc, ...flex, ...aic,
-    background: 'blue',
+    //background: 'blue',
     overflow: 'auto',
-    width: minPort || medPort ? '100%' : minLand || medLand ? '100%' : larPort ? 'calc(100vw - 12px)' : larLand && currentWidth <= 655 ? 'calc(100vw - 67px)' : '100%', // width
+    width: minPort ? '100%' : medPort ? '85%' : minLand || medLand ? '100%' : larPort ? 'calc(100vw - 12px)' : larLand && currentWidth <= 655 ? 'calc(100vw - 67px)' : '100%', // width
     color: '#FFFFFF',
     alignSelf: larPort ? 'flex-start' : 'flex-start',
     justifyContent:
@@ -43,7 +43,7 @@ interface iconBoxI {
 const iconBox = ({ minPort, minLand, medPort, medLand, larPort }: iconBoxI) => { // iconBox
   return {
     ...flex, ...column, ...relative, ...aic,
-    background: 'yellow',
+    //background: 'yellow',
     border: 'none',
     width: minLand ? '7vw' : minPort || medPort ? '70px' : medLand ? '7vw' : larPort ? '111px' : '100px' // width
   }
@@ -65,7 +65,7 @@ const iconMedia = ({ url, minPort, minLand, medPort, medLand, larPort }: iconMed
     backgroundRepeat: 'no-repeat',
     backgroundImage: `url(${url})`,
     width: minPort ? '10vw' : minLand ? '3.5vw' : medPort ? '70px' : medLand ? '5vw' : larPort ? '111px' : '100px', // width
-    height: minPort ? '10vw' : minLand ? '3.5vw' : medPort ? '45px' : medLand ? '5vw' : larPort ? '65px' : '65px' , // height
+    height: minPort ? '10vw' : minLand ? '3.5vw' : medPort ? '45px' : medLand ? '5vw' : larPort ? '55px' : '65px' , // height
     backgroundSize: 'contain'
   }
 }
@@ -82,7 +82,7 @@ interface titleI {
 const title = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: titleI) => { // title
   return {
     ...noSelect, ...mix,
-    fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : medPort ? '12px' : medLand ? '1.3vw' : larPort ? '16px' : '16px', // fontSize
+    fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : medPort ? '12px' : medLand ? '1.3vw' : larPort ? '14px' : '16px', // fontSize
     border: 'none',
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontWeight: 600

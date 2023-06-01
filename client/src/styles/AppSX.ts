@@ -45,10 +45,10 @@ interface topBottomHelperI {
 
 const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
-    background: 'orange',
+    //background: 'orange',
     display: 'flex',
     width: '20px',
-    minHeight: minPort ? '60px' : minLand ? '35px' : medPort || medLand ? '65px' : larPort ? '85px' : '85px',
+    minHeight: minPort ? '60px' : minLand ? '35px' : medPort || medLand ? '65px' : larPort ? '70px' : '85px',
     position: 'relative'
   }
 }

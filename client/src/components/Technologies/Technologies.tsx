@@ -65,10 +65,10 @@ function Technologies() {
   const array: arrayI[] = [
     { icon: react, title: `React` },
     { icon: redux, title: `Redux` },
-    { icon: javascript, title: `Javascript` },
-    { icon: node, title: `Node.js` },
+    { icon: javascript, title: `Javascript` },   
     { icon: sequelize, title: `Sequelize` },
-    { icon: material, title: `Material UI` }
+    { icon: material, title: `Material UI` },
+    { icon: node, title: `Node.js` },
   ]
 
   console.log("currentWidth", currentWidth)

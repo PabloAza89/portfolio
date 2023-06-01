@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import profile from '../../images/profile.png';
 import Swal from 'sweetalert2';
 import {
-  background, typographyBox, text, avatar,
+  mainContainer, typographyBox, text, avatar,
   separatorY, separatorX, textNoDeco, topBottomHelper,
+  background
 } from '../../styles/ContactSX';
 import '../../styles/ContactSX.css';
 import { blue, brown, lime, red, grey } from '@mui/material/colors';
@@ -107,9 +108,9 @@ function Contact() {
   }
 
   return (
-      <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'orange', height: 'calc(100vh - 12px)' }}>
+      <Box sx={background}>
         <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })} />
-        <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+        <Box sx={mainContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
 
           <Avatar
             alt="Pablo Azambuyo"

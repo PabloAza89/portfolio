@@ -11,10 +11,10 @@ import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
 import DialogContent from '@mui/material/DialogContent';
 import {
-  background, scroll, solid, intercalated, topHelper,
+  background, scroll, solid, intercalated, topBottomHelper,
   centerStripe, card, boxTitle, title, boxMedia, cardMedia,
   dialogBox, dialogStyle, boxLower, textLower, select, cardLeft,
-  betweenMedia, lowerHelper, dialogPaper, bottomHelper
+  betweenMedia, lowerHelper, dialogPaper
 } from '../../styles/ProjectsSX';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 
@@ -95,7 +95,7 @@ function Projects() {
 
   return (
   <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
-    <Box sx={topHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+    <Box sx={topBottomHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     <Box sx={background({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height })}>
 
       <ScrollContainer innerRef={useHorizontalScroll()} style={scroll({ minPort, minLand })}>
@@ -172,7 +172,7 @@ function Projects() {
       </Box>
 
     </Box>
-    <Box sx={bottomHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+    <Box sx={topBottomHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     {/* <Box sx={lowerHelper}></Box> */}
   </Box>
   )

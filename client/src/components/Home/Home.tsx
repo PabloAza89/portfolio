@@ -8,7 +8,7 @@ import {
   background, boxTypography, textOne,
   textTwo, textThree, buttonMessage,
   imageSVG, boxTextTechMessage, boxSVG,
-  boxButton
+  boxButton, auxLarPort
 } from '../../styles/HomeSX';
 
 function Home() {
@@ -33,12 +33,14 @@ function Home() {
     <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
       <Box sx={boxTextTechMessage({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Box sx={boxTypography({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-          <Typography sx={textOne({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
-          <Typography sx={textTwo({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
-          <Typography sx={textThree({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
+          <Box sx={auxLarPort({ larPort })}>
+            <Typography sx={textOne({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
+            <Typography sx={textTwo({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
+            <Typography sx={textThree({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
+          </Box>
         </Box>
         <Technologies />
-        <Box sx={boxButton}>
+        <Box sx={boxButton({ minPort, minLand, medPort, medLand, larPort, larLand })}>
           <Link style={{ textDecoration: 'none' }} to="/portfolio/MessageMe">
             <Button
               sx={buttonMessage({ minPort, minLand, medPort, medLand, larPort })}
