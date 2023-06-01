@@ -31,10 +31,10 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
     opacity:
       larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? '0' :
       larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
-      larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.773 ? '0' :
-      larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.731 ? '0' :
-      (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.642 ? '0' :
-      (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.664 ? '0' :
+      larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? '0' :
+      larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? '0' :
+      (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.548 ? '0' :
+      (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.629 ? '0' :
       larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? '0' :
       larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? '0' :
       '1',

@@ -1,10 +1,14 @@
 import { grey } from '@mui/material/colors';
 import { column, flex, relative, fixed } from './CommonsSX';
 
-const background = () => {
+interface backgroundI {
+  darkMode: boolean
+}
+
+const background = ({ darkMode }: backgroundI) => {
   return {
     ...relative, ...flex,
-    backgroundColor: grey[400],
+    backgroundColor: darkMode ? grey[800] : grey[400],
     overflow: 'hidden',
     width: '100vw',
     height: '100vh',
@@ -53,9 +57,13 @@ const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand 
   }
 }
 
-const greyBottom = () => {
+interface greyBottomI {
+  darkMode: boolean,
+}
+
+const greyBottom = ({ darkMode }: greyBottomI) => {
   return {
-    background: grey[400],
+    background: darkMode ? grey[800] : grey[400],
     height: '6px',
     width: 'calc(100vw - 12px)',
     display: 'flex',
@@ -65,9 +73,13 @@ const greyBottom = () => {
   }
 }
 
-const greyRight = () => {
+interface greyRightI {
+  darkMode: boolean,
+}
+
+const greyRight = ({ darkMode }: greyRightI) => {
   return {
-    background: grey[400],
+    background: darkMode ? grey[800] : grey[400],
     //background: 'orange',
     height: '100vh',
     width: '6px',

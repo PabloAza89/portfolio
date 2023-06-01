@@ -170,7 +170,7 @@ interface typographyI {
 const typography = ({ maxStaticReference, darkMode, minPort, minLand, medPort, medLand, larPort }: typographyI) => { // typography
   return {
     ...noSelect,
-    background: 'teal',
+    //background: 'teal',
     justifyContent: 'flex-start',
     display: 'flex',
     flexDirection: 'column',

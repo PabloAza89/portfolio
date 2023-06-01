@@ -4,9 +4,13 @@ import {
   flex, jcc, jic, jsc, noSelect, relative,
 } from './CommonsSX';
 
-const greyTop = () => {
+interface greyTopI {
+  darkMode: boolean,
+}
+
+const greyTop = ({ darkMode }: greyTopI) => {
   return {
-    background: grey[400],
+    background: darkMode ? grey[800] : grey[400],
     height: '6px',
     width: '100vw',
     display: 'flex',
@@ -16,9 +20,13 @@ const greyTop = () => {
   }
 }
 
-const greyLeft = () => {
+interface greyLeftI {
+  darkMode: boolean,
+}
+
+const greyLeft = ({ darkMode }: greyLeftI) => {
   return {
-    background: grey[400],
+    background: darkMode ? grey[800] : grey[400],
     height: 'calc(100vh - 12px)',
     width: '6px',
     display: 'flex',

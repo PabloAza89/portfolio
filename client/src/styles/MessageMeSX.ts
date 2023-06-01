@@ -22,29 +22,7 @@ const formContainer = ({ minPort, minLand, staticRefWidth }: formContainerI) => 
   }
 }
 
-interface clearButtonI {
-  minPort: boolean,
-  minLand: boolean,
-  location: string
-}
 
-const clearButton = ({ minPort, minLand, location }: clearButtonI) => {
-  return {
-    ...flex, ...column,
-    position: minLand && location === '/portfolio/MessageMe' ? 'absolute' : 'none',
-    color: 'white',
-    alignSelf: 'flex-end',
-    backgroundColor: 'gray',
-    ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
-    /* mixBlendMode: 'difference', */
-    width: '11vw',
-    marginRight: minPort ? '5vw' : '1.5vw',
-    marginBottom: '2vh',
-    height: minLand ? '7vh' : 'none',
-    bottom: minLand ? '14vh' : 'none',
-    left: minLand ? '33vw' : 'none'
-  }
-}
 
 interface nameBoxI {
   staticRefWidth: number,
@@ -85,19 +63,46 @@ const messageBox = ({ minPort, minLand, staticRefWidth }: messageBoxI) => {
   }
 }
 
+interface clearButtonI {
+  minPort: boolean,
+  minLand: boolean,
+  location: string
+}
+
+const clearButton = ({ minPort, minLand, location }: clearButtonI) => { // clearButton
+  return {
+    ...flex, ...column,
+    position: minLand && location === '/portfolio/MessageMe' ? 'absolute' : 'none',
+    color: 'white',
+    alignSelf: 'flex-end',
+    fontSize: minPort ? '5.2vw' : '2vw',
+    width: minPort ? '30vw' : minLand ? '24vw' : '10vw',
+    backgroundColor: 'gray',
+    ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
+    /* mixBlendMode: 'difference', */
+
+    marginRight: minPort ? '5vw' : '1.5vw',
+    marginBottom: '2vh',
+    height: minLand ? '7vh' : 'none',
+    bottom: minLand ? '14vh' : 'none',
+    left: minLand ? '33vw' : 'none'
+  }
+}
+
 interface sendMessageButtonI {
   minPort: boolean,
   minLand: boolean
 }
 
-const sendMessageButton = ({ minPort, minLand }: sendMessageButtonI) => {
+const sendMessageButton = ({ minPort, minLand }: sendMessageButtonI) => { // sendMessageButton
   return {
     ...flex, ...asc,
     color: 'white',
     backgroundColor: 'gray',
     ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
     /* mixBlendMode: 'difference', */
-    width: minPort ? '45vw' : minLand ? '24vw' : '10vw',
+    fontSize: minPort ? '5.2vw' : '2vw',
+    width: minPort ? '58vw' : minLand ? '24vw' : '10vw',
     height: minLand ? '7vh' : 'none',
     left: minLand ? '9vw' : 'none'
   }

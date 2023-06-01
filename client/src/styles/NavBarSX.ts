@@ -78,7 +78,7 @@ interface genII {
 
 const lessThan = ({ minPort, minLand, medPort, medLand, larPort }: genII) => { // lessThan
   return {
-    ...noSelect,
+    ...noSelect, ...mix,
     //background: 'darkgray',
     fontSize: minPort || medPort  ? '5vw' : minLand || medLand ? '2.3vw' : larPort ? '54px' : '54px', // fontSize
     width: minPort || medPort ? '6vw' : minLand || medLand ? '3.5vw' : larPort ? '45px' : '45px', // width
@@ -110,7 +110,7 @@ const name = ({ minPort, minLand, medPort, medLand, larPort }: nameI) => { // na
 
 const blink = ({ minPort, minLand, medPort, medLand, larPort }: genII) => { // blink
   return {
-    ...noSelect,
+    ...noSelect, ...mix,
     //background: 'darkgray',
     width: minPort || medPort ? '2vw' : minLand ||medLand ? '13px' : larPort ? '15px' : '11px', // width
     height: minPort || medPort ? '8vw' : minLand ||medLand ? '3.5vw' : larPort ? '80px' : '80px', // height
@@ -128,7 +128,7 @@ const blink = ({ minPort, minLand, medPort, medLand, larPort }: genII) => { // b
 
 const greaterThan = ({ minPort, minLand, medPort, medLand, larPort }: genII) => { // greaterThan
   return {
-    ...noSelect,
+    ...noSelect, ...mix,
     //background: 'yellow',
     fontSize: minPort || medPort  ? '5vw' : minLand || medLand ? '2.3vw' : larPort ? '54px' : '54px', // fontSize
     width: minPort || medPort ? '6vw' : minLand || medLand ? '2.1vw' : larPort ? '60px' : '55px', // width

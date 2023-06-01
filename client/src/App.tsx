@@ -64,11 +64,8 @@ function App() {
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
-  //console.log("TEST 2", window.screen.orientation)
-  //console.log("TEST", window.matchMedia("(orientation: portrait)").matches)
-
   return (
-    <Box sx={background} >
+    <Box sx={background({ darkMode })} >
       <Box sx={blackWhite({ staticRefWidth, darkMode, location:location.pathname })} >
         <Routes>
           <Route path="/portfolio" element={<>
@@ -115,8 +112,8 @@ function App() {
           </>}/>
         </Routes>
       </Box>
-      <Box sx={greyBottom} />
-      <Box sx={greyRight} />
+      <Box sx={greyBottom({ darkMode })} />
+      <Box sx={greyRight({ darkMode })} />
     </Box>
   );
 }
