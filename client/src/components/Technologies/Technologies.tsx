@@ -12,11 +12,7 @@ import {
   iconBox, iconMedia, title, background
 } from '../../styles/TechnologiesSX';
 
-/* interface TechnologiesI {
-  parentWidth: number
-} */
-
-function Technologies( /* { parentWidth }: TechnologiesI */ ) {
+function Technologies() {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
@@ -27,12 +23,7 @@ function Technologies( /* { parentWidth }: TechnologiesI */ ) {
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
-  //const ref = useRef<any>(null);
   const [ parentWidthh, setParentWidthh ] = useState<number>(0);
-
-  /* useLayoutEffect(() => {
-    setParentWidthh(ref.current.offsetWidth);
-  }, [currentWidth]); */
 
   function useHorizontalScroll() {
     const elRef = useRef<any>(null);

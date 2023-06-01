@@ -32,28 +32,41 @@ function Certifications() {
   const [show, setShow] = useState(false)
   const [name, setName] = useState("")
 
+ interface arrayI {
+    title: string,
+    media: string,
+    href: string,
+    url: string
+  }
+
+  const array: arrayI[] =
+  [
+    {
+    title: english ? `JavaScript Algorithms and Data Structures` : `Algoritmos Javascript y Estructura de Datos`,
+    media: fccCertJS,
+    href: `https://www.freecodecamp.org/certification/fcc4dacfa43-3a86-4f27-9ef6-4b74318b8b7a/javascript-algorithms-and-data-structures`,
+    url: `https://freecodecamp.org`
+    },
+    {
+      title: english ? `Full Stack Web Developer` : `Desarrollador Web Full Stack`,
+      media: henry,
+      href: `https://certificates.soyhenry.com/cert?id=19eebce3-e6a8-4e6f-ac26-7e1b28852f54`,
+      url: `https://soyhenry.com`
+    },
+    {
+      title: english ? `English B2 (Upper Intermediate)` : `Inglés B2 (Intermedio Superior)`,
+      media: efSet,
+      href: `https://www.efset.org/cert/T92ez2`,
+      url: `https://efset.org`
+    }
+  ]
+
+
   return (
     <Box sx={background}>
       <Bubbles />
-      <Box sx={boxUpper({ minPort, minLand, larPort })}>
-        {[{
-            title: english ? `JavaScript Algorithms and Data Structures` : `Algoritmos Javascript y Estructura de Datos`,
-            media: fccCertJS,
-            href: `https://www.freecodecamp.org/certification/fcc4dacfa43-3a86-4f27-9ef6-4b74318b8b7a/javascript-algorithms-and-data-structures`,
-            url: `https://freecodecamp.org`
-          },
-          {
-            title: english ? `Full Stack Web Developer` : `Desarrollador Web Full Stack`,
-            media: henry,
-            href: `https://certificates.soyhenry.com/cert?id=19eebce3-e6a8-4e6f-ac26-7e1b28852f54`,
-            url: `https://soyhenry.com`
-          },
-          {
-            title: english ? `English B2 (Upper Intermediate)` : `Inglés B2 (Intermedio Superior)`,
-            media: efSet,
-            href: `https://www.efset.org/cert/T92ez2`,
-            url: `https://efset.org`
-          }].map((e) => {
+      {/* <Box sx={boxUpper({ minPort, minLand, larPort })}>
+        {array.map((e) => {
             return (
               <Box key={e.title} sx={card({ minPort, minLand, larPort })}>
                 <Typography sx={title({ minPort, minLand, larPort })}>{e.title}</Typography>
@@ -81,7 +94,7 @@ function Certifications() {
           src={name}
           alt="image"
         />
-      </Dialog>
+      </Dialog> */}
 
     </Box>
   )

@@ -6,8 +6,8 @@ import {
 const background = () => {
   return {
     ...flex, ...column, ...aic, ...jcc,
-    height: '93vh',
-    width: '97vw',
+    width: 'calc(100vw - 12px)',
+    height: 'calc(100vh - 12px)',
     background: 'none',
     overflow: 'hidden'
   }
