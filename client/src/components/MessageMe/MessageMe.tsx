@@ -21,8 +21,8 @@ function MessageMe() {
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const MedPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const MedLand = useSelector((state: {medLand:boolean}) => state.medLand)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
@@ -155,11 +155,11 @@ function MessageMe() {
 
   return (
     <Box sx={background}>
-      <Box sx={formContainer({ minPort, minLand, staticRefWidth })}>
+      <Box sx={formContainer({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}>
         <Button
           variant="contained"
           onClick={() => clearBoth()}
-          sx={clearButton({ minPort, minLand, location:location.pathname })}
+          sx={clearButton({ minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname })}
         >
           { english ? 'CLEAR' : 'LIMPIAR' }
         </Button>
@@ -168,7 +168,7 @@ function MessageMe() {
           label={english ? "Your name here" : "Tu nombre aquí"}
           multiline
           maxRows={4}
-          size="small"
+          size={minPort || minLand ? "small" : "small"}
           value={name}
         /*   inputProps={{
             style: {
@@ -192,10 +192,10 @@ function MessageMe() {
           multiline
           rows={10}
           value={text}
-          size="small"
+          size={minPort || minLand ? "small" : "small"}
           inputProps={{
             style: {
-              height: minPort ? '37vh' : minLand ? '30vh' : '32vh'
+              height: minPort ? '37vh' : minLand ? '30vh' : medPort ? '32vh' : medLand ? '43vh' : '32vh'
           }}}
           InputLabelProps={{
             style: {
@@ -213,7 +213,7 @@ function MessageMe() {
           disabled={sentButtonDisabled}
           variant="contained"
           onClick={(e) => handleSubmit(e)}
-          sx={sendMessageButton({ minPort, minLand })}
+          sx={sendMessageButton({ minPort, minLand, medPort, medLand, larPort, larLand })}
         >
           { english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
         </Button>
