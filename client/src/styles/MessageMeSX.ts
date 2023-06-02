@@ -4,6 +4,18 @@ import {
   jsc, jcse, jcc
 } from './CommonsSX';
 
+const background = () => {
+  return {
+    background: 'red',
+    display: 'flex',
+    width: 'calc(100vw - 12px)',
+    height: 'calc(100vh - 12px)',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+}
+
 interface formContainerI {
   staticRefWidth: number,
   minPort: boolean,
@@ -12,17 +24,20 @@ interface formContainerI {
 
 const formContainer = ({ minPort, minLand, staticRefWidth }: formContainerI) => {
   return {
-    ...flex, ...column, ...asc, ...jcc,
-    color: 'white',
-    borderRadius: `${staticRefWidth * 1}px`,
-    backgroundColor: '#5f9ea0',
+    ...flex, ...column,
+    justifyContent: 'space-evenly',
+    alignContent: 'space-evenly',
+    top: minLand ? '-4vh' : '0vh',
+    position: 'relative',
+    //color: 'white',
+    borderRadius: `4px`,
+    background: '#5f9ea0',
     opacity: '0.95',
     width: minPort ? '85vw' : minLand ? '70vw' : '50vw',
-    height: '70vh'
+    height: minPort ? '65vh' : minLand ? '76vh' : '76vh',
+    flexFlow: minPort ? 'none' : minLand ? 'wrap' : 'none'
   }
 }
-
-
 
 interface nameBoxI {
   staticRefWidth: number,
@@ -37,9 +52,10 @@ const nameBox = ({ minPort, minLand, staticRefWidth }: nameBoxI) => {
     backgroundColor: 'white',
     opacity: '0.90',
     width: minPort ? '75vw' : minLand ? '60vw' : '47vw',
-    marginBottom: minLand ? 'none' : '2vh',
-    borderRadius: `${staticRefWidth * 0.3}px`,
-    height: minPort ? '50px' : minLand ? '13vh' : '60px'
+    //marginBottom: minLand ? 'none' : '2vh',
+    borderRadius: `4px`,
+    //height: minPort ? '50px' : minLand ? '10vh !important' : '60px',
+    //minHeight: minPort ? '50px' : minLand ? '10vh !important' : '60px'
   }
 }
 
@@ -53,13 +69,13 @@ const messageBox = ({ minPort, minLand, staticRefWidth }: messageBoxI) => {
   return {
     ...flex, ...column, ...asc,
     color: 'white',
-    backgroundColor: 'white',
+    background: 'white',
     opacity: '0.90',
     width: minPort ? '75vw' : minLand ? '60vw' : '47vw',
-    marginTop: minLand ? '3vh' : 'none',
-    marginBottom: '2vh',
-    borderRadius: `${staticRefWidth * 0.3}px`,
-    height: minLand ? '40vh' : 'none'
+    //marginTop: minLand ? '3vh' : 'none',
+    //marginBottom: '2vh',
+    borderRadius: `4px`,
+    //height: minLand ? '40vh' : 'none'
   }
 }
 
@@ -71,21 +87,18 @@ interface clearButtonI {
 
 const clearButton = ({ minPort, minLand, location }: clearButtonI) => { // clearButton
   return {
-    ...flex, ...column,
-    position: minLand && location === '/portfolio/MessageMe' ? 'absolute' : 'none',
+    ...flex,
     color: 'white',
-    alignSelf: 'flex-end',
-    fontSize: minPort ? '5.2vw' : '2vw',
-    width: minPort ? '30vw' : minLand ? '24vw' : '10vw',
     backgroundColor: 'gray',
+    alignSelf: minPort ? 'flex-end' : 'none',
+    marginRight: minPort ? '5vw' : 'none',
+    position: 'relative',
     ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
-    /* mixBlendMode: 'difference', */
-
-    marginRight: minPort ? '5vw' : '1.5vw',
-    marginBottom: '2vh',
-    height: minLand ? '7vh' : 'none',
-    bottom: minLand ? '14vh' : 'none',
-    left: minLand ? '33vw' : 'none'
+    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : '2vw',
+    width: minPort ? '25vw' : minLand ? '19vw' : '10vw',
+    height: minPort ? '3.6vh' : minLand ? '8vh' : 'none',
+    order: minLand ? 1 : 0,
+    //justifyContent: 'center'
   }
 }
 
@@ -96,19 +109,20 @@ interface sendMessageButtonI {
 
 const sendMessageButton = ({ minPort, minLand }: sendMessageButtonI) => { // sendMessageButton
   return {
-    ...flex, ...asc,
+    ...flex,
+    alignSelf: minPort ? 'center' : 'none',
     color: 'white',
     backgroundColor: 'gray',
+    position: 'relative',
     ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
-    /* mixBlendMode: 'difference', */
-    fontSize: minPort ? '5.2vw' : '2vw',
-    width: minPort ? '58vw' : minLand ? '24vw' : '10vw',
-    height: minLand ? '7vh' : 'none',
-    left: minLand ? '9vw' : 'none'
+    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : '2vw',
+    width: minPort ? '45vw' : minLand ? '19vw' : '10vw',
+    height: minPort ? '3.6vh' : minLand ? '8vh' : 'none',
+    order: minLand ? 2 : 0,
   }
 }
 
 export {
-  nameBox, formContainer,
+  nameBox, formContainer, background,
   clearButton, sendMessageButton, messageBox
 }

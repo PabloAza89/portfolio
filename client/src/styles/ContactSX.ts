@@ -98,7 +98,7 @@ const separatorY = ({ minPort, minLand, medPort, medLand }: separatorYI) => {
     display: minPort ? 'none' : 'flex',
     background: 'white',
     margin: minLand || medPort || medLand ? '0px 4vw' : '0px 40px', // : larPort || larLand
-    width: minLand ? '10px' : '15px',
+    width: minLand ? '7px' : '15px',
     height: minLand ? '180px' : medPort || medLand ? '250px' : '400px',
     animation: 'separatorYContact 1s',
     '@keyframes separatorYContact': {
@@ -127,7 +127,7 @@ const separatorX = ({ minPort }: separatorXI) => {
     display: minPort ? 'flex' : 'none',
     background: 'white',
     width: '170px',
-    height: '10px',
+    height: '7px',
     margin: '4vw 0px', // only MinPort
     animation: 'separatorXContact 1s',
     '@keyframes separatorXContact': {

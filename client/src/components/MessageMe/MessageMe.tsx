@@ -3,7 +3,7 @@ import { Box, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from "react-router-dom";
 import {
-  /* form */nameBox, formContainer,
+  nameBox, formContainer, background,
   clearButton, sendMessageButton, messageBox
 } from '../../styles/MessageMeSX';
 import BackButton from '../BackButton/BackButton';
@@ -154,66 +154,70 @@ function MessageMe() {
   }
 
   return (
-    <Box sx={formContainer({ minPort, minLand, staticRefWidth })}>
-      <Button
-        variant="contained"
-        onClick={() => clearBoth()}
-        sx={clearButton({ minPort, minLand, location:location.pathname })}
-      >
-        { english ? 'CLEAR' : 'LIMPIAR' }
-      </Button>
-      <TextField
-        id="outlined-multiline-flexible"
-        label={english ? "Your name here" : "Tu nombre aquí"}
-        multiline
-        maxRows={4}
-        value={name}
-        inputProps={{
-          style: {
-            height: minPort ? '19px' : '29px'
-        }}}
-        InputLabelProps={{
-          style: {
-            background: 'white',
-            paddingTop: '0.1vw',
-            width: (minPort || minLand) && english ? `130px` : `130px`,
-            textAlign: 'center',
-            'borderRadius': `${staticRefWidth * 0.2}px`,
-            left: (minPort || minLand) && english ? '-5px' : (minPort || minLand) && !english ? '-5px' : '-5px'
-        }}}
-        sx={nameBox({ minPort, minLand, staticRefWidth })}
-        onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
-      />
-      <TextField
-        id="outlined-multiline-static"
-        label={ english ? "Your message here" : "Tu mensaje aquí"}
-        multiline
-        rows={10}
-        value={text}
-        inputProps={{
-          style: {
-            height: '32vh'
-        }}}
-        InputLabelProps={{
-          style: {
-            background: 'white',
-            paddingTop: '0.1vw',
-            width: (minPort || minLand) && english ? `155px` : (minPort || minLand) && !english ? `130px` : larLand && english ? '155px' : larLand && !english ? '140px' : '155px',
-            textAlign: 'center',
-            'borderRadius': `${staticRefWidth * 0.2}px`,
-            left: (minPort || minLand) && english ? '-6px' : (minPort || minLand) && !english ? '-5px' : larLand && english ? '-6px' : larLand && !english ? '-6px' : '-3px'
-        }}}
-        onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
-        sx={messageBox({ minPort, minLand, staticRefWidth })}
-      />
-      <Button
-        disabled={sentButtonDisabled}
-        variant="contained"
-        onClick={(e) => handleSubmit(e)}
-        sx={sendMessageButton({ minPort, minLand })}
-      >
-        { english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
-      </Button>
+    <Box sx={background}>
+      <Box sx={formContainer({ minPort, minLand, staticRefWidth })}>
+        <Button
+          variant="contained"
+          onClick={() => clearBoth()}
+          sx={clearButton({ minPort, minLand, location:location.pathname })}
+        >
+          { english ? 'CLEAR' : 'LIMPIAR' }
+        </Button>
+        <TextField
+          id="outlined-multiline-flexible"
+          label={english ? "Your name here" : "Tu nombre aquí"}
+          multiline
+          maxRows={4}
+          size="small"
+          value={name}
+        /*   inputProps={{
+            style: {
+              height: minPort ? '37vh' : minLand ? '8vh' : '32vh'
+          }}} */
+          InputLabelProps={{
+            style: {
+              background: 'white',
+              paddingTop: '0.1vw',
+              width: (minPort || minLand) && english ? `130px` : `130px`,
+              textAlign: 'center',
+              'borderRadius': `${staticRefWidth * 0.2}px`,
+              left: (minPort || minLand) && english ? '-5px' : (minPort || minLand) && !english ? '-5px' : '-5px'
+          }}}
+          sx={nameBox({ minPort, minLand, staticRefWidth })}
+          onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
+        />
+        <TextField
+          id="outlined-multiline-static"
+          label={ english ? "Your message here" : "Tu mensaje aquí"}
+          multiline
+          rows={10}
+          value={text}
+          size="small"
+          inputProps={{
+            style: {
+              height: minPort ? '37vh' : minLand ? '30vh' : '32vh'
+          }}}
+          InputLabelProps={{
+            style: {
+              background: 'white',
+              paddingTop: '0.1vw',
+              width: (minPort || minLand) && english ? `155px` : (minPort || minLand) && !english ? `130px` : larLand && english ? '155px' : larLand && !english ? '140px' : '155px',
+              textAlign: 'center',
+              'borderRadius': `${staticRefWidth * 0.2}px`,
+              left: (minPort || minLand) && english ? '-6px' : (minPort || minLand) && !english ? '-5px' : larLand && english ? '-6px' : larLand && !english ? '-6px' : '-3px'
+          }}}
+          onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
+          sx={messageBox({ minPort, minLand, staticRefWidth })}
+        />
+        <Button
+          disabled={sentButtonDisabled}
+          variant="contained"
+          onClick={(e) => handleSubmit(e)}
+          sx={sendMessageButton({ minPort, minLand })}
+        >
+          { english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
+        </Button>
+      </Box>
     </Box>
   )
 }
