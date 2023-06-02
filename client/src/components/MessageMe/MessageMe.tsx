@@ -3,7 +3,7 @@ import { Box, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from "react-router-dom";
 import {
-  nameBox, formContainer, background,
+  nameBox, formContainer, background, topBottomHelper,
   clearButton, sendMessageButton, messageBox
 } from '../../styles/MessageMeSX';
 import BackButton from '../BackButton/BackButton';
@@ -154,7 +154,8 @@ function MessageMe() {
   }
 
   return (
-    <Box sx={background}>
+    <Box sx={background({ larPort, larLand })}>
+      <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       <Box sx={formContainer({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}>
         <Button
           variant="contained"
@@ -195,6 +196,7 @@ function MessageMe() {
           size={minPort || minLand ? "small" : "small"}
           inputProps={{
             style: {
+              minHeight: minPort ? '37vh' : minLand ? '30vh' : medPort ? '32vh' : medLand ? '43vh' : '213px',
               height: minPort ? '37vh' : minLand ? '30vh' : medPort ? '32vh' : medLand ? '43vh' : '32vh'
           }}}
           InputLabelProps={{
@@ -218,6 +220,7 @@ function MessageMe() {
           { english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
         </Button>
       </Box>
+      <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     </Box>
   )
 }

@@ -23,7 +23,7 @@ const innerMainContainer = () => {
 
 const innerTopBottomHelper = () => {
   return {
-    display: 'flex', 
+    display: 'flex',
     //background: 'yellow',
     minHeight: '50px'
   }
