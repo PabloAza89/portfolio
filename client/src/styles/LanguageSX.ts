@@ -37,7 +37,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
       (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.629 ? '0' :
       larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? '0' :
       larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? '0' :
-      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.500 ? '0' :
+      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.680 ? '0' :
       '1',
     'active': {
       'opacity': '0',

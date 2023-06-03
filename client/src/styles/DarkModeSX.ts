@@ -19,12 +19,10 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxS
     minWidth: '0vh !important',
     width: minPort || minLand ? `30px !important` : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `35px !important`  : `35px !important` ,
     height: minPort || minLand ? `30px !important` : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `35px !important`  : `35px !important` ,
-    //top: minPort ? '4vw' : minLand ? '4vh' : larPort || larLand ? 'none' : '33px',
     right: minPort ? '4vw' : minLand ? '5px' : medPort || medLand ? '20px' : '20px',
     bottom: minLand ? '5px' : '20px',
     justifyContent: 'center',
     alignItems: 'center',
-    //transition: 'opacity .1s ease-in-out',
     opacity:
     larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? '0' :
     larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
@@ -33,7 +31,7 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxS
     larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? '0' :
     larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? '0' :
     (larPort || larLand) && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? '0' :
-    (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.500 ? '0' :
+    (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.680 ? '0' :
       '1',
     'active': {
       'opacity': '0',

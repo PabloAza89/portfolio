@@ -6,7 +6,7 @@ import '../../styles/MessageMeSX.css';
 import {
   nameBox, formContainer, background, topBottomHelper,
   clearButton, sendMessageButton, messageBox, mainContainer,
-  leftRightHelper
+  leftRightHelper, labelStyle
 } from '../../styles/MessageMeSX';
 import BackButton from '../BackButton/BackButton';
 import TextField from '@mui/material/TextField';
@@ -170,90 +170,30 @@ function MessageMe() {
           >
             { english ? 'CLEAR' : 'LIMPIAR' }
           </Button>
-          {/* <Box sx={{ height: '10%', minHeight: '10%', background: 'darkred', justifyContent: 'center', display: 'flex' }}> */}
-            <TextField
-              id="outlined-multiline-flexible"
-              className="textField"
-              //margin="dense"
-              label={english ? "Your name here" : "Tu nombre aquí"}
-              multiline
-              rows={1}
-              /* size={minPort || minLand ? "small" : "small"} */
-              size="small"
-              value={name}
-              //margin="dense"
-              // inputProps={ // Title Box Style (only height, minHeight)
-              //   {}
-              // }
-              inputProps={{ // only height
-                style: {
-                  //height: minPort ? '24px' : '24px',
-                  //minHeight: minPort ? '6vh' : '40vh',
-                  //height: minPort ? '25px' : '24px',
-                  //height: minPort ? 'calc(5vh - 17px)' : 'calc(10vh - 17px)',
-                  //height: minPort ? 'calc(5vh - 17px)' : 'calc(10vh - 17px)',
-                  //height: '16px', // 17 18 19 20 21 // 16 ok
-                  
-                  
-                }
-              }}
-              InputLabelProps={{ // Title Label Style
-                style: {
-                  background: 'white',
-                  //paddingTop: '0.1vw',
-                  width: (minPort || minLand) && english ? `130px` : `130px`,
-                  textAlign: 'center',
-                  borderRadius: `4px`,
-                  /* left: (minPort || minLand) && english ? '-5px' : (minPort || minLand) && !english ? '-5px' : '-5px' */
-                  left: '-5px'
-              }}}
-              sx={nameBox({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}
-              onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
-            />
-          {/* </Box>
-          <Box sx={{ height: '60%', background: 'red', justifyContent: 'center', display: 'flex' }}> */}
-            <TextField
-              /* color="success" */
-              /* style={{background: 'yellow'}} */
-              id="outlined-multiline-static"
-              //margin="dense"
-              className="textField"
-              label={ english ? "Your message here" : "Tu mensaje aquí"}
-              multiline
-              /* rows={ minPort ? 14 : 1 } */
-              //rows={ minPort ? 14 : 16}
-              rows={ minPort ? height / 55 : minLand ? height / 74 : medPort ? height / 75 : medLand ? height / 60 : 3 }
-              //maxRows={3}
-              //color={"warning"} /* focused */
-              value={text}
-              /* size={minPort || minLand ? "small" : "small"} */
-              size="small"
-              inputProps={{ // only height
-                style: {
-                  
-                  //height: 'calc(20vh - 17px)',
-                  
-                }
-              }}
-              
-              //style={{border: '1px solid #001d3d',}}
-
-              InputLabelProps={{ // Message Label Style
-                style: {
-                  background: 'white',
-                  
-                  //border: '1px solid #001d3d',
-                  //paddingTop: '0.1vw',
-                  width: (minPort || minLand) && english ? `155px` : (minPort || minLand) && !english ? `130px` : larLand && english ? '155px' : larLand && !english ? '140px' : '155px',
-                  textAlign: 'center',
-                  borderRadius: `4px`,
-                  left: (minPort || minLand) && english ? '-6px' : (minPort || minLand) && !english ? '-5px' : larLand && english ? '-6px' : larLand && !english ? '-6px' : '-3px'
-              }}}
-              onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
-              sx={messageBox({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}
-              //sx={{ background: "#FFFFFF", input:{ color: "red", } }}
-            />
-          {/* </Box> */}
+          <TextField
+            id="outlined-multiline-flexible"
+            className="textField"
+            label={english ? "Your name here" : "Tu nombre aquí"}
+            multiline
+            rows={1}
+            size="small"
+            value={name}
+            InputLabelProps={{ style: labelStyle() }}
+            sx={nameBox({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}
+            onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
+          />
+          <TextField
+            id="outlined-multiline-static"
+            className="textField"
+            label={ english ? "Your message here" : "Tu mensaje aquí"}
+            multiline
+            rows={ minPort ? height / 55 : minLand ? height / 74 : medPort ? height / 75 : medLand ? height / 60 : 15 }
+            value={text}
+            size="small"
+            InputLabelProps={{ style: labelStyle() }}
+            onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
+            sx={messageBox({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}
+          />
           <Button
             disabled={sentButtonDisabled}
             variant="contained"
