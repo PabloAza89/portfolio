@@ -112,12 +112,14 @@ const formContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand, s
 interface nameBoxI {
   staticRefWidth: number,
   minPort: boolean,
-  minLand: boolean, 
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
   larPort: boolean,
   larLand: boolean
 }
 
-const nameBox = ({ minPort, minLand, larPort, larLand, staticRefWidth }: nameBoxI) => {
+const nameBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: nameBoxI) => {
   return {
     /* ...flex, */ ...asc,
     display: 'flex',
@@ -126,12 +128,7 @@ const nameBox = ({ minPort, minLand, larPort, larLand, staticRefWidth }: nameBox
     opacity: '0.90',
     borderRadius: `4px`,
     //minWidth: larPort || larLand ? '350px' : 'none',
-    width: minPort ? '75vw' : minLand ? '64vw' : '47vw',
-    //minHeight: minPort ? '6vh' : '40vh',
-    //height: minPort ? '6vh' : '40vh',
-    //height: minPort ? '41px' : '41px',
-    //height: minPort ? '5vh' : '10vh',
-    //height: '24px',
+    width: minPort ? '75vw' : minLand ? '64vw' : medPort ? '52vw' : '47vw',
 
   }
 }
@@ -149,28 +146,12 @@ interface messageBoxI {
 const messageBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: messageBoxI) => {
   return {
     ...asc,
-    /* display: 'block', */
     display: 'flex',
     position: 'relative',
     background: 'yellow',
     opacity: '0.90',
     borderRadius: '4px',
-    width: minPort ? '75vw' : minLand ? '64vw' : '47vw',
-    //backgroundColor: '#ffd60a',
-    //border: '3px solid #001d3d',
-    //height: minPort ? '82px' : '70px',
-    //height: minPort ? '42px' : '42px',
-    //height: minPort ? '20vh' : '20vh',
-    //height: '20vh',
-    //border: '1px solid gray',
-    //border: '-3px solid rgba(0, 0, 0, 0.151)',
-    /* border: '2px solid rgba(0, 0, 0, 0.205)' */
-    //outline: '2px solid rgba(0, 0, 0, 0.205)'
-    
-    
-
-    
-    
+    width: minPort ? '75vw' : minLand ? '64vw' : medPort ? '52vw' : '47vw',
   }
 }
 
@@ -184,7 +165,7 @@ interface clearButtonI {
   location: string
 }
 
-const clearButton = ({ minPort, minLand, medPort, medLand, larPort, larLand, location }: clearButtonI) => { // clearButton (only width)
+const clearButton = ({ minPort, minLand, medPort, medLand, larPort, larLand, location }: clearButtonI) => { // clearButton
   return {
     //...flex,
     display: 'flex',
@@ -197,9 +178,9 @@ const clearButton = ({ minPort, minLand, medPort, medLand, larPort, larLand, loc
     marginRight: minPort ? '5vw' : medPort ? '6.5vw' : larPort || larLand ? '3vw' : 'none',
     
     ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
-    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.5vw' : '16px', // fontSize
+    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.32vw' : '16px', // fontSize
     width: minPort ? '20vw' : minLand ? '11vw' : medPort ? '12vw' : medLand ? '9vw' : '90px', // width
-    height: minPort ? '5.8vw' : minLand ? '3.1vw' : medPort ? '22vw' : medLand ? '17vw' : '160px', // height
+    height: minPort ? '5.8vw' : minLand ? '3.1vw' : medPort ? '3.9vw' : medLand ? '2.8vw' : '160px', // height
     
     order: minLand || medLand ? 1 : 0,
   }
@@ -214,7 +195,7 @@ interface sendMessageButtonI {
   larLand: boolean
 }
 
-const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLand,  }: sendMessageButtonI) => { // sendMessageButton (only width)
+const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLand,  }: sendMessageButtonI) => { // sendMessageButton
   return {
     //...flex,
     display: 'flex',
@@ -226,9 +207,9 @@ const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLan
     background: 'gray',
     //position: 'relative',
     ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
-    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.5vw' : '16px', // fontSize
+    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.32vw' : '16px', // fontSize
     width: minPort ? '40vw' : minLand ? '19vw' : medPort ? '22vw' : medLand ? '17vw' : '160px', // width
-    height: minPort ? '5.8vw' : minLand ? '3.1vw' : medPort ? '22vw' : medLand ? '17vw' : '160px', // height
+    height: minPort ? '5.8vw' : minLand ? '3.1vw' : medPort ? '3.9vw' : medLand ? '2.8vw' : '160px', // height
     
     order: minLand || medLand ? 2 : 0,
   }
