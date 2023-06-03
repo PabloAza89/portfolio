@@ -209,8 +209,7 @@ const textNoDeco = () => {
   }
 }
 
-
 export {
   mainContainer, typographyBox, text, topBottomHelper,
-  avatar, separatorY, separatorX, textNoDeco, background
+  avatar, separatorY, separatorX, textNoDeco, background,
 }

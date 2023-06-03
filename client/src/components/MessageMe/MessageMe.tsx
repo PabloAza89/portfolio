@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Box, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from "react-router-dom";
-import '../../styles/MessageMeSX.css';
+//import '../../styles/MessageMeSX.css';
 import {
   nameBox, formContainer, background, topBottomHelper,
   clearButton, sendMessageButton, messageBox, mainContainer,

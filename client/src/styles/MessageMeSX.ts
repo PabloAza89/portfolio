@@ -130,7 +130,9 @@ const nameBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticR
     borderRadius: `4px`,
     minWidth: minPort ? '75vw' : minLand ? '64vw' : medPort ? '52vw' : medLand ? '47vw' : '340px',
     width: minPort ? '75vw' : minLand ? '64vw' : medPort ? '52vw' : medLand ? '47vw' : '47vw',
-
+    fieldset: {
+      border: '2px solid rgb(190, 190, 174)'
+    }
   }
 }
 
@@ -155,6 +157,9 @@ const messageBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, stat
     borderRadius: '4px',
     minWidth: minPort ? '75vw' : minLand ? '64vw' : medPort ? '52vw' : medLand ? '47vw' : '340px',
     width: minPort ? '75vw' : minLand ? '64vw' : medPort ? '52vw' : medLand ? '47vw' : '47vw',
+    fieldset: {
+      border: '2px solid rgb(190, 190, 174)'
+    }
   }
 }
 
@@ -215,7 +220,7 @@ const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLan
 const labelStyle = () => {
   return {
     background: 'white',
-    padding: '0px 2.5%',
+    padding: '0px 8px',
     left: '-5px',
     borderRadius: `4px`,
   }

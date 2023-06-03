@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import {
   mainContainer, typographyBox, text, avatar,
   separatorY, separatorX, textNoDeco, topBottomHelper,
-  background
+  background,
 } from '../../styles/ContactSX';
 import '../../styles/ContactSX.css';
 import { blue, brown, lime, red, grey } from '@mui/material/colors';
