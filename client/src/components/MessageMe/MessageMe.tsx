@@ -222,7 +222,7 @@ function MessageMe() {
               multiline
               /* rows={ minPort ? 14 : 1 } */
               //rows={ minPort ? 14 : 16}
-              rows={ minPort ? height / 60 : 3 }
+              rows={ minPort ? height / 55 : minLand ? height / 74 : 3 }
               //maxRows={3}
               //color={"warning"} /* focused */
               value={text}

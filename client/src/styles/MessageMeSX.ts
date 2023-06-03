@@ -126,7 +126,7 @@ const nameBox = ({ minPort, minLand, larPort, larLand, staticRefWidth }: nameBox
     opacity: '0.90',
     borderRadius: `4px`,
     //minWidth: larPort || larLand ? '350px' : 'none',
-    width: minPort ? '75vw' : minLand ? '60vw' : '47vw',
+    width: minPort ? '75vw' : minLand ? '64vw' : '47vw',
     //minHeight: minPort ? '6vh' : '40vh',
     //height: minPort ? '6vh' : '40vh',
     //height: minPort ? '41px' : '41px',
@@ -155,7 +155,7 @@ const messageBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, stat
     background: 'yellow',
     opacity: '0.90',
     borderRadius: '4px',
-    width: minPort ? '75vw' : minLand ? '60vw' : '47vw',
+    width: minPort ? '75vw' : minLand ? '64vw' : '47vw',
     //backgroundColor: '#ffd60a',
     //border: '3px solid #001d3d',
     //height: minPort ? '82px' : '70px',
@@ -192,12 +192,14 @@ const clearButton = ({ minPort, minLand, medPort, medLand, larPort, larLand, loc
     color: 'white',
     background: 'gray',
     alignSelf: 'flex-end',
-    //padding: '0px !important',
+    padding: '0px !important',
+    lineHeight: 'unset',
     marginRight: minPort ? '5vw' : medPort ? '6.5vw' : larPort || larLand ? '3vw' : 'none',
     
     ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
-    //fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.5vw' : '16px', // fontSize
-    width: minPort ? '26vw' : minLand ? '11vw' : medPort ? '12vw' : medLand ? '9vw' : '90px', // width
+    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.5vw' : '16px', // fontSize
+    width: minPort ? '20vw' : minLand ? '11vw' : medPort ? '12vw' : medLand ? '9vw' : '90px', // width
+    height: minPort ? '5.8vw' : minLand ? '3.1vw' : medPort ? '22vw' : medLand ? '17vw' : '160px', // height
     
     order: minLand || medLand ? 1 : 0,
   }
@@ -218,13 +220,15 @@ const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLan
     display: 'flex',
     position: 'relative',
     alignSelf: 'center',
-    //padding: '0px !important',
+    padding: '0px !important',
+    lineHeight: 'unset',
     color: 'white',
     background: 'gray',
     //position: 'relative',
     ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
-    //fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.5vw' : '16px', // fontSize
-    width: minPort ? '49vw' : minLand ? '19vw' : medPort ? '22vw' : medLand ? '17vw' : '160px', // width
+    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.5vw' : '16px', // fontSize
+    width: minPort ? '40vw' : minLand ? '19vw' : medPort ? '22vw' : medLand ? '17vw' : '160px', // width
+    height: minPort ? '5.8vw' : minLand ? '3.1vw' : medPort ? '22vw' : medLand ? '17vw' : '160px', // height
     
     order: minLand || medLand ? 2 : 0,
   }
