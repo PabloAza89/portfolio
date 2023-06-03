@@ -23,6 +23,45 @@ const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand 
   }
 }
 
+interface mainContainerI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
+}
+
+const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainContainerI) => {
+  return {
+    background: 'darkred',
+    display: larPort || larLand ? 'flex' : 'contents',
+    minHeight: '400px',
+    height: '65vh',
+    width: '100%',
+    justifyContent: larPort || larLand ? 'space-between' : 'center',
+  }
+}
+
+interface leftRightHelperI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
+  return {
+    display: larPort || larLand ? 'flex' : 'none',
+    background: 'darkblue',
+    minHeight: '400px',
+    height: '65vh',
+    minWidth: '112px'
+  }
+}
+
 interface backgroundI {
   larPort: boolean,
   larLand: boolean
@@ -30,7 +69,7 @@ interface backgroundI {
 
 const background = ({ larPort, larLand }: backgroundI) => {
   return {
-    background: 'red',
+    //background: 'red',
     display: 'flex',
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)',
@@ -54,16 +93,18 @@ const formContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand, s
   return {
     ...flex, ...column,
     justifyContent: 'space-evenly',
+    //justifyContent: 'center',
     alignContent: 'space-evenly',
-    top: minLand || medLand ? '-4vh' : '0vh',
+    top: minLand || medLand ? '-4vh' : '0vh', //  DO NOT USE !
     position: 'relative',
     borderRadius: `4px`,
     background: '#5f9ea0',
     opacity: '0.95',
+    minWidth: minPort ? '85vw' : minLand ? '70vw' : medPort ? '60vw' : medLand ? '53vw' : '400px', // minWidth
     width: minPort ? '85vw' : minLand ? '70vw' : medPort ? '60vw' : medLand ? '53vw' : '53vw', // width
-    minHeight: minPort ? '65vh' : minLand ? '76vh' : medPort ? '55vh' : '400px', // minHeight
-    height: minPort ? '65vh' : minLand ? '76vh' : medPort ? '55vh' : '65vh', // height
-    maxHeight: larPort || larLand ? '950px' : 'calc(100vh - 12px)', // maxHeight
+    //minHeight: minPort ? '65vh' : minLand ? '76vh' : medPort ? '55vh' : '400px', // minHeight
+    height: minPort ? '70vh' : minLand ? '76vh' : medPort ? '55vh' : '65vh', // height
+    //maxHeight: larPort || larLand ? '950px' : 'calc(100vh - 12px)', // maxHeight
     flexFlow: minLand || medLand ? 'wrap' : 'none'
   }
 }
@@ -71,34 +112,65 @@ const formContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand, s
 interface nameBoxI {
   staticRefWidth: number,
   minPort: boolean,
-  minLand: boolean
+  minLand: boolean, 
+  larPort: boolean,
+  larLand: boolean
 }
 
-const nameBox = ({ minPort, minLand, staticRefWidth }: nameBoxI) => {
+const nameBox = ({ minPort, minLand, larPort, larLand, staticRefWidth }: nameBoxI) => {
   return {
-    ...flex, ...column, ...asc,
-    color: 'white',
-    backgroundColor: 'white',
+    /* ...flex, */ ...asc,
+    display: 'flex',
+    position: 'relative',
+    background: 'yellow',
     opacity: '0.90',
-    width: minPort ? '75vw' : minLand ? '60vw' : '47vw',
     borderRadius: `4px`,
+    //minWidth: larPort || larLand ? '350px' : 'none',
+    width: minPort ? '75vw' : minLand ? '60vw' : '47vw',
+    //minHeight: minPort ? '6vh' : '40vh',
+    //height: minPort ? '6vh' : '40vh',
+    //height: minPort ? '41px' : '41px',
+    //height: minPort ? '5vh' : '10vh',
+    //height: '24px',
+
   }
 }
 
 interface messageBoxI {
   minPort: boolean,
   minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
   staticRefWidth: number
 }
 
-const messageBox = ({ minPort, minLand, staticRefWidth }: messageBoxI) => {
+const messageBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: messageBoxI) => {
   return {
-    ...flex, ...column, ...asc,
-    color: 'white',
-    background: 'white',
+    ...asc,
+    /* display: 'block', */
+    display: 'flex',
+    position: 'relative',
+    background: 'yellow',
     opacity: '0.90',
+    borderRadius: '4px',
     width: minPort ? '75vw' : minLand ? '60vw' : '47vw',
-    borderRadius: `4px`,
+    //backgroundColor: '#ffd60a',
+    //border: '3px solid #001d3d',
+    //height: minPort ? '82px' : '70px',
+    //height: minPort ? '42px' : '42px',
+    //height: minPort ? '20vh' : '20vh',
+    //height: '20vh',
+    //border: '1px solid gray',
+    //border: '-3px solid rgba(0, 0, 0, 0.151)',
+    /* border: '2px solid rgba(0, 0, 0, 0.205)' */
+    //outline: '2px solid rgba(0, 0, 0, 0.205)'
+    
+    
+
+    
+    
   }
 }
 
@@ -112,18 +184,21 @@ interface clearButtonI {
   location: string
 }
 
-const clearButton = ({ minPort, minLand, medPort, medLand, larPort, larLand, location }: clearButtonI) => { // clearButton
+const clearButton = ({ minPort, minLand, medPort, medLand, larPort, larLand, location }: clearButtonI) => { // clearButton (only width)
   return {
-    ...flex,
-    color: 'white',
-    backgroundColor: 'gray',
-    alignSelf: 'flex-end',
-    marginRight: minPort ? '5vw' : medPort ? '6.5vw' : larPort || larLand ? '3vw' : 'none',
+    //...flex,
+    display: 'flex',
     position: 'relative',
+    color: 'white',
+    background: 'gray',
+    alignSelf: 'flex-end',
+    //padding: '0px !important',
+    marginRight: minPort ? '5vw' : medPort ? '6.5vw' : larPort || larLand ? '3vw' : 'none',
+    
     ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
-    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.5vw' : '18px', // fontSize
-    width: minPort ? '23vw' : minLand ? '11vw' : medPort ? '12vw' : medLand ? '9vw' : '110px', // width
-    height: minPort ? '7vw' : minLand ? '3.5vw' : medPort ? '4.5vw' : medLand ? '3.2vw' : '35px',  // height
+    //fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.5vw' : '16px', // fontSize
+    width: minPort ? '26vw' : minLand ? '11vw' : medPort ? '12vw' : medLand ? '9vw' : '90px', // width
+    
     order: minLand || medLand ? 1 : 0,
   }
 }
@@ -137,22 +212,26 @@ interface sendMessageButtonI {
   larLand: boolean
 }
 
-const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLand,  }: sendMessageButtonI) => { // sendMessageButton
+const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLand,  }: sendMessageButtonI) => { // sendMessageButton (only width)
   return {
-    ...flex,
-    alignSelf: 'center',
-    color: 'white',
-    backgroundColor: 'gray',
+    //...flex,
+    display: 'flex',
     position: 'relative',
+    alignSelf: 'center',
+    //padding: '0px !important',
+    color: 'white',
+    background: 'gray',
+    //position: 'relative',
     ':hover': { backgroundColor: 'gray', webkitFilter: 'brightness(.95)', 'filter': 'brightness(.95)'},
-    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.5vw' : '18px', // fontSize
-    width: minPort ? '40vw' : minLand ? '19vw' : medPort ? '22vw' : medLand ? '17vw' : '220px', // width
-    height: minPort ? '7vw' : minLand ? '3.5vw' : medPort ? '4.5vw' : medLand ? '3.2vw' : '35px', // height
+    //fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.5vw' : '16px', // fontSize
+    width: minPort ? '49vw' : minLand ? '19vw' : medPort ? '22vw' : medLand ? '17vw' : '160px', // width
+    
     order: minLand || medLand ? 2 : 0,
   }
 }
 
 export {
   nameBox, formContainer, background, topBottomHelper,
-  clearButton, sendMessageButton, messageBox
+  clearButton, sendMessageButton, messageBox, mainContainer,
+  leftRightHelper
 }
