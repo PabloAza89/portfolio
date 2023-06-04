@@ -33,15 +33,61 @@ export const chartRow = () => {
     background: 'lightblue',
     display: 'flex',
     position: 'relative',
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'end',
     width: '50vw',
     height: '80vh',
   }
 }
 
-export const level = () => {
+// export const level = () => {
+//   return {
+//     background: 'burlywood',
+//     display: 'flex',
+//     flexDirection: 'row',
+//     position: 'relative',
+//     //justifyContent: 'end',
+//     width: '40px',
+//     height: '300px',
+//     marginLeft: '10px',
+//     marginRight: '10px',
+//   }
+// }
+
+// export const leftSide = () => {
+//   return {
+//     width: '10px',
+//     height: '300px',
+//     background: 
+//       `linear-gradient(45deg, red 6px, silver 6px, silver 212px, gray 212px)`
+//   }
+// }
+
+// export const centerSide = () => {
+//   return {
+//     width: '30px',
+//     height: '300px',
+//     background: 'linear-gradient(to bottom, gray 8px, dimgrey 8px)'
+//   }
+// }
+
+// export const rightSide = () => {
+//   return {
+//     width: '10px',
+//     height: '300px',
+//     background:
+//       `linear-gradient(45deg, transparent 212px, orange 0px),
+//       linear-gradient(180deg, gray 8px, dimgrey 0px)`,
+      
+//   }
+// }
+
+interface levelI {
+  percentage: number
+}
+
+export const level = ({ percentage }: levelI) => {
   return {
     background: 'burlywood',
     display: 'flex',
@@ -49,20 +95,22 @@ export const level = () => {
     position: 'relative',
     //justifyContent: 'end',
     width: '40px',
-    height: '300px',
+    height: `calc(${percentage}px * 2)`,
+    marginLeft: '10px',
+    marginRight: '10px',
   }
 }
 
-export const leftSide = () => {
+export const leftSide = ({ percentage }: levelI) => {
   return {
+    // 025 + 10.5 + 035.5
+    // 050 + 21.0 + 071.0
+    // 075 + 31.5 + 106.5
+    // 100 + 42.0 + 142.0
     width: '10px',
-    height: '300px',
+    height: `${percentage * 2}px`,
     background: 
-      `linear-gradient(45deg, red 3%, orange 3%, orange 97%, red 97%)`
-    // background: 
-    //   `linear-gradient(45deg, #0000 212px, #93429e 0px),
-    //   linear-gradient(to bottom, blue 20px, green 20px),
-    //   linear-gradient(45deg, #0000 20px, #93429e 0px)`
+      `linear-gradient(45deg, red 6px, silver 6px, silver ${percentage + (0.42 * percentage)}px, gray 0px)`
   }
 }
 
@@ -70,7 +118,7 @@ export const centerSide = () => {
   return {
     width: '30px',
     height: '300px',
-    background: 'linear-gradient(to bottom, blue 0px, blue 3%, green 3%)'
+    background: 'linear-gradient(to bottom, gray 8px, dimgrey 8px)'
   }
 }
 
@@ -79,8 +127,8 @@ export const rightSide = () => {
     width: '10px',
     height: '300px',
     background:
-      `linear-gradient(45deg, transparent 97%, orange 0px),
-      linear-gradient(180deg, red 3%, orange 0px)`,
+      `linear-gradient(45deg, transparent 212px, orange 0px),
+      linear-gradient(180deg, gray 8px, dimgrey 0px)`,
       
   }
 }
