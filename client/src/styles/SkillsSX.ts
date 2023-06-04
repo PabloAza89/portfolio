@@ -16,7 +16,7 @@ export const background = () => {
 
 export const mainContainer = () => {
   return {
-    background: 'gray',
+    background: 'lightgray',
     display: 'flex',
     position: 'relative',
     flexDirection: 'row',
@@ -24,64 +24,47 @@ export const mainContainer = () => {
     alignItems: 'center',
     //flexDirection: 'column',
     width: '70vw',
-    height: '50vh'
+    height: '60vh'
   }
 }
 
 export const chartRow = () => {
   return {
-    background: 'lightblue',
     display: 'flex',
     position: 'relative',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'end',
     width: '50vw',
-    height: '80vh',
+    height: '210px',
+    borderTop: '1px solid blueviolet',
+    /* borderBottom: '1px solid blueviolet', */
+    // background:
+    //   `linear-gradient(
+    //     to bottom,
+    //     transparent 0px, transparent 49px,
+    //     blueviolet 49px, blueviolet 50px,
+    //     transparent 50px, transparent 99px,
+    //     blueviolet 99px, blueviolet 100px,
+    //     transparent 100px, transparent 149px,
+    //     blueviolet 149px, blueviolet 150px,
+    //     transparent 150px, transparent 199px
+    //   )`
+    background:
+    `linear-gradient(
+      to bottom,
+      transparent 0px, transparent 49px,
+      blueviolet 49px, blueviolet 50px,
+      transparent 50px, transparent 99px,
+      blueviolet 99px, blueviolet 100px,
+      transparent 100px, transparent 149px,
+      blueviolet 149px, blueviolet 150px,
+      transparent 150px, transparent 199px,
+      blueviolet 199px, blueviolet 200px,
+      transparent 200px, transparent 210px
+    )`
   }
 }
-
-// export const level = () => {
-//   return {
-//     background: 'burlywood',
-//     display: 'flex',
-//     flexDirection: 'row',
-//     position: 'relative',
-//     //justifyContent: 'end',
-//     width: '40px',
-//     height: '300px',
-//     marginLeft: '10px',
-//     marginRight: '10px',
-//   }
-// }
-
-// export const leftSide = () => {
-//   return {
-//     width: '10px',
-//     height: '300px',
-//     background: 
-//       `linear-gradient(45deg, red 6px, silver 6px, silver 212px, gray 212px)`
-//   }
-// }
-
-// export const centerSide = () => {
-//   return {
-//     width: '30px',
-//     height: '300px',
-//     background: 'linear-gradient(to bottom, gray 8px, dimgrey 8px)'
-//   }
-// }
-
-// export const rightSide = () => {
-//   return {
-//     width: '10px',
-//     height: '300px',
-//     background:
-//       `linear-gradient(45deg, transparent 212px, orange 0px),
-//       linear-gradient(180deg, gray 8px, dimgrey 0px)`,
-      
-//   }
-// }
 
 interface levelI {
   percentage: number
@@ -89,45 +72,50 @@ interface levelI {
 
 export const level = ({ percentage }: levelI) => {
   return {
-    background: 'burlywood',
+    background: 'transparent',
     display: 'flex',
     flexDirection: 'row',
     position: 'relative',
     //justifyContent: 'end',
     width: '50px',
-    height: `calc(${percentage}px * 2)`,
+    height: `calc(${percentage + 5}px * 2)`,
     marginLeft: '10px',
     marginRight: '10px',
   }
 }
 
+// 025 + 10.5 + 035.5 // EXAMPLES
+// 050 + 21.0 + 071.0
+// 075 + 31.5 + 106.5
+// 100 + 42.0 + 142.0
+
 export const leftSide = ({ percentage }: levelI) => {
   return {
-    // 025 + 10.5 + 035.5
-    // 050 + 21.0 + 071.0
-    // 075 + 31.5 + 106.5
-    // 100 + 42.0 + 142.0
+    
     width: '10px',
-    height: `${percentage * 2}px`,
-    background: 
-      `linear-gradient(45deg, red 7px, silver 7px, silver ${percentage + (0.42 * percentage)}px, gray 0px)`
+    height: `${(percentage + 5)* 2}px`,
+    background: `
+      linear-gradient(45deg, transparent 7px, silver 7px, silver ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)`
   }
 }
 
 export const centerSide = ({ percentage }: levelI) => {
   return {
     width: '30px',
-    height: `${percentage * 2}px`,
-    background: 'linear-gradient(to bottom, gray 9.5px, darkgrey 8px)'
+    height: `${(percentage  + 5)* 2}px`,
+    background: 'linear-gradient(to bottom, gray 10px, darkgrey 0px)'
   }
 }
 
 export const rightSide = ({ percentage }: levelI) => {
   return {
+    display: 'flex',
+    //flexDirection: 'column-reverse',
     width: '10px',
-    height: `${percentage * 2}px`,
-    background:
-      `linear-gradient(45deg, transparent ${percentage + (0.42 * percentage)}px, orange 0px),
-      linear-gradient(180deg, gray 9.5px, darkgrey 0px)`,
+    height: `${(percentage + 5) * 2}px`,
+    background: `
+      linear-gradient(180deg, #0000 10px, darkgrey 0),
+      linear-gradient(225deg, #0000 7px, gray 7px)`
+      
   }
 }
