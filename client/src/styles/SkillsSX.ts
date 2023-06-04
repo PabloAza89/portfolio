@@ -94,7 +94,7 @@ export const level = ({ percentage }: levelI) => {
     flexDirection: 'row',
     position: 'relative',
     //justifyContent: 'end',
-    width: '40px',
+    width: '50px',
     height: `calc(${percentage}px * 2)`,
     marginLeft: '10px',
     marginRight: '10px',
@@ -110,25 +110,24 @@ export const leftSide = ({ percentage }: levelI) => {
     width: '10px',
     height: `${percentage * 2}px`,
     background: 
-      `linear-gradient(45deg, red 6px, silver 6px, silver ${percentage + (0.42 * percentage)}px, gray 0px)`
+      `linear-gradient(45deg, red 7px, silver 7px, silver ${percentage + (0.42 * percentage)}px, gray 0px)`
   }
 }
 
-export const centerSide = () => {
+export const centerSide = ({ percentage }: levelI) => {
   return {
     width: '30px',
-    height: '300px',
-    background: 'linear-gradient(to bottom, gray 8px, dimgrey 8px)'
+    height: `${percentage * 2}px`,
+    background: 'linear-gradient(to bottom, gray 9.5px, darkgrey 8px)'
   }
 }
 
-export const rightSide = () => {
+export const rightSide = ({ percentage }: levelI) => {
   return {
     width: '10px',
-    height: '300px',
+    height: `${percentage * 2}px`,
     background:
-      `linear-gradient(45deg, transparent 212px, orange 0px),
-      linear-gradient(180deg, gray 8px, dimgrey 0px)`,
-      
+      `linear-gradient(45deg, transparent ${percentage + (0.42 * percentage)}px, orange 0px),
+      linear-gradient(180deg, gray 9.5px, darkgrey 0px)`,
   }
 }
