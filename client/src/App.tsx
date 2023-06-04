@@ -84,6 +84,7 @@ function App() {
           <Route path="/portfolio/Skills" element={<>
             <Skills />
             <BackButton />
+            <Language />
             <DarkMode />
           </>}/>
           <Route path="/portfolio/Projects" element={<>

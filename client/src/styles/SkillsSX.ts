@@ -19,12 +19,12 @@ export const mainContainer = () => {
     background: 'lightgray',
     display: 'flex',
     position: 'relative',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     //flexDirection: 'column',
     width: '70vw',
-    height: '60vh'
+    height: '80vh'
   }
 }
 
@@ -38,18 +38,6 @@ export const chartRow = () => {
     width: '50vw',
     height: '210px',
     borderTop: '1px solid blueviolet',
-    /* borderBottom: '1px solid blueviolet', */
-    // background:
-    //   `linear-gradient(
-    //     to bottom,
-    //     transparent 0px, transparent 49px,
-    //     blueviolet 49px, blueviolet 50px,
-    //     transparent 50px, transparent 99px,
-    //     blueviolet 99px, blueviolet 100px,
-    //     transparent 100px, transparent 149px,
-    //     blueviolet 149px, blueviolet 150px,
-    //     transparent 150px, transparent 199px
-    //   )`
     background:
     `linear-gradient(
       to bottom,
@@ -77,10 +65,16 @@ export const level = ({ percentage }: levelI) => {
     flexDirection: 'row',
     position: 'relative',
     //justifyContent: 'end',
-    width: '50px',
+    justifyContent: 'center',
+    width: '90px',
+    
     height: `calc(${percentage + 5}px * 2)`,
-    marginLeft: '10px',
-    marginRight: '10px',
+    /* marginLeft: '10px',
+    marginRight: '10px', */
+    borderBottom: '2px solid black',
+    borderLeft: '2px solid black',
+    //borderRight: '1px solid black',
+    borderImage: 'linear-gradient(to top, black 0px, black 20px, transparent 20px) 1'
   }
 }
 
@@ -119,3 +113,29 @@ export const rightSide = ({ percentage }: levelI) => {
       
   }
 }
+
+export const titles = () => {
+  return {
+  width: '120px',
+	height: '30px',
+	//transform: 'skew(45deg)',
+	background: 'gray',
+  transform: 'rotate(45deg) skew(135deg)',
+  margin: '-15px',
+  lineHeight: 1.7
+  }
+}
+
+export const titlesBox = () => {
+  return {
+    display: 'flex',
+    flexDirection: 'row',
+    background: 'darkred',
+    height: '100px',
+    width: '70vw',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: '110px',
+  }
+}
+
