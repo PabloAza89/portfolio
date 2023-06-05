@@ -1,14 +1,74 @@
 import { flex, noSelect, row, absolute, relative, column, jcc, fixed } from './CommonsSX';
 import { blue, brown, lime, red, grey } from '@mui/material/colors';
 
+interface topBottomHelperI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+  return {
+    //background: 'blue',
+    display: 'flex',
+    width: '20px',
+    minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : larPort || larLand ? '90px' : '90px',
+    position: 'relative'
+  }
+}
+
+interface middleTopBottomI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+export const middleTopBottom = ({ minPort, minLand, medPort, medLand, larPort, larLand }: middleTopBottomI) => {
+  return {
+    //background: 'green',
+    display: 'flex',
+    width: 'calc(100vw - 12px)',
+    minHeight: '397px',
+    height: '70vh',
+    //minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : larPort || larLand ? '90px' : '90px',
+    position: 'relative',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }
+}
+
+interface leftRightHelperI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+export const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
+  return {
+    display: larPort || larLand ? 'flex' : 'none',
+    //background: 'red',
+    //minHeight: '635px',
+    minWidth: '22px'
+  }
+}
+
 export const background = () => {
   return {
-    background: 'darkred',
+    //background: 'darkred',
     display: 'flex',
+    flexDirection: 'column',
     position: 'relative',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    //flexDirection: 'column',
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)'
   }
@@ -18,20 +78,42 @@ interface mainContainerI {
   length: number
 }
 
-export const mainContainer = ({ length }: mainContainerI) => {
+export const mainContainer = ({ length }:mainContainerI) => {
   return {
-    background: 'lightgray',
+    //background: 'blue',
+    width: `${(92*length)+200}px`,
+    height: '397px', // 50 + 1 + 210 + 100 + 36 = 397
+  }
+}
+
+export const skills = () => {
+  return {
+    background: '#b86b5a',
+    width: 'fit-content',
+    fontFamily: 'NillandRegular, serif',
+    color: 'white',
+    fontSize: '30px',
+    fontWeight: '600',
+    lineHeight: '1.19',
+    height: '36px'
+  }
+}
+
+interface chartContainerI {
+  length: number
+}
+
+export const chartContainer = ({ length }:chartContainerI) => {
+  return {
+    background: 'rgba(128, 128, 128, 0.400)',
     display: 'flex',
     position: 'relative',
+    borderRadius: '0px 10px 10px 10px',
     flexDirection: 'column',
-    //justifyContent: 'center',
     justifyContent: 'flex-start',
-    //alignItems: 'center',
     alignItems: 'flex-start',
-    //flexDirection: 'column',
     width: `${(92*length)+200}px`,
-    //width: '1000px',
-    height: '600px',
+    height: '361px', // 50 + 1 + 210 + 100 = 361
     
   }
 }
@@ -45,25 +127,23 @@ export const chartRow = ({ length }: chartRowI) => {
     display: 'flex',
     position: 'relative',
     flexDirection: 'row',
-    //justifyContent: 'center',
     justifyContent: 'flex-start',
     alignItems: 'end',
-    //width: '900px',
     width: `${(92*length)+200}px`,
     height: '210px',
     marginTop: '50px',
-    borderTop: '1px solid blueviolet',
+    borderTop: '1px solid steelblue',
     background:
     `linear-gradient(
       to bottom,
       transparent 0px, transparent 49px,
-      blueviolet 49px, blueviolet 50px,
+      steelblue 49px, steelblue 50px,
       transparent 50px, transparent 99px,
-      blueviolet 99px, blueviolet 100px,
+      steelblue 99px, steelblue 100px,
       transparent 100px, transparent 149px,
-      blueviolet 149px, blueviolet 150px,
+      steelblue 149px, steelblue 150px,
       transparent 150px, transparent 199px,
-      blueviolet 199px, blueviolet 200px,
+      steelblue 199px, steelblue 200px,
       transparent 200px, transparent 210px
     )`
   }
@@ -79,15 +159,11 @@ export const columnBar = ({ percentage }: columnBarI) => {
     display: 'flex',
     flexDirection: 'row',
     position: 'relative',
-    //justifyContent: 'end',
     justifyContent: 'center',
     width: '90px',
     height: `calc(${percentage + 5}px * 2)`,
-    /* marginLeft: '10px',
-    marginRight: '10px', */
     borderBottom: '2px solid black',
     borderLeft: '2px solid black',
-    //borderRight: '1px solid black',
     borderImage: 'linear-gradient(to top, black 0px, black 20px, transparent 20px) 1'
   }
 }
@@ -120,13 +196,11 @@ export const centerSide = ({ percentage }: columnBarI) => {
 export const rightSide = ({ percentage }: columnBarI) => {
   return {
     display: 'flex',
-    //flexDirection: 'column-reverse',
     width: '10px',
     height: `${(percentage + 5) * 2}px`,
     background: `
       linear-gradient(180deg, #0000 10px, darkgrey 0),
       linear-gradient(225deg, #0000 7px, gray 7px)`
-      
   }
 }
 
@@ -138,27 +212,23 @@ export const titlesBox = ({ length }: titlesBoxI) => {
   return {
     display: 'flex',
     flexDirection: 'row',
-    background: 'darkred',
+    //background: 'darkgreen',
     height: '100px',
-    //width: '600px',
     width: `${length * 92}px`,
-    //justifyContent: 'center',
-    justifyContent: 'flex-start',
     alignItems: 'center',
-    marginLeft: '57px',
+    paddingLeft: '57px',
   }
 }
 
 export const titles = () => {
   return {
-  width: '120px',
-	height: '30px',
-	//transform: 'skew(45deg)',
-	background: 'gray',
-  transform: 'rotate(45deg) skew(135deg)',
-  //margin: '-14px 0px',
-  margin: '0px -14px',
-  lineHeight: 1.7
+    width: '130px',
+    height: '30px',
+    background: 'gray',
+    transform: 'rotate(45deg) skew(135deg)',
+    margin: '0px -14px',
+    lineHeight: 1.9,
+    paddingLeft: '5px',
   }
 }
 
@@ -168,31 +238,25 @@ interface overlappingI {
 
 export const overlapping = ({ length }: overlappingI) => {
   return {
-  //width: '1000px',
-  width: `${(92*length)+200}px`,
-	height: '600px',
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'absolute',
-	//background: 'transparent',
-  //background: 'darkblue',
-  alignItems: 'flex-end'
-  
+    width: `${(92*length)+200}px`,
+    height: '361px', // 50 + 1 + 210 + 100 = 361
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'absolute',
+    alignItems: 'flex-end'
   }
 }
 
 export const level = () => {
   return {
-  width: '200px',
-	height: '50px',
-  display: 'flex',
-  flexDirection: 'row',
-  position: 'relative',
-  justifyContent: 'space-between',
-	background: 'green',
-  //background: 'trnsparent',
-  alignItems: 'flex-end'
-  //border: '1px solid black'
+    width: '200px',
+    height: '50px',
+    display: 'flex',
+    flexDirection: 'row',
+    position: 'relative',
+    justifyContent: 'space-between',
+    //background: 'green',
+    alignItems: 'flex-end'
   }
 }
 
@@ -209,21 +273,22 @@ interface colorLevelI {
 
 export const colorLevel = ({ color }: colorLevelI ) => {
   return {
-    background: color, width: '6px', height: '40px'
+    background: color,
+    width: '6px',
+    height: '38px'
   }
 }
 
 export const levelTitle = () => {
   return {
-  width: '135px',
-	height: '20px',
-  display: 'inline',
-  flexDirection: 'column',
-  position: 'relative',
-  justifyContent: 'flex-end',
-	background: 'darkorange',
-  fontSize: '14px'
-  //border: '1px solid black'
+    width: '135px',
+    height: '20px',
+    display: 'inline',
+    flexDirection: 'column',
+    position: 'relative',
+    justifyContent: 'flex-end',
+    //background: 'darkorange',
+    fontSize: '14px',
   }
 }
 
@@ -240,7 +305,7 @@ export const boxSVG = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
   return {
     position: 'relative',
     justifyContent: 'center',
-    background: 'gray',
+    //background: 'gray',
     display: 'flex',
     width: '50px', // width
     height: '50px', // height
@@ -251,6 +316,7 @@ export const boxSVG = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
 export const imageSVG = ({ minPort, minLand, medPort, medLand, larPort, larLand }: imageSVGI ) => { // imageSVG
   return {
     width: '45px', // width
-    height: '45px', // height
+    height: '45px', // height,
+    marginRight: '30px'
   }
 }

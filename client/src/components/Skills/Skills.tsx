@@ -49,52 +49,58 @@ function Skills() {
 
   return (
     <Box sx={s.background}>
-      <Box sx={s.mainContainer({ length:array.length })}>
-        <Typography sx={s.skills}>{english ? `My skills` : `Mis habilidades`}</Typography>
-        <Box sx={s.chartContainer({ length:array.length })}>
-          <Box sx={s.chartRow({ length:array.length })}>
-            {array.map((e) => {
-              return (
-                <Box key={array.indexOf(e)} sx={s.columnBar({ percentage:e.percentage })}>
-                  <Box sx={s.leftSide({ percentage:e.percentage })}></Box>
-                  <Box sx={s.centerSide({ percentage:e.percentage })}></Box>
-                  <Box sx={s.rightSide({ percentage:e.percentage })}></Box>
-                </Box>
-              )
-            })}
-          </Box>
-          <Box sx={s.titlesBox({ length:array.length })}>
-            {array.map((e) => {
-              return (
-                <Typography key={array.indexOf(e)} sx={s.titles}>
-                  {e.title}
-                </Typography>
-              )
-            })}
-          </Box>
-          <Box sx={s.overlapping({ length:array.length })}>
-            {levels.map((e, idx) => {
-              return (
-                <Box key={levels.indexOf(e)} sx={s.level}>
-                  <Box sx={s.innerLevel}>
-                    <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
-                    <Typography sx={s.levelTitle}>{e.second}</Typography>
+      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+      <Box sx={s.middleTopBottom({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.mainContainer({ length:array.length })}>
+          <Typography sx={s.skills}>{english ? `My skills` : `Mis habilidades`}</Typography>
+          <Box sx={s.chartContainer({ length:array.length })}>
+            <Box sx={s.chartRow({ length:array.length })}>
+              {array.map((e) => {
+                return (
+                  <Box key={array.indexOf(e)} sx={s.columnBar({ percentage:e.percentage })}>
+                    <Box sx={s.leftSide({ percentage:e.percentage })}></Box>
+                    <Box sx={s.centerSide({ percentage:e.percentage })}></Box>
+                    <Box sx={s.rightSide({ percentage:e.percentage })}></Box>
                   </Box>
-                  <Box sx={s.boxSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-                    <SvgIcon
-                      viewBox='0 0 36 30'
-                      sx={s.imageSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}
-                    >
-                      {e.svg}
-                    </SvgIcon>
+                )
+              })}
+            </Box>
+            <Box sx={s.titlesBox({ length:array.length })}>
+              {array.map((e) => {
+                return (
+                  <Typography key={array.indexOf(e)} sx={s.titles}>
+                    {e.title}
+                  </Typography>
+                )
+              })}
+            </Box>
+            <Box sx={s.overlapping({ length:array.length, minPort })}>
+              {levels.map((e) => {
+                return (
+                  <Box key={levels.indexOf(e)} sx={s.level}>
+                    <Box sx={s.innerLevel}>
+                      <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
+                      <Typography sx={s.levelTitle}>{e.second}</Typography>
+                    </Box>
+                    <Box sx={s.boxSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                      <SvgIcon
+                        viewBox='0 0 36 30'
+                        sx={s.imageSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                      >
+                        {e.svg}
+                      </SvgIcon>
+                    </Box>
+                    <Box sx={s.colorLevel({ color:e.color })}></Box>
                   </Box>
-                  <Box sx={s.colorLevel({ color:e.color })}></Box>
-                </Box>
-              )
-            })}
+                )
+              })}
+            </Box>
           </Box>
         </Box>
+        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       </Box>
+      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     </Box>
   )
 }

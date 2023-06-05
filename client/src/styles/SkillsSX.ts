@@ -1,12 +1,73 @@
 import { flex, noSelect, row, absolute, relative, column, jcc, fixed } from './CommonsSX';
 import { blue, brown, lime, red, grey } from '@mui/material/colors';
 
+interface topBottomHelperI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+  return {
+    //background: 'blue',
+    display: 'flex',
+    width: '20px',
+    minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : larPort || larLand ? '90px' : '90px',
+    position: 'relative'
+  }
+}
+
+interface middleTopBottomI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+export const middleTopBottom = ({ minPort, minLand, medPort, medLand, larPort, larLand }: middleTopBottomI) => {
+  return {
+    //background: 'green',
+    display: 'flex',
+    width: 'calc(100vw - 12px)',
+    minHeight: '397px',
+    height: '70vh',
+    //minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : larPort || larLand ? '90px' : '90px',
+    position: 'relative',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }
+}
+
+interface leftRightHelperI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+export const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
+  return {
+    display: larPort || larLand ? 'flex' : 'none',
+    //background: 'red',
+    //minHeight: '635px',
+    minWidth: '22px'
+  }
+}
+
 export const background = () => {
   return {
     //background: 'darkred',
     display: 'flex',
+    flexDirection: 'column',
     position: 'relative',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)'
@@ -16,7 +77,6 @@ export const background = () => {
 interface mainContainerI {
   length: number
 }
-
 
 export const mainContainer = ({ length }:mainContainerI) => {
   return {
@@ -173,17 +233,22 @@ export const titles = () => {
 }
 
 interface overlappingI {
-  length: number
+  length: number,
+  minPort: boolean,
 }
 
-export const overlapping = ({ length }: overlappingI) => {
+export const overlapping = ({ length, minPort }: overlappingI) => {
   return {
-    width: `${(92*length)+200}px`,
+    width: minPort ? '50vw' : `${(92*length)+200}px`,
+    right: minPort ? '0px' : 'unset',
+    //width: `200px`,
     height: '361px', // 50 + 1 + 210 + 100 = 361
     display: 'flex',
     flexDirection: 'column',
-    position: 'absolute',
-    alignItems: 'flex-end'
+    position: 'fixed',
+    //justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    background: 'blue',
   }
 }
 
@@ -195,7 +260,7 @@ export const level = () => {
     flexDirection: 'row',
     position: 'relative',
     justifyContent: 'space-between',
-    //background: 'green',
+    background: 'green',
     alignItems: 'flex-end'
   }
 }
