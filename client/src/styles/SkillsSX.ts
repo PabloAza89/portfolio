@@ -20,11 +20,14 @@ export const mainContainer = () => {
     display: 'flex',
     position: 'relative',
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    //justifyContent: 'center',
+    justifyContent: 'flex-start',
+    //alignItems: 'center',
+    alignItems: 'flex-start',
     //flexDirection: 'column',
-    width: '70vw',
-    height: '80vh'
+    width: '1000px',
+    height: '600px',
+    
   }
 }
 
@@ -33,10 +36,12 @@ export const chartRow = () => {
     display: 'flex',
     position: 'relative',
     flexDirection: 'row',
-    justifyContent: 'center',
+    //justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'end',
-    width: '50vw',
+    width: '900px',
     height: '210px',
+    marginTop: '50px',
     borderTop: '1px solid blueviolet',
     background:
     `linear-gradient(
@@ -54,11 +59,11 @@ export const chartRow = () => {
   }
 }
 
-interface levelI {
+interface columnBarI {
   percentage: number
 }
 
-export const level = ({ percentage }: levelI) => {
+export const columnBar = ({ percentage }: columnBarI) => {
   return {
     background: 'transparent',
     display: 'flex',
@@ -67,7 +72,6 @@ export const level = ({ percentage }: levelI) => {
     //justifyContent: 'end',
     justifyContent: 'center',
     width: '90px',
-    
     height: `calc(${percentage + 5}px * 2)`,
     /* marginLeft: '10px',
     marginRight: '10px', */
@@ -83,7 +87,7 @@ export const level = ({ percentage }: levelI) => {
 // 075 + 31.5 + 106.5
 // 100 + 42.0 + 142.0
 
-export const leftSide = ({ percentage }: levelI) => {
+export const leftSide = ({ percentage }: columnBarI) => {
   return {
     
     width: '10px',
@@ -93,7 +97,7 @@ export const leftSide = ({ percentage }: levelI) => {
   }
 }
 
-export const centerSide = ({ percentage }: levelI) => {
+export const centerSide = ({ percentage }: columnBarI) => {
   return {
     width: '30px',
     height: `${(percentage  + 5)* 2}px`,
@@ -101,7 +105,7 @@ export const centerSide = ({ percentage }: levelI) => {
   }
 }
 
-export const rightSide = ({ percentage }: levelI) => {
+export const rightSide = ({ percentage }: columnBarI) => {
   return {
     display: 'flex',
     //flexDirection: 'column-reverse',
@@ -114,6 +118,20 @@ export const rightSide = ({ percentage }: levelI) => {
   }
 }
 
+export const titlesBox = () => {
+  return {
+    display: 'flex',
+    flexDirection: 'row',
+    background: 'darkred',
+    height: '100px',
+    width: '600px',
+    //justifyContent: 'center',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginLeft: '57px',
+  }
+}
+
 export const titles = () => {
   return {
   width: '120px',
@@ -121,21 +139,70 @@ export const titles = () => {
 	//transform: 'skew(45deg)',
 	background: 'gray',
   transform: 'rotate(45deg) skew(135deg)',
-  margin: '-15px',
+  //margin: '-14px 0px',
+  margin: '0px -14px',
   lineHeight: 1.7
   }
 }
 
-export const titlesBox = () => {
+export const overlapping = () => {
   return {
-    display: 'flex',
-    flexDirection: 'row',
-    background: 'darkred',
-    height: '100px',
-    width: '70vw',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingLeft: '110px',
+  width: '1000px',
+	height: '600px',
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'absolute',
+	//background: 'transparent',
+  //background: 'darkblue',
+  alignItems: 'flex-end'
+  
   }
 }
+
+export const level = () => {
+  return {
+  width: '200px',
+	height: '50px',
+  display: 'flex',
+  flexDirection: 'row',
+  position: 'relative',
+  justifyContent: 'space-between',
+	//background: 'orange',
+  background: 'trnsparent',
+  alignItems: 'flex-end'
+  //border: '1px solid black'
+  }
+}
+
+export const innerLevel = () => {
+  return {
+    display: 'flex',
+    flexDirection: 'column'
+  }
+}
+
+interface colorLevelI {
+  color: string
+}
+
+export const colorLevel = ({ color }: colorLevelI ) => {
+  return {
+    background: color, width: '6px', height: '40px'
+  }
+}
+
+export const levelTitle = () => {
+  return {
+  width: '170px',
+	height: '20px',
+  display: 'inline',
+  flexDirection: 'column',
+  position: 'relative',
+  justifyContent: 'flex-end',
+	background: 'darkorange',
+  fontSize: '14px'
+  //border: '1px solid black'
+  }
+}
+
 

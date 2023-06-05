@@ -20,20 +20,9 @@ function Skills() {
     { title: english ? 'BBQ' : 'Asado', percentage: 75 },
     { title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 25 }
   ]
-
-  interface levelsI {
-    firstA?: any,
-    firstB: any,
-    second: string,
-    color: string
-  }
- 
+  
   const levels: levelsI[] = [
-    { firstA: english ? `I'm the `: `Soy el `, firstB: english ? <b>master</b> : <b>maestro</b>, second: english ? `of the universe.` : `del universo.`, color: `black` },
-    { firstB: english ? <b>High,</b> : <b>Alto,</b>, second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `green` },
-    { firstA: english ? <b>Medium, </b> : <b>Medio, </b>, firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `lightgreen` },
-    { firstA: english ? <b>Medium, </b> : <b>Medio, </b>, firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `blue` },
-    { firstB: <b>Hmm..</b>, second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `red` }
+    { first: ``, second: ``, color: `red` }
   ]
 
   return (
@@ -60,17 +49,37 @@ function Skills() {
           })}
         </Box>
         <Box sx={s.overlapping}>
-          {levels.map((e) => {
-            return (
-              <Box sx={s.level}>
-                <Box sx={s.innerLevel}>
-                  <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
-                  <Typography sx={s.levelTitle}>{e.second}</Typography>
-                </Box>
-                <Box sx={s.colorLevel({ color:e.color })}></Box>
-              </Box>
-            )
-          })}
+          <Box sx={s.level}>
+            <Box sx={s.innerLevel}>
+              <Typography sx={s.levelTitle}>I'm the <b>master</b></Typography>
+              <Typography sx={s.levelTitle}>of the universe.</Typography>
+            </Box>
+            <Box sx={s.colorLevel}></Box>
+          </Box>
+          <Box sx={s.level}>
+            <Box sx={s.innerLevel}>
+              <Typography sx={s.levelTitle}><b>High,</b></Typography>
+              <Typography sx={s.levelTitle}>I'm pretty good.</Typography>
+            </Box>
+          </Box>
+          <Box sx={s.level}>
+            <Box sx={s.innerLevel}>
+              <Typography sx={s.levelTitle}><b>Medium,</b></Typography>
+              <Typography sx={s.levelTitle}>I'm trying to improve.</Typography>
+            </Box>  
+          </Box>
+          <Box sx={s.level}>
+            <Box sx={s.innerLevel}>
+              <Typography sx={s.levelTitle}><b>Basic,</b></Typography>
+              <Typography sx={s.levelTitle}>you can't always win..</Typography>
+            </Box>
+          </Box>
+          <Box sx={s.level}>
+            <Box sx={s.innerLevel}>
+              <Typography sx={s.levelTitle}><b>Hmm..</b></Typography>
+              <Typography sx={s.levelTitle}>Next question ?</Typography>
+            </Box>
+          </Box>
         </Box>
       </Box>
     </Box>
