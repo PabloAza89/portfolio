@@ -14,7 +14,11 @@ export const background = () => {
   }
 }
 
-export const mainContainer = () => {
+interface mainContainerI {
+  length: number
+}
+
+export const mainContainer = ({ length }: mainContainerI) => {
   return {
     background: 'lightgray',
     display: 'flex',
@@ -25,13 +29,18 @@ export const mainContainer = () => {
     //alignItems: 'center',
     alignItems: 'flex-start',
     //flexDirection: 'column',
-    width: '1000px',
+    width: `${(92*length)+200}px`,
+    //width: '1000px',
     height: '600px',
     
   }
 }
 
-export const chartRow = () => {
+interface chartRowI {
+  length: number
+}
+
+export const chartRow = ({ length }: chartRowI) => {
   return {
     display: 'flex',
     position: 'relative',
@@ -39,7 +48,8 @@ export const chartRow = () => {
     //justifyContent: 'center',
     justifyContent: 'flex-start',
     alignItems: 'end',
-    width: '900px',
+    //width: '900px',
+    width: `${(92*length)+200}px`,
     height: '210px',
     marginTop: '50px',
     borderTop: '1px solid blueviolet',
@@ -86,6 +96,8 @@ export const columnBar = ({ percentage }: columnBarI) => {
 // 050 + 21.0 + 071.0
 // 075 + 31.5 + 106.5
 // 100 + 42.0 + 142.0
+
+// each barr 90 + 2 (92) + green 200
 
 export const leftSide = ({ percentage }: columnBarI) => {
   return {
@@ -145,9 +157,14 @@ export const titles = () => {
   }
 }
 
-export const overlapping = () => {
+interface overlappingI {
+  length: number
+}
+
+export const overlapping = ({ length }: overlappingI) => {
   return {
-  width: '1000px',
+  //width: '1000px',
+  width: `${(92*length)+200}px`,
 	height: '600px',
   display: 'flex',
   flexDirection: 'column',
@@ -161,7 +178,7 @@ export const overlapping = () => {
 
 export const level = () => {
   return {
-  width: '280px',
+  width: '200px',
 	height: '50px',
   display: 'flex',
   flexDirection: 'row',
@@ -193,7 +210,7 @@ export const colorLevel = ({ color }: colorLevelI ) => {
 
 export const levelTitle = () => {
   return {
-  width: '140px',
+  width: '135px',
 	height: '20px',
   display: 'inline',
   flexDirection: 'column',
