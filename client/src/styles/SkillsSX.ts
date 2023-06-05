@@ -118,6 +118,43 @@ export const chartContainer = ({ length }:chartContainerI) => {
   }
 }
 
+interface upperChartContainerI {
+  length: number
+}
+
+export const upperChartContainer = ({ length }: upperChartContainerI) => {
+  return {
+    display: 'flex',
+    //background: 'red',
+    flexDirection: 'row',
+    width: `${(92*length)+200}px`,
+  }
+}
+
+export const upperChartContainterRight = () => {
+  return {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '200px',
+    height: '260px',
+    background:
+    `linear-gradient(
+      to bottom,
+      transparent 0px, transparent 50px,
+      steelblue 50px, steelblue 51px,
+      transparent 51px, transparent 100px,
+      steelblue 100px, steelblue 101px,
+      transparent 101px, transparent 150px,
+      steelblue 150px, steelblue 151px,
+      transparent 151px, transparent 200px,
+      steelblue 200px, steelblue 201px,
+      transparent 201px, transparent 250px,
+      steelblue 250px, steelblue 251px,
+      transparent 251px, transparent 260px
+    )`
+  }
+}
+
 interface chartRowI {
   length: number
 }
@@ -129,7 +166,8 @@ export const chartRow = ({ length }: chartRowI) => {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'end',
-    width: `${(92*length)+200}px`,
+    //width: `${(92*length)+200}px`,
+    width: `${(92*length)}px`,
     height: '210px',
     marginTop: '50px',
     borderTop: '1px solid steelblue',
@@ -239,29 +277,68 @@ interface overlappingI {
 
 export const overlapping = ({ length, minPort }: overlappingI) => {
   return {
-    width: minPort ? '50vw' : `${(92*length)+200}px`,
-    right: minPort ? '0px' : 'unset',
+    //width: minPort ? '200px' : `${(92*length)+200}px`,
+    width: minPort ? '200px' : `200px`,
+    //right: minPort ? '0px' : 'unset',
     //width: `200px`,
-    height: '361px', // 50 + 1 + 210 + 100 = 361
-    display: 'flex',
+    //height: '361px', // 50 + 1 + 210 + 100 = 361
+    height: '50px', // 50 + 1 + 210 + 100 = 361
+    //right: minPort ? '-194px' : 'unset',
+    right: minPort ? '6px' : '0px',
+    top: '0px',
+    //left: '10px',
+    display: minPort ? 'flex' : 'flex',
+    position: minPort ? 'fixed' : 'relative',
     flexDirection: 'column',
-    position: 'fixed',
     //justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    background: 'blue',
+    //background: 'blue',
+    // animation: 'rightToLeft 1s',
+    // '@keyframes rightToLeft': {
+    //   '0%': {
+    //     translate: '100vw 0%',
+    //   },
+    //   '50%': {
+    //   },
+    //   '100%': {
+    //     translate: '0% 0vw',
+    //   }
+    // }
   }
 }
 
-export const level = () => {
+interface levelI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+export const level = ({ minPort, minLand, medPort, medLand, larPort, larLand }: levelI) => {
   return {
     width: '200px',
     height: '50px',
     display: 'flex',
+  /*   top: '50px',
+    right: '200px', */
+    position: minPort ? 'fixed' : 'relative',
     flexDirection: 'row',
-    position: 'relative',
     justifyContent: 'space-between',
-    background: 'green',
-    alignItems: 'flex-end'
+    //background: 'green',
+    alignItems: 'flex-end',
+   /*  animation: 'rightToLeft 1s',
+    '@keyframes rightToLeft': {
+      '0%': {
+        translate: '100vw 0%',
+      },
+      '50%': {
+      },
+      '100%': {
+        translate: '0% 0vw',
+      }
+    } */
   }
 }
 
@@ -273,14 +350,24 @@ export const innerLevel = () => {
 }
 
 interface colorLevelI {
-  color: string
+  color: string,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
 }
 
-export const colorLevel = ({ color }: colorLevelI ) => {
+export const colorLevel = ({ minPort, minLand, medPort, medLand, larPort, larLand, color }: colorLevelI ) => {
   return {
+    display: minPort ? 'none' : 'flex',
+    position: minPort ? 'fixed' : 'relative',
+    right: '6px',
+    //top: '200px',
     background: color,
     width: '6px',
-    height: '38px'
+    height: '38px',
   }
 }
 

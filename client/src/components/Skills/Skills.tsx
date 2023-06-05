@@ -55,16 +55,41 @@ function Skills() {
         <Box sx={s.mainContainer({ length:array.length })}>
           <Typography sx={s.skills}>{english ? `My skills` : `Mis habilidades`}</Typography>
           <Box sx={s.chartContainer({ length:array.length })}>
-            <Box sx={s.chartRow({ length:array.length })}>
-              {array.map((e) => {
-                return (
-                  <Box key={array.indexOf(e)} sx={s.columnBar({ percentage:e.percentage })}>
-                    <Box sx={s.leftSide({ percentage:e.percentage })}></Box>
-                    <Box sx={s.centerSide({ percentage:e.percentage })}></Box>
-                    <Box sx={s.rightSide({ percentage:e.percentage })}></Box>
-                  </Box>
-                )
-              })}
+            <Box sx={s.upperChartContainer({ length:array.length })}>
+              <Box sx={s.chartRow({ length:array.length })}>
+                {array.map((e) => {
+                  return (
+                    <Box key={array.indexOf(e)} sx={s.columnBar({ percentage:e.percentage })}>
+                      <Box sx={s.leftSide({ percentage:e.percentage })}></Box>
+                      <Box sx={s.centerSide({ percentage:e.percentage })}></Box>
+                      <Box sx={s.rightSide({ percentage:e.percentage })}></Box>
+                    </Box>
+                  )
+                })}
+              </Box>
+              <Box sx={s.upperChartContainterRight}>
+                {levels.map((e) => {
+                  return (
+                    <Box key={levels.indexOf(e)} sx={s.overlapping({ length:array.length, minPort })}>
+                      <Box key={levels.indexOf(e)} sx={s.level({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                        <Box sx={s.innerLevel}>
+                          <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
+                          <Typography sx={s.levelTitle}>{e.second}</Typography>
+                        </Box>
+                        <Box sx={s.boxSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                          <SvgIcon
+                            viewBox='0 0 36 30'
+                            sx={s.imageSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                          >
+                            {e.svg}
+                          </SvgIcon>
+                        </Box>
+                        <Box sx={s.colorLevel({ minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}></Box>
+                      </Box>
+                    </Box>
+                  )
+                })}
+              </Box>
             </Box>
             <Box sx={s.titlesBox({ length:array.length })}>
               {array.map((e) => {
@@ -75,27 +100,9 @@ function Skills() {
                 )
               })}
             </Box>
-            <Box sx={s.overlapping({ length:array.length, minPort })}>
-              {levels.map((e) => {
-                return (
-                  <Box key={levels.indexOf(e)} sx={s.level}>
-                    <Box sx={s.innerLevel}>
-                      <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
-                      <Typography sx={s.levelTitle}>{e.second}</Typography>
-                    </Box>
-                    <Box sx={s.boxSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-                      <SvgIcon
-                        viewBox='0 0 36 30'
-                        sx={s.imageSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}
-                      >
-                        {e.svg}
-                      </SvgIcon>
-                    </Box>
-                    <Box sx={s.colorLevel({ color:e.color })}></Box>
-                  </Box>
-                )
-              })}
-            </Box>
+            
+              
+            
           </Box>
         </Box>
         <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
