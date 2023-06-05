@@ -1,10 +1,19 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, SvgIcon,  } from '@mui/material';
 import * as s from '../../styles/SkillsSX';
 import { useSelector } from 'react-redux';
+//import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
+import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
+//import SvgIcon from "@material-ui/core/SvgIcon";
 
 function Skills() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
+  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
+  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
+  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
+  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
+  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
+  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
   interface arrayI {
     title: string,
@@ -66,6 +75,14 @@ function Skills() {
                 <Box sx={s.innerLevel}>
                   <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
                   <Typography sx={s.levelTitle}>{e.second}</Typography>
+                </Box>
+                <Box sx={s.boxSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                  <SvgIcon
+                    viewBox='0 0 36 30'
+                    sx={s.imageSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                  >
+                    <MySvg/>
+                  </SvgIcon>
                 </Box>
                 <Box sx={s.colorLevel({ color:e.color })}></Box>
               </Box>

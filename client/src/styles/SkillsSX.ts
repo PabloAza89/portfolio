@@ -161,14 +161,14 @@ export const overlapping = () => {
 
 export const level = () => {
   return {
-  width: '200px',
+  width: '280px',
 	height: '50px',
   display: 'flex',
   flexDirection: 'row',
   position: 'relative',
   justifyContent: 'space-between',
-	//background: 'orange',
-  background: 'trnsparent',
+	background: 'green',
+  //background: 'trnsparent',
   alignItems: 'flex-end'
   //border: '1px solid black'
   }
@@ -193,7 +193,7 @@ export const colorLevel = ({ color }: colorLevelI ) => {
 
 export const levelTitle = () => {
   return {
-  width: '170px',
+  width: '140px',
 	height: '20px',
   display: 'inline',
   flexDirection: 'column',
@@ -205,4 +205,57 @@ export const levelTitle = () => {
   }
 }
 
+interface imageSVGI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
+}
 
+export const boxSVG = ({ minPort, minLand, medPort, medLand, larPort, larLand }: imageSVGI) => {
+  return {
+    position: 'relative',
+    justifyContent: 'center',
+    background: 'gray',
+    display: 'flex',
+    width: '50px', // width
+    height: '50px', // height
+    alignItems: 'center'
+  }
+}
+
+export const imageSVG = ({ minPort, minLand, medPort, medLand, larPort, larLand }: imageSVGI ) => { // imageSVG
+  return {
+    width: '45px', // width
+    height: '45px', // height
+  }
+}
+
+
+
+
+// interface boxSVGI {
+//   minPort: boolean,
+//   minLand: boolean,
+//   medPort: boolean,
+//   medLand: boolean,
+//   larPort: boolean
+// }
+
+// export const boxSVG = ({ minPort, minLand, medPort, medLand, larPort }: boxSVGI ) => { // boxSVGI
+//   return {
+//     //background: 'purple',
+//     position: 'relative',
+//     justifyContent: 'center',
+//     display: 'flex',
+//     //minWidth: minPort ? '40h' : medPort ? '50h' : minLand ? '76vh' : medLand ? '65vh' : larPort ? 'calc(100vw - 12px)' : '631px', // minWidth
+//     //width: minPort ? '40h' : medPort ? '50vh' : minLand ? '76vh' : medLand ? '65vh' : larPort ? 'calc(100vw - 12px)' : '50%', // width
+//     //minHeight: minPort ? '40h' : medPort ? '37vh' : minLand ? '76vh' : medLand ? '65vh' : larPort ? '312px' : '546px', // minHeight
+//     //height: minPort ? '40h' : medPort ? '37vh' : minLand ? '76vh' : medLand ? '65vh' : larPort ? '37vh' : '100%', // height
+//     //alignItems: 'center'
+//     width: '30px', // width
+//     height: '30px', // height
+//   }
+// }
