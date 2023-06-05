@@ -67,10 +67,10 @@ function Skills() {
                   )
                 })}
               </Box>
-              <Box sx={s.upperChartContainterRight}>
+              <Box sx={s.upperChartContainerRight({ minPort, minLand, medPort, medLand, larPort, larLand })}>
                 {levels.map((e) => {
                   return (
-                    <Box key={levels.indexOf(e)} sx={s.overlapping({ length:array.length, minPort })}>
+                    
                       <Box key={levels.indexOf(e)} sx={s.level({ minPort, minLand, medPort, medLand, larPort, larLand })}>
                         <Box sx={s.innerLevel}>
                           <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
@@ -86,7 +86,7 @@ function Skills() {
                         </Box>
                         <Box sx={s.colorLevel({ minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}></Box>
                       </Box>
-                    </Box>
+                    
                   )
                 })}
               </Box>

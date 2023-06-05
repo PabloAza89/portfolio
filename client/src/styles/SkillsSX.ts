@@ -125,33 +125,47 @@ interface upperChartContainerI {
 export const upperChartContainer = ({ length }: upperChartContainerI) => {
   return {
     display: 'flex',
+    position: 'relative',
     //background: 'red',
     flexDirection: 'row',
     width: `${(92*length)+200}px`,
+    //flexFlow: 'wrap'
   }
 }
 
-export const upperChartContainterRight = () => {
+interface upperChartContainerRightI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+export const upperChartContainerRight = ({ minPort, minLand, medPort, medLand, larPort, larLand }: upperChartContainerRightI) => {
   return {
     display: 'flex',
+    position: minPort ? 'fixed' : 'relative',
+    right: '200px',
     flexDirection: 'column',
-    width: '200px',
+    width: '10px',
     height: '260px',
-    background:
-    `linear-gradient(
-      to bottom,
-      transparent 0px, transparent 50px,
-      steelblue 50px, steelblue 51px,
-      transparent 51px, transparent 100px,
-      steelblue 100px, steelblue 101px,
-      transparent 101px, transparent 150px,
-      steelblue 150px, steelblue 151px,
-      transparent 151px, transparent 200px,
-      steelblue 200px, steelblue 201px,
-      transparent 201px, transparent 250px,
-      steelblue 250px, steelblue 251px,
-      transparent 251px, transparent 260px
-    )`
+    background: 'red',
+    // background:
+    // `linear-gradient(
+    //   to bottom,
+    //   transparent 0px, transparent 50px,
+    //   steelblue 50px, steelblue 51px,
+    //   transparent 51px, transparent 100px,
+    //   steelblue 100px, steelblue 101px,
+    //   transparent 101px, transparent 150px,
+    //   steelblue 150px, steelblue 151px,
+    //   transparent 151px, transparent 200px,
+    //   steelblue 200px, steelblue 201px,
+    //   transparent 201px, transparent 250px,
+    //   steelblue 250px, steelblue 251px,
+    //   transparent 251px, transparent 260px
+    // )`
   }
 }
 
@@ -321,12 +335,12 @@ export const level = ({ minPort, minLand, medPort, medLand, larPort, larLand }: 
     width: '200px',
     height: '50px',
     display: 'flex',
-  /*   top: '50px',
-    right: '200px', */
-    position: minPort ? 'fixed' : 'relative',
+    //top: '20px',
+    //right: '-200px',
+    position: minPort ? 'relative' : 'relative',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    //background: 'green',
+    background: 'green',
     alignItems: 'flex-end',
    /*  animation: 'rightToLeft 1s',
     '@keyframes rightToLeft': {
@@ -361,7 +375,7 @@ interface colorLevelI {
 
 export const colorLevel = ({ minPort, minLand, medPort, medLand, larPort, larLand, color }: colorLevelI ) => {
   return {
-    display: minPort ? 'none' : 'flex',
+    display: minPort ? 'flex' : 'flex',
     position: minPort ? 'fixed' : 'relative',
     right: '6px',
     //top: '200px',
