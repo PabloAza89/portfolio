@@ -146,26 +146,12 @@ export const upperChartContainerRight = ({ minPort, minLand, medPort, medLand, l
   return {
     display: 'flex',
     position: minPort ? 'fixed' : 'relative',
+    //right: '0px',
     right: '200px',
     flexDirection: 'column',
-    width: '10px',
+    width: '0px',
     height: '260px',
     background: 'red',
-    // background:
-    // `linear-gradient(
-    //   to bottom,
-    //   transparent 0px, transparent 50px,
-    //   steelblue 50px, steelblue 51px,
-    //   transparent 51px, transparent 100px,
-    //   steelblue 100px, steelblue 101px,
-    //   transparent 101px, transparent 150px,
-    //   steelblue 150px, steelblue 151px,
-    //   transparent 151px, transparent 200px,
-    //   steelblue 200px, steelblue 201px,
-    //   transparent 201px, transparent 250px,
-    //   steelblue 250px, steelblue 251px,
-    //   transparent 251px, transparent 260px
-    // )`
   }
 }
 
@@ -306,18 +292,7 @@ export const overlapping = ({ length, minPort }: overlappingI) => {
     flexDirection: 'column',
     //justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    //background: 'blue',
-    // animation: 'rightToLeft 1s',
-    // '@keyframes rightToLeft': {
-    //   '0%': {
-    //     translate: '100vw 0%',
-    //   },
-    //   '50%': {
-    //   },
-    //   '100%': {
-    //     translate: '0% 0vw',
-    //   }
-    // }
+    //background: 'blue', 
   }
 }
 
@@ -327,7 +302,7 @@ interface levelI {
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
-  larLand: boolean
+  larLand: boolean,
 }
 
 export const level = ({ minPort, minLand, medPort, medLand, larPort, larLand }: levelI) => {
@@ -335,24 +310,12 @@ export const level = ({ minPort, minLand, medPort, medLand, larPort, larLand }: 
     width: '200px',
     height: '50px',
     display: 'flex',
-    //top: '20px',
-    //right: '-200px',
     position: minPort ? 'relative' : 'relative',
     flexDirection: 'row',
     justifyContent: 'space-between',
     background: 'green',
     alignItems: 'flex-end',
-   /*  animation: 'rightToLeft 1s',
-    '@keyframes rightToLeft': {
-      '0%': {
-        translate: '100vw 0%',
-      },
-      '50%': {
-      },
-      '100%': {
-        translate: '0% 0vw',
-      }
-    } */
+    right: '-194px',
   }
 }
 

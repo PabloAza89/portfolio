@@ -1,7 +1,9 @@
-import { Box, Typography, SvgIcon,  } from '@mui/material';
+import { Box, Typography, SvgIcon, Button  } from '@mui/material';
+import { useState, useEffect, useRef } from 'react';
 import * as s from '../../styles/SkillsSX';
 import { useSelector } from 'react-redux';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
+import '../../styles/SkillsSX.css';
 
 function Skills() {
 
@@ -12,6 +14,7 @@ function Skills() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+
 
   interface arrayI {
     title: string,
@@ -29,23 +32,33 @@ function Skills() {
   ]
 
   interface levelsI {
-    key: number,
+    id: number,
+    animated: boolean,
     firstA?: any,
     firstB: any,
     second: string,
     color: string,
     svg?: any
   }
- 
+
   const levels: levelsI[] = [
-    { key: 0, firstA: english ? `I'm the `: `Soy el `, firstB: english ? <b>master</b> : <b>maestro</b>, second: english ? `of the universe.` : `del universo.`, color: `#000000`, svg: <MySvg/> },
-    { key: 1, firstB: english ? <b>High,</b> : <b>Alto,</b>, second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `#8ebd7b` },
-    { key: 2, firstA: english ? <b>Medium, </b> : <b>Medio, </b>, firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `#beca7d` },
-    { key: 3, firstA: english ? <b>Basic, </b> : <b>Básico, </b>, firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `#f4b800` },
-    { key: 4, firstB: <b>Hmm..</b>, second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
+    { id: 0, animated: false, firstA: english ? `I'm the `: `Soy el `, firstB: english ? <b>master</b> : <b>maestro</b>, second: english ? `of the universe.` : `del universo.`, color: `#000000`, svg: <MySvg/> },
+    { id: 1, animated: false, firstB: english ? <b>High,</b> : <b>Alto,</b>, second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `#8ebd7b` },
+    { id: 2, animated: false, firstA: english ? <b>Medium, </b> : <b>Medio, </b>, firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `#beca7d` },
+    { id: 3, animated: false, firstA: english ? <b>Basic, </b> : <b>Básico, </b>, firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `#f4b800` },
+    { id: 4, animated: false, firstB: <b>Hmm..</b>, second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
   ]
 
-  console.log("TEST", array.length)
+  $(function(){
+    levels.map(e => {
+      $(`#rocket${e.id}`).on("click", function(){
+        $(`.rocket${e.id}`).addClass("animated");
+      });
+      return $(`.rocket${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+        $(this).removeClass("animated");
+      });
+    })
+  });
 
   return (
     <Box sx={s.background}>
@@ -68,25 +81,32 @@ function Skills() {
                 })}
               </Box>
               <Box sx={s.upperChartContainerRight({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-                {levels.map((e) => {
+                {levels.map((e, index) => {
                   return (
-                    
-                      <Box key={levels.indexOf(e)} sx={s.level({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-                        <Box sx={s.innerLevel}>
-                          <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
-                          <Typography sx={s.levelTitle}>{e.second}</Typography>
-                        </Box>
-                        <Box sx={s.boxSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-                          <SvgIcon
-                            viewBox='0 0 36 30'
-                            sx={s.imageSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}
-                          >
-                            {e.svg}
-                          </SvgIcon>
-                        </Box>
-                        <Box sx={s.colorLevel({ minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}></Box>
+
+                    <Box
+                      key={levels.indexOf(e)}
+                      sx={s.level({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                      className={`rocket${index}`}
+                      id={`rocket${index}`}
+                    >
+                      <Box sx={s.innerLevel}>
+                        <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
+                        <Typography sx={s.levelTitle}>{e.second}</Typography>
                       </Box>
-                    
+                      <Box sx={s.boxSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                        <SvgIcon
+                          viewBox='0 0 36 30'
+                          sx={s.imageSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                        >
+                          {e.svg}
+                        </SvgIcon>
+                      </Box>
+                      <Box
+                        sx={s.colorLevel({ minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
+                      ></Box>
+                    </Box>
+
                   )
                 })}
               </Box>
@@ -100,9 +120,7 @@ function Skills() {
                 )
               })}
             </Box>
-            
-              
-            
+
           </Box>
         </Box>
         <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
