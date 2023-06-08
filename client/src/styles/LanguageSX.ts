@@ -46,7 +46,11 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
       },
     flexDirection: 'row',
     justifyContent: 'center',
-    bottom: minPort ? '20px' : minLand ? '5px' : medPort || medLand ? '20px' : larPort ? '20px' : '20px'
+    top: 
+      minLand && location === '/portfolio/Skills' ? '5px' : 'none',
+    bottom: 
+      minLand && location === '/portfolio/Skills' ? 'none' :
+      minPort ? '20px' : minLand ? '5px' : medPort || medLand ? '20px' : larPort ? '20px' : '20px'
   }
 }
 

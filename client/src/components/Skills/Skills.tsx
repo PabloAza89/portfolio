@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { Box, Typography, SvgIcon, Button  } from '@mui/material';
 import { useState, useEffect, useRef } from 'react';
 import * as s from '../../styles/SkillsSX';
@@ -57,7 +58,6 @@ function Skills() {
 
   interface levelsI {
     id: number,
-    animated: boolean,
     firstA?: any,
     firstB: any,
     second: string,
@@ -65,12 +65,17 @@ function Skills() {
     svg?: any
   }
 
+  const bold = (string: string) => {
+    return <b style={{ color: 'black' }}>{string}</b>
+  }
+
   const levels: levelsI[] = [
-    { id: 0, animated: false, firstA: english ? `I'm the `: `Soy el `, firstB: english ? <b>master</b> : <b>maestro</b>, second: english ? `of the universe.` : `del universo.`, color: `#000000`, svg: <MySvg/> },
-    { id: 1, animated: false, firstB: english ? <b>High,</b> : <b>Alto,</b>, second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `#8ebd7b` },
-    { id: 2, animated: false, firstA: english ? <b>Medium, </b> : <b>Medio, </b>, firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `#beca7d` },
-    { id: 3, animated: false, firstA: english ? <b>Basic, </b> : <b>Básico, </b>, firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `#f4b800` },
-    { id: 4, animated: false, firstB: <b>Hmm..</b>, second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
+    { id: 0, firstA: english ? `I'm the `: `Soy el `, firstB: english ?  bold(`master`) : bold(`maestro`), second: english ? `of the universe.` : `del universo.`, color: `#000000`, svg: <MySvg/> },
+    //{ id: 1, firstB: english ? <b>High,</b> : <b>Alto,</b>, second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `#8ebd7b` },
+    { id: 1, firstB: english ? bold(`High,`) : bold(`Alto,`), second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `#8ebd7b` },
+    { id: 2, firstA: english ? bold(`Medium, `) : bold(`Medio, `), firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `#beca7d` },
+    { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `#f4b800` },
+    { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
   ]
 
   $(function(){
@@ -94,11 +99,11 @@ function Skills() {
         <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
         
         
-        <Box sx={s.mainContainer({ length:array.length })}>
-          <Typography sx={s.skills}>{english ? `My skills` : `Mis habilidades`}</Typography>
+        <Box sx={s.mainContainer({ length:array.length, minLand })}>
+          <Typography sx={s.skills({ minPort, minLand, medPort, medLand, larPort, larLand })}>{english ? `My skills` : `Mis habilidades`}</Typography>
 
           <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll()} >
-          <Box sx={s.chartContainer({ width, length:array.length })}> {/* aca */}
+          <Box sx={s.chartContainer({ width, length:array.length, minLand })}>
 
             
               <Box sx={s.upperChartContainer({ length:array.length })}>
@@ -107,7 +112,7 @@ function Skills() {
                     return (
                       <Box key={array.indexOf(e)} sx={s.columnBar({ percentage:e.percentage })}>
                         <Box sx={s.leftSide({ percentage:e.percentage })}></Box>
-                        <Box sx={s.centerSide({ percentage:e.percentage })}></Box>
+                        <Box sx={s.centerSide({ percentage:e.percentage })}><Typography sx={s.onlyMinLand({ minPort, minLand, medPort, medLand, larPort, larLand })}>{e.title}</Typography></Box>
                         <Box sx={s.rightSide({ percentage:e.percentage })}></Box>
                       </Box>
                     )
@@ -119,11 +124,11 @@ function Skills() {
 
                       <Box
                         key={levels.indexOf(e)}
-                        sx={s.level({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                        sx={s.level({ bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
                         className={`rocket${index}`}
                         id={`rocket${index}`}
                       >
-                        <Box sx={s.innerLevel}>
+                        <Box sx={s.innerLevel({ minPort, minLand, medPort, medLand, larPort, larLand })}>
                           <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
                           <Typography sx={s.levelTitle}>{e.second}</Typography>
                         </Box>
@@ -146,7 +151,7 @@ function Skills() {
                   })}
                 </Box>
               </Box>
-              <Box sx={s.titlesBox({ length:array.length })}>
+              <Box sx={s.titlesBox({ minLand, length:array.length })}>
                 {array.map((e) => {
                   return (
                     <Typography key={array.indexOf(e)} sx={s.titles}>
@@ -158,7 +163,7 @@ function Skills() {
 
             
 
-          </Box> {/* aca */}
+          </Box>
           </ScrollContainer>
 
 

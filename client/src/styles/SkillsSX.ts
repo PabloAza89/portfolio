@@ -1,4 +1,4 @@
-import { flexdarkgree, noSelect, row, absolute, relative, column, jcc, fixed } from './CommonsSX';
+import { flex, noSelect, row, absolute, relative, column, jcc, fixed } from './CommonsSX';
 import { blue, brown, lime, red, grey } from '@mui/material/colors';
 
 export const background = () => {
@@ -30,7 +30,7 @@ export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, l
     background: 'blue',
     display: 'flex',
     width: '20px',
-    minHeight: minPort || minLand ? '50px' : medPort || medLand ? '1px' : larPort || larLand ? '90px' : '90px',
+    minHeight: minPort ? '50px' : minLand ? '0px' : medPort || medLand ? '1px' : larPort || larLand ? '90px' : '90px',
     position: 'relative'
   }
 }
@@ -80,21 +80,32 @@ export const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, l
 }
 
 interface mainContainerI {
-  length: number
+  length: number,
+  minLand: boolean
 }
 
-export const mainContainer = ({ length }:mainContainerI) => {
+export const mainContainer = ({ length, minLand }:mainContainerI) => {
   return {
     background: 'darkorange',
     //width: `${(92*length)+200}px`, ORIGINAL
     // width: '500px', ACA ESCROLLEA BIEN
 
-    height: '397px', // 50 + 1 + 210 + 100 + 36 = 397
+    height: minLand ? '261px' : '397px', // 50 + 1 + 210 + 100 + 36 = 397
   }
 }
 
-export const skills = () => {
+interface skillsI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+export const skills = ({ minPort, minLand, medPort, medLand, larPort, larLand }: skillsI) => {
   return {
+    display: minLand ? 'none' : 'flex',
     background: '#b86b5a',
     width: 'fit-content',
     fontFamily: 'NillandRegular, serif',
@@ -108,10 +119,11 @@ export const skills = () => {
 
 interface chartContainerI {
   length: number,
-  width: number
+  width: number,
+  minLand: boolean
 }
 
-export const chartContainer = ({ width, length }:chartContainerI) => {
+export const chartContainer = ({ width, length, minLand }:chartContainerI) => {
   return {
     //background: 'rgba(128, 128, 128, 0.400)',
     background: 'darkred',
@@ -120,9 +132,10 @@ export const chartContainer = ({ width, length }:chartContainerI) => {
     borderRadius: '0px 10px 10px 10px',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    width: `${width+90}px`, // dis 280, 370 ok 
-    height: '361px', // 50 + 1 + 210 + 100 = 361
+    alignItems: minLand ? 'center' : 'flex-start',
+    //width: `${width+90}px`, // dis 280, 370 ok (+90)
+    width: `${width}px`,
+    height: minLand ? '261px' : '361px', // 50 + 1 + 210 + 100 = 361
     
   }
 }
@@ -145,27 +158,11 @@ interface upperChartContainerI {
 
 export const upperChartContainer = ({ length }: upperChartContainerI) => {
   return {
-    //'--length': `calc(92 * ${length}px)`,
-    //'--length': `calc(92 * ${length}px)`,
-    //'--vpHeight': `calc(${height}px - 30px)`,
+
     display: 'flex',
     position: 'relative',
     background: 'darkgreen',
-    //width: '900px', // NUEVO, CONFLICTIVO
     flexDirection: 'row',
-    //width: `var(--length)`,
-    //width: `calc(92 * ${length}px)`,
-    //width: `${(92 * length)+200}px`,
-    
-    //alignSelf: 'flex-start',
-    //width: `${(92*length)+200}px`,
-    //width: 'calc((92px * calc(--length)) + 200px)',
-    
-
-
-    //width: `calc((92*var(--lenght))px + 200px)`,
-    //width: '400px',
-    //flexFlow: 'wrap'
   }
 }
 
@@ -181,13 +178,13 @@ interface upperChartContainerRightI {
 export const upperChartContainerRight = ({ minPort, minLand, medPort, medLand, larPort, larLand }: upperChartContainerRightI) => {
   return {
     display: 'flex',
-    position: minPort ? 'relative' : 'relative',
+    position: minPort || minLand ? 'fixed' : 'relative',
     //right: '0px',
     right: '200px',
     flexDirection: 'column',
     width: '0px',
     height: '260px',
-    background: 'red',
+    //background: 'yellow',
   }
 }
 
@@ -261,9 +258,41 @@ export const leftSide = ({ percentage }: columnBarI) => {
 
 export const centerSide = ({ percentage }: columnBarI) => {
   return {
+    display: 'flex',
+    position: 'relative',
     width: '30px',
     height: `${(percentage  + 5)* 2}px`,
-    background: 'linear-gradient(to bottom, gray 10px, darkgrey 0px)'
+    background: 'linear-gradient(to bottom, gray 10px, darkgrey 0px)',
+    //alignItems: 'flex-end',
+    //justifyContent: 'center',
+    textWrap: 'nowrap',
+    //transform: 'rotate(90deg)',
+  }
+}
+
+interface onlyMinLandI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
+}
+
+export const onlyMinLand = ({ minPort, minLand, medPort, medLand, larPort, larLand }: onlyMinLandI) => {
+  return {
+    display: minLand ? 'flex' : 'none',
+    position: 'absolute',
+    transform: 'rotate(270deg)',
+    //width: '130px',
+    width: '-webkit-fill-available',
+    height: '23px',
+    background: 'red',
+    //bottom: '60px',
+    //left: '-45px',
+    bottom: '9px',
+    left: '9px'
+
   }
 }
 
@@ -279,18 +308,20 @@ export const rightSide = ({ percentage }: columnBarI) => {
 }
 
 interface titlesBoxI {
-  length: number
+  length: number,
+  minLand: boolean,
 }
 
-export const titlesBox = ({ length }: titlesBoxI) => {
+export const titlesBox = ({ length, minLand }: titlesBoxI) => {
   return {
-    display: 'flex',
+    display: minLand ? 'none' : 'flex',
     flexDirection: 'row',
-    //background: 'darkgreen',
+    background: 'darkgreen',
     height: '100px',
     width: `${length * 92}px`,
     alignItems: 'center',
     paddingLeft: '57px',
+    paddingRight: '45px',
   }
 }
 
@@ -309,9 +340,14 @@ export const titles = () => {
 interface overlappingI {
   length: number,
   minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
 }
 
-export const overlapping = ({ length, minPort }: overlappingI) => {
+export const overlapping = ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: overlappingI) => {
   return {
     //width: minPort ? '200px' : `${(92*length)+200}px`,
     width: minPort ? '200px' : `200px`,
@@ -320,7 +356,7 @@ export const overlapping = ({ length, minPort }: overlappingI) => {
     //height: '361px', // 50 + 1 + 210 + 100 = 361
     height: '50px', // 50 + 1 + 210 + 100 = 361
     //right: minPort ? '-194px' : 'unset',
-    right: minPort ? '6px' : '0px',
+    right: minPort || minLand ? '6px' : '0px',
     top: '0px',
     //left: '10px',
     display: minPort ? 'flex' : 'flex',
@@ -339,9 +375,10 @@ interface levelI {
   medLand: boolean,
   larPort: boolean,
   larLand: boolean,
+  bgColor: string
 }
 
-export const level = ({ minPort, minLand, medPort, medLand, larPort, larLand }: levelI) => {
+export const level = ({ minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: levelI) => {
   return {
     width: '200px',
     height: '50px',
@@ -349,16 +386,34 @@ export const level = ({ minPort, minLand, medPort, medLand, larPort, larLand }: 
     position: minPort ? 'relative' : 'relative',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    //background: 'green',
+    //background: 'gray',
+    background: `${bgColor}80`,
+    //background: `${bgColor}`,
+    //opacity: '0.5',
     alignItems: 'flex-end',
     right: '-194px',
+    borderRadius: '10px 0px 0px 0px',
+    
   }
 }
 
-export const innerLevel = () => {
+interface innerLevelI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
+}
+
+
+export const innerLevel = ({ minPort, minLand, medPort, medLand, larPort, larLand }: innerLevelI) => {
   return {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    paddingLeft: minPort || minLand ? '10px' : '0px',
+
+    //paddingLeft: '0px'
   }
 }
 
@@ -375,7 +430,7 @@ interface colorLevelI {
 export const colorLevel = ({ minPort, minLand, medPort, medLand, larPort, larLand, color }: colorLevelI ) => {
   return {
     display: minPort ? 'flex' : 'flex',
-    position: minPort ? 'fixed' : 'relative',
+    position: minPort || minLand ? 'fixed' : 'relative',
     right: '6px',
     //top: '200px',
     background: color,
@@ -390,11 +445,13 @@ export const levelTitle = () => {
     width: '135px',
     height: '20px',
     display: 'inline',
-    flexDirection: 'column',
+    flexDirection: 'row',
     position: 'relative',
     justifyContent: 'flex-end',
     //background: 'darkorange',
     fontSize: '14px',
+    color: 'white'
+    
   }
 }
 
@@ -423,6 +480,6 @@ export const imageSVG = ({ minPort, minLand, medPort, medLand, larPort, larLand 
   return {
     width: '45px', // width
     height: '45px', // height,
-    marginRight: '30px'
+    marginRight: minPort || minLand ? '70px' : '30px'
   }
 }

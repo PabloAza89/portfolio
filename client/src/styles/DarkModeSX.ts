@@ -20,19 +20,23 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxS
     width: minPort || minLand ? `30px !important` : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `35px !important`  : `35px !important` ,
     height: minPort || minLand ? `30px !important` : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `35px !important`  : `35px !important` ,
     right: minPort ? '4vw' : minLand ? '5px' : medPort || medLand ? '20px' : '20px',
-    bottom: minLand ? '5px' : '20px',
+    top: 
+      minLand && location === '/portfolio/Skills' ? '5px' : 'none',
+    bottom:
+      minLand && location === '/portfolio/Skills' ? 'none' :
+      minLand ? '5px' : '20px',
     justifyContent: 'center',
     alignItems: 'center',
     opacity:
-    larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? '0' :
-    larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
-    (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.629 ? '0' :
-    (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.548 ? '0' :
-    larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? '0' :
-    larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? '0' :
-    (larPort || larLand) && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? '0' :
-    (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.680 ? '0' :
-    (larLand || larPort) && location === '/portfolio/Skills' && percentageResizedHeight < 0.536 ? '0' :
+      larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? '0' :
+      larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
+      (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.629 ? '0' :
+      (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.548 ? '0' :
+      larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? '0' :
+      larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? '0' :
+      (larPort || larLand) && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? '0' :
+      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.680 ? '0' :
+      (larLand || larPort) && location === '/portfolio/Skills' && percentageResizedHeight < 0.536 ? '0' :
       '1',
     'active': {
       'opacity': '0',
