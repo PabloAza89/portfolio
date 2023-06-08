@@ -45,12 +45,7 @@ const background = ({ minPort, minLand, larPort, staticRefWidth, staticRefHeight
   }
 }
 
-interface scrollI {
-  minPort: boolean,
-  minLand: boolean
-}
-
-const scroll = ({ minPort, minLand }: scrollI) => {
+const scroll = () => {
   return {
     overflow: 'auto',
     background: 'none',

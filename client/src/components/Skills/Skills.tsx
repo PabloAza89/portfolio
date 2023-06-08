@@ -2,6 +2,7 @@ import { Box, Typography, SvgIcon, Button  } from '@mui/material';
 import { useState, useEffect, useRef } from 'react';
 import * as s from '../../styles/SkillsSX';
 import { useSelector } from 'react-redux';
+import ScrollContainer from 'react-indiana-drag-scroll';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
 import '../../styles/SkillsSX.css';
 
@@ -14,6 +15,29 @@ function Skills() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const width = useSelector((state: {width: number}) => state.width)
+
+  const [scrollSpeed, setScrollSpeed] = useState<any>(30)
+
+  function useHorizontalScroll() {
+    const elRef = useRef<HTMLInputElement>(null);
+    useEffect(() => {
+      const el:any = elRef.current;
+      if (el) {
+        const onWheel = (e:any) => {
+          if (e.deltaY === 0) return;
+          e.preventDefault();
+          el.scrollTo({
+            left: el.scrollLeft + e.deltaY * scrollSpeed,
+            behavior: "smooth"
+          });
+        };
+        el.addEventListener("wheel", onWheel);
+        return () => el.removeEventListener("wheel", onWheel);
+      }
+    }, [scrollSpeed]);
+    return elRef;
+  }
 
 
   interface arrayI {
@@ -53,9 +77,11 @@ function Skills() {
     levels.map(e => {
       $(`#rocket${e.id}`).on("click", function(){
         $(`.rocket${e.id}`).addClass("animated");
+        $(`.rocketTest${e.id}`).addClass("animatedTest");
       });
       return $(`.rocket${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-        $(this).removeClass("animated");
+        $(`.rocket${e.id}`).removeClass("animated");
+        $(`.rocketTest${e.id}`).removeClass("animatedTest");
       });
     })
   });
@@ -63,68 +89,86 @@ function Skills() {
   return (
     <Box sx={s.background}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-      <Box sx={s.middleTopBottom({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+      
+      <Box sx={s.middle({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        
+        
         <Box sx={s.mainContainer({ length:array.length })}>
           <Typography sx={s.skills}>{english ? `My skills` : `Mis habilidades`}</Typography>
-          <Box sx={s.chartContainer({ length:array.length })}>
-            <Box sx={s.upperChartContainer({ length:array.length })}>
-              <Box sx={s.chartRow({ length:array.length })}>
+
+          <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll()} >
+          <Box sx={s.chartContainer({ width, length:array.length })}> {/* aca */}
+
+            
+              <Box sx={s.upperChartContainer({ length:array.length })}>
+                <Box sx={s.chartRow({ length:array.length })}>
+                  {array.map((e) => {
+                    return (
+                      <Box key={array.indexOf(e)} sx={s.columnBar({ percentage:e.percentage })}>
+                        <Box sx={s.leftSide({ percentage:e.percentage })}></Box>
+                        <Box sx={s.centerSide({ percentage:e.percentage })}></Box>
+                        <Box sx={s.rightSide({ percentage:e.percentage })}></Box>
+                      </Box>
+                    )
+                  })}
+                </Box>
+                <Box sx={s.upperChartContainerRight({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                  {levels.map((e, index) => {
+                    return (
+
+                      <Box
+                        key={levels.indexOf(e)}
+                        sx={s.level({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                        className={`rocket${index}`}
+                        id={`rocket${index}`}
+                      >
+                        <Box sx={s.innerLevel}>
+                          <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
+                          <Typography sx={s.levelTitle}>{e.second}</Typography>
+                        </Box>
+                        <Box sx={s.boxSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                          <SvgIcon
+                            viewBox='0 0 36 30'
+                            sx={s.imageSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                          >
+                            {e.svg}
+                          </SvgIcon>
+                        </Box>
+                        <Box
+                          className={`rocketTest${index}`}
+                          id={`rocketTest${index}`}
+                          sx={s.colorLevel({ minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
+                        ></Box>
+                      </Box>
+
+                    )
+                  })}
+                </Box>
+              </Box>
+              <Box sx={s.titlesBox({ length:array.length })}>
                 {array.map((e) => {
                   return (
-                    <Box key={array.indexOf(e)} sx={s.columnBar({ percentage:e.percentage })}>
-                      <Box sx={s.leftSide({ percentage:e.percentage })}></Box>
-                      <Box sx={s.centerSide({ percentage:e.percentage })}></Box>
-                      <Box sx={s.rightSide({ percentage:e.percentage })}></Box>
-                    </Box>
+                    <Typography key={array.indexOf(e)} sx={s.titles}>
+                      {e.title}
+                    </Typography>
                   )
                 })}
               </Box>
-              <Box sx={s.upperChartContainerRight({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-                {levels.map((e, index) => {
-                  return (
 
-                    <Box
-                      key={levels.indexOf(e)}
-                      sx={s.level({ minPort, minLand, medPort, medLand, larPort, larLand })}
-                      className={`rocket${index}`}
-                      id={`rocket${index}`}
-                    >
-                      <Box sx={s.innerLevel}>
-                        <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
-                        <Typography sx={s.levelTitle}>{e.second}</Typography>
-                      </Box>
-                      <Box sx={s.boxSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-                        <SvgIcon
-                          viewBox='0 0 36 30'
-                          sx={s.imageSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}
-                        >
-                          {e.svg}
-                        </SvgIcon>
-                      </Box>
-                      <Box
-                        sx={s.colorLevel({ minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
-                      ></Box>
-                    </Box>
+            
 
-                  )
-                })}
-              </Box>
-            </Box>
-            <Box sx={s.titlesBox({ length:array.length })}>
-              {array.map((e) => {
-                return (
-                  <Typography key={array.indexOf(e)} sx={s.titles}>
-                    {e.title}
-                  </Typography>
-                )
-              })}
-            </Box>
+          </Box> {/* aca */}
+          </ScrollContainer>
 
-          </Box>
+
         </Box>
+
+          
+        
         <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       </Box>
+      
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     </Box>
   )

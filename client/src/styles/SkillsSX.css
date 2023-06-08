@@ -1,11 +1,32 @@
 .animated {
-   animation-name: rocket;
-   animation-duration: 2.5s;
+   animation: rocket 2.5s;
 }
 
+.animatedTest {
+  animation: rocketTest 2.5s;
+}
+
+
 @keyframes rocket {
-  0% { transform: translate(-20px, 0px) }
+  0% { transform: translate(0px, 0px) }
   50% { transform: translate(-194px, 0px) }
   75% { transform: translate(-194px, 0px) }
-  100% { transform: translate(-20px, 0px) }
+  100% { transform: translate(0px, 0px) }
 }
+
+/* .boxwithout {
+  animation: antimovebox 2.5s infinite;
+} */
+
+/* .boxwithout {
+  animation: none;
+} */
+
+
+@keyframes rocketTest {
+  0% { transform: translate(-194px, 0px) }
+  50% { transform: translate(0px, 0px) }
+  75% { transform: translate(0px, 0px) }
+  100% { transform: translate(-194px, 0px) }
+}
+

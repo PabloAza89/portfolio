@@ -98,7 +98,7 @@ function Projects() {
     <Box sx={topBottomHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     <Box sx={background({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height })}>
 
-      <ScrollContainer innerRef={useHorizontalScroll()} style={scroll({ minPort, minLand })}>
+      <ScrollContainer innerRef={useHorizontalScroll()} style={scroll()}>
 
         <Box sx={solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
         <Box sx={intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>

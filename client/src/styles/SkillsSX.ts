@@ -1,5 +1,20 @@
-import { flex, noSelect, row, absolute, relative, column, jcc, fixed } from './CommonsSX';
+import { flexdarkgree, noSelect, row, absolute, relative, column, jcc, fixed } from './CommonsSX';
 import { blue, brown, lime, red, grey } from '@mui/material/colors';
+
+export const background = () => {
+  return {
+    //background: 'darkred',
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'relative',
+    justifyContent: 'space-between',
+    //alignItems: 'center',// ORIGINAL
+    alignItems: 'flex-start',
+    width: 'calc(100vw - 12px)', // ORIGINAL
+    //width: '900px',
+    height: 'calc(100vh - 12px)'
+  }
+}
 
 interface topBottomHelperI {
   minPort: boolean,
@@ -12,15 +27,15 @@ interface topBottomHelperI {
 
 export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
-    //background: 'blue',
+    background: 'blue',
     display: 'flex',
     width: '20px',
-    minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : larPort || larLand ? '90px' : '90px',
+    minHeight: minPort || minLand ? '50px' : medPort || medLand ? '1px' : larPort || larLand ? '90px' : '90px',
     position: 'relative'
   }
 }
 
-interface middleTopBottomI {
+interface middleI {
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -29,11 +44,14 @@ interface middleTopBottomI {
   larLand: boolean
 }
 
-export const middleTopBottom = ({ minPort, minLand, medPort, medLand, larPort, larLand }: middleTopBottomI) => {
+export const middle = ({ minPort, minLand, medPort, medLand, larPort, larLand }: middleI) => {
   return {
-    //background: 'green',
-    display: 'flex',
-    width: 'calc(100vw - 12px)',
+    background: 'orange',
+    //display: minPort ? 'contents' : 'flex', ANTERIOR
+    //alignSelf: 'left',
+    display: minPort ? 'contents' : 'contents',
+    // width: 'calc(100vw - 12px)', ORIGINAL
+    //width: '900px',
     minHeight: '397px',
     height: '70vh',
     //minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : larPort || larLand ? '90px' : '90px',
@@ -61,27 +79,16 @@ export const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, l
   }
 }
 
-export const background = () => {
-  return {
-    //background: 'darkred',
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'relative',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: 'calc(100vw - 12px)',
-    height: 'calc(100vh - 12px)'
-  }
-}
-
 interface mainContainerI {
   length: number
 }
 
 export const mainContainer = ({ length }:mainContainerI) => {
   return {
-    //background: 'blue',
-    width: `${(92*length)+200}px`,
+    background: 'darkorange',
+    //width: `${(92*length)+200}px`, ORIGINAL
+    // width: '500px', ACA ESCROLLEA BIEN
+
     height: '397px', // 50 + 1 + 210 + 100 + 36 = 397
   }
 }
@@ -100,21 +107,35 @@ export const skills = () => {
 }
 
 interface chartContainerI {
-  length: number
+  length: number,
+  width: number
 }
 
-export const chartContainer = ({ length }:chartContainerI) => {
+export const chartContainer = ({ width, length }:chartContainerI) => {
   return {
-    background: 'rgba(128, 128, 128, 0.400)',
+    //background: 'rgba(128, 128, 128, 0.400)',
+    background: 'darkred',
     display: 'flex',
     position: 'relative',
     borderRadius: '0px 10px 10px 10px',
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    width: `${(92*length)+200}px`,
+    width: `${width+90}px`, // dis 280, 370 ok 
     height: '361px', // 50 + 1 + 210 + 100 = 361
     
+  }
+}
+
+export const scroll = () => {
+  return {
+    //overflow: 'scroll', ORIGINAL
+    overflow: 'auto',
+    //width: '900px'
+    
+    //width: '1200px',
+    //background: 'none',
+    //opacity: '0.9',
   }
 }
 
@@ -124,11 +145,26 @@ interface upperChartContainerI {
 
 export const upperChartContainer = ({ length }: upperChartContainerI) => {
   return {
+    //'--length': `calc(92 * ${length}px)`,
+    //'--length': `calc(92 * ${length}px)`,
+    //'--vpHeight': `calc(${height}px - 30px)`,
     display: 'flex',
     position: 'relative',
-    //background: 'red',
+    background: 'darkgreen',
+    //width: '900px', // NUEVO, CONFLICTIVO
     flexDirection: 'row',
-    width: `${(92*length)+200}px`,
+    //width: `var(--length)`,
+    //width: `calc(92 * ${length}px)`,
+    //width: `${(92 * length)+200}px`,
+    
+    //alignSelf: 'flex-start',
+    //width: `${(92*length)+200}px`,
+    //width: 'calc((92px * calc(--length)) + 200px)',
+    
+
+
+    //width: `calc((92*var(--lenght))px + 200px)`,
+    //width: '400px',
     //flexFlow: 'wrap'
   }
 }
@@ -145,7 +181,7 @@ interface upperChartContainerRightI {
 export const upperChartContainerRight = ({ minPort, minLand, medPort, medLand, larPort, larLand }: upperChartContainerRightI) => {
   return {
     display: 'flex',
-    position: minPort ? 'fixed' : 'relative',
+    position: minPort ? 'relative' : 'relative',
     //right: '0px',
     right: '200px',
     flexDirection: 'column',
@@ -167,7 +203,7 @@ export const chartRow = ({ length }: chartRowI) => {
     justifyContent: 'flex-start',
     alignItems: 'end',
     //width: `${(92*length)+200}px`,
-    width: `${(92*length)}px`,
+    width: `${92*length}px`,
     height: '210px',
     marginTop: '50px',
     borderTop: '1px solid steelblue',
@@ -313,7 +349,7 @@ export const level = ({ minPort, minLand, medPort, medLand, larPort, larLand }: 
     position: minPort ? 'relative' : 'relative',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    background: 'green',
+    //background: 'green',
     alignItems: 'flex-end',
     right: '-194px',
   }
@@ -345,6 +381,7 @@ export const colorLevel = ({ minPort, minLand, medPort, medLand, larPort, larLan
     background: color,
     width: '6px',
     height: '38px',
+
   }
 }
 
