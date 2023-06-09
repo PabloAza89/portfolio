@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
 import '../../styles/SkillsSX.css';
+import $ from 'jquery';
 
 function Skills() {
 
@@ -19,6 +20,7 @@ function Skills() {
   const width = useSelector((state: {width: number}) => state.width)
 
   const [scrollSpeed, setScrollSpeed] = useState<any>(30)
+
 
   function useHorizontalScroll() {
     const elRef = useRef<HTMLInputElement>(null);
@@ -40,7 +42,6 @@ function Skills() {
     return elRef;
   }
 
-
   interface arrayI {
     title: string,
     percentage: number
@@ -55,6 +56,16 @@ function Skills() {
     { title: english ? 'BBQ' : 'Asado', percentage: 100 },
     { title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }
   ]
+
+  const [graphDontFit, setGraphDontFit] = useState<any>(width < ((array.length * 92) + 200) ? true : false)
+  console.log("graphDontFit", graphDontFit)
+
+  useEffect(() => {
+    setGraphDontFit(width < ((array.length * 92) + 200) ? true : false)
+  }, [width, array.length]);
+
+
+
 
   interface levelsI {
     id: number,
@@ -71,41 +82,65 @@ function Skills() {
 
   const levels: levelsI[] = [
     { id: 0, firstA: english ? `I'm the `: `Soy el `, firstB: english ?  bold(`master`) : bold(`maestro`), second: english ? `of the universe.` : `del universo.`, color: `#000000`, svg: <MySvg/> },
-    //{ id: 1, firstB: english ? <b>High,</b> : <b>Alto,</b>, second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `#8ebd7b` },
     { id: 1, firstB: english ? bold(`High,`) : bold(`Alto,`), second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `#8ebd7b` },
     { id: 2, firstA: english ? bold(`Medium, `) : bold(`Medio, `), firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `#beca7d` },
     { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `#f4b800` },
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
   ]
 
-  $(function(){
-    levels.map(e => {
-      $(`#rocket${e.id}`).on("click", function(){
-        $(`.rocket${e.id}`).addClass("animated");
-        $(`.rocketTest${e.id}`).addClass("animatedTest");
-      });
-      return $(`.rocket${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-        $(`.rocket${e.id}`).removeClass("animated");
-        $(`.rocketTest${e.id}`).removeClass("animatedTest");
-      });
+  // $(function(){
+  //   levels.map(e => {
+  //     $(`#rocket${e.id}`).on("click", function(){
+  //       $(`.rocket${e.id}`).addClass("animated");
+  //       $(`.rocketTest${e.id}`).addClass("animatedTest");
+  //     });
+  //     return $(`.rocket${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+  //       $(`.rocket${e.id}`).removeClass("animated");
+  //       $(`.rocketTest${e.id}`).removeClass("animatedTest");
+  //     });
+  //   })
+  // });
+
+
+
+
+    $(function(){
+      //if (graphDontFit)  {
+        levels.map(e => {
+          $(`#rocket${e.id}`).on("click", function(){
+            $(`.rocket${e.id}`).addClass("animated");
+            $(`.rocketTest${e.id}`).addClass("animatedTest");
+          });
+          return $(`.rocket${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+            $(`.rocket${e.id}`).removeClass("animated");
+            $(`.rocketTest${e.id}`).removeClass("animatedTest");
+          });
+        })
+
+      //}
     })
-  });
+
+
+
+    //console.log("ABC", array.length)
+    //console.log("ABC", ((array.length * 92) + 200) <= width )
+
 
   return (
     <Box sx={s.background}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-      
+
       <Box sx={s.middle({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        
-        
+        <Box sx={s.leftRightHelper({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+
+
         <Box sx={s.mainContainer({ length:array.length, minLand })}>
           <Typography sx={s.skills({ minPort, minLand, medPort, medLand, larPort, larLand })}>{english ? `My skills` : `Mis habilidades`}</Typography>
 
           <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll()} >
-          <Box sx={s.chartContainer({ width, length:array.length, minLand })}>
+          <Box sx={s.chartContainer({ graphDontFit, width, length:array.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
 
-            
+
               <Box sx={s.upperChartContainer({ length:array.length })}>
                 <Box sx={s.chartRow({ length:array.length })}>
                   {array.map((e) => {
@@ -118,13 +153,13 @@ function Skills() {
                     )
                   })}
                 </Box>
-                <Box sx={s.upperChartContainerRight({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                <Box sx={s.upperChartContainerRight({ graphDontFit, width, length:array.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
                   {levels.map((e, index) => {
                     return (
 
                       <Box
                         key={levels.indexOf(e)}
-                        sx={s.level({ bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
+                        sx={s.level({ graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
                         className={`rocket${index}`}
                         id={`rocket${index}`}
                       >
@@ -143,7 +178,7 @@ function Skills() {
                         <Box
                           className={`rocketTest${index}`}
                           id={`rocketTest${index}`}
-                          sx={s.colorLevel({ minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
+                          sx={s.colorLevel({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
                         ></Box>
                       </Box>
 
@@ -161,7 +196,7 @@ function Skills() {
                 })}
               </Box>
 
-            
+
 
           </Box>
           </ScrollContainer>
@@ -169,11 +204,11 @@ function Skills() {
 
         </Box>
 
-          
-        
-        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+
+
+        <Box sx={s.leftRightHelper({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       </Box>
-      
+
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     </Box>
   )

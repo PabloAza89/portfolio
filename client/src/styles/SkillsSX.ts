@@ -49,19 +49,22 @@ export const middle = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
     background: 'orange',
     //display: minPort ? 'contents' : 'flex', ANTERIOR
     //alignSelf: 'left',
-    display: minPort ? 'contents' : 'contents',
+    display: minPort ? 'contents' : 'flex',
     // width: 'calc(100vw - 12px)', ORIGINAL
     //width: '900px',
-    minHeight: '397px',
-    height: '70vh',
+    width: 'calc(100vw - 12px)',
+    minHeight: minLand ? '261px' : '397px', // for LAR & LAND ?
+    height: minLand ? '261px' : '397px',
     //minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : larPort || larLand ? '90px' : '90px',
     position: 'relative',
+    
     justifyContent: 'space-between',
     alignItems: 'center'
   }
 }
 
 interface leftRightHelperI {
+  graphDontFit: boolean,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -70,12 +73,14 @@ interface leftRightHelperI {
   larLand: boolean
 }
 
-export const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
+export const leftRightHelper = ({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
   return {
-    display: larPort || larLand ? 'flex' : 'none',
-    //background: 'red',
+    //display: larPort || larLand ? 'flex' : 'none',
+    display: graphDontFit ? 'none' : 'flex',
+    background: 'blue',
     //minHeight: '635px',
-    minWidth: '22px'
+    minWidth: larPort || larLand ? '22px' : '0px',
+    height: '50px',
   }
 }
 
@@ -87,7 +92,9 @@ interface mainContainerI {
 export const mainContainer = ({ length, minLand }:mainContainerI) => {
   return {
     background: 'darkorange',
-    //width: `${(92*length)+200}px`, ORIGINAL
+    //width: `${(92*length)+200}px`, // ORIGINAL
+    //width: `914px`, // ORIGINAL
+    width: `${(length*92)+200}$px`, // ORIGINAL
     // width: '500px', ACA ESCROLLEA BIEN
 
     height: minLand ? '261px' : '397px', // 50 + 1 + 210 + 100 + 36 = 397
@@ -118,12 +125,18 @@ export const skills = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
 }
 
 interface chartContainerI {
+  graphDontFit: boolean,
   length: number,
   width: number,
-  minLand: boolean
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean
 }
 
-export const chartContainer = ({ width, length, minLand }:chartContainerI) => {
+export const chartContainer = ({ graphDontFit, width, length, minPort, minLand, medPort, medLand, larPort, larLand }:chartContainerI) => {
   return {
     //background: 'rgba(128, 128, 128, 0.400)',
     background: 'darkred',
@@ -132,9 +145,11 @@ export const chartContainer = ({ width, length, minLand }:chartContainerI) => {
     borderRadius: '0px 10px 10px 10px',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: minLand ? 'center' : 'flex-start',
+    //alignItems: minLand ? 'center' : 'flex-start',
+    alignItems: larPort || larLand ? 'flex-start' : graphDontFit ? 'flex-start' : 'center',
+    
     //width: `${width+90}px`, // dis 280, 370 ok (+90)
-    width: `${width}px`,
+    width: graphDontFit ? `${width}px` : `${(length*92)+200}px`,
     height: minLand ? '261px' : '361px', // 50 + 1 + 210 + 100 = 361
     
   }
@@ -144,11 +159,6 @@ export const scroll = () => {
   return {
     //overflow: 'scroll', ORIGINAL
     overflow: 'auto',
-    //width: '900px'
-    
-    //width: '1200px',
-    //background: 'none',
-    //opacity: '0.9',
   }
 }
 
@@ -167,6 +177,9 @@ export const upperChartContainer = ({ length }: upperChartContainerI) => {
 }
 
 interface upperChartContainerRightI {
+  graphDontFit: boolean,
+  width: number,
+  length: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -175,16 +188,17 @@ interface upperChartContainerRightI {
   larLand: boolean
 }
 
-export const upperChartContainerRight = ({ minPort, minLand, medPort, medLand, larPort, larLand }: upperChartContainerRightI) => {
+export const upperChartContainerRight = ({ graphDontFit, width, length, minPort, minLand, medPort, medLand, larPort, larLand }: upperChartContainerRightI) => {
   return {
     display: 'flex',
-    position: minPort || minLand ? 'fixed' : 'relative',
-    //right: '0px',
-    right: '200px',
+    position: larPort || larLand ? 'relative' : graphDontFit ? 'fixed' : 'relative',
+    right: '0px',
+    //right: '200px',
     flexDirection: 'column',
-    width: '0px',
+    //right: graphDontFit ? '0px' : 'none',
+    width: graphDontFit ? '0px' : '200px', // WIDTH 0 FOR SCROLL 
     height: '260px',
-    //background: 'yellow',
+    background: 'yellow',
   }
 }
 
@@ -337,38 +351,8 @@ export const titles = () => {
   }
 }
 
-interface overlappingI {
-  length: number,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
-}
-
-export const overlapping = ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: overlappingI) => {
-  return {
-    //width: minPort ? '200px' : `${(92*length)+200}px`,
-    width: minPort ? '200px' : `200px`,
-    //right: minPort ? '0px' : 'unset',
-    //width: `200px`,
-    //height: '361px', // 50 + 1 + 210 + 100 = 361
-    height: '50px', // 50 + 1 + 210 + 100 = 361
-    //right: minPort ? '-194px' : 'unset',
-    right: minPort || minLand ? '6px' : '0px',
-    top: '0px',
-    //left: '10px',
-    display: minPort ? 'flex' : 'flex',
-    position: minPort ? 'fixed' : 'relative',
-    flexDirection: 'column',
-    //justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    //background: 'blue', 
-  }
-}
-
 interface levelI {
+  graphDontFit: boolean,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -378,20 +362,18 @@ interface levelI {
   bgColor: string
 }
 
-export const level = ({ minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: levelI) => {
+export const level = ({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: levelI) => {
   return {
     width: '200px',
     height: '50px',
     display: 'flex',
-    position: minPort ? 'relative' : 'relative',
+    position: 'relative',
     flexDirection: 'row',
     justifyContent: 'space-between',
     //background: 'gray',
     background: `${bgColor}80`,
-    //background: `${bgColor}`,
-    //opacity: '0.5',
     alignItems: 'flex-end',
-    right: '-194px',
+    right: graphDontFit ? '-194px' : '0px',
     borderRadius: '10px 0px 0px 0px',
     
   }
@@ -418,6 +400,7 @@ export const innerLevel = ({ minPort, minLand, medPort, medLand, larPort, larLan
 }
 
 interface colorLevelI {
+  graphDontFit: boolean,
   color: string,
   minPort: boolean,
   minLand: boolean,
@@ -427,10 +410,10 @@ interface colorLevelI {
   larLand: boolean
 }
 
-export const colorLevel = ({ minPort, minLand, medPort, medLand, larPort, larLand, color }: colorLevelI ) => {
+export const colorLevel = ({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, color }: colorLevelI ) => {
   return {
     display: minPort ? 'flex' : 'flex',
-    position: minPort || minLand ? 'fixed' : 'relative',
+    position: /* minPort || minLand || */ graphDontFit ? 'fixed' : 'relative',
     right: '6px',
     //top: '200px',
     background: color,
