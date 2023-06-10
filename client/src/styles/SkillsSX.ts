@@ -191,8 +191,9 @@ interface upperChartContainerRightI {
 export const upperChartContainerRight = ({ graphDontFit, width, length, minPort, minLand, medPort, medLand, larPort, larLand }: upperChartContainerRightI) => {
   return {
     display: 'flex',
-    position: larPort || larLand ? 'relative' : graphDontFit ? 'fixed' : 'relative',
-    right: '0px',
+    //position: larPort || larLand ? 'relative' : graphDontFit ? 'fixed' : 'relative',
+    position: graphDontFit ? 'fixed' : 'relative',
+    right: graphDontFit ? '200px' : '0px',
     //right: '200px',
     flexDirection: 'column',
     //right: graphDontFit ? '0px' : 'none',

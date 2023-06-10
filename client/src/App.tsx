@@ -10,7 +10,6 @@ import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
 import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
-//import StaticBackground from './components/StaticBackground/StaticBackground';
 import { 
   background, blackWhite, greyBottom, greyRight, topBottomHelper
 } from './styles/AppSX';
@@ -51,9 +50,8 @@ function App() {
       dispatch(setMinRatioReference(window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width)))
     }
     window.addEventListener("resize", handleResize);
-    handleResize();
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  });
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
@@ -63,6 +61,8 @@ function App() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const width = useSelector((state: {width:number}) => state.width)
+  //console.log("WIDTH", width)
 
   return (
     <Box sx={background({ darkMode })} >

@@ -1,6 +1,6 @@
-import * as React from 'react'
+//import * as React from 'react'
 import { Box, Typography, SvgIcon, Button  } from '@mui/material';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import * as s from '../../styles/SkillsSX';
 import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
@@ -20,7 +20,6 @@ function Skills() {
   const width = useSelector((state: {width: number}) => state.width)
 
   const [scrollSpeed, setScrollSpeed] = useState<any>(30)
-
 
   function useHorizontalScroll() {
     const elRef = useRef<HTMLInputElement>(null);
@@ -57,15 +56,13 @@ function Skills() {
     { title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }
   ]
 
-  const [graphDontFit, setGraphDontFit] = useState<any>(width < ((array.length * 92) + 200) ? true : false)
+  const [graphDontFit, setGraphDontFit] = useState<any>(width < ((array.length * 92) + 206) ? true : false)
   console.log("graphDontFit", graphDontFit)
 
+  
   useEffect(() => {
-    setGraphDontFit(width < ((array.length * 92) + 200) ? true : false)
+    setGraphDontFit(width < ((array.length * 92) + 206) ? true : false)
   }, [width, array.length]);
-
-
-
 
   interface levelsI {
     id: number,
@@ -80,46 +77,43 @@ function Skills() {
     return <b style={{ color: 'black' }}>{string}</b>
   }
 
-  const levels: levelsI[] = [
+  const levels = useMemo(() =>  [
     { id: 0, firstA: english ? `I'm the `: `Soy el `, firstB: english ?  bold(`master`) : bold(`maestro`), second: english ? `of the universe.` : `del universo.`, color: `#000000`, svg: <MySvg/> },
     { id: 1, firstB: english ? bold(`High,`) : bold(`Alto,`), second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `#8ebd7b` },
     { id: 2, firstA: english ? bold(`Medium, `) : bold(`Medio, `), firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `#beca7d` },
     { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `#f4b800` },
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
-  ]
+  ], [english]);
 
-  // $(function(){
-  //   levels.map(e => {
-  //     $(`#rocket${e.id}`).on("click", function(){
-  //       $(`.rocket${e.id}`).addClass("animated");
-  //       $(`.rocketTest${e.id}`).addClass("animatedTest");
-  //     });
-  //     return $(`.rocket${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-  //       $(`.rocket${e.id}`).removeClass("animated");
-  //       $(`.rocketTest${e.id}`).removeClass("animatedTest");
-  //     });
-  //   })
-  // });
+  useEffect(() => {
+    if (graphDontFit === true)  {
+      $(function(){
+          levels.forEach(e => {
+          $(`#barsMoveId${e.id}`).on("click", function(){
+              $(`.barsMoveClass${e.id}`).addClass(`barsMoveClass`)
+              $(`.barsFixedClass${e.id}`).addClass(`barsFixedClass`) // ENABLES
+            });
+              $(`#barsMoveId${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+              $(`.barsMoveClass${e.id}`).removeClass(`barsMoveClass`);
+              $(`.barsFixedClass${e.id}`).removeClass(`barsFixedClass`); // TRIGGERS TO INITIAL STATE
+            });
+          })
+      })
+    } else {
+      levels.forEach(e => {
 
+            $(`#barsMoveId${e.id}`).removeClass(`barsMoveClass${e.id}`);
+            $(`#barsFixedId${e.id}`).removeClass(`barsFixedClass${e.id}`);
+            
 
-
-
-    $(function(){
-      //if (graphDontFit)  {
-        levels.map(e => {
-          $(`#rocket${e.id}`).on("click", function(){
-            $(`.rocket${e.id}`).addClass("animated");
-            $(`.rocketTest${e.id}`).addClass("animatedTest");
-          });
-          return $(`.rocket${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-            $(`.rocket${e.id}`).removeClass("animated");
-            $(`.rocketTest${e.id}`).removeClass("animatedTest");
-          });
+         
         })
 
-      //}
-    })
 
+    }
+
+  },[graphDontFit, levels])
+    
 
 
     //console.log("ABC", array.length)
@@ -160,8 +154,8 @@ function Skills() {
                       <Box
                         key={levels.indexOf(e)}
                         sx={s.level({ graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
-                        className={`rocket${index}`}
-                        id={`rocket${index}`}
+                        className={`barsMoveClass${index}`}
+                        id={`barsMoveId${index}`}
                       >
                         <Box sx={s.innerLevel({ minPort, minLand, medPort, medLand, larPort, larLand })}>
                           <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
@@ -176,8 +170,8 @@ function Skills() {
                           </SvgIcon>
                         </Box>
                         <Box
-                          className={`rocketTest${index}`}
-                          id={`rocketTest${index}`}
+                          className={`barsFixedClass${index}`}
+                          id={`barsFixedId${index}`}
                           sx={s.colorLevel({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
                         ></Box>
                       </Box>

@@ -1,19 +1,19 @@
-.animated {
-   animation: rocket 2.5s;
+.barsMoveClass {
+   animation: entireBarMove 2.5s;
 }
 
-.animatedTest {
-  animation: rocketTest 2.5s;
-}
-
-@keyframes rocket {
+@keyframes entireBarMove {
   0% { transform: translate(0px, 0px) }
   50% { transform: translate(-194px, 0px) }
   75% { transform: translate(-194px, 0px) }
   100% { transform: translate(0px, 0px) }
 }
 
-@keyframes rocketTest {
+.barsFixedClass {
+  animation: colorsFixed 2.5s;
+}
+
+@keyframes colorsFixed {
   0% { transform: translate(-194px, 0px) }
   50% { transform: translate(0px, 0px) }
   75% { transform: translate(0px, 0px) }

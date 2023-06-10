@@ -11,25 +11,29 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import {
   iconBox, iconMedia, title, background
 } from '../../styles/TechnologiesSX';
+import store from '../../store/store';
+
 
 function Technologies() {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
-  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
+  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
+  //const currentWidth = store.getState().currentWidth
+  console.log("currentWidth", currentWidth)
 
-  const [ parentWidthh, setParentWidthh ] = useState<number>(0);
+  //const [ parentWidthh, setParentWidthh ] = useState<number>(0);
 
   function useHorizontalScroll() {
     const elRef = useRef<any>(null);
-    useLayoutEffect(() => {
+    /* useLayoutEffect(() => {
       setParentWidthh(elRef.current.offsetWidth);
-    },[currentWidth]);
+    },[]); */
     useEffect(() => {
       const el:any = elRef.current;
       if (el) {
@@ -71,7 +75,7 @@ function Technologies() {
     { icon: node, title: `Node.js` },
   ]
 
-  console.log("currentWidth", currentWidth)
+  
 
   return (
     <ScrollContainer /* ref={ref}  */style={background({ currentWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
