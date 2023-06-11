@@ -11,6 +11,7 @@ function Language() {
   const dispatch = useDispatch()
 
   const english = useSelector((state: {english:boolean}) => state.english)
+  const height = useSelector((state: {height:number}) => state.height)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
@@ -23,10 +24,8 @@ function Language() {
   const location = useLocation()
 
   return (
-    <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname, percentageResizedHeight })}>
-      {/* <CardMedia component="div" onClick={() => dispatch(languageChanger(true))} sx={lanEnFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></CardMedia> */}
+    <Box sx={background({ height, minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname, percentageResizedHeight })}>
       <Box component="img" src={lanEn} onClick={() => dispatch(languageChanger(true))} sx={lanEnFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></Box>
-      {/* <CardMedia component="div" onClick={() => dispatch(languageChanger(false))} sx={lanEsFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></CardMedia> */}
       <Box component="img" src={lanEs} onClick={() => dispatch(languageChanger(false))} sx={lanEsFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}></Box>
     </Box>
   )

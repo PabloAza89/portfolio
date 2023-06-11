@@ -1,4 +1,3 @@
-//import * as React from 'react'
 import { Box, Typography, SvgIcon, Button  } from '@mui/material';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import * as s from '../../styles/SkillsSX';
@@ -17,9 +16,7 @@ function Skills() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const width = useSelector((state: {width: number}) => state.width)
-
-  const [scrollSpeed, setScrollSpeed] = useState<any>(30)
+  const width = useSelector((state: {currentWidth: number}) => state.currentWidth)
 
   function useHorizontalScroll() {
     const elRef = useRef<HTMLInputElement>(null);
@@ -30,14 +27,14 @@ function Skills() {
           if (e.deltaY === 0) return;
           e.preventDefault();
           el.scrollTo({
-            left: el.scrollLeft + e.deltaY * scrollSpeed,
+            left: el.scrollLeft + e.deltaY * 30,
             behavior: "smooth"
           });
         };
         el.addEventListener("wheel", onWheel);
         return () => el.removeEventListener("wheel", onWheel);
       }
-    }, [scrollSpeed]);
+    }, []);
     return elRef;
   }
 
@@ -56,22 +53,13 @@ function Skills() {
     { title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }
   ]
 
-  const [graphDontFit, setGraphDontFit] = useState<any>(width < ((array.length * 92) + 206) ? true : false)
+   const [ graphDontFit, setGraphDontFit ] = useState<any>(width < ((array.length * 92) + 206) ? true : false)
   console.log("graphDontFit", graphDontFit)
 
   
   useEffect(() => {
     setGraphDontFit(width < ((array.length * 92) + 206) ? true : false)
   }, [width, array.length]);
-
-  interface levelsI {
-    id: number,
-    firstA?: any,
-    firstB: any,
-    second: string,
-    color: string,
-    svg?: any
-  }
 
   const bold = (string: string) => {
     return <b style={{ color: 'black' }}>{string}</b>
@@ -89,52 +77,33 @@ function Skills() {
     if (graphDontFit === true)  {
       $(function(){
           levels.forEach(e => {
-          $(`#barsMoveId${e.id}`).on("click", function(){
+            $(`#barsMoveId${e.id}`).on("click", function(){
               $(`.barsMoveClass${e.id}`).addClass(`barsMoveClass`)
               $(`.barsFixedClass${e.id}`).addClass(`barsFixedClass`) // ENABLES
             });
-              $(`#barsMoveId${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-              $(`.barsMoveClass${e.id}`).removeClass(`barsMoveClass`);
-              $(`.barsFixedClass${e.id}`).removeClass(`barsFixedClass`); // TRIGGERS TO INITIAL STATE
-            });
-          })
+            $(`#barsMoveId${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+            $(`.barsMoveClass${e.id}`).removeClass(`barsMoveClass`);
+            $(`.barsFixedClass${e.id}`).removeClass(`barsFixedClass`); // TRIGGERS TO INITIAL STATE
+          });
+        })
       })
     } else {
       levels.forEach(e => {
-
-            $(`#barsMoveId${e.id}`).removeClass(`barsMoveClass${e.id}`);
-            $(`#barsFixedId${e.id}`).removeClass(`barsFixedClass${e.id}`);
-            
-
-         
-        })
-
-
+        $(`#barsMoveId${e.id}`).removeClass(`barsMoveClass${e.id}`);
+        $(`#barsFixedId${e.id}`).removeClass(`barsFixedClass${e.id}`);
+      })
     }
-
   },[graphDontFit, levels])
-    
-
-
-    //console.log("ABC", array.length)
-    //console.log("ABC", ((array.length * 92) + 200) <= width )
-
 
   return (
     <Box sx={s.background}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-
       <Box sx={s.middle({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Box sx={s.leftRightHelper({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-
-
         <Box sx={s.mainContainer({ length:array.length, minLand })}>
           <Typography sx={s.skills({ minPort, minLand, medPort, medLand, larPort, larLand })}>{english ? `My skills` : `Mis habilidades`}</Typography>
-
-          <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll()} >
+          <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll({ minLand })} >
           <Box sx={s.chartContainer({ graphDontFit, width, length:array.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
-
-
               <Box sx={s.upperChartContainer({ length:array.length })}>
                 <Box sx={s.chartRow({ length:array.length })}>
                   {array.map((e) => {
@@ -150,21 +119,21 @@ function Skills() {
                 <Box sx={s.upperChartContainerRight({ graphDontFit, width, length:array.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
                   {levels.map((e, index) => {
                     return (
-
                       <Box
                         key={levels.indexOf(e)}
                         sx={s.level({ graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
                         className={`barsMoveClass${index}`}
                         id={`barsMoveId${index}`}
                       >
-                        <Box sx={s.innerLevel({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                        <Box
+                          sx={s.innerLevel({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}>
                           <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
                           <Typography sx={s.levelTitle}>{e.second}</Typography>
                         </Box>
-                        <Box sx={s.boxSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                        <Box sx={s.boxSVG({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}>
                           <SvgIcon
                             viewBox='0 0 36 30'
-                            sx={s.imageSVG({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                            sx={s.imageSVG({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}
                           >
                             {e.svg}
                           </SvgIcon>
@@ -175,7 +144,6 @@ function Skills() {
                           sx={s.colorLevel({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
                         ></Box>
                       </Box>
-
                     )
                   })}
                 </Box>
@@ -189,20 +157,11 @@ function Skills() {
                   )
                 })}
               </Box>
-
-
-
           </Box>
           </ScrollContainer>
-
-
         </Box>
-
-
-
         <Box sx={s.leftRightHelper({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       </Box>
-
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     </Box>
   )

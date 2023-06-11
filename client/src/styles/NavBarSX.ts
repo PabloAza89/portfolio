@@ -11,7 +11,7 @@ interface genI {
   larLand: boolean
 }
 
-const background = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // background
+export const background = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // background
   return {
     ...flex,
     //background: 'blue',
@@ -25,7 +25,7 @@ const background = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPor
   }
 }
 
-const mainLeft = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // mainLeft
+export const mainLeft = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // mainLeft
   return {
     ...flex, ...row, ...aic,
     //background: 'red',
@@ -50,7 +50,7 @@ interface mainRightI {
   larLand: boolean
 }
 
-const mainRight = ({ staticRefWidth, percentageResizedWidth, minPort, minLand, medPort, medLand, larPort, larLand }: mainRightI) => { // mainRight
+export const mainRight = ({ staticRefWidth, percentageResizedWidth, minPort, minLand, medPort, medLand, larPort, larLand }: mainRightI) => { // mainRight
   return {
     ...asc, ...flex, ...aic,
     //background: 'yellow',
@@ -76,7 +76,7 @@ interface genII {
   larPort: boolean
 }
 
-const lessThan = ({ minPort, minLand, medPort, medLand, larPort }: genII) => { // lessThan
+export const lessThan = ({ minPort, minLand, medPort, medLand, larPort }: genII) => { // lessThan
   return {
     ...noSelect, ...mix,
     //background: 'darkgray',
@@ -95,7 +95,7 @@ interface nameI {
   larPort: boolean
 }
 
-const name = ({ minPort, minLand, medPort, medLand, larPort }: nameI) => { // name
+export const name = ({ minPort, minLand, medPort, medLand, larPort }: nameI) => { // name
   return {
     ...noSelect,
     //background: 'navy',
@@ -108,7 +108,7 @@ const name = ({ minPort, minLand, medPort, medLand, larPort }: nameI) => { // na
   }
 }
 
-const blink = ({ minPort, minLand, medPort, medLand, larPort }: genII) => { // blink
+export const blink = ({ minPort, minLand, medPort, medLand, larPort }: genII) => { // blink
   return {
     ...noSelect, ...mix,
     //background: 'darkgray',
@@ -126,7 +126,7 @@ const blink = ({ minPort, minLand, medPort, medLand, larPort }: genII) => { // b
   }
 }
 
-const greaterThan = ({ minPort, minLand, medPort, medLand, larPort }: genII) => { // greaterThan
+export const greaterThan = ({ minPort, minLand, medPort, medLand, larPort }: genII) => { // greaterThan
   return {
     ...noSelect, ...mix,
     //background: 'yellow',
@@ -134,6 +134,13 @@ const greaterThan = ({ minPort, minLand, medPort, medLand, larPort }: genII) => 
     width: minPort || medPort ? '6vw' : minLand || medLand ? '2.1vw' : larPort ? '60px' : '55px', // width
     height: minPort || medPort ? '8vw' : minLand || medLand ? '3.5vw' : larPort ? '80px' : '80px', // height
     textAlign: 'center'
+  }
+}
+
+export const test = () => {
+  return {
+    transition: 'all .2s ease-in-out',
+    ':hover': { transform: 'scale(1.1)' }
   }
 }
 
@@ -148,7 +155,7 @@ interface textItemI {
   larLand: boolean
 }
 
-const textItem = ({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand }: textItemI) => { // textItem
+export const textItem = ({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand }: textItemI) => { // textItem
   return {
     ...noDeco, ...noSelect, ...mix,
     //background: 'red',
@@ -158,11 +165,6 @@ const textItem = ({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort
     color: darkMode ? '#b5b3b3' : '#FFFFFF',
     fontSize: minPort || medPort ? '3vw' :  minLand || medLand ? '1.8vw' : larPort ? '23px' : `23px`, // fontSize
     fontFamily: 'Roboto',
-    fontWeight: '600'
+    fontWeight: '600',
   }
-}
-
-export {
-  background, mainLeft, lessThan, name,
-  blink, greaterThan, mainRight, textItem
 }

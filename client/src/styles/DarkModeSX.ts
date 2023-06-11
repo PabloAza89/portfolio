@@ -1,6 +1,7 @@
-import { absolute, column, flex} from '../styles/CommonsSX';
+import { absolute, column, flex, jcc, aic } from '../styles/CommonsSX';
 
 interface backgroundI {
+  height: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -12,21 +13,30 @@ interface backgroundI {
   percentageResizedHeight: number
 }
 
-const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location, percentageResizedHeight }: backgroundI) => {
+const background = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location, percentageResizedHeight }: backgroundI) => {
   return {
-    ...column, ...absolute,
+    ...column, ...absolute, ...jcc, ...aic,
     padding: '0vw !important',
     minWidth: '0vh !important',
-    width: minPort || minLand ? `30px !important` : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `35px !important`  : `35px !important` ,
-    height: minPort || minLand ? `30px !important` : medPort ? `${maxStaticReference * 4.2}px !important`  : medLand ? `${maxStaticReference * 4.2}px !important`  : larPort ? `35px !important`  : `35px !important` ,
-    right: minPort ? '4vw' : minLand ? '5px' : medPort || medLand ? '20px' : '20px',
-    top: 
-      minLand && location === '/portfolio/Skills' ? '5px' : 'none',
+    width: minPort || minLand ? `30px !important` : medPort || medLand ? `32.5px !important` : `35px !important` ,
+    height: minPort || minLand ? `30px !important` : medPort || medLand ? `32.5px !important` : `35px !important` ,
+    right: '20px',
+    top:
+      minLand && height <= 380 && location === '/portfolio/Skills' ? '20px' : 'none',
     bottom:
-      minLand && location === '/portfolio/Skills' ? 'none' :
-      minLand ? '5px' : '20px',
-    justifyContent: 'center',
-    alignItems: 'center',
+      minLand && height <= 380 && location === '/portfolio/Skills' ? 'none' :
+      minLand ? '20px' : '20px',
+    pointerEvents:
+      larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? 'none' :
+      larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? 'none' :
+      (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.629 ? 'none' :
+      (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.548 ? 'none' :
+      larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? 'none' :
+      larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? 'none' :
+      (larPort || larLand) && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? 'none' :
+      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.680 ? 'none' :
+      (larLand || larPort) && location === '/portfolio/Skills' && percentageResizedHeight < 0.536 ? 'none' :
+      'null',
     opacity:
       larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? '0' :
       larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
@@ -54,24 +64,21 @@ interface genI {
   maxStaticReference: number
 }
 
-
 const iconDay = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
   return {
-    //width: '1.6vw'
     ...flex, ...absolute, ...column,
     minWidth: '0vh',
-    width: minPort || minLand ? `15px !important` : medPort ? `${maxStaticReference * 2.1}px !important`  : medLand ? `${maxStaticReference * 2.1}px !important`  : larPort ? `22px !important`  : `22px !important` ,
-    height: minPort || minLand ? `15px !important` : medPort ? `${maxStaticReference * 2.1}px !important`  : medLand ? `${maxStaticReference * 2.1}px !important`  : larPort ? `22px !important`  : `22px !important`
+    width: minPort || minLand ? `17px !important` : medPort || medLand ? `19.5px !important`  : `22px !important` ,
+    height: minPort || minLand ? `17px !important` : medPort || medLand ? `19.5px !important`  : `22px !important`
   }
 }
 
 const iconNight = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
   return {
-    //width: '1.6vw'
     ...flex, ...absolute, ...column,
     minWidth: '0vh',
-    width: minPort || minLand ? `15px !important` : medPort ? `${maxStaticReference * 2.1}px !important`  : medLand ? `${maxStaticReference * 2.1}px !important`  : larPort ? `22px !important`  : `22px !important` ,
-    height: minPort || minLand ? `15px !important` : medPort ? `${maxStaticReference * 2.1}px !important`  : medLand ? `${maxStaticReference * 2.1}px !important`  : larPort ? `22px !important`  : `22px !important`
+    width: minPort || minLand ? `17px !important` : medPort || medLand ? `18.5px !important`  : `20px !important` ,
+    height: minPort || minLand ? `17px !important` : medPort || medLand ? `18.5px !important`  : `20px !important`
   }
 }
 

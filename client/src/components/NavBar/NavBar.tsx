@@ -3,10 +3,7 @@ import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
-import { 
-  background, mainLeft, lessThan, name,
-  blink, greaterThan, mainRight, textItem
-} from '../../styles/NavBarSX';
+import * as s from '../../styles/NavBarSX';
 
 function NavBar() {
 
@@ -50,21 +47,21 @@ function NavBar() {
   // LAR HEIGHT 10 + 87
 
   return (
-    <Box sx={background({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand })}>
-      <Box sx={mainLeft({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand })}>
-        <Typography sx={lessThan({ minPort, minLand, medPort, medLand, larPort })}>{`<`}</Typography>
-        <Typography sx={name({ minPort, minLand, medPort, medLand, larPort })}>{`Pablo Azambuyo`}</Typography>
-        <Typography sx={blink({ minPort, minLand, medPort, medLand, larPort })}>{`I`}</Typography>
-        <Typography sx={greaterThan({ minPort, minLand, medPort, medLand, larPort })}>{`/>`}</Typography>
+    <Box sx={s.background({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand })}>
+      <Box sx={s.mainLeft({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand })}>
+        <Typography sx={s.lessThan({ minPort, minLand, medPort, medLand, larPort })}>{`<`}</Typography>
+        <Typography sx={s.name({ minPort, minLand, medPort, medLand, larPort })}>{`Pablo Azambuyo`}</Typography>
+        <Typography sx={s.blink({ minPort, minLand, medPort, medLand, larPort })}>{`I`}</Typography>
+        <Typography sx={s.greaterThan({ minPort, minLand, medPort, medLand, larPort })}>{`/>`}</Typography>
       </Box>
-      <ScrollContainer style={mainRight({ staticRefWidth, percentageResizedWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
+      <ScrollContainer style={s.mainRight({ staticRefWidth, percentageResizedWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
         innerRef={useHorizontalScroll()}
       >
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/AboutMe">{ english ? `About Me` : `Acerca De Mi` }</Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Skills">{ english ? `Skills` : `Habilidades` } </Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Projects">{ english ? `Projects` : `Proyectos` }</Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Certifications">{ english ? `Certifications` : `Certificaciones`}</Link>
-        <Link style={textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Contact">{ english ? `Contact` : `Contacto` }</Link>
+        <Link style={s.textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/AboutMe"><Box sx={s.test}>{english ? `About Me` : `Acerca De Mi` }</Box></Link>
+        <Link style={s.textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Skills"><Box sx={s.test}>{ english ? `Skills` : `Habilidades` }</Box></Link>
+        <Link style={s.textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Projects"><Box sx={s.test}>{ english ? `Projects` : `Proyectos` }</Box></Link>
+        <Link style={s.textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Certifications"><Box sx={s.test}>{ english ? `Certifications` : `Certificaciones` }</Box></Link>
+        <Link style={s.textItem({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Contact"><Box sx={s.test}>{ english ? `Contact` : `Contacto` }</Box></Link>
       </ScrollContainer>
     </Box>
   )

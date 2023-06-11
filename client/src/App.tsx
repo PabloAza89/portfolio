@@ -61,8 +61,6 @@ function App() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const width = useSelector((state: {width:number}) => state.width)
-  //console.log("WIDTH", width)
 
   return (
     <Box sx={background({ darkMode })} >

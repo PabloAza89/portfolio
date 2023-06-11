@@ -1,9 +1,8 @@
 import { cyan } from '@mui/material/colors';
-import lanEn from '../images/lanEn.png';
-import lanEs from '../images/lanEs.png';
 import { asc, relative, flex, noSelect, row, absolute, column, jcc, fixed } from './CommonsSX';
 
 interface backgroundI {
+  height: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -14,25 +13,25 @@ interface backgroundI {
   location: string
 }
 
-const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, location, percentageResizedHeight }: backgroundI) => {
+const background = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, location, percentageResizedHeight }: backgroundI) => {
   return {
-    ...asc, ...absolute,
+    ...asc, ...absolute, ...flex, ...row, ...jcc,
     background: 'none',
-    display: 'flex',
     pointerEvents:
-      //(larPort || larLand) && location === '/portfolio' && percentageResizedHeight < 0.660 ? 'none' :
-      (larPort || larLand) && location === '/portfolio' && percentageResizedHeight < 0.665 ? 'none' :
-      larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.773 ? 'none' :
-      larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.731 ? 'none' :
-      (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.642 ? 'none' :
-      (larPort || larLand) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.664 ? 'none' :
+      larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? 'none' :
+      larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? 'none' :
+      (larPort || larLand) && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? 'none' :
+      (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.548 ? 'none' :
+      (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.629 ? 'none' :
+      larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? 'none' :
+      larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? 'none' :
+      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.680 ? 'none' :
+      (larLand || larPort) && location === '/portfolio/Skills' && percentageResizedHeight < 0.536 ? 'none' :
       'null',
-    //transition: 'opacity .1s ease-in-out',
     opacity:
       larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? '0' :
       larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
-      larPort && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? '0' :
-      larLand && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? '0' :
+      (larPort || larLand) && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? '0' :
       (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.548 ? '0' :
       (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.629 ? '0' :
       larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? '0' :
@@ -44,13 +43,11 @@ const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, loca
       'opacity': '0',
       'display': 'flex'
       },
-    flexDirection: 'row',
-    justifyContent: 'center',
     top: 
-      minLand && location === '/portfolio/Skills' ? '5px' : 'none',
+      minLand && height <= 380 && location === '/portfolio/Skills' ? '20px' : 'none',
     bottom: 
-      minLand && location === '/portfolio/Skills' ? 'none' :
-      minPort ? '20px' : minLand ? '5px' : medPort || medLand ? '20px' : larPort ? '20px' : '20px'
+      minLand && height <= 380 && location === '/portfolio/Skills' ? 'none' :
+      '20px'
   }
 }
 
@@ -64,13 +61,10 @@ interface genI {
   maxStaticReference: number
 }
 
-
 const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
   return {
+    ...flex, ...row, ...asc,
     cursor: 'pointer',
-    display: 'flex',
-    flexDirection: 'row',
-    alignSelf: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid ${cyan[100]} 2px` : `solid transparent 2px`,
@@ -83,13 +77,10 @@ const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxSt
   }
 }
 
-
 const lanEsFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
   return {
+    ...flex, ...row, ...asc,
     cursor: 'pointer',
-    display: 'flex',
-    flexDirection: 'row',
-    alignSelf: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid transparent 2px` : `solid ${cyan[100]} 2px`,

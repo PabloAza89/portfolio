@@ -1,6 +1,7 @@
-import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Box, CardMedia, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 import javascript from '../../images/javascript.png';
 import material from '../../images/material.png';
 import node from '../../images/node.png';
@@ -11,29 +12,21 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import {
   iconBox, iconMedia, title, background
 } from '../../styles/TechnologiesSX';
-import store from '../../store/store';
-
 
 function Technologies() {
 
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
-  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
-  //const currentWidth = store.getState().currentWidth
-  console.log("currentWidth", currentWidth)
-
-  //const [ parentWidthh, setParentWidthh ] = useState<number>(0);
+  const darkMode = useSelector((state: { darkMode:boolean }) => state.darkMode)
+  const english = useSelector((state: { english:boolean }) => state.english)
+  const minPort = useSelector((state: { minPort:boolean }) => state.minPort)
+  const minLand = useSelector((state: { minLand:boolean }) => state.minLand)
+  const medPort = useSelector((state: { medPort:boolean }) => state.medPort)
+  const medLand = useSelector((state: { medLand:boolean }) => state.medLand)
+  const larPort = useSelector((state: { larPort:boolean }) => state.larPort)
+  const larLand = useSelector((state: { larLand:boolean }) => state.larLand)
+  const currentWidth = useSelector((state: { currentWidth:number }) => state.currentWidth)
 
   function useHorizontalScroll() {
     const elRef = useRef<any>(null);
-    /* useLayoutEffect(() => {
-      setParentWidthh(elRef.current.offsetWidth);
-    },[]); */
     useEffect(() => {
       const el:any = elRef.current;
       if (el) {
@@ -63,29 +56,33 @@ function Technologies() {
 
   interface arrayI {
     icon: string,
-    title: string
+    title: string,
+    url: string
   }
 
   const array: arrayI[] = [
-    { icon: react, title: `React` },
-    { icon: redux, title: `Redux` },
-    { icon: javascript, title: `Javascript` },   
-    { icon: sequelize, title: `Sequelize` },
-    { icon: material, title: `Material UI` },
-    { icon: node, title: `Node.js` },
+    { icon: react, title: `React`, url: english ? `https://react.dev/` : `https://es.react.dev/` },
+    { icon: redux, title: `Redux`, url: english ? `https://redux.js.org/` : `https://es.redux.js.org/` },
+    { icon: javascript, title: `Javascript`, url: english ? `https://developer.mozilla.org/en-US/docs/Web/JavaScript` : `https://developer.mozilla.org/es/docs/Web/JavaScript` },
+    { icon: sequelize, title: `Sequelize`, url: english ? `https://sequelize.org/ ` : `https://translate.google.com/translate?sl=en&tl=es&hl=es&u=https://sequelize.org/` },
+    { icon: material, title: `Material UI`, url: english ? `https://mui.com/ ` : `https://translate.google.com/translate?sl=en&tl=es&hl=es&u=https://mui.com/` },
+    { icon: node, title: `Node.js`, url: english ? `https://nodejs.org/en` : `https://nodejs.org/es ` },
   ]
 
-  
-
   return (
-    <ScrollContainer /* ref={ref}  */style={background({ currentWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
+    <ScrollContainer style={background({ currentWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
       innerRef={useHorizontalScroll()}
-      //innerRef={ref}
       horizontal={true}
     >
       {array.map((e) => {
         return (
-          <Box key={e.icon} sx={iconBox({ minPort, minLand, medPort, medLand, larPort })}>
+          <Box
+            key={e.title}
+            sx={iconBox({ minPort, minLand, medPort, medLand, larPort })}
+            component={Link}
+            to={e.url}
+            target="_blank"
+          >
             <CardMedia component="div" sx={iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}></CardMedia>
             <Typography sx={title({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{e.title}</Typography>
           </Box>

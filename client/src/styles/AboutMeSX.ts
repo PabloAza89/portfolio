@@ -1,5 +1,7 @@
-import { flex, noSelect, row, absolute, relative, column, jcc, fixed } from './CommonsSX';
-import { blue, brown, lime, red, grey } from '@mui/material/colors';
+import { 
+  flex, noSelect, row, absolute, relative, column, jcc, fixed
+} from './CommonsSX';
+import { grey } from '@mui/material/colors';
 
 const background = () => {
   return {
@@ -104,7 +106,6 @@ interface mainContainerI {
 
 const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainContainerI) => {
   return {
-    //display: larPort || larLand ? 'flex' : 'none',
     display: 'flex',
     height: '100%',
     justifyContent: larPort || larLand ? 'space-between' : 'center',
@@ -214,4 +215,3 @@ export {
   background, innerMainContainer, innerTopBottomHelper,
   innerBlueBoxHelper
 }
-
