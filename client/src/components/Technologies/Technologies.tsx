@@ -12,6 +12,9 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import {
   iconBox, iconMedia, title, background
 } from '../../styles/TechnologiesSX';
+import '../../styles/TechnologiesSX.css';
+import $ from 'jquery';
+
 
 function Technologies() {
 
@@ -69,6 +72,37 @@ function Technologies() {
     { icon: node, title: `Node.js`, url: english ? `https://nodejs.org/en` : `https://nodejs.org/es ` },
   ]
 
+
+ 
+      
+    /*       $(`#boxClass`).hover(function() {
+            $( this ).addClass(`boxClass`)
+          });
+ */
+        /*   $(function(){
+            array.forEach(e => {
+              $(`#boxClass${e.id}`).on( "mouseenter", function(){
+                $(this).addClass(`boxClass${e.id}`)
+                
+              });
+            });
+          })
+         */
+      
+          
+        
+
+        
+
+        /* $( document ).click(function() {
+          $( "#toggle" ).toggle( "scale" );
+        });
+    */
+     
+
+
+    
+
   return (
     <ScrollContainer style={background({ currentWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
       innerRef={useHorizontalScroll()}
@@ -77,6 +111,9 @@ function Technologies() {
       {array.map((e) => {
         return (
           <Box
+            /* className={`boxClass`} */
+            /* id={`boxId`} */
+        
             key={e.title}
             sx={iconBox({ minPort, minLand, medPort, medLand, larPort })}
             component={Link}

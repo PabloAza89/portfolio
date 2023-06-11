@@ -1,0 +1,17 @@
+.boxClass {
+  transition: all .2s ease-in-out;
+  
+}
+
+.boxClass:hover { 
+  transform: scale(1.1);
+  mix-blend-mode: unset
+}
+
+/* .boxClassA {
+  transition: 'all .2s ease-in-out';
+  
+}
+
+.boxClassA:hover { transform: 'scale(1.1)' } */
+
