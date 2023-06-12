@@ -9,9 +9,7 @@ import react from '../../images/react.png';
 import redux from '../../images/redux.png';
 import sequelize from '../../images/sequelize.png';
 import ScrollContainer from 'react-indiana-drag-scroll';
-import {
-  iconBox, iconMedia, title, background
-} from '../../styles/TechnologiesSX';
+import * as s from '../../styles/TechnologiesSX';
 import '../../styles/TechnologiesSX.css';
 import $ from 'jquery';
 
@@ -98,30 +96,28 @@ function Technologies() {
           $( "#toggle" ).toggle( "scale" );
         });
     */
-     
-
-
-    
 
   return (
-    <ScrollContainer style={background({ currentWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
+    <ScrollContainer style={s.background({ currentWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
       innerRef={useHorizontalScroll()}
       horizontal={true}
     >
       {array.map((e) => {
         return (
-          <Box
-            /* className={`boxClass`} */
-            /* id={`boxId`} */
-        
+          <Box 
             key={e.title}
-            sx={iconBox({ minPort, minLand, medPort, medLand, larPort })}
-            component={Link}
-            to={e.url}
-            target="_blank"
+            sx={s.iconBoxCopy({ minPort, minLand, medPort, medLand, larPort })}
           >
-            <CardMedia component="div" sx={iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}></CardMedia>
-            <Typography sx={title({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{e.title}</Typography>
+            <Box
+              
+              sx={s.iconBox({ minPort, minLand, medPort, medLand, larPort })}
+              component={Link}
+              to={e.url}
+              target="_blank"
+            >
+              <Typography sx={s.title({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{e.title}</Typography>
+            </Box>
+            <CardMedia component="div" sx={s.iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}></CardMedia>
           </Box>
         )
       })}
