@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from "react-router-dom";
 import * as s from '../../styles/MessageMeSX';
@@ -33,8 +33,8 @@ function MessageMe() {
   const [name, setName] = useState<string | null>("")
   const [text, setText] = useState<string | null>("")
   const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
-
-  const [isLoading, setIsLoading] = useState<boolean | null>(false)
+  const [clearButtonDisabled, setClearButtonDisabled] = useState<boolean>(false)
+  const [showMessageSpinner, setShowMessageSpinner] = useState<boolean>(false)
 
   useEffect(() => {
     let name: string | null = localStorage.getItem('name');
@@ -127,12 +127,12 @@ function MessageMe() {
       }})
       .then(res => res.json())
       .then(res => { if(!res.success) throw new Error(); return res })
-      .then(() => {sentNotif(); handleTimerStart(); setSentButtonDisabled(false); clearBoth()})
-      .catch(error => {console.error("Error:", error); noSentNotif(); setSentButtonDisabled(false)})
+      .then(() => {sentNotif(); handleTimerStart(); setSentButtonDisabled(false); setClearButtonDisabled(false); setShowMessageSpinner(false); clearBoth()})
+      .catch(error => {console.error("Error:", error); noSentNotif(); setSentButtonDisabled(false); setClearButtonDisabled(false); setShowMessageSpinner(false) })
     };
     e.preventDefault();
 
-    if (name?.length !== 0 && name?.trim() !== "" && text?.length !== 0 && text?.trim() !== "") {setSentButtonDisabled(true); fetchData()}
+    if (name?.length !== 0 && name?.trim() !== "" && text?.length !== 0 && text?.trim() !== "") {setSentButtonDisabled(true); setClearButtonDisabled(true); setShowMessageSpinner(true); fetchData()}
     else emptyMessage()
   };
 
@@ -160,6 +160,7 @@ function MessageMe() {
         <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
         <Box sx={s.formContainer({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}>
           <Button
+            disabled={clearButtonDisabled}
             variant="contained"
             size="small"
             onClick={() => clearBoth()}
@@ -200,6 +201,13 @@ function MessageMe() {
           >
             { english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
           </Button>
+        </Box>
+        <Box sx={s.messageLoadingSpinner({ show:showMessageSpinner })} >
+          <Typography sx={s.loadingText}>{ english ? `SENDING MESSAGE..` : `ENVIANDO MENSAJE..` }</Typography>
+          <Box component="div"></Box>
+          <Box component="div"></Box>
+          <Box component="div"></Box>
+          <Box component="div"></Box>
         </Box>
         <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       </Box>

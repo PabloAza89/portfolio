@@ -225,3 +225,66 @@ export const labelStyle = () => {
     borderRadius: `4px`,
   }
 }
+
+export const loadingText = () => {
+  return {
+    mixBlendMode: 'difference',
+    fontSize: '12px',
+    color: 'white',
+    fontWeight: '700',
+    animation: 'flickerAnimation 1.2s infinite',
+    '@keyframes flickerAnimation': {
+      '0%': { opacity: 1 },
+      '50%': { opacity: 0 },
+      '100%': { opacity: 1 }
+    },
+  }
+}
+
+interface messageLoadingSpinnerI {
+  show: boolean
+}
+
+export const messageLoadingSpinner = ({ show }: messageLoadingSpinnerI) => {
+  return {
+    //background: 'red',
+    display: show ? 'flex' : 'none',
+    position: 'absolute',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100px',
+    zIndex: 900,
+    mixBlendMode: 'difference',
+   'div': {
+      boxSizing: 'border-box',
+      display: 'block',
+      position: 'absolute',
+      width: '150px',
+      height: '150px',
+      margin: '8px',
+      border: '8px solid #fff',
+      borderRadius: '50%',
+      animation: 'lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite',
+      borderColor: '#fff transparent transparent transparent',
+    },
+   'div:nth-of-type(1)': {
+      animationDelay: '-0.45s'
+    },
+     'div:nth-of-type(2)': {
+      animationDelay: '-0.3s'
+    },
+    'div:nth-of-type(3)': {
+      animationDelay: '-0.15s'
+    },
+    '@keyframes lds-ring': {
+      '0%': {
+        transform: 'rotate(0deg)'
+      },
+      '100%': {
+        transform: 'rotate(360deg)'
+      }
+    }
+  }
+}
