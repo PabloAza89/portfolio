@@ -203,10 +203,11 @@ export const chartRow = ({ length }: chartRowI) => {
 }
 
 interface columnBarI {
+  darkMode: boolean,
   percentage: number
 }
 
-export const columnBar = ({ percentage }: columnBarI) => {
+export const columnBar = ({ percentage, darkMode }: columnBarI) => {
   return {
     ...flex, ...relative, ...row, ...jcc,
     background: 'transparent',
@@ -225,21 +226,24 @@ export const columnBar = ({ percentage }: columnBarI) => {
 
 // each barr 90 + 2 (92) + green 200
 
-export const leftSide = ({ percentage }: columnBarI) => {
+export const leftSide = ({ darkMode, percentage }: columnBarI) => {
   return {
     width: '10px',
-    height: `${(percentage + 5)* 2}px`,
-    background: `
-      linear-gradient(45deg, transparent 7px, silver 7px, silver ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)`
+    height: `${(percentage + 5)* 2}px`, // #141414
+    background: darkMode ? 
+      `linear-gradient(45deg, transparent 7px, silver 7px, #141414 ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)` :
+      `linear-gradient(45deg, transparent 7px, silver 7px, silver ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)`,
   }
 }
 
-export const centerSide = ({ percentage }: columnBarI) => {
+export const centerSide = ({ darkMode, percentage }: columnBarI) => {
   return {
     ...flex, ...relative,
     width: '30px',
     height: `${(percentage  + 5)* 2}px`,
-    background: 'linear-gradient(to bottom, gray 10px, darkgrey 0px)',
+    background: darkMode ? 
+      'linear-gradient(to bottom, gray 10px, #595959 0px)' :
+      'linear-gradient(to bottom, gray 10px, darkgrey 0px)',
     textWrap: 'nowrap',
   }
 }
@@ -266,13 +270,15 @@ export const onlyMinLand = ({ minPort, minLand, medPort, medLand, larPort, larLa
   }
 }
 
-export const rightSide = ({ percentage }: columnBarI) => {
+export const rightSide = ({ darkMode, percentage }: columnBarI) => {
   return {
     ...flex,
     width: '10px',
     height: `${(percentage + 5) * 2}px`,
-    background: `
-      linear-gradient(180deg, #0000 10px, darkgrey 0),
+    background: darkMode ?
+      `linear-gradient(180deg, #0000 10px, #595959 0),
+      linear-gradient(225deg, #0000 7px, gray 7px)` :
+      `linear-gradient(180deg, #0000 10px, darkgrey 0),
       linear-gradient(225deg, #0000 7px, gray 7px)`
   }
 }

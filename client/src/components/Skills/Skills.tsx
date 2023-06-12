@@ -17,6 +17,7 @@ function Skills() {
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
   const width = useSelector((state: {currentWidth: number}) => state.currentWidth)
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
 
   function useHorizontalScroll() {
     const elRef = useRef<HTMLInputElement>(null);
@@ -108,10 +109,10 @@ function Skills() {
                 <Box sx={s.chartRow({ length:array.length })}>
                   {array.map((e) => {
                     return (
-                      <Box key={array.indexOf(e)} sx={s.columnBar({ percentage:e.percentage })}>
-                        <Box sx={s.leftSide({ percentage:e.percentage })}></Box>
-                        <Box sx={s.centerSide({ percentage:e.percentage })}><Typography sx={s.onlyMinLand({ minPort, minLand, medPort, medLand, larPort, larLand })}>{e.title}</Typography></Box>
-                        <Box sx={s.rightSide({ percentage:e.percentage })}></Box>
+                      <Box key={array.indexOf(e)} sx={s.columnBar({ darkMode, percentage:e.percentage })}>
+                        <Box sx={s.leftSide({ darkMode, percentage:e.percentage })}></Box>
+                        <Box sx={s.centerSide({ darkMode, percentage:e.percentage })}><Typography sx={s.onlyMinLand({ minPort, minLand, medPort, medLand, larPort, larLand })}>{e.title}</Typography></Box>
+                        <Box sx={s.rightSide({ darkMode, percentage:e.percentage })}></Box>
                       </Box>
                     )
                   })}

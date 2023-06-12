@@ -81,7 +81,7 @@ export const background = ({ larPort, larLand }: backgroundI) => {
 }
 
 interface formContainerI {
-  staticRefWidth: number,
+  darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -90,7 +90,7 @@ interface formContainerI {
   larLand: boolean
 }
 
-export const formContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: formContainerI) => { // formContainer
+export const formContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode }: formContainerI) => { // formContainer
   return {
     ...flex, ...column,
     justifyContent: 'space-evenly',
@@ -98,7 +98,7 @@ export const formContainer = ({ minPort, minLand, medPort, medLand, larPort, lar
     top: minLand || medLand ? '-4vh' : '0vh',
     position: 'relative',
     borderRadius: `4px`,
-    background: '#5f9ea0',
+    background: darkMode ? '#325b5c' : '#5f9ea0',
     opacity: '0.95',
     minWidth: minPort ? '85vw' : minLand ? '70vw' : medPort ? '60vw' : medLand ? '53vw' : '400px', // minWidth
     width: minPort ? '85vw' : minLand ? '70vw' : medPort ? '60vw' : medLand ? '53vw' : '53vw', // width
@@ -109,8 +109,32 @@ export const formContainer = ({ minPort, minLand, medPort, medLand, larPort, lar
   }
 }
 
+interface labelStyleI {
+  darkMode: boolean
+}
+
+export const labelStyle = ({ darkMode }: labelStyleI) => {
+  return {
+    background: darkMode ? '#615f5f' : 'white',
+    padding: '0px 8px',
+    left: '-5px',
+    borderRadius: `4px`,
+    color: darkMode ? 'white' : 'none',
+  }
+}
+
+interface inputStyleI {
+  darkMode: boolean
+}
+
+export const inputStyle = ({ darkMode }: inputStyleI) => {
+  return {
+    color: darkMode ? 'white' : 'none',
+  }
+}
+
 interface nameBoxI {
-  staticRefWidth: number,
+  darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -119,19 +143,19 @@ interface nameBoxI {
   larLand: boolean
 }
 
-export const nameBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: nameBoxI) => {
+export const nameBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode }: nameBoxI) => {
   return {
      ...asc,
     display: 'flex',
     position: 'relative',
     //background: 'yellow',
-    background: 'white',
+    background: darkMode ? '#615f5f' : 'white',
     opacity: '0.90',
     borderRadius: `4px`,
     minWidth: minPort ? '75vw' : minLand ? '64vw' : medPort ? '52vw' : medLand ? '47vw' : '340px',
     width: minPort ? '75vw' : minLand ? '64vw' : medPort ? '52vw' : medLand ? '47vw' : '47vw',
     fieldset: {
-      border: '2px solid rgb(190, 190, 174)'
+      border: '2px solid rgb(190, 190, 174)',
     }
   }
 }
@@ -143,16 +167,16 @@ interface messageBoxI {
   medLand: boolean,
   larPort: boolean,
   larLand: boolean
-  staticRefWidth: number
+  darkMode: boolean,
 }
 
-export const messageBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: messageBoxI) => {
+export const messageBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode }: messageBoxI) => {
   return {
     ...asc,
     display: 'flex',
     position: 'relative',
     //background: 'yellow',
-    background: 'white',
+    background: darkMode ? '#615f5f' : 'white',
     opacity: '0.90',
     borderRadius: '4px',
     minWidth: minPort ? '75vw' : minLand ? '64vw' : medPort ? '52vw' : medLand ? '47vw' : '340px',
@@ -214,15 +238,6 @@ export const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort,
     width: minPort ? '40vw' : minLand ? '19vw' : medPort ? '22vw' : medLand ? '17vw' : '160px', // width
     height: minPort ? '5.8vw' : minLand ? '3.1vw' : medPort ? '3.9vw' : medLand ? '2.8vw' : '32px', // height
     order: minLand || medLand ? 2 : 0,
-  }
-}
-
-export const labelStyle = () => {
-  return {
-    background: 'white',
-    padding: '0px 8px',
-    left: '-5px',
-    borderRadius: `4px`,
   }
 }
 

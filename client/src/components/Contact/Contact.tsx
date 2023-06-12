@@ -33,6 +33,7 @@ function Contact() {
         minPort || minLand ? `<i class="fa-regular fa-envelope fa-bounce fa-xl"></i>` :
         `<i class="fa-regular fa-envelope fa-bounce fa-2x"></i>`,
       focusConfirm: false,
+      background: darkMode ? 'rgb(49, 18, 85)' : 'white',
       confirmButtonText: '<i class="fas fa-clipboard fa-2x"></i>',
       customClass: {
         popup:
@@ -49,6 +50,7 @@ function Contact() {
         Swal.fire({
           title: english ? 'Copied to clipboard !' : 'Copiado al portapapeles !',
           showConfirmButton: false,
+          background: darkMode ? 'rgb(49, 18, 85)' : 'white',
           icon: 'success',
           timer: 1000,
           customClass: {
@@ -74,6 +76,7 @@ function Contact() {
         minPort || minLand ? `<i class="fa-brands fa-whatsapp fa-bounce fa-xl"></i>` :
         `<i class="fa-brands fa-whatsapp fa-bounce fa-2x"></i>`,
       focusConfirm: false,
+      background: darkMode ? 'rgb(49, 18, 85)' : 'white',
       confirmButtonText: '<i class="fas fa-clipboard fa-2x"></i>',
       customClass: {
         popup:
@@ -90,6 +93,7 @@ function Contact() {
         Swal.fire({
           title: english ? 'Copied to clipboard !' : 'Copiado al portapapeles !',
           showConfirmButton: false,
+          background: darkMode ? 'rgb(49, 18, 85)' : 'white',
           icon: 'success',
           timer: 1000,
           customClass: {

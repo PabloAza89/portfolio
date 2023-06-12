@@ -158,7 +158,7 @@ function MessageMe() {
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       <Box sx={s.mainContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={s.formContainer({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}>
+        <Box sx={s.formContainer({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode })}>
           <Button
             disabled={clearButtonDisabled}
             variant="contained"
@@ -169,28 +169,26 @@ function MessageMe() {
             { english ? 'CLEAR' : 'LIMPIAR' }
           </Button>
           <TextField
-            id="outlined-multiline-flexible"
-            className="textField"
             label={english ? "Your name here" : "Tu nombre aquí"}
             multiline
             rows={1}
             size="small"
             value={name}
-            InputLabelProps={{ style: s.labelStyle() }}
-            sx={s.nameBox({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}
+            InputLabelProps={{ style: s.labelStyle({ darkMode }) }}
+            InputProps={{ style: s.inputStyle({ darkMode }) }}
+            sx={s.nameBox({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode })}
             onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
           />
           <TextField
-            id="outlined-multiline-static"
-            className="textField"
             label={ english ? "Your message here" : "Tu mensaje aquí"}
             multiline
             rows={ minPort ? height / 55 : minLand ? height / 74 : medPort ? height / 75 : medLand ? height / 60 : 15 }
             value={text}
             size="small"
-            InputLabelProps={{ style: s.labelStyle() }}
+            InputLabelProps={{ style: s.labelStyle({ darkMode }) }}
+            InputProps={{ style: s.inputStyle({ darkMode }) }}
             onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
-            sx={s.messageBox({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}
+            sx={s.messageBox({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode })}
           />
           <Button
             disabled={sentButtonDisabled}

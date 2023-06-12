@@ -147,7 +147,7 @@ const boxTitle = ({ length, minPort, minLand, larPort, darkMode }: boxTitleI) =>
   return {
     ...flex, ...row, ...aic,
     paddingLeft: '18px',
-    background: darkMode ? '#6e0f0f' : red[800],
+    background: darkMode ? '#5f1e1e' : '#9f3434',
     height: minPort ? '50px' : minLand ? '35px' : larPort ? '60px' : '60px'
   }
 }
@@ -214,7 +214,7 @@ interface betweenMediaI {
 const betweenMedia = ({ darkMode, indexOf, length }: betweenMediaI) => {
   return {
     display: indexOf === length ? 'none' : 'flex',
-    background: darkMode ? lime[900] : lime[400],
+    background: darkMode ? '#71735e' : '#d3d79f',
     width: '14px'
   }
 }
