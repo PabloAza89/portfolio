@@ -10,7 +10,6 @@ import redux from '../../images/redux.png';
 import sequelize from '../../images/sequelize.png';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import * as s from '../../styles/TechnologiesSX';
-import '../../styles/TechnologiesSX.css';
 import $ from 'jquery';
 
 
@@ -56,46 +55,39 @@ function Technologies() {
   // text = 25 // 90 total
 
   interface arrayI {
+    id: number,
     icon: string,
     title: string,
     url: string
   }
 
   const array: arrayI[] = [
-    { icon: react, title: `React`, url: english ? `https://react.dev/` : `https://es.react.dev/` },
-    { icon: redux, title: `Redux`, url: english ? `https://redux.js.org/` : `https://es.redux.js.org/` },
-    { icon: javascript, title: `Javascript`, url: english ? `https://developer.mozilla.org/en-US/docs/Web/JavaScript` : `https://developer.mozilla.org/es/docs/Web/JavaScript` },
-    { icon: sequelize, title: `Sequelize`, url: english ? `https://sequelize.org/ ` : `https://translate.google.com/translate?sl=en&tl=es&hl=es&u=https://sequelize.org/` },
-    { icon: material, title: `Material UI`, url: english ? `https://mui.com/ ` : `https://translate.google.com/translate?sl=en&tl=es&hl=es&u=https://mui.com/` },
-    { icon: node, title: `Node.js`, url: english ? `https://nodejs.org/en` : `https://nodejs.org/es ` },
+    { id: 0, icon: react, title: `React`, url: english ? `https://react.dev/` : `https://es.react.dev/` },
+    { id: 1, icon: redux, title: `Redux`, url: english ? `https://redux.js.org/` : `https://es.redux.js.org/` },
+    { id: 2, icon: javascript, title: `Javascript`, url: english ? `https://developer.mozilla.org/en-US/docs/Web/JavaScript` : `https://developer.mozilla.org/es/docs/Web/JavaScript` },
+    { id: 3, icon: sequelize, title: `Sequelize`, url: english ? `https://sequelize.org/ ` : `https://translate.google.com/translate?sl=en&tl=es&hl=es&u=https://sequelize.org/` },
+    { id: 4, icon: material, title: `Material UI`, url: english ? `https://mui.com/ ` : `https://translate.google.com/translate?sl=en&tl=es&hl=es&u=https://mui.com/` },
+    { id: 5, icon: node, title: `Node.js`, url: english ? `https://nodejs.org/en` : `https://nodejs.org/es ` },
   ]
 
-
- 
-      
-    /*       $(`#boxClass`).hover(function() {
-            $( this ).addClass(`boxClass`)
-          });
- */
-        /*   $(function(){
-            array.forEach(e => {
-              $(`#boxClass${e.id}`).on( "mouseenter", function(){
-                $(this).addClass(`boxClass${e.id}`)
-                
-              });
-            });
-          })
-         */
-      
-          
-        
-
-        
-
-        /* $( document ).click(function() {
-          $( "#toggle" ).toggle( "scale" );
-        });
-    */
+  $(function(){
+    array.forEach(e => {
+      $(`.titleClass${e.id}`).on("mouseenter", function () {
+          $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+          $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+      }).on("mouseleave", function () {
+        $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+        $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+      })
+      $(`.iconClass${e.id}`).on("mouseenter", function () {
+        $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+        $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+      }).on("mouseleave", function () {
+        $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+        $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+      })
+    })
+  })
 
   return (
     <ScrollContainer style={s.background({ currentWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
@@ -104,12 +96,12 @@ function Technologies() {
     >
       {array.map((e) => {
         return (
-          <Box 
+          <Box
             key={e.title}
             sx={s.iconBoxCopy({ minPort, minLand, medPort, medLand, larPort })}
           >
             <Box
-              
+              className={`titleClass${e.id}`}
               sx={s.iconBox({ minPort, minLand, medPort, medLand, larPort })}
               component={Link}
               to={e.url}
@@ -117,7 +109,13 @@ function Technologies() {
             >
               <Typography sx={s.title({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{e.title}</Typography>
             </Box>
-            <CardMedia component="div" sx={s.iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}></CardMedia>
+            <CardMedia
+              className={`iconClass${e.id}`}
+              component={Link}
+              to={e.url}
+              target="_blank"
+              sx={s.iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}
+            ></CardMedia>
           </Box>
         )
       })}

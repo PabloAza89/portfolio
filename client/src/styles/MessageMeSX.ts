@@ -13,7 +13,7 @@ interface topBottomHelperI {
   larLand: boolean
 }
 
-const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
     //background: 'blue',
     display: larPort || larLand ? 'flex' : 'none',
@@ -32,7 +32,7 @@ interface mainContainerI {
   larLand: boolean,
 }
 
-const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainContainerI) => {
+export const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainContainerI) => {
   return {
     //background: 'darkred',
     display: larPort || larLand ? 'flex' : 'contents',
@@ -53,7 +53,7 @@ interface leftRightHelperI {
   larLand: boolean
 }
 
-const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
+export const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
   return {
     display: larPort || larLand ? 'flex' : 'none',
     //background: 'darkblue',
@@ -68,7 +68,7 @@ interface backgroundI {
   larLand: boolean
 }
 
-const background = ({ larPort, larLand }: backgroundI) => {
+export const background = ({ larPort, larLand }: backgroundI) => {
   return {
     //background: 'red',
     display: 'flex',
@@ -90,7 +90,7 @@ interface formContainerI {
   larLand: boolean
 }
 
-const formContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: formContainerI) => { // formContainer
+export const formContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: formContainerI) => { // formContainer
   return {
     ...flex, ...column,
     justifyContent: 'space-evenly',
@@ -119,7 +119,7 @@ interface nameBoxI {
   larLand: boolean
 }
 
-const nameBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: nameBoxI) => {
+export const nameBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: nameBoxI) => {
   return {
      ...asc,
     display: 'flex',
@@ -146,7 +146,7 @@ interface messageBoxI {
   staticRefWidth: number
 }
 
-const messageBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: messageBoxI) => {
+export const messageBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth }: messageBoxI) => {
   return {
     ...asc,
     display: 'flex',
@@ -173,7 +173,7 @@ interface clearButtonI {
   location: string
 }
 
-const clearButton = ({ minPort, minLand, medPort, medLand, larPort, larLand, location }: clearButtonI) => { // clearButton
+export const clearButton = ({ minPort, minLand, medPort, medLand, larPort, larLand, location }: clearButtonI) => { // clearButton
   return {
     display: 'flex',
     position: 'relative',
@@ -200,7 +200,7 @@ interface sendMessageButtonI {
   larLand: boolean
 }
 
-const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLand,  }: sendMessageButtonI) => { // sendMessageButton
+export const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLand,  }: sendMessageButtonI) => { // sendMessageButton
   return {
     display: 'flex',
     position: 'relative',
@@ -217,17 +217,11 @@ const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLan
   }
 }
 
-const labelStyle = () => {
+export const labelStyle = () => {
   return {
     background: 'white',
     padding: '0px 8px',
     left: '-5px',
     borderRadius: `4px`,
   }
-}
-
-export {
-  nameBox, formContainer, background, topBottomHelper,
-  clearButton, sendMessageButton, messageBox, mainContainer,
-  leftRightHelper, labelStyle
 }

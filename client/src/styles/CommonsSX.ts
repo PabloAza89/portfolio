@@ -17,6 +17,7 @@ export const aic = { alignItems: 'center' }
 export const aifs = { alignItems: 'flex-start' }
 export const asc = { alignSelf: 'center' }
 export const jcc = { justifyContent: 'center' }
+export const jcfe = { justifyContent: 'flex-end' }
 export const jcfs = { justifyContent: 'flex-start' }
 export const jcsb = { justifyContent: 'space-between' }
 export const jcse = { justifyContent: 'space-evenly' }

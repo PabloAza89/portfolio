@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import { Box, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from "react-router-dom";
-import * as s from '../../styles/MessageMeSX';
+//import '../../styles/MessageMeSX.css';
+import {
+  nameBox, formContainer, background, topBottomHelper,
+  clearButton, sendMessageButton, messageBox, mainContainer,
+  leftRightHelper, labelStyle
+} from '../../styles/MessageMeSX';
 import BackButton from '../BackButton/BackButton';
 import TextField from '@mui/material/TextField';
 import Swal from 'sweetalert2'
@@ -33,8 +38,6 @@ function MessageMe() {
   const [name, setName] = useState<string | null>("")
   const [text, setText] = useState<string | null>("")
   const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
-
-  const [isLoading, setIsLoading] = useState<boolean | null>(false)
 
   useEffect(() => {
     let name: string | null = localStorage.getItem('name');
@@ -154,16 +157,16 @@ function MessageMe() {
   }
 
   return (
-    <Box sx={s.background({ larPort, larLand })}>
-      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-      <Box sx={s.mainContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={s.formContainer({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}>
+    <Box sx={background({ larPort, larLand })}>
+      <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+      <Box sx={mainContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+        <Box sx={leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={formContainer({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}>
           <Button
             variant="contained"
             size="small"
             onClick={() => clearBoth()}
-            sx={s.clearButton({ minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname })}
+            sx={clearButton({ minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname })}
           >
             { english ? 'CLEAR' : 'LIMPIAR' }
           </Button>
@@ -175,8 +178,8 @@ function MessageMe() {
             rows={1}
             size="small"
             value={name}
-            InputLabelProps={{ style: s.labelStyle() }}
-            sx={s.nameBox({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}
+            InputLabelProps={{ style: labelStyle() }}
+            sx={nameBox({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}
             onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
           />
           <TextField
@@ -187,23 +190,23 @@ function MessageMe() {
             rows={ minPort ? height / 55 : minLand ? height / 74 : medPort ? height / 75 : medLand ? height / 60 : 15 }
             value={text}
             size="small"
-            InputLabelProps={{ style: s.labelStyle() }}
+            InputLabelProps={{ style: labelStyle() }}
             onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
-            sx={s.messageBox({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}
+            sx={messageBox({ minPort, minLand, medPort, medLand, larPort, larLand, staticRefWidth })}
           />
           <Button
             disabled={sentButtonDisabled}
             variant="contained"
             size="small"
             onClick={(e) => handleSubmit(e)}
-            sx={s.sendMessageButton({ minPort, minLand, medPort, medLand, larPort, larLand })}
+            sx={sendMessageButton({ minPort, minLand, medPort, medLand, larPort, larLand })}
           >
             { english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
           </Button>
         </Box>
-        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       </Box>
-      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+      <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     </Box>
   )
 }
