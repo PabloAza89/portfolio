@@ -4,11 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import profile from '../../images/profile.png';
 import Swal from 'sweetalert2';
-import {
-  mainContainer, typographyBox, text, avatar,
-  separatorY, separatorX, textNoDeco, topBottomHelper,
-  background,
-} from '../../styles/ContactSX';
+import * as s from '../../styles/ContactSX';
 import '../../styles/ContactSX.css';
 import { blue, brown, lime, red, grey } from '@mui/material/colors';
 
@@ -112,45 +108,45 @@ function Contact() {
   }
 
   return (
-      <Box sx={background}>
-        <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })} />
-        <Box sx={mainContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+      <Box sx={s.background}>
+        <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })} />
+        <Box sx={s.mainContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
 
           <Avatar
             alt="Pablo Azambuyo"
             src={profile}
-            sx={avatar({ minPort, minLand, medPort, medLand, larPort })}
+            sx={s.avatar({ minPort, minLand, medPort, medLand, larPort })}
           />
 
-          <Box sx={separatorY({ minPort, minLand, medPort, medLand })}></Box>
-          <Box sx={separatorX({ minPort })}></Box>
-          <Box sx={typographyBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-            <Typography sx={text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>
+          <Box sx={s.separatorY({ minPort, minLand, medPort, medLand })}></Box>
+          <Box sx={s.separatorX({ minPort })}></Box>
+          <Box sx={s.typographyBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+            <Typography sx={s.text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>
               <Link
-                style={textNoDeco()}
+                style={s.textNoDeco()}
                 to="https://www.linkedin.com/in/juan-pablo-azambuyo/"
                 target="_blank"
               >LinkedIn</Link>
             </Typography>
-            <Typography onClick={() => notifCopyEmail()} sx={text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>Email</Typography>
-            <Typography onClick={() => notifCopyPhone()} sx={text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>Whatsapp</Typography>
-            <Typography sx={text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>
+            <Typography onClick={() => notifCopyEmail()} sx={s.text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>Email</Typography>
+            <Typography onClick={() => notifCopyPhone()} sx={s.text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>Whatsapp</Typography>
+            <Typography sx={s.text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>
               <Link
-                style={textNoDeco()}
+                style={s.textNoDeco()}
                 to="https://twitter.com/jpazambuyo"
                 target="_blank"
               >Twitter</Link>
             </Typography>
-            <Typography sx={text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>
+            <Typography sx={s.text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>
               <Link
-                style={textNoDeco()}
+                style={s.textNoDeco()}
                 to="https://www.instagram.com/pabloaza_/"
                 target="_blank"
               >Instagram</Link>
             </Typography>
           </Box>
         </Box>
-        <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       </Box>
   )
 }

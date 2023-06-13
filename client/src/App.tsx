@@ -10,9 +10,7 @@ import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
 import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
-import { 
-  background, blackWhite, greyBottom, greyRight, topBottomHelper
-} from './styles/AppSX';
+import * as s from './styles/AppSX';
 import { Box } from '@mui/material';
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -63,15 +61,15 @@ function App() {
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
   return (
-    <Box sx={background({ darkMode })} >
-      <Box sx={blackWhite({ staticRefWidth, darkMode, location:location.pathname })} >
+    <Box sx={s.background({ darkMode })} >
+      <Box sx={s.blackWhite({ staticRefWidth, darkMode, location:location.pathname })} >
         <Routes>
           <Route path="/portfolio" element={<>
             <NavBar />
             <DarkMode />
             <Home />
             <Language />
-            <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+            <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
           </>}/>
           <Route path="/portfolio/AboutMe" element={<>
             <AboutMe />
@@ -111,8 +109,8 @@ function App() {
           </>}/>
         </Routes>
       </Box>
-      <Box sx={greyBottom({ darkMode })} />
-      <Box sx={greyRight({ darkMode })} />
+      <Box sx={s.greyBottom({ darkMode })} />
+      <Box sx={s.greyRight({ darkMode })} />
     </Box>
   );
 }

@@ -13,7 +13,7 @@ interface backgroundI {
   percentageResizedHeight: number
 }
 
-const background = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location, percentageResizedHeight }: backgroundI) => {
+export const background = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location, percentageResizedHeight }: backgroundI) => {
   return {
     ...column, ...absolute, ...jcc, ...aic,
     padding: '0vw !important',
@@ -64,7 +64,7 @@ interface genI {
   maxStaticReference: number
 }
 
-const iconDay = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
+export const iconDay = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
   return {
     ...flex, ...absolute, ...column,
     minWidth: '0vh',
@@ -73,7 +73,7 @@ const iconDay = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReferen
   }
 }
 
-const iconNight = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
+export const iconNight = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
   return {
     ...flex, ...absolute, ...column,
     minWidth: '0vh',
@@ -81,7 +81,5 @@ const iconNight = ({ minPort, minLand, medPort, medLand, larPort, maxStaticRefer
     height: minPort || minLand ? `17px !important` : medPort || medLand ? `18.5px !important`  : `20px !important`
   }
 }
-
-export { background, iconDay, iconNight }
 
 

@@ -1,8 +1,8 @@
 import {
-  asc, column, mix, flex, jcc, noSelect,
-  absolute, relative, row, aic, jcse, jcsb
+  flex, relative, absolute, fixed, column,
+  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
+  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
 } from './CommonsSX';
-import { blue, brown, lime, red, grey } from '@mui/material/colors';
 
 interface backgroundI {
   minPort: boolean,
@@ -13,13 +13,12 @@ interface backgroundI {
   larLand: boolean,
 }
 
-const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => { // background
+export const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => { // background
   return {
     ...flex, ...relative,
     //background: 'gray',
     justifyContent: minPort ? 'space-evenly' : medPort || larPort ? 'space-evenly' : minLand ? 'space-evenly' : medLand ? 'space-evenly' : 'flex-start',
     paddingLeft: larLand ? '55px' : 'none',
-    /* paddingRight: larLand ? '55px' : 'none', */
     alignItems: larPort ? 'none' : 'center',
     flexDirection: minPort || medPort || larPort ? 'column-reverse' : 'row',
     minWidth: minPort || minLand || medPort || medLand ? 'calc(100vw - 12px)' : larPort ? '666px' : '600px', // minWidth
@@ -38,7 +37,7 @@ interface boxTextTechMessageI {
   larLand: boolean
 }
 
- const boxTextTechMessage = ({ minPort, minLand, medPort, medLand, larPort, larLand }: boxTextTechMessageI) => { // boxTextTechMessage
+ export const boxTextTechMessage = ({ minPort, minLand, medPort, medLand, larPort, larLand }: boxTextTechMessageI) => { // boxTextTechMessage
   return {
     ...flex, ...column, ...aic,
     //background: 'maroon',
@@ -60,7 +59,7 @@ interface boxSVGI {
   larPort: boolean
 }
 
-const boxSVG = ({ minPort, minLand, medPort, medLand, larPort }: boxSVGI ) => { // boxSVGI
+export const boxSVG = ({ minPort, minLand, medPort, medLand, larPort }: boxSVGI ) => { // boxSVGI
   return {
     ...relative, ...flex, ...jcc, aic,
     //background: 'purple',
@@ -84,7 +83,7 @@ interface imageSVGI {
   percentageResizedWidth: number
 }
 
-const imageSVG = ({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth }: imageSVGI ) => { // imageSVG
+export const imageSVG = ({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth }: imageSVGI ) => { // imageSVG
   return {
     ...flex, ...relative,
     //background: 'red',
@@ -104,7 +103,7 @@ interface boxTypographyI {
   larLand: boolean
 }
 
-const boxTypography = ({ minPort, minLand, medPort, medLand, larPort, larLand }: boxTypographyI) => { // boxTypography
+export const boxTypography = ({ minPort, minLand, medPort, medLand, larPort, larLand }: boxTypographyI) => { // boxTypography
   return {
     ...flex, ...column, ...jcse,
     //background: 'teal',
@@ -131,7 +130,7 @@ interface auxLarPortI {
   larPort: boolean
 }
 
-const auxLarPort = ({ larPort }: auxLarPortI) => { // auxLarPort
+export const auxLarPort = ({ larPort }: auxLarPortI) => { // auxLarPort
   return {
     ...column, ...jcsb,
     //background: 'darkblue',
@@ -143,7 +142,7 @@ const auxLarPort = ({ larPort }: auxLarPortI) => { // auxLarPort
   }
 }
 
-const textOne = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight }: textOneI) => { // textOne
+export const textOne = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight }: textOneI) => { // textOne
   return {
     ...noSelect, ...mix, ...relative, ...flex,
     lineHeight: '1.0',
@@ -164,7 +163,7 @@ interface textTwoI {
   staticRefHeight: number
 }
 
-const textTwo = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight }: textTwoI) => { // textTwo
+export const textTwo = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight }: textTwoI) => { // textTwo
   return {
     ...noSelect, ...mix,
     lineHeight: '1.0',
@@ -186,7 +185,7 @@ interface textThreeI {
   staticRefHeight: number
 }
 
-const textThree = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight }: textThreeI) => { // textThree
+export const textThree = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight }: textThreeI) => { // textThree
   return {
     ...noSelect, ...mix,
     lineHeight: '1.0',
@@ -205,7 +204,7 @@ interface boxButtonI {
   larLand: boolean
 }
 
-const boxButton = ({ minPort, minLand, medPort, medLand, larPort, larLand }: boxButtonI) => { // boxButton
+export const boxButton = ({ minPort, minLand, medPort, medLand, larPort, larLand }: boxButtonI) => { // boxButton
   return {
     ...flex, ...row, ...jcc,
     width: larPort ? '100vw' : '100%', // width
@@ -221,7 +220,7 @@ interface buttonMessageI {
   larPort: boolean
 }
 
-const buttonMessage = ({ minPort, minLand, medPort, medLand, larPort }: buttonMessageI ) => { //buttonMessage
+export const buttonMessage = ({ minPort, minLand, medPort, medLand, larPort }: buttonMessageI ) => { //buttonMessage
   return {
     ...mix,
     background: 'none',
@@ -229,12 +228,7 @@ const buttonMessage = ({ minPort, minLand, medPort, medLand, larPort }: buttonMe
     width: minPort ? '55vw' : medPort ? '55vw' : minLand ? '23vw' : medLand ? '30vw' : larPort ? '320px' : '370px', // width
     color:'#FFFFFF',
     fontSize: minPort ? '4vw' : minLand ? '1.8vw' : medPort ? '4vw' : medLand ? '2.4vw' : larPort ? '24px' : '28px', // fontSize
+    transition: 'all .2s ease-in-out',
+    ':hover': { transform: 'scale(1.05)' },
   }
-}
-
-export {
-  background, boxTypography, textOne,
-  textTwo, textThree, buttonMessage,
-  imageSVG, boxTextTechMessage, boxSVG,
-  boxButton, auxLarPort
 }

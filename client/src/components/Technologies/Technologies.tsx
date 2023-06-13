@@ -71,22 +71,7 @@ function Technologies() {
   ]
 
   $(function(){
-    array.forEach(e => {
-      $(`.titleClass${e.id}`).on("mouseenter", function () {
-          $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
-          $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
-      }).on("mouseleave", function () {
-        $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
-        $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
-      })
-      $(`.iconClass${e.id}`).on("mouseenter", function () {
-        $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
-        $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
-      }).on("mouseleave", function () {
-        $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
-        $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
-      })
-    })
+    s.hover(array)
   })
 
   return (
@@ -97,8 +82,9 @@ function Technologies() {
       {array.map((e) => {
         return (
           <Box
+            className={`container${e.id}`}
             key={e.title}
-            sx={s.iconBoxCopy({ minPort, minLand, medPort, medLand, larPort })}
+            sx={s.container({ minPort, minLand, medPort, medLand, larPort })}
           >
             <Box
               className={`titleClass${e.id}`}
@@ -115,7 +101,7 @@ function Technologies() {
               to={e.url}
               target="_blank"
               sx={s.iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}
-            ></CardMedia>
+            />
           </Box>
         )
       })}

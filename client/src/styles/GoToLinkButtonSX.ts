@@ -7,7 +7,7 @@ interface backgroundI {
   larPort: boolean
 }
 
-const background = ({ darkMode, minPort, minLand, larPort }: backgroundI) => {
+export const background = ({ darkMode, minPort, minLand, larPort }: backgroundI) => {
   return {
     ...column, ...aic, ...jcc, ...relative,
     background: darkMode ? '#48555e' : null,
@@ -25,7 +25,7 @@ interface iconI {
   larPort: boolean
 }
 
-const icon = ({ minPort, minLand, larPort }: iconI) => {
+export const icon = ({ minPort, minLand, larPort }: iconI) => {
   return {
     transform: 'scaleX(-1)',
     padding: '0vw !important',
@@ -33,5 +33,3 @@ const icon = ({ minPort, minLand, larPort }: iconI) => {
     height: minPort ? `19px !important` : minLand ? `17px !important` : larPort ? '25px !important' : '25px !important'
   }
 }
-
-export { background, icon }

@@ -1,4 +1,8 @@
-import { flex, relative, fixed, jcse, } from './CommonsSX';
+import {
+  flex, relative, absolute, fixed, column, pointer,
+  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
+  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
+} from './CommonsSX';
 
 interface backgroundI {
   darkMode: boolean,
@@ -12,7 +16,7 @@ interface backgroundI {
   larLand: boolean
 }
 
-const background = ({ darkMode, width, height, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
+export const background = ({ darkMode, width, height, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
   return {
     ...flex, ...fixed, ...jcse,
     '--vpHeight': `calc(${height}px - 30px)`,
@@ -46,10 +50,8 @@ interface durationI {
   secs: number
 }
 
-const duration = ({ secs }: durationI) => {
+export const duration = ({ secs }: durationI) => {
   return {
     'animationDuration': `calc(125s / ${secs})`
   }
 }
-
-export { background , duration }

@@ -2,19 +2,38 @@ import { grey } from '@mui/material/colors';
 import {
   absolute, mix, noDeco, aic, asc, column,
   flex, jcc, jic, jsc, noSelect, relative,
+  jcse, fixed, jcsb, jcsa, pointer
 } from './CommonsSX';
+import $ from 'jquery';
+
+interface arrayI {
+  id: number,
+}
+
+export const hover = (array: arrayI[]) => {
+  array.forEach(e => {
+    $(`.cardClass${e.id}`).on("mouseenter", function () {
+      $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+      $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+      $(`.urlClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)').css('mix-blend-mode', 'difference')
+    }).on("mouseleave", function () {
+      $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+      $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+      $(`.urlClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+    })
+  })
+}
 
 interface greyTopI {
   darkMode: boolean,
 }
 
-const greyTop = ({ darkMode }: greyTopI) => {
+export const greyTop = ({ darkMode }: greyTopI) => {
   return {
+    ...flex, ...fixed,
     background: darkMode ? grey[800] : grey[400],
     height: '6px',
     width: '100vw',
-    display: 'flex',
-    position: 'fixed',
     top: '0px',
     zIndex: 1000
   }
@@ -24,13 +43,12 @@ interface greyLeftI {
   darkMode: boolean,
 }
 
-const greyLeft = ({ darkMode }: greyLeftI) => {
+export const greyLeft = ({ darkMode }: greyLeftI) => {
   return {
+    ...flex, ...fixed,
     background: darkMode ? grey[800] : grey[400],
     height: 'calc(100vh - 12px)',
     width: '6px',
-    display: 'flex',
-    position: 'fixed',
     left: '0px',
     zIndex: 1000
   }
@@ -45,25 +63,21 @@ interface topBottomHelperI {
   larLand: boolean
 }
 
-const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
+    ...flex, ...relative,
     //background: 'red',
-    display: 'flex',
     width: '20px',
     minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : '120px',
-    position: 'relative'
   }
 }
 
-const background = () => {
+export const background = () => {
   return {
-    ...flex, ...aic,
+    ...flex, ...aic, ...column, ...jcsb,
     background: 'none',
-    flexDirection: 'column',
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)',
-    justifyContent: 'space-between'
-    //overflow: 'hidden'
   }
 }
 
@@ -76,11 +90,10 @@ interface genI {
   larLand: boolean
 }
 
-const mainBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }: genI) => {
+export const mainBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }: genI) => {
   return {
-    ...flex,
+    ...flex, ...jcsb,
     //background: 'darkred',
-    justifyContent: 'space-between',
     width: 'calc(100vw - 12px)',
     minHeight: larLand ? '220px' : 'none',
     height: minPort || medPort || larPort ? '80vh' : '50vh',
@@ -96,12 +109,11 @@ interface leftRightHelperI {
   larLand: boolean
 }
 
-const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
+export const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
   return {
     display: larLand ? 'flex' : 'none',
-        //background: 'yellow',
+    //background: 'yellow',
     minWidth: '44px',
-    
   }
 }
 
@@ -114,13 +126,11 @@ interface cardContainerI {
   larLand: boolean
 }
 
-const cardContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: cardContainerI) => {
+export const cardContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: cardContainerI) => {
   return {
-    display: 'flex',
+    ...flex, ...aic, ...jcse,
     flexDirection: minPort || medPort || larPort ? 'column' : 'row',
     //background: 'blue',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
     minWidth: larLand ? '1200px' : 'none',
     width: 'calc(100vw - 12px)',
     minHeight: larPort ? '720px' : larLand ? '220px' : 'none',
@@ -137,19 +147,13 @@ interface cardI {
   larLand: boolean
 }
 
-const card = ({ minPort, minLand, medPort, medLand, larPort, larLand }: cardI) => { // card
+export const card = ({ minPort, minLand, medPort, medLand, larPort, larLand }: cardI) => { // card
   return {
-    ...flex,
-    display: 'flex',
+    ...flex, ...relative, ...column, ...aic, ...jcsb,
     //background: 'orange',
-    //border: '1px solid',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
     minWidth: minPort ? '87vw' : minLand || medPort || medLand ? '32vw' : '400px', // minWidth
     width: minPort ? '87vw' : medPort ? '50vw' : minLand || medLand ? '32vw' : '400px', // minWidth
     height: minPort ? '25vh' : medPort ? '20vh' : minLand || medLand ? '35vh' : '220px', // height
-    
   }
 }
 
@@ -162,11 +166,10 @@ interface titleI {
   larLand: boolean
 }
 
-const title = ({ minPort, minLand, medPort, medLand, larPort, larLand }: titleI) => { // title
+export const title = ({ minPort, minLand, medPort, medLand, larPort, larLand }: titleI) => { // title
   return {
     ...noSelect, ...mix,
-    background: 'none',
-    //height: minLand ? '13vh' : 'none',
+    //background: 'Red',
     color: '#FFFFFF',
     fontSize: minPort ? '4.1vw': medPort ? '2.5vw' : minLand || medLand ? '1.6vw' : larPort ? '20px' : '20px', // fontSize
   }
@@ -181,20 +184,17 @@ interface boxMediaI {
   larPort: boolean
 }
 
-const boxMedia = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: boxMediaI) => { // boxMedia
+export const boxMedia = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: boxMediaI) => { // boxMedia
   return {
-/*     ...asc, */
-    'cursor': 'pointer',
+    ...pointer,
     width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : larPort ? '220px' : '220px', // width
     height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : larPort ? '120px' : '120px', // height
-    ':hover':
-      darkMode ? {webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)'}
-      : {webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)'},
+    ':hover': darkMode ?
+      { webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)' } :
+      { webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)/* ' },
     webkitFilter: darkMode ? 'brightness(.6)' : 'none',
     'filter': darkMode ? 'brightness(.6)' : 'none',
     zIndex: 1000,
-    /* transition: 'all .2s ease-in-out', // editing here
-    ':hover': { transform: 'scale(1.1)' }, */
   }
 }
 
@@ -206,25 +206,24 @@ interface urlI {
   larPort: boolean
 }
 
-const url = ({ minPort, minLand, medPort, medLand, larPort }: urlI) => {
+export const url = ({ minPort, minLand, medPort, medLand, larPort }: urlI) => {
   return {
-    /* ...asc, */
     color: '#FFFFFF',
     paddingRight: '0vw',
     paddingTop: '0vw',
     fontSize: minPort ? '3.8vw' : medPort ? '2.3vw' : minLand || medLand ? '1.8vw' : larPort ? '20px' : '20px',
-    background: 'none'
+    //background: 'gray',
   }
 }
 
-const anchor = () => {
+export const anchor = () => {
   return {
     ...asc, ...noSelect,...noDeco, ...mix,
     color: '#FFFFFF',
   }
 }
 
-const dialogStyle = () => {
+export const dialogStyle = () => {
   return {
     maxWidth: '100vw',
     maxHeight: '100vh',
@@ -240,19 +239,16 @@ interface dialogPaperI {
   larPort: boolean
 }
 
-const dialogPaper = ({ minPort, minLand, medPort, medLand, larPort }: dialogPaperI) => {
+export const dialogPaper = ({ minPort, minLand, medPort, medLand, larPort }: dialogPaperI) => {
   return {
-    sx: {  overflow: 'hidden',
-      padding: '0px',
-      display: 'flex',
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      width: minPort ? '85vw' : minLand ? '85vw' : medPort ? '90vw' : medLand ? '80vw' : larPort ? '85vw' : '70vw',
-      height: minPort ? '80vh' : minLand ? '80vh' : medPort ? '35vh' : medLand ? '55vh' : larPort ? '45vh' : '65vh',
-      justifyContent: 'center',
-      alignItems: 'center',
-      '&::-webkit-scrollbar': {display: 'none'}
-    }  
+    ...flex, ...jcc, ...aic,
+    overflow: 'hidden',
+    padding: '0px',
+    maxWidth: '100vw',
+    maxHeight: '100vh',
+    width: minPort ? '85vw' : minLand ? '85vw' : medPort ? '90vw' : medLand ? '80vw' : larPort ? '85vw' : '70vw',
+    height: minPort ? '80vh' : minLand ? '80vh' : medPort ? '35vh' : medLand ? '55vh' : larPort ? '45vh' : '65vh',
+    '&::-webkit-scrollbar': {display: 'none'}
   }
 }
 
@@ -264,18 +260,11 @@ interface dialogBoxI {
   larPort: boolean
 }
 
-const dialogBox = ({ minPort, minLand, medPort, medLand, larPort }: dialogBoxI) => {
+export const dialogBox = ({ minPort, minLand, medPort, medLand, larPort }: dialogBoxI) => {
   return {
     width: minPort ? 'calc(80vh - 32px)' : minLand ? 'calc(85vw - 32px)' : medPort ? 'calc(90vw - 32px)' : medLand ? 'calc(80vw - 32px)' : larPort ? 'calc(85vw - 32px)' : 'calc(70vw - 32px)',
     height: minPort ? 'calc(85vw - 32px)' : minLand ? 'calc(80vh - 32px)' : medPort ? 'calc(35vh - 32px)' : medLand ? 'calc(55vh - 32px)' : larPort ? 'calc(45vh - 32px)' : 'calc(65vh - 32px)',
     transform: minPort ? 'rotate(-90deg)' : 'none',
     padding: '0px'
   }
-}
-
-export {
-  background, mainBox, card, anchor, dialogBox,
-  title, boxMedia, url, dialogStyle, dialogPaper,
-  greyTop, topBottomHelper, leftRightHelper,
-  cardContainer, greyLeft
 }

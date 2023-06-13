@@ -1,18 +1,21 @@
 import { grey } from '@mui/material/colors';
-import { column, flex, relative, fixed } from './CommonsSX';
+import {
+  flex, relative, absolute, fixed, column, pointer,
+  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
+  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
+} from './CommonsSX';
 
 interface backgroundI {
   darkMode: boolean
 }
 
-const background = ({ darkMode }: backgroundI) => {
+export const background = ({ darkMode }: backgroundI) => {
   return {
-    ...relative, ...flex,
+    ...relative, ...flex, ...jcc,
     backgroundColor: darkMode ? grey[800] : grey[400],
     overflow: 'hidden',
     width: '100vw',
     height: '100vh',
-    justifyContent: 'center'
   }
 }
 
@@ -22,13 +25,11 @@ interface blackWhiteI {
   location: string
 }
 
-const blackWhite = ( { staticRefWidth, darkMode, location }: blackWhiteI ) => {
+export const blackWhite = ( { staticRefWidth, darkMode, location }: blackWhiteI ) => {
   return {
-    /* ...fixed, */ ...flex, ...column,
-    position: 'relative',
+    ...relative, ...flex, ...column, ...asc,
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)',
-    alignSelf: 'center',
     justifyContent: 
       location === '/portfolio'  ? 'space-between' :
       location === '/portfolio/MessageMe'  ? 'center' :
@@ -47,13 +48,12 @@ interface topBottomHelperI {
   larLand: boolean,
 }
 
-const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
+    ...flex, ...relative,
     //background: 'orange',
-    display: 'flex',
     width: '20px',
     minHeight: minPort ? '60px' : minLand ? '35px' : medPort || medLand ? '65px' : larPort ? '70px' : '85px',
-    position: 'relative'
   }
 }
 
@@ -61,13 +61,12 @@ interface greyBottomI {
   darkMode: boolean,
 }
 
-const greyBottom = ({ darkMode }: greyBottomI) => {
+export const greyBottom = ({ darkMode }: greyBottomI) => {
   return {
+    ...flex, ...fixed,
     background: darkMode ? grey[800] : grey[400],
     height: '6px',
     width: 'calc(100vw - 12px)',
-    display: 'flex',
-    position: 'fixed',
     bottom: '0px',
     zIndex: 1000
   }
@@ -77,20 +76,14 @@ interface greyRightI {
   darkMode: boolean,
 }
 
-const greyRight = ({ darkMode }: greyRightI) => {
+export const greyRight = ({ darkMode }: greyRightI) => {
   return {
+    ...flex, ...absolute,
     background: darkMode ? grey[800] : grey[400],
     //background: 'orange',
     height: '100vh',
     width: '6px',
-    display: 'flex',
-    position: 'absolute',
     right: '0px',
     zIndex: 1000
   }
-}
-
-export {
-  background, blackWhite, greyBottom, greyRight,
-  topBottomHelper
 }

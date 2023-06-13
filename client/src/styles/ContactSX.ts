@@ -1,16 +1,13 @@
 import {
-  flex, mix, noSelect, row, column,
-  relative, asc, jcc, noDeco
+  flex, relative, absolute, fixed, column, pointer,
+  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
+  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
 } from './CommonsSX';
-import { blue, brown, lime, red, grey } from '@mui/material/colors';
 
-const background = () => {
+export const background = () => {
   return {
+    ...flex, ...relative, ...jcsb, ...column,
     //background: 'orange',
-    display: 'flex',
-    position: 'relative',
-    justifyContent: 'space-between',
-    flexDirection: 'column',
     height: 'calc(100vh - 12px)'
   }
 }
@@ -24,13 +21,12 @@ interface topBottomHelperI {
   larLand: boolean
 }
 
-const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
+    ...flex, ...relative,
     //background: 'darkblue',
-    display: 'flex',
     width: '20px',
     minHeight: minPort || minLand || medPort || medLand ? '1px' : '100px',
-    position: 'relative'
   }
 }
 
@@ -43,15 +39,14 @@ interface mainContainerI {
   larLand: boolean
 }
 
-const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainContainerI) => {
+export const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainContainerI) => {
   return {
-    ...flex, ...jcc,
+    ...flex, ...jcc, ...aic,
     flexDirection: minPort ? 'column' : 'row',
     //background: 'teal',
     width: 'calc(100vw - 12px)',
     minWidth: minPort || minLand || medPort || medLand ? 'none' : larPort ? '900px' : '900px',
     height: minLand ? '220px' : medLand ? '350px' : larPort ? '500px' : '500px',
-    alignItems: 'center'
   }
 }
 
@@ -63,7 +58,7 @@ interface avatarI {
   larPort: boolean
 }
 
-const avatar = ({ minPort, minLand, medPort, medLand, larPort }: avatarI) => {
+export const avatar = ({ minPort, minLand, medPort, medLand, larPort }: avatarI) => {
   return {
     ...relative, ...flex,
     width: minPort ? '180px' : minLand ? '180px' : medPort || medLand ? '250px' : larPort ? '400px' : '400px',
@@ -92,7 +87,7 @@ interface separatorYI {
   medLand: boolean,
 }
 
-const separatorY = ({ minPort, minLand, medPort, medLand }: separatorYI) => {
+export const separatorY = ({ minPort, minLand, medPort, medLand }: separatorYI) => {
   return {
     ...relative, ...asc, ...mix,
     display: minPort ? 'none' : 'flex',
@@ -121,14 +116,14 @@ interface separatorXI {
   minPort: boolean
 }
 
-const separatorX = ({ minPort }: separatorXI) => {
+export const separatorX = ({ minPort }: separatorXI) => {
   return {
     ...relative, ...asc, ...mix,
     display: minPort ? 'flex' : 'none',
     background: 'white',
     width: '170px',
     height: '7px',
-    margin: '4vw 0px', // only MinPort
+    margin: '4vw 0px', // only on MinPort
     animation: 'separatorXContact 1s',
     '@keyframes separatorXContact': {
       '0%': {
@@ -155,14 +150,12 @@ interface typographyBoxI {
   larLand: boolean
 }
 
-const typographyBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }: typographyBoxI) => { // typographyBox
+export const typographyBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }: typographyBoxI) => { // typographyBox
   return {
-    ...flex, ...column, ...relative, ...asc,
+    ...flex, ...column, ...relative, ...asc, ...jcc,
     //'background': 'red',
     width: minPort ? '160px' : minLand ? '120px' : medPort || medLand ? '160px' : '230px', // width
     height: minPort ? '230px' : minLand ? '180px' : medPort || medLand ? '300px' : '400px', // height
-    //alignItems: 'center',
-    justifyContent: 'center',
     alignItems: minPort ? 'center' : 'flex-start',
   }
 }
@@ -176,16 +169,15 @@ interface textI {
   larPort: boolean
 }
 
-const text = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: textI) => {
+export const text = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: textI) => {
   return {
-    ...noSelect, ...relative, ...mix,
+    ...noSelect, ...relative, ...mix, ...pointer,
     fontFamily: 'Lucida Console',
     fontSize: minPort ? '23px' : minLand ? '20px' : medPort || medLand ? '26px' : larPort ? '39px' : '39px',
     color: darkMode ? '#b5b3b3' : 'white',
     padding: minPort ? '5px 0px' : minLand ? '5px 0px' : medPort || medLand ? '9px 0px' : '15px 0px',
     transition: 'all .2s ease-in-out',
     ':hover': { transform: 'scale(1.1)' },
-    cursor: 'pointer', 
     animation: 'textContact 1s',
     '@keyframes textContact': {
       '0%': {
@@ -203,15 +195,10 @@ const text = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: textI) 
   }
 }
 
-const textNoDeco = () => {
+export const textNoDeco = () => {
   return {
     ...noSelect, ...relative, ...mix, ...noDeco,
     fontFamily: 'Lucida Console',
     color: 'white',
   }
-}
-
-export {
-  mainContainer, typographyBox, text, topBottomHelper,
-  avatar, separatorY, separatorX, textNoDeco, background,
 }

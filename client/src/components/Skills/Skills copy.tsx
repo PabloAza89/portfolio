@@ -82,16 +82,6 @@ function Skills() {
     }
   },[graphDontFit, levels])
 
-
-  // $('#barsMoveId1').jrumble({
-  //   speed: 50
-  // });
-  // $('#barsMoveId1').hover(function(){
-  //   $(this).trigger('startRumble');
-  // }, function(){
-  //   $(this).trigger('stopRumble');
-  // });
-
   return (
     <Box sx={s.background}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>

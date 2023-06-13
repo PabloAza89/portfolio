@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from "react-router-dom";
 import { setDarkMode } from '../../actions';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { background, iconDay, iconNight } from '../../styles/DarkModeSX';
+import * as s from '../../styles/DarkModeSX';
 
 function DarkMode() {
 
@@ -24,8 +24,14 @@ function DarkMode() {
 
   return (
     <Link style={{ textDecoration: 'none' }} to="/portfolio">
-      <Button onClick={(e) => {e.preventDefault(); dispatch(setDarkMode(!darkMode))}} variant="contained" sx={background({ height,minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location:location.pathname, percentageResizedHeight })}>
-        { darkMode ? <LightMode sx={iconDay({ minPort, minLand, medPort, medLand, larPort, maxStaticReference })}/> : <DarkModeIcon sx={iconNight({ minPort, minLand, medPort, medLand, larPort, maxStaticReference })}/> }
+      <Button 
+        onClick={(e) => {e.preventDefault(); dispatch(setDarkMode(!darkMode))}}
+        variant="contained"
+        sx={s.background({ height,minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location:location.pathname, percentageResizedHeight })}
+      >
+        { darkMode ?
+          <LightMode sx={s.iconDay({ minPort, minLand, medPort, medLand, larPort, maxStaticReference })} /> :
+          <DarkModeIcon sx={s.iconNight({ minPort, minLand, medPort, medLand, larPort, maxStaticReference })}/> }
       </Button>
     </Link>
   )

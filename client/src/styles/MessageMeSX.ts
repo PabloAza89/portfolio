@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
 import {
-  flex, noSelect, row, column, asc,
-  jsc, jcse, jcc
+  flex, relative, absolute, fixed, column, pointer,
+  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
+  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
 } from './CommonsSX';
 
 interface topBottomHelperI {
@@ -15,11 +16,11 @@ interface topBottomHelperI {
 
 export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
   return {
+    ...relative,
     //background: 'blue',
     display: larPort || larLand ? 'flex' : 'none',
     width: '20px',
     minHeight: minPort || minLand ? '1px' : medPort || medLand ? '1px' : '100px',
-    position: 'relative'
   }
 }
 
@@ -34,12 +35,12 @@ interface mainContainerI {
 
 export const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainContainerI) => {
   return {
+    ...aic,
     //background: 'darkred',
     display: larPort || larLand ? 'flex' : 'contents',
     minHeight: '560px',
     height: '65vh',
     width: '100%',
-    alignItems: 'center',
     justifyContent: larPort || larLand ? 'space-between' : 'center',
   }
 }
@@ -70,13 +71,11 @@ interface backgroundI {
 
 export const background = ({ larPort, larLand }: backgroundI) => {
   return {
+    ...flex, ...column, ...aic,
     //background: 'red',
-    display: 'flex',
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)',
-    flexDirection: 'column',
     justifyContent: larPort || larLand ? 'space-between' : 'center',
-    alignItems: 'center'
   }
 }
 
@@ -92,11 +91,9 @@ interface formContainerI {
 
 export const formContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode }: formContainerI) => { // formContainer
   return {
-    ...flex, ...column,
-    justifyContent: 'space-evenly',
+    ...flex, ...column, ...jcse, ...relative,
     alignContent: 'space-evenly',
     top: minLand || medLand ? '-4vh' : '0vh',
-    position: 'relative',
     borderRadius: `4px`,
     background: darkMode ? '#325b5c' : '#5f9ea0',
     opacity: '0.95',
@@ -119,7 +116,7 @@ export const labelStyle = ({ darkMode }: labelStyleI) => {
     padding: '0px 8px',
     left: '-5px',
     borderRadius: `4px`,
-    color: darkMode ? 'white' : 'none',
+    color: darkMode ? 'white' : 'rgba(0, 0, 0, 0.6)',
   }
 }
 
@@ -129,7 +126,7 @@ interface inputStyleI {
 
 export const inputStyle = ({ darkMode }: inputStyleI) => {
   return {
-    color: darkMode ? 'white' : 'none',
+    color: darkMode ? 'white' : 'rgba(0, 0, 0, 0.87)',
   }
 }
 
@@ -145,9 +142,7 @@ interface nameBoxI {
 
 export const nameBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode }: nameBoxI) => {
   return {
-     ...asc,
-    display: 'flex',
-    position: 'relative',
+    ...asc, ...flex, ...relative,
     //background: 'yellow',
     background: darkMode ? '#615f5f' : 'white',
     opacity: '0.90',
@@ -172,9 +167,7 @@ interface messageBoxI {
 
 export const messageBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode }: messageBoxI) => {
   return {
-    ...asc,
-    display: 'flex',
-    position: 'relative',
+    ...asc, ...flex, ...relative,
     //background: 'yellow',
     background: darkMode ? '#615f5f' : 'white',
     opacity: '0.90',
@@ -199,8 +192,7 @@ interface clearButtonI {
 
 export const clearButton = ({ minPort, minLand, medPort, medLand, larPort, larLand, location }: clearButtonI) => { // clearButton
   return {
-    display: 'flex',
-    position: 'relative',
+    ...flex, ...relative,
     color: 'white',
     background: 'gray',
     alignSelf: 'flex-end',
@@ -226,9 +218,7 @@ interface sendMessageButtonI {
 
 export const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLand,  }: sendMessageButtonI) => { // sendMessageButton
   return {
-    display: 'flex',
-    position: 'relative',
-    alignSelf: 'center',
+    ...flex, ...relative, ...asc,
     padding: '0px !important',
     lineHeight: 'unset',
     color: 'white',
@@ -243,7 +233,7 @@ export const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort,
 
 export const loadingText = () => {
   return {
-    mixBlendMode: 'difference',
+    ...mix,
     fontSize: '12px',
     color: 'white',
     fontWeight: '700',
@@ -262,20 +252,17 @@ interface messageLoadingSpinnerI {
 
 export const messageLoadingSpinner = ({ show }: messageLoadingSpinnerI) => {
   return {
+    ...absolute, ...jcc, ...aic,  ...mix,
     //background: 'red',
     display: show ? 'flex' : 'none',
-    position: 'absolute',
-    justifyContent: 'center',
     alignContent: 'center',
-    alignItems: 'center',
     width: '100%',
     height: '100px',
     zIndex: 900,
-    mixBlendMode: 'difference',
    'div': {
+      ...absolute,
       boxSizing: 'border-box',
       display: 'block',
-      position: 'absolute',
       width: '150px',
       height: '150px',
       margin: '8px',

@@ -1,5 +1,9 @@
 import { blue } from '@mui/material/colors';
-import { aic, asc, mix, flex, jcse, noDeco, noSelect, row } from './CommonsSX';
+import {
+  flex, relative, absolute, fixed, column, pointer,
+  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
+  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
+} from './CommonsSX';
 
 interface genI {
   staticRefWidth: number,
@@ -27,15 +31,13 @@ export const background = ({ staticRefWidth, minPort, minLand, medPort, medLand,
 
 export const mainLeft = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // mainLeft
   return {
-    ...flex, ...row, ...aic,
+    ...flex, ...row, ...aic, ...jcc,
     //background: 'red',
-    alignItems: 'center',
     minWidth: minPort || minLand || medPort || medLand ? '30vw' : larPort ? '491px' : '580px', // minWidth
     height: minPort || medPort ? '11vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '82px' : '100px', // height
     color: '#FFFFFF',
     'alignSelf': minPort || minLand || medPort || larPort ? 'start' : 'center',
     marginLeft: minPort || minLand || medPort || medLand ? '2vw' : larPort || larLand ? '25px' : 'none',
-    justifyContent: 'center'
   }
 }
 
@@ -58,7 +60,7 @@ export const mainRight = ({ staticRefWidth, percentageResizedWidth, minPort, min
     width: minLand ? '55vw' : minPort || medPort ? 'calc(100vw - 12px)' : medLand ? '60vw' : larPort ? '93vw' : '50vw', // width
     minHeight: minPort || medPort ? '6vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '45px' : `100px`, // minHeight
     paddingLeft: minPort || minLand || medPort ? '0px' : larLand ? '20px' : '20px',
-    paddingRight: larLand ? '50px' : '20px',
+    paddingRight: medLand ? '35px' : larLand ? '50px' : '20px',
     color: '#FFFFFF',
     alignSelf: larPort ? 'flex-start' : 'unset',
     justifyContent:

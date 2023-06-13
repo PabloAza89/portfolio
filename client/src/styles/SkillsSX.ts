@@ -2,6 +2,31 @@ import {
   flex, noSelect, row, absolute, relative,
   column, jcc, fixed, jcsb, aic, aifs, jcfs,
 } from './CommonsSX';
+import $ from 'jquery';
+
+interface levelsI {
+  id: number,
+}
+
+export const onClickTrue = (levels: levelsI[]) => {
+  levels.forEach(e => {
+    $(`#barsMoveId${e.id}`).on("click", function(){
+      $(`.barsMoveClass${e.id}`).addClass(`barsMoveClass`)
+      $(`.barsFixedClass${e.id}`).addClass(`barsFixedClass`) // ENABLES
+    });
+    $(`#barsMoveId${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+      $(`.barsMoveClass${e.id}`).removeClass(`barsMoveClass`);
+      $(`.barsFixedClass${e.id}`).removeClass(`barsFixedClass`); // TRIGGERS TO INITIAL STATE
+    });
+  })
+}
+
+export const onClickDefault = (levels: levelsI[]) => {
+  levels.forEach(e => {
+    $(`#barsMoveId${e.id}`).removeClass(`barsMoveClass${e.id}`);
+    $(`#barsFixedId${e.id}`).removeClass(`barsFixedClass${e.id}`);
+  })
+}
 
 export const background = () => {
   return {
@@ -351,7 +376,6 @@ interface innerLevelI {
 export const innerLevel = ({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand }: innerLevelI) => {
   return {
     ...flex, ...column, ...noSelect,
-    //paddingLeft: minPort || minLand ? '10px' : '0px',
     paddingLeft: graphDontFit ? '10px' : '0px',
   }
 }
@@ -375,7 +399,11 @@ export const colorLevel = ({ graphDontFit, minPort, minLand, medPort, medLand, l
     background: color,
     width: '6px',
     height: '38px',
-    //marginBottom: '0px',
+    animation: 'shake .2s linear 1s 4',
+    '@keyframes shake': {
+      '0%': { transform: 'translateX(-2px)' },
+      '50%': { transform: 'translateX(2px)' }
+    }
   }
 }
 
@@ -415,7 +443,6 @@ export const imageSVG = ({ graphDontFit, minPort, minLand, medPort, medLand, lar
   return {
     width: '45px',
     height: '45px',
-    //marginRight: minPort || minLand ? '55px' : '40px',
     marginRight: graphDontFit ? '65px' : '40px',
   }
 }

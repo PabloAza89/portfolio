@@ -1,8 +1,25 @@
 import {
-  aic, asc, column, mix, flex, jcc,
-  jcsb, noSelect, relative, row, noDeco,
-  absolute, jcfe
+  flex, relative, absolute, fixed, column, pointer,
+  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
+  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
 } from './CommonsSX';
+import $ from 'jquery';
+
+interface arrayI {
+  id: number,
+}
+
+export const hover = (array: arrayI[]) => {
+  array.forEach(e => {
+    $(`.container${e.id}`).on("mouseenter", function () {
+      $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+      $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+    }).on("mouseleave", function () {
+      $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+      $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+    })
+  })
+}
 
 interface backgroundI {
   currentWidth: number,
@@ -18,7 +35,6 @@ export const background = ({ currentWidth, minPort, minLand, medPort, medLand, l
   return {
     order: minPort || medPort || larPort ? '1' : '0',
     ...asc, ...flex, ...aic,
-    //background: 'blue',
     overflow: 'auto',
     width: minPort ? '100%' : medPort ? '85%' : minLand || medLand ? '100%' : larPort ? 'calc(100vw - 12px)' : larLand && currentWidth <= 655 ? 'calc(100vw - 67px)' : '100%', // width
     height: minPort ? 'calc(10vw + 4.5vw + 2%)' : minLand ? 'calc(4.5vw + 1.8vw + 2%)' : medPort ? 'calc(6vw + 3.5vw + 2%)' : medLand ? 'calc(5vw + 2vw + 2%)' : larPort ? 'calc(55px + 21px + 2%)' : 'calc(65px + 24px + 2%)',
@@ -39,9 +55,10 @@ interface iconBoxCopyI {
   larPort: boolean
 }
 
-export const iconBoxCopy = ({ minPort, minLand, medPort, medLand, larPort }: iconBoxCopyI) => { // iconBox
+export const container = ({ minPort, minLand, medPort, medLand, larPort }: iconBoxCopyI) => { // iconBox
   return {
     ...flex, ...column, ...relative, ...noDeco,
+    //background: 'red',
     width: minPort ? '15vw' : minLand ? '7vw' : medPort ? '12vw' : medLand ? '7vw' : larPort ? '111px' : '100px', // width
     height: minPort ? 'calc(10vw + 4.5vw)' : minLand ? 'calc(4.5vw + 1.8vw)' : medPort ? 'calc(6vw + 3.5vw)' : medLand ? 'calc(5vw + 2vw)' : larPort ? 'calc(55px + 21px)' : 'calc(65px + 24px)',
   }

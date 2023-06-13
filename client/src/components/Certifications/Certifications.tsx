@@ -5,13 +5,9 @@ import { useSelector } from 'react-redux';
 import efSet from '../../images/efSet.png';
 import fccCertJS from '../../images/fccCertJS.png';
 import henry from '../../images/henry.png';
-import {
-  background, mainBox, card, anchor, dialogBox,
-  title, boxMedia, url, dialogStyle, dialogPaper,
-  greyTop, topBottomHelper, leftRightHelper,
-  cardContainer, greyLeft
-} from '../../styles/CertificationsSX';
+import * as s from '../../styles/CertificationsSX';
 import Bubbles from '../Bubbles/Bubbles';
+import $ from 'jquery';
 
 function Certifications() {
 
@@ -35,6 +31,7 @@ function Certifications() {
   const [name, setName] = useState("")
 
  interface arrayI {
+    id: number,
     title: string,
     media: string,
     href: string,
@@ -44,18 +41,21 @@ function Certifications() {
   const array: arrayI[] =
   [
     {
-    title: english ? `JavaScript Algorithms and Data Structures` : `Algoritmos Javascript y Estructura de Datos`,
-    media: fccCertJS,
-    href: `https://www.freecodecamp.org/certification/fcc4dacfa43-3a86-4f27-9ef6-4b74318b8b7a/javascript-algorithms-and-data-structures`,
-    url: `https://freecodecamp.org`
+      id: 0,
+      title: english ? `JavaScript Algorithms and Data Structures` : `Algoritmos Javascript y Estructura de Datos`,
+      media: fccCertJS,
+      href: `https://www.freecodecamp.org/certification/fcc4dacfa43-3a86-4f27-9ef6-4b74318b8b7a/javascript-algorithms-and-data-structures`,
+      url: `https://freecodecamp.org`
     },
     {
+      id: 1,
       title: english ? `Full Stack Web Developer` : `Desarrollador Web Full Stack`,
       media: henry,
       href: `https://certificates.soyhenry.com/cert?id=19eebce3-e6a8-4e6f-ac26-7e1b28852f54`,
       url: `https://soyhenry.com`
     },
     {
+      id: 2,
       title: english ? `English B2 (Upper Intermediate)` : `Inglés B2 (Intermedio Superior)`,
       media: efSet,
       href: `https://www.efset.org/cert/T92ez2`,
@@ -63,22 +63,43 @@ function Certifications() {
     }
   ]
 
+  $(function(){
+    s.hover(array)
+  })
+
   return (
-    <Box sx={background}>
-      <Box sx={greyTop({ darkMode })} />
-      <Box sx={greyLeft({ darkMode })} />
-      <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+    <Box sx={s.background}>
+      <Box sx={s.greyTop({ darkMode })} />
+      <Box sx={s.greyLeft({ darkMode })} />
+      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       <Bubbles />
-      <Box sx={mainBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-        <Box sx={leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={cardContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+      <Box sx={s.mainBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.cardContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
           {array.map((e) => {
             return (
-              <Box key={e.title} sx={card({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-                <Typography sx={title({ minPort, minLand, medPort, medLand, larPort, larLand })}>{e.title}</Typography>
-                <Box component="img" src={e.media} onClick={() => {setName(e.media); setShow(!show)}} sx={boxMedia({ darkMode, minPort, minLand, medPort, medLand, larPort })} />
-                <Typography sx={url({ minPort, minLand, medPort, medLand, larPort })}>
-                  <Link style={anchor()}
+              <Box
+                className={`cardClass${e.id}`}
+                key={e.title}
+                sx={s.card({ minPort, minLand, medPort, medLand, larPort, larLand })}
+              >
+                <Typography
+                  className={`titleClass${e.id}`}
+                  sx={s.title({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                >{e.title}</Typography>
+                <Box
+                  className={`imageClass${e.id}`}
+                  component="img"
+                  src={e.media}
+                  onClick={() => {setName(e.media); setShow(!show)}}
+                  sx={s.boxMedia({ darkMode, minPort, minLand, medPort, medLand, larPort })}
+                />
+                <Typography
+                  className={`urlClass${e.id}`}
+                  sx={s.url({ minPort, minLand, medPort, medLand, larPort })}
+                >
+                  <Link
+                    style={s.anchor()}
                     to={e.href}
                     target="_blank"
                   >{e.url}</Link>
@@ -86,24 +107,24 @@ function Certifications() {
               </Box>)
           })}
         </Box>
-        <Box sx={leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       </Box>
 
       <Dialog
         open={show}
         onClick={() => {setShow(false)}}
-        style={dialogStyle()}
-        PaperProps={
-          dialogPaper({ minPort, minLand, medPort, medLand, larPort })
-      }>
+        style={s.dialogStyle()}
+        PaperProps={{sx: s.dialogPaper({ minPort, minLand, medPort, medLand, larPort })}}
+        
+      >
         <Box
           component="img"
-          sx={dialogBox({ minPort, minLand, medPort, medLand, larPort })}
+          sx={s.dialogBox({ minPort, minLand, medPort, medLand, larPort })}
           src={name}
           alt="image"
         />
       </Dialog>
-      <Box sx={topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
 
     </Box>
   )

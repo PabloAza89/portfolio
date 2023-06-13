@@ -10,12 +10,7 @@ import food3 from '../../images/food3.png';
 import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
 import DialogContent from '@mui/material/DialogContent';
-import {
-  background, scroll, solid, intercalated, topBottomHelper,
-  centerStripe, card, boxTitle, title, boxMedia, cardMedia,
-  dialogBox, dialogStyle, boxLower, textLower, select, cardLeft,
-  betweenMedia, lowerHelper, dialogPaper
-} from '../../styles/ProjectsSX';
+import * as s from '../../styles/ProjectsSX';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 
 function Projects() {
@@ -95,32 +90,38 @@ function Projects() {
 
   return (
   <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
-    <Box sx={topBottomHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-    <Box sx={background({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height })}>
+    <Box sx={s.topBottomHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+    <Box sx={s.background({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height })}>
 
-      <ScrollContainer innerRef={useHorizontalScroll()} style={scroll()}>
+      <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll()}>
 
-        <Box sx={solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
 
-        <Box sx={centerStripe({ minPort, minLand, medPort, medLand, larPort, larLand })} >
+        <Box sx={s.centerStripe({ minPort, minLand, medPort, medLand, larPort, larLand })} >
           {array.map((e) => {
             return (
-              <Box key={e.title} sx={card({ darkMode, minPort, minLand, larPort })}>
-                <Box sx={cardLeft}></Box>
+              <Box key={e.title} sx={s.card({ darkMode, minPort, minLand, larPort })}>
+                <Box sx={s.cardLeft}></Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', }}>
-                  <Box sx={boxTitle({ length:e.media.length, minPort, minLand, larPort, darkMode })}>
-                    <Typography sx={title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
-                    <GoToLinkButton link={e.href}/>
+                  <Box sx={s.boxTitle({ length:e.media.length, minPort, minLand, larPort, darkMode })}>
+                    <Typography sx={s.title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
+                    <GoToLinkButton link={e.href} />
                   </Box>
-                  <Box sx={boxMedia({ length:e.media.length, darkMode, minPort, minLand, larPort })}>
+                  <Box sx={s.boxMedia({ length:e.media.length, darkMode, minPort, minLand, larPort })}>
 
                     {e.media.map((m) =>{
                       return (
-                        <Box key={m.toString()} sx={{ display: 'flex', flexDirection: 'row' }}>
-                          <Box key={m.toString().concat('A')} src={m} component="img" onClick={() => {setName(m); setShow(!show)}} sx={cardMedia({ url:m, darkMode, minPort, minLand, larPort })}></Box>
-                          <Box key={m.toString()} sx={betweenMedia({ darkMode, indexOf:e.media.indexOf(m), length:e.media.length-1 })}></Box>
+                        <Box key={m} sx={{ display: 'flex', flexDirection: 'row' }}>
+                          <Box 
+                            src={m} component="img"
+                            onClick={() => {setName(m); setShow(!show)}}
+                            sx={s.cardMedia({ url:m, darkMode, minPort, minLand, larPort })}
+                          />
+                          <Box
+                            sx={s.betweenMedia({ darkMode, indexOf:e.media.indexOf(m), length:e.media.length-1 })}
+                          />
                         </Box>
                       )
                     })}
@@ -131,33 +132,32 @@ function Projects() {
           )})}
         </Box>
 
-        <Box sx={solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
 
       </ScrollContainer>
 
       <Dialog
         open={show}
         onClick={() => {setShow(false)}}
-        style={dialogStyle()}
-        PaperProps={
-          dialogPaper({ minPort, minLand, medPort, medLand, larPort })
-      }>
+        style={s.dialogStyle()}
+        PaperProps={{sx: s.dialogPaper({ minPort, minLand, medPort, medLand, larPort })}}
+      >
         <Box
           component="img"
-          sx={dialogBox({ minPort, minLand, medPort, medLand, larPort })}
+          sx={s.dialogBox({ minPort, minLand, medPort, medLand, larPort })}
           src={name}
           alt="image"
         />
       </Dialog>
 
-      <Box sx={boxLower({ height, minPort, minLand, medLand, larPort, larLand })}>
-        <Typography sx={textLower( larPort )}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
+      <Box sx={s.boxLower({ height, minPort, minLand, medLand, larPort, larLand })}>
+        <Typography sx={s.textLower( larPort )}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
         <FormControl>
           <InputLabel id="demo-simple-select-label"></InputLabel>
           <Select
-            sx={select({ darkMode, larPort })}
+            sx={s.select({ darkMode, larPort })}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={scrollSpeed}
@@ -172,8 +172,7 @@ function Projects() {
       </Box>
 
     </Box>
-    <Box sx={topBottomHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-    {/* <Box sx={lowerHelper}></Box> */}
+    <Box sx={s.topBottomHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
   </Box>
   )
 }

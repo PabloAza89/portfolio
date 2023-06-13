@@ -1,5 +1,8 @@
 import { cyan } from '@mui/material/colors';
-import { asc, relative, flex, noSelect, row, absolute, column, jcc, fixed } from './CommonsSX';
+import { 
+  asc, relative, flex, noSelect, row,
+  absolute, column, jcc, fixed, pointer
+} from './CommonsSX';
 
 interface backgroundI {
   height: number,
@@ -13,10 +16,10 @@ interface backgroundI {
   location: string
 }
 
-const background = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, location, percentageResizedHeight }: backgroundI) => {
+export const background = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, location, percentageResizedHeight }: backgroundI) => {
   return {
     ...asc, ...absolute, ...flex, ...row, ...jcc,
-    background: 'none',
+    //background: 'red',
     pointerEvents:
       larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? 'none' :
       larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? 'none' :
@@ -61,10 +64,9 @@ interface genI {
   maxStaticReference: number
 }
 
-const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
+export const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
   return {
-    ...flex, ...row, ...asc,
-    cursor: 'pointer',
+    ...flex, ...row, ...asc, ...pointer,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid ${cyan[100]} 2px` : `solid transparent 2px`,
@@ -72,15 +74,16 @@ const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxSt
     width: minPort ? '37px' : minLand ? '37px' : medPort ? '50px' : medLand ? '50px' : larPort ? '60px' : '60px',
     ':hover': {
       webkitFilter: 'brightness(.9)',
-      'filter': 'brightness(.9)'
-    }
+      'filter': 'brightness(.9)',
+      transform: 'scale(1.01)'
+    },
+    transition: 'all .2s ease-in-out',
   }
 }
 
-const lanEsFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
+export const lanEsFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
   return {
-    ...flex, ...row, ...asc,
-    cursor: 'pointer',
+    ...flex, ...row, ...asc, ...pointer,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid transparent 2px` : `solid ${cyan[100]} 2px`,
@@ -88,9 +91,9 @@ const lanEsFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxSt
     width: minPort ? '37px' : minLand ? '37px' : medPort ? '50px' : medLand ? '50px' : larPort ? '60px' : '60px',
     ':hover': {
       webkitFilter: 'brightness(.9)',
-      'filter': 'brightness(.9)'
-    }
+      'filter': 'brightness(.9)',
+      transform: 'scale(1.01)'
+    },
+    transition: 'all .2s ease-in-out',
   }
 }
-
-export { background, lanEnFlag, lanEsFlag }

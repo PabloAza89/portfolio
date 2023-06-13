@@ -1,4 +1,8 @@
-import { absolute, column, flex} from '../styles/CommonsSX';
+import {
+  flex, relative, absolute, fixed, column, pointer,
+  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
+  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
+} from './CommonsSX';
 
 interface backgroundI {
   minPort: boolean,
@@ -12,17 +16,15 @@ interface backgroundI {
   percentageResizedHeight: number
 }
 
-const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location, percentageResizedHeight }: backgroundI) => {
+export const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location, percentageResizedHeight }: backgroundI) => {
   return {
-    ...column, ...absolute,
+    ...column, ...absolute, ...jcc, ...aic,
     padding: '0vw !important',
     minWidth: '0vh !important',
     width: minPort || minLand ? `30px !important`  : medPort || medLand ? `32.5px !important`  : `35px !important` ,
     height: minPort || minLand ? `30px !important`  : medPort || medLand ? `32.5px !important`  : `35px !important` ,
     top: '20px',
     left: '20px',
-    justifyContent: 'center',
-    alignItems: 'center',
     transition: 'opacity .1s ease-in-out',
     opacity: '1',
     active: {
@@ -41,7 +43,7 @@ interface iconI {
   maxStaticReference: number
 }
 
-const icon = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference }: iconI) => {
+export const icon = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference }: iconI) => {
   return {
     ...flex, ...absolute, ...column,
     transform: 'rotate(180deg)',
@@ -50,5 +52,3 @@ const icon = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference 
     height: minPort || minLand ? `20px !important`  : medPort || medLand ? `21.5px !important`  : `23px !important`
   }
 }
-
-export { background, icon }

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation } from "react-router-dom";
 import ForwardIcon from '@mui/icons-material/Forward';
 import { Button } from '@mui/material';
-import { background, icon } from '../../styles/BackButtonSX';
+import * as s from '../../styles/BackButtonSX';
 
 function BackButton() {
 
@@ -19,8 +19,8 @@ function BackButton() {
 
   return (
     <Link style={{ textDecoration: 'none' }} to="/portfolio">
-      <Button variant="contained"  sx={background({ minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location:location.pathname, percentageResizedHeight })}>
-        <ForwardIcon sx={icon({ minPort, minLand, medPort, medLand, larPort, maxStaticReference })}/>
+      <Button variant="contained"  sx={s.background({ minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location:location.pathname, percentageResizedHeight })}>
+        <ForwardIcon sx={s.icon({ minPort, minLand, medPort, medLand, larPort, maxStaticReference })}/>
       </Button>
     </Link>
   )

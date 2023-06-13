@@ -45,8 +45,7 @@ function Home() {
             <Button
               sx={buttonMessage({ minPort, minLand, medPort, medLand, larPort })}
               variant='outlined'
-            >{ english ? `Message Me` : `Envíame un mensaje` }
-            </Button>
+            >{ english ? `Message Me` : `Envíame un mensaje` }</Button>
           </Link>
         </Box>
       </Box>
