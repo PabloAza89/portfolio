@@ -229,7 +229,7 @@ export const columnBar = ({ percentage, darkMode }: columnBarI) => {
 export const leftSide = ({ darkMode, percentage }: columnBarI) => {
   return {
     width: '10px',
-    height: `${(percentage + 5)* 2}px`, // #141414
+    height: `${(percentage + 5)* 2}px`,
     background: darkMode ? 
       `linear-gradient(45deg, transparent 7px, silver 7px, #141414 ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)` :
       `linear-gradient(45deg, transparent 7px, silver 7px, silver ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)`,
@@ -241,7 +241,7 @@ export const centerSide = ({ darkMode, percentage }: columnBarI) => {
     ...flex, ...relative,
     width: '30px',
     height: `${(percentage  + 5)* 2}px`,
-    background: darkMode ? 
+    background: darkMode ?
       'linear-gradient(to bottom, gray 10px, #595959 0px)' :
       'linear-gradient(to bottom, gray 10px, darkgrey 0px)',
     textWrap: 'nowrap',

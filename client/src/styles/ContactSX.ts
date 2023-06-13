@@ -163,7 +163,7 @@ const typographyBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
     height: minPort ? '230px' : minLand ? '180px' : medPort || medLand ? '300px' : '400px', // height
     //alignItems: 'center',
     justifyContent: 'center',
-    alignItems: minPort ? 'center' : 'flex-start'
+    alignItems: minPort ? 'center' : 'flex-start',
   }
 }
 
@@ -183,7 +183,9 @@ const text = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: textI) 
     fontSize: minPort ? '23px' : minLand ? '20px' : medPort || medLand ? '26px' : larPort ? '39px' : '39px',
     color: darkMode ? '#b5b3b3' : 'white',
     padding: minPort ? '5px 0px' : minLand ? '5px 0px' : medPort || medLand ? '9px 0px' : '15px 0px',
-    cursor: 'pointer', //
+    transition: 'all .2s ease-in-out',
+    ':hover': { transform: 'scale(1.1)' },
+    cursor: 'pointer', 
     animation: 'textContact 1s',
     '@keyframes textContact': {
       '0%': {

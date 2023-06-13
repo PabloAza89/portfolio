@@ -27,4 +27,3 @@ export const bgNone = { background: 'none' }
 export const bgRed = { background: 'Red' }
 export const noDeco = { textDecoration: 'none' }
 export const mix = { mixBlendMode: 'difference' }
-

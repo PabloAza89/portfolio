@@ -54,9 +54,7 @@ function Skills() {
     { title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }
   ]
 
-   const [ graphDontFit, setGraphDontFit ] = useState<any>(width < ((array.length * 92) + 206) ? true : false)
-  console.log("graphDontFit", graphDontFit)
-
+  const [ graphDontFit, setGraphDontFit ] = useState<any>(width < ((array.length * 92) + 206) ? true : false)
   
   useEffect(() => {
     setGraphDontFit(width < ((array.length * 92) + 206) ? true : false)

@@ -1,4 +1,4 @@
-import { flex, relative } from './CommonsSX';
+import { flex, relative, fixed, jcse, } from './CommonsSX';
 
 interface backgroundI {
   darkMode: boolean,
@@ -13,17 +13,14 @@ interface backgroundI {
 }
 
 const background = ({ darkMode, width, height, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
-  console.log("ESTE ACTUALIZA ?", height)
   return {
-    ...flex,
+    ...flex, ...fixed, ...jcse,
     '--vpHeight': `calc(${height}px - 30px)`,
     left: '0px',
-    position: 'fixed',
     minWidth: `${width}px !important`,
     width: `${width}px !important`,
     minHeight: `${height}px !important`,
     height: `${height}px !important`,
-    justifyContent: 'space-evenly',
     span: {
       width: minPort || minLand ? '10px' : medPort || medLand ? '18px' : '22px',
       height: minPort || minLand ? '10px' : medPort || medLand ? '18px' : '22px',

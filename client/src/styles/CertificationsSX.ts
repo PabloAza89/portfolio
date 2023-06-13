@@ -149,6 +149,7 @@ const card = ({ minPort, minLand, medPort, medLand, larPort, larLand }: cardI) =
     minWidth: minPort ? '87vw' : minLand || medPort || medLand ? '32vw' : '400px', // minWidth
     width: minPort ? '87vw' : medPort ? '50vw' : minLand || medLand ? '32vw' : '400px', // minWidth
     height: minPort ? '25vh' : medPort ? '20vh' : minLand || medLand ? '35vh' : '220px', // height
+    
   }
 }
 
@@ -192,6 +193,8 @@ const boxMedia = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: box
     webkitFilter: darkMode ? 'brightness(.6)' : 'none',
     'filter': darkMode ? 'brightness(.6)' : 'none',
     zIndex: 1000,
+    /* transition: 'all .2s ease-in-out', // editing here
+    ':hover': { transform: 'scale(1.1)' }, */
   }
 }
 
