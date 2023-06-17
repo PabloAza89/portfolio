@@ -77,7 +77,7 @@ export const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort
       'filter': 'brightness(.9)',
       transform: 'scale(1.01)'
     },
-    transition: 'all .2s ease-in-out',
+    transition: 'all .1s ease-in-out',
   }
 }
 
@@ -94,6 +94,6 @@ export const lanEsFlag = ({ english, minPort, minLand, medPort, medLand, larPort
       'filter': 'brightness(.9)',
       transform: 'scale(1.01)'
     },
-    transition: 'all .2s ease-in-out',
+    transition: 'all .1s ease-in-out',
   }
 }

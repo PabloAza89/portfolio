@@ -12,11 +12,11 @@ interface arrayI {
 export const hover = (array: arrayI[]) => {
   array.forEach(e => {
     $(`.container${e.id}`).on("mouseenter", function () {
-      $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
-      $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+      $(`.titleClass${e.id}`).css('transition', 'all .1s ease-in-out').css('transform', 'scale(1.1)')
+      $(`.iconClass${e.id}`).css('transition', 'all .1s ease-in-out').css('transform', 'scale(1.1)')
     }).on("mouseleave", function () {
-      $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
-      $(`.iconClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+      $(`.titleClass${e.id}`).css('transition', 'all .1s ease-in-out').css('transform', 'scale(1)')
+      $(`.iconClass${e.id}`).css('transition', 'all .1s ease-in-out').css('transform', 'scale(1)')
     })
   })
 }

@@ -176,8 +176,8 @@ export const text = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: 
     fontSize: minPort ? '23px' : minLand ? '20px' : medPort || medLand ? '26px' : larPort ? '39px' : '39px',
     color: darkMode ? '#b5b3b3' : 'white',
     padding: minPort ? '5px 0px' : minLand ? '5px 0px' : medPort || medLand ? '9px 0px' : '15px 0px',
-    transition: 'all .2s ease-in-out',
-    ':hover': { transform: 'scale(1.1)' },
+    transition: 'all .1s ease-in-out',
+    ':hover': { transform: 'scale(1.05)' },
     animation: 'textContact 1s',
     '@keyframes textContact': {
       '0%': {

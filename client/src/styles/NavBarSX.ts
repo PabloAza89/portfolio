@@ -141,8 +141,10 @@ export const greaterThan = ({ minPort, minLand, medPort, medLand, larPort }: gen
 
 export const test = () => {
   return {
-    transition: 'all .2s ease-in-out',
-    ':hover': { transform: 'scale(1.1)' }
+    transition: 'all .1s ease-in-out',
+    //':hover': { transform: 'scale(1.05)' }
+    ':hover': { fontSize: '110%' }
+
   }
 }
 

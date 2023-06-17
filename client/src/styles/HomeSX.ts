@@ -228,7 +228,7 @@ export const buttonMessage = ({ minPort, minLand, medPort, medLand, larPort }: b
     width: minPort ? '55vw' : medPort ? '55vw' : minLand ? '23vw' : medLand ? '30vw' : larPort ? '320px' : '370px', // width
     color:'#FFFFFF',
     fontSize: minPort ? '4vw' : minLand ? '1.8vw' : medPort ? '4vw' : medLand ? '2.4vw' : larPort ? '24px' : '28px', // fontSize
-    transition: 'all .2s ease-in-out',
+    transition: 'all .1s ease-in-out',
     ':hover': { transform: 'scale(1.05)' },
   }
 }
