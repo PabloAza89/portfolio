@@ -72,21 +72,31 @@ function Skills() {
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
   ], [english]);
 
+  // useEffect(() => {
+  //   if (graphDontFit)  {
+  //     $(function(){
+  //       s.graphDontFit(levels)
+  //     })
+  //   } else {
+  //     s.graphFit(levels)
+  //   }
+  // },[graphDontFit, levels])
+
   useEffect(() => {
-    if (graphDontFit === true)  {
+    if (graphDontFit)  {
       $(function(){
-        s.onClickTrue(levels)
+        s.graphDontFit(levels)
       })
     } else {
-      s.onClickDefault(levels)
+      s.graphFit(levels)
     }
   },[graphDontFit, levels])
 
 
-  // $('#barsMoveId1').jrumble({
+  // $('#entireBarMoveId1').jrumble({
   //   speed: 50
   // });
-  // $('#barsMoveId1').hover(function(){
+  // $('#entireBarMoveId1').hover(function(){
   //   $(this).trigger('startRumble');
   // }, function(){
   //   $(this).trigger('stopRumble');
@@ -119,8 +129,8 @@ function Skills() {
                       <Box
                         key={levels.indexOf(e)}
                         sx={s.level({ graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
-                        className={`barsMoveClass${index}`}
-                        id={`barsMoveId${index}`}
+                        className={`entireBarMoveCl${index}`}
+                        id={`entireBarMoveId${index}`}
                       >
                         <Box
                           sx={s.innerLevel({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}>
@@ -136,9 +146,9 @@ function Skills() {
                           </SvgIcon>
                         </Box>
                         <Box
-                          className={`barsFixedClass${index}`}
-                          id={`barsFixedId${index}`}
-                          sx={s.colorLevel({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
+                          className={`colorFixedCl${index}`}
+                          id={`colorFixedId${index}`}
+                          sx={s.colorLevel({ index:index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
                         ></Box>
                       </Box>
                     )

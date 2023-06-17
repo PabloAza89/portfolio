@@ -1,4 +1,4 @@
-.barsMoveClass {
+.entireBarMoveCl {
    animation: entireBarMove 2.5s;
 }
 
@@ -9,7 +9,7 @@
   100% { transform: translate(0px, 0px) }
 }
 
-.barsFixedClass {
+.colorFixedCl {
   animation: colorsFixed 2.5s;
 }
 
@@ -18,4 +18,56 @@
   50% { transform: translate(0px, 0px) }
   75% { transform: translate(0px, 0px) }
   100% { transform: translate(-194px, 0px) }
+}
+
+/* #colorShakeId {
+  animation: shake .1s linear 1s 4;
+} */
+
+.colorShakeId {
+  /* animation: shake .1s linear 1s 4; */
+  animation-name: shake/* , shakeUp */;
+  /* animation-duration: 2s; */
+  /* animation-timing-function: linear; */
+  /* animation-delay: 1s; */
+  animation-iteration-count: infinite;
+  /* animation-direction: alternate; */
+}
+
+@keyframes shake {
+  0% { transform: translateX(-2px) }
+  1% { transform: translateX(0px) }
+  2% { transform: translateX(-2px) }
+  3% { transform: translateX(0px) }
+  4% { transform: translateX(-2px) }
+  5% { transform: translateX(0px) }
+  6% { transform: translateX(-2px) }
+  7% { transform: translateX(0px) }
+  30% { transform: translateX(0px) }
+  40% { transform: translateX(0px) }
+  50% { transform: translateX(0px) }
+  60% { transform: translateX(0px) }
+  70% { transform: translateX(0px) }
+  80% { transform: translateX(0px) }
+  90% { transform: translateX(0px) }
+  100% { transform: translateX(0px) }
+}
+
+/* #colorShakeIdUp {
+  
+  animation: shakeUp .1s linear 1s 4;
+} */
+
+@keyframes shakeUp {
+  0% { transform: translateX(-10px) }
+  10% { transform: translateX(-12px) }
+  20% { transform: translateX(0px) }
+  30% { transform: translateX(0px) }
+  40% { transform: translateX(0px) }
+  50% { transform: translateX(0px) }
+  60% { transform: translateX(0px) }
+  70% { transform: translateX(0px) }
+  80% { transform: translateX(0px) }
+  90% { transform: translateX(0px) }
+  100% { transform: translateX(0px) }
 }
