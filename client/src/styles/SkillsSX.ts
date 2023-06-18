@@ -31,6 +31,7 @@ export const graphDontFit = (levels: levelsI[]) => {
     
 
     $(`#entireBarMoveId${e.id}`).on("click", function(){
+      /* $(`.colorFixedCl${e.id}`).css("animation", "none") */
       $(`.entireBarMoveCl${e.id}`).addClass(`entireBarMoveCl`)
       $(`.colorFixedCl${e.id}`).addClass(`colorFixedCl`) // ENABLES
 
@@ -73,6 +74,7 @@ export const graphFit = (levels: levelsI[]) => {
 }
 
 interface colorLevelI {
+  animRunning: boolean,
   index: number,
   graphDontFit: boolean,
   color: string,
@@ -84,7 +86,7 @@ interface colorLevelI {
   larLand: boolean
 }
 
-export const colorLevel = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, color }: colorLevelI ) => {
+export const colorLevel = ({ animRunning, index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, color }: colorLevelI ) => {
   return {
     display: minPort ? 'flex' : 'flex',
     position: graphDontFit ? 'fixed' : 'relative',
@@ -92,27 +94,10 @@ export const colorLevel = ({ index, graphDontFit, minPort, minLand, medPort, med
     background: color,
     width: '6px',
     height: '38px',
-    animation: graphDontFit ? 'shake 2s linear 1s infinite' : 'none',
-    //animationDelay: `1s`,
+    //animation: graphDontFit ? 'shake 7s linear 1s infinite' : 'none',
+    animation: animRunning ? 'none' : graphDontFit ? 'shake 1s linear 1s infinite' : 'none',
     animationDelay: `.${index}s`,
-    //animationIterationCount: 'infinite',
     '@keyframes shake': {
-      // '0%': { transform: `translateX(-2px)` },
-      // '1%': { transform: `translateX(0px)` },
-      // '2%': { transform: `translateX(-2px)` },
-      // '3%': { transform: `translateX(0px)` },
-      // '4%': { transform: `translateX(-2px)` },
-      // '5%': { transform: `translateX(0px)` },
-      // '6%': { transform: `translateX(-2px)` },
-      // '7%': { transform: `translateX(0px)` },
-      // '30%': { transform: `translateX(0px)` },
-      // '40%': { transform: `translateX(0px)` },
-      // '50%': { transform: `translateX(0px)` },
-      // '60%': { transform: `translateX(0px)` },
-      // '70%': { transform: `translateX(0px)` },
-      // '80%': { transform: `translateX(0px)` },
-      // '90%': { transform: `translateX(0px)` },
-      // '100%': { transform: `translateX(0px)` }
       '0%': { transform: `translateX(-2px)` },
       '1%': { transform: `translateX(0px)` },
       '2%': { transform: `translateX(-2px)` },
@@ -121,13 +106,6 @@ export const colorLevel = ({ index, graphDontFit, minPort, minLand, medPort, med
       '5%': { transform: `translateX(0px)` },
       '6%': { transform: `translateX(-2px)` },
       '7%': { transform: `translateX(0px)` },
-      '30%': { transform: `translateX(0px)` },
-      '40%': { transform: `translateX(0px)` },
-      '50%': { transform: `translateX(0px)` },
-      '60%': { transform: `translateX(0px)` },
-      '70%': { transform: `translateX(0px)` },
-      '80%': { transform: `translateX(0px)` },
-      '90%': { transform: `translateX(0px)` },
       '100%': { transform: `translateX(0px)` }
     }
   }

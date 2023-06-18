@@ -55,6 +55,10 @@ function Skills() {
   ]
 
   const [ graphDontFit, setGraphDontFit ] = useState<any>(width < ((array.length * 92) + 206) ? true : false)
+  const [ animRunning, setAnimRunning ] = useState<boolean>(false)
+
+  let one = useRef(false) // animation handler click number One
+  let two = useRef(false) // animation handler click number Two
 
   useEffect(() => {
     setGraphDontFit(width < ((array.length * 92) + 206) ? true : false)
@@ -72,15 +76,61 @@ function Skills() {
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
   ], [english]);
 
-  // useEffect(() => {
-  //   if (graphDontFit)  {
-  //     $(function(){
-  //       s.graphDontFit(levels)
-  //     })
-  //   } else {
-  //     s.graphFit(levels)
-  //   }
-  // },[graphDontFit, levels])
+  const HandleColorClick = () => {
+    setAnimRunning(true)
+    if (!one.current && !two.current) {
+      one.current = true
+      two.current = false
+      setTimeout(() => {
+        if (one.current && !two.current) {
+          one.current = false
+          two.current = false
+          //console.log("1b end", one.current, two.current)
+          setAnimRunning(false)
+        } /* else console.log("fb NOT GONNA RUN") */
+      }, 2500)
+    }
+
+    else if (one.current && !two.current) {
+     one.current = false
+     two.current = true
+      setTimeout(() => {
+        if (!one.current && two.current) {
+          one.current = false;
+          two.current = false;
+          //console.log("2b end", one.current, two.current)
+          setAnimRunning(false)
+        }
+      }, 2500)
+    }
+
+    else if (!one.current && two.current) {
+      one.current = true
+      two.current = true
+       setTimeout(() => {
+         if (one.current && two.current) {
+           one.current = false;
+           two.current = false;
+           //console.log("3b end", one.current, two.current)
+           setAnimRunning(false)
+         }
+       }, 2500)
+     }
+
+     else if (one.current && two.current) {
+      one.current = false
+      two.current = false
+       setTimeout(() => {
+         if (!one.current && !two.current) {
+           one.current = false;
+           two.current = false;
+           //console.log("4b end", one.current, two.current)
+           setAnimRunning(false)
+         }
+       }, 2500)
+     }
+}
+
 
   useEffect(() => {
     if (graphDontFit)  {
@@ -92,15 +142,7 @@ function Skills() {
     }
   },[graphDontFit, levels])
 
-
-  // $('#entireBarMoveId1').jrumble({
-  //   speed: 50
-  // });
-  // $('#entireBarMoveId1').hover(function(){
-  //   $(this).trigger('startRumble');
-  // }, function(){
-  //   $(this).trigger('stopRumble');
-  // });
+  console.log("animRunning", animRunning)
 
   return (
     <Box sx={s.background}>
@@ -146,9 +188,12 @@ function Skills() {
                           </SvgIcon>
                         </Box>
                         <Box
+                          //onClick={() => console.log('clicked', 'STATE', colorClicked)}
+                          //onClick={() => setColorClicked(!colorClicked)}
+                          onClick={() => HandleColorClick()}
                           className={`colorFixedCl${index}`}
                           id={`colorFixedId${index}`}
-                          sx={s.colorLevel({ index:index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
+                          sx={s.colorLevel({ animRunning:animRunning, index:index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
                         ></Box>
                       </Box>
                     )
