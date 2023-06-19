@@ -76,7 +76,7 @@ function Skills() {
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
   ], [english]);
 
-  const HandleColorClick = () => {
+  const HandleColorClick: any = (index: number) => {
     setAnimRunning(true)
     if (!one.current && !two.current) {
       one.current = true
@@ -173,6 +173,7 @@ function Skills() {
                         sx={s.level({ graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
                         className={`entireBarMoveCl${index}`}
                         id={`entireBarMoveId${index}`}
+                        
                       >
                         <Box
                           sx={s.innerLevel({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}>
@@ -188,13 +189,12 @@ function Skills() {
                           </SvgIcon>
                         </Box>
                         <Box
-                          //onClick={() => console.log('clicked', 'STATE', colorClicked)}
-                          //onClick={() => setColorClicked(!colorClicked)}
-                          onClick={() => HandleColorClick()}
+                          
                           className={`colorFixedCl${index}`}
                           id={`colorFixedId${index}`}
                           sx={s.colorLevel({ animRunning:animRunning, index:index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
-                        ></Box>
+                          onClick={() => HandleColorClick()}
+                        >{/* <Box sx={{ width: '100%', height: '100%' }} onClick={() => HandleColorClick()}></Box> */}</Box>
                       </Box>
                     )
                   })}
