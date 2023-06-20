@@ -71,8 +71,8 @@ function Skills() {
   const levels = useMemo(() =>  [
     { id: 0, firstA: english ? `I'm the `: `Soy el `, firstB: english ?  bold(`master`) : bold(`maestro`), second: english ? `of the universe.` : `del universo.`, color: `#000000`, svg: <MySvg/> },
     { id: 1, firstB: english ? bold(`High,`) : bold(`Alto,`), second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `#8ebd7b` },
-    { id: 2, firstA: english ? bold(`Medium, `) : bold(`Medio, `), firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `#beca7d` },
-    { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `#f4b800` },
+    { id: 2, firstA: english ? bold(`Medium, `) : bold(`Medio, `), firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `blue` }, // color: `#beca7d` },
+    { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `brown` }, // color: `#f4b800` },
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
   ], [english]);
 
@@ -135,14 +135,14 @@ function Skills() {
   useEffect(() => {
     if (graphDontFit)  {
       $(function(){
-        s.graphDontFit(levels)
+        s.graphDontFit({ levels, animRunning })
       })
     } else {
       s.graphFit(levels)
     }
-  },[graphDontFit, levels])
+  },[graphDontFit, levels, animRunning])
 
-  console.log("animRunning", animRunning)
+  //console.log("animRunning", animRunning)
 
   return (
     <Box sx={s.background}>
@@ -170,7 +170,7 @@ function Skills() {
                     return (
                       <Box
                         key={levels.indexOf(e)}
-                        sx={s.level({ graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
+                        sx={s.level({ index, graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
                         className={`entireBarMoveCl${index}`}
                         id={`entireBarMoveId${index}`}
                         
@@ -192,7 +192,7 @@ function Skills() {
                           
                           className={`colorFixedCl${index}`}
                           id={`colorFixedId${index}`}
-                          sx={s.colorLevel({ animRunning:animRunning, index:index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
+                          sx={s.colorLevel({ animRunning, index:index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
                           onClick={() => HandleColorClick()}
                         >{/* <Box sx={{ width: '100%', height: '100%' }} onClick={() => HandleColorClick()}></Box> */}</Box>
                       </Box>

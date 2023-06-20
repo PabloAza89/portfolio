@@ -6,61 +6,80 @@ import './SkillsSX.css';
 import $ from 'jquery';
 
 interface levelsI {
-  id: number,
+  id: number
 }
 
-// export const graphDontFit = (levels: levelsI[]) => {
-//   levels.forEach(e => {
-//     $(`#entireBarMoveId${e.id}`).on("click", function(){
-//       $(`.entireBarMoveCl${e.id}`).addClass(`entireBarMoveCl`)
-//       $(`.colorFixedCl${e.id}`).addClass(`colorFixedCl`) // ENABLES
-//     });
-//     $(`#entireBarMoveId${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-//       $(`.entireBarMoveCl${e.id}`).removeClass(`entireBarMoveCl`);
-//       $(`.colorFixedCl${e.id}`).removeClass(`colorFixedCl`); // TRIGGERS TO INITIAL STATE
-//     });
-//   })
-// }
+interface graphDontFitI {
+  levels: levelsI[],
+  animRunning: boolean
+}
 
-export const graphDontFit = (levels: levelsI[]) => {
-  console.log("A VERR", levels)
+
+export const graphDontFit = ({ levels, animRunning }: graphDontFitI) => {
+  
   levels.forEach(e => {
-    $(`.colorFixedCl${e.id}`).addClass(`testShake`).css(`animation-delay`, `.${e.id}s`)
 
-    $(`#colorFixedId${e.id}`).on("click", function(){
-      //$(`.colorFixedCl${e.id}`).removeClass(`testShake`).css(`animation-delay`, `0s`)
-      levels.forEach(l => {
-        $(`.colorFixedCl${l.id}`).css(`animation-delay`, `0s`).removeClass(`testShake`)  
-      })
+    
+    $(`.colorFixedCl${e.id}`).on("click", function(){
       
-      //$(`.colorFixedCl${e.id}`).css(`animation`,`none`)
-      //$(`.colorFixedCl${e.id}`).addClass(`colorFixedCl`)
+      $(`.colorFixedCl${e.id}`)
+        .css(`animation-name`, `colorFixed`)
+        .css(`animation-duration`, `2.5s`)
+        .css(`animation-timing-function`, `ease`)
+        .css(`animation-delay`, `none`)
+
+
+      
+
       $(`.entireBarMoveCl${e.id}`).addClass(`entireBarMoveCl`)
-      $(`.colorFixedCl${e.id}`).addClass(`colorFixedCl`) // ENABLES
-      //$(`.colorFixedCl${e.id}`).css(`animation`,`colorFixed 2.5s`) // ENABLES
+      $(`.colorFixedCl${e.id}`).addClass(`colorFixedCl`)//.css("animation-play-state", "pause").css(`animation-delay`, `0s`)
       
-    });
+    })
+    
+    $(`.entireBarMoveCl${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+      $(`.entireBarMoveCl${e.id}`).removeClass(`entireBarMoveCl`)
+      $(`.colorFixedCl${e.id}`).removeClass(`colorFixedCl`)//.css("animation-play-state", "running")//.css("animation-timing-function", "ease")
 
-    $(`#entireBarMoveId${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-      $(`.entireBarMoveCl${e.id}`).removeClass(`entireBarMoveCl`);
-      $(`.colorFixedCl${e.id}`).removeClass(`colorFixedCl`); // TRIGGERS TO INITIAL STATE
-      //$(`.colorFixedCl${e.id}`).addClass(`testShake`).css(`animation-delay`, `.${e.id}s`)
+      $(`.colorFixedCl${e.id}`)
+        .css(`animation-name`, `none`)
+        .css(`animation-duration`, `none`)
+        .css(`animation-timing-function`, `none`)
+        .css(`animation-delay`, `none`)
 
-      levels.forEach(l => {
-        $(`.colorFixedCl${l.id}`).addClass(`testShake`).css(`animation-delay`, `.${l.id}s`)
-      })
-      //$(`.colorFixedCl${e.id}`).css(`animation`,`shake 1s linear 1s infinite`)
-    });
+
+    })
   })
+     // animation-play-state: paused;
+  if (animRunning) {
+    console.log("running");
+    levels.forEach(e => {
+      $(`.colorFixedCl${e.id}`).removeClass(`testShake`)
+    })
+
+  } else {
+    console.log("stopped");
+    levels.forEach(e => {
+      $(`.colorFixedCl${e.id}`).addClass(`testShake`)//.css(`animation-delay`, `.${e.id}s`)
+      //$(`.colorFixedCl${e.id}`).addClass(`testShake`).css(`animation-delay`, `0s`)
+
+      $(`.colorFixedCl${e.id}`)
+        .css(`animation-name`, `shakeT`)
+        .css(`animation-duration`, `1s`)
+        .css(`animation-timing-function`, `ease`)
+        .css(`animation-delay`, `none`)
+
+    })
+
+    
+
+  }
 }
 
 export const graphFit = (levels: levelsI[]) => {
 
   levels.forEach(e => {
-     
     $(`#entireBarMoveId${e.id}`).removeClass(`entireBarMoveCl${e.id}`);
     $(`#colorFixedId${e.id}`).removeClass(`colorFixedCl${e.id}`);
-    
   })
 }
 
@@ -78,51 +97,46 @@ interface colorLevelI {
 }
 
 export const colorLevel = ({ animRunning, index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, color }: colorLevelI ) => {
+ 
+
+  
+
   return {
     display: 'flex',
-    position: animRunning ? 'fixed' : graphDontFit ? 'fixed' : 'relative',
-    //right: '6px',
-    right: animRunning ? '6px' : '6px',
+    position: graphDontFit ? 'fixed' : 'relative',
+    right: '6px',
     background: color,
     width: '6px',
     height: '38px',
-    //animation: graphDontFit ? 'shake 7s linear 1s infinite' : 'none',
-    //animation: animRunning ? 'none' : graphDontFit ? 'shake 1s linear 1s infinite' : 'none',
-    //animation: animRunning && graphDontFit ? 'none' : !animRunning && graphDontFit ? 'shake 1s linear 1s infinite' : 'none',
-    //animation: animRunning ? 'none' : 'shake 1s linear 1s infinite',
-    //animationDelay: animRunning ? 'none' : `.${index}s`,
-    //animationDelay: animRunning ? 'none' : `none`,
-    '@keyframes shake': {
-      '0%': { transform: `translateX(-2px)` },
-      '1%': { transform: `translateX(0px)` },
-      '2%': { transform: `translateX(-2px)` },
-      '3%': { transform: `translateX(0px)` },
-      '4%': { transform: `translateX(-2px)` },
-      '5%': { transform: `translateX(0px)` },
-      '6%': { transform: `translateX(-2px)` },
-      '7%': { transform: `translateX(0px)` },
-      '100%': { transform: `translateX(0px)` }
-    },
-/*     '@keyframes test': {
-      '0%': { transform: 'translate(0px, 0px)' },
-      '50%': { transform: 'translate(0px, 0px)' },
-      '75%': { transform: 'translate(0px, 0px)' },
-      '100%': { transform: 'translate(0px, 0px)' }
-    }, */
+    animationDelay: animRunning ? `none` : `.${index}s`
+  }
+}
 
-   
-      //animation: 'colorFixed 2.5s',
-    
-    
-    // '@keyframes colorFixed': {
-    //   '0%': { transform: 'translate(-194px, 0px)' },
-    //   '50%': { transform: 'translate(0px, 0px)' },
-    //   '75%': { transform: 'translate(0px, 0px)' },
-    //   '100%': { transform: 'translate(-194px, 0px)' }
-    // }
+interface levelI {
+  index: number,
+  graphDontFit: boolean,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
+  bgColor: string
+}
 
-
-
+export const level = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: levelI) => {
+  return {
+    ...flex, ...relative, ...row, ...jcsb,
+    width: '200px',
+    height: '49px',
+    marginBottom: '1px',
+    background: graphDontFit ? `${bgColor}80` : 'none',
+    //background: `red`,
+    alignItems: 'flex-end',
+    right: graphDontFit ? '-194px' : '0px',
+    //right: graphDontFit ? '0px' : '0px',
+    borderRadius: '10px 0px 0px 0px',
+    //animationDelay: 'none'
   }
 }
 
@@ -436,30 +450,7 @@ export const titles = () => {
   }
 }
 
-interface levelI {
-  graphDontFit: boolean,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean,
-  bgColor: string
-}
 
-export const level = ({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: levelI) => {
-  return {
-    ...flex, ...relative, ...row, ...jcsb,
-    width: '200px',
-    height: '49px',
-    marginBottom: '1px',
-    background: graphDontFit ? `${bgColor}80` : 'none',
-    //background: `red`,
-    alignItems: 'flex-end',
-    right: graphDontFit ? '-194px' : '0px',
-    borderRadius: '10px 0px 0px 0px',
-  }
-}
 
 interface innerLevelI {
   graphDontFit: boolean,
