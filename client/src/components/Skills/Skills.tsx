@@ -71,12 +71,13 @@ function Skills() {
   const levels = useMemo(() =>  [
     { id: 0, firstA: english ? `I'm the `: `Soy el `, firstB: english ?  bold(`master`) : bold(`maestro`), second: english ? `of the universe.` : `del universo.`, color: `#000000`, svg: <MySvg/> },
     { id: 1, firstB: english ? bold(`High,`) : bold(`Alto,`), second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `#8ebd7b` },
-    { id: 2, firstA: english ? bold(`Medium, `) : bold(`Medio, `), firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `blue` }, // color: `#beca7d` },
-    { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `brown` }, // color: `#f4b800` },
+    { id: 2, firstA: english ? bold(`Medium, `) : bold(`Medio, `), firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `#beca7d` },
+    { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `#f4b800` },
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
   ], [english]);
 
   const HandleColorClick: any = (index: number) => {
+
     setAnimRunning(true)
     if (!one.current && !two.current) {
       one.current = true
@@ -85,20 +86,18 @@ function Skills() {
         if (one.current && !two.current) {
           one.current = false
           two.current = false
-          //console.log("1b end", one.current, two.current)
           setAnimRunning(false)
-        } /* else console.log("fb NOT GONNA RUN") */
+        }
       }, 2500)
     }
 
     else if (one.current && !two.current) {
-     one.current = false
-     two.current = true
+      one.current = false
+      two.current = true
       setTimeout(() => {
         if (!one.current && two.current) {
           one.current = false;
           two.current = false;
-          //console.log("2b end", one.current, two.current)
           setAnimRunning(false)
         }
       }, 2500)
@@ -107,30 +106,27 @@ function Skills() {
     else if (!one.current && two.current) {
       one.current = true
       two.current = true
-       setTimeout(() => {
-         if (one.current && two.current) {
-           one.current = false;
-           two.current = false;
-           //console.log("3b end", one.current, two.current)
-           setAnimRunning(false)
-         }
-       }, 2500)
-     }
+      setTimeout(() => {
+        if (one.current && two.current) {
+          one.current = false;
+          two.current = false;
+          setAnimRunning(false)
+        }
+      }, 2500)
+    }
 
      else if (one.current && two.current) {
       one.current = false
       two.current = false
-       setTimeout(() => {
-         if (!one.current && !two.current) {
-           one.current = false;
-           two.current = false;
-           //console.log("4b end", one.current, two.current)
-           setAnimRunning(false)
-         }
-       }, 2500)
-     }
-}
-
+      setTimeout(() => {
+        if (!one.current && !two.current) {
+          one.current = false;
+          two.current = false;
+          setAnimRunning(false)
+        }
+      }, 2500)
+    }
+  }
 
   useEffect(() => {
     if (graphDontFit)  {
@@ -141,8 +137,6 @@ function Skills() {
       s.graphFit(levels)
     }
   },[graphDontFit, levels, animRunning])
-
-  //console.log("animRunning", animRunning)
 
   return (
     <Box sx={s.background}>
@@ -173,7 +167,6 @@ function Skills() {
                         sx={s.level({ index, graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
                         className={`entireBarMoveCl${index}`}
                         id={`entireBarMoveId${index}`}
-                        
                       >
                         <Box
                           sx={s.innerLevel({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}>
@@ -189,7 +182,6 @@ function Skills() {
                           </SvgIcon>
                         </Box>
                         <Box
-                          
                           className={`colorFixedCl${index}`}
                           id={`colorFixedId${index}`}
                           sx={s.colorLevel({ animRunning, index:index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}

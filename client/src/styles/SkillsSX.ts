@@ -14,69 +14,42 @@ interface graphDontFitI {
   animRunning: boolean
 }
 
-
 export const graphDontFit = ({ levels, animRunning }: graphDontFitI) => {
-  
   levels.forEach(e => {
-
-    
     $(`.colorFixedCl${e.id}`).on("click", function(){
-      
       $(`.colorFixedCl${e.id}`)
-        .css(`animation-name`, `colorFixed`)
+        .css(`animation-name`, `colorFixedKF`)
         .css(`animation-duration`, `2.5s`)
         .css(`animation-timing-function`, `ease`)
-        .css(`animation-delay`, `none`)
-
-
-      
-
       $(`.entireBarMoveCl${e.id}`).addClass(`entireBarMoveCl`)
-      $(`.colorFixedCl${e.id}`).addClass(`colorFixedCl`)//.css("animation-play-state", "pause").css(`animation-delay`, `0s`)
-      
     })
-    
     $(`.entireBarMoveCl${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
       $(`.entireBarMoveCl${e.id}`).removeClass(`entireBarMoveCl`)
-      $(`.colorFixedCl${e.id}`).removeClass(`colorFixedCl`)//.css("animation-play-state", "running")//.css("animation-timing-function", "ease")
-
       $(`.colorFixedCl${e.id}`)
         .css(`animation-name`, `none`)
         .css(`animation-duration`, `none`)
         .css(`animation-timing-function`, `none`)
-        .css(`animation-delay`, `none`)
-
-
     })
   })
-     // animation-play-state: paused;
   if (animRunning) {
     console.log("running");
     levels.forEach(e => {
-      $(`.colorFixedCl${e.id}`).removeClass(`testShake`)
+      $(`.colorFixedCl${e.id}`).removeClass(`shake`)
     })
-
   } else {
     console.log("stopped");
     levels.forEach(e => {
-      $(`.colorFixedCl${e.id}`).addClass(`testShake`)//.css(`animation-delay`, `.${e.id}s`)
-      //$(`.colorFixedCl${e.id}`).addClass(`testShake`).css(`animation-delay`, `0s`)
-
+      $(`.colorFixedCl${e.id}`).addClass(`shake`)
       $(`.colorFixedCl${e.id}`)
-        .css(`animation-name`, `shakeT`)
+        .css(`animation-name`, `shakeKF`)
         .css(`animation-duration`, `1s`)
         .css(`animation-timing-function`, `ease`)
         .css(`animation-delay`, `none`)
-
     })
-
-    
-
   }
 }
 
 export const graphFit = (levels: levelsI[]) => {
-
   levels.forEach(e => {
     $(`#entireBarMoveId${e.id}`).removeClass(`entireBarMoveCl${e.id}`);
     $(`#colorFixedId${e.id}`).removeClass(`colorFixedCl${e.id}`);
@@ -97,10 +70,6 @@ interface colorLevelI {
 }
 
 export const colorLevel = ({ animRunning, index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, color }: colorLevelI ) => {
- 
-
-  
-
   return {
     display: 'flex',
     position: graphDontFit ? 'fixed' : 'relative',
@@ -134,9 +103,7 @@ export const level = ({ index, graphDontFit, minPort, minLand, medPort, medLand,
     //background: `red`,
     alignItems: 'flex-end',
     right: graphDontFit ? '-194px' : '0px',
-    //right: graphDontFit ? '0px' : '0px',
     borderRadius: '10px 0px 0px 0px',
-    //animationDelay: 'none'
   }
 }
 
@@ -414,9 +381,9 @@ export const rightSide = ({ darkMode, percentage }: columnBarI) => {
     height: `${(percentage + 5) * 2}px`,
     background: darkMode ?
       `linear-gradient(180deg, #0000 10px, #595959 0),
-      linear-gradient(225deg, #0000 7px, gray 7px)` :
+       linear-gradient(225deg, #0000 7px, gray 7px)` :
       `linear-gradient(180deg, #0000 10px, darkgrey 0),
-      linear-gradient(225deg, #0000 7px, gray 7px)`
+       linear-gradient(225deg, #0000 7px, gray 7px)`
   }
 }
 

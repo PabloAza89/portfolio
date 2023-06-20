@@ -1,62 +1,37 @@
 .entireBarMoveCl {
-  animation-name: entireBarMove;
+  animation-name: entireBarMoveClKF;
   animation-duration: 2.5s;
   animation-timing-function: ease;
   animation-delay: none;
 
 }
 
-@keyframes entireBarMove {
+@keyframes entireBarMoveClKF {
  
   0% { transform: translateX(0px) }
-  1% { transform: translateX(0px) }
-  2% { transform: translateX(0px) }
-  3% { transform: translateX(0px) }
-  4% { transform: translateX(0px) }
-  5% { transform: translateX(0px) }
-  6% { transform: translateX(0px) }
   7% { transform: translateX(0px) }
   50% { transform: translateX(-194px) }
   75% { transform: translateX(-194px) }
   100% { transform: translateX(0px) }
-
-
 }
 
-.colorFixedCl {
-  animation-name: colorFixed;
-  animation-duration: 2.5s;
-  animation-timing-function: ease;
-  animation-delay: none;
-}
-
-@keyframes colorFixed {
-
-
+@keyframes colorFixedKF {
     0% { transform: translateX(-194px) }
-    1% { transform: translateX(-194px) }
-    2% { transform: translateX(-194px) }
-    3% { transform: translateX(-194px) }
-    4% { transform: translateX(-194px) }
-    5% { transform: translateX(-194px) }
-    6% { transform: translateX(-194px) }
     7% { transform: translateX(-194px) }
     50% { transform: translateX(0px) }
     75% { transform: translateX(0px) }
     100% { transform: translateX(-194px) }
-
 }
 
-.testShake {
-  animation-name: shakeT;
+.shake {
+  animation-name: shakeKF;
   animation-duration: 1s;
   animation-timing-function: ease;
   animation-delay: none;
   animation-iteration-count: infinite
 }
 
-@keyframes shakeT {
-
+@keyframes shakeKF {
   0% { transform: translateX(-2px) }
   1% { transform: translateX(0px) }
   2% { transform: translateX(-2px) }
@@ -65,8 +40,5 @@
   5% { transform: translateX(0px) }
   6% { transform: translateX(-2px) }
   7% { transform: translateX(0px) }
-  50% { transform: translateX(0px) }
-  75% { transform: translateX(0px) }
   100% { transform: translateX(0px) }
-
 }
