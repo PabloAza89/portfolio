@@ -26,32 +26,40 @@ export const graphDontFit = ({ levels, animRunning }: graphDontFitI) => {
     })
   } else {
     levels.forEach(e => {
-      $(`.colorFixedCl${e.id}`) // hace vibrar colores
+      $(`.colorFixedCl${e.id}`) // make bars shake
         .css(`animationName`,`shakeKF`)
-        .css(`animationDuration`,`1s`)
-        .css(`animationDelay`,`.${e.id}s`)
+        .css(`animationDuration`,`6s`) // entire color shake duration
+        .css(`animationDelay`,`calc(2.5s + 0.${e.id}s)`) // start delay + each bar delay
         .css(`animationIterationCount`,`infinite`)
-        $(`.entireBarMoveCl${e.id}`).on("click", function(){ // hace onClick se mueva Barra
-          $(this)
-            .css(`animationName`,`entireBarMoveClKF`)
-            .css(`animationDuration`,`2.5s`)
-          $(`.entireBarMoveCl${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-            $(this) // vuelve al estado inicial
-              .css(`animationName`,`none`)
-              .css(`animationDuration`,`none`)
-          })
+      $(`.colorFixedCl${e.id}`)
+      .on('click', function(){ // on onClick bar moves
+        $(`.entireBarMoveCl${e.id}`)
+          .css(`animationName`,`entireBarMoveClKF`)
+          .css(`animationDuration`,`2.5s`)
+        $(`.entireBarMoveCl${e.id}`)
+        .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+          $(`.entireBarMoveCl${e.id}`) // vuelve al estado inicial
+            .css(`animationName`,`none`)
+            .css(`animationDuration`,`none`)
         })
+      })
     })
   }
-
 }
 
 export const graphFit = (levels: levelsI[]) => {
   levels.forEach(e => {
-
-    $(`.entireBarMoveCl${e.id}`).removeClass(`entireBarMoveCl`)
-    $(`.colorFixedCl${e.id}`).removeClass(`shake`)
-    //$(`.colorFixedCl${e.id}`).css("animation-name","noMoveKF")
+    levels.forEach(e => {
+      $(`.colorFixedCl${e.id}`) // stop all shakes
+        .css(`animationName`,`none`)
+        .css(`animationDuration`,`0s`)
+        .css(`animationDelay`,`0s`)
+        .css(`animationIterationCount`,`none`)
+      $(`.entireBarMoveCl${e.id}`) // stop bar moving
+        .css(`animationName`,`none`)
+        .css(`animationDuration`,`none`)
+    })
+    
   })
 }
 
@@ -72,8 +80,8 @@ export const colorFixed = ({ animRunning, index, graphDontFit, minPort, minLand,
   return {
     display: 'flex',
     position: graphDontFit ? 'fixed' : 'absolute',
-    //zIndex: 2000,
-    //pointerEvents: graphDontFit ? 'null' : 'none',
+    zIndex: 9000,
+    pointerEvents: graphDontFit ? 'null' : 'none',
     //right: '6px',
     marginTop: '11px',
 
@@ -111,7 +119,7 @@ export const entireBarContainer = ({ index, graphDontFit, minPort, minLand, medP
     height: '49px',
     marginBottom: '1px',
     //background: graphDontFit ? `${bgColor}80` : 'none',
-    background: 'yellow',
+    //background: 'yellow',
     alignItems: 'flex-end',
     right: graphDontFit ? '-194px' : '0px',
     borderRadius: '10px 0px 0px 0px',
@@ -134,15 +142,18 @@ interface entireBarI {
 
 export const entireBar = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: entireBarI) => {
   return {
-    ...flex, ...relative, ...row, ...jcsb,
+    ...flex, ...row, ...jcsb, //...relative,
+    position: 'relative',
     width: '200px',
     height: '49px',
-    marginBottom: '1px',
+    marginBottom: '0px',
     zIndex: 3000,
-    //background: graphDontFit ? `${bgColor}80` : 'none',
-    background: `red`,
+    background: graphDontFit ? `${bgColor}80` : 'none',
+    //background: `red`,
+    //background: `none`,
     alignItems: 'flex-end',
-    right: graphDontFit ? '-194px' : '0px',
+    //right: graphDontFit ? '-194px' : '0px',
+    right: graphDontFit ? '0px' : '0px', // mover aca !!
     borderRadius: '10px 0px 0px 0px',
   }
 }
@@ -512,6 +523,6 @@ export const imageSVG = ({ graphDontFit, minPort, minLand, medPort, medLand, lar
   return {
     width: '45px',
     height: '45px',
-    marginRight: graphDontFit ? '65px' : '40px',
+    marginRight: graphDontFit ? '65px' : '58px',
   }
 }

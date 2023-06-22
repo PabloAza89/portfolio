@@ -1,59 +1,15 @@
-.entireBarMoveCl {
-  animation-name: entireBarMoveClKF;
-  animation-duration: 2.5s;
-}
-
 @keyframes entireBarMoveClKF { 
   0% { transform: translateX(0px) }
-  /* 7% { transform: translateX(0px) } */
   50% { transform: translateX(-194px) }
   75% { transform: translateX(-194px) }
   100% { transform: translateX(0px) }
-}
-
-.entireBarMoveContainerCl {
-  animation-name: entireBarMoveContainerClKF;
-  animation-duration: 2.5s;
-}
-
-@keyframes entireBarMoveContainerClKF { 
-  0% { transform: translateX(0px) }
-  /* 7% { transform: translateX(0px) } */
-  50% { transform: translateX(-194px) }
-  75% { transform: translateX(-194px) }
-  100% { transform: translateX(0px) }
-}
-
-.colorFixedCl {
-  /* animation: colorFixed 2.5s; */
-  animation-name: colorFixedKF;
-  animation-duration: 2.5s;
-  /* animation-timing-function: ease; */
-  /* animation-delay: none; */
 }
 
 @keyframes colorFixedKF {
   0% { transform: translateX(-194px) }
-  7% { transform: translateX(-194px) }
   50% { transform: translateX(0px) }
   75% { transform: translateX(0px) }
   100% { transform: translateX(-194px) }
-}
-
-/* @keyframes noMoveKF {
-  0% { transform: translateX(0px) }
-  7% { transform: translateX(0px) }
-  50% { transform: translateX(0px) }
-  75% { transform: translateX(0px) }
-  100% { transform: translateX(0px) }
-} */
-
-.shake {
-  animation-name: shakeKF;
-  animation-duration: 1s;
-  /* animation-timing-function: ease; */
-  /* animation-delay: none; */
-  animation-iteration-count: infinite
 }
 
 @keyframes shakeKF {
@@ -65,10 +21,5 @@
   5% { transform: translateX(0px) }
   6% { transform: translateX(-2px) }
   7% { transform: translateX(0px) }
-  100% { transform: translateX(0px) }
-}
-
-@keyframes noShakeKF {
-  0% { transform: translateX(0px) }
   100% { transform: translateX(0px) }
 }
