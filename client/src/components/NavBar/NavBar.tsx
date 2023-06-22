@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
 import * as s from '../../styles/NavBarSX';
+//import "@fontsource/allura";
 
 function NavBar() {
 

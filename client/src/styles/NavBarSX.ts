@@ -4,6 +4,8 @@ import {
   row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
   jcsb, jcse, jsc, jic, noDeco, mix, noSelect
 } from './CommonsSX';
+//import "@fontsource/allura";
+
 
 interface genI {
   staticRefWidth: number,

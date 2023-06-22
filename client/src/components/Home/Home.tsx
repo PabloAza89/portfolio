@@ -11,6 +11,7 @@ import {
   boxButton, auxLarPort
 } from '../../styles/HomeSX';
 
+
 function Home() {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)

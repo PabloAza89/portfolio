@@ -16,14 +16,23 @@ interface graphDontFitI {
 
 export const graphDontFit = ({ levels, animRunning }: graphDontFitI) => {
   console.log("animRunning",animRunning)
+
+
+
   if (animRunning) {
+
+
     levels.forEach(e => {
       $(`.colorFixedCl${e.id}`) // stop all shakes
         .css(`animationName`,`none`)
         .css(`animationDuration`,`0s`)
-        .css(`animationDelay`,`0s`)
+        .css(`animationDelay`,`unset`)
         .css(`animationIterationCount`,`none`)
+
+        
+      
     })
+
   } else {
     levels.forEach(e => {
       $(`.colorFixedCl${e.id}`) // hace vibrar colores
@@ -31,16 +40,21 @@ export const graphDontFit = ({ levels, animRunning }: graphDontFitI) => {
         .css(`animationDuration`,`1s`)
         .css(`animationDelay`,`.${e.id}s`)
         .css(`animationIterationCount`,`infinite`)
+
         $(`.entireBarMoveCl${e.id}`).on("click", function(){ // hace onClick se mueva Barra
+          //$(`.entireBarMoveCl${e.id}`).css(`animationName`,`none`).css(`animationDuration`,`unset`)
           $(this)
             .css(`animationName`,`entireBarMoveClKF`)
             .css(`animationDuration`,`2.5s`)
+
           $(`.entireBarMoveCl${e.id}`).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
             $(this) // vuelve al estado inicial
               .css(`animationName`,`none`)
               .css(`animationDuration`,`none`)
           })
+
         })
+
     })
   }
 
@@ -55,7 +69,7 @@ export const graphFit = (levels: levelsI[]) => {
   })
 }
 
-interface colorFixedI {
+interface colorLevelI {
   animRunning: boolean,
   index: number,
   graphDontFit: boolean,
@@ -68,30 +82,21 @@ interface colorFixedI {
   larLand: boolean
 }
 
-export const colorFixed = ({ animRunning, index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, color }: colorFixedI ) => {
+export const colorLevel = ({ animRunning, index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, color }: colorLevelI ) => {
   return {
     display: 'flex',
-    position: graphDontFit ? 'fixed' : 'absolute',
-    //zIndex: 2000,
+    position: graphDontFit ? 'fixed' : 'relative',
     //pointerEvents: graphDontFit ? 'null' : 'none',
-    //right: '6px',
-    marginTop: '11px',
-
     right: '6px',
     background: color,
     width: '6px',
     height: '38px',
-    //transition: 'all 5s ease-out'
-    //animationName: animRunning ? `colorFixedKF` : 'none',
-    //animationDuration: '2.5s',
-    //transform: animRunning ? 'translateX(-6px)' : 'none',
-    //animationName: `colorFixedKF`,
     //animationDuration: graphDontFit ? '6s' : '0s',
     //animationDelay: animRunning ? `none` : `calc(2s + 0.${index}s)` // delay time of shake animation when component renders
   }
 }
 
-interface entireBarContainerI {
+interface levelI {
   index: number,
   graphDontFit: boolean,
   minPort: boolean,
@@ -103,45 +108,16 @@ interface entireBarContainerI {
   bgColor: string
 }
 
-export const entireBarContainer = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: entireBarContainerI) => {
-  return {
-    //...flex, ...relative, ...row, ...jcsb,
-    ...flex, ...relative, ...row, ...jcsb,
-    width: '200px',
-    height: '49px',
-    marginBottom: '1px',
-    //background: graphDontFit ? `${bgColor}80` : 'none',
-    background: 'yellow',
-    alignItems: 'flex-end',
-    right: graphDontFit ? '-194px' : '0px',
-    borderRadius: '10px 0px 0px 0px',
-    //display: 'flex',
-    
-  }
-}
-
-interface entireBarI {
-  index: number,
-  graphDontFit: boolean,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean,
-  bgColor: string
-}
-
-export const entireBar = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: entireBarI) => {
+export const level = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: levelI) => {
   return {
     ...flex, ...relative, ...row, ...jcsb,
     width: '200px',
     height: '49px',
     marginBottom: '1px',
-    zIndex: 3000,
-    //background: graphDontFit ? `${bgColor}80` : 'none',
-    background: `red`,
+    background: graphDontFit ? `${bgColor}80` : 'none',
+    //background: `red`,
     alignItems: 'flex-end',
+    //animationName: graphDontFit ? 'shakeKF' : 'none',
     right: graphDontFit ? '-194px' : '0px',
     borderRadius: '10px 0px 0px 0px',
   }

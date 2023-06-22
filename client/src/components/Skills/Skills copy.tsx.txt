@@ -9,6 +9,12 @@ import $ from 'jquery';
 
 function Skills() {
 
+  let one = useRef(false) // animation handler click number One
+  let two = useRef(false) // animation handler click number Two
+
+  one.current = false
+  two.current = false
+
   const english = useSelector((state: {english:boolean}) => state.english)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
@@ -55,6 +61,9 @@ function Skills() {
   ]
 
   const [ graphDontFit, setGraphDontFit ] = useState<any>(width < ((array.length * 92) + 206) ? true : false)
+  const [ animRunning, setAnimRunning ] = useState<boolean>(false)
+
+  
 
   useEffect(() => {
     setGraphDontFit(width < ((array.length * 92) + 206) ? true : false)
@@ -72,15 +81,67 @@ function Skills() {
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
   ], [english]);
 
+  const HandleColorClick: any = (index: number) => {
+
+    setAnimRunning(true)
+    if (!one.current && !two.current) {
+      one.current = true
+      two.current = false
+      setTimeout(() => {
+        if (one.current && !two.current) {
+          one.current = false
+          two.current = false
+          setAnimRunning(false)
+        }
+      }, 2500)
+    }
+
+    else if (one.current && !two.current) {
+      one.current = false
+      two.current = true
+      setTimeout(() => {
+        if (!one.current && two.current) {
+          one.current = false;
+          two.current = false;
+          setAnimRunning(false)
+        }
+      }, 2500)
+    }
+
+    else if (!one.current && two.current) {
+      one.current = true
+      two.current = true
+      setTimeout(() => {
+        if (one.current && two.current) {
+          one.current = false;
+          two.current = false;
+          setAnimRunning(false)
+        }
+      }, 2500)
+    }
+
+     else if (one.current && two.current) {
+      one.current = false
+      two.current = false
+      setTimeout(() => {
+        if (!one.current && !two.current) {
+          one.current = false;
+          two.current = false;
+          setAnimRunning(false)
+        }
+      }, 2500)
+    }
+  }
+
   useEffect(() => {
-    if (graphDontFit === true)  {
+    if (graphDontFit)  {
       $(function(){
-        s.onClickTrue(levels)
+        s.graphDontFit({ levels, animRunning })
       })
     } else {
-      s.onClickDefault(levels)
+      s.graphFit(levels)
     }
-  },[graphDontFit, levels])
+  },[graphDontFit, levels, animRunning])
 
   return (
     <Box sx={s.background}>
@@ -108,9 +169,9 @@ function Skills() {
                     return (
                       <Box
                         key={levels.indexOf(e)}
-                        sx={s.level({ graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
-                        className={`barsMoveClass${index}`}
-                        id={`barsMoveId${index}`}
+                        sx={s.level({ index, graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
+                        className={`entireBarMoveCl${index}`}
+                        id={`entireBarMoveId${index}`}
                       >
                         <Box
                           sx={s.innerLevel({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}>
@@ -126,10 +187,11 @@ function Skills() {
                           </SvgIcon>
                         </Box>
                         <Box
-                          className={`barsFixedClass${index}`}
-                          id={`barsFixedId${index}`}
-                          sx={s.colorLevel({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
-                        ></Box>
+                          className={`colorFixedCl${index}`}
+                          id={`colorFixedId${index}`}
+                          sx={s.colorLevel({ animRunning, index:index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
+                          onClick={() => HandleColorClick()}
+                        >{/* <Box sx={{ width: '100%', height: '100%' }} onClick={() => HandleColorClick()}></Box> */}</Box>
                       </Box>
                     )
                   })}
