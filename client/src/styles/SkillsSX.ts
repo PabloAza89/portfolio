@@ -38,7 +38,7 @@ export const graphDontFit = ({ levels, animRunning }: graphDontFitI) => {
           .css(`animationDuration`,`2.5s`)
         $(`.entireBarMoveCl${e.id}`)
         .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-          $(`.entireBarMoveCl${e.id}`) // vuelve al estado inicial
+          $(`.entireBarMoveCl${e.id}`) // return to  initial state
             .css(`animationName`,`none`)
             .css(`animationDuration`,`none`)
         })
@@ -59,7 +59,6 @@ export const graphFit = (levels: levelsI[]) => {
         .css(`animationName`,`none`)
         .css(`animationDuration`,`none`)
     })
-    
   })
 }
 
@@ -82,20 +81,10 @@ export const colorFixed = ({ animRunning, index, graphDontFit, minPort, minLand,
     position: graphDontFit ? 'fixed' : 'absolute',
     zIndex: 9000,
     pointerEvents: graphDontFit ? 'null' : 'none',
-    //right: '6px',
-    marginTop: '11px',
-
     right: '6px',
     background: color,
     width: '6px',
     height: '38px',
-    //transition: 'all 5s ease-out'
-    //animationName: animRunning ? `colorFixedKF` : 'none',
-    //animationDuration: '2.5s',
-    //transform: animRunning ? 'translateX(-6px)' : 'none',
-    //animationName: `colorFixedKF`,
-    //animationDuration: graphDontFit ? '6s' : '0s',
-    //animationDelay: animRunning ? `none` : `calc(2s + 0.${index}s)` // delay time of shake animation when component renders
   }
 }
 
@@ -113,18 +102,13 @@ interface entireBarContainerI {
 
 export const entireBarContainer = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: entireBarContainerI) => {
   return {
-    //...flex, ...relative, ...row, ...jcsb,
     ...flex, ...relative, ...row, ...jcsb,
     width: '200px',
     height: '49px',
     marginBottom: '1px',
-    //background: graphDontFit ? `${bgColor}80` : 'none',
     //background: 'yellow',
     alignItems: 'flex-end',
     right: graphDontFit ? '-194px' : '0px',
-    borderRadius: '10px 0px 0px 0px',
-    //display: 'flex',
-    
   }
 }
 
@@ -142,18 +126,14 @@ interface entireBarI {
 
 export const entireBar = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: entireBarI) => {
   return {
-    ...flex, ...row, ...jcsb, //...relative,
-    position: 'relative',
+    ...flex, ...row, ...jcsb, ...relative,
     width: '200px',
     height: '49px',
     marginBottom: '0px',
     zIndex: 3000,
     background: graphDontFit ? `${bgColor}80` : 'none',
-    //background: `red`,
-    //background: `none`,
+    //background: 'darkred',
     alignItems: 'flex-end',
-    //right: graphDontFit ? '-194px' : '0px',
-    right: graphDontFit ? '0px' : '0px', // mover aca !!
     borderRadius: '10px 0px 0px 0px',
   }
 }
@@ -276,6 +256,7 @@ interface chartContainerI {
 export const chartContainer = ({ graphDontFit, width, length, minPort, minLand, medPort, medLand, larPort, larLand }:chartContainerI) => {
   return {
     ...flex, ...relative, ...column, ...jcfs,
+    //background: 'red',
     alignItems: larPort || larLand ? 'flex-start' : graphDontFit ? 'flex-start' : 'center',
     width: graphDontFit ? `${width}px` : `${(length*92)+200}px`,
     height: minLand ? '261px' : '361px', // 50 + 1 + 210 + 100 = 361
@@ -290,7 +271,7 @@ export const scroll = ({ minLand }: scrollI) => {
   return {
     overflow: 'auto',
     borderRadius: minLand ? '0px 0px 10px 0px' : '0px 0px 10px 10px',
-    height: minLand ? '261px' : '361px',
+    height: minLand ? '261px' : '362px',
     background:
     `linear-gradient(
       to bottom,
@@ -358,11 +339,12 @@ export const chartRow = ({ length }: chartRowI) => {
 }
 
 interface columnBarI {
+  id: number,
   darkMode: boolean,
   percentage: number
 }
 
-export const columnBar = ({ percentage, darkMode }: columnBarI) => {
+export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
   return {
     ...flex, ...relative, ...row, ...jcc,
     background: 'transparent',
@@ -370,7 +352,8 @@ export const columnBar = ({ percentage, darkMode }: columnBarI) => {
     height: `calc(${percentage + 5}px * 2)`,
     borderBottom: '2px solid black',
     borderLeft: '2px solid black',
-    borderImage: 'linear-gradient(to top, black 0px, black 20px, transparent 20px) 1'
+    borderImage: 'linear-gradient(to top, black 0px, black 20px, transparent 20px) 1',
+    
   }
 }
 
@@ -388,18 +371,48 @@ export const leftSide = ({ darkMode, percentage }: columnBarI) => {
     background: darkMode ?
       `linear-gradient(45deg, transparent 7px, silver 7px, #141414 ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)` :
       `linear-gradient(45deg, transparent 7px, silver 7px, silver ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)`,
+    
   }
 }
 
-export const centerSide = ({ darkMode, percentage }: columnBarI) => {
+// export const centerSide = ({ darkMode, percentage }: columnBarI) => {
+//   return {
+//     ...flex, ...relative,
+//     width: '30px',
+//     height: `${(percentage  + 5)* 2}px`,
+//     background: darkMode ?
+//       'linear-gradient(to bottom, gray 10px, #595959 0px)' :
+//       'linear-gradient(to bottom, gray 10px, darkgrey 0px)',
+//     textWrap: 'nowrap',
+//   }
+// }
+
+export const centerSide = ({ id, darkMode, percentage }: columnBarI) => {
+  //console.log("del lado sx", percentage)
   return {
     ...flex, ...relative,
+    //'varr': id,
     width: '30px',
+    //height: `${(percentage  + 5)* 2}px`,
     height: `${(percentage  + 5)* 2}px`,
-    background: darkMode ?
+    background: 'darkred',
+    /* //background: darkMode ?
       'linear-gradient(to bottom, gray 10px, #595959 0px)' :
-      'linear-gradient(to bottom, gray 10px, darkgrey 0px)',
+      'linear-gradient(to bottom, gray 10px, darkgrey 0px)', */
     textWrap: 'nowrap',
+    //animation: 'lineInserted 4s',
+    //animationDirection: 'alternate',
+    //animationDuration: '10s',
+    //animationName: '--varr',
+    //transition: 'height 4s',
+    // '@keyframes --varr': {
+    //   'from': {
+    //     height: `${(percentage  + 5)* 2}px`
+    //   },
+    //   'to': {
+    //     height: '0px'
+    //   }
+    // }
   }
 }
 
@@ -434,7 +447,8 @@ export const rightSide = ({ darkMode, percentage }: columnBarI) => {
       `linear-gradient(180deg, #0000 10px, #595959 0),
        linear-gradient(225deg, #0000 7px, gray 7px)` :
       `linear-gradient(180deg, #0000 10px, darkgrey 0),
-       linear-gradient(225deg, #0000 7px, gray 7px)`
+       linear-gradient(225deg, #0000 7px, gray 7px)`,
+      
   }
 }
 
@@ -514,8 +528,8 @@ export const boxSVG = ({ graphDontFit, minPort, minLand, medPort, medLand, larPo
   return {
     ...flex, ...relative, ...jcc, ...aic,
     //background: 'gray',
-    width: '50px',
-    height: '50px',
+    width: '49px',
+    height: '49px',
   }
 }
 

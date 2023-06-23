@@ -28,25 +28,23 @@ export const graphDontFit = ({ levels, animRunning }: graphDontFitI) => {
     levels.forEach(e => {
       $(`.colorFixedCl${e.id}`) // make bars shake
         .css(`animationName`,`shakeKF`)
-        .css(`animationDuration`,`1s`)
-        //.css(`animationDelay`,`.${e.id}s`)
-        .css(`animationDelay`,`calc(2.5s + 0.${e.id}s)`) // test
+        .css(`animationDuration`,`6s`) // entire color shake duration
+        .css(`animationDelay`,`calc(2.5s + 0.${e.id}s)`) // start delay + each bar delay
         .css(`animationIterationCount`,`infinite`)
-        $(`.colorFixedCl${e.id}`)
-          .on("click", function(){ // on onClick bar moves
-            $(`.entireBarMoveCl${e.id}`)
-              .css(`animationName`,`entireBarMoveClKF`)
-              .css(`animationDuration`,`2.5s`)
-          $(`.entireBarMoveCl${e.id}`)
-            .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-              $(`.entireBarMoveCl${e.id}`) // vuelve al estado inicial
-                .css(`animationName`,`none`)
-                .css(`animationDuration`,`none`)
-          })
+      $(`.colorFixedCl${e.id}`)
+      .on('click', function(){ // on onClick bar moves
+        $(`.entireBarMoveCl${e.id}`)
+          .css(`animationName`,`entireBarMoveClKF`)
+          .css(`animationDuration`,`2.5s`)
+        $(`.entireBarMoveCl${e.id}`)
+        .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+          $(`.entireBarMoveCl${e.id}`) // return to  initial state
+            .css(`animationName`,`none`)
+            .css(`animationDuration`,`none`)
         })
+      })
     })
   }
-
 }
 
 export const graphFit = (levels: levelsI[]) => {
@@ -61,7 +59,6 @@ export const graphFit = (levels: levelsI[]) => {
         .css(`animationName`,`none`)
         .css(`animationDuration`,`none`)
     })
-    
   })
 }
 
@@ -84,20 +81,10 @@ export const colorFixed = ({ animRunning, index, graphDontFit, minPort, minLand,
     position: graphDontFit ? 'fixed' : 'absolute',
     zIndex: 9000,
     pointerEvents: graphDontFit ? 'null' : 'none',
-    //right: '6px',
-    marginTop: '11px',
-
     right: '6px',
     background: color,
     width: '6px',
     height: '38px',
-    //transition: 'all 5s ease-out'
-    //animationName: animRunning ? `colorFixedKF` : 'none',
-    //animationDuration: '2.5s',
-    //transform: animRunning ? 'translateX(-6px)' : 'none',
-    //animationName: `colorFixedKF`,
-    //animationDuration: graphDontFit ? '6s' : '0s',
-    //animationDelay: animRunning ? `none` : `calc(2s + 0.${index}s)` // delay time of shake animation when component renders
   }
 }
 
@@ -115,18 +102,13 @@ interface entireBarContainerI {
 
 export const entireBarContainer = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: entireBarContainerI) => {
   return {
-    //...flex, ...relative, ...row, ...jcsb,
     ...flex, ...relative, ...row, ...jcsb,
     width: '200px',
     height: '49px',
     marginBottom: '1px',
-    //background: graphDontFit ? `${bgColor}80` : 'none',
     //background: 'yellow',
     alignItems: 'flex-end',
     right: graphDontFit ? '-194px' : '0px',
-    borderRadius: '10px 0px 0px 0px',
-    //display: 'flex',
-    
   }
 }
 
@@ -144,18 +126,14 @@ interface entireBarI {
 
 export const entireBar = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: entireBarI) => {
   return {
-    ...flex, ...row, ...jcsb, //...relative,
-    position: 'relative',
+    ...flex, ...row, ...jcsb, ...relative,
     width: '200px',
     height: '49px',
     marginBottom: '0px',
     zIndex: 3000,
     background: graphDontFit ? `${bgColor}80` : 'none',
-    //background: `red`,
-    //background: `none`,
+    //background: 'darkred',
     alignItems: 'flex-end',
-    //right: graphDontFit ? '-194px' : '0px',
-    right: graphDontFit ? '0px' : '0px', // mover aca !!
     borderRadius: '10px 0px 0px 0px',
   }
 }
@@ -278,6 +256,7 @@ interface chartContainerI {
 export const chartContainer = ({ graphDontFit, width, length, minPort, minLand, medPort, medLand, larPort, larLand }:chartContainerI) => {
   return {
     ...flex, ...relative, ...column, ...jcfs,
+    //background: 'red',
     alignItems: larPort || larLand ? 'flex-start' : graphDontFit ? 'flex-start' : 'center',
     width: graphDontFit ? `${width}px` : `${(length*92)+200}px`,
     height: minLand ? '261px' : '361px', // 50 + 1 + 210 + 100 = 361
@@ -292,7 +271,7 @@ export const scroll = ({ minLand }: scrollI) => {
   return {
     overflow: 'auto',
     borderRadius: minLand ? '0px 0px 10px 0px' : '0px 0px 10px 10px',
-    height: minLand ? '261px' : '361px',
+    height: minLand ? '261px' : '362px',
     background:
     `linear-gradient(
       to bottom,
@@ -516,8 +495,8 @@ export const boxSVG = ({ graphDontFit, minPort, minLand, medPort, medLand, larPo
   return {
     ...flex, ...relative, ...jcc, ...aic,
     //background: 'gray',
-    width: '50px',
-    height: '50px',
+    width: '49px',
+    height: '49px',
   }
 }
 

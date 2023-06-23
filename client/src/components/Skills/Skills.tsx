@@ -6,6 +6,7 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
 import '../../styles/SkillsSX.css';
 import $ from 'jquery';
+import { mainBox } from '../../styles/CertificationsSX';
 
 function Skills() {
 
@@ -42,20 +43,40 @@ function Skills() {
     return elRef;
   }
 
-  interface arrayI {
-    title: string,
-    percentage: number
-  }
+  // interface arrayI {
+  //   id: number,
+  //   title: string,
+  //   percentage: number
+  // }
 
-  const array: arrayI[] = [
-    { title: 'HTML & CSS', percentage: 70 },
-    { title: 'Sequelize', percentage: 60 },
-    { title: 'Javascript', percentage: 90 },
-    { title: 'Typescript', percentage: 75 },
-    { title: 'React & Redux', percentage: 90 },
-    { title: english ? 'BBQ' : 'Asado', percentage: 100 },
-    { title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }
-  ]
+  // const array: arrayI[] = [
+  //   { title: 'HTML & CSS', percentage: 70 },
+  //   { title: 'Sequelize', percentage: 60 },
+  //   { title: 'Javascript', percentage: 90 },
+  //   { title: 'Typescript', percentage: 75 },
+  //   { title: 'React & Redux', percentage: 90 },
+  //   { title: english ? 'BBQ' : 'Asado', percentage: 100 },
+  //   { title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }
+  // ]
+
+  //let [ array, setArray ] = useState([
+
+  //  interface arrayI {
+  //   id: number,
+  //   title: string,
+  //   percentage: number
+  // }
+
+ let [array, setArray] = useState([{ id: 0, title: 'HTML & CSS', percentage: 70 },
+    { id: 1, title: 'Sequelize', percentage: 60 },
+    { id: 2, title: 'Javascript', percentage: 90 },
+    { id: 3, title: 'Typescript', percentage: 75 },
+    { id: 4, title: 'React & Redux', percentage: 90 },
+    { id: 5, title: english ? 'BBQ' : 'Asado', percentage: 100 },
+    { id: 6, title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 25 }
+  ])
+
+  const lenghtOfArray = array[array.length - 1].id // helper for stability
 
   const [ graphDontFit, setGraphDontFit ] = useState<any>(width < ((array.length * 92) + 206) ? true : false)
   const [ animRunning, setAnimRunning ] = useState<boolean>(false)
@@ -63,6 +84,7 @@ function Skills() {
   useEffect(() => {
     setGraphDontFit(width < ((array.length * 92) + 206) ? true : false)
   }, [width, array.length]);
+
 
   const bold = (string: string) => {
     return <b style={{ color: 'black' }}>{string}</b>
@@ -75,6 +97,7 @@ function Skills() {
     { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `#f4b800` },
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
   ], [english]);
+
 
   const HandleColorClick: any = (index: number) => {
 
@@ -138,6 +161,55 @@ function Skills() {
     }
   },[graphDontFit, levels, animRunning])
 
+
+let [updateFrequency, setUpdateFrequency] = useState(0)
+  
+useEffect(() => {
+  let i:number = 0
+    let fastInterval = setInterval(() => {
+      if (i < 100) {
+        setUpdateFrequency(i)
+        i++
+      } else {
+        return () => clearInterval(fastInterval)
+      }
+    }, 5); // visual update frequency helper
+},[])
+
+  useEffect(() => {
+    let i:number = 0
+    let j:number = 0
+    let onlyFirstTime:number = 0
+    let maxPercentage:any = []
+    let onePercent:any = []
+    let arrayToShow: any = []
+    let firstBaseArray:any = []
+    do {
+      maxPercentage.push(array[onlyFirstTime].percentage)
+      onePercent.push(array[onlyFirstTime].percentage / 100)
+      firstBaseArray.push({id:array[onlyFirstTime].id, title: array[onlyFirstTime].title, percentage: array[onlyFirstTime].percentage / 100})
+      onlyFirstTime++
+    } while (onlyFirstTime <= lenghtOfArray)
+    arrayToShow = firstBaseArray
+
+    console.log(firstBaseArray)
+    console.log(arrayToShow)
+    let interval = setInterval(() => {
+      if (i < 99) {
+        do {
+          arrayToShow[j].percentage = arrayToShow[j].percentage + onePercent[j]
+          j++
+        } while (j <= lenghtOfArray) // all quantity bars
+        j = 0
+        setArray(arrayToShow);
+        i++
+      } else {
+        return () => clearInterval(interval)
+      }
+    }, 5); // data update frequency helper
+    
+  },[]);
+
   return (
     <Box sx={s.background}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
@@ -151,10 +223,10 @@ function Skills() {
                 <Box sx={s.chartRow({ length:array.length })}>
                   {array.map((e) => {
                     return (
-                      <Box key={array.indexOf(e)} sx={s.columnBar({ darkMode, percentage:e.percentage })}>
-                        <Box sx={s.leftSide({ darkMode, percentage:e.percentage })}></Box>
-                        <Box sx={s.centerSide({ darkMode, percentage:e.percentage })}><Typography sx={s.onlyMinLand({ minPort, minLand, medPort, medLand, larPort, larLand })}>{e.title}</Typography></Box>
-                        <Box sx={s.rightSide({ darkMode, percentage:e.percentage })}></Box>
+                      <Box key={array.indexOf(e)} sx={s.columnBar({ id:e.id, darkMode, percentage:e.percentage })}>
+                        <Box sx={s.leftSide({ id:e.id, darkMode, percentage:e.percentage })}></Box>
+                        <Box sx={s.centerSide({ id:e.id, darkMode, percentage:e.percentage })}><Typography sx={s.onlyMinLand({ minPort, minLand, medPort, medLand, larPort, larLand })}>{e.title}</Typography></Box>
+                        <Box sx={s.rightSide({ id:e.id, darkMode, percentage:e.percentage })}></Box>
                       </Box>
                     )
                   })}
