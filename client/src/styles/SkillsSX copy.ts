@@ -339,11 +339,12 @@ export const chartRow = ({ length }: chartRowI) => {
 }
 
 interface columnBarI {
+  id: number,
   darkMode: boolean,
   percentage: number
 }
 
-export const columnBar = ({ percentage, darkMode }: columnBarI) => {
+export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
   return {
     ...flex, ...relative, ...row, ...jcc,
     background: 'transparent',
@@ -351,7 +352,8 @@ export const columnBar = ({ percentage, darkMode }: columnBarI) => {
     height: `calc(${percentage + 5}px * 2)`,
     borderBottom: '2px solid black',
     borderLeft: '2px solid black',
-    borderImage: 'linear-gradient(to top, black 0px, black 20px, transparent 20px) 1'
+    borderImage: 'linear-gradient(to top, black 0px, black 20px, transparent 20px) 1',
+    
   }
 }
 
@@ -369,18 +371,48 @@ export const leftSide = ({ darkMode, percentage }: columnBarI) => {
     background: darkMode ?
       `linear-gradient(45deg, transparent 7px, silver 7px, #141414 ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)` :
       `linear-gradient(45deg, transparent 7px, silver 7px, silver ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)`,
+    
   }
 }
 
-export const centerSide = ({ darkMode, percentage }: columnBarI) => {
+// export const centerSide = ({ darkMode, percentage }: columnBarI) => {
+//   return {
+//     ...flex, ...relative,
+//     width: '30px',
+//     height: `${(percentage  + 5)* 2}px`,
+//     background: darkMode ?
+//       'linear-gradient(to bottom, gray 10px, #595959 0px)' :
+//       'linear-gradient(to bottom, gray 10px, darkgrey 0px)',
+//     textWrap: 'nowrap',
+//   }
+// }
+
+export const centerSide = ({ id, darkMode, percentage }: columnBarI) => {
+  //console.log("del lado sx", percentage)
   return {
     ...flex, ...relative,
+    //'varr': id,
     width: '30px',
+    //height: `${(percentage  + 5)* 2}px`,
     height: `${(percentage  + 5)* 2}px`,
-    background: darkMode ?
+    background: 'darkred',
+    /* //background: darkMode ?
       'linear-gradient(to bottom, gray 10px, #595959 0px)' :
-      'linear-gradient(to bottom, gray 10px, darkgrey 0px)',
+      'linear-gradient(to bottom, gray 10px, darkgrey 0px)', */
     textWrap: 'nowrap',
+    //animation: 'lineInserted 4s',
+    //animationDirection: 'alternate',
+    //animationDuration: '10s',
+    //animationName: '--varr',
+    //transition: 'height 4s',
+    // '@keyframes --varr': {
+    //   'from': {
+    //     height: `${(percentage  + 5)* 2}px`
+    //   },
+    //   'to': {
+    //     height: '0px'
+    //   }
+    // }
   }
 }
 
@@ -415,7 +447,8 @@ export const rightSide = ({ darkMode, percentage }: columnBarI) => {
       `linear-gradient(180deg, #0000 10px, #595959 0),
        linear-gradient(225deg, #0000 7px, gray 7px)` :
       `linear-gradient(180deg, #0000 10px, darkgrey 0),
-       linear-gradient(225deg, #0000 7px, gray 7px)`
+       linear-gradient(225deg, #0000 7px, gray 7px)`,
+      
   }
 }
 

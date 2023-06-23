@@ -4,6 +4,7 @@ import {
 } from './CommonsSX';
 import './SkillsSX.css';
 import $ from 'jquery';
+import { keyframes } from '@emotion/react'
 
 interface levelsI {
   id: number
@@ -345,11 +346,13 @@ interface columnBarI {
 }
 
 export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
+  const fadeIn = keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } })
   return {
     ...flex, ...relative, ...row, ...jcc,
     background: 'transparent',
     width: '90px',
     height: `calc(${percentage + 5}px * 2)`,
+    animation: `${fadeIn} 1s linear`,
     borderBottom: '2px solid black',
     borderLeft: '2px solid black',
     borderImage: 'linear-gradient(to top, black 0px, black 20px, transparent 20px) 1',
@@ -365,9 +368,11 @@ export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
 // each barr 90 + 2 (92) + green 200
 
 export const leftSide = ({ darkMode, percentage }: columnBarI) => {
+  const fadeIn = keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } })
   return {
     width: '10px',
     height: `${(percentage + 5)* 2}px`,
+    animation: `${fadeIn} 1s linear`,
     background: darkMode ?
       `linear-gradient(45deg, transparent 7px, silver 7px, #141414 ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)` :
       `linear-gradient(45deg, transparent 7px, silver 7px, silver ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)`,
@@ -388,31 +393,21 @@ export const leftSide = ({ darkMode, percentage }: columnBarI) => {
 // }
 
 export const centerSide = ({ id, darkMode, percentage }: columnBarI) => {
-  //console.log("del lado sx", percentage)
+  console.log("del lado sx", percentage)
+  //$(`.center1`).css("height", "300px")
+  const fadeIn = keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } })
+ 
   return {
+    
     ...flex, ...relative,
-    //'varr': id,
     width: '30px',
-    //height: `${(percentage  + 5)* 2}px`,
     height: `${(percentage  + 5)* 2}px`,
-    background: 'darkred',
-    /* //background: darkMode ?
+    animation: `${fadeIn} 1s linear`,
+    //background: 'darkred',
+    background: darkMode ?
       'linear-gradient(to bottom, gray 10px, #595959 0px)' :
-      'linear-gradient(to bottom, gray 10px, darkgrey 0px)', */
+      'linear-gradient(to bottom, gray 10px, darkgrey 0px)',
     textWrap: 'nowrap',
-    //animation: 'lineInserted 4s',
-    //animationDirection: 'alternate',
-    //animationDuration: '10s',
-    //animationName: '--varr',
-    //transition: 'height 4s',
-    // '@keyframes --varr': {
-    //   'from': {
-    //     height: `${(percentage  + 5)* 2}px`
-    //   },
-    //   'to': {
-    //     height: '0px'
-    //   }
-    // }
   }
 }
 
@@ -439,10 +434,12 @@ export const onlyMinLand = ({ minPort, minLand, medPort, medLand, larPort, larLa
 }
 
 export const rightSide = ({ darkMode, percentage }: columnBarI) => {
+  const fadeIn = keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } })
   return {
     ...flex,
     width: '10px',
     height: `${(percentage + 5) * 2}px`,
+    animation: `${fadeIn} 1s linear`,
     background: darkMode ?
       `linear-gradient(180deg, #0000 10px, #595959 0),
        linear-gradient(225deg, #0000 7px, gray 7px)` :
