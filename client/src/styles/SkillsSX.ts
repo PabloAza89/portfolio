@@ -80,12 +80,32 @@ export const colorFixed = ({ animRunning, index, graphDontFit, minPort, minLand,
   return {
     display: 'flex',
     position: graphDontFit ? 'fixed' : 'absolute',
-    zIndex: 9000,
+    //zIndex: 9000,
     pointerEvents: graphDontFit ? 'null' : 'none',
     right: '6px',
     background: color,
     width: '6px',
     height: '38px',
+  }
+}
+
+interface testI {
+  graphDontFit: boolean
+  width: number,
+}
+
+export const test = ({ width, graphDontFit }: testI) => {
+  console.log("al lado", graphDontFit)
+  return {
+    display: 'flex',
+    position: 'absolute',
+    //zIndex: 9000,
+    //right: graphDontFit ? '-100px' : '0px',
+    right: graphDontFit ? '10px' : '0px',
+    background: 'rgba(128, 128, 128, 0.400)',
+    //width: graphDontFit ? '0px' : '98px',
+    width: graphDontFit ? `${94-(850-width)}px` : '98px',
+    height: '100px',
   }
 }
 
@@ -131,7 +151,7 @@ export const entireBar = ({ index, graphDontFit, minPort, minLand, medPort, medL
     width: '200px',
     height: '49px',
     marginBottom: '0px',
-    zIndex: 3000,
+    //zIndex: 3000,
     background: graphDontFit ? `${bgColor}80` : 'none',
     //background: 'darkred',
     alignItems: 'flex-end',
@@ -265,14 +285,15 @@ export const chartContainer = ({ graphDontFit, width, length, minPort, minLand, 
 }
 
 interface scrollI {
+  graphDontFit: boolean,
   minLand: boolean
 }
 
-export const scroll = ({ minLand }: scrollI) => {
+export const scroll = ({ graphDontFit, minLand }: scrollI) => {
   return {
     overflow: 'auto',
-    borderRadius: minLand ? '0px 0px 10px 0px' : '0px 0px 10px 10px',
-    height: minLand ? '261px' : '362px',
+    borderRadius: graphDontFit ? '0px 0px 10px 0px' : minLand ? '0px 0px 10px 0px' : '0px 0px 10px 10px',
+    height: minLand ? '261px' : '361px',
     background:
     `linear-gradient(
       to bottom,
@@ -286,7 +307,8 @@ export const scroll = ({ minLand }: scrollI) => {
       steelblue 199px, steelblue 200px,
       rgba(128, 128, 128, 0.400) 200px, rgba(128, 128, 128, 0.400) 249px,
       steelblue 249px, steelblue 250px,
-      rgba(128, 128, 128, 0.400) 250px
+      rgba(128, 128, 128, 0.400) 250px, rgba(128, 128, 128, 0.400) 261px,
+      transparent 261px, transparent
     )`
   }
 }
@@ -299,6 +321,8 @@ export const upperChartContainer = ({ length }: upperChartContainerI) => {
   return {
     ...flex, ...relative, ...row,
     //background: 'darkgreen',
+    height: '261px',
+    //borderBottom: '0px solid black', // test
   }
 }
 
@@ -320,8 +344,9 @@ export const upperChartContainerRight = ({ graphDontFit, width, length, minPort,
     position: graphDontFit ? 'fixed' : 'relative',
     right: graphDontFit ? '200px' : '0px',
     width: graphDontFit ? '0px' : '200px',
-    height: '260px',
+    height: '261px',
     //background: 'yellow',
+    //borderBottom: '1px transparent solid',
   }
 }
 
@@ -345,18 +370,19 @@ interface columnBarI {
   percentage: number
 }
 
+const growAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } }) }
+const growAnimDuration: number = 1.2
+
 export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
-  const fadeIn = keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } })
   return {
     ...flex, ...relative, ...row, ...jcc,
     background: 'transparent',
     width: '90px',
     height: `calc(${percentage + 5}px * 2)`,
-    animation: `${fadeIn} 1s linear`,
+    animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
     borderBottom: '2px solid black',
     borderLeft: '2px solid black',
     borderImage: 'linear-gradient(to top, black 0px, black 20px, transparent 20px) 1',
-    
   }
 }
 
@@ -368,45 +394,30 @@ export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
 // each barr 90 + 2 (92) + green 200
 
 export const leftSide = ({ darkMode, percentage }: columnBarI) => {
-  const fadeIn = keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } })
   return {
     width: '10px',
     height: `${(percentage + 5)* 2}px`,
-    animation: `${fadeIn} 1s linear`,
-    background: darkMode ?
-      `linear-gradient(45deg, transparent 7px, silver 7px, #141414 ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)` :
-      `linear-gradient(45deg, transparent 7px, silver 7px, silver ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)`,
-    
+    animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
+     background: darkMode ?
+        `linear-gradient(225deg, gray 7px, #141414 7px, transparent),
+         linear-gradient(45deg, #0000 7px, silver 0)` :
+        `linear-gradient(225deg, gray 7px, silver 7px, transparent),
+         linear-gradient(45deg, #0000 7px, silver 0)`
+      //`linear-gradient(45deg, transparent 7px, silver 7px, #141414 ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)`
+      
   }
 }
 
-// export const centerSide = ({ darkMode, percentage }: columnBarI) => {
-//   return {
-//     ...flex, ...relative,
-//     width: '30px',
-//     height: `${(percentage  + 5)* 2}px`,
-//     background: darkMode ?
-//       'linear-gradient(to bottom, gray 10px, #595959 0px)' :
-//       'linear-gradient(to bottom, gray 10px, darkgrey 0px)',
-//     textWrap: 'nowrap',
-//   }
-// }
-
 export const centerSide = ({ id, darkMode, percentage }: columnBarI) => {
-  console.log("del lado sx", percentage)
-  //$(`.center1`).css("height", "300px")
-  const fadeIn = keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } })
- 
   return {
-    
     ...flex, ...relative,
     width: '30px',
     height: `${(percentage  + 5)* 2}px`,
-    animation: `${fadeIn} 1s linear`,
+    animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
     //background: 'darkred',
     background: darkMode ?
       'linear-gradient(to bottom, gray 10px, #595959 0px)' :
-      'linear-gradient(to bottom, gray 10px, darkgrey 0px)',
+      'linear-gradient(to bottom, gray 10px, darkgrey 10px)',
     textWrap: 'nowrap',
   }
 }
@@ -434,18 +445,16 @@ export const onlyMinLand = ({ minPort, minLand, medPort, medLand, larPort, larLa
 }
 
 export const rightSide = ({ darkMode, percentage }: columnBarI) => {
-  const fadeIn = keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } })
   return {
     ...flex,
     width: '10px',
     height: `${(percentage + 5) * 2}px`,
-    animation: `${fadeIn} 1s linear`,
+    animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
     background: darkMode ?
       `linear-gradient(180deg, #0000 10px, #595959 0),
        linear-gradient(225deg, #0000 7px, gray 7px)` :
       `linear-gradient(180deg, #0000 10px, darkgrey 0),
        linear-gradient(225deg, #0000 7px, gray 7px)`,
-      
   }
 }
 
@@ -459,10 +468,16 @@ export const titlesBox = ({ length, minLand }: titlesBoxI) => {
     ...row, ...aic, ...noSelect,
     display: minLand ? 'none' : 'flex',
     //background: 'darkgreen',
+    background: 'rgba(128, 128, 128, 0.400)',
+    //background: 'rgba(128, 128, 128, 0.400)',
+    //zIndex: 20000,
+    borderRadius: '0px 0px 0px 10px',
     height: '100px',
     width: `${length * 92}px`,
     paddingLeft: '57px',
     paddingRight: '45px',
+    //borderRight: '50px solid',
+    borderColor: 'transparent',
   }
 }
 

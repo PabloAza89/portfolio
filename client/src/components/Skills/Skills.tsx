@@ -158,7 +158,7 @@ function Skills() {
         <Box sx={s.leftRightHelper({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
         <Box sx={s.mainContainer({ length:array.length, minLand })}>
           <Typography sx={s.skills({ minPort, minLand, medPort, medLand, larPort, larLand })}>{english ? `My skills` : `Mis habilidades`}</Typography>
-          <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll({ minLand })} >
+          <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll({ graphDontFit, minLand })} >
           <Box sx={s.chartContainer({ graphDontFit, width, length:array.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
               <Box sx={s.upperChartContainer({ length:array.length })}>
                 <Box sx={s.chartRow({ length:array.length })}>
@@ -225,7 +225,9 @@ function Skills() {
                     </Typography>
                   )
                 })}
+                <Box sx={s.test({ width, graphDontFit })} />
               </Box>
+              
           </Box>
           </ScrollContainer>
         </Box>
