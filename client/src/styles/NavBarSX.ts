@@ -1,11 +1,9 @@
 import { blue } from '@mui/material/colors';
 import {
-  flex, relative, absolute, fixed, column, pointer,
-  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
-  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
+  flex, 
+  row, aic, asc, jcc, 
+  noDeco, mix, noSelect
 } from './CommonsSX';
-//import "@fontsource/allura";
-
 
 interface genI {
   staticRefWidth: number,
@@ -141,12 +139,11 @@ export const greaterThan = ({ minPort, minLand, medPort, medLand, larPort }: gen
   }
 }
 
-export const test = () => {
+export const item = () => {
   return {
     transition: 'all .1s ease-in-out',
     //':hover': { transform: 'scale(1.05)' }
     ':hover': { fontSize: '110%' }
-
   }
 }
 

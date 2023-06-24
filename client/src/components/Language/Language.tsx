@@ -1,4 +1,4 @@
-import { Box, CardMedia } from '@mui/material';
+import { Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from "react-router-dom";
 import { languageChanger } from '../../actions';

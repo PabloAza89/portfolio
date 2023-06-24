@@ -1,7 +1,7 @@
 import {
-  flex, relative, absolute, fixed, column, pointer,
-  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
-  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
+  flex, relative, column, pointer,
+  aic, asc, jcc, 
+  jcsb, noDeco, mix, noSelect
 } from './CommonsSX';
 
 export const background = () => {

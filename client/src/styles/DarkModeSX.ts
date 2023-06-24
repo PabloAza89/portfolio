@@ -34,7 +34,7 @@ export const background = ({ height, minPort, minLand, medPort, medLand, larPort
       larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? 'none' :
       larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? 'none' :
       (larPort || larLand) && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? 'none' :
-      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.680 ? 'none' :
+      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.693 ? 'none' :
       (larLand || larPort) && location === '/portfolio/Skills' && percentageResizedHeight < 0.536 ? 'none' :
       'null',
     opacity:
@@ -45,7 +45,7 @@ export const background = ({ height, minPort, minLand, medPort, medLand, larPort
       larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? '0' :
       larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? '0' :
       (larPort || larLand) && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? '0' :
-      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.680 ? '0' :
+      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.693 ? '0' :
       (larLand || larPort) && location === '/portfolio/Skills' && percentageResizedHeight < 0.536 ? '0' :
       '1',
     'active': {

@@ -1,9 +1,8 @@
 import { grey } from '@mui/material/colors';
 import {
-  flex, relative, absolute, fixed, column, pointer,
-  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
-  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
-} from './CommonsSX';
+  flex, relative, absolute, fixed, column, 
+  asc, jcc
+  } from './CommonsSX';
 
 interface backgroundI {
   darkMode: boolean

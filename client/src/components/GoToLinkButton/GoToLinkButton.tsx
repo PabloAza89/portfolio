@@ -3,8 +3,10 @@ import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import * as s from '../../styles/GoToLinkButtonSX';
 
+
 interface GoToLinkButtonI {
   link: string
+  /* className?: string */
 }
 
 function GoToLinkButton({ link }: GoToLinkButtonI) {
@@ -14,13 +16,17 @@ function GoToLinkButton({ link }: GoToLinkButtonI) {
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
 
+
+
   return (
     <a
+      
       href={link}
       target="_blank"
       rel="noopener noreferrer"
     >
       <Button
+      className={`linkButton`} 
         variant="contained"
         sx={s.background({ darkMode, minPort, minLand, larPort })}
       >

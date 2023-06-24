@@ -1,8 +1,7 @@
 import {
-  flex, relative, absolute, fixed, column, pointer,
-  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
-  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
-} from './CommonsSX';
+  flex, absolute, column, 
+  aic, jcc
+  } from './CommonsSX';
 
 interface backgroundI {
   minPort: boolean,

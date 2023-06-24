@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Typography, Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
@@ -17,9 +17,7 @@ function AboutMe() {
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
   const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
-  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference)
   const height = useSelector((state: {height:number}) => state.height)
-  const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
 
   const [ deviceHasMouse, setDeviceHasMouse ] = useState<any>(matchMedia('(pointer:fine)').matches ? true : false)
 

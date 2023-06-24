@@ -1,7 +1,7 @@
 import {
-  flex, relative, absolute, fixed, column,
-  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
-  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
+  flex, relative, column,
+  row, aic, jcc,
+  jcsb, jcse, mix, noSelect
 } from './CommonsSX';
 
 interface backgroundI {

@@ -1,6 +1,6 @@
 import {
   flex, noSelect, row, absolute, relative,
-  column, jcc, fixed, jcsb, aic, aifs, jcfs,
+  column, jcc, jcsb, aic, aifs, jcfs,
 } from './CommonsSX';
 import './SkillsSX.css';
 import $ from 'jquery';
@@ -80,7 +80,6 @@ export const colorFixed = ({ animRunning, index, graphDontFit, minPort, minLand,
   return {
     display: 'flex',
     position: graphDontFit ? 'fixed' : 'absolute',
-    //zIndex: 9000,
     pointerEvents: graphDontFit ? 'null' : 'none',
     right: '6px',
     background: color,
@@ -89,21 +88,18 @@ export const colorFixed = ({ animRunning, index, graphDontFit, minPort, minLand,
   }
 }
 
-interface testI {
+interface titlesNextI {
   graphDontFit: boolean
   width: number,
 }
 
-export const test = ({ width, graphDontFit }: testI) => {
+export const titlesNext = ({ width, graphDontFit }: titlesNextI) => {
   console.log("al lado", graphDontFit)
   return {
     display: 'flex',
     position: 'absolute',
-    //zIndex: 9000,
-    //right: graphDontFit ? '-100px' : '0px',
     right: graphDontFit ? '10px' : '0px',
     background: 'rgba(128, 128, 128, 0.400)',
-    //width: graphDontFit ? '0px' : '98px',
     width: graphDontFit ? `${94-(850-width)}px` : '98px',
     height: '100px',
   }
@@ -151,7 +147,6 @@ export const entireBar = ({ index, graphDontFit, minPort, minLand, medPort, medL
     width: '200px',
     height: '49px',
     marginBottom: '0px',
-    //zIndex: 3000,
     background: graphDontFit ? `${bgColor}80` : 'none',
     //background: 'darkred',
     alignItems: 'flex-end',
@@ -322,7 +317,6 @@ export const upperChartContainer = ({ length }: upperChartContainerI) => {
     ...flex, ...relative, ...row,
     //background: 'darkgreen',
     height: '261px',
-    //borderBottom: '0px solid black', // test
   }
 }
 
@@ -346,7 +340,6 @@ export const upperChartContainerRight = ({ graphDontFit, width, length, minPort,
     width: graphDontFit ? '0px' : '200px',
     height: '261px',
     //background: 'yellow',
-    //borderBottom: '1px transparent solid',
   }
 }
 
@@ -403,8 +396,6 @@ export const leftSide = ({ darkMode, percentage }: columnBarI) => {
          linear-gradient(45deg, #0000 7px, silver 0)` :
         `linear-gradient(225deg, gray 7px, silver 7px, transparent),
          linear-gradient(45deg, #0000 7px, silver 0)`
-      //`linear-gradient(45deg, transparent 7px, silver 7px, #141414 ${(percentage + 5) + (0.415 * (percentage + 5))}px, gray 0px)`
-      
   }
 }
 
@@ -469,14 +460,11 @@ export const titlesBox = ({ length, minLand }: titlesBoxI) => {
     display: minLand ? 'none' : 'flex',
     //background: 'darkgreen',
     background: 'rgba(128, 128, 128, 0.400)',
-    //background: 'rgba(128, 128, 128, 0.400)',
-    //zIndex: 20000,
     borderRadius: '0px 0px 0px 10px',
     height: '100px',
     width: `${length * 92}px`,
     paddingLeft: '57px',
     paddingRight: '45px',
-    //borderRight: '50px solid',
     borderColor: 'transparent',
   }
 }

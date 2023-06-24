@@ -1,4 +1,3 @@
-import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { Box, Button, SvgIcon, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
@@ -11,13 +10,10 @@ import {
   boxButton, auxLarPort
 } from '../../styles/HomeSX';
 
-
 function Home() {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
-  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
-  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference)
   const width = useSelector((state: {width: number}) => state.width)
   const height= useSelector((state: {height: number}) => state.height)
   const english = useSelector((state: {english:boolean}) => state.english)

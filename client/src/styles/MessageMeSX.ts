@@ -1,9 +1,7 @@
-import { useSelector } from 'react-redux';
 import {
-  flex, relative, absolute, fixed, column, pointer,
-  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
-  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
-} from './CommonsSX';
+  flex, relative, absolute, column, 
+  aic, asc, jcc, noSelect,
+  jcse, mix} from './CommonsSX';
 
 interface topBottomHelperI {
   minPort: boolean,
@@ -112,6 +110,7 @@ interface labelStyleI {
 
 export const labelStyle = ({ darkMode }: labelStyleI) => {
   return {
+    ...noSelect,
     background: darkMode ? '#615f5f' : 'white',
     padding: '0px 8px',
     left: '-5px',

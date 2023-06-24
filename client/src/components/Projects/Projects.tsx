@@ -1,6 +1,5 @@
-import { Box, CardMedia, Typography } from '@mui/material';
-import { Dialog, FormControl, InputLabel, MenuItem, Select, Paper } from '@mui/material/';
-import { grey } from '@mui/material/colors';
+import { Box, Typography } from '@mui/material';
+import { Dialog, FormControl, InputLabel, MenuItem, Select } from '@mui/material/';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
@@ -9,14 +8,14 @@ import food2 from '../../images/food2.png';
 import food3 from '../../images/food3.png';
 import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
-import DialogContent from '@mui/material/DialogContent';
 import * as s from '../../styles/ProjectsSX';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
+import $ from 'jquery';
+import '../../styles/SkillsSX.css';
 
 function Projects() {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
-
   const height = useSelector((state: {height:number}) => state.height)
   const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
   const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
@@ -49,11 +48,12 @@ function Projects() {
         el.addEventListener("wheel", onWheel);
         return () => el.removeEventListener("wheel", onWheel);
       }
-    }, [scrollSpeed]);
+    });
     return elRef;
   }
 
-  const array = [{
+  const array = [
+    {
       title: english ? `Weather App` : `Aplicación del Clima`,
       media: [ weatherify1, weatherify2 ],
       href: `https://pabloaza89.github.io/weather-app/`
@@ -62,31 +62,75 @@ function Projects() {
       title: english ? `Food App` : `Aplicación de Comidas`,
       media: [ food1, food2, food3 ],
       href: `https://pabloaza89.github.io/PI-Food-GH/`
-    }]
+    }
+  ]
 
-// mediaMeasures MIN PORT:
-// total height: 270
-// titleheight: 50 **
-// image height: 220 **
-// image width: 400
-// separators width: 14
-// each width: 414 / 6 = 69
+  // mediaMeasures MIN PORT:
+  // total height: 270
+  // titleheight: 50 **
+  // image height: 220 **
+  // image width: 400
+  // separators width: 14
+  // each width: 414 / 6 = 69
 
-// mediaMeasures MIN LAND:
-// total height: 220
-// titleheight: 35
-// image height: 160
-// image width: 400
-// separators width: 14
-// each width: 414 / 6 = 69
+  // mediaMeasures MIN LAND:
+  // total height: 220
+  // titleheight: 35
+  // image height: 160
+  // image width: 400
+  // separators width: 14
+  // each width: 414 / 6 = 69
 
-// mediaMeasures LAR:
-// total height: 340
-// titleheight: 60
-// image height: 280
-// image width: 550
-// separators width: 14
-// each width: 564 / 6 = 94
+  // mediaMeasures LAR:
+  // total height: 340
+  // titleheight: 60
+  // image height: 280
+  // image width: 550
+  // separators width: 14
+  // each width: 564 / 6 = 94
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let [updateFrequency, setUpdateFrequency] = useState(0)
+
+  useEffect(() => { // helper for button shake animation
+    let i:number = 0
+      let interval = setInterval(() => {
+        if (i < 5) {
+          setUpdateFrequency(i)
+          i++
+        } else {
+          return () => clearInterval(interval)
+        }
+      }, 100);
+  },[])
+
+  $(`.linkButton`) // make button shake
+    .css(`animationName`,`shakeKF`)
+    .css(`animationDuration`,`4s`) // button shake duration
+    .css(`animationIterationCount`,`infinite`)
+
+    
+    $(`.extraPXImage`)
+      .on( "mouseenter", function(){
+        $(`.extraPXSolid`)
+          .width(`calc((${array.map(e => e.media).flat().length} * 564px) + 3px)`)
+          .css("transition", "all .2s ease-in-out")
+        $(`.extraPXTitle${array.length - 1}`)
+          //.css("background", "blue")
+          //.css("width", "20px")
+          //.width(`calc((${array[array.length - 1].media.length} * 550px) + ((${array[array.length - 1].media.length} - 1px) + 14px) + 3px)`)
+          //.width(`${(3 * 550) + (1 * 14)}px`)
+          //.width(`${(3 * 550) + 28 + 3}px`)
+          .width(`1678px`)
+      })
+      .on( "mouseleave", function(){
+        $(`.extraPXSolid`)
+          .width(`calc(${array.map(e => e.media).flat().length} * 564px)`)
+        $(`.extraPXTitle${array.length - 1}`)
+          .width(`1681px`)
+      })
+
+  console.log(array[array.length - 1].media.length)
 
   return (
   <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
@@ -95,17 +139,17 @@ function Projects() {
 
       <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll()}>
 
-        <Box sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
         <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
 
-        <Box sx={s.centerStripe({ minPort, minLand, medPort, medLand, larPort, larLand })} >
-          {array.map((e) => {
+        <Box sx={s.centerStripe({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })} >
+          {array.map((e, index) => {
             return (
               <Box key={e.title} sx={s.card({ darkMode, minPort, minLand, larPort })}>
                 <Box sx={s.cardLeft}></Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', }}>
-                  <Box sx={s.boxTitle({ length:e.media.length, minPort, minLand, larPort, darkMode })}>
+                  <Box className={`extraPXTitle${index}`} sx={s.boxTitle({ length:e.media.length, minPort, minLand, larPort, darkMode })}>
                     <Typography sx={s.title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
                     <GoToLinkButton link={e.href} />
                   </Box>
@@ -114,7 +158,8 @@ function Projects() {
                     {e.media.map((m) =>{
                       return (
                         <Box key={m} sx={{ display: 'flex', flexDirection: 'row' }}>
-                          <Box 
+                          <Box
+                            className={`extraPXImage`}
                             src={m} component="img"
                             onClick={() => {setName(m); setShow(!show)}}
                             sx={s.cardMedia({ url:m, darkMode, minPort, minLand, larPort })}
@@ -132,9 +177,9 @@ function Projects() {
           )})}
         </Box>
 
-        <Box sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
         <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
 
       </ScrollContainer>
 

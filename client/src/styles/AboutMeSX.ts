@@ -1,6 +1,6 @@
 import {
-  flex, noSelect, row, jcsb, absolute, relative,
-  column, jcc, fixed, asc, jcfs
+  flex, noSelect, row, jcsb, relative,
+  column, fixed, asc, jcfs
 } from './CommonsSX';
 import { grey } from '@mui/material/colors';
 

@@ -1,7 +1,7 @@
 import { cyan } from '@mui/material/colors';
 import { 
-  asc, relative, flex, noSelect, row,
-  absolute, column, jcc, fixed, pointer
+  asc, flex, row,
+  absolute, jcc, pointer
 } from './CommonsSX';
 
 interface backgroundI {
@@ -28,7 +28,7 @@ export const background = ({ height, minPort, minLand, medPort, medLand, larPort
       (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.629 ? 'none' :
       larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? 'none' :
       larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? 'none' :
-      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.680 ? 'none' :
+      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.693 ? 'none' :
       (larLand || larPort) && location === '/portfolio/Skills' && percentageResizedHeight < 0.536 ? 'none' :
       'null',
     opacity:
@@ -39,7 +39,7 @@ export const background = ({ height, minPort, minLand, medPort, medLand, larPort
       (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.629 ? '0' :
       larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? '0' :
       larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? '0' :
-      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.680 ? '0' :
+      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.693 ? '0' :
       (larLand || larPort) && location === '/portfolio/Skills' && percentageResizedHeight < 0.536 ? '0' :
       '1',
     'active': {

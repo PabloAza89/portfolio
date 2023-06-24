@@ -12,7 +12,7 @@ import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
 import * as s from './styles/AppSX';
 import { Box } from '@mui/material';
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setCurrentHeight, setCurrentWidth, setHeight, setLarLand,

@@ -1,4 +1,4 @@
-import { Box, Typography, SvgIcon, Button  } from '@mui/material';
+import { Box, Typography, SvgIcon } from '@mui/material';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import * as s from '../../styles/SkillsSX';
 import { useSelector } from 'react-redux';
@@ -6,8 +6,6 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
 import '../../styles/SkillsSX.css';
 import $ from 'jquery';
-import { mainBox } from '../../styles/CertificationsSX';
-
 
 function Skills() {
 
@@ -67,7 +65,6 @@ function Skills() {
     setGraphDontFit(width < ((array.length * 92) + 206) ? true : false)
   }, [width, array.length]);
 
-
   const bold = (string: string) => {
     return <b style={{ color: 'black' }}>{string}</b>
   }
@@ -79,7 +76,6 @@ function Skills() {
     { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `#f4b800` },
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
   ], [english]);
-
 
   const HandleColorClick: any = (index: number) => {
 
@@ -143,14 +139,6 @@ function Skills() {
     }
   },[graphDontFit, levels, animRunning])
 
-  
-    
-  // $(`.center1`).on("click", function(){
-  //   $(`.center1`).animate({height:40},100);
-  // })
-    
-  
-  
   return (
     <Box sx={s.background}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
@@ -166,10 +154,8 @@ function Skills() {
                     return (
                       <Box key={array.indexOf(e)} sx={s.columnBar({ id:e.id, darkMode, percentage:e.percentage })}>
                         <Box sx={s.leftSide({ id:e.id, darkMode, percentage:e.percentage })}></Box>
-                        <Box 
+                        <Box
                           sx={s.centerSide({ id:e.id, darkMode, percentage:e.percentage,  })}
-                          
-                          //sx={{ background: 'red', width: '20px',  }}
                           className={`center${index}`}
                           onClick={() => console.log(index)}
                         >
@@ -225,9 +211,8 @@ function Skills() {
                     </Typography>
                   )
                 })}
-                <Box sx={s.test({ width, graphDontFit })} />
+                <Box sx={s.titlesNext({ width, graphDontFit })} />
               </Box>
-              
           </Box>
           </ScrollContainer>
         </Box>

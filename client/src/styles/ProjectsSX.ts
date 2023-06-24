@@ -1,10 +1,12 @@
-import { blue, brown, lime, red } from '@mui/material/colors';
+import { blue, brown } from '@mui/material/colors';
 import {
-  flex, relative, absolute, fixed, column, pointer,
-  row, aic, aifs, asc, jcc, jcfe, jcfs, jcsa,
-  jcsb, jcse, jsc, jic, noDeco, mix, noSelect
+  flex, relative, fixed, column, pointer,
+  row, aic, asc, jcc, 
+  jcsb, mix, noSelect
 } from './CommonsSX';
 import { grey } from '@mui/material/colors';
+import './SkillsSX.css';
+import $ from 'jquery';
 
 interface topBottomHelperI {
   height: number,
@@ -46,7 +48,7 @@ export const background = ({ minPort, minLand, larPort, staticRefWidth, staticRe
 export const scroll = () => {
   return {
     overflow: 'auto',
-    //background: 'none',
+    //background: 'red',
     opacity: '0.8',
   }
 }
@@ -92,13 +94,13 @@ export const intercalated =  ({ length, minPort, minLand, medPort, medLand, larP
 }
 
 interface centerStripeI {
+  length: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
   larLand: boolean
-
 }
 
 export const centerStripe = ({ minPort, minLand, medPort, medLand, larPort, larLand }: centerStripeI) => {
@@ -143,6 +145,7 @@ export const boxTitle = ({ length, minPort, minLand, larPort, darkMode }: boxTit
   return {
     ...flex, ...row, ...aic,
     paddingLeft: '18px',
+    //background: 'blue',
     background: darkMode ? '#5f1e1e' : '#9f3434',
     height: minPort ? '50px' : minLand ? '35px' : larPort ? '60px' : '60px'
   }
@@ -192,6 +195,7 @@ export const cardMedia = ({ url, darkMode, minPort, minLand, larPort }: cardMedi
     ...asc, ...pointer,
     width: minPort ? '400px' : minLand ? '400px' : '550px',
     height: minPort ? '220px' : minLand ? '160px' : '280px',
+    //background: 'red',
     ':hover': darkMode ? 
       { webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)', transform: 'scale(1.01)' } :
       { webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)', transform: 'scale(1.01)' },

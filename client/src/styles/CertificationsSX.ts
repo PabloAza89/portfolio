@@ -1,8 +1,8 @@
 import { grey } from '@mui/material/colors';
 import {
-  absolute, mix, noDeco, aic, asc, column,
-  flex, jcc, jic, jsc, noSelect, relative,
-  jcse, fixed, jcsb, jcsa, pointer
+  mix, noDeco, aic, asc, column,
+  flex, jcc, noSelect, relative,
+  jcse, fixed, jcsb, pointer
 } from './CommonsSX';
 import $ from 'jquery';
 
@@ -186,7 +186,8 @@ interface boxMediaI {
 
 export const boxMedia = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: boxMediaI) => { // boxMedia
   return {
-    ...pointer,
+    ...pointer, ...noSelect,
+    //background: 'red',
     width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : larPort ? '220px' : '220px', // width
     height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : larPort ? '120px' : '120px', // height
     ':hover': darkMode ?

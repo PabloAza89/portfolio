@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import * as s from '../../styles/MessageMeSX';
-import BackButton from '../BackButton/BackButton';
 import TextField from '@mui/material/TextField';
 import Swal from 'sweetalert2'
 import { setTimer, stopTimer, setNumberTimer, setTimerEnabled } from '../../actions';
@@ -14,7 +13,6 @@ function MessageMe() {
   const dispatch = useDispatch()
   const location = useLocation()
   const english = useSelector((state: {english:boolean}) => state.english)
-  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const height = useSelector((state: {height:number}) => state.height)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
@@ -23,12 +21,6 @@ function MessageMe() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
-  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
-  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference)
-  const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
-  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
-  const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
 
   const [name, setName] = useState<string | null>("")
   const [text, setText] = useState<string | null>("")
@@ -144,7 +136,7 @@ function MessageMe() {
     dispatch(setTimerEnabled(true))
   }
 
-  const handleTimerStartCB = (qq: number) => {
+  const handleTimerStartCB = () => {
     if (store.getState().timerEnabled) dispatch(setTimer(1))
     if (store.getState().timer === 0) {
       dispatch(setTimerEnabled(false))

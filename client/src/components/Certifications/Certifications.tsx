@@ -1,4 +1,4 @@
-import { Box, CardMedia, Dialog, Typography } from '@mui/material';
+import { Box, Dialog, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -12,7 +12,6 @@ import $ from 'jquery';
 function Certifications() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
-  const currentWidth = useSelector((state: {currentWidth:number}) => state.currentWidth)
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
@@ -20,12 +19,6 @@ function Certifications() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
-  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
-  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference)
-  const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
-  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
-  const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
 
   const [show, setShow] = useState(false)
   const [name, setName] = useState("")

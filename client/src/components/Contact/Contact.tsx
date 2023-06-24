@@ -1,16 +1,13 @@
-import { useState, useEffect } from 'react';
-import { Box, Typography, Avatar, Button } from '@mui/material';
+import { Box, Typography, Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import profile from '../../images/profile.png';
 import Swal from 'sweetalert2';
 import * as s from '../../styles/ContactSX';
 import '../../styles/ContactSX.css';
-import { blue, brown, lime, red, grey } from '@mui/material/colors';
 
 function Contact() {
-
-  const [target, setTarget] = useState<string>("")
+  
   const english = useSelector((state: {english:boolean}) => state.english)
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
@@ -19,7 +16,6 @@ function Contact() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const currentHeight = useSelector((state: {currentHeight:number}) => state.currentHeight)
 
   const notifCopyEmail = () => {
 
