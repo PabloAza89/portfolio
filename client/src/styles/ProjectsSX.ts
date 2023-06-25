@@ -1,12 +1,11 @@
-import { blue, brown } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
 import {
   flex, relative, fixed, column, pointer,
-  row, aic, asc, jcc, 
-  jcsb, mix, noSelect
+  row, aic, asc, jcc,
+  mix, noSelect
 } from './CommonsSX';
 import { grey } from '@mui/material/colors';
 import './SkillsSX.css';
-import $ from 'jquery';
 
 interface topBottomHelperI {
   height: number,
@@ -66,7 +65,7 @@ interface solidI {
 export const solid = ({ minPort, minLand, medPort, medLand, larPort, larLand, length }: solidI) => {
   return {
     ...flex, ...relative,
-    background: brown[700],
+    background: '#5d4037',
     width: minPort || minLand ? `calc(${length} * 414px)` : `calc(${length} * 564px)`,
     height: minPort ? '9px' : minLand ? '7px' : '12px'
   }
@@ -103,10 +102,11 @@ interface centerStripeI {
   larLand: boolean
 }
 
-export const centerStripe = ({ minPort, minLand, medPort, medLand, larPort, larLand }: centerStripeI) => {
+export const centerStripe = ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: centerStripeI) => {
   return {
     ...row, ...flex,
-    background: brown[700],
+    width: `calc(${length} * 564px)`,
+    background: '#5d4037',
     height: minPort ? '270px' : minLand ? '195px' : '340px',
   }
 }
@@ -128,7 +128,7 @@ export const card = ({ darkMode, minPort, minLand, larPort }: cardI) => {
 
 export const cardLeft = () => {
   return {
-    background: brown[700],
+    background: '#5d4037',
     width: '14px'
   }
 }
@@ -178,7 +178,7 @@ interface boxMediaI {
 
 export const boxMedia = ({ length, darkMode, minPort, minLand, larPort }: boxMediaI) => {
   return {
-    ...row, ...jcsb, ...flex
+    ...row, ...flex,
   }
 }
 

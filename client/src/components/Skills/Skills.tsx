@@ -19,7 +19,7 @@ function Skills() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const width = useSelector((state: {currentWidth: number}) => state.currentWidth)
+  const currentWidth = useSelector((state: {currentWidth: number}) => state.currentWidth)
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
 
   function useHorizontalScroll() {
@@ -58,12 +58,14 @@ function Skills() {
     { id: 6, title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }
   ]
 
-  const [ graphDontFit, setGraphDontFit ] = useState<any>(width < ((array.length * 92) + 206) ? true : false)
+  console.log(array[4].title.length)
+
+  const [ graphDontFit, setGraphDontFit ] = useState<any>(currentWidth < ((array.length * 92) + 206) ? true : false)
   const [ animRunning, setAnimRunning ] = useState<boolean>(false)
 
   useEffect(() => {
-    setGraphDontFit(width < ((array.length * 92) + 206) ? true : false)
-  }, [width, array.length]);
+    setGraphDontFit(currentWidth < ((array.length * 92) + 206) ? true : false)
+  }, [currentWidth, array.length]);
 
   const bold = (string: string) => {
     return <b style={{ color: 'black' }}>{string}</b>
@@ -147,7 +149,7 @@ function Skills() {
         <Box sx={s.mainContainer({ length:array.length, minLand })}>
           <Typography sx={s.skills({ minPort, minLand, medPort, medLand, larPort, larLand })}>{english ? `My skills` : `Mis habilidades`}</Typography>
           <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll({ graphDontFit, minLand })} >
-          <Box sx={s.chartContainer({ graphDontFit, width, length:array.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
+          <Box sx={s.chartContainer({ graphDontFit, currentWidth, length:array.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
               <Box sx={s.upperChartContainer({ length:array.length })}>
                 <Box sx={s.chartRow({ length:array.length })}>
                   {array.map((e, index) => {
@@ -157,9 +159,9 @@ function Skills() {
                         <Box
                           sx={s.centerSide({ id:e.id, darkMode, percentage:e.percentage,  })}
                           className={`center${index}`}
-                          onClick={() => console.log(index)}
                         >
-                          <Typography sx={s.onlyMinLand({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+                          <Typography sx={s.onlyMinLand({ textLength:e.title.length ,percentage:e.percentage, minPort, minLand, medPort, medLand, larPort, larLand })}>
+                          
                             {e.title}
                           </Typography>
                         </Box>
@@ -168,7 +170,7 @@ function Skills() {
                     )
                   })}
                 </Box>
-                <Box sx={s.upperChartContainerRight({ graphDontFit, width, length:array.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
+                <Box sx={s.upperChartContainerRight({ graphDontFit, currentWidth, length:array.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
                   {levels.map((e, index) => {
                     return (
                       <Box
@@ -211,7 +213,7 @@ function Skills() {
                     </Typography>
                   )
                 })}
-                <Box sx={s.titlesNext({ width, graphDontFit })} />
+                <Box sx={s.titlesNext({ currentWidth, graphDontFit })} />
               </Box>
           </Box>
           </ScrollContainer>

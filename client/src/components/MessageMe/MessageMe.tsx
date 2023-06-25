@@ -110,7 +110,7 @@ function MessageMe() {
   const handleSubmit = (e: any) => {
     if (store.getState().timerEnabled) return MustWait()
     function fetchData() {
-      //fetch("http://localhost:3001/", {
+      //fetch(`http://localhost:3001/`, {
       fetch(`https://oval-transparent-ornament.glitch.me/`, {
       method: "POST",
       body: JSON.stringify({name: name, text: text}),

@@ -47,7 +47,7 @@ export const background = ({ currentWidth, minPort, minLand, medPort, medLand, l
   }
 }
 
-interface iconBoxCopyI {
+interface containerI {
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -55,7 +55,7 @@ interface iconBoxCopyI {
   larPort: boolean
 }
 
-export const container = ({ minPort, minLand, medPort, medLand, larPort }: iconBoxCopyI) => { // iconBox
+export const container = ({ minPort, minLand, medPort, medLand, larPort }: containerI) => { // iconBox
   return {
     ...flex, ...column, ...relative, ...noDeco,
     //background: 'red',

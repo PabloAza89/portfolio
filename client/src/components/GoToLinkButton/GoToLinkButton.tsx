@@ -6,7 +6,6 @@ import * as s from '../../styles/GoToLinkButtonSX';
 
 interface GoToLinkButtonI {
   link: string
-  /* className?: string */
 }
 
 function GoToLinkButton({ link }: GoToLinkButtonI) {

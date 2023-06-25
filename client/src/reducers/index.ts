@@ -20,7 +20,8 @@ interface initialStateI {
   minRatioReference: number,
   timer: number,
   numberTimer: number | undefined,
-  timerEnabled: boolean
+  timerEnabled: boolean,
+  fullScreen: boolean,
 }
 
 const initialState: initialStateI = {
@@ -45,7 +46,8 @@ const initialState: initialStateI = {
   minRatioReference: window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width),
   timer: 60,
   numberTimer: undefined,
-  timerEnabled: false
+  timerEnabled: false,
+  fullScreen: window.screen.width === window.innerWidth && window.screen.height === window.innerHeight ? true : false
 }
 
 
@@ -165,6 +167,11 @@ const reducer = (state = initialState, action: {type: string; payload: any}) => 
       return {
         ...state,
         timerEnabled: action.payload
+      };
+    case 'SET_FULL_SCREEN':
+      return {
+        ...state,
+        fullScreen: action.payload
       };
     default:
       return state

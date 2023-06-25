@@ -16,7 +16,6 @@ interface graphDontFitI {
 }
 
 export const graphDontFit = ({ levels, animRunning }: graphDontFitI) => {
-  console.log("animRunning",animRunning)
   if (animRunning) {
     levels.forEach(e => {
       $(`.colorFixedCl${e.id}`) // stop all shakes
@@ -90,17 +89,16 @@ export const colorFixed = ({ animRunning, index, graphDontFit, minPort, minLand,
 
 interface titlesNextI {
   graphDontFit: boolean
-  width: number,
+  currentWidth: number,
 }
 
-export const titlesNext = ({ width, graphDontFit }: titlesNextI) => {
-  console.log("al lado", graphDontFit)
+export const titlesNext = ({ currentWidth, graphDontFit }: titlesNextI) => {
   return {
     display: 'flex',
     position: 'absolute',
     right: graphDontFit ? '10px' : '0px',
     background: 'rgba(128, 128, 128, 0.400)',
-    width: graphDontFit ? `${94-(850-width)}px` : '98px',
+    width: graphDontFit ? `${94-(850-currentWidth)}px` : '98px',
     height: '100px',
   }
 }
@@ -260,7 +258,7 @@ export const skills = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
 interface chartContainerI {
   graphDontFit: boolean,
   length: number,
-  width: number,
+  currentWidth: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -269,12 +267,12 @@ interface chartContainerI {
   larLand: boolean
 }
 
-export const chartContainer = ({ graphDontFit, width, length, minPort, minLand, medPort, medLand, larPort, larLand }:chartContainerI) => {
+export const chartContainer = ({ graphDontFit, currentWidth, length, minPort, minLand, medPort, medLand, larPort, larLand }:chartContainerI) => {
   return {
     ...flex, ...relative, ...column, ...jcfs,
     //background: 'red',
     alignItems: larPort || larLand ? 'flex-start' : graphDontFit ? 'flex-start' : 'center',
-    width: graphDontFit ? `${width}px` : `${(length*92)+200}px`,
+    width: graphDontFit ? `${currentWidth}px` : `${(length*92)+200}px`,
     height: minLand ? '261px' : '361px', // 50 + 1 + 210 + 100 = 361
   }
 }
@@ -322,7 +320,7 @@ export const upperChartContainer = ({ length }: upperChartContainerI) => {
 
 interface upperChartContainerRightI {
   graphDontFit: boolean,
-  width: number,
+  currentWidth: number,
   length: number,
   minPort: boolean,
   minLand: boolean,
@@ -332,7 +330,7 @@ interface upperChartContainerRightI {
   larLand: boolean
 }
 
-export const upperChartContainerRight = ({ graphDontFit, width, length, minPort, minLand, medPort, medLand, larPort, larLand }: upperChartContainerRightI) => {
+export const upperChartContainerRight = ({ graphDontFit, currentWidth, length, minPort, minLand, medPort, medLand, larPort, larLand }: upperChartContainerRightI) => {
   return {
     ...flex, ...column,
     position: graphDontFit ? 'fixed' : 'relative',
@@ -364,7 +362,8 @@ interface columnBarI {
 }
 
 const growAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } }) }
-const growAnimDuration: number = 1.2
+//const growAnimDuration: number = 1.2
+const growAnimDuration: number = 4
 
 export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
   return {
@@ -406,32 +405,62 @@ export const centerSide = ({ id, darkMode, percentage }: columnBarI) => {
     height: `${(percentage  + 5)* 2}px`,
     animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
     //background: 'darkred',
+    flexDirection: 'column-reverse',
     background: darkMode ?
       'linear-gradient(to bottom, gray 10px, #595959 0px)' :
       'linear-gradient(to bottom, gray 10px, darkgrey 10px)',
     textWrap: 'nowrap',
+    //justifyContent: 'center', // added
+    //alignItems: 'flex-end',
+    //padddingTop: '10px',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   }
 }
 
 interface onlyMinLandI {
+  percentage: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
-  larLand: boolean
+  larLand: boolean,
+  textLength: number
 }
 
-export const onlyMinLand = ({ minPort, minLand, medPort, medLand, larPort, larLand }: onlyMinLandI) => {
+//const GgrowAnim = (percentage: number) => { return keyframes({ from: { width: `0px` }, to: { width: `${(percentage  + 5)* 2}px` } }) }
+const GgrowAnim = (percentage: number) => { return keyframes({ from: { width: `0px` }, to: { width: `500%` } }) }
+
+export const onlyMinLand = ({ textLength, percentage, minPort, minLand, medPort, medLand, larPort, larLand }: onlyMinLandI) => {
+  console.log(textLength)
   return {
     ...absolute,
-    display: minLand ? 'flex' : 'none',
+    //...relative,
+    //position: 'fixed',
+    display: minLand ? 'flex' : 'none', // test
+    
+    //animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
     transform: 'rotate(270deg)',
-    width: '-webkit-fill-available',
+    //width: '-webkit-fill-available',
+    //width: `${textLength*12}px`,
+    //width: `${150}px`,
+    //width: `100px`,
+    //width: `${percentage+40}px`,
     height: '23px',
-    //background: 'red',
-    bottom: '9px',
-    left: '9px',
+    animation: `${GgrowAnim(percentage)} ${growAnimDuration}s linear`,
+    //bottom: '50px',
+    background: 'red',
+    bottom: '10px',
+    //top: '90px',
+    //left: '-55px',
+    //right: '-10px',
+    //top: '90px',
+    
+    overflow: 'hidden',
+    
+    //'-webkitTransformOriginY': 'bottom',
+    //justifyContent: 'space-around'
   }
 }
 

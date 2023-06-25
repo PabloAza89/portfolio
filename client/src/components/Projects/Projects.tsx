@@ -104,33 +104,27 @@ function Projects() {
       }, 100);
   },[])
 
-  $(`.linkButton`) // make button shake
+  $(`.linkButton`) // make link button shake
     .css(`animationName`,`shakeKF`)
     .css(`animationDuration`,`4s`) // button shake duration
+    .css(`animationDelay`,`1.5s`)
     .css(`animationIterationCount`,`infinite`)
 
-    
-    $(`.extraPXImage`)
-      .on( "mouseenter", function(){
-        $(`.extraPXSolid`)
-          .width(`calc((${array.map(e => e.media).flat().length} * 564px) + 3px)`)
-          .css("transition", "all .2s ease-in-out")
-        $(`.extraPXTitle${array.length - 1}`)
-          //.css("background", "blue")
-          //.css("width", "20px")
-          //.width(`calc((${array[array.length - 1].media.length} * 550px) + ((${array[array.length - 1].media.length} - 1px) + 14px) + 3px)`)
-          //.width(`${(3 * 550) + (1 * 14)}px`)
-          //.width(`${(3 * 550) + 28 + 3}px`)
-          .width(`1678px`)
-      })
-      .on( "mouseleave", function(){
-        $(`.extraPXSolid`)
-          .width(`calc(${array.map(e => e.media).flat().length} * 564px)`)
-        $(`.extraPXTitle${array.length - 1}`)
-          .width(`1681px`)
-      })
-
-  console.log(array[array.length - 1].media.length)
+  $(`.extraPXImage`) // when hover image, extra pixels helper on right
+    .on( "mouseenter", function(){
+      $(`.extraPXSolid`)
+        .css("transition", "all .2s ease-in-out")
+        .width(`calc((${array.map(e => e.media).flat().length} * 564px) + 3px)`)
+      $(`.extraPXCenterStripe`)
+        .css("transition", "all .2s ease-in-out")
+        .width(`calc((${array.map(e => e.media).flat().length} * 564px) + 3px)`)
+    })
+    .on( "mouseleave", function(){
+      $(`.extraPXSolid`)
+        .width(`calc(${array.map(e => e.media).flat().length} * 564px)`)
+      $(`.extraPXCenterStripe`)
+        .width(`calc(${array.map(e => e.media).flat().length} * 564px)`)
+    })
 
   return (
   <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
@@ -143,13 +137,13 @@ function Projects() {
         <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
         <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
 
-        <Box sx={s.centerStripe({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })} >
+        <Box className={`extraPXCenterStripe`} sx={s.centerStripe({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })} >
           {array.map((e, index) => {
             return (
               <Box key={e.title} sx={s.card({ darkMode, minPort, minLand, larPort })}>
                 <Box sx={s.cardLeft}></Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', }}>
-                  <Box className={`extraPXTitle${index}`} sx={s.boxTitle({ length:e.media.length, minPort, minLand, larPort, darkMode })}>
+                  <Box sx={s.boxTitle({ length:e.media.length, minPort, minLand, larPort, darkMode })}>
                     <Typography sx={s.title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
                     <GoToLinkButton link={e.href} />
                   </Box>

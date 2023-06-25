@@ -19,7 +19,7 @@ import {
   setLarPort, setMaxStaticReference, setMedLand, setMedPort,
   setMinLand, setMinPort, setMinRatioReference, setMinStaticReference,
   setPercentageResizedHeight, setPercentageResizedWidth,
-  setStaticRefHeight, setStaticRefWidth, setWidth
+  setStaticRefHeight, setStaticRefWidth, setWidth, setFullScreen
 } from './actions';
 
 function App() {
@@ -46,6 +46,7 @@ function App() {
       dispatch(setPercentageResizedHeight(window.innerHeight / window.screen.height))
       dispatch(setPercentageResizedWidth(window.innerWidth / window.screen.width))
       dispatch(setMinRatioReference(window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width)))
+      dispatch(setFullScreen(window.screen.width === window.innerWidth && window.screen.height === window.innerHeight ? true : false))
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);

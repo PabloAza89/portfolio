@@ -158,3 +158,10 @@ export function setTimerEnabled(setTimerEnabled:boolean) {
     payload: setTimerEnabled
   }
 };
+
+export function setFullScreen(setFullScreen:boolean) {
+  return {
+    type: 'SET_FULL_SCREEN',
+    payload: setFullScreen
+  }
+};

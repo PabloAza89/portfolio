@@ -3,9 +3,12 @@ import {
 } from './CommonsSX';
 
 interface backgroundI {
+  fullScreen: boolean,
   darkMode: boolean,
   width: number,
   height: number,
+  currentWidth: number,
+  currentHeight: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -14,15 +17,13 @@ interface backgroundI {
   larLand: boolean
 }
 
-export const background = ({ darkMode, width, height, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
+export const background = ({ fullScreen, darkMode, width, height, currentWidth, currentHeight, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
   return {
     ...flex, ...fixed, ...jcse,
-    '--vpHeight': `calc(${height}px - 30px)`,
+    '--vpHeight': fullScreen ? `${height}px` : `calc(${height}px - 150px)`, // from bottom, where animation start from
     left: '0px',
     minWidth: `${width}px !important`,
     width: `${width}px !important`,
-    minHeight: `${height}px !important`,
-    height: `${height}px !important`,
     span: {
       width: minPort || minLand ? '10px' : medPort || medLand ? '18px' : '22px',
       height: minPort || minLand ? '10px' : medPort || medLand ? '18px' : '22px',
