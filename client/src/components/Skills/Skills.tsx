@@ -141,6 +141,8 @@ function Skills() {
     }
   },[graphDontFit, levels, animRunning])
 
+  //$(`.abc`).css("animation", "none")
+
   return (
     <Box sx={s.background}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
@@ -154,18 +156,24 @@ function Skills() {
                 <Box sx={s.chartRow({ length:array.length })}>
                   {array.map((e, index) => {
                     return (
-                      <Box key={array.indexOf(e)} sx={s.columnBar({ id:e.id, darkMode, percentage:e.percentage })}>
-                        <Box sx={s.leftSide({ id:e.id, darkMode, percentage:e.percentage })}></Box>
+                      <Box>
+                        <Box key={array.indexOf(e)} sx={s.columnBar({ id:e.id, darkMode, percentage:e.percentage })}>
+                          <Box sx={s.fixedTopping1({ minLand })} />
+                          <Box sx={s.fixedTopping2({ minLand })} />
+                          <Box sx={s.leftSide({ id:e.id, darkMode, percentage:e.percentage })}></Box>
+                          <Box
+                            sx={s.centerSide({ id:e.id, darkMode, percentage:e.percentage,  })}
+                            className={`center${index}`}
+                          />
+                          <Box sx={s.rightSide({ id:e.id, darkMode, percentage:e.percentage })}></Box>
+                        </Box>
                         <Box
-                          sx={s.centerSide({ id:e.id, darkMode, percentage:e.percentage,  })}
-                          className={`center${index}`}
+                          sx={s.onlyMinLand({ minLand, percentage:e.percentage })}
                         >
-                          <Typography sx={s.onlyMinLand({ textLength:e.title.length ,percentage:e.percentage, minPort, minLand, medPort, medLand, larPort, larLand })}>
-                          
+                          <Typography sx={s.titlesOnlyMinLand}>
                             {e.title}
                           </Typography>
                         </Box>
-                        <Box sx={s.rightSide({ id:e.id, darkMode, percentage:e.percentage })}></Box>
                       </Box>
                     )
                   })}

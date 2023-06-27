@@ -363,7 +363,7 @@ interface columnBarI {
 
 const growAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } }) }
 //const growAnimDuration: number = 1.2
-const growAnimDuration: number = 10
+const growAnimDuration: number = 4
 
 export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
   return {
@@ -376,7 +376,6 @@ export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
     borderBottom: '2px solid black',
     borderLeft: '2px solid black',
     borderImage: 'linear-gradient(to top, black 0px, black 20px, transparent 20px) 1',
-    overflow: 'hidden',
   }
 }
 
@@ -384,18 +383,19 @@ export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
 // 050 + 21.0 + 071.0
 // 075 + 31.5 + 106.5
 // 100 + 42.0 + 142.0
+
 // each barr 90 + 2 (92) + green 200
 
 export const leftSide = ({ darkMode, percentage }: columnBarI) => {
   return {
     width: '10px',
     height: `${(percentage + 5)* 2}px`,
-    animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
-    background: darkMode ?
-      `linear-gradient(225deg, gray 7px, #141414 7px, transparent),
-        linear-gradient(45deg, #0000 7px, silver 0)` :
-      `linear-gradient(225deg, gray 7px, silver 7px, transparent),
-        linear-gradient(45deg, #0000 7px, silver 0)`
+    //animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
+     background: darkMode ?
+        `linear-gradient(225deg, gray 7px, #141414 7px, transparent),
+         linear-gradient(45deg, #0000 7px, silver 0)` :
+        `linear-gradient(225deg, gray 7px, silver 7px, transparent),
+         linear-gradient(45deg, #0000 7px, silver 0)`
   }
 }
 
@@ -404,92 +404,144 @@ export const centerSide = ({ id, darkMode, percentage }: columnBarI) => {
     ...flex, ...relative,
     width: '30px',
     height: `${(percentage  + 5)* 2}px`,
-    animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
+    //animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
+    //background: 'darkred',
     flexDirection: 'column-reverse',
     background: darkMode ?
       'linear-gradient(to bottom, gray 10px, #595959 0px)' :
       'linear-gradient(to bottom, gray 10px, darkgrey 10px)',
     //background: 'blue',
     textWrap: 'nowrap',
+    //justifyContent: 'center', // added
+    //alignItems: 'flex-end',
+    //padddingTop: '10px',
     alignItems: 'center',
     justifyContent: 'flex-start',
   }
 }
 
-interface fixedToppingI {
-  minLand: boolean
-}
+//const GgrowAnim = (percentage: number) => { return keyframes({ from: { width: `0px` }, to: { width: `${(percentage  + 5)* 2}px` } }) }
+//const GgrowAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `100px` } }) }
+//const GgrowAnim = (percentage: number) => { return keyframes({ from: { width: `0px` }, to: { width: `200px` } }) }
+//const GgrowAnim = (percentage: number) => { return keyframes({ from: { width: `0px` }, to: { width: `200px` } }) }
 
-export const fixedTopping1 = ({ minLand }: fixedToppingI) => {
-  return {
-    display:  minLand ? 'flex' : 'none',
-    //display: 'none',
-    transform: 'skew(45deg)',
-    position: 'absolute',
-    flexDirection: 'row',
-    background: 'gray',
-    //background: 'yellow',
-    height: '9px',
-    width: '37px',
-    zIndex: 10000,
-  }
-}
+//const GGGgrowAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `200px` } }) }
+//const GGGgrowAnim = (percentage: number) => { return keyframes({ from: { width: `30px`, height: `0px` }, to: { width: `30px`, height: `200px` } }) }
+//const GGGgrowAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `170px` } }) }
+const GGGgrowAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `170px` } }) }
+//const GGGgrowAnim = (percentage: number) => { return keyframes({ from: { width: `0px` }, to: { width: `200px` } }) }
 
-export const fixedTopping2 = ({ minLand }: fixedToppingI) => {
+
+export const centerSideTest = ({ id, darkMode, percentage }: columnBarI) => {
   return {
-    display:  minLand ? 'flex' : 'none',
+    display: 'flex',
     position: 'absolute',
-    background: 'darkgrey',
-    //background: 'gray',
-    flexDirection: 'row',
-    marginTop: '9px',
-    marginLeft: '13px',
-    height: '15px',
     width: '30px',
-    zIndex: 10000,
-  }
-}
-
-interface onlyMinLandI {
-  minLand: boolean,
-  percentage: number,
-}
-
-export const onlyMinLand = ({ minLand, percentage }: onlyMinLandI) => {
-  return {
-    display: minLand ? 'flex' : 'none',
-    position: 'absolute',
-        width: '37px',
-    height: `${((percentage + 5)* 2)}px`, // este va
-    animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
-    flexDirection: 'column',
+    //height: `${(percentage  + (percentage * 0.1))}px`,
+    height: `130px`, // este va
+    animation: `${GGGgrowAnim(percentage)} ${growAnimDuration}s linear`,
+    //background: 'darkred',
+    flexDirection: 'column',    
     background: 'blue',
     textWrap: 'nowrap',
     alignItems: 'center',
-    bottom: '0px',
+    bottom: '10px',
     marginLeft: '35px',
     overflow: 'hidden',
     justifyContent: 'flex-end',
   }
 }
 
-export  const titlesOnlyMinLand = () => {
+export  const ccc = () => {
   return {
     display: 'flex',
     position: 'relative',
     transform: 'rotate(270deg)',
     background: 'darkred',
     width: '180px',
-    marginBottom: '90px',
+    marginBottom: '100px',
+    top: '10px',
   }
 }
+
+interface onlyMinLandI {
+  percentage: number,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
+  textLength: number
+}
+
+//const AAAgrowAnim = (percentage: number) => { return keyframes({ from: { width: `0px`, height: `0px` }, to: { width: `190px`, height: `190px` } }) }
+//const AAAgrowAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `190px` } }) }
+//const AAAgrowAnim = (percentage: number) => { return keyframes({ from: { width: `0px` }, to: { width: `190px` } }) }
+const AAAgrowAnim = (percentage: number) => { return keyframes({ from: { height: `30px` }, to: { height: `30px` } }) }
+
+export const onlyMinLand = ({ textLength, percentage, minPort, minLand, medPort, medLand, larPort, larLand }: onlyMinLandI) => {
+  console.log(textLength)
+  return {
+    //...absolute,
+    //...relative,
+    //position: 'fixed',
+    //position: 'absolute',
+    position: 'relative',
+    display: 'flex',
+    //display: 'none',
+    //display: minLand ? 'flex' : 'none', // test
+    //marginTop: '50px',
+    //marginBottom: '10px',
+    //animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
+    //transform: 'rotate(270deg)',
+    transform: 'rotate(270deg)',
+    //animation: 'none',
+    //width: '-webkit-fill-available',
+    //width: `${textLength*12}px`,
+    //width: `${150}px`,
+    //width: `18px`,
+    //justifyContent: 'center', // problem here
+    //justifyContent: 'flex-start',
+    //justifyContent: 'flex-end',
+    width: `110px`, // height // este va
+    //minheight: '190px',
+    //paddingLeft: '20px',
+    //zIndex: 20000,
+    //width: `50px`,
+    //width: `20px`,
+    //width: `${percentage+40}px`,
+    //height: '100px',
+    height: '30px', // width
+    //animation: `${AAAgrowAnim(percentage)} ${growAnimDuration}s linear`,
+    //paddingLeft: '80px',
+    //marginLeft: '80px',
+    //marginBottom: '50px',
+    background: 'green',
+    //zIndex: '40000',
+    //alignItems: 'center',
+    //writingMode: 'lr',
+    //bottom: '50px',
+    //top: '90px',
+    //left: '-35px',
+    //right: '-10px',
+    //top: '90px',
+    //justifyItems: 'self-end',
+    overflow: 'hidden',
+    
+    //'-webkitTransformOriginY': 'bottom',
+    //justifyContent: 'space-around'
+  }
+}
+
+
 
 export const rightSide = ({ darkMode, percentage }: columnBarI) => {
   return {
     ...flex,
     width: '10px',
     height: `${(percentage + 5) * 2}px`,
-    animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
+    //animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
     background: darkMode ?
       `linear-gradient(180deg, #0000 10px, #595959 0),
        linear-gradient(225deg, #0000 7px, gray 7px)` :
@@ -530,6 +582,8 @@ export const titles = () => {
     fontWeight: 600,
   }
 }
+
+
 
 interface innerLevelI {
   graphDontFit: boolean,
