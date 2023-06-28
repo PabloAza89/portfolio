@@ -271,7 +271,8 @@ export const chartContainer = ({ graphDontFit, currentWidth, length, minPort, mi
   return {
     ...flex, ...relative, ...column, ...jcfs,
     //background: 'red',
-    alignItems: larPort || larLand ? 'flex-start' : graphDontFit ? 'flex-start' : 'center',
+    //alignItems: larPort || larLand ? 'flex-start' : graphDontFit ? 'flex-start' : 'center',
+    alignItems: 'flex-start',
     width: graphDontFit ? `${currentWidth}px` : `${(length*92)+200}px`,
     height: minLand ? '261px' : '361px', // 50 + 1 + 210 + 100 = 361
   }
@@ -362,14 +363,12 @@ interface columnBarI {
 }
 
 const growAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } }) }
-//const growAnimDuration: number = 1.2
-const growAnimDuration: number = 10
+const growAnimDuration: number = 1.2
+//const growAnimDuration: number = 10
 
 export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
   return {
     ...flex, ...relative, ...row, ...jcc,
-    //background: 'transparent',
-    //background: 'blue',
     width: '90px',
     height: `calc(${percentage + 5}px * 2)`,
     animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
@@ -417,35 +416,22 @@ export const centerSide = ({ id, darkMode, percentage }: columnBarI) => {
 }
 
 interface fixedToppingI {
+  darkMode: boolean,
   minLand: boolean
 }
 
-export const fixedTopping1 = ({ minLand }: fixedToppingI) => {
-  return {
-    display:  minLand ? 'flex' : 'none',
-    //display: 'none',
-    transform: 'skew(45deg)',
-    position: 'absolute',
-    flexDirection: 'row',
-    background: 'gray',
-    //background: 'yellow',
-    height: '9px',
-    width: '37px',
-    zIndex: 10000,
-  }
-}
-
-export const fixedTopping2 = ({ minLand }: fixedToppingI) => {
+export const fixedToppingMinLand = ({ darkMode, minLand }: fixedToppingI) => {
   return {
     display:  minLand ? 'flex' : 'none',
     position: 'absolute',
-    background: 'darkgrey',
-    //background: 'gray',
     flexDirection: 'row',
-    marginTop: '9px',
-    marginLeft: '13px',
-    height: '15px',
+    //background: `linear-gradient(180deg, darkblue 10px, darkred 0)`,
+    background:  darkMode ?
+      `linear-gradient(180deg, gray 10px, #595959 0)` :
+      `linear-gradient(180deg, gray 10px, darkgrey 0)`,
+    marginLeft: '0px',
     width: '30px',
+    height: '20px',
     zIndex: 10000,
   }
 }
@@ -460,14 +446,14 @@ export const onlyMinLand = ({ minLand, percentage }: onlyMinLandI) => {
     display: minLand ? 'flex' : 'none',
     position: 'absolute',
         width: '37px',
-    height: `${((percentage + 5)* 2)}px`, // este va
+    height: `${((percentage + 5)* 2)}px`, 
     animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
     flexDirection: 'column',
-    background: 'blue',
+    //background: 'blue',
     textWrap: 'nowrap',
     alignItems: 'center',
     bottom: '0px',
-    marginLeft: '35px',
+    marginLeft: '33px',
     overflow: 'hidden',
     justifyContent: 'flex-end',
   }
@@ -478,7 +464,7 @@ export  const titlesOnlyMinLand = () => {
     display: 'flex',
     position: 'relative',
     transform: 'rotate(270deg)',
-    background: 'darkred',
+    //background: 'darkred',
     width: '180px',
     marginBottom: '90px',
   }

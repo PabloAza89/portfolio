@@ -105,7 +105,8 @@ interface centerStripeI {
 export const centerStripe = ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: centerStripeI) => {
   return {
     ...row, ...flex,
-    width: `calc(${length} * 564px)`,
+    width: minPort || minLand ? `calc(${length} * 414px)` : `calc(${length} * 564px)`,
+    //background: 'yellow',
     background: '#5d4037',
     height: minPort ? '270px' : minLand ? '195px' : '340px',
   }

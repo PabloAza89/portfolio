@@ -57,9 +57,7 @@ function Skills() {
     { id: 5, title: english ? 'BBQ' : 'Asado', percentage: 100 },
     { id: 6, title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }
   ]
-
-  console.log(array[4].title.length)
-
+  
   const [ graphDontFit, setGraphDontFit ] = useState<any>(currentWidth < ((array.length * 92) + 206) ? true : false)
   const [ animRunning, setAnimRunning ] = useState<boolean>(false)
 
@@ -141,8 +139,6 @@ function Skills() {
     }
   },[graphDontFit, levels, animRunning])
 
-  //$(`.abc`).css("animation", "none")
-
   return (
     <Box sx={s.background}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
@@ -158,8 +154,7 @@ function Skills() {
                     return (
                       <Box>
                         <Box key={array.indexOf(e)} sx={s.columnBar({ id:e.id, darkMode, percentage:e.percentage })}>
-                          <Box sx={s.fixedTopping1({ minLand })} />
-                          <Box sx={s.fixedTopping2({ minLand })} />
+                          <Box sx={s.fixedToppingMinLand({ darkMode, minLand })} />
                           <Box sx={s.leftSide({ id:e.id, darkMode, percentage:e.percentage })}></Box>
                           <Box
                             sx={s.centerSide({ id:e.id, darkMode, percentage:e.percentage,  })}

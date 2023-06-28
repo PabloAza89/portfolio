@@ -138,7 +138,7 @@ function Projects() {
         <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
 
         <Box className={`extraPXCenterStripe`} sx={s.centerStripe({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })} >
-          {array.map((e, index) => {
+          {array.map((e) => {
             return (
               <Box key={e.title} sx={s.card({ darkMode, minPort, minLand, larPort })}>
                 <Box sx={s.cardLeft}></Box>
