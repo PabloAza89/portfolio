@@ -1,6 +1,6 @@
 import { grey } from '@mui/material/colors';
 import {
-  flex, relative, absolute, fixed, column, 
+  flex, relative, absolute, column, 
   asc, jcc
   } from './CommonsSX';
 
@@ -60,7 +60,8 @@ interface greyBottomI {
 
 export const greyBottom = ({ darkMode }: greyBottomI) => {
   return {
-    ...flex, ...fixed,
+    ...flex, ...absolute,
+    //background: 'darkred',
     background: darkMode ? grey[800] : grey[400],
     height: '6px',
     width: 'calc(100vw - 12px)',

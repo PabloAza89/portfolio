@@ -168,21 +168,6 @@ export const cardMedia = ({ darkMode, minPort, minLand }: cardMediaI) => {
   }
 }
 
-export const cardMediaTest = () => {
-  return {
-    display: 'flex', position: 'relative',
-    /* ...asc, */ ...pointer, ...noSelect,
-    width: '280px',
-    height: '280px',
-    animation: `abc .8s linear infinite`,
-    animationTimingFunction: 'steps(12, end)',
-    '@keyframes abc': {
-      '0%': { transform: 'rotate(0deg)' },
-      '100%': { transform: 'rotate(360deg)' }, // 99.96
-    }
-  }
-}
-
 interface betweenMediaI {
   indexOf: number,
   length: number,

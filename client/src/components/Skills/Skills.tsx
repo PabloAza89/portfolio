@@ -152,8 +152,8 @@ function Skills() {
                 <Box sx={s.chartRow({ length:array.length })}>
                   {array.map((e, index) => {
                     return (
-                      <Box>
-                        <Box key={array.indexOf(e)} sx={s.columnBar({ id:e.id, darkMode, percentage:e.percentage })}>
+                      <Box key={array.indexOf(e)}>
+                        <Box sx={s.columnBar({ id:e.id, darkMode, percentage:e.percentage })}>
                           <Box sx={s.fixedToppingMinLand({ darkMode, minLand })} />
                           <Box sx={s.leftSide({ id:e.id, darkMode, percentage:e.percentage })}></Box>
                           <Box

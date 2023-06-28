@@ -284,6 +284,7 @@ export const upperChartContainerRight = ({ graphDontFit }: upperChartContainerRi
     width: graphDontFit ? '0px' : '200px',
     height: '261px',
     //background: 'yellow',
+    zIndex: 3
   }
 }
 
@@ -374,7 +375,7 @@ export const fixedToppingMinLand = ({ darkMode, minLand }: fixedToppingI) => {
     marginLeft: '0px',
     width: '30px',
     height: '20px',
-    zIndex: 10000,
+    zIndex: 1,
   }
 }
 

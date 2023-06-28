@@ -8,7 +8,6 @@ import food2 from '../../images/food2.png';
 import food3 from '../../images/food3.png';
 import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
-import loadingImage from '../../images/loadingImage.png';
 import * as s from '../../styles/ProjectsSX';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 import $ from 'jquery';
@@ -124,39 +123,6 @@ function Projects() {
         .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
     })
 
-    // $("img").one("load", function() {
-    //   // do stuff
-    // }).each(function() {
-    //   if(this.complete) {
-    //       $(this).load(); // For jQuery < 3.0 
-    //       // $(this).trigger('load'); // For jQuery >= 3.0 
-    //   }
-    // });
-
-    // $(".extraPXImage").one("load", function() {
-    //   $(food1).on("load", function() {
-    //     console.log("ABC")});
-    //   })
-
-    // var img = $("").attr('src', '../../images/food1.png').on("load", function() {
-    //   $(`.extraPXImage`).append(img);
-    // });
-
-    // $(window).on("load", function() {
-    //   $("").attr('src', '../../images/food1.png').on("load", function() {
-//        $(`.extraPXImage`).attr('src', `${food1}`)
-    //   });
-    // })
-
-
-    //$(`.extraPXImage`).attr('src', `https://apod.nasa.gov/apod/image/0710/iapetus2_cassini_big.jpg`)
-    
-
-    
-      
-      
-    
-
   return (
   <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
     {/* <img id="test" src="http://upload.wikimedia.org/wikipedia/commons/4/42/Loading.gif" ></img> */}
@@ -186,12 +152,10 @@ function Projects() {
                         <Box key={m} sx={{ display: 'flex', flexDirection: 'row' }}>
                           <Box
                             className={`extraPXImage`}
-                            id={`extraPXImage`}
                             component="img"
-                            src={loadingImage}
+                            src={m}
                             onClick={() => {setName(m); setShow(!show)}}
-                            //sx={s.cardMedia({ darkMode, minPort, minLand })}
-                            sx={s.cardMediaTest}
+                            sx={s.cardMedia({ darkMode, minPort, minLand })}
                           />
                           <Box
                             sx={s.betweenMedia({ darkMode, indexOf:e.media.indexOf(m), length:e.media.length-1 })}
