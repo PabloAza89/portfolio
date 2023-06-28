@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from "react-router-dom";
 import * as s from '../../styles/MessageMeSX';
 import TextField from '@mui/material/TextField';
 import Swal from 'sweetalert2'
@@ -11,7 +10,7 @@ import store from '../../store/store';
 function MessageMe() {
 
   const dispatch = useDispatch()
-  const location = useLocation()
+
   const english = useSelector((state: {english:boolean}) => state.english)
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const height = useSelector((state: {height:number}) => state.height)
@@ -148,15 +147,15 @@ function MessageMe() {
   return (
     <Box sx={s.background({ larPort, larLand })}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-      <Box sx={s.mainContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={s.formContainer({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode })}>
+      <Box sx={s.mainContainer({ larPort, larLand })}>
+        <Box sx={s.leftRightHelper({ larPort, larLand })}></Box>
+        <Box sx={s.formContainer({ minPort, minLand, medPort, medLand, darkMode })}>
           <Button
             disabled={clearButtonDisabled}
             variant="contained"
             size="small"
             onClick={() => clearBoth()}
-            sx={s.clearButton({ minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname })}
+            sx={s.clearButton({ minPort, minLand, medPort, medLand, larPort, larLand })}
           >
             { english ? 'CLEAR' : 'LIMPIAR' }
           </Button>
@@ -168,7 +167,7 @@ function MessageMe() {
             value={name}
             InputLabelProps={{ style: s.labelStyle({ darkMode }) }}
             InputProps={{ style: s.inputStyle({ darkMode }) }}
-            sx={s.nameBox({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode })}
+            sx={s.nameBox({ minPort, minLand, medPort, medLand, darkMode })}
             onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
           />
           <TextField
@@ -180,14 +179,14 @@ function MessageMe() {
             InputLabelProps={{ style: s.labelStyle({ darkMode }) }}
             InputProps={{ style: s.inputStyle({ darkMode }) }}
             onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
-            sx={s.messageBox({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode })}
+            sx={s.messageBox({ minPort, minLand, medPort, medLand, darkMode })}
           />
           <Button
             disabled={sentButtonDisabled}
             variant="contained"
             size="small"
             onClick={(e) => handleSubmit(e)}
-            sx={s.sendMessageButton({ minPort, minLand, medPort, medLand, larPort, larLand })}
+            sx={s.sendMessageButton({ minPort, minLand, medPort, medLand })}
           >
             { english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
           </Button>
@@ -199,7 +198,7 @@ function MessageMe() {
           <Box component="div"></Box>
           <Box component="div"></Box>
         </Box>
-        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.leftRightHelper({ larPort, larLand })}></Box>
       </Box>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     </Box>

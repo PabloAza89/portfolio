@@ -1,5 +1,5 @@
 import {
-  flex, absolute, column, 
+  flex, absolute, column,
   aic, jcc
   } from './CommonsSX';
 
@@ -10,12 +10,10 @@ interface backgroundI {
   medLand: boolean,
   larPort: boolean,
   larLand: boolean,
-  maxStaticReference: number,
   location: string,
-  percentageResizedHeight: number
 }
 
-export const background = ({ minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location, percentageResizedHeight }: backgroundI) => {
+export const background = ({ minPort, minLand, medPort, medLand }: backgroundI) => {
   return {
     ...column, ...absolute, ...jcc, ...aic,
     padding: '0vw !important',
@@ -33,10 +31,9 @@ interface iconI {
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
-  maxStaticReference: number
 }
 
-export const icon = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference }: iconI) => {
+export const icon = ({ minPort, minLand, medPort, medLand }: iconI) => {
   return {
     ...flex, ...absolute, ...column,
     transform: 'rotate(180deg)',

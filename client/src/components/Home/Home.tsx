@@ -13,9 +13,6 @@ import {
 function Home() {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
-  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
-  const width = useSelector((state: {width: number}) => state.width)
-  const height= useSelector((state: {height: number}) => state.height)
   const english = useSelector((state: {english:boolean}) => state.english)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
@@ -23,17 +20,15 @@ function Home() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
-  const percentageResizedWidth = useSelector((state: {percentageResizedWidth:number}) => state.percentageResizedWidth)
 
   return (
     <Box sx={background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-      <Box sx={boxTextTechMessage({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+      <Box sx={boxTextTechMessage({ minPort, minLand, medPort, medLand, larPort })}>
         <Box sx={boxTypography({ minPort, minLand, medPort, medLand, larPort, larLand })}>
           <Box sx={auxLarPort({ larPort })}>
-            <Typography sx={textOne({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
-            <Typography sx={textTwo({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
-            <Typography sx={textThree({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight })}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
+            <Typography sx={textOne({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</Typography>
+            <Typography sx={textTwo({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</Typography>
+            <Typography sx={textThree({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</Typography>
           </Box>
         </Box>
         <Technologies />
@@ -48,7 +43,7 @@ function Home() {
       </Box>
       <Box sx={boxSVG({ minPort, minLand, medPort, medLand, larPort })}>
         <SvgIcon
-          sx={imageSVG({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth })}
+          sx={imageSVG({ minPort, minLand, medPort, medLand, larPort })}
           preserveAspectRatio="none"
         >
           <MySvg/>

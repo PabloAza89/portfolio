@@ -8,16 +8,11 @@ import { grey } from '@mui/material/colors';
 import './SkillsSX.css';
 
 interface topBottomHelperI {
-  height: number,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
   larPort: boolean,
   larLand: boolean
 }
 
-export const topBottomHelper = ({ height, minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+export const topBottomHelper = ({ larPort, larLand }: topBottomHelperI) => {
   return {
     ...flex, ...relative,
     //background: 'orange',
@@ -27,17 +22,7 @@ export const topBottomHelper = ({ height, minPort, minLand, medPort, medLand, la
   }
 }
 
-interface backgroundI {
-  minPort: boolean,
-  minLand: boolean,
-  larPort: boolean,
-  staticRefWidth: number,
-  staticRefHeight: number,
-  percentageResizedHeight: number,
-  height: number
-}
-
-export const background = ({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height }: backgroundI) => {
+export const background = () => {
   return {
     ...flex, ...relative, ...column,
     //background: 'red',
@@ -56,13 +41,9 @@ interface solidI {
   length: number,
   minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const solid = ({ minPort, minLand, medPort, medLand, larPort, larLand, length }: solidI) => {
+export const solid = ({ minPort, minLand, length }: solidI) => {
   return {
     ...flex, ...relative,
     background: '#5d4037',
@@ -74,14 +55,10 @@ export const solid = ({ minPort, minLand, medPort, medLand, larPort, larLand, le
 interface intercalatedI {
   minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
   length: number
 }
 
-export const intercalated =  ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: intercalatedI) => {
+export const intercalated =  ({ length, minPort, minLand }: intercalatedI) => {
   return {
     ...flex, ...relative,
     background: 'linear-gradient(to right, transparent 70%, #5d4037 30%)',
@@ -96,13 +73,9 @@ interface centerStripeI {
   length: number,
   minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const centerStripe = ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: centerStripeI) => {
+export const centerStripe = ({ length, minPort, minLand }: centerStripeI) => {
   return {
     ...row, ...flex,
     width: minPort || minLand ? `calc(${length} * 414px)` : `calc(${length} * 564px)`,
@@ -113,13 +86,12 @@ export const centerStripe = ({ length, minPort, minLand, medPort, medLand, larPo
 }
 
 interface cardI {
-  darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
   larPort: boolean
 }
 
-export const card = ({ darkMode, minPort, minLand, larPort }: cardI) => {
+export const card = ({ minPort, minLand, larPort }: cardI) => {
   return {
     ...row, ...flex,
     //background: 'gray',
@@ -138,11 +110,10 @@ interface boxTitleI {
   minPort: boolean,
   minLand: boolean,
   larPort: boolean,
-  length: number,
   darkMode: boolean
 }
 
-export const boxTitle = ({ length, minPort, minLand, larPort, darkMode }: boxTitleI) => {
+export const boxTitle = ({ minPort, minLand, larPort, darkMode }: boxTitleI) => {
   return {
     ...flex, ...row, ...aic,
     paddingLeft: '18px',
@@ -169,35 +140,25 @@ export const title = ({ darkMode, minPort, minLand, larPort }: titleI) => {
   }
 }
 
-interface boxMediaI {
-  length: number,
-  darkMode: boolean,
-  minPort: boolean,
-  minLand: boolean,
-  larPort: boolean
-}
-
-export const boxMedia = ({ length, darkMode, minPort, minLand, larPort }: boxMediaI) => {
+export const boxMedia = () => {
   return {
     ...row, ...flex,
   }
 }
 
 interface cardMediaI {
-  url: string,
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
-  larPort: boolean
 }
 
-export const cardMedia = ({ url, darkMode, minPort, minLand, larPort }: cardMediaI) => {
+export const cardMedia = ({ darkMode, minPort, minLand }: cardMediaI) => {
   return {
-    ...asc, ...pointer,
+    ...asc, ...pointer, ...noSelect,
     width: minPort ? '400px' : minLand ? '400px' : '550px',
     height: minPort ? '220px' : minLand ? '160px' : '280px',
     //background: 'red',
-    ':hover': darkMode ? 
+    ':hover': darkMode ?
       { webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)', transform: 'scale(1.01)' } :
       { webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)', transform: 'scale(1.01)' },
     webkitFilter: darkMode ? 'brightness(.6)' : 'none',
@@ -272,11 +233,9 @@ interface boxLowerI {
   minPort: boolean,
   minLand: boolean,
   medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const boxLower = ({ height, minPort, minLand, medLand, larPort, larLand }: boxLowerI) => {
+export const boxLower = ({ height, minPort, minLand, medLand }: boxLowerI) => {
   return {
     ...asc, ...row, ...noSelect,
     background: 'none',

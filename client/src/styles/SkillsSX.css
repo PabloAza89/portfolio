@@ -1,4 +1,4 @@
-@keyframes entireBarMoveClKF { 
+@keyframes entireBarMoveClKF {
   0% { transform: translateX(0px) }
   50% { transform: translateX(-194px) }
   75% { transform: translateX(-194px) }

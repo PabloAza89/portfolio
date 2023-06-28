@@ -1,6 +1,6 @@
 import {
   flex, relative, column, pointer,
-  aic, asc, jcc, 
+  aic, asc, jcc,
   jcsb, noDeco, mix, noSelect
 } from './CommonsSX';
 
@@ -17,11 +17,9 @@ interface topBottomHelperI {
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+export const topBottomHelper = ({ minPort, minLand, medPort, medLand }: topBottomHelperI) => {
   return {
     ...flex, ...relative,
     //background: 'darkblue',
@@ -39,7 +37,7 @@ interface mainContainerI {
   larLand: boolean
 }
 
-export const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainContainerI) => {
+export const mainContainer = ({ minPort, minLand, medPort, medLand, larPort }: mainContainerI) => {
   return {
     ...flex, ...jcc, ...aic,
     flexDirection: minPort ? 'column' : 'row',
@@ -150,7 +148,7 @@ interface typographyBoxI {
   larLand: boolean
 }
 
-export const typographyBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }: typographyBoxI) => { // typographyBox
+export const typographyBox = ({ minPort, minLand, medPort, medLand }: typographyBoxI) => { // typographyBox
   return {
     ...flex, ...column, ...relative, ...asc, ...jcc,
     //'background': 'red',

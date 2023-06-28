@@ -15,9 +15,6 @@ function AboutMe() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
-  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
-  const height = useSelector((state: {height:number}) => state.height)
 
   const [ deviceHasMouse, setDeviceHasMouse ] = useState<any>(matchMedia('(pointer:fine)').matches ? true : false)
 
@@ -28,16 +25,16 @@ function AboutMe() {
   return (
     <Box sx={s.background}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-      <Box sx={s.mainContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+      <Box sx={s.mainContainer({ larPort, larLand })}>
         <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
         <Box sx={s.innerMainContainer}>
           <Box sx={s.innerTopBottomHelper}></Box>
-          <Box sx={s.blueBox({ height, staticRefWidth, darkMode, minPort, minLand, medPort, medLand, larPort })}>
+          <Box sx={s.blueBox({ darkMode, minPort, minLand, medPort, medLand, larPort })}>
             <Box sx={s.innerBlueBoxHelper}>
               <Avatar
                 alt="Pablo Azambuyo"
                 src={profile}
-                sx={s.avatar({ minPort, minLand, medPort, medLand, larPort, larLand, height, staticRefHeight })}
+                sx={s.avatar({ minPort, minLand, medPort, medLand, larPort })}
               />
             </Box>
             <Typography sx={s.typography({ mouse:deviceHasMouse, darkMode, minPort, minLand, medPort, medLand, larPort })}>

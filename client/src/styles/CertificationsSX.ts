@@ -59,11 +59,9 @@ interface topBottomHelperI {
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+export const topBottomHelper = ({ minPort, minLand, medPort, medLand }: topBottomHelperI) => {
   return {
     ...flex, ...relative,
     //background: 'red',
@@ -90,7 +88,7 @@ interface genI {
   larLand: boolean
 }
 
-export const mainBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }: genI) => {
+export const mainBox = ({ minPort, medPort, larPort, larLand }: genI) => {
   return {
     ...flex, ...jcsb,
     //background: 'darkred',
@@ -109,7 +107,7 @@ interface leftRightHelperI {
   larLand: boolean
 }
 
-export const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
+export const leftRightHelper = ({ larLand }: leftRightHelperI) => {
   return {
     display: larLand ? 'flex' : 'none',
     //background: 'yellow',
@@ -126,7 +124,7 @@ interface cardContainerI {
   larLand: boolean
 }
 
-export const cardContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: cardContainerI) => {
+export const cardContainer = ({ minPort, medPort, larPort, larLand }: cardContainerI) => {
   return {
     ...flex, ...aic, ...jcse,
     flexDirection: minPort || medPort || larPort ? 'column' : 'row',
@@ -147,7 +145,7 @@ interface cardI {
   larLand: boolean
 }
 
-export const card = ({ minPort, minLand, medPort, medLand, larPort, larLand }: cardI) => { // card
+export const card = ({ minPort, minLand, medPort, medLand }: cardI) => { // card
   return {
     ...flex, ...relative, ...column, ...aic, ...jcsb,
     //background: 'orange',
@@ -166,7 +164,7 @@ interface titleI {
   larLand: boolean
 }
 
-export const title = ({ minPort, minLand, medPort, medLand, larPort, larLand }: titleI) => { // title
+export const title = ({ minPort, minLand, medPort, medLand, larPort }: titleI) => { // title
   return {
     ...noSelect, ...mix,
     //background: 'Red',
@@ -190,11 +188,12 @@ export const boxMedia = ({ darkMode, minPort, minLand, medPort, medLand, larPort
     //background: 'red',
     width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : larPort ? '220px' : '220px', // width
     height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : larPort ? '120px' : '120px', // height
+    'filter': darkMode ?
+      'brightness(.6)' :
+      'none',
     ':hover': darkMode ?
-      { webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)' } :
-      { webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)/* ' },
-    webkitFilter: darkMode ? 'brightness(.6)' : 'none',
-    'filter': darkMode ? 'brightness(.6)' : 'none',
+      { filter: 'brightness(.65)' } :
+      { filter: 'brightness(.9)' },
     zIndex: 1000,
   }
 }

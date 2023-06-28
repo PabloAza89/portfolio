@@ -8,12 +8,11 @@ interface backgroundI {
   medLand: boolean,
   larPort: boolean,
   larLand: boolean,
-  maxStaticReference: number,
   location: string,
   percentageResizedHeight: number
 }
 
-export const background = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location, percentageResizedHeight }: backgroundI) => {
+export const background = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, location, percentageResizedHeight }: backgroundI) => {
   return {
     ...column, ...absolute, ...jcc, ...aic,
     padding: '0vw !important',
@@ -61,10 +60,9 @@ interface genI {
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
-  maxStaticReference: number
 }
 
-export const iconDay = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
+export const iconDay = ({ minPort, minLand, medPort, medLand, larPort }: genI) => {
   return {
     ...flex, ...absolute, ...column,
     minWidth: '0vh',
@@ -73,7 +71,7 @@ export const iconDay = ({ minPort, minLand, medPort, medLand, larPort, maxStatic
   }
 }
 
-export const iconNight = ({ minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
+export const iconNight = ({ minPort, minLand, medPort, medLand, larPort }: genI) => {
   return {
     ...flex, ...absolute, ...column,
     minWidth: '0vh',

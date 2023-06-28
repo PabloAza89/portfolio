@@ -1,6 +1,6 @@
 import {
-  flex, relative, absolute, column, 
-  aic, asc, jcc, jcfe, 
+  flex, relative, absolute, column,
+  aic, asc, jcc, jcfe,
   noDeco, mix, noSelect
 } from './CommonsSX';
 import $ from 'jquery';

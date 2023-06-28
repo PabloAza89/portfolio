@@ -1,19 +1,19 @@
 import gear from '../images/gear.png';
 import {
   absolute, noSelect, mix, flex,
-  column, jcc, fixed, relative
+  column, jcc, relative
 } from './CommonsSX';
 
-const background = ( staticRefWidth: number ) => {
+const background = () => {
   return {
     ...flex, ...column, ...jcc, ...relative,
-    top: `${staticRefWidth * 0.5}px`,
-    right: `${staticRefWidth * 0.5}px`,
-    bottom: `${staticRefWidth * 0.5}px`,
-    left: `${staticRefWidth * 0.5}px`,
+    top: `10px`, // REVIEW `${staticRefWidth * 0.5}px`
+    right: `10px`, // REVIEW
+    bottom: `10px`, // REVIEW
+    left: `10px`, // REVIEW
     background: 'none',
     //minHeight: '30vh'
-    height: '30'
+    height: '30px' // REVIEW height: '30'
   }
 }
 
@@ -21,12 +21,10 @@ interface genI {
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
   larPort: boolean
 }
 
-const textUpperOneLine = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
+const textUpperOneLine = ({ darkMode, minPort, minLand, larPort }: genI) => {
   return {
     ...noSelect, ...absolute, ...mix,
     fontFamily: 'Lucida Console',
@@ -38,8 +36,7 @@ const textUpperOneLine = ({ darkMode, minPort, minLand, medPort, medLand, larPor
   }
 }
 
-
-const textUpperTwoLines = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
+const textUpperTwoLines = ({ darkMode, minPort, minLand, larPort }: genI) => {
   return {
     ...noSelect, ...absolute, ...mix,
     fontFamily: 'Monaco',
@@ -51,20 +48,19 @@ const textUpperTwoLines = ({ darkMode, minPort, minLand, medPort, medLand, larPo
   }
 }
 
-const textLowerOneLine = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
+const textLowerOneLine = ({ darkMode, minPort, minLand, larPort }: genI) => {
   return {
-      ...noSelect, ...absolute,
+      ...noSelect, ...absolute, ...mix,
     fontFamily: 'Verdana',
     fontSize: minPort ? '4vw' : minLand ? '4vw' : larPort ? '4vw' : '1.2vw',
     color: darkMode ? '#5c5b5b' : 'white',
     fontWeight: 400,
     top: minPort ? '88vh' : minLand ? '80vh' : larPort ? '88vh' : '85vh',
     left: minPort ? '30vw' : minLand ? '30vw' : larPort ? '30vw' : '60vw',
-    mixBlendMode: 'difference'
   }
 }
 
-const gearBig = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
+const gearBig = ({ darkMode, minPort, minLand, larPort }: genI) => {
   return {
     ...absolute,
     left: minPort ? '3vh' : minLand ? '70vh' : larPort ? '13vh' : '30vh',
@@ -80,7 +76,7 @@ const gearBig = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI
   }
 }
 
-const gearMed = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
+const gearMed = ({ darkMode, minPort, minLand, larPort }: genI) => {
   return {
     ...absolute,
     left: minPort ? '27.5vh' : minLand ? '94.5vh' : larPort ? '37.3vh' : '67.3vh',
@@ -96,7 +92,7 @@ const gearMed = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI
   }
 }
 
-const gearMin = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: genI) => {
+const gearMin = ({ darkMode, minPort, minLand, larPort }: genI) => {
   return {
     ...absolute,
     left: minPort ? '25vh' : minLand ? '92vh' : larPort ? '35.2vh' : '65.9vh',

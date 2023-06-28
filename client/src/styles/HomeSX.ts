@@ -34,10 +34,9 @@ interface boxTextTechMessageI {
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
-  larLand: boolean
 }
 
- export const boxTextTechMessage = ({ minPort, minLand, medPort, medLand, larPort, larLand }: boxTextTechMessageI) => { // boxTextTechMessage
+ export const boxTextTechMessage = ({ minPort, minLand, medPort, medLand, larPort }: boxTextTechMessageI) => { // boxTextTechMessage
   return {
     ...flex, ...column, ...aic,
     //background: 'maroon',
@@ -71,19 +70,14 @@ export const boxSVG = ({ minPort, minLand, medPort, medLand, larPort }: boxSVGI 
 }
 
 interface imageSVGI {
-  width: number,
-  height: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
-  larLand: boolean,
-  percentageResizedHeight: number,
-  percentageResizedWidth: number
 }
 
-export const imageSVG = ({ width, height, minPort, minLand, medPort, medLand, larPort, larLand, percentageResizedHeight, percentageResizedWidth }: imageSVGI ) => { // imageSVG
+export const imageSVG = ({ minPort, minLand, medPort, medLand, larPort }: imageSVGI ) => { // imageSVG
   return {
     ...flex, ...relative,
     //background: 'red',
@@ -103,7 +97,7 @@ interface boxTypographyI {
   larLand: boolean
 }
 
-export const boxTypography = ({ minPort, minLand, medPort, medLand, larPort, larLand }: boxTypographyI) => { // boxTypography
+export const boxTypography = ({ minPort, minLand, medPort, medLand, larPort }: boxTypographyI) => { // boxTypography
   return {
     ...flex, ...column, ...jcse,
     //background: 'teal',
@@ -113,17 +107,6 @@ export const boxTypography = ({ minPort, minLand, medPort, medLand, larPort, lar
     minHeight: minPort ? '18vh' : medPort ? '22vh' : minLand ? '40vh' : medLand ? '40vh' : larPort ? '180px' : '300px', // minHeight
     height: minPort ? '18vh' : medPort ? '22vh' : minLand ? '40vh' : medLand ? '40vh' : larPort ? '15vh' : '300px', // height
   }
-}
-
-interface textOneI {
-  darkMode: boolean,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  percentageResizedHeight: number,
-  staticRefHeight: number
 }
 
 interface auxLarPortI {
@@ -142,7 +125,16 @@ export const auxLarPort = ({ larPort }: auxLarPortI) => { // auxLarPort
   }
 }
 
-export const textOne = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight }: textOneI) => { // textOne
+interface textOneI {
+  darkMode: boolean,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+}
+
+export const textOne = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: textOneI) => { // textOne
   return {
     ...noSelect, ...mix, ...relative, ...flex,
     lineHeight: '1.0',
@@ -159,11 +151,9 @@ interface textTwoI {
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
-  percentageResizedHeight: number,
-  staticRefHeight: number
 }
 
-export const textTwo = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight }: textTwoI) => { // textTwo
+export const textTwo = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: textTwoI) => { // textTwo
   return {
     ...noSelect, ...mix,
     lineHeight: '1.0',
@@ -181,11 +171,9 @@ interface textThreeI {
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
-  percentageResizedHeight: number,
-  staticRefHeight: number
 }
 
-export const textThree = ({ darkMode, minPort, minLand, medPort, medLand, larPort, percentageResizedHeight, staticRefHeight }: textThreeI) => { // textThree
+export const textThree = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: textThreeI) => { // textThree
   return {
     ...noSelect, ...mix,
     lineHeight: '1.0',
@@ -204,7 +192,7 @@ interface boxButtonI {
   larLand: boolean
 }
 
-export const boxButton = ({ minPort, minLand, medPort, medLand, larPort, larLand }: boxButtonI) => { // boxButton
+export const boxButton = ({ larPort }: boxButtonI) => { // boxButton
   return {
     ...flex, ...row, ...jcc,
     width: larPort ? '100vw' : '100%', // width

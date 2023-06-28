@@ -19,12 +19,11 @@ export const background = ({ darkMode }: backgroundI) => {
 }
 
 interface blackWhiteI {
-  staticRefWidth: number,
   darkMode: boolean,
   location: string
 }
 
-export const blackWhite = ( { staticRefWidth, darkMode, location }: blackWhiteI ) => {
+export const blackWhite = ( { darkMode, location }: blackWhiteI ) => {
   return {
     ...relative, ...flex, ...column, ...asc,
     width: 'calc(100vw - 12px)',
@@ -44,10 +43,9 @@ interface topBottomHelperI {
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
-  larLand: boolean,
 }
 
-export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: topBottomHelperI) => {
+export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort }: topBottomHelperI) => {
   return {
     ...flex, ...relative,
     //background: 'orange',

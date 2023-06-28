@@ -7,7 +7,7 @@ import * as s from '../../styles/ContactSX';
 import '../../styles/ContactSX.css';
 
 function Contact() {
-  
+
   const english = useSelector((state: {english:boolean}) => state.english)
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
@@ -105,7 +105,7 @@ function Contact() {
 
   return (
       <Box sx={s.background}>
-        <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })} />
+        <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })} />
         <Box sx={s.mainContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
 
           <Avatar
@@ -142,7 +142,7 @@ function Contact() {
             </Typography>
           </Box>
         </Box>
-        <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })}></Box>
       </Box>
   )
 }

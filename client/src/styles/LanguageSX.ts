@@ -1,22 +1,19 @@
 import { cyan } from '@mui/material/colors';
-import { 
-  asc, flex, row,
+import {
+  asc, flex, row, noSelect,
   absolute, jcc, pointer
 } from './CommonsSX';
 
 interface backgroundI {
   height: number,
-  minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
   larPort: boolean,
   larLand: boolean,
   percentageResizedHeight: number,
   location: string
 }
 
-export const background = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, location, percentageResizedHeight }: backgroundI) => {
+export const background = ({ height, minLand, larPort, larLand, location, percentageResizedHeight }: backgroundI) => {
   return {
     ...asc, ...absolute, ...flex, ...row, ...jcc,
     //background: 'red',
@@ -46,9 +43,9 @@ export const background = ({ height, minPort, minLand, medPort, medLand, larPort
       'opacity': '0',
       'display': 'flex'
       },
-    top: 
+    top:
       minLand && height <= 380 && location === '/portfolio/Skills' ? '20px' : 'none',
-    bottom: 
+    bottom:
       minLand && height <= 380 && location === '/portfolio/Skills' ? 'none' :
       '20px'
   }
@@ -61,12 +58,11 @@ interface genI {
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
-  maxStaticReference: number
 }
 
-export const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
+export const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort }: genI) => {
   return {
-    ...flex, ...row, ...asc, ...pointer,
+    ...flex, ...row, ...asc, ...pointer, ...noSelect,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid ${cyan[100]} 2px` : `solid transparent 2px`,
@@ -81,9 +77,9 @@ export const lanEnFlag = ({ english, minPort, minLand, medPort, medLand, larPort
   }
 }
 
-export const lanEsFlag = ({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference }: genI) => {
+export const lanEsFlag = ({ english, minPort, minLand, medPort, medLand, larPort }: genI) => {
   return {
-    ...flex, ...row, ...asc, ...pointer,
+    ...flex, ...row, ...asc, ...pointer, ...noSelect,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     border: english ? `solid transparent 2px` : `solid ${cyan[100]} 2px`,

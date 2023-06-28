@@ -68,34 +68,6 @@ export function setLarLand(setLarLand:boolean) {
   }
 };
 
-export function setStaticRefWidth(setStaticRefWidth:number) {
-  return {
-    type: 'STATIC_REF_WIDTH',
-    payload: setStaticRefWidth
-  }
-};
-
-export function setStaticRefHeight(setStaticRefHeight:number) {
-  return {
-    type: 'STATIC_REF_HEIGHT',
-    payload: setStaticRefHeight
-  }
-};
-
-export function setMaxStaticReference(setMaxStaticReference:number) {
-  return {
-    type: 'MAX_STATIC_REFERENCE',
-    payload: setMaxStaticReference
-  }
-};
-
-export function setMinStaticReference(setMinStaticReference:number) {
-  return {
-    type: 'MIN_STATIC_REFERENCE',
-    payload: setMinStaticReference
-  }
-};
-
 export function setCurrentWidth(setCurrentWidth:number) {
   return {
     type: 'CURRENT_WIDTH',
@@ -103,31 +75,10 @@ export function setCurrentWidth(setCurrentWidth:number) {
   }
 };
 
-export function setCurrentHeight(setCurrentHeight:number) {
-  return {
-    type: 'CURRENT_HEIGHT',
-    payload: setCurrentHeight
-  }
-};
-
 export function setPercentageResizedHeight(setPercentageResizedHeight:number) {
   return {
     type: 'PERCENTAGE_RESIZED_HEIGHT',
     payload: setPercentageResizedHeight
-  }
-};
-
-export function setPercentageResizedWidth(setPercentageResizedWidth:number) {
-  return {
-    type: 'PERCENTAGE_RESIZED_WIDTH',
-    payload: setPercentageResizedWidth
-  }
-};
-
-export function setMinRatioReference(setMinRatioReference:number) {
-  return {
-    type: 'SET_MIN_RATIO_REFERENCE',
-    payload: setMinRatioReference
   }
 };
 

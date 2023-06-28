@@ -9,15 +9,8 @@ interface initialStateI {
   medLand: boolean,
   larPort: boolean,
   larLand: boolean,
-  staticRefWidth: number,
-  staticRefHeight: number,
-  maxStaticReference: number,
-  minStaticReference: number,
   currentWidth: number,
-  currentHeight: number,
   percentageResizedHeight: number,
-  percentageResizedWidth: number,
-  minRatioReference: number,
   timer: number,
   numberTimer: number | undefined,
   timerEnabled: boolean,
@@ -35,15 +28,8 @@ const initialState: initialStateI = {
   medLand: window.screen.height >= 425 && window.screen.height <= 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
   larPort: window.screen.width > 825 && window.matchMedia("(orientation: portrait)").matches ? true : false,
   larLand: window.screen.height > 825 && !window.matchMedia("(orientation: portrait)").matches ? true : false,
-  staticRefWidth: window.screen.width / 100,
-  staticRefHeight: window.screen.height / 100,
-  maxStaticReference: ( window.screen.width >= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100,
-  minStaticReference: ( window.screen.width <= window.screen.height ) ? window.screen.width / 100 : window.screen.height / 100,
   currentWidth: window.innerWidth,
-  currentHeight: window.innerHeight,
   percentageResizedHeight: window.innerHeight / window.screen.height,
-  percentageResizedWidth: window.innerWidth / window.screen.width,
-  minRatioReference: window.innerWidth / window.screen.width <= window.innerHeight / window.screen.height  ? (window.innerWidth / window.screen.width) / (window.innerHeight / window.screen.height) : (window.innerHeight / window.screen.height) / (window.innerWidth / window.screen.width),
   timer: 60,
   numberTimer: undefined,
   timerEnabled: false,
@@ -103,50 +89,15 @@ const reducer = (state = initialState, action: {type: string; payload: any}) => 
         ...state,
         larLand: action.payload
       };
-    case 'STATIC_REF_WIDTH':
-        return {
-          ...state,
-          staticRefWidth: action.payload
-        };
-    case 'STATIC_REF_HEIGHT':
-      return {
-        ...state,
-        staticRefHeight: action.payload
-      };
-    case 'MAX_STATIC_REFERENCE':
-      return {
-        ...state,
-        maxStaticReference: action.payload
-      };
-    case 'MIN_STATIC_REFERENCE':
-      return {
-        ...state,
-        minStaticReference: action.payload
-      };
     case 'CURRENT_WIDTH':
       return {
         ...state,
         currentWidth: action.payload
       };
-    case 'CURRENT_HEIGHT':
-      return {
-        ...state,
-        currentHeight: action.payload
-      };
     case 'PERCENTAGE_RESIZED_HEIGHT':
       return {
         ...state,
         percentageResizedHeight: action.payload
-      };
-    case 'PERCENTAGE_RESIZED_WIDTH':
-      return {
-        ...state,
-        percentageResizedWidth: action.payload
-      };
-    case 'SET_MIN_RATIO_REFERENCE':
-      return {
-        ...state,
-        minRatioReference: action.payload
       };
     case 'SET_TIMER':
       return {

@@ -1,12 +1,11 @@
 import { blue } from '@mui/material/colors';
 import {
-  flex, 
-  row, aic, asc, jcc, 
+  flex,
+  row, aic, asc, jcc,
   noDeco, mix, noSelect
 } from './CommonsSX';
 
 interface genI {
-  staticRefWidth: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -15,21 +14,21 @@ interface genI {
   larLand: boolean
 }
 
-export const background = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // background
+export const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // background
   return {
     ...flex,
     //background: 'blue',
     flexDirection: minPort || medPort || larPort ? 'column' : 'row',
     paddingTop: minLand ? '10px' : '10px',
     color: '#FFFFFF',
-    minWidth: minPort || medPort ? 'none' : minLand || medLand ? 'none' : larPort ? '526px' : '677px', // minWidth 
+    minWidth: minPort || medPort ? 'none' : minLand || medLand ? 'none' : larPort ? '526px' : '677px', // minWidth
     minHeight: minPort || medPort ? '17vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '127px' : '100px', // minHeight
     height: minPort || medPort ? '17vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '127px' : '100px', //height
     justifyContent: minLand || minLand || medLand || larLand ? 'space-between' : 'none'
   }
 }
 
-export const mainLeft = ({ staticRefWidth, minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // mainLeft
+export const mainLeft = ({ minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // mainLeft
   return {
     ...flex, ...row, ...aic, ...jcc,
     //background: 'red',
@@ -42,8 +41,6 @@ export const mainLeft = ({ staticRefWidth, minPort, minLand, medPort, medLand, l
 }
 
 interface mainRightI {
-  staticRefWidth: number,
-  percentageResizedWidth: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -52,7 +49,7 @@ interface mainRightI {
   larLand: boolean
 }
 
-export const mainRight = ({ staticRefWidth, percentageResizedWidth, minPort, minLand, medPort, medLand, larPort, larLand }: mainRightI) => { // mainRight
+export const mainRight = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainRightI) => { // mainRight
   return {
     ...asc, ...flex, ...aic,
     //background: 'yellow',
@@ -148,7 +145,6 @@ export const item = () => {
 }
 
 interface textItemI {
-  staticRefWidth: number,
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
@@ -158,7 +154,7 @@ interface textItemI {
   larLand: boolean
 }
 
-export const textItem = ({ staticRefWidth, darkMode, minPort, minLand, medLand, medPort, larPort, larLand }: textItemI) => { // textItem
+export const textItem = ({ darkMode, minPort, minLand, medLand, medPort, larPort, larLand }: textItemI) => { // textItem
   return {
     ...noDeco, ...noSelect, ...mix,
     //background: 'red',

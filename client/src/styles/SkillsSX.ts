@@ -1,6 +1,6 @@
 import {
   flex, noSelect, row, absolute, relative,
-  column, jcc, jcsb, aic, aifs, jcfs,
+  column, jcc, jcsb, aic, aifs, jcfs, jcfe
 } from './CommonsSX';
 import './SkillsSX.css';
 import $ from 'jquery';
@@ -48,7 +48,7 @@ export const graphDontFit = ({ levels, animRunning }: graphDontFitI) => {
 }
 
 export const graphFit = (levels: levelsI[]) => {
-  levels.forEach(e => {
+  levels.forEach(() => {
     levels.forEach(e => {
       $(`.colorFixedCl${e.id}`) // stop all shakes
         .css(`animationName`,`none`)
@@ -63,19 +63,11 @@ export const graphFit = (levels: levelsI[]) => {
 }
 
 interface colorFixedI {
-  animRunning: boolean,
-  index: number,
   graphDontFit: boolean,
   color: string,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const colorFixed = ({ animRunning, index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, color }: colorFixedI ) => {
+export const colorFixed = ({ graphDontFit, color }: colorFixedI ) => {
   return {
     display: 'flex',
     position: graphDontFit ? 'fixed' : 'absolute',
@@ -94,8 +86,7 @@ interface titlesNextI {
 
 export const titlesNext = ({ currentWidth, graphDontFit }: titlesNextI) => {
   return {
-    display: 'flex',
-    position: 'absolute',
+    ...flex, ...absolute,
     right: graphDontFit ? '10px' : '0px',
     background: 'rgba(128, 128, 128, 0.400)',
     width: graphDontFit ? `${94-(850-currentWidth)}px` : '98px',
@@ -104,18 +95,10 @@ export const titlesNext = ({ currentWidth, graphDontFit }: titlesNextI) => {
 }
 
 interface entireBarContainerI {
-  index: number,
   graphDontFit: boolean,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean,
-  bgColor: string
 }
 
-export const entireBarContainer = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: entireBarContainerI) => {
+export const entireBarContainer = ({ graphDontFit }: entireBarContainerI) => {
   return {
     ...flex, ...relative, ...row, ...jcsb,
     width: '200px',
@@ -128,18 +111,11 @@ export const entireBarContainer = ({ index, graphDontFit, minPort, minLand, medP
 }
 
 interface entireBarI {
-  index: number,
   graphDontFit: boolean,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean,
   bgColor: string
 }
 
-export const entireBar = ({ index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand, bgColor }: entireBarI) => {
+export const entireBar = ({ graphDontFit, bgColor }: entireBarI) => {
   return {
     ...flex, ...row, ...jcsb, ...relative,
     width: '200px',
@@ -182,13 +158,9 @@ export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, l
 interface middleI {
   minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const middle = ({ minPort, minLand, medPort, medLand, larPort, larLand }: middleI) => {
+export const middle = ({ minPort, minLand }: middleI) => {
   return {
     ...relative, ...jcsb, ...aic,
     //background: 'orange',
@@ -201,15 +173,11 @@ export const middle = ({ minPort, minLand, medPort, medLand, larPort, larLand }:
 
 interface leftRightHelperI {
   graphDontFit: boolean,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
   larPort: boolean,
   larLand: boolean
 }
 
-export const leftRightHelper = ({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
+export const leftRightHelper = ({ graphDontFit, larPort, larLand }: leftRightHelperI) => {
   return {
     display: graphDontFit ? 'none' : 'flex',
     //background: 'blue',
@@ -232,15 +200,10 @@ export const mainContainer = ({ length, minLand }:mainContainerI) => {
 }
 
 interface skillsI {
-  minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const skills = ({ minPort, minLand, medPort, medLand, larPort, larLand }: skillsI) => {
+export const skills = ({ minLand }: skillsI) => {
   return {
     ...noSelect,
     display: minLand ? 'none' : 'flex',
@@ -259,19 +222,13 @@ interface chartContainerI {
   graphDontFit: boolean,
   length: number,
   currentWidth: number,
-  minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const chartContainer = ({ graphDontFit, currentWidth, length, minPort, minLand, medPort, medLand, larPort, larLand }:chartContainerI) => {
+export const chartContainer = ({ graphDontFit, currentWidth, length, minLand }:chartContainerI) => {
   return {
     ...flex, ...relative, ...column, ...jcfs,
     //background: 'red',
-    //alignItems: larPort || larLand ? 'flex-start' : graphDontFit ? 'flex-start' : 'center',
     alignItems: 'flex-start',
     width: graphDontFit ? `${currentWidth}px` : `${(length*92)+200}px`,
     height: minLand ? '261px' : '361px', // 50 + 1 + 210 + 100 = 361
@@ -307,11 +264,7 @@ export const scroll = ({ graphDontFit, minLand }: scrollI) => {
   }
 }
 
-interface upperChartContainerI {
-  length: number
-}
-
-export const upperChartContainer = ({ length }: upperChartContainerI) => {
+export const upperChartContainer = () => {
   return {
     ...flex, ...relative, ...row,
     //background: 'darkgreen',
@@ -321,17 +274,9 @@ export const upperChartContainer = ({ length }: upperChartContainerI) => {
 
 interface upperChartContainerRightI {
   graphDontFit: boolean,
-  currentWidth: number,
-  length: number,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const upperChartContainerRight = ({ graphDontFit, currentWidth, length, minPort, minLand, medPort, medLand, larPort, larLand }: upperChartContainerRightI) => {
+export const upperChartContainerRight = ({ graphDontFit }: upperChartContainerRightI) => {
   return {
     ...flex, ...column,
     position: graphDontFit ? 'fixed' : 'relative',
@@ -366,7 +311,7 @@ const growAnim = (percentage: number) => { return keyframes({ from: { height: `0
 const growAnimDuration: number = 1.2
 //const growAnimDuration: number = 10
 
-export const columnBar = ({ id, percentage, darkMode }: columnBarI) => {
+export const columnBar = ({ percentage }: columnBarI) => {
   return {
     ...flex, ...relative, ...row, ...jcc,
     width: '90px',
@@ -398,9 +343,9 @@ export const leftSide = ({ darkMode, percentage }: columnBarI) => {
   }
 }
 
-export const centerSide = ({ id, darkMode, percentage }: columnBarI) => {
+export const centerSide = ({ darkMode, percentage }: columnBarI) => {
   return {
-    ...flex, ...relative,
+    ...flex, ...relative, ...aic, ...jcfs,
     width: '30px',
     height: `${(percentage  + 5)* 2}px`,
     animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
@@ -410,8 +355,6 @@ export const centerSide = ({ id, darkMode, percentage }: columnBarI) => {
       'linear-gradient(to bottom, gray 10px, darkgrey 10px)',
     //background: 'blue',
     textWrap: 'nowrap',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
   }
 }
 
@@ -422,9 +365,8 @@ interface fixedToppingI {
 
 export const fixedToppingMinLand = ({ darkMode, minLand }: fixedToppingI) => {
   return {
+    ...row, ...absolute,
     display:  minLand ? 'flex' : 'none',
-    position: 'absolute',
-    flexDirection: 'row',
     //background: `linear-gradient(180deg, darkblue 10px, darkred 0)`,
     background:  darkMode ?
       `linear-gradient(180deg, gray 10px, #595959 0)` :
@@ -443,26 +385,22 @@ interface onlyMinLandI {
 
 export const onlyMinLand = ({ minLand, percentage }: onlyMinLandI) => {
   return {
+    ...absolute, ...aic, ...jcfe, ...column,
     display: minLand ? 'flex' : 'none',
-    position: 'absolute',
-        width: '37px',
-    height: `${((percentage + 5)* 2)}px`, 
+    width: '37px',
+    height: `${((percentage + 5)* 2)}px`,
     animation: `${growAnim(percentage)} ${growAnimDuration}s linear`,
-    flexDirection: 'column',
     //background: 'blue',
     textWrap: 'nowrap',
-    alignItems: 'center',
     bottom: '0px',
     marginLeft: '33px',
     overflow: 'hidden',
-    justifyContent: 'flex-end',
   }
 }
 
 export  const titlesOnlyMinLand = () => {
   return {
-    display: 'flex',
-    position: 'relative',
+    ...flex, ...relative,
     transform: 'rotate(270deg)',
     //background: 'darkred',
     width: '180px',
@@ -519,15 +457,9 @@ export const titles = () => {
 
 interface innerLevelI {
   graphDontFit: boolean,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean,
 }
 
-export const innerLevel = ({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand }: innerLevelI) => {
+export const innerLevel = ({ graphDontFit }: innerLevelI) => {
   return {
     ...flex, ...column, ...noSelect,
     paddingLeft: graphDontFit ? '10px' : '0px',
@@ -536,28 +468,17 @@ export const innerLevel = ({ graphDontFit, minPort, minLand, medPort, medLand, l
 
 export const levelTitle = () => {
   return {
-    ...row, ...relative,
+    ...row, ...relative, ...jcfe,
     display: 'inline',
     width: '135px',
     height: '20px',
-    justifyContent: 'flex-end',
     //background: 'darkorange',
     fontSize: '14px',
     color: 'white',
   }
 }
 
-interface imageSVGI {
-  graphDontFit: boolean,
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean,
-}
-
-export const boxSVG = ({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand }: imageSVGI) => {
+export const boxSVG = () => {
   return {
     ...flex, ...relative, ...jcc, ...aic,
     //background: 'gray',
@@ -566,7 +487,11 @@ export const boxSVG = ({ graphDontFit, minPort, minLand, medPort, medLand, larPo
   }
 }
 
-export const imageSVG = ({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand }: imageSVGI ) => {
+interface imageSVGI {
+  graphDontFit: boolean,
+}
+
+export const imageSVG = ({ graphDontFit }: imageSVGI ) => {
   return {
     width: '45px',
     height: '45px',

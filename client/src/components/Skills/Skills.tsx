@@ -57,7 +57,7 @@ function Skills() {
     { id: 5, title: english ? 'BBQ' : 'Asado', percentage: 100 },
     { id: 6, title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }
   ]
-  
+
   const [ graphDontFit, setGraphDontFit ] = useState<any>(currentWidth < ((array.length * 92) + 206) ? true : false)
   const [ animRunning, setAnimRunning ] = useState<boolean>(false)
 
@@ -142,13 +142,13 @@ function Skills() {
   return (
     <Box sx={s.background}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-      <Box sx={s.middle({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-        <Box sx={s.leftRightHelper({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+      <Box sx={s.middle({ minPort, minLand })}>
+        <Box sx={s.leftRightHelper({ graphDontFit, larPort, larLand })}></Box>
         <Box sx={s.mainContainer({ length:array.length, minLand })}>
-          <Typography sx={s.skills({ minPort, minLand, medPort, medLand, larPort, larLand })}>{english ? `My skills` : `Mis habilidades`}</Typography>
+          <Typography sx={s.skills({ minLand })}>{english ? `My skills` : `Mis habilidades`}</Typography>
           <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll({ graphDontFit, minLand })} >
-          <Box sx={s.chartContainer({ graphDontFit, currentWidth, length:array.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
-              <Box sx={s.upperChartContainer({ length:array.length })}>
+          <Box sx={s.chartContainer({ graphDontFit, currentWidth, length:array.length, minLand })}>
+              <Box sx={s.upperChartContainer}>
                 <Box sx={s.chartRow({ length:array.length })}>
                   {array.map((e, index) => {
                     return (
@@ -173,26 +173,26 @@ function Skills() {
                     )
                   })}
                 </Box>
-                <Box sx={s.upperChartContainerRight({ graphDontFit, currentWidth, length:array.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
+                <Box sx={s.upperChartContainerRight({ graphDontFit })}>
                   {levels.map((e, index) => {
                     return (
                       <Box
                         key={levels.indexOf(e)}
-                        sx={s.entireBarContainer({ index, graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
+                        sx={s.entireBarContainer({ graphDontFit })}
                       >
                         <Box
-                          sx={s.entireBar({ index, graphDontFit, bgColor:e.color, minPort, minLand, medPort, medLand, larPort, larLand })}
+                          sx={s.entireBar({ graphDontFit, bgColor:e.color })}
                           className={`entireBarMoveCl${index}`}
                         >
                           <Box
-                            sx={s.innerLevel({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}>
+                            sx={s.innerLevel({ graphDontFit })}>
                             <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
                             <Typography sx={s.levelTitle}>{e.second}</Typography>
                           </Box>
-                          <Box sx={s.boxSVG({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}>
+                          <Box sx={s.boxSVG}>
                             <SvgIcon
                               viewBox='0 0 36 30'
-                              sx={s.imageSVG({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}
+                              sx={s.imageSVG({ graphDontFit })}
                             >
                               {e.svg}
                             </SvgIcon>
@@ -200,7 +200,7 @@ function Skills() {
                         </Box>
                         <Box
                           className={`colorFixedCl${index}`}
-                          sx={s.colorFixed({ animRunning, index:index, graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand,color:e.color })}
+                          sx={s.colorFixed({ graphDontFit, color:e.color })}
                           onClick={() => HandleColorClick(index)}
                         />
                       </Box>
@@ -221,7 +221,7 @@ function Skills() {
           </Box>
           </ScrollContainer>
         </Box>
-        <Box sx={s.leftRightHelper({ graphDontFit, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box sx={s.leftRightHelper({ graphDontFit, larPort, larLand })}></Box>
       </Box>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
     </Box>

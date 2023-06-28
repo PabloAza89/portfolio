@@ -62,7 +62,7 @@ interface leftRightHelperI {
   larLand: boolean
 }
 
-export const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
+export const leftRightHelper = ({ larPort, larLand }: leftRightHelperI) => {
   return {
     display: larPort || larLand ? 'flex' : 'none',
     //background: 'red',
@@ -90,15 +90,11 @@ export const blueBoxHelper = ({ minPort, minLand, medPort, medLand, larPort, lar
 }
 
 interface mainContainerI {
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
   larPort: boolean,
   larLand: boolean,
 }
 
-export const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainContainerI) => {
+export const mainContainer = ({ larPort, larLand }: mainContainerI) => {
   return {
     ...flex,
     height: '100%',
@@ -107,8 +103,6 @@ export const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, lar
 }
 
 interface blueBoxI {
-  height: number,
-  staticRefWidth: number,
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
@@ -117,11 +111,11 @@ interface blueBoxI {
   larPort: boolean
 }
 
-export const blueBox = ({ height, darkMode, minPort, minLand, medPort, medLand, larPort, staticRefWidth }: blueBoxI) => { // blueBox
+export const blueBox = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: blueBoxI) => { // blueBox
   return {
     ...flex, ...column, ...relative, ...asc,
     background: darkMode ? '#253740' : '#3C6478',
-    'borderRadius': `${staticRefWidth * 1}px`,
+    borderRadius: minPort || minLand ? `10px` : medPort || medLand ? `15px` : `20px`,
     justifyContent: minLand ? 'space-between' : 'space-evenly',
     minWidth: minPort ? '85vw' : minLand ? '70vw' : medPort ? '80vw' : medLand ? '70vw' : larPort ? '710px' : '710px', // minWidth
     width: minPort ? '85vw' : minLand ? '70vw' : medPort ? '80vw' : medLand ? '70vw' : larPort ? '70vw' : '70vw', // width
@@ -131,17 +125,14 @@ export const blueBox = ({ height, darkMode, minPort, minLand, medPort, medLand, 
  }
 
 interface avatarI {
-  height: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
   larPort: boolean,
-  larLand: boolean,
-  staticRefHeight: number
 }
 
-export const avatar = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, staticRefHeight }: avatarI) => { // avatar
+export const avatar = ({ minPort, minLand, medPort, medLand, larPort }: avatarI) => { // avatar
   return {
     ...flex, ...row, ...relative,
     width: minPort  ? '14vh' : minLand ? '20vh' : medPort ? '14vh' : medLand ? '20vh' : larPort ? '150px' : '150px', // width

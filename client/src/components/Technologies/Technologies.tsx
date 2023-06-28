@@ -12,7 +12,6 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import * as s from '../../styles/TechnologiesSX';
 import $ from 'jquery';
 
-
 function Technologies() {
 
   const darkMode = useSelector((state: { darkMode:boolean }) => state.darkMode)

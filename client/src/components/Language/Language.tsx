@@ -9,6 +9,7 @@ import lanEs from '../../images/lanEs.png';
 function Language() {
 
   const dispatch = useDispatch()
+  const location = useLocation()
 
   const english = useSelector((state: {english:boolean}) => state.english)
   const height = useSelector((state: {height:number}) => state.height)
@@ -19,23 +20,20 @@ function Language() {
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
   const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
-  const maxStaticReference = useSelector((state: {maxStaticReference: number}) => state.maxStaticReference)
-
-  const location = useLocation()
 
   return (
-    <Box sx={s.background({ height, minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname, percentageResizedHeight })}>
-      <Box 
+    <Box sx={s.background({ height, minLand, larPort, larLand, location:location.pathname, percentageResizedHeight })}>
+      <Box
         component="img"
         src={lanEn}
         onClick={() => dispatch(languageChanger(true))}
-        sx={s.lanEnFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}
+        sx={s.lanEnFlag({ english, minPort, minLand, medPort, medLand, larPort })}
       />
-      <Box 
+      <Box
         component="img"
         src={lanEs}
         onClick={() => dispatch(languageChanger(false))}
-        sx={s.lanEsFlag({ english, minPort, minLand, medPort, medLand, larPort, maxStaticReference })}
+        sx={s.lanEsFlag({ english, minPort, minLand, medPort, medLand, larPort })}
       />
     </Box>
   )

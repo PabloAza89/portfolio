@@ -64,7 +64,7 @@ function Certifications() {
     <Box sx={s.background}>
       <Box sx={s.greyTop({ darkMode })} />
       <Box sx={s.greyLeft({ darkMode })} />
-      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })}></Box>
       <Bubbles />
       <Box sx={s.mainBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
@@ -108,7 +108,6 @@ function Certifications() {
         onClick={() => {setShow(false)}}
         style={s.dialogStyle()}
         PaperProps={{sx: s.dialogPaper({ minPort, minLand, medPort, medLand, larPort })}}
-        
       >
         <Box
           component="img"
@@ -117,7 +116,7 @@ function Certifications() {
           alt="image"
         />
       </Dialog>
-      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })}></Box>
 
     </Box>
   )

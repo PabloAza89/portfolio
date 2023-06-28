@@ -7,8 +7,6 @@ interface backgroundI {
   darkMode: boolean,
   width: number,
   height: number,
-  currentWidth: number,
-  currentHeight: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -17,7 +15,7 @@ interface backgroundI {
   larLand: boolean
 }
 
-export const background = ({ fullScreen, darkMode, width, height, currentWidth, currentHeight, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => {
+export const background = ({ fullScreen, darkMode, width, height, minPort, minLand, medPort, medLand }: backgroundI) => {
   return {
     ...flex, ...fixed, ...jcse,
     '--vpHeight': fullScreen ? `${height}px` : `calc(${height}px - 150px)`, // from bottom, where animation start from

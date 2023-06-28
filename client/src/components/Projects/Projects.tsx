@@ -17,8 +17,6 @@ function Projects() {
 
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const height = useSelector((state: {height:number}) => state.height)
-  const staticRefWidth = useSelector((state: {staticRefWidth:number}) => state.staticRefWidth)
-  const staticRefHeight = useSelector((state: {staticRefHeight:number}) => state.staticRefHeight)
   const english = useSelector((state: {english:boolean}) => state.english)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
@@ -26,7 +24,6 @@ function Projects() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
 
   const [show, setShow] = useState<boolean>(false)
   const [name, setName] = useState<string>("")
@@ -128,26 +125,26 @@ function Projects() {
 
   return (
   <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
-    <Box sx={s.topBottomHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-    <Box sx={s.background({ minPort, minLand, larPort, staticRefWidth, staticRefHeight, percentageResizedHeight, height })}>
+    <Box sx={s.topBottomHelper({ larPort, larLand })}></Box>
+    <Box sx={s.background}>
 
       <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll()}>
 
-        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
+        <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
+        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
 
-        <Box className={`extraPXCenterStripe`} sx={s.centerStripe({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })} >
+        <Box className={`extraPXCenterStripe`} sx={s.centerStripe({ length:array.map(e => e.media).flat().length, minPort, minLand })} >
           {array.map((e) => {
             return (
-              <Box key={e.title} sx={s.card({ darkMode, minPort, minLand, larPort })}>
+              <Box key={e.title} sx={s.card({ minPort, minLand, larPort })}>
                 <Box sx={s.cardLeft}></Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', }}>
-                  <Box sx={s.boxTitle({ length:e.media.length, minPort, minLand, larPort, darkMode })}>
+                  <Box sx={s.boxTitle({ minPort, minLand, larPort, darkMode })}>
                     <Typography sx={s.title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
                     <GoToLinkButton link={e.href} />
                   </Box>
-                  <Box sx={s.boxMedia({ length:e.media.length, darkMode, minPort, minLand, larPort })}>
+                  <Box sx={s.boxMedia}>
 
                     {e.media.map((m) =>{
                       return (
@@ -156,7 +153,7 @@ function Projects() {
                             className={`extraPXImage`}
                             src={m} component="img"
                             onClick={() => {setName(m); setShow(!show)}}
-                            sx={s.cardMedia({ url:m, darkMode, minPort, minLand, larPort })}
+                            sx={s.cardMedia({ darkMode, minPort, minLand })}
                           />
                           <Box
                             sx={s.betweenMedia({ darkMode, indexOf:e.media.indexOf(m), length:e.media.length-1 })}
@@ -171,9 +168,9 @@ function Projects() {
           )})}
         </Box>
 
-        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
+        <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
+        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
 
       </ScrollContainer>
 
@@ -191,7 +188,7 @@ function Projects() {
         />
       </Dialog>
 
-      <Box sx={s.boxLower({ height, minPort, minLand, medLand, larPort, larLand })}>
+      <Box sx={s.boxLower({ height, minPort, minLand, medLand })}>
         <Typography sx={s.textLower( larPort )}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
         <FormControl>
           <InputLabel id="demo-simple-select-label"></InputLabel>
@@ -211,7 +208,7 @@ function Projects() {
       </Box>
 
     </Box>
-    <Box sx={s.topBottomHelper({ height, minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+    <Box sx={s.topBottomHelper({ larPort, larLand })}></Box>
   </Box>
   )
 }

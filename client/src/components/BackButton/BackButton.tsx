@@ -14,13 +14,11 @@ function BackButton() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const maxStaticReference = useSelector((state: {maxStaticReference:number}) => state.maxStaticReference)
-  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
 
   return (
     <Link style={{ textDecoration: 'none' }} to="/portfolio">
-      <Button variant="contained"  sx={s.background({ minPort, minLand, medPort, medLand, larPort, larLand, maxStaticReference, location:location.pathname, percentageResizedHeight })}>
-        <ForwardIcon sx={s.icon({ minPort, minLand, medPort, medLand, larPort, maxStaticReference })}/>
+      <Button variant="contained"  sx={s.background({ minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname })}>
+        <ForwardIcon sx={s.icon({ minPort, minLand, medPort, medLand, larPort })}/>
       </Button>
     </Link>
   )

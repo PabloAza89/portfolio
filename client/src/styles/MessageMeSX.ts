@@ -1,5 +1,5 @@
 import {
-  flex, relative, absolute, column, 
+  flex, relative, absolute, column,
   aic, asc, jcc, noSelect,
   jcse, mix} from './CommonsSX';
 
@@ -23,15 +23,11 @@ export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort, l
 }
 
 interface mainContainerI {
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
   larPort: boolean,
   larLand: boolean,
 }
 
-export const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainContainerI) => {
+export const mainContainer = ({ larPort, larLand }: mainContainerI) => {
   return {
     ...aic,
     //background: 'darkred',
@@ -44,15 +40,11 @@ export const mainContainer = ({ minPort, minLand, medPort, medLand, larPort, lar
 }
 
 interface leftRightHelperI {
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
   larPort: boolean,
   larLand: boolean
 }
 
-export const leftRightHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: leftRightHelperI) => {
+export const leftRightHelper = ({ larPort, larLand }: leftRightHelperI) => {
   return {
     display: larPort || larLand ? 'flex' : 'none',
     //background: 'darkblue',
@@ -83,11 +75,9 @@ interface formContainerI {
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const formContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode }: formContainerI) => { // formContainer
+export const formContainer = ({ minPort, minLand, medPort, medLand, darkMode }: formContainerI) => { // formContainer
   return {
     ...flex, ...column, ...jcse, ...relative,
     alignContent: 'space-evenly',
@@ -135,11 +125,9 @@ interface nameBoxI {
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const nameBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode }: nameBoxI) => {
+export const nameBox = ({ minPort, minLand, medPort, medLand, darkMode }: nameBoxI) => {
   return {
     ...asc, ...flex, ...relative,
     //background: 'yellow',
@@ -159,12 +147,10 @@ interface messageBoxI {
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
   darkMode: boolean,
 }
 
-export const messageBox = ({ minPort, minLand, medPort, medLand, larPort, larLand, darkMode }: messageBoxI) => {
+export const messageBox = ({ minPort, minLand, medPort, medLand, darkMode }: messageBoxI) => {
   return {
     ...asc, ...flex, ...relative,
     //background: 'yellow',
@@ -186,10 +172,9 @@ interface clearButtonI {
   medLand: boolean,
   larPort: boolean,
   larLand: boolean
-  location: string
 }
 
-export const clearButton = ({ minPort, minLand, medPort, medLand, larPort, larLand, location }: clearButtonI) => { // clearButton
+export const clearButton = ({ minPort, minLand, medPort, medLand, larPort, larLand }: clearButtonI) => { // clearButton
   return {
     ...flex, ...relative,
     color: 'white',
@@ -211,11 +196,9 @@ interface sendMessageButtonI {
   minLand: boolean,
   medPort: boolean,
   medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
 }
 
-export const sendMessageButton = ({ minPort, minLand, medPort, medLand, larPort, larLand,  }: sendMessageButtonI) => { // sendMessageButton
+export const sendMessageButton = ({ minPort, minLand, medPort, medLand }: sendMessageButtonI) => { // sendMessageButton
   return {
     ...flex, ...relative, ...asc,
     padding: '0px !important',
