@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { Dialog, FormControl, InputLabel, MenuItem, Select } from '@mui/material/';
+import { Dialog, FormControl, InputLabel, MenuItem, Select, CardMedia } from '@mui/material/';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
@@ -102,34 +102,41 @@ function Projects() {
       }, 100);
   },[])
 
+
+
   $(`.linkButton`) // make link button shake
     .css(`animationName`,`shakeKF`)
     .css(`animationDuration`,`4s`) // button shake duration
     .css(`animationDelay`,`1.5s`)
     .css(`animationIterationCount`,`infinite`)
 
-    $(`.extraPXImage`) // when hover image, extra pixels helper on right
-    .on( "mouseenter", function(){
-      $(`.extraPXSolid`)
-        .css("transition", "all .2s ease-in-out")
-        .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
-      $(`.extraPXCenterStripe`)
-        .css("transition", "all .2s ease-in-out")
-        .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
+    array.map(e => e.media).flat().forEach(r => {
+      $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`) // when hover image, extra pixels helper on right
+      .on( "mouseenter", function(){
+        $(`.extraPXSolid`)
+          .css("transition", "all .2s ease-in-out")
+          .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
+        $(`.extraPXCenterStripe`)
+          .css("transition", "all .2s ease-in-out")
+          .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
+      })
+      .on( "mouseleave", function(){
+        $(`.extraPXSolid`)
+          .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+        $(`.extraPXCenterStripe`)
+          .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+      })
+
     })
-    .on( "mouseleave", function(){
-      $(`.extraPXSolid`)
-        .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
-      $(`.extraPXCenterStripe`)
-        .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
-    })
+
+  
 
     // $("img").one("load", function() {
     //   // do stuff
     // }).each(function() {
     //   if(this.complete) {
-    //       $(this).load(); // For jQuery < 3.0 
-    //       // $(this).trigger('load'); // For jQuery >= 3.0 
+    //       $(this).load(); // For jQuery < 3.0
+    //       // $(this).trigger('load'); // For jQuery >= 3.0
     //   }
     // });
 
@@ -149,13 +156,111 @@ function Projects() {
     // })
 
 
-    //$(`.extraPXImage`).attr('src', `https://apod.nasa.gov/apod/image/0710/iapetus2_cassini_big.jpg`)
-    
+    // $(`.extraPXImage`)
+    //   //.attr('src', `https://apod.nasa.gov/apod/image/0710/iapetus2_cassini_big.jpg`)
+    //   .attr('src', `${food1}`)
 
-    
+    //$(`.extraPXImage`)
+      //$(`.extraPXImage`).attr('src', `${food1}`)
+
+      //$(`.extraPXImage`)
+      // $(`.extraPXImage`)
+      //   .attr('src', `${food1}`).load(function() {
+      //     console.log("Image loaded !")
+      //   })
+
+      // var image = new Image();
       
+      // image.onload = function () {
+      //   console.log("Image loaded !");
+      //   $(`.extraPXImage`).attr('src', `${food1}`)
+      // }
+      // image.src = `${food1}`
+
+      // $(`.extraPXImage`).on('load',function(){
+      //   //$(`.extraPXImage`).attr('src', `${food1}`)
+      //   console.log("Image loaded !");
+      // });
+
       
-    
+
+      // $(`.extraPXImage`).attr('src', `${food1}`)
+      //   .css("padding", "0px")
+      //   .css("width", "550px")
+      //   .css("height", "280px")
+      //   .css("animation", "none").one("load", function(){
+      //     console.log("READT")
+      //   })
+
+        // $(`.extraPXImage`)
+        //   .attr('src', `${food1}`)
+        // .one("load", function(){
+        //   setLoaded(true);
+        // })
+
+      //   $(`.extraPXImage`)
+      //   .attr('src', `${food1}`)
+      // .one("load", function(){
+      //   setLoaded(true);
+      // })
+
+      //  array.map(e => e.media).flat().forEach(r => {
+      //   $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`)
+      //   .css("animation", "none") // removes remain animation
+      //   .attr('src', `${r}`)
+      //   .one("load", function(){
+      //     setLoaded(true);
+      //   })
+      // })
+
+      // Promise.all([array.map(e => e.media).flat().forEach(r => {
+      //   $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`)
+      //   .attr('src', `${r}`)        
+      // })])
+
+      
+
+      //console.log(array.map(e => e.media).flat())
+
+  //const [loaded, setLoaded] = useState<boolean>(false)
+
+  interface setLoadedI {
+    id: number,
+    loaded: boolean
+  }
+
+  const [loaded, setLoaded] = useState<any>(() => {
+    let total: setLoadedI[] = []
+    array.map(e => e.media.forEach(x => total.push({id: array.map(e => e.media).flat().indexOf(x), loaded: false})))
+    return total
+  })
+
+  //let lengthObject: number = 0
+
+
+  //  useEffect(() => {
+  //   setLoaded(array.reduce((sum, a) => sum + a.media.length, 0))
+  //   console.log("DONE")
+  //   //console.log("a ver", "asd")
+  //  },[])
+
+  //  useEffect(() => {
+  //   //setLoaded([/* ...loaded,  */loaded[2] = {id: 2, loaded: true}])
+  //   let cloned = [...loaded]
+  //   cloned[2] = {id: 2, loaded: true}
+  //   setLoaded(cloned)
+  //  },[])
+
+  const loadedUpdater = (index: number) => {
+    let cloned = [...loaded]
+    cloned[index] = {id: index, loaded: true}
+    setLoaded(cloned)
+  }
+
+
+  console.log("a ver", loaded)
+  //console.log("a ver", array.reduce((sum, a) => sum + a.media.length, 0))
+  //console.log("a ver", "asd")
 
   return (
   <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
@@ -163,8 +268,11 @@ function Projects() {
     <Box sx={s.topBottomHelper({ larPort, larLand })}></Box>
     <Box sx={s.background}>
 
-      <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll()}>
-
+      <ScrollContainer
+        innerRef={useHorizontalScroll()}
+        style={s.scroll()}
+        vertical={false}
+      >
         <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
         <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
         <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
@@ -180,18 +288,26 @@ function Projects() {
                     <GoToLinkButton link={e.href} />
                   </Box>
                   <Box sx={s.boxMedia}>
-
                     {e.media.map((m) =>{
                       return (
-                        <Box key={m} sx={{ display: 'flex', flexDirection: 'row' }}>
+                        <Box key={m} sx={{ display:'flex', flexDirection: 'row', border: '0px solid blue', }}>
                           <Box
-                            className={`extraPXImage`}
-                            id={`extraPXImage`}
+                            className={`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`}
+                            component="img"
+                            onLoad={() => {loadedUpdater(array.map(e => e.media).flat().indexOf(m)); console.log("DONE"); ; console.log(array.map(e => e.media).flat().indexOf(m))}} // en uso
+                            src={m}
+                            onClick={() => {setName(m); setShow(!show)}}
+                            sx={ s.imageMedia({ m, loaded, darkMode, minPort, minLand }) }
+                          />
+                          <Box
+                            component="img"
+                            //src={loadingImage}
+                            sx={s.placeholderBackground({ loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded })}
+                          />
+                          <Box
                             component="img"
                             src={loadingImage}
-                            onClick={() => {setName(m); setShow(!show)}}
-                            //sx={s.cardMedia({ darkMode, minPort, minLand })}
-                            sx={s.cardMediaTest}
+                            sx={s.placeholderAnimation({ loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded })}
                           />
                           <Box
                             sx={s.betweenMedia({ darkMode, indexOf:e.media.indexOf(m), length:e.media.length-1 })}
