@@ -33,11 +33,11 @@ function Home() {
         </Box>
         <Technologies />
         <Box sx={boxButton({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-          <Link style={{ textDecoration: 'none' }} to="/portfolio/MessageMe">
+          <Link style={{ textDecoration: 'none' }} to="/MessageMe">
             <Button
               sx={buttonMessage({ minPort, minLand, medPort, medLand, larPort })}
               variant='outlined'
-            >{ english ? `Message Me` : `Envíame un mensaje` }</Button>
+            >{ english ? `Message Me7` : `Envíame un mensaje` }</Button>
           </Link>
         </Box>
       </Box>

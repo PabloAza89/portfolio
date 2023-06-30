@@ -169,7 +169,7 @@ function Projects() {
                           />
                           <Box
                             component="img"
-                            sx={s.placeholderBackground({ loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded, minPort, minLand })}
+                            sx={s.placeholderBackground({ darkMode, loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded, minPort, minLand })}
                           />
                           <Box
                             component="img"

@@ -6,30 +6,22 @@ import {
 } from './CommonsSX';
 import $ from 'jquery';
 
-interface hoverI {
-  array: any[];
-  loaded: any[];
+interface arrayI {
+  id: number
 }
 
-// export const hover = (array: arrayI[]) => {
-//   array.forEach(e => {
-//     $(`.cardClass${e.id}`).on("mouseenter", function () {
-//       $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
-//       $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
-//       $(`.urlClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)').css('mix-blend-mode', 'difference')
-//     }).on("mouseleave", function () {
-//       $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
-//       $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
-//       $(`.urlClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
-//     })
-//   })
-// }
+interface loadedI {
+  loaded: boolean
+}
+
+interface hoverI {
+  array: arrayI[];
+  loaded: loadedI[];
+}
 
 export const hover = ({ array, loaded }: hoverI) => {
-
-    array.forEach(e => {
-      if (loaded[array.indexOf(e)].loaded) {
-
+  array.forEach(e => {
+    if (loaded[array.indexOf(e)].loaded) {
       $(`.cardClass${e.id}`).on("mouseenter", function () {
         $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
         $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
@@ -39,10 +31,8 @@ export const hover = ({ array, loaded }: hoverI) => {
         $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
         $(`.urlClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
       })
-    }  
-      
-    })
-
+    }
+  })
 }
 
 interface greyTopI {
@@ -222,22 +212,14 @@ export const boxMedia = ({ darkMode, minPort, minLand, medPort, medLand, larPort
 
 export const boxMediaWrapper = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: boxMediaI) => { // boxMedia
   return {
-    display: 'flex',
-   /*  ...pointer, ...noSelect,
-    //background: 'red', */
+    display: 'flex', ...noSelect,
     width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : '220px', // width
     height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : '120px', // height
-  /*   'filter': darkMode ?
-      'brightness(.6)' :
-      'none',
-    ':hover': darkMode ?
-      { filter: 'brightness(.65)' } :
-      { filter: 'brightness(.9)' },
-    zIndex: 1000, */
   }
 }
 
 interface placeholderI {
+  darkMode?: boolean,
   loaded: boolean
   minPort: boolean,
   minLand: boolean,
@@ -245,16 +227,13 @@ interface placeholderI {
   medLand: boolean,
 }
 
-export const placeholderBackground = ({ loaded, minPort, minLand, medPort, medLand }: placeholderI) => {
+export const placeholderBackground = ({ darkMode, loaded, minPort, minLand, medPort, medLand }: placeholderI) => {
   return {
-    display: 'flex',
-    ...noSelect, //...relative,
-    //position: 'absolute',
-    position: 'relative',
-    //display: loaded ? 'none' : 'flex',
-    marginLeft: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '-20vw' : '-220px',
-    background: 'darkorange',
-    //background: '#5d4037',
+    ...relative, ...noSelect,
+    //display: 'flex',
+    display: loaded ? 'none' : 'flex',
+    background: darkMode ? '#a66d28' : 'darkorange',
+    marginLeft: minPort ? '-45vw' : medPort ? '-25vw' : minLand || medLand ? '-20vw' : '-220px',
     width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : '220px', // width
     height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : '120px', // height
     zIndex: 1000,
@@ -263,23 +242,18 @@ export const placeholderBackground = ({ loaded, minPort, minLand, medPort, medLa
 
 export const placeholderAnimation = ({ loaded, minPort, minLand, medPort, medLand }: placeholderI) => {
   return {
-    ...noSelect, //...relative,
-    //display: loaded ? 'none' : 'flex',
+    ...noSelect, ...relative,
     //display: 'flex',
-    display: 'none',
-    //width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : larPort ? '220px' : '220px', // width
-    //height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : larPort ? '120px' : '120px', // height
-    //marginLeft: minPort ? '-310px' : minLand ? '-280px' : '-415px', // 90 + 220 = 310                       120 + 160 = 280                        135 + 280 = 415
-    //marginRight: minPort ? '90px' : minLand ? '120px' : '135px',    // 90 + 220 + 90 = 400 (minPort 220) // 120 + 160 + 120 = 400 (minLand 160) // 135 + 280 + 135 = 550 (med & lar)
-    marginTop: minPort || minLand ? '-400px' : '-140px',
-    width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '10vw' : '120px', // width
+    display: loaded ? 'none' : 'flex',
+    marginLeft: minPort ? '-35vw' : medPort ? '-19vw' : minLand || medLand ? '-15vw' : '-170px', // minPort (45+25/2) | medPort (25+13/2) | minLand || medLand (20+10/2) | lar (120+220/2)
+    width: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : '120px', // width
     height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : '120px', // height
     zIndex: 1001,
     animation: `abc .8s linear infinite`,
     animationTimingFunction: 'steps(12, end)',
     '@keyframes abc': {
       '0%': { transform: 'rotate(0deg)' },
-      '100%': { transform: 'rotate(360deg)' }, // 99.96
+      '100%': { transform: 'rotate(360deg)' },
     }
   }
 }
@@ -302,10 +276,15 @@ export const url = ({ minPort, minLand, medPort, medLand, larPort }: urlI) => {
   }
 }
 
-export const anchor = () => {
+interface anchorI {
+  loaded: boolean
+}
+
+export const anchor = ({ loaded }: anchorI) => {
   return {
     ...asc, ...noSelect,...noDeco, ...mix,
     color: '#FFFFFF',
+    pointerEvents: loaded ? null : 'none',
   }
 }
 
@@ -334,7 +313,7 @@ export const dialogPaper = ({ minPort, minLand, medPort, medLand, larPort }: dia
     maxHeight: '100vh',
     width: minPort ? '85vw' : minLand ? '85vw' : medPort ? '90vw' : medLand ? '80vw' : larPort ? '85vw' : '70vw',
     height: minPort ? '80vh' : minLand ? '80vh' : medPort ? '35vh' : medLand ? '55vh' : larPort ? '45vh' : '65vh',
-    '&::-webkit-scrollbar': {display: 'none'}
+    '&::-webkit-scrollbar': { display: 'none' }
   }
 }
 

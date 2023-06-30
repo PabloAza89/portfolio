@@ -71,7 +71,7 @@ export const colorFixed = ({ graphDontFit, color }: colorFixedI ) => {
   return {
     display: 'flex',
     position: graphDontFit ? 'fixed' : 'absolute',
-    pointerEvents: graphDontFit ? 'null' : 'none',
+    pointerEvents: graphDontFit ? null : 'none',
     right: '6px',
     background: color,
     width: '6px',

@@ -16,7 +16,7 @@ function BackButton() {
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
   return (
-    <Link style={{ textDecoration: 'none' }} to="/portfolio">
+    <Link style={{ textDecoration: 'none' }} to="/">
       <Button variant="contained"  sx={s.background({ minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname })}>
         <ForwardIcon sx={s.icon({ minPort, minLand, medPort, medLand, larPort })}/>
       </Button>

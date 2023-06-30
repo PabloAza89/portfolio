@@ -96,7 +96,6 @@ function Technologies() {
             </Box>
             <CardMedia
               className={`iconClass${e.id}`}
-              onLoad={() => console.log("ASD")}
               component={Link}
               to={e.url}
               target="_blank"

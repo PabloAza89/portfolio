@@ -54,44 +54,44 @@ function App() {
     <Box sx={s.background({ darkMode })} >
       <Box sx={s.blackWhite({ darkMode, location:location.pathname })} >
         <Routes>
-          <Route path="/portfolio" element={<>
+          <Route path="/" element={<>
             <NavBar />
             <DarkMode />
             <Home />
             <Language />
             <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort })}></Box>
           </>}/>
-          <Route path="/portfolio/AboutMe" element={<>
+          <Route path="/AboutMe" element={<>
             <AboutMe />
             <BackButton />
             <DarkMode />
             <Language />
           </>}/>
-          <Route path="/portfolio/Skills" element={<>
+          <Route path="/Skills" element={<>
             <Skills />
             <BackButton />
             <Language />
             <DarkMode />
           </>}/>
-          <Route path="/portfolio/Projects" element={<>
+          <Route path="/Projects" element={<>
             <Projects />
             <BackButton />
             <DarkMode />
             <Language />
           </>}/>
-          <Route path="/portfolio/Certifications" element={<>
+          <Route path="/Certifications" element={<>
             <Certifications />
             <BackButton />
             <DarkMode />
             <Language />
           </>}/>
-          <Route path="/portfolio/Contact" element={<>
+          <Route path="/Contact" element={<>
             <Contact />
             <BackButton />
             <DarkMode />
             <Language />
           </>}/>
-          <Route path="/portfolio/MessageMe" element={<>
+          <Route path="/MessageMe" element={<>
             <MessageMe />
             <BackButton />
             <DarkMode />

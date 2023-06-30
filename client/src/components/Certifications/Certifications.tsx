@@ -78,10 +78,6 @@ function Certifications() {
     s.hover({ array, loaded })
   })
 
-  //loadedUpdater(1)
-
-  console.log(loaded)
-
   return (
     <Box sx={s.background}>
       <Box sx={s.greyTop({ darkMode })} />
@@ -103,11 +99,6 @@ function Certifications() {
                   sx={s.title({ minPort, minLand, medPort, medLand, larPort, larLand })}
                 >{e.title}</Typography>
                 <Box
-                  //className={`imageClass${e.id}`}
-                  //component="img"
-                  //onLoad={() => loadedUpdater(array.map(r => r.media).indexOf(e.media))}
-                  //src={e.media}
-                  //onClick={() => {setName(e.media); setShow(!show)}}
                   sx={s.boxMediaWrapper({ darkMode, minPort, minLand, medPort, medLand, larPort })}
                 >
                   <Box
@@ -120,20 +111,20 @@ function Certifications() {
                   />
                   <Box
                     component="img"
-                    sx={s.placeholderBackground({ loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
+                    sx={s.placeholderBackground({ darkMode, loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
+                  />
+                  <Box
+                    component="img"
+                    src={loadingImage}
+                    sx={s.placeholderAnimation({ loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
                   />
                 </Box>
-                {/* <Box
-                  component="img"
-                  //src={loadingImage}
-                  sx={s.placeholderAnimation({ loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
-                /> */}
                 <Typography
                   className={`urlClass${e.id}`}
                   sx={s.url({ minPort, minLand, medPort, medLand, larPort })}
                 >
                   <Link
-                    style={s.anchor()}
+                    style={s.anchor({ loaded:loaded[array.map(r => r.media).indexOf(e.media)].loaded })}
                     to={e.href}
                     target="_blank"
                   >{e.url}</Link>

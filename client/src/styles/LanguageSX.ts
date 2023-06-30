@@ -18,35 +18,35 @@ export const background = ({ height, minLand, larPort, larLand, location, percen
     ...asc, ...absolute, ...flex, ...row, ...jcc,
     //background: 'red',
     pointerEvents:
-      larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? 'none' :
-      larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? 'none' :
-      (larPort || larLand) && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? 'none' :
-      (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.548 ? 'none' :
-      (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.629 ? 'none' :
-      larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? 'none' :
-      larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? 'none' :
-      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.693 ? 'none' :
-      (larLand || larPort) && location === '/portfolio/Skills' && percentageResizedHeight < 0.536 ? 'none' :
-      'null',
+      larPort && location === '/' && percentageResizedHeight < 0.788 ? 'none' :
+      larLand && location === '/' && percentageResizedHeight < 0.665 ? 'none' :
+      (larPort || larLand) && location === '/Projects' && percentageResizedHeight < 0.640 ? 'none' :
+      (larPort || larLand) && location === '/Contact' && percentageResizedHeight < 0.548 ? 'none' :
+      (larLand || larPort) && location === '/AboutMe' && percentageResizedHeight < 0.629 ? 'none' :
+      larPort && location === '/Certifications' && percentageResizedHeight < 0.829 ? 'none' :
+      larLand && location === '/Certifications' && percentageResizedHeight < 0.4 ? 'none' :
+      (larLand || larPort) && location === '/MessageMe' && percentageResizedHeight < 0.693 ? 'none' :
+      (larLand || larPort) && location === '/Skills' && percentageResizedHeight < 0.536 ? 'none' :
+      null,
     opacity:
-      larPort && location === '/portfolio' && percentageResizedHeight < 0.788 ? '0' :
-      larLand && location === '/portfolio' && percentageResizedHeight < 0.665 ? '0' :
-      (larPort || larLand) && location === '/portfolio/Projects' && percentageResizedHeight < 0.640 ? '0' :
-      (larPort || larLand) && location === '/portfolio/Contact' && percentageResizedHeight < 0.548 ? '0' :
-      (larLand || larPort) && location === '/portfolio/AboutMe' && percentageResizedHeight < 0.629 ? '0' :
-      larPort && location === '/portfolio/Certifications' && percentageResizedHeight < 0.829 ? '0' :
-      larLand && location === '/portfolio/Certifications' && percentageResizedHeight < 0.4 ? '0' :
-      (larLand || larPort) && location === '/portfolio/MessageMe' && percentageResizedHeight < 0.693 ? '0' :
-      (larLand || larPort) && location === '/portfolio/Skills' && percentageResizedHeight < 0.536 ? '0' :
+      larPort && location === '/' && percentageResizedHeight < 0.788 ? '0' :
+      larLand && location === '/' && percentageResizedHeight < 0.665 ? '0' :
+      (larPort || larLand) && location === '/Projects' && percentageResizedHeight < 0.640 ? '0' :
+      (larPort || larLand) && location === '/Contact' && percentageResizedHeight < 0.548 ? '0' :
+      (larLand || larPort) && location === '/AboutMe' && percentageResizedHeight < 0.629 ? '0' :
+      larPort && location === '/Certifications' && percentageResizedHeight < 0.829 ? '0' :
+      larLand && location === '/Certifications' && percentageResizedHeight < 0.4 ? '0' :
+      (larLand || larPort) && location === '/MessageMe' && percentageResizedHeight < 0.693 ? '0' :
+      (larLand || larPort) && location === '/Skills' && percentageResizedHeight < 0.536 ? '0' :
       '1',
     'active': {
       'opacity': '0',
       'display': 'flex'
       },
     top:
-      minLand && height <= 380 && location === '/portfolio/Skills' ? '20px' : 'none',
+      minLand && height <= 380 && location === '/Skills' ? '20px' : 'none',
     bottom:
-      minLand && height <= 380 && location === '/portfolio/Skills' ? 'none' :
+      minLand && height <= 380 && location === '/Skills' ? 'none' :
       '20px'
   }
 }

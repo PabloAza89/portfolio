@@ -51,11 +51,11 @@ function NavBar() {
       <ScrollContainer style={s.mainRight({ minPort, minLand, medPort, medLand, larPort, larLand })}
         innerRef={useHorizontalScroll()}
       >
-        <Link style={s.textItem({ darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/AboutMe"><Box sx={s.item}>{english ? `About Me` : `Acerca De Mi` }</Box></Link>
-        <Link style={s.textItem({ darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Skills"><Box sx={s.item}>{ english ? `Skills` : `Habilidades` }</Box></Link>
-        <Link style={s.textItem({ darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Projects"><Box sx={s.item}>{ english ? `Projects` : `Proyectos` }</Box></Link>
-        <Link style={s.textItem({ darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Certifications"><Box sx={s.item}>{ english ? `Certifications` : `Certificaciones` }</Box></Link>
-        <Link style={s.textItem({ darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/portfolio/Contact"><Box sx={s.item}>{ english ? `Contact` : `Contacto` }</Box></Link>
+        <Link style={s.textItem({ darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/AboutMe"><Box sx={s.item}>{english ? `About Me` : `Acerca De Mi` }</Box></Link>
+        <Link style={s.textItem({ darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/Skills"><Box sx={s.item}>{ english ? `Skills` : `Habilidades` }</Box></Link>
+        <Link style={s.textItem({ darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/Projects"><Box sx={s.item}>{ english ? `Projects` : `Proyectos` }</Box></Link>
+        <Link style={s.textItem({ darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/Certifications"><Box sx={s.item}>{ english ? `Certifications` : `Certificaciones` }</Box></Link>
+        <Link style={s.textItem({ darkMode, minPort, minLand, medLand, medPort, larPort, larLand })} to="/Contact"><Box sx={s.item}>{ english ? `Contact` : `Contacto` }</Box></Link>
       </ScrollContainer>
     </Box>
   )

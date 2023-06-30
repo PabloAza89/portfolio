@@ -170,18 +170,19 @@ export const cardMedia = ({ darkMode, minPort, minLand }: cardMediaI) => {
 }
 
 interface placeholderI {
-  loaded: boolean
+  darkMode?: boolean,
+  loaded: boolean,
   minPort: boolean,
   minLand: boolean,
 }
 
-export const placeholderBackground = ({ loaded, minPort, minLand }: placeholderI) => {
+export const placeholderBackground = ({ darkMode, loaded, minPort, minLand }: placeholderI) => {
   return {
     ...noSelect, ...relative,
+    //display: 'flex',
     display: loaded ? 'none' : 'flex',
     marginLeft: minPort || minLand ? '-400px' : '-550px',
-    //background: 'darkorange',
-    background: '#5d4037',
+    background: darkMode ? '#196b6b' : 'darkcyan',
     width: minPort || minLand ? '400px' : '550px',
     height: minPort ? '220px' : minLand ? '160px' : '280px',
     zIndex: 900,
@@ -191,6 +192,7 @@ export const placeholderBackground = ({ loaded, minPort, minLand }: placeholderI
 export const placeholderAnimation = ({ loaded, minPort, minLand }: placeholderI) => {
   return {
     ...noSelect, ...relative,
+    //display: 'flex',
     display: loaded ? 'none' : 'flex',
     marginLeft: minPort ? '-310px' : minLand ? '-280px' : '-415px', // 90 + 220 = 310                       120 + 160 = 280                        135 + 280 = 415
     marginRight: minPort ? '90px' : minLand ? '120px' : '135px',    // 90 + 220 + 90 = 400 (minPort 220) // 120 + 160 + 120 = 400 (minLand 160) // 135 + 280 + 135 = 550 (med & lar)

@@ -29,9 +29,9 @@ export const blackWhite = ( { darkMode, location }: blackWhiteI ) => {
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)',
     justifyContent: 
-      location === '/portfolio'  ? 'space-between' :
-      location === '/portfolio/MessageMe'  ? 'center' :
-      location === '/portfolio/Contact' ||  location === '/portfolio/AboutMe' ? 'space-between' :
+      location === '/'  ? 'space-between' :
+      location === '/MessageMe'  ? 'center' :
+      location === '/Contact' ||  location === '/AboutMe' ? 'space-between' :
       'none',
     background: darkMode ? 'linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%)' : 'linear-gradient(to bottom right, black 49.9%,white 50.1%)'
   }
