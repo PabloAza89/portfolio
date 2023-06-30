@@ -148,151 +148,55 @@ export const boxMedia = () => {
 }
 
 interface cardMediaI {
-  m: any,
-  loaded: boolean,
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
 }
 
-export const imageMedia = ({ m, loaded, darkMode, minPort, minLand }: cardMediaI) => {
+export const cardMedia = ({ darkMode, minPort, minLand }: cardMediaI) => {
   return {
-    //display: loaded ? 'none' : 'flex',
-    //display: loaded ? 'flex' : 'none',
-    //display: 'none',
-    display: 'flex',
-    //background: `transparent url('http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif') center no-repeat`,
-    //background: `darkorange`,
-    //border: '0px solid blue',
-    //display: 'flex',
-    ...asc, ...pointer, ...noSelect,
-    width: minPort ? '400px' : minLand ? '400px' : '550px',
+    ...flex, ...asc, ...pointer, ...noSelect,
+    width: minPort || minLand ? '400px' : '550px',
     height: minPort ? '220px' : minLand ? '160px' : '280px',
-    //background: 'red',
-    //background: `url(${m})`,
-    //backgroundSize: '550px 280px',
     ':hover': darkMode ?
       { webkitFilter: 'brightness(.65)', 'filter': 'brightness(.65)', transform: 'scale(1.01)' } :
       { webkitFilter: 'brightness(.9)', 'filter': 'brightness(.9)', transform: 'scale(1.01)' },
     webkitFilter: darkMode ? 'brightness(.6)' : 'none',
     'filter': darkMode ? 'brightness(.6)' : 'none',
     transition: 'all .2s ease-in-out',
-    //transition: 'none',
     zIndex: 900,
     animation: `none`,
-    /* animationTimingFunction: 'steps(12, end)',
-    '@keyframes abcc': {
-      '0%': { transform: 'rotate(0deg)' },
-      '100%': { transform: 'rotate(0deg)' }, // 99.96
-    } */
   }
 }
 
-interface cardMediaPlaceholderI {
+interface placeholderI {
   loaded: boolean
+  minPort: boolean,
+  minLand: boolean,
 }
 
-export const placeholderBackground = ({ loaded }: cardMediaPlaceholderI) => {
+export const placeholderBackground = ({ loaded, minPort, minLand }: placeholderI) => {
   return {
+    ...noSelect, ...relative,
     display: loaded ? 'none' : 'flex',
-    position: 'relative',
-    marginLeft: '-550px',
-    //position: 'absolute',
-        /* ...asc, */ ...pointer, ...noSelect,
-    //border: '0px solid blue',
-    //background: 'darksalmon',
-    background: 'darkorange',
-    //border: '0px solid transparent',
-    //padding: '0px 135px', // 270 L+R
-    //margin: '0px 135px', // 270 L+R
-    //width: '280px', // 550
-    width: '550px', // 550
-    height: '280px', // 280
-    zIndex: 6000,
-    //  animation: `abc .8s linear infinite`,
-    // animationTimingFunction: 'steps(12, end)',
-    // '@keyframes abc': {
-    //   '0%': { transform: 'rotate(0deg)' },
-    //   '100%': { transform: 'rotate(360deg)' }, // 99.96
-    // }
-  }
-}
-
-export const placeholderAnimation = ({ loaded }: cardMediaPlaceholderI) => {
-  return {
-    display: loaded ? 'none' : 'flex',
-    position: 'relative',
-    //marginLeft: '-135px',
-    //marginLeft: '-280px',
-    marginLeft: '-415px', // 415 ?? // 280 + 135
-    marginRight: '135px',
-    //marginRight: '-135px',
-    //marginRight: '-135px',
-    //marginLeft: '-550px',
-    //position: 'absolute',
-        /* ...asc, */ ...pointer, ...noSelect,
-    //border: '0px solid blue',
-    //background: 'darksalmon',
+    marginLeft: minPort || minLand ? '-400px' : '-550px',
     //background: 'darkorange',
-    //border: '0px solid transparent',
-    //padding: '0px 135px', // 270 L+R
-    //margin: '0px 135px', // 270 L+R
-    //width: '280px', // 550
-    width: '280px', // 550
-    height: '280px', // 280
-    zIndex: 6001,
-     animation: `abc .8s linear infinite`,
-    animationTimingFunction: 'steps(12, end)',
-    '@keyframes abc': {
-      '0%': { transform: 'rotate(0deg)' },
-      '100%': { transform: 'rotate(360deg)' }, // 99.96
-    }
+    background: '#5d4037',
+    width: minPort || minLand ? '400px' : '550px',
+    height: minPort ? '220px' : minLand ? '160px' : '280px',
+    zIndex: 900,
   }
 }
 
-// export const cardMediaPlaceholder = () => {
-//   return {
-//     display: 'flex', position: 'relative',
-//         /* ...asc, */ ...pointer, ...noSelect,
-//     border: '0px solid blue',
-//     //border: '0px solid transparent',
-//     //padding: '0px 135px', // 270 L+R
-//     //margin: '0px 135px', // 270 L+R
-//     //width: '280px', // 550
-//     width: '550px', // 550
-//     height: '280px', // 280
-//    /*  animation: `abc .8s linear infinite`,
-//     animationTimingFunction: 'steps(12, end)',
-//     '@keyframes abc': {
-//       '0%': { transform: 'rotate(0deg)' },
-//       '100%': { transform: 'rotate(360deg)' }, // 99.96
-//     } */
-//   }
-// }
-
-interface loadingI {
-  loaded: boolean
-}
-
-export const loading = ({ loaded }: loadingI) => {
+export const placeholderAnimation = ({ loaded, minPort, minLand }: placeholderI) => {
   return {
-    //display: 'flex', position: 'relative',
-    //display: 'flex',
+    ...noSelect, ...relative,
     display: loaded ? 'none' : 'flex',
-    //display: 'flex',
-    //position: 'absolute',
-    position: 'absolute',
-    padding: '0px 135px', // 270 L+R
-    
-    zIndex: 400000,
-        /* ...asc, */ ...pointer, ...noSelect,
-    //border: '0px solid blue',
-    //border: '0px solid transparent',
-    //padding: '0px 135px', // 270 L+R
-    //margin: '0px 135px', // 270 L+R
-    //width: '280px', // 550
-    width: '280px', // 550
-    height: '280px', // 280
+    marginLeft: minPort ? '-310px' : minLand ? '-280px' : '-415px', // 90 + 220 = 310                       120 + 160 = 280                        135 + 280 = 415
+    marginRight: minPort ? '90px' : minLand ? '120px' : '135px',    // 90 + 220 + 90 = 400 (minPort 220) // 120 + 160 + 120 = 400 (minLand 160) // 135 + 280 + 135 = 550 (med & lar)
+    width: minPort ? '220px' : minLand ? '160px' : '280px',
+    height: minPort ? '220px' : minLand ? '160px' : '280px',
+    zIndex: 901,
     animation: `abc .8s linear infinite`,
     animationTimingFunction: 'steps(12, end)',
     '@keyframes abc': {

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import efSet from '../../images/efSet.png';
 import fccCertJS from '../../images/fccCertJS.png';
 import henry from '../../images/henry.png';
+import loadingImage from '../../images/loadingImage.png';
 import * as s from '../../styles/CertificationsSX';
 import Bubbles from '../Bubbles/Bubbles';
 import $ from 'jquery';
@@ -26,7 +27,7 @@ function Certifications() {
  interface arrayI {
     id: number,
     title: string,
-    media: string,
+    media: any,
     href: string,
     url: string
   }
@@ -56,9 +57,30 @@ function Certifications() {
     }
   ]
 
-  $(function(){
-    s.hover(array)
+  interface setLoadedI {
+    id: number,
+    loaded: boolean
+  }
+
+  const [loaded, setLoaded] = useState<any>(() => {
+    let total: setLoadedI[] = []
+    array.forEach((x:any) => total.push({id: array.indexOf(x), loaded: false}))
+    return total
   })
+
+  const loadedUpdater = (index: number) => {
+    let cloned = [...loaded]
+    cloned[index] = {id: index, loaded: true}
+    setLoaded(cloned)
+  }
+
+  $(function(){
+    s.hover({ array, loaded })
+  })
+
+  //loadedUpdater(1)
+
+  console.log(loaded)
 
   return (
     <Box sx={s.background}>
@@ -81,12 +103,31 @@ function Certifications() {
                   sx={s.title({ minPort, minLand, medPort, medLand, larPort, larLand })}
                 >{e.title}</Typography>
                 <Box
-                  className={`imageClass${e.id}`}
+                  //className={`imageClass${e.id}`}
+                  //component="img"
+                  //onLoad={() => loadedUpdater(array.map(r => r.media).indexOf(e.media))}
+                  //src={e.media}
+                  //onClick={() => {setName(e.media); setShow(!show)}}
+                  sx={s.boxMediaWrapper({ darkMode, minPort, minLand, medPort, medLand, larPort })}
+                >
+                  <Box
+                    className={`imageClass${e.id}`}
+                    component="img"
+                    onLoad={() => loadedUpdater(array.map(r => r.media).indexOf(e.media))}
+                    src={e.media}
+                    onClick={() => {setName(e.media); setShow(!show)}}
+                    sx={s.boxMedia({ darkMode, minPort, minLand, medPort, medLand, larPort })}
+                  />
+                  <Box
+                    component="img"
+                    sx={s.placeholderBackground({ loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
+                  />
+                </Box>
+                {/* <Box
                   component="img"
-                  src={e.media}
-                  onClick={() => {setName(e.media); setShow(!show)}}
-                  sx={s.boxMedia({ darkMode, minPort, minLand, medPort, medLand, larPort })}
-                />
+                  //src={loadingImage}
+                  sx={s.placeholderAnimation({ loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
+                /> */}
                 <Typography
                   className={`urlClass${e.id}`}
                   sx={s.url({ minPort, minLand, medPort, medLand, larPort })}

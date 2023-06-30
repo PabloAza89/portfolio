@@ -6,22 +6,43 @@ import {
 } from './CommonsSX';
 import $ from 'jquery';
 
-interface arrayI {
-  id: number,
+interface hoverI {
+  array: any[];
+  loaded: any[];
 }
 
-export const hover = (array: arrayI[]) => {
-  array.forEach(e => {
-    $(`.cardClass${e.id}`).on("mouseenter", function () {
-      $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
-      $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
-      $(`.urlClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)').css('mix-blend-mode', 'difference')
-    }).on("mouseleave", function () {
-      $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
-      $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
-      $(`.urlClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+// export const hover = (array: arrayI[]) => {
+//   array.forEach(e => {
+//     $(`.cardClass${e.id}`).on("mouseenter", function () {
+//       $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+//       $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+//       $(`.urlClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)').css('mix-blend-mode', 'difference')
+//     }).on("mouseleave", function () {
+//       $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+//       $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+//       $(`.urlClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+//     })
+//   })
+// }
+
+export const hover = ({ array, loaded }: hoverI) => {
+
+    array.forEach(e => {
+      if (loaded[array.indexOf(e)].loaded) {
+
+      $(`.cardClass${e.id}`).on("mouseenter", function () {
+        $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+        $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)')
+        $(`.urlClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1.1)').css('mix-blend-mode', 'difference')
+      }).on("mouseleave", function () {
+        $(`.titleClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+        $(`.imageClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+        $(`.urlClass${e.id}`).css('transition', 'all .2s ease-in-out').css('transform', 'scale(1)')
+      })
+    }  
+      
     })
-  })
+
 }
 
 interface greyTopI {
@@ -169,7 +190,7 @@ export const title = ({ minPort, minLand, medPort, medLand, larPort }: titleI) =
     ...noSelect, ...mix,
     //background: 'Red',
     color: '#FFFFFF',
-    fontSize: minPort ? '4.1vw': medPort ? '2.5vw' : minLand || medLand ? '1.6vw' : larPort ? '20px' : '20px', // fontSize
+    fontSize: minPort ? '4.1vw': medPort ? '2.5vw' : minLand || medLand ? '1.6vw' : '20px', // fontSize
   }
 }
 
@@ -184,10 +205,11 @@ interface boxMediaI {
 
 export const boxMedia = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: boxMediaI) => { // boxMedia
   return {
+    display: 'flex',
     ...pointer, ...noSelect,
     //background: 'red',
-    width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : larPort ? '220px' : '220px', // width
-    height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : larPort ? '120px' : '120px', // height
+    width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : '220px', // width
+    height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : '120px', // height
     'filter': darkMode ?
       'brightness(.6)' :
       'none',
@@ -195,6 +217,70 @@ export const boxMedia = ({ darkMode, minPort, minLand, medPort, medLand, larPort
       { filter: 'brightness(.65)' } :
       { filter: 'brightness(.9)' },
     zIndex: 1000,
+  }
+}
+
+export const boxMediaWrapper = ({ darkMode, minPort, minLand, medPort, medLand, larPort }: boxMediaI) => { // boxMedia
+  return {
+    display: 'flex',
+   /*  ...pointer, ...noSelect,
+    //background: 'red', */
+    width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : '220px', // width
+    height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : '120px', // height
+  /*   'filter': darkMode ?
+      'brightness(.6)' :
+      'none',
+    ':hover': darkMode ?
+      { filter: 'brightness(.65)' } :
+      { filter: 'brightness(.9)' },
+    zIndex: 1000, */
+  }
+}
+
+interface placeholderI {
+  loaded: boolean
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+}
+
+export const placeholderBackground = ({ loaded, minPort, minLand, medPort, medLand }: placeholderI) => {
+  return {
+    display: 'flex',
+    ...noSelect, //...relative,
+    //position: 'absolute',
+    position: 'relative',
+    //display: loaded ? 'none' : 'flex',
+    marginLeft: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '-20vw' : '-220px',
+    background: 'darkorange',
+    //background: '#5d4037',
+    width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : '220px', // width
+    height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : '120px', // height
+    zIndex: 1000,
+  }
+}
+
+export const placeholderAnimation = ({ loaded, minPort, minLand, medPort, medLand }: placeholderI) => {
+  return {
+    ...noSelect, //...relative,
+    //display: loaded ? 'none' : 'flex',
+    //display: 'flex',
+    display: 'none',
+    //width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '20vw' : larPort ? '220px' : '220px', // width
+    //height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : larPort ? '120px' : '120px', // height
+    //marginLeft: minPort ? '-310px' : minLand ? '-280px' : '-415px', // 90 + 220 = 310                       120 + 160 = 280                        135 + 280 = 415
+    //marginRight: minPort ? '90px' : minLand ? '120px' : '135px',    // 90 + 220 + 90 = 400 (minPort 220) // 120 + 160 + 120 = 400 (minLand 160) // 135 + 280 + 135 = 550 (med & lar)
+    marginTop: minPort || minLand ? '-400px' : '-140px',
+    width: minPort ? '45vw' : medPort ? '25vw' : minLand || medLand ? '10vw' : '120px', // width
+    height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : '120px', // height
+    zIndex: 1001,
+    animation: `abc .8s linear infinite`,
+    animationTimingFunction: 'steps(12, end)',
+    '@keyframes abc': {
+      '0%': { transform: 'rotate(0deg)' },
+      '100%': { transform: 'rotate(360deg)' }, // 99.96
+    }
   }
 }
 

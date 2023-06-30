@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { Dialog, FormControl, InputLabel, MenuItem, Select, CardMedia } from '@mui/material/';
+import { Dialog, FormControl, InputLabel, MenuItem, Select } from '@mui/material/';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
@@ -79,7 +79,7 @@ function Projects() {
   // separators width: 14
   // each width: 414 / 6 = 69
 
-  // mediaMeasures LAR:
+  // mediaMeasures MED & LAR:
   // total height: 340
   // titleheight: 60
   // image height: 280
@@ -87,142 +87,33 @@ function Projects() {
   // separators width: 14
   // each width: 564 / 6 = 94
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  let [updateFrequency, setUpdateFrequency] = useState(0)
-
-  useEffect(() => { // helper for button shake animation
-    let i:number = 0
-      let interval = setInterval(() => {
-        if (i < 5) {
-          setUpdateFrequency(i)
-          i++
-        } else {
-          return () => clearInterval(interval)
-        }
-      }, 100);
-  },[])
-
-
-
   $(`.linkButton`) // make link button shake
     .css(`animationName`,`shakeKF`)
     .css(`animationDuration`,`4s`) // button shake duration
     .css(`animationDelay`,`1.5s`)
     .css(`animationIterationCount`,`infinite`)
 
-    array.map(e => e.media).flat().forEach(r => {
-      $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`) // when hover image, extra pixels helper on right
-      .on( "mouseenter", function(){
-        $(`.extraPXSolid`)
-          .css("transition", "all .2s ease-in-out")
-          .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
-        $(`.extraPXCenterStripe`)
-          .css("transition", "all .2s ease-in-out")
-          .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
-      })
-      .on( "mouseleave", function(){
-        $(`.extraPXSolid`)
-          .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
-        $(`.extraPXCenterStripe`)
-          .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
-      })
-
+  array.map(e => e.media).flat().forEach(r => {
+    $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`) // when hover image, extra pixels helper on right
+    .on( "mouseenter", function(){
+      $(`.extraPXSolid`)
+        .css("transition", "all .2s ease-in-out")
+        .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
+      $(`.extraPXCenterStripe`)
+        .css("transition", "all .2s ease-in-out")
+        .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
     })
-
-  
-
-    // $("img").one("load", function() {
-    //   // do stuff
-    // }).each(function() {
-    //   if(this.complete) {
-    //       $(this).load(); // For jQuery < 3.0
-    //       // $(this).trigger('load'); // For jQuery >= 3.0
-    //   }
-    // });
-
-    // $(".extraPXImage").one("load", function() {
-    //   $(food1).on("load", function() {
-    //     console.log("ABC")});
-    //   })
-
-    // var img = $("").attr('src', '../../images/food1.png').on("load", function() {
-    //   $(`.extraPXImage`).append(img);
-    // });
-
-    // $(window).on("load", function() {
-    //   $("").attr('src', '../../images/food1.png').on("load", function() {
-//        $(`.extraPXImage`).attr('src', `${food1}`)
-    //   });
-    // })
-
-
-    // $(`.extraPXImage`)
-    //   //.attr('src', `https://apod.nasa.gov/apod/image/0710/iapetus2_cassini_big.jpg`)
-    //   .attr('src', `${food1}`)
-
-    //$(`.extraPXImage`)
-      //$(`.extraPXImage`).attr('src', `${food1}`)
-
-      //$(`.extraPXImage`)
-      // $(`.extraPXImage`)
-      //   .attr('src', `${food1}`).load(function() {
-      //     console.log("Image loaded !")
-      //   })
-
-      // var image = new Image();
-      
-      // image.onload = function () {
-      //   console.log("Image loaded !");
-      //   $(`.extraPXImage`).attr('src', `${food1}`)
-      // }
-      // image.src = `${food1}`
-
-      // $(`.extraPXImage`).on('load',function(){
-      //   //$(`.extraPXImage`).attr('src', `${food1}`)
-      //   console.log("Image loaded !");
-      // });
-
-      
-
-      // $(`.extraPXImage`).attr('src', `${food1}`)
-      //   .css("padding", "0px")
-      //   .css("width", "550px")
-      //   .css("height", "280px")
-      //   .css("animation", "none").one("load", function(){
-      //     console.log("READT")
-      //   })
-
-        // $(`.extraPXImage`)
-        //   .attr('src', `${food1}`)
-        // .one("load", function(){
-        //   setLoaded(true);
-        // })
-
-      //   $(`.extraPXImage`)
-      //   .attr('src', `${food1}`)
-      // .one("load", function(){
-      //   setLoaded(true);
-      // })
-
-      //  array.map(e => e.media).flat().forEach(r => {
-      //   $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`)
-      //   .css("animation", "none") // removes remain animation
-      //   .attr('src', `${r}`)
-      //   .one("load", function(){
-      //     setLoaded(true);
-      //   })
-      // })
-
-      // Promise.all([array.map(e => e.media).flat().forEach(r => {
-      //   $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`)
-      //   .attr('src', `${r}`)        
-      // })])
-
-      
-
-      //console.log(array.map(e => e.media).flat())
-
-  //const [loaded, setLoaded] = useState<boolean>(false)
+    .on( "mouseleave", function(){
+      $(`.extraPXSolid`)
+        .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+      $(`.extraPXCenterStripe`)
+        .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+    })
+    $(`.extraPXSolid`)
+      .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+    $(`.extraPXCenterStripe`)
+      .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+  })
 
   interface setLoadedI {
     id: number,
@@ -235,39 +126,16 @@ function Projects() {
     return total
   })
 
-  //let lengthObject: number = 0
-
-
-  //  useEffect(() => {
-  //   setLoaded(array.reduce((sum, a) => sum + a.media.length, 0))
-  //   console.log("DONE")
-  //   //console.log("a ver", "asd")
-  //  },[])
-
-  //  useEffect(() => {
-  //   //setLoaded([/* ...loaded,  */loaded[2] = {id: 2, loaded: true}])
-  //   let cloned = [...loaded]
-  //   cloned[2] = {id: 2, loaded: true}
-  //   setLoaded(cloned)
-  //  },[])
-
   const loadedUpdater = (index: number) => {
     let cloned = [...loaded]
     cloned[index] = {id: index, loaded: true}
     setLoaded(cloned)
   }
 
-
-  console.log("a ver", loaded)
-  //console.log("a ver", array.reduce((sum, a) => sum + a.media.length, 0))
-  //console.log("a ver", "asd")
-
   return (
   <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
-    {/* <img id="test" src="http://upload.wikimedia.org/wikipedia/commons/4/42/Loading.gif" ></img> */}
     <Box sx={s.topBottomHelper({ larPort, larLand })}></Box>
     <Box sx={s.background}>
-
       <ScrollContainer
         innerRef={useHorizontalScroll()}
         style={s.scroll()}
@@ -294,20 +162,19 @@ function Projects() {
                           <Box
                             className={`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`}
                             component="img"
-                            onLoad={() => {loadedUpdater(array.map(e => e.media).flat().indexOf(m)); console.log("DONE"); ; console.log(array.map(e => e.media).flat().indexOf(m))}} // en uso
+                            onLoad={() => loadedUpdater(array.map(e => e.media).flat().indexOf(m))}
                             src={m}
                             onClick={() => {setName(m); setShow(!show)}}
-                            sx={ s.imageMedia({ m, loaded, darkMode, minPort, minLand }) }
+                            sx={ s.cardMedia({ darkMode, minPort, minLand }) }
                           />
                           <Box
                             component="img"
-                            //src={loadingImage}
-                            sx={s.placeholderBackground({ loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded })}
+                            sx={s.placeholderBackground({ loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded, minPort, minLand })}
                           />
                           <Box
                             component="img"
                             src={loadingImage}
-                            sx={s.placeholderAnimation({ loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded })}
+                            sx={s.placeholderAnimation({ loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded, minPort, minLand })}
                           />
                           <Box
                             sx={s.betweenMedia({ darkMode, indexOf:e.media.indexOf(m), length:e.media.length-1 })}
