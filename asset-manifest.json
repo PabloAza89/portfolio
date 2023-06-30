@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/portfolio/static/css/main.ddabc13c.chunk.css",
-    "main.js": "/portfolio/static/js/main.da06edab.chunk.js",
-    "main.js.map": "/portfolio/static/js/main.da06edab.chunk.js.map",
+    "main.js": "/portfolio/static/js/main.cf4e026d.chunk.js",
+    "main.js.map": "/portfolio/static/js/main.cf4e026d.chunk.js.map",
     "runtime-main.js": "/portfolio/static/js/runtime-main.4349c77d.js",
     "runtime-main.js.map": "/portfolio/static/js/runtime-main.4349c77d.js.map",
-    "static/js/2.cd9e3700.chunk.js": "/portfolio/static/js/2.cd9e3700.chunk.js",
-    "static/js/2.cd9e3700.chunk.js.map": "/portfolio/static/js/2.cd9e3700.chunk.js.map",
+    "static/js/2.d4acdc58.chunk.js": "/portfolio/static/js/2.d4acdc58.chunk.js",
+    "static/js/2.d4acdc58.chunk.js.map": "/portfolio/static/js/2.d4acdc58.chunk.js.map",
     "static/js/3.e53e9211.chunk.js": "/portfolio/static/js/3.e53e9211.chunk.js",
     "static/js/3.e53e9211.chunk.js.map": "/portfolio/static/js/3.e53e9211.chunk.js.map",
     "index.html": "/portfolio/index.html",
     "static/css/main.ddabc13c.chunk.css.map": "/portfolio/static/css/main.ddabc13c.chunk.css.map",
-    "static/js/2.cd9e3700.chunk.js.LICENSE.txt": "/portfolio/static/js/2.cd9e3700.chunk.js.LICENSE.txt",
+    "static/js/2.d4acdc58.chunk.js.LICENSE.txt": "/portfolio/static/js/2.d4acdc58.chunk.js.LICENSE.txt",
     "static/media/darth-vader.787c667a.svg": "/portfolio/static/media/darth-vader.787c667a.svg",
     "static/media/efSet.70a4ba20.png": "/portfolio/static/media/efSet.70a4ba20.png",
     "static/media/fccCertJS.2398854b.png": "/portfolio/static/media/fccCertJS.2398854b.png",
@@ -33,8 +33,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.4349c77d.js",
-    "static/js/2.cd9e3700.chunk.js",
+    "static/js/2.d4acdc58.chunk.js",
     "static/css/main.ddabc13c.chunk.css",
-    "static/js/main.da06edab.chunk.js"
+    "static/js/main.cf4e026d.chunk.js"
   ]
 }
