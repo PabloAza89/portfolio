@@ -24,9 +24,8 @@ function DarkMode() {
 
   useEffect(() => {
     let night: string | null = localStorage.getItem('night');
-    if (night === null) { dispatch(setDarkMode(false)) }
-    if (night === 'false') { dispatch(setDarkMode(false)) }
-    if (night === 'true') { dispatch(setDarkMode(true)) }
+    if (night === ( null || 'false' )) dispatch(setDarkMode(false))
+    if (night === 'true') dispatch(setDarkMode(true))
   })
 
   return (
