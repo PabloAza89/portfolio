@@ -5,6 +5,7 @@ import Contact from './components/Contact/Contact';
 import DarkMode from './components/DarkMode/DarkMode';
 import Home from './components/Home/Home';
 import Language from './components/Language/Language';
+import Error from './components/Error/Error';
 import NavBar from './components/NavBar/NavBar';
 import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
@@ -12,7 +13,7 @@ import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
 import * as s from './styles/AppSX';
 import { Box } from '@mui/material';
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setCurrentWidth, setHeight, setLarLand,
@@ -96,6 +97,13 @@ function App() {
             <BackButton />
             <DarkMode />
             <Language />
+          </>}/>
+          <Route path="/Error" element={<>
+            <BackButton />
+            <Error />
+          </>}/>
+          <Route path="*" element={<>
+            <Navigate to="/Error" replace />
           </>}/>
         </Routes>
       </Box>
