@@ -12,7 +12,7 @@ import {
 
 function Home() {
 
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
+  const darkMode = useSelector((state: {darkMode:boolean}) => state.darkMode)
   const english = useSelector((state: {english:boolean}) => state.english)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import LightMode from '@mui/icons-material/LightMode';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,9 +22,16 @@ function DarkMode() {
   const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
 
+  useEffect(() => {
+    let night: string | null = localStorage.getItem('night');
+    if (night === null) { dispatch(setDarkMode(false)) }
+    if (night === 'false') { dispatch(setDarkMode(false)) }
+    if (night === 'true') { dispatch(setDarkMode(true)) }
+  })
+
   return (
     <Button
-      onClick={(e) => {e.preventDefault(); dispatch(setDarkMode(!darkMode))}}
+      onClick={() => { localStorage.setItem('night', (!darkMode).toString()); dispatch(setDarkMode(!darkMode)) }}
       variant="contained"
       sx={s.background({ height,minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname, percentageResizedHeight })}
     >

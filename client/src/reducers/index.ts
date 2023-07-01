@@ -19,7 +19,7 @@ interface initialStateI {
 
 const initialState: initialStateI = {
   english:  true,
-  darkMode: false,
+  darkMode: JSON.parse(`${localStorage.getItem('night')}`),
   width: window.screen.width,
   height: window.screen.height,
   minPort: window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false,
