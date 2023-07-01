@@ -21,8 +21,8 @@ function MessageMe() {
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
-  const [name, setName] = useState<string | null>("")
-  const [text, setText] = useState<string | null>("")
+  const [name, setName] = useState<string>("")
+  const [text, setText] = useState<string>("")
   const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
   const [clearButtonDisabled, setClearButtonDisabled] = useState<boolean>(false)
   const [showMessageSpinner, setShowMessageSpinner] = useState<boolean>(false)
@@ -30,8 +30,10 @@ function MessageMe() {
   useEffect(() => {
     let name: string | null = localStorage.getItem('name');
     let text: string | null = localStorage.getItem('text');
-    if (name !== "") setName(name)
-    if (text !== "") setText(text)
+    if (name === null) setName("")
+    if (name !== null) setName(name)
+    if (text === null) setText("")
+    if (text !== null) setText(text)
   },[])
 
   var Toast: any = Swal
