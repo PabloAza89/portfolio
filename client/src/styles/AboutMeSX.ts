@@ -1,8 +1,7 @@
 import {
   flex, noSelect, row, jcsb, relative,
-  column, fixed, asc, jcfs
+  column, asc, jcfs
 } from './CommonsSX';
-import { grey } from '@mui/material/colors';
 
 export const background = () => {
   return {
@@ -68,24 +67,6 @@ export const leftRightHelper = ({ larPort, larLand }: leftRightHelperI) => {
     //background: 'red',
     minHeight: '635px',
     minWidth: '70px'
-  }
-}
-
-interface blueBoxHelperI {
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
-}
-
-export const blueBoxHelper = ({ minPort, minLand, medPort, medLand, larPort, larLand }: blueBoxHelperI) => {
-  return {
-    ...flex, ...relative,
-    //background: 'darkblue',
-    width: '20px',
-    minHeight: minPort || minLand ? '90px' : medPort || medLand ? '90px' : larPort || larLand ? '100px' : '100px',
   }
 }
 
@@ -174,16 +155,5 @@ export const typography = ({ mouse, darkMode, minPort, minLand, medPort, medLand
     color: mouse ? 'transparent' : 'rgba(0, 0, 0, 0.18)',
     WebkitTextFillColor: darkMode ? '#b5b3b3' : 'white',
     'transition': 'color 0.3s ease',
-  }
-}
-
-export const greyBottom = () => {
-  return {
-    ...flex, ...fixed,
-    background: grey[400],
-    height: '6px',
-    width: 'calc(100vw - 12px)',
-    bottom: '0px',
-    zIndex: 1000
   }
 }

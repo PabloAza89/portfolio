@@ -46,7 +46,7 @@ export const greyTop = ({ darkMode }: greyTopI) => {
     height: '6px',
     width: '100vw',
     top: '0px',
-    zIndex: 1000
+    zIndex: 2000
   }
 }
 
@@ -61,7 +61,7 @@ export const greyLeft = ({ darkMode }: greyLeftI) => {
     height: 'calc(100vh - 12px)',
     width: '6px',
     left: '0px',
-    zIndex: 1000
+    zIndex: 2000
   }
 }
 
@@ -249,9 +249,9 @@ export const placeholderAnimation = ({ loaded, minPort, minLand, medPort, medLan
     width: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : '120px', // width
     height: minPort ? '25vw' : medPort ? '13vw' : minLand || medLand ? '10vw' : '120px', // height
     zIndex: 1001,
-    animation: `abc .8s linear infinite`,
+    animation: `cert .8s linear infinite`,
     animationTimingFunction: 'steps(12, end)',
-    '@keyframes abc': {
+    '@keyframes cert': {
       '0%': { transform: 'rotate(0deg)' },
       '100%': { transform: 'rotate(360deg)' },
     }

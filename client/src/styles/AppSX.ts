@@ -1,6 +1,6 @@
 import { grey } from '@mui/material/colors';
 import {
-  flex, relative, absolute, column, 
+  flex, relative, absolute, column,
   asc, jcc
   } from './CommonsSX';
 
@@ -28,7 +28,7 @@ export const blackWhite = ( { darkMode, location }: blackWhiteI ) => {
     ...relative, ...flex, ...column, ...asc,
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)',
-    justifyContent: 
+    justifyContent:
       location === '/'  ? 'space-between' :
       location === '/MessageMe'  ? 'center' :
       location === '/Contact' ||  location === '/AboutMe' ? 'space-between' :
@@ -66,7 +66,7 @@ export const greyBottom = ({ darkMode }: greyBottomI) => {
     height: '6px',
     width: 'calc(100vw - 12px)',
     bottom: '0px',
-    zIndex: 1000
+    zIndex: 2000
   }
 }
 
@@ -82,6 +82,6 @@ export const greyRight = ({ darkMode }: greyRightI) => {
     height: '100vh',
     width: '6px',
     right: '0px',
-    zIndex: 1000
+    zIndex: 2000
   }
 }

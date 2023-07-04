@@ -133,9 +133,9 @@ function Projects() {
   }
 
   return (
-  <Box sx={{ display: 'flex', position: 'relative', justifyContent: 'space-between', flexDirection: 'column', background: 'none', height: 'calc(100vh - 12px)' }}>
+  <Box sx={s.background}>
     <Box sx={s.topBottomHelper({ larPort, larLand })}></Box>
-    <Box sx={s.background}>
+    <Box sx={s.mainContainer}>
       <ScrollContainer
         innerRef={useHorizontalScroll()}
         style={s.scroll()}

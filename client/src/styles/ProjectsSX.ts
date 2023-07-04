@@ -1,11 +1,18 @@
 import { blue } from '@mui/material/colors';
 import {
-  flex, relative, fixed, column, pointer,
+  flex, relative, column, pointer,
   row, aic, asc, jcc,
-  mix, noSelect
+  mix, noSelect, jcsb
 } from './CommonsSX';
-import { grey } from '@mui/material/colors';
 import './SkillsSX.css';
+
+export const background = () => {
+  return {
+    ...flex, ...column, ...relative, ...jcsb,
+    //background: 'yellow',
+    height: 'calc(100vh - 12px)'
+  }
+}
 
 interface topBottomHelperI {
   larPort: boolean,
@@ -22,7 +29,7 @@ export const topBottomHelper = ({ larPort, larLand }: topBottomHelperI) => {
   }
 }
 
-export const background = () => {
+export const mainContainer = () => {
   return {
     ...flex, ...relative, ...column,
     //background: 'red',
@@ -199,9 +206,9 @@ export const placeholderAnimation = ({ loaded, minPort, minLand }: placeholderI)
     width: minPort ? '220px' : minLand ? '160px' : '280px',
     height: minPort ? '220px' : minLand ? '160px' : '280px',
     zIndex: 901,
-    animation: `abc .8s linear infinite`,
+    animation: `proj .8s linear infinite`,
     animationTimingFunction: 'steps(12, end)',
-    '@keyframes abc': {
+    '@keyframes proj': {
       '0%': { transform: 'rotate(0deg)' },
       '100%': { transform: 'rotate(360deg)' }, // 99.96
     }
@@ -304,16 +311,5 @@ export const select = ({ darkMode, larPort }: selectI) => {
     height: larPort ? '45px' : '45px',
     width: larPort ? '65px' : '65px',
     fontSize: larPort ? '17px': '17px'
-  }
-}
-
-export const lowerHelper = () => {
-  return {
-    ...flex, ...fixed,
-    background: grey[400],
-    height: '26px',
-    width: 'calc(100vw - 12px)',
-    bottom: '0px',
-    zIndex: 1000
   }
 }

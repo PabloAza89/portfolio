@@ -21,7 +21,8 @@ export const background = ({ minPort, minLand, medPort, medLand }: backgroundI) 
     width: minPort || minLand ? `30px !important`  : medPort || medLand ? `32.5px !important`  : `35px !important` ,
     height: minPort || minLand ? `30px !important`  : medPort || medLand ? `32.5px !important`  : `35px !important` ,
     top: '20px',
-    left: '20px'
+    left: '20px',
+    zIndex: '1',
   }
 }
 

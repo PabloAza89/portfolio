@@ -62,6 +62,15 @@ export const graphFit = (levels: levelsI[]) => {
   })
 }
 
+export const background = () => {
+  return {
+    ...flex, ...relative, ...jcsb, ...column, ...aifs,
+    //background: 'darkred',
+    width: 'calc(100vw - 12px)',
+    height: 'calc(100vh - 12px)'
+  }
+}
+
 interface colorFixedI {
   graphDontFit: boolean,
   color: string,
@@ -125,15 +134,6 @@ export const entireBar = ({ graphDontFit, bgColor }: entireBarI) => {
     //background: 'darkred',
     alignItems: 'flex-end',
     borderRadius: '10px 0px 0px 0px',
-  }
-}
-
-export const background = () => {
-  return {
-    ...flex, ...relative, ...jcsb, ...column, ...aifs,
-    //background: 'darkred',
-    width: 'calc(100vw - 12px)',
-    height: 'calc(100vh - 12px)'
   }
 }
 
