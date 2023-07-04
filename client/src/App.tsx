@@ -11,6 +11,7 @@ import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
 import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
+import News from './components/News/News';
 import * as s from './styles/AppSX';
 import { Box } from '@mui/material';
 import { Route, Routes, useLocation } from "react-router-dom";
@@ -60,6 +61,7 @@ function App() {
             <DarkMode />
             <Home />
             <Language />
+            <News />
             <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort })}></Box>
           </>}/>
           <Route path="/AboutMe" element={<>
