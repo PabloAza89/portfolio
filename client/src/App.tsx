@@ -61,7 +61,7 @@ function App() {
             <DarkMode />
             <Home />
             <Language />
-            <News />
+            {/* <News /> */}
             <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort })}></Box>
           </>}/>
           <Route path="/AboutMe" element={<>
