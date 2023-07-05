@@ -38,10 +38,11 @@ export const sliderBox = () => { // background
     //bottom: '100px',
     //right: '200px',
     background: 'orange',
-    width: '300px',
+    width: '500px',
     height: '300px',
     //height: '300px',
     overflowX: 'hidden',
+    //overflowX: 'scroll',
     overflowY: 'scroll',
     //zIndex: 20000,
   }
@@ -55,25 +56,10 @@ export const eachDescription = () => { // background
     position: 'relative',
     //bottom: '100px',
     //right: '200px',
-    width: '300px',
+    width: '480px',
     height: '30px',
     background: 'gray',
-    //width: '280px',
-    //height: '250px',
-    //zIndex: 20000,
-  }
-}
-
-export const buttonNews = () => { // background
-  return {
-    display: 'flex',
-    //position: 'absolute',
-    position: 'relative',
-    //bottom: '100px',
-    //right: '200px',
-    width: '300px',
-    height: '30px',
-    background: 'lightblue',
+    //overflowX: 'scroll',
     //width: '280px',
     //height: '250px',
     //zIndex: 20000,
@@ -90,19 +76,48 @@ export const date = () => { // background
     width: '80px',
     minWidth: '80px',
     background: 'darkred',
+    
   }
 }
 
-export const text = () => { // background
+interface textI {
+  scrollWidth: number
+}
+
+export const text = ({ scrollWidth }: textI) => { // background
   return {
     display: 'flex',
     //position: 'absolute',
     position: 'relative',
     //bottom: '100px',
     //right: '200px',
-    width: '600px',
-    minWidth: '600px',
+    //width: '420px',
+    //width: '403px',
+    //width: `${420 - scrollWidth}px`,
+    width: `400px`,
+    //minWidth: '200x',
     background: 'lightgreen',
-    overflow: 'hidden',
+    overflowY: 'hidden',
+    //overflowX: 'scroll',
+    overflowX: 'hidden',
+    textWrap: 'nowrap',
+    //overflow: 'auto',
+    //overflow: 'hidden',
+  }
+}
+
+export const buttonNews = () => { // background
+  return {
+    display: 'flex',
+    //position: 'absolute',
+    position: 'relative',
+    //bottom: '100px',
+    //right: '200px',
+    width: '300px',
+    height: '30px',
+    background: 'lightblue',
+    //width: '280px',
+    //height: '250px',
+    //zIndex: 20000,
   }
 }
