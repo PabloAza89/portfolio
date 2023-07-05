@@ -1,8 +1,15 @@
 import {
   flex, relative, column,
-  row, aic, jcc,
+  row, aic, jcc, fixed,
   jcsb, jcse, mix, noSelect
 } from './CommonsSX';
+
+// LAR (width)    // MIN (width)    //
+// 500 total      // 500 total      //
+// date text      // date text      //
+// 80   420       // 80   420       //
+// button (w & h) // button (w & h) //
+// 90 30          // 50 23          //
 
 interface backgroundI {
   show: boolean
@@ -10,114 +17,112 @@ interface backgroundI {
 
 export const background = ({ show }: backgroundI) => { // background
   return {
-    display: 'flex',
-    flexDirection: 'column',
-    //position: 'absolute',
-    position: 'fixed',
+    ...flex, ...fixed, ...column,
     bottom: '20px',
     left: '20px',
-    background: 'yellow',
-    width: '300px',
+    //background: 'yellow',
+    width: '90px',
+    //height: 'fit-content',
     //height: '300px',
-    //height: '0px',
-    //height: show ? '300px' : '0px',
-    height: '300px',
+    height: show ? 'fit-content' : '30px',
     justifyContent: 'end',
-    //overflowX: 'hidden',
-    //overflowY: 'auto',
-    //zIndex: 20000,
+  }
+}
+
+interface buttonNewsI {
+  show: boolean,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
+}
+
+
+export const buttonNews = ({ show, minPort, minLand, medPort, medLand, larPort, larLand }: buttonNewsI) => { // background
+  return {
+    ...flex, ...relative,
+    minWidth: minPort || minLand ? '50px !important' : '90px !important',
+    width: minPort || minLand ? '50px !important' : '90px !important',
+    minHeight: minPort || minLand ? '23px !important' : '30px !important',
+    height: minPort || minLand ? '23px !important' : '30px !important',
+    color: 'darkblue',
+    fontSize: minPort || minLand ? '10px' : '14px',
+    borderRadius: show ? '0px 0px 4px 4px' : '4px',
+    background: 'lightblue',
+    ':hover': {
+      background: '#91bfcf'
+    }
   }
 }
 
 export const sliderBox = () => { // background
   return {
-    display: 'flex',
+    ...flex, ...relative,
     flexDirection : 'column-reverse',
-    //position: 'absolute',
-    position: 'relative',
-    //bottom: '100px',
-    //right: '200px',
-    background: 'orange',
+    //background: 'orange',
     width: '500px',
-    height: '300px',
     //height: '300px',
     overflowX: 'hidden',
-    //overflowX: 'scroll',
     overflowY: 'scroll',
-    //zIndex: 20000,
   }
 }
 
-export const eachDescription = () => { // background
+interface eachDescriptionI {
+  scrollWidth: number
+}
+
+export const eachDescription = ({ scrollWidth }: eachDescriptionI) => { // background
   return {
-    display: 'flex',
-    flexDirection : 'row',
-    //position: 'absolute',
-    position: 'relative',
-    //bottom: '100px',
-    //right: '200px',
-    width: '480px',
-    height: '30px',
-    background: 'gray',
-    //overflowX: 'scroll',
-    //width: '280px',
-    //height: '250px',
-    //zIndex: 20000,
+    ...flex, ...row, ...relative,
+    width: `${500 - scrollWidth}px`,
+    height: '24px',
+    minHeight: '24px',
+    //background: 'gray',
   }
 }
 
-export const date = () => { // background
+interface dateI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
+}
+
+export const date = ({ minPort, minLand, medPort, medLand, larPort, larLand }: dateI) => { // background
   return {
-    display: 'flex',
-    //position: 'absolute',
-    position: 'relative',
-    //bottom: '100px',
-    //right: '200px',
+    ...flex, ...relative, ...jcc, ...noSelect,
     width: '80px',
     minWidth: '80px',
-    background: 'darkred',
-    
+    background: 'lightcoral',
+    fontSize: minPort || minLand ? '12px' : '16px',
+    //#c97b7b
   }
 }
 
 interface textI {
-  scrollWidth: number
+  scrollWidth: number,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
 }
 
-export const text = ({ scrollWidth }: textI) => { // background
+export const text = ({ scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand }: textI) => { // background
   return {
-    display: 'flex',
-    //position: 'absolute',
-    position: 'relative',
-    //bottom: '100px',
-    //right: '200px',
-    //width: '420px',
-    //width: '403px',
-    //width: `${420 - scrollWidth}px`,
-    width: `400px`,
-    //minWidth: '200x',
+    ...flex, ...relative, ...noSelect,
+    //width: `400px`,
+    width: `${420 - scrollWidth}px`,
     background: 'lightgreen',
+    //background: 'gainsboro',
     overflowY: 'hidden',
-    //overflowX: 'scroll',
     overflowX: 'hidden',
     textWrap: 'nowrap',
-    //overflow: 'auto',
-    //overflow: 'hidden',
-  }
-}
-
-export const buttonNews = () => { // background
-  return {
-    display: 'flex',
-    //position: 'absolute',
-    position: 'relative',
-    //bottom: '100px',
-    //right: '200px',
-    width: '300px',
-    height: '30px',
-    background: 'lightblue',
-    //width: '280px',
-    //height: '250px',
-    //zIndex: 20000,
+    fontSize: minPort || minLand ? '12px' : '16px',
   }
 }
