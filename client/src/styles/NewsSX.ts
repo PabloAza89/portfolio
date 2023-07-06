@@ -17,23 +17,37 @@ import { keyframes } from '@emotion/react'
 
 interface backgroundI {
   show: boolean,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
 }
 
 // const growAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } }) }
 // const growAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } }) }
 
-export const background = ({ show }: backgroundI) => { // background
+export const background = ({ show, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => { // background
   return {
     ...flex, ...fixed, //...column,
     flexDirection: 'row',
-    bottom: '20px',
+    top: larPort ? '200px' : 'none',
+    bottom: larLand ? '20px' : 'none',
     //left: '-494px', // 500 - 6
     left: '-494px', // 500 - 6
+    //left: '-510px', // 500 - 6
     //left: '6px', // 500 - 6
     //left: animToRight ? '6px' : '-494px', // 500 - 6
     background: 'yellow',
     //width: '90px',
     width: '530px',
+    //minWidth: '530px',
+    //width: '90vw',
+    //maxWidth: '530px',
+
+
+
     //height: 'fit-content',
     //height: '300px',
     //height: show ? 'fit-content' : '30px',
@@ -62,22 +76,18 @@ interface buttonNewsI {
 
 export const buttonNews = ({ show, minPort, minLand, medPort, medLand, larPort, larLand }: buttonNewsI) => { // background
   return {
-    ...flex, ...relative,
-    //minWidth: minPort || minLand ? '50px !important' : '120px !important',
-    //width: minPort || minLand ? '50px !important' : '120px !important',
+    ...flex,
+    position: larLand ? 'relative' : 'fixed',
+    //position: 'relative',
+    //position: 'fixed',
     minWidth: '30px !important',
     width: '30px !important',
-    //padding: '0px !important',
-    //minHeight: minPort || minLand ? '23px !important' : '30px !important',
-    //height: minPort || minLand ? '23px !important' : '30px !important',
     minHeight: '120px !important',
     height: '120px !important',
     color: 'darkblue',
     fontSize: minPort || minLand ? '10px' : '14px',
-    //borderRadius: show ? '0px 0px 4px 4px' : '4px',
     borderRadius: '0px',
     background: 'lightblue',
-    //transform: 'rotate(270deg)',
     ':hover': {
       background: '#91bfcf'
     }
@@ -98,7 +108,7 @@ export const sliderBox = () => { // background
   return {
     ...flex, ...relative,
     flexDirection : 'column-reverse',
-    //background: 'orange',
+    background: 'orange',
     width: '500px',
     //height: '300px',
     overflowX: 'hidden',
@@ -114,7 +124,12 @@ export const eachDescription = ({ scrollWidth }: eachDescriptionI) => { // backg
   return {
     ...flex, ...row, ...relative,
     //width: `${500 - scrollWidth}px`,
-    width: `${500}px`,
+    //width: '500px',
+    //width: '88vw',
+    width: 'calc(100vw - 12px - 30px)',
+    maxWidth: `500px`,
+    //width: `80vw`,
+    //maxWidth: `${500}px`,
     height: '24px',
     minHeight: '24px',
     //background: 'gray',
@@ -158,7 +173,10 @@ export const text = ({ darkMode, scrollWidth, minPort, minLand, medPort, medLand
     ...flex, ...relative, ...noSelect,
     //width: `400px`,
     //width: `${420 - scrollWidth}px`,
-    width: `${420}px`,
+    //width: `400px`,
+    //width: `420px`,
+    //width: '90vw',
+    width: '420px',
     background: darkMode ? '#76b376' : 'lightgreen',
     //background: 'gainsboro',
     overflowY: 'hidden',

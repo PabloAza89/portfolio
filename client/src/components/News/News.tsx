@@ -8,6 +8,7 @@ import '../../styles/NewsSX.css';
 
 function News() {
 
+  const width = useSelector((state: {width: number}) => state.width)
   const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const english = useSelector((state: {english:boolean}) => state.english)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
@@ -18,7 +19,10 @@ function News() {
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
   const [ show, setShow ] = useState<boolean>(false)
+  //const [ show, setShow ] = useState<boolean>(true)
   const [ scrollWidth, setScrollWidth ] = useState<number>(0)
+  const [ animRunning, setAnimRunning ] = useState<boolean>(false)
+  let isRunning = useRef(false)
 
   interface arrayI {
     id: number,
@@ -35,50 +39,6 @@ function News() {
     {id: 1, date: '23-02-21', text: english ? ' Break for vacations  ' : ' Descanso de vacaciones  '},
     {id: 0, date: '23-01-20', text: english ? ' Start developing my own first portfolio !  ' : ' Empezando a desarrollar mi primer portfolio propio !  '},
   ]
-
-  // useEffect(() => {
-  //   $(function() {
-  //     array.forEach(e => {
-  //       $(`.text${e.id}`).on("mouseenter", function(){
-  //         $(`.text${e.id}`)
-  //           .css("background", "#76b376")
-  //           .stop(true, true)
-  //           .delay(400)
-  //           .animate({scrollLeft: 420}, 6000)
-  //         $(`.date${e.id}`)
-  //           .css("background", "#bd7979")
-  //       })
-  //       $(`.text${e.id}`).on("mouseleave", function(){
-  //         $(`.text${e.id}`)
-  //           .stop(true, true)
-  //           .css("background", "lightgreen")
-  //           .animate({scrollLeft: 0}, 0)
-  //         $(`.date${e.id}`)
-  //           .css("background", "lightcoral")
-  //       })
-  //     })
-  //   })
-  // },[])
-
-  // if (darkMode) {
-  //   $(`.text${e.id}`).on("mouseenter", function(){
-  //     $(`.text${e.id}`)
-  //       .css("background", "lightgreen")
-  //       .stop(true, true)
-  //       .delay(400)
-  //       .animate({scrollLeft: 420}, 6000)
-  //     $(`.date${e.id}`)
-  //       .css("background", "lightcoral")
-  //   })
-  //   $(`.text${e.id}`).on("mouseleave", function(){
-  //     $(`.text${e.id}`)
-  //       .stop(true, true)
-  //       .css("background", "#76b376")
-  //       .animate({scrollLeft: 0}, 0)
-  //     $(`.date${e.id}`)
-  //       .css("background", "#bd7979")
-  //   })
-  // } 
 
   
   useEffect(() => {
@@ -176,31 +136,108 @@ function News() {
 
   },[])
   
-    $(function() {
-      if (show) {
+  //   $(function() {
+  //     if (show) {
+  //       $(`.buttonShow`).on("click", function() {
+  //         $(`.all`)
+  //          .css("transition", "all .8s ease-in-out")
+  //          .css(`transform`,`translateX(0px)`)
+  //          $(`.all`)
+  //       })
+  //    } else {
+  //       $(`.buttonShow`).on("click", function() {
+  //         $(`.all`)
+  //          .css("transition", "all 1.5s ease-in-out")
+  //          .css(`transform`,`translateX(500px)`)
+  //       })
+  //    }
+  // })
+
+  useEffect(() => {
+      $(function() {
+
+        if (show && larPort) { // HIDDEN TO SHOWN
+
+          $(`.buttonShow`)
+            .css("transition", "none")
+            .css(`transform`,`none`)
+
+          $(`.buttonShow`).on("click", function() {
+            $(`.dateAndText`)
+            .css("transition", "all .8s ease-in-out")
+            .css(`transform`,`translateX(0px)`)
+
+          })
+        }
+        else if (!show && larPort) { // SHOWN TO HIDDEN
+
+          $(`.buttonShow`)
+            .css("transition", "none")
+            .css(`transform`,`none`)
+
+          $(`.buttonShow`).on("click", function() {
+            $(`.dateAndText`)
+            .css("transition", "all 1.5s ease-in-out")
+            .css(`transform`,`translateX(500px)`)
+          })
+       }
+       else  if (show && larLand) { // HIDDEN TO SHOWN
+
+         $(`.buttonShow`)
+          //.css("transition", "all 1.5s linear")
+          //.css("transition-duration", "0s")
+          //.css(`transform`,`translateX(500px)`)
+          .css(`transform`,`translateX(500px)`)
+
         $(`.buttonShow`).on("click", function() {
-          $(`.all`)
-           .css("transition", "all .8s ease-in-out")
-           .css(`transform`,`translateX(0px)`)
-           $(`.all`)
+          $(`.dateAndText`)
+            .css("transition", "all .8s ease-in-out")
+            .css(`transform`,`translateX(0px)`)
+          $(`.buttonShow`)
+            .css("transition", "all .8s ease-in-out")
+            .css(`transform`,`translateX(0px)`)
         })
-     } else {
+      }
+      else if (!show && larLand) { // SHOWN TO HIDDEN
+
+        $(`.buttonShow`)
+          //.css("transition", "all .8s linear")
+          //.css("transition-duration", "0s")
+         //.css(`transform`,`translateX(500px)`)
+
         $(`.buttonShow`).on("click", function() {
-          $(`.all`)
-           .css("transition", "all 1.5s ease-in-out")
-           .css(`transform`,`translateX(500px)`)
+          $(`.dateAndText`)
+            .css("transition", "all 1.5s ease-in-out")
+            .css(`transform`,`translateX(500px)`)
+          $(`.buttonShow`)
+            .css("transition", "all 1.5s ease-in-out")
+            .css(`transform`,`translateX(500px)`)
         })
      }
-  })
+    })
+  },[show, larLand, larPort, width])
 
-  console.log("console log", show)
+
+  const animRunningHandler: any = (timerShowLong: boolean) => {
+    setAnimRunning(true)
+    isRunning.current = true  
+  }
+
+
+  console.log("show", show, "animRunning", animRunning)
+
+
+
 
   return (
     <Box
-      sx={s.background({ show })}
-      className={`all`}
+      sx={s.background({ show, minPort, minLand, medPort, medLand, larPort, larLand })}
+      //className={`all`}
     >
-      <Box sx={s.sliderBox}>
+      <Box 
+        sx={s.sliderBox}
+        className={`dateAndText`}
+      >
         {array.map(e => {
           return (
             <Box key={e.id} sx={s.eachDescription({ scrollWidth })}>
@@ -222,7 +259,7 @@ function News() {
       </Box>
       <Button
         className={`buttonShow`}
-        onClick={() => setShow(!show)}
+        onClick={() => { animRunningHandler(!show); setShow(!show) }}
         sx={s.buttonNews({ show, minPort, minLand, medPort, medLand, larPort, larLand })}
       >
         <Typography sx={s.changeLogTypo}>
