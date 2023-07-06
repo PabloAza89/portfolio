@@ -1,11 +1,14 @@
 import { Box, Typography, Button } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import * as s from '../../styles/NewsSX';
 import $ from 'jquery';
+import { keyframes } from '@emotion/react'
+import '../../styles/NewsSX.css';
 
 function News() {
 
+  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const english = useSelector((state: {english:boolean}) => state.english)
   const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
   const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
@@ -14,7 +17,7 @@ function News() {
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
-  const [ show, setShow ] = useState(false)
+  const [ show, setShow ] = useState<boolean>(false)
   const [ scrollWidth, setScrollWidth ] = useState<number>(0)
 
   interface arrayI {
@@ -33,54 +36,183 @@ function News() {
     {id: 0, date: '23-01-20', text: english ? ' Start developing my own first portfolio !  ' : ' Empezando a desarrollar mi primer portfolio propio !  '},
   ]
 
-  $(function() {
-    array.forEach(e => {
-      $(`.text${e.id}`).on("mouseenter", function(){
-        $(`.text${e.id}`)
-          .css("background", "#76b376")
-          .stop(true, true)
-          .delay(400)
-          .animate({scrollLeft: 420}, 6000)
-        $(`.date${e.id}`)
-          .css("background", "#bd7979")
+  // useEffect(() => {
+  //   $(function() {
+  //     array.forEach(e => {
+  //       $(`.text${e.id}`).on("mouseenter", function(){
+  //         $(`.text${e.id}`)
+  //           .css("background", "#76b376")
+  //           .stop(true, true)
+  //           .delay(400)
+  //           .animate({scrollLeft: 420}, 6000)
+  //         $(`.date${e.id}`)
+  //           .css("background", "#bd7979")
+  //       })
+  //       $(`.text${e.id}`).on("mouseleave", function(){
+  //         $(`.text${e.id}`)
+  //           .stop(true, true)
+  //           .css("background", "lightgreen")
+  //           .animate({scrollLeft: 0}, 0)
+  //         $(`.date${e.id}`)
+  //           .css("background", "lightcoral")
+  //       })
+  //     })
+  //   })
+  // },[])
+
+  // if (darkMode) {
+  //   $(`.text${e.id}`).on("mouseenter", function(){
+  //     $(`.text${e.id}`)
+  //       .css("background", "lightgreen")
+  //       .stop(true, true)
+  //       .delay(400)
+  //       .animate({scrollLeft: 420}, 6000)
+  //     $(`.date${e.id}`)
+  //       .css("background", "lightcoral")
+  //   })
+  //   $(`.text${e.id}`).on("mouseleave", function(){
+  //     $(`.text${e.id}`)
+  //       .stop(true, true)
+  //       .css("background", "#76b376")
+  //       .animate({scrollLeft: 0}, 0)
+  //     $(`.date${e.id}`)
+  //       .css("background", "#bd7979")
+  //   })
+  // } 
+
+  
+  useEffect(() => {
+    
+      
+
+
+        if (darkMode) {
+          $(function() {
+            
+          array.forEach(e => {
+            $(`.text${e.id}`)
+                .stop(true, true)
+                .css("background", "#76b376")
+                .animate({scrollLeft: 0}, 0)
+              $(`.date${e.id}`)
+                .css("background", "#bd7979")
+
+            $(`.text${e.id}`).on("mouseenter", function(){
+              $(`.text${e.id}`)
+                .css("background", "lightgreen")
+                .stop(true, true)
+                .delay(400)
+                .animate({scrollLeft: 420}, 6000)
+              $(`.date${e.id}`)
+                .css("background", "lightcoral")
+            })
+            $(`.text${e.id}`).on("mouseleave", function(){
+              $(`.text${e.id}`)
+                .stop(true, true)
+                .css("background", "#76b376")
+                .animate({scrollLeft: 0}, 0)
+              $(`.date${e.id}`)
+                .css("background", "#bd7979")
+            })
+
+
+          })
+         })
+        }
+        
+        
+        else {
+        $(function() {
+          array.forEach(e => {
+            $(`.text${e.id}`)
+            .stop(true, true)
+            .css("background", "lightgreen")
+            .animate({scrollLeft: 0}, 0)
+          $(`.date${e.id}`)
+            .css("background", "lightcoral")
+            
+
+            $(`.text${e.id}`).on("mouseenter", function(){
+              $(`.text${e.id}`)
+                .css("background", "#76b376")
+                .stop(true, true)
+                .delay(400)
+                .animate({scrollLeft: 420}, 6000)
+              $(`.date${e.id}`)
+                .css("background", "#bd7979")
+            })
+            $(`.text${e.id}`).on("mouseleave", function(){
+              $(`.text${e.id}`)
+                .stop(true, true)
+                .css("background", "lightgreen")
+                .animate({scrollLeft: 0}, 0)
+              $(`.date${e.id}`)
+                .css("background", "lightcoral")
+            })
+
+
+          })
       })
-      $(`.text${e.id}`).on("mouseleave", function(){
-        $(`.text${e.id}`)
-          .stop(true, true)
-          .css("background", "lightgreen")
-          .animate({scrollLeft: 0}, 0)
-        $(`.date${e.id}`)
-          .css("background", "lightcoral")
-      })
+    }
+
+
+
+      
+  
+  
+  },[darkMode])
+
+  useEffect(() => {
+    $(function() {
+      var scrollDiv = document.createElement("div"); // Creates the div
+      scrollDiv.className = "scrollbar-measure";
+      document.body.appendChild(scrollDiv);
+      $(`.scrollbar-measure`)
+        .css("overflowY", "scroll") // Creates a ScrollBar
+        .css("width", "fit-content") // Set width to auto considering the ScrollBar width
+      setScrollWidth(scrollDiv.offsetWidth)
+      document.body.removeChild(scrollDiv); // Delete the div
     })
+
+  },[])
+  
+    $(function() {
+      if (show) {
+        $(`.buttonShow`).on("click", function() {
+          $(`.all`)
+           .css("transition", "all .8s ease-in-out")
+           .css(`transform`,`translateX(0px)`)
+           $(`.all`)
+        })
+     } else {
+        $(`.buttonShow`).on("click", function() {
+          $(`.all`)
+           .css("transition", "all 1.5s ease-in-out")
+           .css(`transform`,`translateX(500px)`)
+        })
+     }
   })
 
-  $(function() {
-    var scrollDiv = document.createElement("div"); // Creates the div
-    scrollDiv.className = "scrollbar-measure";
-    document.body.appendChild(scrollDiv);
-    $(`.scrollbar-measure`)
-      .css("overflowY", "scroll") // Creates a ScrollBar
-      .css("width", "fit-content") // Set width to auto considering the ScrollBar width
-    setScrollWidth(scrollDiv.offsetWidth)
-    document.body.removeChild(scrollDiv); // Delete the div
-  })
+  console.log("console log", show)
 
   return (
-    <Box sx={s.background({ show })}>
+    <Box
+      sx={s.background({ show })}
+      className={`all`}
+    >
       <Box sx={s.sliderBox}>
         {array.map(e => {
           return (
             <Box key={e.id} sx={s.eachDescription({ scrollWidth })}>
               <Typography
                 className={`date${e.id}`}
-                sx={s.date({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                sx={s.date({ darkMode, minPort, minLand, medPort, medLand, larPort, larLand })}
               >
                 {e.date}
               </Typography>
               <Typography
                 className={`text${e.id}`}
-                sx={s.text({ scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
+                sx={s.text({ darkMode, scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
               >
                 {e.text}
               </Typography>
@@ -89,10 +221,13 @@ function News() {
         })}
       </Box>
       <Button
+        className={`buttonShow`}
         onClick={() => setShow(!show)}
         sx={s.buttonNews({ show, minPort, minLand, medPort, medLand, larPort, larLand })}
       >
-        NEWS
+        <Typography sx={s.changeLogTypo}>
+          CHANGELOG
+        </Typography>
       </Button>
     </Box>
   )

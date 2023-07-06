@@ -1,0 +1,9 @@
+@keyframes showKF {
+  0% { transform: translateX(0px) }
+  50% { transform: translateX(100px) }
+}
+
+@keyframes hideKF {
+  0% { transform: translateX(250px) }
+  100% { transform: translateX(0px) }
+}
