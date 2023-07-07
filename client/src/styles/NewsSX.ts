@@ -104,11 +104,23 @@ export const changeLogTypo = () => { // background
   }
 }
 
-export const sliderBox = () => { // background
+interface slideBoxI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
+}
+
+export const sliderBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }: slideBoxI) => { // background
   return {
     ...flex, ...relative,
     flexDirection : 'column-reverse',
     background: 'orange',
+    //left: '-30px',
+    //left: 'none',
+    left: larPort ? '-30px': 'none',
     width: '500px',
     //height: '300px',
     overflowX: 'hidden',
@@ -117,16 +129,22 @@ export const sliderBox = () => { // background
 }
 
 interface eachDescriptionI {
-  scrollWidth: number
+  scrollWidth: number,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
 }
 
-export const eachDescription = ({ scrollWidth }: eachDescriptionI) => { // background
+export const eachDescription = ({ scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand }: eachDescriptionI) => { // background
   return {
     ...flex, ...row, ...relative,
     //width: `${500 - scrollWidth}px`,
     //width: '500px',
     //width: '88vw',
-    width: 'calc(100vw - 12px - 30px)',
+    width: larLand ? '500px' : 'calc(100vw - 12px - 30px)',
     maxWidth: `500px`,
     //width: `80vw`,
     //maxWidth: `${500}px`,

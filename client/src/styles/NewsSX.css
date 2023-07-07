@@ -1,9 +1,99 @@
-@keyframes showKF {
-  0% { transform: translateX(0px) }
-  50% { transform: translateX(100px) }
+/* #shake {
+  animation-name: shakeKF;
+  animation-duration: 6s;
+  animation-delay: 2.5s;
+  animation-iteration-count: infinite;
+} */
+
+/* @keyframes shakeKF {
+  0% { transform: translate(inherit, -2px) }
+  1% { transform: translate(inherit,0px) }
+  2% { transform: translate(inherit,-2px) }
+  3% { transform: translate(inherit,0px) }
+  4% { transform: translate(inherit,-2px) }
+  5% { transform: translate(inherit,0px) }
+  6% { transform: translate(inherit,-2px) }
+  7% { transform: translate(inherit,0px) }
+  100% { transform: translate(inherit,0px) }
+} */
+
+@keyframes shakeKF {
+  0% { transform: translate(500px, -2px) }
+  1% { transform: translate(500px, 0px) }
+  2% { transform: translate(500px, -2px) }
+  3% { transform: translate(500px, 0px) }
+  4% { transform: translate(500px, -2px) }
+  5% { transform: translate(500px, 0px) }
+  6% { transform: translate(500px, -2px) }
+  7% { transform: translate(500px, 0px) }
+  100% { transform: translate(500px, 0px) }
 }
 
-@keyframes hideKF {
-  0% { transform: translateX(250px) }
-  100% { transform: translateX(0px) }
+
+@keyframes toRight {
+  from { transform: translateX(0px) }
+  to { transform: translateX(500px) }
+}
+
+@keyframes rightText {
+  from { transform: translateX(500px) }
+  to { transform: translateX(500px) }
+}
+
+@keyframes rightButton {
+  0% { transform: translate(500px, -2px) }
+  1% { transform: translate(500px, 0px) }
+  2% { transform: translate(500px, -2px) }
+  3% { transform: translate(500px, 0px) }
+  4% { transform: translate(500px, -2px) }
+  5% { transform: translate(500px, 0px) }
+  6% { transform: translate(500px, -2px) }
+  7% { transform: translate(500px, 0px) }
+  100% { transform: translate(500px, 0px) }
+}
+
+@keyframes toLeft {
+  from { transform: translateX(500px) }
+  to { transform: translateX(0px) }
+}
+
+@keyframes leftText {
+  from { transform: translateX(0px) }
+  to { transform: translateX(0px) }
+}
+
+@keyframes leftButton {
+  0% { transform: translate(0px, -2px) }
+  1% { transform: translate(0px, 0px) }
+  2% { transform: translate(0px, -2px) }
+  3% { transform: translate(0px, 0px) }
+  4% { transform: translate(0px, -2px) }
+  5% { transform: translate(0px, 0px) }
+  6% { transform: translate(0px, -2px) }
+  7% { transform: translate(0px, 0px) }
+  100% { transform: translate(0px, 0px) }
+}
+
+@keyframes shakeKFShow {
+  0% { transform: translate(500px, -2px) }
+  1% { transform: translate(500px, 0px) }
+  2% { transform: translate(500px, -2px) }
+  3% { transform: translate(500px, 0px) }
+  4% { transform: translate(500px, -2px) }
+  5% { transform: translate(500px, 0px) }
+  6% { transform: translate(500px, -2px) }
+  7% { transform: translate(500px, 0px) }
+  100% { transform: translate(500px, 0px) }
+}
+
+@keyframes shakeKFHide {
+  0% { transform: translate(0px, -2px) }
+  1% { transform: translate(0px, 0px) }
+  2% { transform: translate(0px, -2px) }
+  3% { transform: translate(0px, 0px) }
+  4% { transform: translate(0px, -2px) }
+  5% { transform: translate(0px, 0px) }
+  6% { transform: translate(0px, -2px) }
+  7% { transform: translate(0px, 0px) }
+  100% { transform: translate(0px, 0px) }
 }

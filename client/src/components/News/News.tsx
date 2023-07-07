@@ -40,15 +40,15 @@ function News() {
     {id: 0, date: '23-01-20', text: english ? ' Start developing my own first portfolio !  ' : ' Empezando a desarrollar mi primer portfolio propio !  '},
   ]
 
-  
+
   useEffect(() => {
-    
-      
+
+
 
 
         if (darkMode) {
           $(function() {
-            
+
           array.forEach(e => {
             $(`.text${e.id}`)
                 .stop(true, true)
@@ -79,8 +79,8 @@ function News() {
           })
          })
         }
-        
-        
+
+
         else {
         $(function() {
           array.forEach(e => {
@@ -90,7 +90,7 @@ function News() {
             .animate({scrollLeft: 0}, 0)
           $(`.date${e.id}`)
             .css("background", "lightcoral")
-            
+
 
             $(`.text${e.id}`).on("mouseenter", function(){
               $(`.text${e.id}`)
@@ -117,10 +117,158 @@ function News() {
 
 
 
-      
-  
-  
+
+
+
   },[darkMode])
+
+  // useEffect(() => {
+  //   $(function() {
+  //     var scrollDiv = document.createElement("div"); // Creates the div
+  //     scrollDiv.className = "scrollbar-measure";
+  //     document.body.appendChild(scrollDiv);
+  //     $(`.scrollbar-measure`)
+  //       .css("overflowY", "scroll") // Creates a ScrollBar
+  //       .css("width", "fit-content") // Set width to auto considering the ScrollBar width
+  //     setScrollWidth(scrollDiv.offsetWidth)
+  //     document.body.removeChild(scrollDiv); // Delete the div
+  //   })
+
+  // },[])
+
+  // //   $(function() {
+  // //     if (show) {
+  // //       $(`.buttonShow`).on("click", function() {
+  // //         $(`.all`)
+  // //          .css("transition", "all .8s ease-in-out")
+  // //          .css(`transform`,`translateX(0px)`)
+  // //          $(`.all`)
+  // //       })
+  // //    } else {
+  // //       $(`.buttonShow`).on("click", function() {
+  // //         $(`.all`)
+  // //          .css("transition", "all 1.5s ease-in-out")
+  // //          .css(`transform`,`translateX(500px)`)
+  // //       })
+  // //    }
+  // // })
+
+  // useEffect(() => {
+  //     $(function() {
+
+  //       if (show && larPort) { // HIDDEN -> SHOWN
+
+
+
+  //         $(`#buttonShow`)
+  //           .css("transition", "none")
+  //           .css(`transform`,`none`)
+  //         $(`.dateAndText`) // new !
+  //           .css(`transform`,`translateX(530px)`)
+  //           .css(`transitionDuration`,`0s`)
+   
+
+
+
+  //           $(`#buttonShow`).on("click", function() {
+  //           $(`.dateAndText`)
+  //           .css("transition", "all .8s ease-in-out")
+  //           .css(`transform`,`translateX(0px)`)
+
+  //         $(`.dateAndText`)
+  //           .on("transitionend webkitTransitionEnd oTransitionEnd", function(){
+  //             isRunning.current = false;
+  //             if (!isRunning.current) setAnimRunning(false)
+  //           })
+
+  //         })
+  //       }
+  //       else if (!show && larPort) { // SHOWN -> HIDDEN
+
+
+         
+  //           $(`#buttonShow`)
+  //             .css("transition", "none")
+  //             .css(`transform`,`none`)
+              
+
+
+  //           $(`#buttonShow`).on("click", function() {
+  //           $(`.dateAndText`)
+  //           .css("transition", "all 1.5s ease-in-out")
+  //           .css(`transform`,`translateX(530px)`)
+
+  //         $(`.dateAndText`)
+  //           .on("transitionend webkitTransitionEnd oTransitionEnd", function(){
+  //             isRunning.current = false;
+  //             if (!isRunning.current) {
+  //               setAnimRunning(false)
+
+  //             $(`#buttonShow`)
+  //               .css(`animationName`,`shakeKF`)
+  //               .css(`animationDuration`,`1.5s`)
+  //               .css(`animationIterationCount`,`infinite`)
+  //               .css(`animationDelay`,`0s`)
+   
+  //             }
+  //           })
+
+
+  //         })
+  //      }
+
+  //      else  if (show && larLand) { // HIDDEN -> SHOWN
+
+  //       $(`#buttonShow`).on("click", function() {
+  //         $(`.dateAndText`)
+  //           .css("transition", "all .8s ease-in-out")
+  //           .css(`transform`,`translateX(0px)`)
+
+  //           $(`#buttonShow`)
+  //           .css("transition", "all .8s ease-in-out")
+  //           .css(`transform`,`translateX(0px)`)
+
+  //         $(`.dateAndText`)
+  //           .on("transitionend webkitTransitionEnd oTransitionEnd", function(){
+  //             isRunning.current = false;
+
+  //             if (!isRunning.current) {
+  //               setAnimRunning(false)
+
+  //             }
+  //           })
+
+  //       })
+  //     }
+  //     else if (!show && larLand) { // SHOWN -> HIDDEN
+
+  //       $(`#buttonShow`).on("click", function() {
+  //         $(`.dateAndText`)
+  //           .css("transition", "all 1.5s ease-in-out")
+  //           .css(`transform`,`translateX(500px)`)
+  //         $(`#buttonShow`)
+
+  //           .css("transition", "all 1.5s ease-in-out")
+  //           .css(`transform`,`translateX(500px)`)
+
+  //         $(`.dateAndText`)
+  //           .on("transitionend webkitTransitionEnd oTransitionEnd", function(){
+  //             isRunning.current = false; 
+
+  //             if (!isRunning.current) {
+  //               setAnimRunning(false)
+
+  //             }
+
+  //           })
+
+  //       })
+  //    }
+
+
+
+  //   })
+  // },[show, larLand, larPort, width, animRunning])
 
   useEffect(() => {
     $(function() {
@@ -135,7 +283,7 @@ function News() {
     })
 
   },[])
-  
+
   //   $(function() {
   //     if (show) {
   //       $(`.buttonShow`).on("click", function() {
@@ -156,91 +304,186 @@ function News() {
   useEffect(() => {
       $(function() {
 
-        if (show && larPort) { // HIDDEN TO SHOWN
+        if (show && larPort) { // HIDDEN -> SHOWN
 
-          $(`.buttonShow`)
+
+
+          $(`#buttonShow`)
             .css("transition", "none")
             .css(`transform`,`none`)
+          $(`.dateAndText`) // new !
+            .css(`transform`,`translateX(530px)`)
+            .css(`transitionDuration`,`0s`)
+   
 
-          $(`.buttonShow`).on("click", function() {
+
+
+            $(`#buttonShow`).on("click", function() {
             $(`.dateAndText`)
             .css("transition", "all .8s ease-in-out")
             .css(`transform`,`translateX(0px)`)
+
+          $(`.dateAndText`)
+            .on("transitionend webkitTransitionEnd oTransitionEnd", function(){
+              isRunning.current = false;
+              if (!isRunning.current) setAnimRunning(false)
+            })
 
           })
         }
-        else if (!show && larPort) { // SHOWN TO HIDDEN
+        else if (!show && larPort) { // SHOWN -> HIDDEN
 
-          $(`.buttonShow`)
-            .css("transition", "none")
-            .css(`transform`,`none`)
 
-          $(`.buttonShow`).on("click", function() {
+         
+            $(`#buttonShow`)
+              .css("transition", "none")
+              .css(`transform`,`none`)
+              
+
+
+            $(`#buttonShow`).on("click", function() {
             $(`.dateAndText`)
             .css("transition", "all 1.5s ease-in-out")
-            .css(`transform`,`translateX(500px)`)
+            .css(`transform`,`translateX(530px)`)
+
+          $(`.dateAndText`)
+            .on("transitionend webkitTransitionEnd oTransitionEnd", function(){
+              isRunning.current = false;
+              if (!isRunning.current) {
+                setAnimRunning(false)
+
+              $(`#buttonShow`)
+                .css(`animationName`,`shakeKF`)
+                .css(`animationDuration`,`1.5s`)
+                .css(`animationIterationCount`,`infinite`)
+                .css(`animationDelay`,`0s`)
+   
+              }
+            })
+
+
           })
        }
-       else  if (show && larLand) { // HIDDEN TO SHOWN
 
-         $(`.buttonShow`)
-          //.css("transition", "all 1.5s linear")
-          //.css("transition-duration", "0s")
-          //.css(`transform`,`translateX(500px)`)
-          .css(`transform`,`translateX(500px)`)
+       else  if (show && larLand) { // SHOW -> HIDDEN
 
-        $(`.buttonShow`).on("click", function() {
+       
+
+
+        $(`#buttonShow`).on("click", function() {
           $(`.dateAndText`)
-            .css("transition", "all .8s ease-in-out")
-            .css(`transform`,`translateX(0px)`)
-          $(`.buttonShow`)
-            .css("transition", "all .8s ease-in-out")
-            .css(`transform`,`translateX(0px)`)
+              .css(`animationName`, `toLeft`)
+              .css(`animationDuration`,`1.5s`)
+              .css(`animationDelay`,`0s`)
+              .css(`animationIterationCount`,`1`)
+
+            $(`#buttonShow`)
+              .css(`animationName`, `toLeft`)
+              .css(`animationDuration`,`1.5s`)
+              .css(`animationDelay`,`0s`)
+              .css(`animationIterationCount`,`1`)
+
+          $(`.dateAndText`)
+            .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+              isRunning.current = false;
+
+              if (!isRunning.current) {
+                setAnimRunning(false)
+
+            $(`.dateAndText`)
+              .css(`animationName`, `leftText`)
+              .css(`animationDuration`,`1.5s`)
+              .css(`animationDelay`,`0s`)
+              .css(`animationIterationCount`,`infinite`)
+
+            $(`#buttonShow`)
+              .css(`animationName`, `leftButton`)
+              .css(`animationDuration`,`1.5s`)
+              .css(`animationDelay`,`0s`)
+              .css(`animationIterationCount`,`infinite`)
+
+              }
+            })
+
         })
       }
-      else if (!show && larLand) { // SHOWN TO HIDDEN
+      else if (!show && larLand) { // HIDDEN -> SHOWN
 
-        $(`.buttonShow`)
-          //.css("transition", "all .8s linear")
-          //.css("transition-duration", "0s")
-         //.css(`transform`,`translateX(500px)`)
+        if (!animRunning) {
+          $(`#buttonShow`)
+            .css(`animationName`, `leftButton`)
+            .css(`animationDuration`,`1.5s`)
+            .css(`animationDelay`,`1.5s`)
+            .css(`animationIterationCount`,`infinite`)
+        }
+        
 
-        $(`.buttonShow`).on("click", function() {
+
+        $(`#buttonShow`).on("click", function() {
           $(`.dateAndText`)
-            .css("transition", "all 1.5s ease-in-out")
-            .css(`transform`,`translateX(500px)`)
-          $(`.buttonShow`)
-            .css("transition", "all 1.5s ease-in-out")
-            .css(`transform`,`translateX(500px)`)
+            .css(`animationName`, `toRight`)
+            .css(`animationDuration`,`1.5s`)
+            .css(`animationDelay`,`0s`)
+            .css(`animationIterationCount`,`1`)
+          $(`#buttonShow`)
+            .css(`animationName`, `toRight`)
+            .css(`animationDuration`,`1.5s`)
+            .css(`animationDelay`,`0s`)
+            .css(`animationIterationCount`,`1`)
+
+            //.css("transition", "all 1.5s ease-in-out")
+            //.css(`transform`,`translateX(500px)`)
+
+          $(`.dateAndText`)
+            .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+              isRunning.current = false;
+
+              if (!isRunning.current) {
+                setAnimRunning(false)
+
+                $(`.dateAndText`)
+                  .css(`animationName`, `rightText`)
+                  .css(`animationDuration`,`1.5s`)
+                  .css(`animationDelay`,`0s`)
+                  .css(`animationIterationCount`,`infinite`)
+                $(`#buttonShow`)
+                  .css(`animationName`, `rightButton`)
+                  .css(`animationDuration`,`1.5s`)
+                  .css(`animationDelay`,`0s`)
+                  .css(`animationIterationCount`,`infinite`)
+
+              }
+
+            })
+
         })
      }
+
+
+
     })
-  },[show, larLand, larPort, width])
+  },[show, larLand, larPort, width, animRunning])
 
 
   const animRunningHandler: any = (timerShowLong: boolean) => {
     setAnimRunning(true)
-    isRunning.current = true  
+    isRunning.current = true
   }
 
-
   console.log("show", show, "animRunning", animRunning)
-
-
-
 
   return (
     <Box
       sx={s.background({ show, minPort, minLand, medPort, medLand, larPort, larLand })}
       //className={`all`}
     >
-      <Box 
-        sx={s.sliderBox}
+      <Box
+        sx={s.sliderBox({ minPort, minLand, medPort, medLand, larPort, larLand })}
         className={`dateAndText`}
       >
         {array.map(e => {
           return (
-            <Box key={e.id} sx={s.eachDescription({ scrollWidth })}>
+            <Box key={e.id} sx={s.eachDescription({ scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand })}>
               <Typography
                 className={`date${e.id}`}
                 sx={s.date({ darkMode, minPort, minLand, medPort, medLand, larPort, larLand })}
@@ -259,6 +502,7 @@ function News() {
       </Box>
       <Button
         className={`buttonShow`}
+        id={`buttonShow`}
         onClick={() => { animRunningHandler(!show); setShow(!show) }}
         sx={s.buttonNews({ show, minPort, minLand, medPort, medLand, larPort, larLand })}
       >
