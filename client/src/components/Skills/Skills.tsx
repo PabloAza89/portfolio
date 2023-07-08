@@ -7,6 +7,7 @@ import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
 import '../../styles/SkillsSX.css';
 import $ from 'jquery';
 
+
 function Skills() {
 
   let one = useRef(false) // animation moving ? click handler number One
