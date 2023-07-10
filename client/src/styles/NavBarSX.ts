@@ -19,7 +19,7 @@ export const background = ({ minPort, minLand, medPort, medLand, larPort, larLan
     ...flex,
     //background: 'blue',
     flexDirection: minPort || medPort || larPort ? 'column' : 'row',
-    paddingTop: minLand ? '10px' : '10px',
+    paddingTop: '10px',
     color: '#FFFFFF',
     minWidth: minPort || medPort ? 'none' : minLand || medLand ? 'none' : larPort ? '526px' : '677px', // minWidth
     minHeight: minPort || medPort ? '17vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '127px' : '100px', // minHeight

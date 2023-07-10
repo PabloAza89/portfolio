@@ -1,8 +1,7 @@
-import { grey } from '@mui/material/colors';
 import {
   mix, noDeco, aic, asc, column,
   flex, jcc, noSelect, relative,
-  jcse, fixed, jcsb, pointer
+  jcse, jcsb, pointer
 } from './CommonsSX';
 import $ from 'jquery';
 
@@ -33,36 +32,6 @@ export const hover = ({ array, loaded }: hoverI) => {
       })
     }
   })
-}
-
-interface greyTopI {
-  darkMode: boolean,
-}
-
-export const greyTop = ({ darkMode }: greyTopI) => {
-  return {
-    ...flex, ...fixed,
-    background: darkMode ? grey[800] : grey[400],
-    height: '6px',
-    width: '100vw',
-    top: '0px',
-    zIndex: 2000
-  }
-}
-
-interface greyLeftI {
-  darkMode: boolean,
-}
-
-export const greyLeft = ({ darkMode }: greyLeftI) => {
-  return {
-    ...flex, ...fixed,
-    background: darkMode ? grey[800] : grey[400],
-    height: 'calc(100vh - 12px)',
-    width: '6px',
-    left: '0px',
-    zIndex: 2000
-  }
 }
 
 interface topBottomHelperI {

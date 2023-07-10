@@ -80,8 +80,6 @@ function Certifications() {
 
   return (
     <Box sx={s.background}>
-      <Box sx={s.greyTop({ darkMode })} />
-      <Box sx={s.greyLeft({ darkMode })} />
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })}></Box>
       <Bubbles />
       <Box sx={s.mainBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>

@@ -157,15 +157,16 @@ function News() {
   useEffect(() => {
       $(function() {
 
-        if (show && larPort) { // SHOWN -> HIDDEN  // LARPORT
+        if (show && ( minPort || medPort || larPort )) { // SHOWN -> HIDDEN  // LARPORT
 
           $(`.buttonShow`)
             .stop()
             .css("left", "6px")
           $(`.dateAndText`)
-            .css("left", "500px")
+            .css("left", minPort || minLand ? "490px" : "500px")
 
           if (!animRunning) {
+            
             $(`.buttonShow`)
               .css(`animationName`,`shake`)
               .css(`animationDuration`,`6s`)
@@ -186,11 +187,14 @@ function News() {
                   isRunning.current = false;
                   if (!isRunning.current) {
                     setAnimRunning(false)
+                    
                   }
                 }})
+             
+
           })
         }
-        else if (!show && larPort) { // HIDDEN -> SHOWN // LARPORT
+        else if (!show && ( minPort || medPort || larPort )) { // HIDDEN -> SHOWN // LARPORT
 
           $(`.buttonShow`)
           .stop() 
@@ -212,16 +216,18 @@ function News() {
               .css(`animationDelay`,`0s`)
               .css(`animationIterationCount`,`none`)
               $(`.dateAndText`)
-                .animate( { left: 500 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
+              .stop() // added
+                .animate( { left: minPort || minLand ? 490 : 500 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
                   isRunning.current = false;
                   if (!isRunning.current) {
                     setAnimRunning(false)
                   }
                 }})
+                
           })
        }
 
-       else  if (show && larLand) { // SHOWN -> HIDDEN // LARLAND
+       else  if (show && ( minLand || medLand || larLand )) { // SHOWN -> HIDDEN // LARLAND
 
         if (!animRunning) {
           $(`.buttonShow`)
@@ -261,7 +267,7 @@ function News() {
               }})
         })
       }
-      else if (!show && larLand) { // HIDDEN -> SHOWN // LARLAND
+      else if (!show && ( minLand || medLand || larLand )) { // HIDDEN -> SHOWN // LARLAND
         
         if (!animRunning) {
           $(`.buttonShow`)
@@ -299,7 +305,7 @@ function News() {
         })
      }
     })
-  },[show, larLand, larPort, width, animRunning])
+  },[show, minPort, minLand, medPort, medLand, larPort, larLand, width, animRunning])
 
 
   const animRunningHandler: any = () => {
@@ -307,7 +313,7 @@ function News() {
     isRunning.current = true
   }
 
-  //console.log("show", show, "animRunning", animRunning)
+  console.log("show", show, "animRunning", animRunning)
 
   return (
     <Box
@@ -321,7 +327,11 @@ function News() {
       >
         {array.map(e => {
           return (
-            <Box key={e.id} sx={s.eachDescription({ scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand })}>
+            <Box 
+              className={`eachDescription`}
+              key={e.id} 
+              sx={s.eachDescription({ animRunning, scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
+            >
               <Typography
                 className={`date${e.id}`}
                 sx={s.date({ darkMode, minPort, minLand, medPort, medLand, larPort, larLand })}
@@ -330,7 +340,7 @@ function News() {
               </Typography>
               <Typography
                 className={`text${e.id}`}
-                sx={s.text({ darkMode, scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
+                sx={s.text({ animRunning, darkMode, scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
               >
                 {e.text}
               </Typography>
@@ -344,7 +354,7 @@ function News() {
         onClick={() => { animRunningHandler(!show); setShow(!show) }}
         sx={s.buttonNews({ show, darkMode, minPort, minLand, medPort, medLand, larPort, larLand })}
       >
-        <Typography sx={s.changeLogTypo({ english })}>
+        <Typography sx={s.changeLogTypo({ english, minPort, minLand, medPort, medLand, larPort, larLand })}>
           {english ? `CHANGELOG` : `REG. DE CAMBIOS`}
         </Typography>
       </Button>

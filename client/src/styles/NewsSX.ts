@@ -25,41 +25,17 @@ interface backgroundI {
   larLand: boolean,
 }
 
-// const growAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } }) }
-// const growAnim = (percentage: number) => { return keyframes({ from: { height: `0px` }, to: { height: `${(percentage  + 5)* 2}px` } }) }
 
 export const background = ({ show, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => { // background
   return {
     ...flex, ...fixed, //...column,
     flexDirection: 'row',
-    top: larPort ? '200px' : 'none',
-    bottom: larLand ? '20px' : 'none',
-    //left: '-494px', // 500 - 6
+    top: minPort || medPort ? 'calc(17vw + 10px + 7vh)' : larPort ? 'calc(143px + 10vh)' : 'none', // medPort 17vw+10px // larPort 127+10+6
+    bottom: minLand || medLand || larLand ? '20px' : 'none',
     left: '-494px', // 500 - 6
-    //left: '-510px', // 500 - 6
-    //left: '6px', // 500 - 6
-    //left: animToRight ? '6px' : '-494px', // 500 - 6
     background: 'yellow',
-    //width: '90px',
     width: '530px',
-    //minWidth: '530px',
-    //width: '90vw',
-    //maxWidth: '530px',
-
-
-
-    //height: 'fit-content',
-    //height: '300px',
-    //height: show ? 'fit-content' : '30px',
     justifyContent: 'end',
-    //animation: show ? 
-    // `${keyframes({ '0%': { transform: 'translateX(100px)' }, '100%': { transform: 'translateX(400px)' } })} 1s linear` :
-    // `${keyframes({ '0%': { transform: 'translateX(500px)' }, '100%': { transform: 'translateX(0px)' } })} 1s linear`
-
-    // '@keyframes': {
-    //   '0%': { transform: 'translateX(100px)' },
-    //   '100%': { transform: 'translateX(200px)' }
-    // }
   }
 }
 
@@ -79,8 +55,8 @@ export const buttonNews = ({ show, darkMode, minPort, minLand, medPort, medLand,
   return {
     ...flex,
     position: 'fixed',
-    minWidth: '30px !important',
-    width: '30px !important',
+    minWidth: minPort || minLand ? '20px !important' : '30px !important',
+    width: minPort || minLand ? '20px !important' : '30px !important',
     minHeight: '120px !important',
     height: '120px !important',
     color: 'darkblue',
@@ -94,15 +70,21 @@ export const buttonNews = ({ show, darkMode, minPort, minLand, medPort, medLand,
 }
 
 interface changeLogTypoI {
-  english: boolean
+  english: boolean,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
 }
 
-export const changeLogTypo = ({ english }: changeLogTypoI) => { // background
+export const changeLogTypo = ({ english, minPort, minLand, medPort, medLand, larPort, larLand }: changeLogTypoI) => { // background
   return {
     display: 'flex',
     //flexDirection: 'column',
     fontFamily: 'Roboto',
-    fontSize: english ? '14px' : '13px',
+    fontSize: minPort || minLand ? '11px' : english && ( larPort || larLand ) ? '14px' : '13px',
     fontWeight: '500',
     transform: 'rotate(270deg)',
     textWrap: 'nowrap',
@@ -123,17 +105,14 @@ export const sliderBox = ({ minPort, minLand, medPort, medLand, larPort, larLand
     ...flex, ...relative,
     flexDirection : 'column-reverse',
     background: 'orange',
-    //left: '-30px',
-    //left: 'none',
     left: larPort ? '-30px': 'none',
     width: '500px',
-    //height: '300px',
     overflowX: 'hidden',
-    //overflowY: 'scroll',
   }
 }
 
 interface eachDescriptionI {
+  animRunning: boolean,
   scrollWidth: number,
   minPort: boolean,
   minLand: boolean,
@@ -143,16 +122,14 @@ interface eachDescriptionI {
   larLand: boolean,
 }
 
-export const eachDescription = ({ scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand }: eachDescriptionI) => { // background
+export const eachDescription = ({ animRunning, scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand }: eachDescriptionI) => { // background
   return {
     ...flex, ...row, ...relative,
-    //width: `${500 - scrollWidth}px`,
-    //width: '500px',
-    //width: '88vw',
-    width: larLand ? '500px' : 'calc(100vw - 12px - 30px)',
+    //width: animRunning && minPort ? 'calc(100vw - 12px - 20px)' : animRunning && larPort ? 'calc(100vw - 12px - 30px)' : animRunning && larLand ? '500px' : 'none',
+    width: animRunning ? 'none' : minPort ? 'calc(100vw - 12px - 20px)' : larPort ? 'calc(100vw - 12px - 30px)' : '500px',
+    //width: '300px',
+    //width: 'none',
     maxWidth: `500px`,
-    //width: `80vw`,
-    //maxWidth: `${500}px`,
     height: '24px',
     minHeight: '24px',
     //background: 'gray',
@@ -176,11 +153,11 @@ export const date = ({ darkMode, minPort, minLand, medPort, medLand, larPort, la
     minWidth: '80px',
     background: darkMode ? '#bd7979' : 'lightcoral',
     fontSize: minPort || minLand ? '12px' : '16px',
-    //#c97b7b
   }
 }
 
 interface textI {
+  animRunning: boolean,
   darkMode: boolean,
   scrollWidth: number,
   minPort: boolean,
@@ -191,19 +168,15 @@ interface textI {
   larLand: boolean,
 }
 
-export const text = ({ darkMode, scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand }: textI) => { // background
+export const text = ({ animRunning, darkMode, scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand }: textI) => { // background
   return {
     ...flex, ...relative, ...noSelect,
-    //width: `400px`,
-    //width: `${420 - scrollWidth}px`,
-    //width: `400px`,
-    //width: `420px`,
-    //width: '90vw',
     width: '420px',
     background: darkMode ? '#76b376' : 'lightgreen',
     //background: 'gainsboro',
     overflowY: 'hidden',
     overflowX: 'hidden',
+    //overflow: animRunning ? 'visible' : 'none',
     textWrap: 'nowrap',
     fontSize: minPort || minLand ? '12px' : '16px',
   }
