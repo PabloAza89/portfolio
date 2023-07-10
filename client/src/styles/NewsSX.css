@@ -18,19 +18,19 @@
   to { transform: translateX(0px) }
 }
 
-@keyframes leftFixedShake {
-  0% { transform: translate(0px, -2px) }
-  1% { transform: translate(0px, 0px) }
-  2% { transform: translate(0px, -2px) }
-  3% { transform: translate(0px, 0px) }
-  4% { transform: translate(0px, -2px) }
-  5% { transform: translate(0px, 0px) }
-  6% { transform: translate(0px, -2px) }
-  7% { transform: translate(0px, 0px) }
-  100% { transform: translate(0px, 0px) }
+@keyframes leftShake {
+  0% { transform: translate(-500px, -2px) }
+  1% { transform: translate(-500px, 0px) }
+  2% { transform: translate(-500px, -2px) }
+  3% { transform: translate(-500px, 0px) }
+  4% { transform: translate(-500px, -2px) }
+  5% { transform: translate(-500px, 0px) }
+  6% { transform: translate(-500px, -2px) }
+  7% { transform: translate(-500px, 0px) }
+  100% { transform: translate(-500px, 0px) }
 }
 
-@keyframes rightFixedShake {
+@keyframes rightShake {
   0% { transform: translate(500px, -2px) }
   1% { transform: translate(500px, 0px) }
   2% { transform: translate(500px, -2px) }

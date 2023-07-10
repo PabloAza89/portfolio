@@ -54,6 +54,22 @@ export const topBottomHelper = ({ minPort, minLand, medPort, medLand, larPort }:
   }
 }
 
+interface greyTopI {
+  darkMode: boolean,
+}
+
+export const greyTop = ({ darkMode }: greyTopI) => {
+  return {
+    ...flex, ...absolute,
+    background: darkMode ? grey[800] : grey[400],
+    //background: darkMode ? 'red' : 'blue',
+    height: '6px',
+    width: 'calc(100vw - 12px)',
+    top: '0px',
+    zIndex: 2000
+  }
+}
+
 interface greyBottomI {
   darkMode: boolean,
 }
@@ -66,6 +82,22 @@ export const greyBottom = ({ darkMode }: greyBottomI) => {
     height: '6px',
     width: 'calc(100vw - 12px)',
     bottom: '0px',
+    zIndex: 2000
+  }
+}
+
+interface greyLeftI {
+  darkMode: boolean,
+}
+
+export const greyLeft = ({ darkMode }: greyLeftI) => {
+  return {
+    ...flex, ...absolute,
+    background: darkMode ? grey[800] : grey[400],
+    //background: darkMode ? 'red' : 'blue',
+    height: '100vh',
+    width: '6px',
+    left: '0px',
     zIndex: 2000
   }
 }

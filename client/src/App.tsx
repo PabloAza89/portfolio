@@ -106,8 +106,10 @@ function App() {
           </>}/>
         </Routes>
       </Box>
-      <Box sx={s.greyBottom({ darkMode })} />
+      <Box sx={s.greyLeft({ darkMode })} />
       <Box sx={s.greyRight({ darkMode })} />
+      <Box sx={s.greyTop({ darkMode })} />
+      <Box sx={s.greyBottom({ darkMode })} />
     </Box>
   );
 }

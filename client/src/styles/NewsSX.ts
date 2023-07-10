@@ -65,6 +65,7 @@ export const background = ({ show, minPort, minLand, medPort, medLand, larPort, 
 
 interface buttonNewsI {
   show: boolean,
+  darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -74,12 +75,10 @@ interface buttonNewsI {
 }
 
 
-export const buttonNews = ({ show, minPort, minLand, medPort, medLand, larPort, larLand }: buttonNewsI) => { // background
+export const buttonNews = ({ show, darkMode, minPort, minLand, medPort, medLand, larPort, larLand }: buttonNewsI) => { // background
   return {
     ...flex,
-    position: larLand ? 'relative' : 'fixed',
-    //position: 'relative',
-    //position: 'fixed',
+    position: 'fixed',
     minWidth: '30px !important',
     width: '30px !important',
     minHeight: '120px !important',
@@ -87,20 +86,26 @@ export const buttonNews = ({ show, minPort, minLand, medPort, medLand, larPort, 
     color: 'darkblue',
     fontSize: minPort || minLand ? '10px' : '14px',
     borderRadius: '0px',
-    background: 'lightblue',
+    background: darkMode ? '#708f99' : 'lightblue',
     ':hover': {
-      background: '#91bfcf'
+      background: darkMode ? '#749aa6' : '#91bfcf'
     }
   }
 }
 
-export const changeLogTypo = () => { // background
+interface changeLogTypoI {
+  english: boolean
+}
+
+export const changeLogTypo = ({ english }: changeLogTypoI) => { // background
   return {
     display: 'flex',
+    //flexDirection: 'column',
     fontFamily: 'Roboto',
-    fontSize: '14px',
+    fontSize: english ? '14px' : '13px',
     fontWeight: '500',
     transform: 'rotate(270deg)',
+    textWrap: 'nowrap',
   }
 }
 
