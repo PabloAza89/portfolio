@@ -41,30 +41,21 @@ function News() {
     {id: 0, date: '23-01-20', text: english ? ' Start developing my own first portfolio !  ' : ' Empezando a desarrollar mi primer portfolio propio !  '},
   ], [english]);
 
-  useEffect(() => {
-    if (darkMode) {
-      $(function() { s.colorAndHoverIsDark({ array })})
-    } else $(function() { s.colorAndHoverNotDark({ array })})
+  useEffect(() => { // hover color handler
+    if (darkMode) $(function() { s.colorAndHoverIsDark({ array })})
+    else $(function() { s.colorAndHoverNotDark({ array })})
   },[darkMode, array])
 
-  useEffect(() => {
+  useEffect(() => { // size & animation handler
     $(function() {
-      if (show && ( minPort || medPort || larPort )) { // SHOWN -> HIDDEN  // PORT
-        s.shownHiddenPort({ animRunning, isRunning, minPort, minLand, setAnimRunning })
-      } else if (!show && ( minPort || medPort || larPort )) { // HIDDEN -> SHOWN // PORT
-        s.hiddenShowPort({ animRunning, isRunning, minPort, minLand, setAnimRunning })
-      } else if (show && ( minLand || medLand || larLand )) { // SHOWN -> HIDDEN // LAND
-        s.showHiddenLand({ animRunning, isRunning, minPort, minLand, setAnimRunning })
-      } else if (!show && ( minLand || medLand || larLand )) { // HIDDEN -> SHOWN // LAND
-        s.hiddenShownLand({ animRunning, isRunning, minPort, minLand, setAnimRunning })
-      }
+      if (show && ( minPort || medPort || larPort )) s.shownHiddenPort({ animRunning, isRunning, minPort, minLand, setAnimRunning })
+      else if (!show && ( minPort || medPort || larPort )) s.hiddenShowPort({ animRunning, isRunning, minPort, minLand, setAnimRunning })
+      else if (show && ( minLand || medLand || larLand )) s.showHiddenLand({ animRunning, isRunning, minPort, minLand, setAnimRunning })
+      else if (!show && ( minLand || medLand || larLand )) s.hiddenShownLand({ animRunning, isRunning, minPort, minLand, setAnimRunning })
     })
   },[show, minPort, minLand, medPort, medLand, larPort, larLand, width, animRunning])
 
-  const animRunningHandler: any = () => {
-    setAnimRunning(true)
-    isRunning.current = true
-  }
+  const animRunningHandler: any = () => { setAnimRunning(true); isRunning.current = true }
 
   return (
     <Box sx={s.background({ minPort, minLand, medPort, medLand, larPort, larLand })}>

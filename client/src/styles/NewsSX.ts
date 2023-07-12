@@ -281,7 +281,7 @@ interface slideBoxI {
   larPort: boolean,
 }
 
-export const sliderBox = ({ larPort }: slideBoxI) => { 
+export const sliderBox = ({ larPort }: slideBoxI) => {
   return {
     ...flex, ...relative,
     flexDirection : 'column-reverse',
@@ -299,7 +299,7 @@ interface eachDescriptionI {
   larPort: boolean,
 }
 
-export const eachDescription = ({ animRunning, show, minPort, larPort }: eachDescriptionI) => { 
+export const eachDescription = ({ animRunning, show, minPort, larPort }: eachDescriptionI) => {
   return {
     ...flex, ...row, ...relative,
     width: animRunning ? 'none' : minPort && show ? 'calc(100vw - 12px - 20px)' : larPort && show ? 'calc(100vw - 12px - 30px)' : '500px',

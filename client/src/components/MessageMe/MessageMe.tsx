@@ -36,6 +36,12 @@ function MessageMe() {
     if (text !== null) setText(text)
   },[])
 
+  useEffect(() => { // text length handler
+    if (text.length > 1250) setSentButtonDisabled(true)
+    else setSentButtonDisabled(false)
+  },[text])
+
+
   var Toast: any = Swal
 
   const clearBoth = () => {
@@ -146,12 +152,20 @@ function MessageMe() {
     }
   }
 
+  console.log("text length", text.length)
+
   return (
     <Box sx={s.background({ larPort, larLand })}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       <Box sx={s.mainContainer({ larPort, larLand })}>
         <Box sx={s.leftRightHelper({ larPort, larLand })}></Box>
         <Box sx={s.formContainer({ minPort, minLand, medPort, medLand, darkMode })}>
+          
+          <Box sx={s.test({ length: text.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
+            <Typography sx={s.test1({ length: text.length, minPort, minLand, medPort, medLand, larPort, larLand })}>{text.length} </Typography>
+            <Typography sx={s.test2({ length: text.length, minPort, minLand, medPort, medLand, larPort, larLand })}>/ 1250</Typography>
+          </Box>
+          
           <Button
             disabled={clearButtonDisabled}
             variant="contained"

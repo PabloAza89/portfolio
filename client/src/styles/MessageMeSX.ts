@@ -165,6 +165,90 @@ export const messageBox = ({ minPort, minLand, medPort, medLand, darkMode }: mes
   }
 }
 
+interface testI {
+  minPort: boolean,
+  medPort: boolean,
+  larPort: boolean,
+  larLand: boolean,
+}
+
+export const test = ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: testI) => {
+  return {
+    display: 'flex',
+    //display: 'none',
+    flexDirection: 'row',
+    //position: 'absolute',
+    position: minLand || medLand ? 'relative' : 'absolute',
+    marginLeft: minPort ? '5vw' : medPort ? '4.3vw' : larPort || larLand ? 'max(30px, 3vw);' : 'none',
+    top: minPort ? '4.5%' : medPort ? '6%' : larPort || larLand ? '4.5%' : 'none', // none === minLand || medLand
+    //minLand || medLand ? 1 : 0,
+    //padding: '0px !important',
+    //margin: '0px !important',
+    background: 'yellow',
+    //color: 'white',
+    fontWeight: 500,
+    width: minPort ? '23vw' : minLand ? '11vw' : medPort ? '13vw' : medLand ? '9vw' : '100px',
+    justifyContent: 'center',
+    order: minLand || medLand ? 1 : 0,
+    //alignSelf: 'center',
+    alignItems: 'center',
+  }
+}
+
+interface testI {
+  length: number,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+  larPort: boolean,
+  larLand: boolean,
+}
+
+export const test1 = ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: testI) => {
+  return {
+    display: 'flex',
+    //display: 'none',
+    position: 'relative',
+    //position: 'absolute',
+    //marginLeft: minPort ? '5vw' : medPort ? '4.3vw' : larPort || larLand ? 'max(75px, 3vw);' : 'none', // 45 + 30
+    //top: '4%',
+    top: minLand || medLand ? '0%' : '4%',
+    //top: '4%',
+    //position: 'relative',
+    //padding: '0px',
+    //margin: '0px !important',
+    background: 'gray',
+    color: length > 1250 ? 'red' : 'white',
+    fontWeight: 500,
+    //fontSize: '16px',
+    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.32vw' : '16px', // fontSize
+    width: '50%',
+    justifyContent: 'flex-end',
+    //alignItems: 'center',
+  }
+}
+
+export const test2 = ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: testI) => {
+  return {
+    display: 'flex',
+    //display: 'none',
+    position: 'relative',
+    //marginLeft: minPort ? '5vw' : medPort ? '4.3vw' : larPort || larLand ? 'max(75px, 3vw);' : 'none', // 45 + 30
+    //top: '4%',
+    top: minLand || medLand ? '0%' : '4%',
+    //position: 'relative',
+    background: 'lightgray',
+    color: 'white',
+    fontWeight: 500,
+    //fontSize: '16px',
+    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.32vw' : '16px', // fontSize
+    width: '50%',
+    justifyContent: 'flex-start',
+    //alignItems: 'center',
+  }
+}
+
 interface clearButtonI {
   minPort: boolean,
   minLand: boolean,
