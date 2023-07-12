@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import * as s from '../../styles/NewsSX';
 import $ from 'jquery';
-import { keyframes } from '@emotion/react'
 import '../../styles/NewsSX.css';
 import { easings } from '../../styles/CommonsSX';
 
@@ -24,9 +23,7 @@ function News() {
   const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
   const [ show, setShow ] = useState<boolean>(false)
-  const [ scrollWidth, setScrollWidth ] = useState<number>(0)
   const [ animRunning, setAnimRunning ] = useState<boolean>(false)
-  
 
   interface arrayI {
     id: number,
@@ -46,10 +43,7 @@ function News() {
 
 
   useEffect(() => {
-
-
-
-
+    
         if (darkMode) {
           $(function() {
 
@@ -66,7 +60,7 @@ function News() {
                 .css("background", "lightgreen")
                 .stop(true, true)
                 .delay(400)
-                .animate({scrollLeft: 420}, 6000)
+                .animate({scrollLeft: 420}, 8000)
               $(`.date${e.id}`)
                 .css("background", "lightcoral")
             })
@@ -101,7 +95,7 @@ function News() {
                 .css("background", "#76b376")
                 .stop(true, true)
                 .delay(400)
-                .animate({scrollLeft: 420}, 6000)
+                .animate({scrollLeft: 420}, 8000)
               $(`.date${e.id}`)
                 .css("background", "#bd7979")
             })
@@ -126,34 +120,6 @@ function News() {
 
   },[darkMode])
 
-  // useEffect(() => {
-  //   $(function() {
-  //     var scrollDiv = document.createElement("div"); // Creates the div
-  //     scrollDiv.className = "scrollbar-measure";
-  //     document.body.appendChild(scrollDiv);
-  //     $(`.scrollbar-measure`)
-  //       .css("overflowY", "scroll") // Creates a ScrollBar
-  //       .css("width", "fit-content") // Set width to auto considering the ScrollBar width
-  //     setScrollWidth(scrollDiv.offsetWidth)
-  //     document.body.removeChild(scrollDiv); // Delete the div
-  //   })
-
-  // },[])
-
-  useEffect(() => {
-    $(function() {
-      var scrollDiv = document.createElement("div"); // Creates the div
-      scrollDiv.className = "scrollbar-measure";
-      document.body.appendChild(scrollDiv);
-      $(`.scrollbar-measure`)
-        .css("overflowY", "scroll") // Creates a ScrollBar
-        .css("width", "fit-content") // Set width to auto considering the ScrollBar width
-      setScrollWidth(scrollDiv.offsetWidth)
-      document.body.removeChild(scrollDiv); // Delete the div
-    })
-
-  },[])
-
   useEffect(() => {
       $(function() {
 
@@ -163,7 +129,7 @@ function News() {
             .stop()
             .css("left", "6px")
           $(`.dateAndText`)
-            .css("left", minPort || minLand ? "490px" : "500px")
+            .css("left", "500px")
 
           if (!animRunning) {
             
@@ -183,7 +149,7 @@ function News() {
               .css(`animationIterationCount`,`none`)
             $(`.dateAndText`)
               .stop()
-                .animate( { left: -30 }, { queue: false, easing: 'easeOutCubic', duration: 800, complete: function() {
+                .animate( { left: minPort || minLand ? -20 : -30 }, { queue: false, easing: 'easeOutCubic', duration: 800, complete: function() {
                   isRunning.current = false;
                   if (!isRunning.current) {
                     setAnimRunning(false)
@@ -197,8 +163,10 @@ function News() {
         else if (!show && ( minPort || medPort || larPort )) { // HIDDEN -> SHOWN // LARPORT
 
           $(`.buttonShow`)
-          .stop() 
+          .stop()
           .css("left", "6px")
+          $(`.dateAndText`) // added
+          .css("left", minPort || minLand ? "-20px" : "-30px") // added
 
           if (!animRunning) {
             $(`.buttonShow`)
@@ -210,14 +178,14 @@ function News() {
 
             $(`#buttonShow`).on("click", function() {
               $(`#buttonShow`)
-              .stop() 
+              .stop()
               .css(`animationName`,`none`)
               .css(`animationDuration`,`0s`)
               .css(`animationDelay`,`0s`)
               .css(`animationIterationCount`,`none`)
               $(`.dateAndText`)
               .stop() // added
-                .animate( { left: minPort || minLand ? 490 : 500 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
+                .animate( { left: 500 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
                   isRunning.current = false;
                   if (!isRunning.current) {
                     setAnimRunning(false)
@@ -233,7 +201,7 @@ function News() {
           $(`.buttonShow`)
             .css("left", "506px")
           $(`.dateAndText`)
-            .css("left", "470px")
+            .css("left", minPort || minLand ? "480px" : "470px")
         }
 
         if (!animRunning) {
@@ -247,7 +215,7 @@ function News() {
         $(`.buttonShow`).on("click", function() {
            $(`.dateAndText`)
               .stop()
-              .animate( { left: -30}, { queue: false, easing: 'easeOutCubic', duration: 800, complete: function() {
+              .animate( { left: minPort || minLand ? -20 : -30}, { queue: false, easing: 'easeOutCubic', duration: 800, complete: function() {
                 isRunning.current = false;
                 if (!isRunning.current) {
                   setAnimRunning(false)
@@ -273,7 +241,7 @@ function News() {
           $(`.buttonShow`)
             .css("left", "6px")
           $(`.dateAndText`)
-            .css("left", "-30px")
+            .css("left", minPort || minLand ? "-20px" : "-30px")
         }
 
         if (!animRunning) {
@@ -286,7 +254,7 @@ function News() {
 
         $(`.buttonShow`).on("click", function() {
           $(`.dateAndText`)
-            .animate( { left: 470 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
+            .animate( { left: minPort || minLand ? 480 : 470 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
               isRunning.current = false;
               if (!isRunning.current) {
                 setAnimRunning(false)
@@ -330,7 +298,7 @@ function News() {
             <Box 
               className={`eachDescription`}
               key={e.id} 
-              sx={s.eachDescription({ animRunning, scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
+              sx={s.eachDescription({ animRunning, show, minPort, minLand, medPort, medLand, larPort, larLand })}
             >
               <Typography
                 className={`date${e.id}`}
@@ -340,7 +308,7 @@ function News() {
               </Typography>
               <Typography
                 className={`text${e.id}`}
-                sx={s.text({ animRunning, darkMode, scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
+                sx={s.text({ animRunning, darkMode, minPort, minLand, medPort, medLand, larPort, larLand })}
               >
                 {e.text}
               </Typography>

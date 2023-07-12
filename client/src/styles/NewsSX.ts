@@ -34,7 +34,7 @@ export const background = ({ show, minPort, minLand, medPort, medLand, larPort, 
     bottom: minLand || medLand || larLand ? '20px' : 'none',
     left: '-494px', // 500 - 6
     background: 'yellow',
-    width: '530px',
+    width: minPort || minLand ? '520px' : '530px',
     justifyContent: 'end',
   }
 }
@@ -113,7 +113,7 @@ export const sliderBox = ({ minPort, minLand, medPort, medLand, larPort, larLand
 
 interface eachDescriptionI {
   animRunning: boolean,
-  scrollWidth: number,
+  show: boolean,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -122,11 +122,11 @@ interface eachDescriptionI {
   larLand: boolean,
 }
 
-export const eachDescription = ({ animRunning, scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand }: eachDescriptionI) => { // background
+export const eachDescription = ({ animRunning, show, minPort, minLand, medPort, medLand, larPort, larLand }: eachDescriptionI) => { // background
   return {
     ...flex, ...row, ...relative,
     //width: animRunning && minPort ? 'calc(100vw - 12px - 20px)' : animRunning && larPort ? 'calc(100vw - 12px - 30px)' : animRunning && larLand ? '500px' : 'none',
-    width: animRunning ? 'none' : minPort ? 'calc(100vw - 12px - 20px)' : larPort ? 'calc(100vw - 12px - 30px)' : '500px',
+    width: animRunning ? 'none' : minPort && show ? 'calc(100vw - 12px - 20px)' : larPort && show ? 'calc(100vw - 12px - 30px)' : '500px',
     //width: '300px',
     //width: 'none',
     maxWidth: `500px`,
@@ -152,14 +152,13 @@ export const date = ({ darkMode, minPort, minLand, medPort, medLand, larPort, la
     width: '80px',
     minWidth: '80px',
     background: darkMode ? '#bd7979' : 'lightcoral',
-    fontSize: minPort || minLand ? '12px' : '16px',
+    fontSize: minPort || minLand ? '14px' : '16px',
   }
 }
 
 interface textI {
   animRunning: boolean,
   darkMode: boolean,
-  scrollWidth: number,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -168,7 +167,7 @@ interface textI {
   larLand: boolean,
 }
 
-export const text = ({ animRunning, darkMode, scrollWidth, minPort, minLand, medPort, medLand, larPort, larLand }: textI) => { // background
+export const text = ({ animRunning, darkMode, minPort, minLand, medPort, medLand, larPort, larLand }: textI) => { // background
   return {
     ...flex, ...relative, ...noSelect,
     width: '420px',
@@ -178,6 +177,6 @@ export const text = ({ animRunning, darkMode, scrollWidth, minPort, minLand, med
     overflowX: 'hidden',
     //overflow: animRunning ? 'visible' : 'none',
     textWrap: 'nowrap',
-    fontSize: minPort || minLand ? '12px' : '16px',
+    fontSize: minPort || minLand ? '14px' : '16px',
   }
 }
