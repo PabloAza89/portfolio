@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Swal from 'sweetalert2'
 import { setTimer, stopTimer, setNumberTimer, setTimerEnabled } from '../../actions';
 import store from '../../store/store';
+import '../../styles/MessageMeSX.css';
 
 function MessageMe() {
 
@@ -36,11 +37,14 @@ function MessageMe() {
     if (text !== null) setText(text)
   },[])
 
-  useEffect(() => { // text length handler
-    if (text.length > 1250) setSentButtonDisabled(true)
-    else setSentButtonDisabled(false)
-  },[text])
-
+  useEffect(() => { // name & text length handler
+    if ( name.length > 70 || text.length > 1250 ) {
+      setSentButtonDisabled(true)
+      if (name.length > 70) s.doShake()
+      else s.doNotShake()
+    }
+    else { setSentButtonDisabled(false); s.doNotShake() }
+  },[name, text])
 
   var Toast: any = Swal
 
@@ -152,20 +156,16 @@ function MessageMe() {
     }
   }
 
-  console.log("text length", text.length)
-
   return (
     <Box sx={s.background({ larPort, larLand })}>
       <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
       <Box sx={s.mainContainer({ larPort, larLand })}>
         <Box sx={s.leftRightHelper({ larPort, larLand })}></Box>
         <Box sx={s.formContainer({ minPort, minLand, medPort, medLand, darkMode })}>
-          
-          <Box sx={s.test({ length: text.length, minPort, minLand, medPort, medLand, larPort, larLand })}>
-            <Typography sx={s.test1({ length: text.length, minPort, minLand, medPort, medLand, larPort, larLand })}>{text.length} </Typography>
-            <Typography sx={s.test2({ length: text.length, minPort, minLand, medPort, medLand, larPort, larLand })}>/ 1250</Typography>
+          <Box sx={s.lengthContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+            <Typography sx={s.leftCounter({ length: text.length, minPort, minLand, medPort, medLand })}>{text.length} </Typography>
+            <Typography sx={s.rightCounter({ minPort, minLand, medPort, medLand })}>/ 1250</Typography>
           </Box>
-          
           <Button
             disabled={clearButtonDisabled}
             variant="contained"
@@ -176,13 +176,12 @@ function MessageMe() {
             { english ? 'CLEAR' : 'LIMPIAR' }
           </Button>
           <TextField
+            className={`nameInput`}
             label={english ? "Your name here" : "Tu nombre aquí"}
-            multiline
-            rows={1}
             size="small"
             value={name}
             InputLabelProps={{ style: s.labelStyle({ darkMode }) }}
-            InputProps={{ style: s.inputStyle({ darkMode }) }}
+            InputProps={{ style: s.inputStyleName({ darkMode, length: name.length }) }}
             sx={s.nameBox({ minPort, minLand, medPort, medLand, darkMode })}
             onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
           />
@@ -193,7 +192,7 @@ function MessageMe() {
             value={text}
             size="small"
             InputLabelProps={{ style: s.labelStyle({ darkMode }) }}
-            InputProps={{ style: s.inputStyle({ darkMode }) }}
+            InputProps={{ style: s.inputStyleText({ darkMode }) }}
             onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
             sx={s.messageBox({ minPort, minLand, medPort, medLand, darkMode })}
           />

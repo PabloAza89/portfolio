@@ -1,7 +1,23 @@
 import {
-  flex, relative, absolute, column,
-  aic, asc, jcc, noSelect,
-  jcse, mix} from './CommonsSX';
+  flex, relative, absolute, column, jcfe,
+  aic, asc, jcc, noSelect, jcse, row, jcfs,
+} from './CommonsSX';
+import $ from 'jquery';
+
+export const doShake = () => {
+  $('.nameInput')
+    .css(`animationName`,`shakeLeftRight`)
+    .css(`animationDuration`,`2.5s`)
+    .css(`animationIterationCount`,`infinite`)
+}
+
+export const doNotShake = () => {
+  $('.nameInput')
+    .stop()
+    .css(`animationName`,`none`)
+    .css(`animationDuration`,`0s`)
+    .css(`animationIterationCount`,`none`)
+}
 
 interface topBottomHelperI {
   minPort: boolean,
@@ -103,17 +119,28 @@ export const labelStyle = ({ darkMode }: labelStyleI) => {
     ...noSelect,
     background: darkMode ? '#615f5f' : 'white',
     padding: '0px 8px',
-    left: '-5px',
+        left: '-5px',
     borderRadius: `4px`,
     color: darkMode ? 'white' : 'rgba(0, 0, 0, 0.6)',
   }
 }
 
-interface inputStyleI {
-  darkMode: boolean
+interface inputStyleNameI {
+  darkMode: boolean,
+  length: number,
 }
 
-export const inputStyle = ({ darkMode }: inputStyleI) => {
+export const inputStyleName = ({ darkMode, length }: inputStyleNameI) => {
+  return {
+    color: length > 70 ? 'red' : darkMode ? 'white' : 'rgba(0, 0, 0, 0.87)',
+  }
+}
+
+interface inputStyleTextI {
+  darkMode: boolean,
+}
+
+export const inputStyleText = ({ darkMode }: inputStyleTextI) => {
   return {
     color: darkMode ? 'white' : 'rgba(0, 0, 0, 0.87)',
   }
@@ -165,38 +192,7 @@ export const messageBox = ({ minPort, minLand, medPort, medLand, darkMode }: mes
   }
 }
 
-interface testI {
-  minPort: boolean,
-  medPort: boolean,
-  larPort: boolean,
-  larLand: boolean,
-}
-
-export const test = ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: testI) => {
-  return {
-    display: 'flex',
-    //display: 'none',
-    flexDirection: 'row',
-    //position: 'absolute',
-    position: minLand || medLand ? 'relative' : 'absolute',
-    marginLeft: minPort ? '5vw' : medPort ? '4.3vw' : larPort || larLand ? 'max(30px, 3vw);' : 'none',
-    top: minPort ? '4.5%' : medPort ? '6%' : larPort || larLand ? '4.5%' : 'none', // none === minLand || medLand
-    //minLand || medLand ? 1 : 0,
-    //padding: '0px !important',
-    //margin: '0px !important',
-    background: 'yellow',
-    //color: 'white',
-    fontWeight: 500,
-    width: minPort ? '23vw' : minLand ? '11vw' : medPort ? '13vw' : medLand ? '9vw' : '100px',
-    justifyContent: 'center',
-    order: minLand || medLand ? 1 : 0,
-    //alignSelf: 'center',
-    alignItems: 'center',
-  }
-}
-
-interface testI {
-  length: number,
+interface lengthContainerI {
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -205,47 +201,55 @@ interface testI {
   larLand: boolean,
 }
 
-export const test1 = ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: testI) => {
+export const lengthContainer = ({ minPort, minLand, medPort, medLand, larPort, larLand }: lengthContainerI) => {
   return {
-    display: 'flex',
-    //display: 'none',
-    position: 'relative',
-    //position: 'absolute',
-    //marginLeft: minPort ? '5vw' : medPort ? '4.3vw' : larPort || larLand ? 'max(75px, 3vw);' : 'none', // 45 + 30
-    //top: '4%',
-    top: minLand || medLand ? '0%' : '4%',
-    //top: '4%',
-    //position: 'relative',
-    //padding: '0px',
-    //margin: '0px !important',
-    background: 'gray',
-    color: length > 1250 ? 'red' : 'white',
+    ...flex, ...row, ...jcc, ...aic,
+    position: minLand || medLand ? 'relative' : 'absolute',
+    marginLeft: minPort ? '5vw' : medPort ? '4.3vw' : larPort || larLand ? 'max(30px, 3vw);' : 'none',
+    top: minPort ? '4.5%' : medPort ? '6%' : larPort || larLand ? '4.5%' : 'none', // none === minLand || medLand
+    //background: 'yellow',
     fontWeight: 500,
-    //fontSize: '16px',
-    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.32vw' : '16px', // fontSize
-    width: '50%',
-    justifyContent: 'flex-end',
-    //alignItems: 'center',
+    width: minPort ? '23vw' : minLand ? '11vw' : medPort ? '13vw' : medLand ? '9vw' : '100px',
+    order: minLand || medLand ? 1 : 0,
   }
 }
 
-export const test2 = ({ length, minPort, minLand, medPort, medLand, larPort, larLand }: testI) => {
+interface leftCounterI {
+  length: number,
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+}
+
+export const leftCounter = ({ length, minPort, minLand, medPort, medLand }: leftCounterI) => {
   return {
-    display: 'flex',
-    //display: 'none',
-    position: 'relative',
-    //marginLeft: minPort ? '5vw' : medPort ? '4.3vw' : larPort || larLand ? 'max(75px, 3vw);' : 'none', // 45 + 30
-    //top: '4%',
+    ...flex, ...relative, ...jcfe,
     top: minLand || medLand ? '0%' : '4%',
-    //position: 'relative',
-    background: 'lightgray',
+    //background: 'gray',
+    color: length > 1250 ? 'red' : 'white',
+    fontWeight: 500,
+    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.32vw' : '16px',
+    width: '50%',
+  }
+}
+
+interface rightCounterI {
+  minPort: boolean,
+  minLand: boolean,
+  medPort: boolean,
+  medLand: boolean,
+}
+
+export const rightCounter = ({ minPort, minLand, medPort, medLand }: rightCounterI) => {
+  return {
+    ...flex, ...relative, ...jcfs,
+    top: minLand || medLand ? '0%' : '4%',
+    //background: 'lightgray',
     color: 'white',
     fontWeight: 500,
-    //fontSize: '16px',
-    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.32vw' : '16px', // fontSize
+    fontSize: minPort ? '3.4vw' : minLand ? '1.58vw' : medPort ? '1.9vw' : medLand ? '1.32vw' : '16px',
     width: '50%',
-    justifyContent: 'flex-start',
-    //alignItems: 'center',
   }
 }
 
@@ -299,10 +303,10 @@ export const sendMessageButton = ({ minPort, minLand, medPort, medLand }: sendMe
 
 export const loadingText = () => {
   return {
-    ...mix,
     fontSize: '12px',
-    color: 'white',
-    fontWeight: '700',
+    //color: 'white',
+    color: 'black',
+    fontWeight: '900',
     animation: 'flickerAnimation 1.2s infinite',
     '@keyframes flickerAnimation': {
       '0%': { opacity: 1 },
@@ -318,13 +322,13 @@ interface messageLoadingSpinnerI {
 
 export const messageLoadingSpinner = ({ show }: messageLoadingSpinnerI) => {
   return {
-    ...absolute, ...jcc, ...aic,  ...mix,
-    //background: 'red',
+    ...absolute, ...jcc, ...aic,
     display: show ? 'flex' : 'none',
+    //display: 'flex',
     alignContent: 'center',
     width: '100%',
     height: '100px',
-    zIndex: 900,
+    zIndex: 1000,
    'div': {
       ...absolute,
       boxSizing: 'border-box',
@@ -335,7 +339,8 @@ export const messageLoadingSpinner = ({ show }: messageLoadingSpinnerI) => {
       border: '8px solid #fff',
       borderRadius: '50%',
       animation: 'lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite',
-      borderColor: '#fff transparent transparent transparent',
+      //borderColor: '#fff transparent transparent transparent',
+      borderColor: 'black transparent transparent transparent',
     },
    'div:nth-of-type(1)': {
       animationDelay: '-0.45s'
