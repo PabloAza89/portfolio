@@ -1,5 +1,5 @@
 import { Box, Typography, Button } from '@mui/material';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import * as s from '../../styles/NewsSX';
 import $ from 'jquery';
@@ -31,7 +31,7 @@ function News() {
     text: string,
   }
 
-  const array: arrayI[] = [
+  const array: arrayI[] = useMemo(() =>  [
     {id: 6, date: '23-07-01', text: english ? ' Start using LocalStorage for data persistance  ' : ' Se empezó a utilizar LocalStorage para la persistencia de datos  '},
     {id: 5, date: '23-06-03', text: english ? ' Developing Skills Component (the most difficult)  ' : ' Desarrollando el Componente Habilidades (El más dificultoso)  '},
     {id: 4, date: '23-05-08', text: english ? ' Using own solution for use styles with variables  ' : ' Utilizando una solución propia para el uso de estilos con variables  '},
@@ -39,276 +39,56 @@ function News() {
     {id: 2, date: '23-03-30', text: english ? ' Break for moving  ' : ' Pausa para mudanza  '},
     {id: 1, date: '23-02-21', text: english ? ' Break for vacations  ' : ' Descanso de vacaciones  '},
     {id: 0, date: '23-01-20', text: english ? ' Start developing my own first portfolio !  ' : ' Empezando a desarrollar mi primer portfolio propio !  '},
-  ]
-
-
-  useEffect(() => {
-    
-        if (darkMode) {
-          $(function() {
-
-          array.forEach(e => {
-            $(`.text${e.id}`)
-                .stop(true, true)
-                .css("background", "#76b376")
-                .animate({scrollLeft: 0}, 0)
-              $(`.date${e.id}`)
-                .css("background", "#bd7979")
-
-            $(`.text${e.id}`).on("mouseenter", function(){
-              $(`.text${e.id}`)
-                .css("background", "lightgreen")
-                .stop(true, true)
-                .delay(400)
-                .animate({scrollLeft: 420}, 8000)
-              $(`.date${e.id}`)
-                .css("background", "lightcoral")
-            })
-            $(`.text${e.id}`).on("mouseleave", function(){
-              $(`.text${e.id}`)
-                .stop(true, true)
-                .css("background", "#76b376")
-                .animate({scrollLeft: 0}, 0)
-              $(`.date${e.id}`)
-                .css("background", "#bd7979")
-            })
-
-
-          })
-         })
-        }
-
-
-        else {
-        $(function() {
-          array.forEach(e => {
-            $(`.text${e.id}`)
-            .stop(true, true)
-            .css("background", "lightgreen")
-            .animate({scrollLeft: 0}, 0)
-          $(`.date${e.id}`)
-            .css("background", "lightcoral")
-
-
-            $(`.text${e.id}`).on("mouseenter", function(){
-              $(`.text${e.id}`)
-                .css("background", "#76b376")
-                .stop(true, true)
-                .delay(400)
-                .animate({scrollLeft: 420}, 8000)
-              $(`.date${e.id}`)
-                .css("background", "#bd7979")
-            })
-            $(`.text${e.id}`).on("mouseleave", function(){
-              $(`.text${e.id}`)
-                .stop(true, true)
-                .css("background", "lightgreen")
-                .animate({scrollLeft: 0}, 0)
-              $(`.date${e.id}`)
-                .css("background", "lightcoral")
-            })
-
-
-          })
-      })
-    }
-
-
-
-
-
-
-  },[darkMode])
+  ], [english]);
 
   useEffect(() => {
-      $(function() {
+    if (darkMode) {
+      $(function() { s.colorAndHoverIsDark({ array })})
+    } else $(function() { s.colorAndHoverNotDark({ array })})
+  },[darkMode, array])
 
-        if (show && ( minPort || medPort || larPort )) { // SHOWN -> HIDDEN  // LARPORT
-
-          $(`.buttonShow`)
-            .stop()
-            .css("left", "6px")
-          $(`.dateAndText`)
-            .css("left", "500px")
-
-          if (!animRunning) {
-            
-            $(`.buttonShow`)
-              .css(`animationName`,`shake`)
-              .css(`animationDuration`,`6s`)
-              .css(`animationDelay`,`3s`)
-              .css(`animationIterationCount`,`infinite`)
-          }
-
-          $(`#buttonShow`).on("click", function() {
-            $(`#buttonShow`)
-              .stop()
-              .css(`animationName`,`none`)
-              .css(`animationDuration`,`0s`)
-              .css(`animationDelay`,`0s`)
-              .css(`animationIterationCount`,`none`)
-            $(`.dateAndText`)
-              .stop()
-                .animate( { left: minPort || minLand ? -20 : -30 }, { queue: false, easing: 'easeOutCubic', duration: 800, complete: function() {
-                  isRunning.current = false;
-                  if (!isRunning.current) {
-                    setAnimRunning(false)
-                    
-                  }
-                }})
-             
-
-          })
-        }
-        else if (!show && ( minPort || medPort || larPort )) { // HIDDEN -> SHOWN // LARPORT
-
-          $(`.buttonShow`)
-          .stop()
-          .css("left", "6px")
-          $(`.dateAndText`) // added
-          .css("left", minPort || minLand ? "-20px" : "-30px") // added
-
-          if (!animRunning) {
-            $(`.buttonShow`)
-              .css(`animationName`,`shake`)
-              .css(`animationDuration`,`6s`)
-              .css(`animationDelay`,`3s`)
-              .css(`animationIterationCount`,`infinite`)
-          }
-
-            $(`#buttonShow`).on("click", function() {
-              $(`#buttonShow`)
-              .stop()
-              .css(`animationName`,`none`)
-              .css(`animationDuration`,`0s`)
-              .css(`animationDelay`,`0s`)
-              .css(`animationIterationCount`,`none`)
-              $(`.dateAndText`)
-              .stop() // added
-                .animate( { left: 500 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
-                  isRunning.current = false;
-                  if (!isRunning.current) {
-                    setAnimRunning(false)
-                  }
-                }})
-                
-          })
-       }
-
-       else  if (show && ( minLand || medLand || larLand )) { // SHOWN -> HIDDEN // LARLAND
-
-        if (!animRunning) {
-          $(`.buttonShow`)
-            .css("left", "506px")
-          $(`.dateAndText`)
-            .css("left", minPort || minLand ? "480px" : "470px")
-        }
-
-        if (!animRunning) {
-          $(`.buttonShow`)
-            .css(`animationName`,`shake`)
-            .css(`animationDuration`,`6s`)
-            .css(`animationDelay`,`3s`)
-            .css(`animationIterationCount`,`infinite`)
-        }
-
-        $(`.buttonShow`).on("click", function() {
-           $(`.dateAndText`)
-              .stop()
-              .animate( { left: minPort || minLand ? -20 : -30}, { queue: false, easing: 'easeOutCubic', duration: 800, complete: function() {
-                isRunning.current = false;
-                if (!isRunning.current) {
-                  setAnimRunning(false)
-                }
-              }})
-            $(`.buttonShow`)
-               .stop()
-               .css(`animationName`,`none`)
-               .css(`animationDuration`,`0s`)
-               .css(`animationDelay`,`0s`)
-               .css(`animationIterationCount`,`none`)
-              .animate( { left: 6}, { queue: false, easing: 'easeOutCubic', duration: 800, complete: function() {
-                isRunning.current = false;
-                if (!isRunning.current) {
-                  setAnimRunning(false)
-                }
-              }})
-        })
+  useEffect(() => {
+    $(function() {
+      if (show && ( minPort || medPort || larPort )) { // SHOWN -> HIDDEN  // PORT
+        s.shownHiddenPort({ animRunning, isRunning, minPort, minLand, setAnimRunning })
+      } else if (!show && ( minPort || medPort || larPort )) { // HIDDEN -> SHOWN // PORT
+        s.hiddenShowPort({ animRunning, isRunning, minPort, minLand, setAnimRunning })
+      } else if (show && ( minLand || medLand || larLand )) { // SHOWN -> HIDDEN // LAND
+        s.showHiddenLand({ animRunning, isRunning, minPort, minLand, setAnimRunning })
+      } else if (!show && ( minLand || medLand || larLand )) { // HIDDEN -> SHOWN // LAND
+        s.hiddenShownLand({ animRunning, isRunning, minPort, minLand, setAnimRunning })
       }
-      else if (!show && ( minLand || medLand || larLand )) { // HIDDEN -> SHOWN // LARLAND
-        
-        if (!animRunning) {
-          $(`.buttonShow`)
-            .css("left", "6px")
-          $(`.dateAndText`)
-            .css("left", minPort || minLand ? "-20px" : "-30px")
-        }
-
-        if (!animRunning) {
-          $(`.buttonShow`)
-            .css(`animationName`,`shake`)
-            .css(`animationDuration`,`6s`)
-            .css(`animationDelay`,`3s`)
-            .css(`animationIterationCount`,`infinite`)
-        }
-
-        $(`.buttonShow`).on("click", function() {
-          $(`.dateAndText`)
-            .animate( { left: minPort || minLand ? 480 : 470 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
-              isRunning.current = false;
-              if (!isRunning.current) {
-                setAnimRunning(false)
-              }
-            }})
-          $(`.buttonShow`)
-              .css(`animationName`,`none`)
-               .css(`animationDuration`,`0s`)
-               .css(`animationDelay`,`0s`)
-               .css(`animationIterationCount`,`none`)
-            .animate( { left: 506 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
-              isRunning.current = false; if (!isRunning.current) {
-                setAnimRunning(false)
-              }
-            }})
-        })
-     }
     })
   },[show, minPort, minLand, medPort, medLand, larPort, larLand, width, animRunning])
-
 
   const animRunningHandler: any = () => {
     setAnimRunning(true)
     isRunning.current = true
   }
 
-  console.log("show", show, "animRunning", animRunning)
-
   return (
-    <Box
-      sx={s.background({ show, minPort, minLand, medPort, medLand, larPort, larLand })}
-      //className={`all`}
-    >
+    <Box sx={s.background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
       <Box
-        sx={s.sliderBox({ minPort, minLand, medPort, medLand, larPort, larLand })}
+        sx={s.sliderBox({ larPort })}
         className={`dateAndText`}
         id={`dateAndText`}
       >
         {array.map(e => {
           return (
-            <Box 
+            <Box
               className={`eachDescription`}
-              key={e.id} 
-              sx={s.eachDescription({ animRunning, show, minPort, minLand, medPort, medLand, larPort, larLand })}
+              key={e.id}
+              sx={s.eachDescription({ animRunning, show, minPort, larPort })}
             >
               <Typography
                 className={`date${e.id}`}
-                sx={s.date({ darkMode, minPort, minLand, medPort, medLand, larPort, larLand })}
+                sx={s.date({ darkMode, minPort, minLand })}
               >
                 {e.date}
               </Typography>
               <Typography
                 className={`text${e.id}`}
-                sx={s.text({ animRunning, darkMode, minPort, minLand, medPort, medLand, larPort, larLand })}
+                sx={s.text({ darkMode, minPort, minLand })}
               >
                 {e.text}
               </Typography>
@@ -320,9 +100,9 @@ function News() {
         className={`buttonShow`}
         id={`buttonShow`}
         onClick={() => { animRunningHandler(!show); setShow(!show) }}
-        sx={s.buttonNews({ show, darkMode, minPort, minLand, medPort, medLand, larPort, larLand })}
+        sx={s.buttonNews({ darkMode, minPort, minLand })}
       >
-        <Typography sx={s.changeLogTypo({ english, minPort, minLand, medPort, medLand, larPort, larLand })}>
+        <Typography sx={s.changeLogTypo({ english, minPort, minLand, larPort, larLand })}>
           {english ? `CHANGELOG` : `REG. DE CAMBIOS`}
         </Typography>
       </Button>

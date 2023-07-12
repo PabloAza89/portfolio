@@ -1,9 +1,8 @@
 import {
-  flex, relative, column,
-  row, aic, jcc, fixed,
-  jcsb, jcse, mix, noSelect
+  flex, relative, row,
+  jcc, fixed, noSelect
 } from './CommonsSX';
-import { keyframes } from '@emotion/react'
+import $ from 'jquery';
 
 // LAR (width)    // MIN (width)    //
 // 500 total      // 500 total      //
@@ -14,9 +13,207 @@ import { keyframes } from '@emotion/react'
 
 // 80 + 420 + 30 = 530
 
+interface arrayI {
+  id: number
+}
+
+interface colorAndHoverI {
+  array: arrayI[]
+}
+
+export const colorAndHoverIsDark = ({ array }: colorAndHoverI) => {
+  array.forEach(e => {
+    $(`.text${e.id}`)
+      .stop(true, true)
+      .css("background", "#76b376")
+      .animate({scrollLeft: 0}, 0)
+    $(`.date${e.id}`)
+      .css("background", "#bd7979")
+    $(`.text${e.id}`).on("mouseenter", function() {
+      $(`.text${e.id}`)
+        .css("background", "lightgreen")
+        .stop(true, true)
+        .delay(400)
+        .animate({scrollLeft: 420}, 8000)
+      $(`.date${e.id}`)
+        .css("background", "lightcoral")
+    })
+    $(`.text${e.id}`).on("mouseleave", function() {
+      $(`.text${e.id}`)
+        .stop(true, true)
+        .css("background", "#76b376")
+        .animate({scrollLeft: 0}, 0)
+      $(`.date${e.id}`)
+        .css("background", "#bd7979")
+    })
+  })
+}
+
+export const colorAndHoverNotDark = ({ array }: colorAndHoverI) => {
+  array.forEach(e => {
+    $(`.text${e.id}`)
+      .stop(true, true)
+      .css("background", "lightgreen")
+      .animate({scrollLeft: 0}, 0)
+    $(`.date${e.id}`)
+      .css("background", "lightcoral")
+    $(`.text${e.id}`).on("mouseenter", function() {
+      $(`.text${e.id}`)
+        .css("background", "#76b376")
+        .stop(true, true)
+        .delay(400)
+        .animate({scrollLeft: 420}, 8000)
+      $(`.date${e.id}`)
+        .css("background", "#bd7979")
+    })
+    $(`.text${e.id}`).on("mouseleave", function() {
+      $(`.text${e.id}`)
+        .stop(true, true)
+        .css("background", "lightgreen")
+        .animate({scrollLeft: 0}, 0)
+      $(`.date${e.id}`)
+        .css("background", "lightcoral")
+    })
+  })
+}
+
+interface isRunningI {
+  current: boolean
+}
+
+interface shownHiddenI {
+  animRunning: boolean,
+  isRunning: isRunningI,
+  minPort: boolean,
+  minLand: boolean,
+  setAnimRunning: Function
+}
+
+export const shownHiddenPort = ({ animRunning, isRunning, minPort, minLand, setAnimRunning }: shownHiddenI) => { // SHOWN -> HIDDEN  // PORT
+  $(`.buttonShow`)
+    .stop()
+    .css("left", "6px")
+  $(`.dateAndText`)
+    .css("left", "500px")
+  if (!animRunning) {
+    $(`.buttonShow`)
+      .css(`animationName`,`shake`)
+      .css(`animationDuration`,`6s`)
+      .css(`animationDelay`,`3s`)
+      .css(`animationIterationCount`,`infinite`)
+  }
+  $(`#buttonShow`).on("click", function() {
+    $(`#buttonShow`)
+      .stop()
+      .css(`animationName`,`none`)
+      .css(`animationDuration`,`0s`)
+      .css(`animationDelay`,`0s`)
+      .css(`animationIterationCount`,`none`)
+    $(`.dateAndText`)
+      .stop()
+      .animate( { left: minPort || minLand ? -20 : -30 }, { queue: false, easing: 'easeOutCubic', duration: 800, complete: function() {
+        isRunning.current = false;
+        if (!isRunning.current) setAnimRunning(false)
+      }})
+  })
+}
+
+export const hiddenShowPort = ({ animRunning, isRunning, minPort, minLand, setAnimRunning }: shownHiddenI) => { // HIDDEN -> SHOWN // PORT
+  $(`.buttonShow`)
+    .stop()
+    .css("left", "6px")
+  $(`.dateAndText`)
+    .css("left", minPort || minLand ? "-20px" : "-30px")
+  if (!animRunning) {
+    $(`.buttonShow`)
+      .css(`animationName`,`shake`)
+      .css(`animationDuration`,`6s`)
+      .css(`animationDelay`,`3s`)
+      .css(`animationIterationCount`,`infinite`)
+  }
+  $(`#buttonShow`).on("click", function() {
+    $(`#buttonShow`)
+      .stop()
+      .css(`animationName`,`none`)
+      .css(`animationDuration`,`0s`)
+      .css(`animationDelay`,`0s`)
+      .css(`animationIterationCount`,`none`)
+    $(`.dateAndText`)
+      .stop()
+      .animate( { left: 500 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
+        isRunning.current = false;
+        if (!isRunning.current) setAnimRunning(false)
+      }})
+  })
+}
+
+export const showHiddenLand = ({ animRunning, isRunning, minPort, minLand, setAnimRunning }: shownHiddenI) => { // SHOWN -> HIDDEN // LAND
+  if (!animRunning) {
+    $(`.buttonShow`)
+      .css("left", "506px")
+    $(`.dateAndText`)
+      .css("left", minPort || minLand ? "480px" : "470px")
+  }
+  if (!animRunning) {
+    $(`.buttonShow`)
+      .css(`animationName`,`shake`)
+      .css(`animationDuration`,`6s`)
+      .css(`animationDelay`,`3s`)
+      .css(`animationIterationCount`,`infinite`)
+  }
+  $(`.buttonShow`).on("click", function() {
+    $(`.dateAndText`)
+      .stop()
+      .animate( { left: minPort || minLand ? -20 : -30}, { queue: false, easing: 'easeOutCubic', duration: 800, complete: function() {
+        isRunning.current = false;
+        if (!isRunning.current) setAnimRunning(false)
+      }})
+    $(`.buttonShow`)
+      .stop()
+      .css(`animationName`,`none`)
+      .css(`animationDuration`,`0s`)
+      .css(`animationDelay`,`0s`)
+      .css(`animationIterationCount`,`none`)
+      .animate( { left: 6}, { queue: false, easing: 'easeOutCubic', duration: 800, complete: function() {
+        isRunning.current = false;
+        if (!isRunning.current) setAnimRunning(false)
+      }})
+  })
+}
+
+export const hiddenShownLand = ({ animRunning, isRunning, minPort, minLand, setAnimRunning }: shownHiddenI) => { // HIDDEN -> SHOWN // LAND
+  if (!animRunning) {
+    $(`.buttonShow`)
+      .css("left", "6px")
+    $(`.dateAndText`)
+      .css("left", minPort || minLand ? "-20px" : "-30px")
+  }
+  if (!animRunning) {
+    $(`.buttonShow`)
+      .css(`animationName`,`shake`)
+      .css(`animationDuration`,`6s`)
+      .css(`animationDelay`,`3s`)
+      .css(`animationIterationCount`,`infinite`)
+  }
+  $(`.buttonShow`).on("click", function() {
+    $(`.dateAndText`)
+      .animate( { left: minPort || minLand ? 480 : 470 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
+        isRunning.current = false;
+        if (!isRunning.current) setAnimRunning(false)
+      }})
+    $(`.buttonShow`)
+      .css(`animationName`,`none`)
+      .css(`animationDuration`,`0s`)
+      .css(`animationDelay`,`0s`)
+      .css(`animationIterationCount`,`none`)
+      .animate( { left: 506 }, { queue: false, easing: 'easeOutCubic', duration: 1500, complete: function() {
+        isRunning.current = false;
+        if (!isRunning.current) setAnimRunning(false)
+      }})
+  })
+}
 
 interface backgroundI {
-  show: boolean,
   minPort: boolean,
   minLand: boolean,
   medPort: boolean,
@@ -25,36 +222,28 @@ interface backgroundI {
   larLand: boolean,
 }
 
-
-export const background = ({ show, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => { // background
+export const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => { // background
   return {
-    ...flex, ...fixed, //...column,
-    flexDirection: 'row',
+    ...flex, ...fixed, ...row,
     top: minPort || medPort ? 'calc(17vw + 10px + 7vh)' : larPort ? 'calc(143px + 10vh)' : 'none', // medPort 17vw+10px // larPort 127+10+6
     bottom: minLand || medLand || larLand ? '20px' : 'none',
     left: '-494px', // 500 - 6
-    background: 'yellow',
+    //background: 'yellow',
     width: minPort || minLand ? '520px' : '530px',
     justifyContent: 'end',
   }
 }
 
 interface buttonNewsI {
-  show: boolean,
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean,
 }
 
 
-export const buttonNews = ({ show, darkMode, minPort, minLand, medPort, medLand, larPort, larLand }: buttonNewsI) => { // background
+export const buttonNews = ({ darkMode, minPort, minLand }: buttonNewsI) => {
   return {
-    ...flex,
-    position: 'fixed',
+    ...flex, ...fixed,
     minWidth: minPort || minLand ? '20px !important' : '30px !important',
     width: minPort || minLand ? '20px !important' : '30px !important',
     minHeight: '120px !important',
@@ -73,16 +262,13 @@ interface changeLogTypoI {
   english: boolean,
   minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
   larPort: boolean,
   larLand: boolean,
 }
 
-export const changeLogTypo = ({ english, minPort, minLand, medPort, medLand, larPort, larLand }: changeLogTypoI) => { // background
+export const changeLogTypo = ({ english, minPort, minLand, larPort, larLand }: changeLogTypoI) => {
   return {
-    display: 'flex',
-    //flexDirection: 'column',
+    ...flex,
     fontFamily: 'Roboto',
     fontSize: minPort || minLand ? '11px' : english && ( larPort || larLand ) ? '14px' : '13px',
     fontWeight: '500',
@@ -92,19 +278,14 @@ export const changeLogTypo = ({ english, minPort, minLand, medPort, medLand, lar
 }
 
 interface slideBoxI {
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
   larPort: boolean,
-  larLand: boolean,
 }
 
-export const sliderBox = ({ minPort, minLand, medPort, medLand, larPort, larLand }: slideBoxI) => { // background
+export const sliderBox = ({ larPort }: slideBoxI) => { 
   return {
     ...flex, ...relative,
     flexDirection : 'column-reverse',
-    background: 'orange',
+    //background: 'orange',
     left: larPort ? '-30px': 'none',
     width: '500px',
     overflowX: 'hidden',
@@ -115,24 +296,16 @@ interface eachDescriptionI {
   animRunning: boolean,
   show: boolean,
   minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
   larPort: boolean,
-  larLand: boolean,
 }
 
-export const eachDescription = ({ animRunning, show, minPort, minLand, medPort, medLand, larPort, larLand }: eachDescriptionI) => { // background
+export const eachDescription = ({ animRunning, show, minPort, larPort }: eachDescriptionI) => { 
   return {
     ...flex, ...row, ...relative,
-    //width: animRunning && minPort ? 'calc(100vw - 12px - 20px)' : animRunning && larPort ? 'calc(100vw - 12px - 30px)' : animRunning && larLand ? '500px' : 'none',
     width: animRunning ? 'none' : minPort && show ? 'calc(100vw - 12px - 20px)' : larPort && show ? 'calc(100vw - 12px - 30px)' : '500px',
-    //width: '300px',
-    //width: 'none',
     maxWidth: `500px`,
     height: '24px',
     minHeight: '24px',
-    //background: 'gray',
   }
 }
 
@@ -140,13 +313,9 @@ interface dateI {
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean,
 }
 
-export const date = ({ darkMode, minPort, minLand, medPort, medLand, larPort, larLand }: dateI) => { // background
+export const date = ({ darkMode, minPort, minLand }: dateI) => {
   return {
     ...flex, ...relative, ...jcc, ...noSelect,
     width: '80px',
@@ -157,17 +326,12 @@ export const date = ({ darkMode, minPort, minLand, medPort, medLand, larPort, la
 }
 
 interface textI {
-  animRunning: boolean,
   darkMode: boolean,
   minPort: boolean,
   minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean,
 }
 
-export const text = ({ animRunning, darkMode, minPort, minLand, medPort, medLand, larPort, larLand }: textI) => { // background
+export const text = ({ darkMode, minPort, minLand }: textI) => {
   return {
     ...flex, ...relative, ...noSelect,
     width: '420px',
@@ -175,7 +339,6 @@ export const text = ({ animRunning, darkMode, minPort, minLand, medPort, medLand
     //background: 'gainsboro',
     overflowY: 'hidden',
     overflowX: 'hidden',
-    //overflow: animRunning ? 'visible' : 'none',
     textWrap: 'nowrap',
     fontSize: minPort || minLand ? '14px' : '16px',
   }
