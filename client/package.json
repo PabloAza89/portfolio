@@ -11,7 +11,6 @@
     "@types/react-dom": "^17.0.2",
     "easings.net": "^1.0.3",
     "jquery": "^3.7.0",
-    "jquery.easing": "^1.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-indiana-drag-scroll": "^2.2.0",
@@ -32,8 +31,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
