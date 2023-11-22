@@ -21,7 +21,7 @@ function GoToLinkButton({ link }: GoToLinkButtonI) {
       rel="noopener noreferrer"
     >
       <Button
-      className={`linkButton`}
+        className={`linkButton`}
         variant="contained"
         sx={s.background({ darkMode, minPort, minLand, larPort })}
       >
