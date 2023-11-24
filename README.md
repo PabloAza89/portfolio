@@ -58,7 +58,7 @@
     <h3 style="display: inline-block">○ Where can I see the server running ?</h3>
   </ul>
 </div>
-<ul><summary>https://glitch.com/edit/#!/oval-transparent-ornament?path=server.js</summary></ul>
+<ul><summary>https://glitch.com/edit/#!/oval-transparent-ornament?path=index.js</summary></ul>
 <div id="user-content-toc" align="left">
   <ul>
     <h3 style="display: inline-block">○ Connect with me:</h3>
