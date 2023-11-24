@@ -284,32 +284,88 @@ interface boxLowerI {
 
 export const boxLower = ({ height, minPort, minLand, medLand }: boxLowerI) => {
   return {
+    //background: 'gray', // DEV
     ...asc, ...row, ...noSelect,
-    background: 'none',
+    justifyContent: 'center',
+    minHeight: '45px',
+    width: 'calc(100vw - 12px)',
     marginTop: '10px',
     display: minLand || minPort ? 'none' : medLand && height <= 600 ? 'none' : 'flex'
   }
 }
 
-export const textLower = ( larPort: boolean ) => {
+export const bbb = () => {
   return {
-    ...jcc, ...asc, ...row, ...mix,
-    color: '#FFFFFF',
-    fontSize: larPort ? '23px' : '23px',
+    // background: 'darkgray', // DEV
+    display: 'flex',
+    position: 'relative',
+    flexFlow: 'wrap',
+    justifyContent: 'center'
   }
 }
 
-interface selectI {
-  darkMode: boolean,
-  larPort: boolean
+interface selectContainerI {
+  tall: boolean
 }
 
-export const select = ({ darkMode, larPort }: selectI) => {
+export const selectContainer = ({ tall }: selectContainerI) => {
+  return {
+    //background: 'darkred', // DEV
+    display: 'flex',
+    width: '50px',
+    height: '45px',
+    position: 'absolute',
+    right: '-60px',
+    marginTop: tall ? '-32px' : '5px'
+  }
+}
+
+export const eachText = () => {
+  return {
+    //background: 'orange', // DEV
+    display: 'flex',
+    position: 'relative',
+    width: '248px',
+    height: 'inherit',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    alignSelf: 'center',
+  }
+}
+
+export const textContainer = ( larPort: boolean ) => {
+  return {
+    //background: 'yellow', // DEV // 65px
+    display: 'flex',
+    position: 'relative',
+    color: '#FFFFFF',
+    fontSize: larPort ? '26px' : '26px',
+    flexFlow: 'wrap',
+    justifyContent: 'center',
+    paddingRight: '40px'
+  }
+}
+
+export const onlyMix = () => {
+  return { ...mix }
+}
+
+interface selectI {
+  darkMode: boolean
+}
+
+export const select = ({ darkMode }: selectI) => {
   return {
     color: '#FFFFFF',
     background: darkMode ? '#48555e' : blue[500],
-    height: larPort ? '45px' : '45px',
-    width: larPort ? '65px' : '65px',
-    fontSize: larPort ? '17px': '17px'
+    height: '45px',
+    width: '65px',
+    fontSize: '17px',
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: 'rgba(0, 0, 0, 0.23)',
+    },
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      border: '1px solid rgba(0, 0, 0, 0.23)',
+    }
   }
 }

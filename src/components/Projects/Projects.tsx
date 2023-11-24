@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { Dialog, FormControl, InputLabel, MenuItem, Select } from '@mui/material/';
+import { Dialog, FormControl, MenuItem, Select } from '@mui/material/';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
@@ -132,6 +132,17 @@ function Projects() {
     setLoaded(cloned)
   }
 
+  const [ tall, setTall ] = useState(false)
+
+  useEffect(() => {
+    let buttonIn = document.getElementById('textContainerID')
+    buttonIn && new ResizeObserver(textHeightChecker).observe(buttonIn)
+    function textHeightChecker() {
+      if (buttonIn?.clientHeight === 72) setTall(true)
+      else setTall(false)
+    }
+  })
+
   return (
   <Box sx={s.background}>
     <Box sx={s.topBottomHelper({ larPort, larLand })}></Box>
@@ -210,22 +221,52 @@ function Projects() {
       </Dialog>
 
       <Box sx={s.boxLower({ height, minPort, minLand, medLand })}>
-        <Typography sx={s.textLower( larPort )}>{ english ? `Scroll Wheel Speed:  ` : `Velocidad de Rueda de Desplazamiento:  ` }</Typography>
-        <FormControl>
-          <InputLabel id="demo-simple-select-label"></InputLabel>
-          <Select
-            sx={s.select({ darkMode, larPort })}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={scrollSpeed}
-            label="Scroll"
-            onChange={(e) => setScrollSpeed(parseInt(e.target.value))}
-          >
-            <MenuItem value={10}>1x</MenuItem>
-            <MenuItem value={30}>2x</MenuItem>
-            <MenuItem value={50}>3x</MenuItem>
-          </Select>
-        </FormControl>
+        <Box id={`textContainerID`} sx={s.textContainer( larPort )} style={{ marginRight: '40px' }}>
+          {
+            english ?
+            null :
+            <Box sx={s.eachText}>
+              <Box sx={s.onlyMix}>Velocidad de Rueda</Box>
+            </Box>
+          }
+          {
+            english ?
+            <Box sx={s.eachText} >
+              <Box sx={s.selectContainer({ tall })} style={{ marginRight: 'auto' }}>
+                <FormControl>
+                  <Select
+                    sx={s.select({ darkMode })}
+                    value={scrollSpeed}
+                    label="Scroll"
+                    onChange={(e) => setScrollSpeed(parseInt(e.target.value))}
+                  >
+                    <MenuItem value={10}>1x</MenuItem>
+                    <MenuItem value={30}>2x</MenuItem>
+                    <MenuItem value={50}>3x</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box sx={s.onlyMix}>Scroll Wheel Speed:</Box>
+            </Box> :
+            <Box sx={s.eachText}>
+              <Box sx={s.selectContainer({ tall })} style={{ marginRight: 'auto' }}>
+                <FormControl>
+                  <Select
+                    sx={s.select({ darkMode })}
+                    value={scrollSpeed}
+                    label="Scroll"
+                    onChange={(e) => setScrollSpeed(parseInt(e.target.value))}
+                  >
+                    <MenuItem value={10}>1x</MenuItem>
+                    <MenuItem value={30}>2x</MenuItem>
+                    <MenuItem value={50}>3x</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box sx={s.onlyMix}>de Desplazamiento:</Box>
+            </Box>
+          }
+        </Box>
       </Box>
 
     </Box>
