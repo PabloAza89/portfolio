@@ -14,6 +14,17 @@ export const background = () => {
   }
 }
 
+export const selectType = () => {
+  return {
+    display: 'flex',
+    position: 'fixed',
+    left: '50%',
+    top: '0px',
+    background: 'red',
+    width: '150px'
+  }
+}
+
 interface topBottomHelperI {
   larPort: boolean,
   larLand: boolean

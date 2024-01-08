@@ -52,23 +52,34 @@ function Projects() {
     return elRef;
   }
 
-  const array = [
+  let [ projectChosen, setProjectChosen ] = useState(`All Projects`)
+
+  let preArray = [
     {
       title: `Weatherify`,
       media: [ weatherify1, weatherify2 ],
-      href: `https://pabloaza89.github.io/weather-app/`
+      href: `https://pabloaza89.github.io/weather-app/`,
+      type: `API Handle`
     },
     {
       title: `Foodify`,
       media: [ food1, food2, food3 ],
-      href: `https://pabloaza89.github.io/PI-Food-GH/`
+      href: `https://pabloaza89.github.io/PI-Food-GH/`,
+      type: `Server Handle`
     },
     {
       title: `TicTacToe`,
       media: [ tictac1, tictac2 ],
-      href: `https://pabloaza89.github.io/tictactoe/`
+      href: `https://pabloaza89.github.io/tictactoe/`,
+      type: `Games`
     }
   ]
+
+  //const array = preArray.filter(e => e.type === projectChosen)
+  let array =
+    projectChosen === `All Projects` ?
+    preArray :
+    preArray.filter(e => e.type === projectChosen)
 
   // mediaMeasures MIN PORT:
   // total height: 270
@@ -100,26 +111,28 @@ function Projects() {
     .css(`animationDelay`,`1.5s`)
     .css(`animationIterationCount`,`infinite`)
 
-  array.map(e => e.media).flat().forEach(r => {
-    $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`) // when hover image, extra pixels helper on right
-    .on( "mouseenter", function(){
-      $(`.extraPXSolid`)
-        .css("transition", "all .2s ease-in-out")
-        .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
-      $(`.extraPXCenterStripe`)
-        .css("transition", "all .2s ease-in-out")
-        .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
-    })
-    .on( "mouseleave", function(){
+  useEffect(() => {
+    array.map(e => e.media).flat().forEach(r => {
+      $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`) // when hover image, extra pixels helper on right
+      .on( "mouseenter", function(){
+        $(`.extraPXSolid`)
+          .css("transition", "all .2s ease-in-out")
+          .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
+        $(`.extraPXCenterStripe`)
+          .css("transition", "all .2s ease-in-out")
+          .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
+      })
+      .on( "mouseleave", function(){
+        $(`.extraPXSolid`)
+          .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+        $(`.extraPXCenterStripe`)
+          .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+      })
       $(`.extraPXSolid`)
         .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
       $(`.extraPXCenterStripe`)
         .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
     })
-    $(`.extraPXSolid`)
-      .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
-    $(`.extraPXCenterStripe`)
-      .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
   })
 
   interface setLoadedI {
@@ -139,7 +152,7 @@ function Projects() {
     setLoaded(cloned)
   }
 
-  const [ tall, setTall ] = useState(false)
+  const [ tall, setTall ] = useState(false) 
 
   useEffect(() => {
     let buttonIn = document.getElementById('textContainerID')
@@ -152,6 +165,30 @@ function Projects() {
 
   return (
   <Box sx={s.background}>
+    <Select
+      size="small"
+      sx={s.selectType}
+      value={projectChosen}
+      onChange={(e) => {
+        setProjectChosen(e.target.value)
+        setLoaded(() => {
+          let total: setLoadedI[] = []
+          array.filter(x => x.type === e.target.value).map(e => e.media.forEach(x => total.push({id: array.map(e => e.media).flat().indexOf(x), loaded: false})))
+          return total
+        })
+        // array.forEach((e,i) => {
+        //   loadedUpdater(i)
+        // })
+        //loadedUpdater(array.map(e => e.media).flat().indexOf(m))
+        //loadedUpdater(array.map(e => e.media).flat().indexOf(m))
+        //loadedUpdater(array.map(e => e.media).flat())
+      }}
+    >
+      <MenuItem value={"All Projects"}>All Projects</MenuItem>
+      <MenuItem value={"API Handle"}>API Handle</MenuItem>
+      <MenuItem value={"Server Handle"}>Server Handle</MenuItem>
+      <MenuItem value={"Games"}>Games</MenuItem>
+    </Select>
     <Box sx={s.topBottomHelper({ larPort, larLand })}></Box>
     <Box sx={s.mainContainer}>
       <ScrollContainer
@@ -160,7 +197,7 @@ function Projects() {
         vertical={false}
       >
         <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
-        <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
+        <Box                     sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
         <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
 
         <Box className={`extraPXCenterStripe`} sx={s.centerStripe({ length:array.map(e => e.media).flat().length, minPort, minLand })} >
