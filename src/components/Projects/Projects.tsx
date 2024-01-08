@@ -8,6 +8,8 @@ import food2 from '../../images/food2.png';
 import food3 from '../../images/food3.png';
 import weatherify1 from '../../images/weatherify1.png';
 import weatherify2 from '../../images/weatherify2.png';
+import tictac1 from '../../images/tictac1.png';
+import tictac2 from '../../images/tictac2.png';
 import loadingImage from '../../images/loadingImage.png';
 import * as s from '../../styles/ProjectsSX';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
@@ -52,14 +54,19 @@ function Projects() {
 
   const array = [
     {
-      title: english ? `Weather App` : `Aplicación del Clima`,
+      title: `Weatherify`,
       media: [ weatherify1, weatherify2 ],
       href: `https://pabloaza89.github.io/weather-app/`
     },
     {
-      title: english ? `Food App` : `Aplicación de Comidas`,
+      title: `Foodify`,
       media: [ food1, food2, food3 ],
       href: `https://pabloaza89.github.io/PI-Food-GH/`
+    },
+    {
+      title: `TicTacToe`,
+      media: [ tictac1, tictac2 ],
+      href: `https://pabloaza89.github.io/tictactoe/`
     }
   ]
 
