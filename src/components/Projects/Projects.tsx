@@ -140,19 +140,44 @@ function Projects() {
     loaded: boolean
   }
 
-  const [loaded, setLoaded] = useState<any>(() => {
-    let total: setLoadedI[] = []
-    array.map(e => e.media.forEach(x => total.push({id: array.map(e => e.media).flat().indexOf(x), loaded: false})))
-    return total
-  })
+  // const [loaded, setLoaded] = useState<any>(() => {
+  //   let total: setLoadedI[] = []
+  //   array.map(e => e.media.forEach(x => total.push({id: array.map(e => e.media).flat().indexOf(x), loaded: false})))
+  //   return total
+  // })
 
-  const loadedUpdater = (index: number) => {
+  const [loaded, setLoaded] = useState<any>(
+    Array.from(
+      { length: preArray.map(t => t.media).flat().length },
+      (e, i) => ({
+        media: preArray.map(t => t.media).flat()[i],
+        loaded: false,
+        type: preArray[preArray.findIndex(e => e.media.some(r => r === preArray.map(t => t.media).flat()[i]))].type
+      })
+    )
+  )
+    //let total: setLoadedI[] = []
+    // array.map(e => e.media.forEach(x => total.push({id: array.map(e => e.media).flat().indexOf(x), loaded: false})))
+    //return total
+  
+
+  // const loadedUpdater = (index: number) => {
+  //   let cloned = [...loaded]
+  //   cloned[index] = {id: index, loaded: true}
+  //   setLoaded(cloned)
+  // }
+
+  const loadedUpdater = (media: any) => {
     let cloned = [...loaded]
-    cloned[index] = {id: index, loaded: true}
+    //cloned[index] = {id: index, loaded: true}
+    let targetIndex = cloned.findIndex(e => e.media === media)
+    let copyTypeValue = cloned[targetIndex].type
+    cloned[targetIndex] = { media: media, loaded: true, type: copyTypeValue }
+    //cloned[targetIndex].loaded = true
     setLoaded(cloned)
   }
 
-  const [ tall, setTall ] = useState(false) 
+  const [ tall, setTall ] = useState(false)
 
   useEffect(() => {
     let buttonIn = document.getElementById('textContainerID')
@@ -163,19 +188,58 @@ function Projects() {
     }
   })
 
+  //console.log("ALL", preArray.map(t => t.media).flat())
+  console.log("LOADED TOTAL", loaded)
+
   return (
   <Box sx={s.background}>
     <Select
       size="small"
       sx={s.selectType}
       value={projectChosen}
-      onChange={(e) => {
+      onChange={(e: any) => {
+        //setProjectChosen(e.target.value)
+        //console.log("333", preArray.filter(s => s.type === e.target.value).map(t => t.media).flat().length)
+        //console.log("333", preArray.filter(s => s.type === e.target.value))
+        //console.log("333", preArray.map(t => t.media).flat().length)
+        //console.log("333", preArray.filter(s => s.type === e.target.value).map(t => t.media).flat().length )
         setProjectChosen(e.target.value)
-        setLoaded(() => {
+
+        // e.target.value === `All Projects` ?
+        // null :
+
+
+
+        //console.log("444", array.map(t => t.media).flat() )
+
+        // preArray.map(t => t.media).flat().map((g) => {
+        //   console.log("CARGADO ?", (document.getElementById(`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`) as HTMLElement).complete )
+        // })
+
+        // array.map(t => t.media).flat().map((s, i) => {
+        //   console.log("CARGADO ?", (document.getElementById(`extraPXImage${i}`) as HTMLElement).complete )
+        // })
+       
+        
+        //setLoaded(Array.from({ length: preArray.filter(s => s.type === e.target.value).map(t => t.media).flat().length }, (e,i) => ({ id: i, loaded: false })))
+        //  setLoaded(
+        //   // () => {
+        // //     //rC.current = Array.from({length: 9}, (e,i) => ({ id: i, value: '' }))
+        //     //let total: setLoadedI[] = []
+        // //     //let total: setLoadedI[] = Array.from({length: preArray.filter(s => s.type === e.target.value).length}, (e,i) => ({ id: i, loaded: false }))
+        //     e.target.value === `All Projects`?
+        //     Array.from({ length: preArray.map(t => t.media).flat().length }, (m,i) => ({ id: i, loaded: false })) :
+        //     Array.from({ length: preArray.filter(s => s.type === e.target.value).map(t => t.media).flat().length }, (m,i) => ({ id: i, loaded: false }))
+        // //     preArray.filter(s => s.type === e.target.value).map(r => r.media.forEach(x => total.push({id: preArray.filter(s => s.type === e.target.value).map(r => r.media).flat().indexOf(x), loaded: false})))
+        //     // return total
+        //   //}
+        //  )
+         
+      /*   setLoaded(() => {
           let total: setLoadedI[] = []
-          array.filter(x => x.type === e.target.value).map(e => e.media.forEach(x => total.push({id: array.map(e => e.media).flat().indexOf(x), loaded: false})))
+          array.filter(s => s.type === e.target.value).map(e => e.media.forEach(x => total.push({id: array.map(e => e.media).flat().indexOf(x), loaded: false})))
           return total
-        })
+        }) */
         // array.forEach((e,i) => {
         //   loadedUpdater(i)
         // })
@@ -202,6 +266,7 @@ function Projects() {
 
         <Box className={`extraPXCenterStripe`} sx={s.centerStripe({ length:array.map(e => e.media).flat().length, minPort, minLand })} >
           {array.map((e) => {
+            //console.log("a verr", array.map(e => e.media).flat())
             return (
               <Box key={e.title} sx={s.card({ minPort, minLand, larPort })}>
                 <Box sx={s.cardLeft}></Box>
@@ -211,18 +276,31 @@ function Projects() {
                     <GoToLinkButton link={e.href} />
                   </Box>
                   <Box sx={s.boxMedia}>
-                    {e.media.map((m) =>{
+                    {e.media.map((m,i) =>{
                       return (
                         <Box key={m} sx={{ display:'flex', flexDirection: 'row', border: '0px solid blue', }}>
                           <Box
+                            //className={`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`}
                             className={`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`}
+                            id={`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`}
                             component="img"
-                            onLoad={() => loadedUpdater(array.map(e => e.media).flat().indexOf(m))}
+                            onLoad={() => {
+                              //console.log("a verr", array.map(e => e.media).flat())
+                              //setTimeout(() => {
+                              //}, 100)
+                              //loadedUpdater(array.map(e => e.media).flat().indexOf(m))
+                              loadedUpdater(m)
+                              //console.log("LOADED", m)
+                              //console.log("a ver", array.map(e => e.media).flat().indexOf(m))
+                            }}
+                            alt=""
+                            //beforeUnload={() => {console.log("UNLOADED")}}
+                            //complete={() => console.log("WAS LOADED")}
                             src={m}
                             onClick={() => {setName(m); setShow(!show)}}
-                            sx={ s.cardMedia({ darkMode, minPort, minLand }) }
+                            sx={s.cardMedia({ darkMode, minPort, minLand })}
                           />
-                          <Box
+                          {/* <Box
                             component="img"
                             sx={s.placeholderBackground({ darkMode, loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded, minPort, minLand })}
                           />
@@ -230,7 +308,7 @@ function Projects() {
                             component="img"
                             src={loadingImage}
                             sx={s.placeholderAnimation({ loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded, minPort, minLand })}
-                          />
+                          /> */}
                           <Box
                             sx={s.betweenMedia({ darkMode, indexOf:e.media.indexOf(m), length:e.media.length-1 })}
                           />
