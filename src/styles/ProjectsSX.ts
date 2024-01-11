@@ -14,14 +14,21 @@ export const background = () => {
   }
 }
 
-export const selectType = () => {
+interface selectTypeI {
+  darkMode: boolean
+}
+
+export const selectType = ({ darkMode }: selectTypeI) => {
+  let width = 150;
   return {
     display: 'flex',
-    position: 'fixed',
-    left: '50%',
+    position: 'absolute',
+    left: `calc(50% - ${width / 2}px)`,
     top: '0px',
-    background: 'red',
-    width: '150px'
+    background: darkMode ? '#708f99' : 'lightblue',
+    width: `${width}px`,
+    borderRadius: '0px 0px 4px 4px',
+    zIndex: 4000
   }
 }
 
@@ -43,7 +50,7 @@ export const topBottomHelper = ({ larPort, larLand }: topBottomHelperI) => {
 export const mainContainer = () => {
   return {
     ...flex, ...relative, ...column,
-    //background: 'red',
+    //background: 'red', /* DEV */
     textAlign: '-webkit-center'
   }
 }
@@ -51,10 +58,8 @@ export const mainContainer = () => {
 export const scroll = () => {
   return {
     overflow: 'auto',
-    //background: 'red',
+    //background: 'red', /* DEV */
     opacity: '0.8',
-    //textAlign: '-webkit-center'
-    //textAlign: 'center'
   }
 }
 

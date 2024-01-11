@@ -110,75 +110,17 @@ function Projects() {
     .css(`animationDelay`,`1.5s`)
     .css(`animationIterationCount`,`infinite`)
 
-  // useEffect(() => { // when hover image, extra pixels helper on right
-  //   array.map(e => e.media).flat().forEach(r => {
-  //     $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`)
-  //     .on( "mouseenter", function(){
-  //       $(`.extraPXSolid`)
-  //         .css("transition", "all .2s ease-in-out")
-  //         .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
-  //       $(`.extraPXCenterStripe`)
-  //         .css("transition", "all .2s ease-in-out")
-  //         .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
-  //     })
-  //     .on( "mouseleave", function(){
-  //       $(`.extraPXSolid`)
-  //         .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
-  //       $(`.extraPXCenterStripe`)
-  //         .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
-  //     })
-  //     $(`.extraPXSolid`)
-  //       .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
-  //     $(`.extraPXCenterStripe`)
-  //       .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
-  //   })
-  // })
-
-  // const current = () => {
-  //   array.map(e => e.media).flat().length
-  // }
-
   const [ current, setCurrent ] = useState(array.map(e => e.media).flat().length)
 
   useEffect(() => {
     setCurrent(array.map(e => e.media).flat().length)
   },[array])
 
-  // const extraPixelsUpdater = () => {
-  //   $(`.extraPXImage${current - 1}`)
-  //     .on( "mouseenter", function() {
-  //       $(`.extraPXSolid`)
-  //         .css("transition", "all .2s ease-in-out")
-  //         .width( minPort || minLand ? `calc((${current} * 414px) + 3px)` : `calc((${current} * 564px) + 3px)` )
-  //       $(`.extraPXCenterStripe`)
-  //         .css("transition", "all .2s ease-in-out")
-  //         .width( minPort || minLand ? `calc((${current} * 414px) + 3px)` : `calc((${current} * 564px) + 3px)` )
-  //     })
-  //     .on( "mouseleave", function() {
-  //       $(`.extraPXSolid`)
-  //         .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-  //       $(`.extraPXCenterStripe`)
-  //         .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-  //     })
-  //     $(`.extraPXSolid`)
-  //       .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-  //     $(`.extraPXCenterStripe`)
-  //       .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-  // }
-
-  const [ trigger, setTrigger ] = useState(false)
-
   useEffect(() => { // when hover image, extra pixels helper on right
-    console.log("EJECUTADO UNA SOLA VEZ")
-    //$(`.extraPXImage${current - 1}`).unbind("mouseenter");
-    //$(`.extraPXImage${current - 1}`).unbind("mouseleave");
-    //extraPixelsUpdater()
-
-    let qq = [0,1,2,3,4,5,6]
-        qq.forEach((e) => {
-          $(`.extraPXImage${e}`).off("mouseenter");
-          $(`.extraPXImage${e}`).off("mouseleave");
-        })
+    loaded.forEach((el: any, idx: any) => {
+      $(`.extraPXImage${idx}`).off("mouseenter");
+      $(`.extraPXImage${idx}`).off("mouseleave");
+    })
 
     $(`.extraPXImage${current - 1}`)
       .on( "mouseenter", function() {
@@ -194,16 +136,13 @@ function Projects() {
           .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
         $(`.extraPXCenterStripe`)
           .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-      })
-      $(`.extraPXSolid`)
-        .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-      $(`.extraPXCenterStripe`)
-        .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-  //},[current])
-  //},[current, array])
-  //},[trigger])
+      });
+    $(`.extraPXSolid`)
+      .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
+    $(`.extraPXCenterStripe`)
+      .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
+    // eslint-disable-next-line
   }, [array])
-  //})
 
   const [loaded, setLoaded] = useState<any>(
     Array.from(
@@ -246,44 +185,16 @@ function Projects() {
     }
   })
 
-  //console.log("ARRAY", array.map(e => e.media).flat()[array.map(e => e.media).flat().length - 1])
-  //console.log("ARRAY", array.map(e => e.media).flat().length - 1)
-  //console.log("ARRAY", array.map(e => e.media).flat().length )
-  console.log("current", current )
-  //console.log("ARRAY", array )
-  //console.log("LOADED", loaded )
-
   return (
   <Box sx={s.background}>
     <Select
       size="small"
-      sx={s.selectType}
+      sx={s.selectType({ darkMode })}
       value={projectChosen}
       onChange={(e: any) => {
-        //$(`.extraPXImage${current - 1}`)
-        // $(`.extraPXImage${current - 1}`)
-        //   .on( "mouseenter", function(){})
-        // let qq = [0,1,2,3,4,5,6]
-        // qq.forEach((e) => {
-        //   $(`.extraPXImage${e}`).off("mouseenter");
-        //   $(`.extraPXImage${e}`).off("mouseleave");
-        // })
-        
-        
-         
-         //setTrigger(!trigger)
-
+        $(`.autoScrollOnChange`).animate({scrollLeft: 0}, 0)
         setProjectChosen(e.target.value)
         if (e.target.value !== `All Projects`) onChangeUpdater(e.target.value)
-
-          // $(`.extraPXSolid`)
-          //   .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-          // $(`.extraPXCenterStripe`)
-          //   .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-
-          $(`.extraPXImage${current - 1}`)
-
-        //extraPixelsUpdater()
       }}
     >
       <MenuItem value={"All Projects"}>All Projects</MenuItem>
@@ -294,6 +205,7 @@ function Projects() {
     <Box sx={s.topBottomHelper({ larPort, larLand })}></Box>
     <Box sx={s.mainContainer}>
       <ScrollContainer
+        className={`autoScrollOnChange`}
         innerRef={useHorizontalScroll()}
         style={s.scroll()}
         vertical={false}
@@ -314,7 +226,6 @@ function Projects() {
                   </Box>
                   <Box sx={s.boxMedia}>
                     {e.media.map((m,i) => {
-                      //console.log("a ver", array.map(e => e.media).flat().indexOf(m))
                       return (
                         <Box key={m} sx={{ display:'flex', flexDirection: 'row', border: '0px solid blue' }}>
                           <Box
@@ -342,7 +253,6 @@ function Projects() {
                         </Box>
                       )
                     })}
-
                   </Box>
                 </Box>
               </Box>
