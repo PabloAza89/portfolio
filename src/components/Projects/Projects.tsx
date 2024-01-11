@@ -75,7 +75,6 @@ function Projects() {
     }
   ]
 
-  //const array = preArray.filter(e => e.type === projectChosen)
   let array =
     projectChosen === `All Projects` ?
     preArray :
@@ -111,40 +110,100 @@ function Projects() {
     .css(`animationDelay`,`1.5s`)
     .css(`animationIterationCount`,`infinite`)
 
+  // useEffect(() => { // when hover image, extra pixels helper on right
+  //   array.map(e => e.media).flat().forEach(r => {
+  //     $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`)
+  //     .on( "mouseenter", function(){
+  //       $(`.extraPXSolid`)
+  //         .css("transition", "all .2s ease-in-out")
+  //         .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
+  //       $(`.extraPXCenterStripe`)
+  //         .css("transition", "all .2s ease-in-out")
+  //         .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
+  //     })
+  //     .on( "mouseleave", function(){
+  //       $(`.extraPXSolid`)
+  //         .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+  //       $(`.extraPXCenterStripe`)
+  //         .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+  //     })
+  //     $(`.extraPXSolid`)
+  //       .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+  //     $(`.extraPXCenterStripe`)
+  //       .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+  //   })
+  // })
+
+  // const current = () => {
+  //   array.map(e => e.media).flat().length
+  // }
+
+  const [ current, setCurrent ] = useState(array.map(e => e.media).flat().length)
+
   useEffect(() => {
-    array.map(e => e.media).flat().forEach(r => {
-      $(`.extraPXImage${array.map(e => e.media).flat().indexOf(r)}`) // when hover image, extra pixels helper on right
-      .on( "mouseenter", function(){
+    setCurrent(array.map(e => e.media).flat().length)
+  },[array])
+
+  // const extraPixelsUpdater = () => {
+  //   $(`.extraPXImage${current - 1}`)
+  //     .on( "mouseenter", function() {
+  //       $(`.extraPXSolid`)
+  //         .css("transition", "all .2s ease-in-out")
+  //         .width( minPort || minLand ? `calc((${current} * 414px) + 3px)` : `calc((${current} * 564px) + 3px)` )
+  //       $(`.extraPXCenterStripe`)
+  //         .css("transition", "all .2s ease-in-out")
+  //         .width( minPort || minLand ? `calc((${current} * 414px) + 3px)` : `calc((${current} * 564px) + 3px)` )
+  //     })
+  //     .on( "mouseleave", function() {
+  //       $(`.extraPXSolid`)
+  //         .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
+  //       $(`.extraPXCenterStripe`)
+  //         .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
+  //     })
+  //     $(`.extraPXSolid`)
+  //       .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
+  //     $(`.extraPXCenterStripe`)
+  //       .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
+  // }
+
+  const [ trigger, setTrigger ] = useState(false)
+
+  useEffect(() => { // when hover image, extra pixels helper on right
+    console.log("EJECUTADO UNA SOLA VEZ")
+    //$(`.extraPXImage${current - 1}`).unbind("mouseenter");
+    //$(`.extraPXImage${current - 1}`).unbind("mouseleave");
+    //extraPixelsUpdater()
+
+    let qq = [0,1,2,3,4,5,6]
+        qq.forEach((e) => {
+          $(`.extraPXImage${e}`).off("mouseenter");
+          $(`.extraPXImage${e}`).off("mouseleave");
+        })
+
+    $(`.extraPXImage${current - 1}`)
+      .on( "mouseenter", function() {
         $(`.extraPXSolid`)
           .css("transition", "all .2s ease-in-out")
-          .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
+          .width( minPort || minLand ? `calc((${current} * 414px) + 3px)` : `calc((${current} * 564px) + 3px)` )
         $(`.extraPXCenterStripe`)
           .css("transition", "all .2s ease-in-out")
-          .width( minPort || minLand ? `calc((${array.map(e => e.media).flat().length} * 414px) + 3px)` : `calc((${array.map(e => e.media).flat().length} * 564px) + 3px)` )
+          .width( minPort || minLand ? `calc((${current} * 414px) + 3px)` : `calc((${current} * 564px) + 3px)` )
       })
-      .on( "mouseleave", function(){
+      .on( "mouseleave", function() {
         $(`.extraPXSolid`)
-          .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+          .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
         $(`.extraPXCenterStripe`)
-          .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+          .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
       })
       $(`.extraPXSolid`)
-        .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
+        .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
       $(`.extraPXCenterStripe`)
-        .width( minPort || minLand ? `calc(${array.map(e => e.media).flat().length} * 414px)` : `calc(${array.map(e => e.media).flat().length} * 564px)` )
-    })
-  })
-
-  interface setLoadedI {
-    id: number,
-    loaded: boolean
-  }
-
-  // const [loaded, setLoaded] = useState<any>(() => {
-  //   let total: setLoadedI[] = []
-  //   array.map(e => e.media.forEach(x => total.push({id: array.map(e => e.media).flat().indexOf(x), loaded: false})))
-  //   return total
-  // })
+        .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
+  //},[current])
+  //},[current, array])
+  //},[trigger])
+  }, [array])
+  //})
 
   const [loaded, setLoaded] = useState<any>(
     Array.from(
@@ -156,24 +215,23 @@ function Projects() {
       })
     )
   )
-    //let total: setLoadedI[] = []
-    // array.map(e => e.media.forEach(x => total.push({id: array.map(e => e.media).flat().indexOf(x), loaded: false})))
-    //return total
-  
 
-  // const loadedUpdater = (index: number) => {
-  //   let cloned = [...loaded]
-  //   cloned[index] = {id: index, loaded: true}
-  //   setLoaded(cloned)
-  // }
+  const onChangeUpdater = (type: any) => {
+    let cloned = [...loaded]
+    let toInitialStatus = cloned.filter(e => e.type !== type).map(e => {
+      let copyMedia = e.media;
+      let copyType = e.type;
+      return { media: copyMedia, loaded: false, type: copyType }
+    })
+    let keepLoaded = cloned.filter(e => e.type === type)
+    setLoaded(toInitialStatus.concat(keepLoaded))
+  }
 
   const loadedUpdater = (media: any) => {
     let cloned = [...loaded]
-    //cloned[index] = {id: index, loaded: true}
     let targetIndex = cloned.findIndex(e => e.media === media)
     let copyTypeValue = cloned[targetIndex].type
     cloned[targetIndex] = { media: media, loaded: true, type: copyTypeValue }
-    //cloned[targetIndex].loaded = true
     setLoaded(cloned)
   }
 
@@ -188,8 +246,12 @@ function Projects() {
     }
   })
 
-  //console.log("ALL", preArray.map(t => t.media).flat())
-  console.log("LOADED TOTAL", loaded)
+  //console.log("ARRAY", array.map(e => e.media).flat()[array.map(e => e.media).flat().length - 1])
+  //console.log("ARRAY", array.map(e => e.media).flat().length - 1)
+  //console.log("ARRAY", array.map(e => e.media).flat().length )
+  console.log("current", current )
+  //console.log("ARRAY", array )
+  //console.log("LOADED", loaded )
 
   return (
   <Box sx={s.background}>
@@ -198,54 +260,30 @@ function Projects() {
       sx={s.selectType}
       value={projectChosen}
       onChange={(e: any) => {
-        //setProjectChosen(e.target.value)
-        //console.log("333", preArray.filter(s => s.type === e.target.value).map(t => t.media).flat().length)
-        //console.log("333", preArray.filter(s => s.type === e.target.value))
-        //console.log("333", preArray.map(t => t.media).flat().length)
-        //console.log("333", preArray.filter(s => s.type === e.target.value).map(t => t.media).flat().length )
-        setProjectChosen(e.target.value)
-
-        // e.target.value === `All Projects` ?
-        // null :
-
-
-
-        //console.log("444", array.map(t => t.media).flat() )
-
-        // preArray.map(t => t.media).flat().map((g) => {
-        //   console.log("CARGADO ?", (document.getElementById(`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`) as HTMLElement).complete )
+        //$(`.extraPXImage${current - 1}`)
+        // $(`.extraPXImage${current - 1}`)
+        //   .on( "mouseenter", function(){})
+        // let qq = [0,1,2,3,4,5,6]
+        // qq.forEach((e) => {
+        //   $(`.extraPXImage${e}`).off("mouseenter");
+        //   $(`.extraPXImage${e}`).off("mouseleave");
         // })
-
-        // array.map(t => t.media).flat().map((s, i) => {
-        //   console.log("CARGADO ?", (document.getElementById(`extraPXImage${i}`) as HTMLElement).complete )
-        // })
-       
         
-        //setLoaded(Array.from({ length: preArray.filter(s => s.type === e.target.value).map(t => t.media).flat().length }, (e,i) => ({ id: i, loaded: false })))
-        //  setLoaded(
-        //   // () => {
-        // //     //rC.current = Array.from({length: 9}, (e,i) => ({ id: i, value: '' }))
-        //     //let total: setLoadedI[] = []
-        // //     //let total: setLoadedI[] = Array.from({length: preArray.filter(s => s.type === e.target.value).length}, (e,i) => ({ id: i, loaded: false }))
-        //     e.target.value === `All Projects`?
-        //     Array.from({ length: preArray.map(t => t.media).flat().length }, (m,i) => ({ id: i, loaded: false })) :
-        //     Array.from({ length: preArray.filter(s => s.type === e.target.value).map(t => t.media).flat().length }, (m,i) => ({ id: i, loaded: false }))
-        // //     preArray.filter(s => s.type === e.target.value).map(r => r.media.forEach(x => total.push({id: preArray.filter(s => s.type === e.target.value).map(r => r.media).flat().indexOf(x), loaded: false})))
-        //     // return total
-        //   //}
-        //  )
+        
          
-      /*   setLoaded(() => {
-          let total: setLoadedI[] = []
-          array.filter(s => s.type === e.target.value).map(e => e.media.forEach(x => total.push({id: array.map(e => e.media).flat().indexOf(x), loaded: false})))
-          return total
-        }) */
-        // array.forEach((e,i) => {
-        //   loadedUpdater(i)
-        // })
-        //loadedUpdater(array.map(e => e.media).flat().indexOf(m))
-        //loadedUpdater(array.map(e => e.media).flat().indexOf(m))
-        //loadedUpdater(array.map(e => e.media).flat())
+         //setTrigger(!trigger)
+
+        setProjectChosen(e.target.value)
+        if (e.target.value !== `All Projects`) onChangeUpdater(e.target.value)
+
+          // $(`.extraPXSolid`)
+          //   .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
+          // $(`.extraPXCenterStripe`)
+          //   .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
+
+          $(`.extraPXImage${current - 1}`)
+
+        //extraPixelsUpdater()
       }}
     >
       <MenuItem value={"All Projects"}>All Projects</MenuItem>
@@ -261,12 +299,11 @@ function Projects() {
         vertical={false}
       >
         <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
-        <Box                     sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
+        <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
         <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
 
         <Box className={`extraPXCenterStripe`} sx={s.centerStripe({ length:array.map(e => e.media).flat().length, minPort, minLand })} >
           {array.map((e) => {
-            //console.log("a verr", array.map(e => e.media).flat())
             return (
               <Box key={e.title} sx={s.card({ minPort, minLand, larPort })}>
                 <Box sx={s.cardLeft}></Box>
@@ -276,39 +313,29 @@ function Projects() {
                     <GoToLinkButton link={e.href} />
                   </Box>
                   <Box sx={s.boxMedia}>
-                    {e.media.map((m,i) =>{
+                    {e.media.map((m,i) => {
+                      //console.log("a ver", array.map(e => e.media).flat().indexOf(m))
                       return (
-                        <Box key={m} sx={{ display:'flex', flexDirection: 'row', border: '0px solid blue', }}>
+                        <Box key={m} sx={{ display:'flex', flexDirection: 'row', border: '0px solid blue' }}>
                           <Box
-                            //className={`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`}
                             className={`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`}
                             id={`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`}
                             component="img"
-                            onLoad={() => {
-                              //console.log("a verr", array.map(e => e.media).flat())
-                              //setTimeout(() => {
-                              //}, 100)
-                              //loadedUpdater(array.map(e => e.media).flat().indexOf(m))
-                              loadedUpdater(m)
-                              //console.log("LOADED", m)
-                              //console.log("a ver", array.map(e => e.media).flat().indexOf(m))
-                            }}
+                            onLoad={() => loadedUpdater(m)}
                             alt=""
-                            //beforeUnload={() => {console.log("UNLOADED")}}
-                            //complete={() => console.log("WAS LOADED")}
                             src={m}
                             onClick={() => {setName(m); setShow(!show)}}
                             sx={s.cardMedia({ darkMode, minPort, minLand })}
                           />
-                          {/* <Box
+                          <Box
                             component="img"
-                            sx={s.placeholderBackground({ darkMode, loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded, minPort, minLand })}
+                            sx={s.placeholderBackground({ darkMode, loaded: loaded[loaded.map((e: any) => e.media).indexOf(m)].loaded , minPort, minLand })}
                           />
                           <Box
                             component="img"
                             src={loadingImage}
-                            sx={s.placeholderAnimation({ loaded: loaded[array.map(e => e.media).flat().indexOf(m)].loaded, minPort, minLand })}
-                          /> */}
+                            sx={s.placeholderAnimation({ loaded: loaded[loaded.map((e: any) => e.media).indexOf(m)].loaded, minPort, minLand })}
+                          />
                           <Box
                             sx={s.betweenMedia({ darkMode, indexOf:e.media.indexOf(m), length:e.media.length-1 })}
                           />

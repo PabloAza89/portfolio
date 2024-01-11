@@ -44,6 +44,7 @@ export const mainContainer = () => {
   return {
     ...flex, ...relative, ...column,
     //background: 'red',
+    textAlign: '-webkit-center'
   }
 }
 
@@ -52,6 +53,8 @@ export const scroll = () => {
     overflow: 'auto',
     //background: 'red',
     opacity: '0.8',
+    //textAlign: '-webkit-center'
+    //textAlign: 'center'
   }
 }
 
