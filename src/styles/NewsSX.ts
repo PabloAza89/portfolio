@@ -277,18 +277,42 @@ export const changeLogTypo = ({ english, minPort, minLand, larPort, larLand }: c
   }
 }
 
-interface slideBoxI {
+interface sliderBoxI {
   larPort: boolean,
+  darkMode: boolean
 }
 
-export const sliderBox = ({ larPort }: slideBoxI) => {
+export const sliderBox = ({ larPort, darkMode }: sliderBoxI) => {
   return {
     ...flex, ...relative,
     flexDirection : 'column-reverse',
-    //background: 'orange',
+    //background: 'red', /* DEV */
     left: larPort ? '-30px': 'none',
     width: '500px',
-    overflowX: 'hidden',
+    height: '168px', // 24 * 7
+    background:
+      darkMode ?
+      `linear-gradient(
+        to right,
+        #bd7979 0px, #bd7979 80px,
+        #76b376 80px, #76b376 500px
+      )` :
+      `linear-gradient(
+        to right,
+        lightcoral 0px, lightcoral 80px,
+        lightgreen 80px, lightgreen 500px
+      )`
+  }
+}
+
+export const buttonsContainer = () => {
+  return {
+    ...flex,
+    position: 'absolute',
+    top: '-20px',
+    flexDirection : 'row',
+    /* background: 'orange', */ /* DEV */
+    height: '20px'
   }
 }
 
