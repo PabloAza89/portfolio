@@ -4,10 +4,10 @@
     /* ...flex, ...relative, */
     display: flex;
     position: relative;
-    /* background: 'gray', */
+    background: gray; /* DEV */
     /* justifyContent: minPort ? 'space-evenly' : medPort || larPort ? 'space-evenly' : minLand ? 'space-evenly' : medLand ? 'space-evenly' : 'flex-start', */
     /* justifyContent: 'space-evenly', */
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
     /* paddingLeft: larLand ? '55px' : 'none', */
     /* alignItems: larPort ? 'none' : 'center', */
     align-Items: center;
@@ -18,23 +18,26 @@
     /* min-height: minPort ? '80vh' : medPort ? '74vh' : minLand ? '76vh' : medLand ? '76vh' : larPort ? '618px' : '543px', // minHeight */
     min-height: 543px;
     /* height: minPort ? '80vh' : medPort ? '74vh' : minLand ? '76vh' : medLand ? '76vh' : larPort ? '80vh' : '75vh', // height */
-    height: 75vh
+    height: 75vh;
+    justify-content: center;
   
 }
 
- .boxTextTechMessage { 
+ .leftContainer { 
     /* ...flex, ...column, ...aic, */
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* //background: 'maroon', */
+    background: maroon; /* DEV */
     /* //justifyContent: larPort ? 'flex-start' : 'space-evenly', */
     justify-content: space-evenly;
     align-content: space-evenly;
     /* min-width: minPort || medPort ? 'calc(100vw - 12px)' : minLand || medLand ? '48vw' : larPort ? '666px' : '600px', // minWidth */
-    min-width: 600px; /* // minWidth */
+    /* min-width: 600px; */ /* // minWidth */
+    max-width: 800px;
     /* width: minPort || medPort ? 'calc(100vw - 12px)' : minLand || medLand ? '48vw' : larPort ? 'calc(100vw - 12px)' : '47%', // width */
-    width: 47%; /* // width */
+    /* width: 47%; */ /* // width */
+    width: 100%;
     /* minHeight: minPort ? '40vh' : medPort ? '37vh' : minLand ? '76vh' : medLand ? '69vh' : larPort ? '378px' : '546px', // minHeight */
     min-height: 546px; /* // minHeight */
     /* height: minPort ? '40vh' : medPort ? '37vh' : minLand ? '76vh' : medLand ? '69vh' : larPort ? '47vh' : '100%', // height */
@@ -43,13 +46,13 @@
   
 }
 
-.boxSVG {
+.rightContainer {
     /* ...relative, ...flex, ...jcc, aic, */
     display: flex;
     position: relative;
     justify-content: center;
     align-items: center;
-    /* //background: 'purple', */
+    background: purple; /* DEV */
     /* minWidth: minPort ? '40h' : medPort ? '50h' : minLand ? '76vh' : medLand ? '65vh' : larPort ? 'calc(100vw - 12px)' : '631px', // minWidth */
     min-width: 631px; /* // minWidth */
     /* width: minPort ? '40h' : medPort ? '50vh' : minLand ? '76vh' : medLand ? '65vh' : larPort ? 'calc(100vw - 12px)' : '50%', // width */
@@ -130,11 +133,10 @@
     /* color: darkMode ? '#b5b3b3' : '#FFFFFF', */
     color: #FFFFFF;
     /* fontSize: minPort ? '8vw' : medPort ? '7vw' : minLand ? '3.7vw' : medLand ? '3.7vw' : larPort ? '45px' : '65px', // fontSize */
-    font-size: 65px;
+    /* font-size: 65px; */
+    font-size: min(10vw, 65px);
     mix-blend-mode: difference;
 }
-
-
 
 .textTwo {
 
@@ -142,7 +144,8 @@
     display: flex;
     position: relative;
     color: #FFFFFF;
-    font-size: 67px;
+    /* font-size: 67px; */
+    font-size: min(11vw, 67px);
     mix-blend-mode: difference;
     /* ...noSelect, ...mix,
     lineHeight: '1.0',
@@ -161,7 +164,8 @@
   display: flex;
   position: relative;
   color: #FFFFFF;
-  font-size: 42px;
+  font-size: min(6.5vw, 42px);
+  /* font-size: 42px; */
   mix-blend-mode: difference;
     /* ...noSelect, ...mix,
     lineHeight: '1.0',
@@ -188,10 +192,10 @@
     background: none;
     padding: 0px !important;
     /* width: minPort ? '55vw' : medPort ? '55vw' : minLand ? '23vw' : medLand ? '30vw' : larPort ? '320px' : '370px', // width */
-    width: 370px;
+    width: min(50vw, 370px);
     color: #FFFFFF;
     /* fontSize: minPort ? '4vw' : minLand ? '1.8vw' : medPort ? '4vw' : medLand ? '2.4vw' : larPort ? '24px' : '28px', // fontSize */
-    font-size: 28px;
+    font-size: min(4vw, 28px) !important;
     /* transition: 'all .1s ease-in-out', */
     transition: all .1s ease-in-out;
 }
@@ -207,7 +211,7 @@ and (width < 1280px),
 screen
 and (orientation: portrait)
 and (width < 1280px) {
-  .boxSVG {
+  .rightContainer {
     display: none !important;
   }
 }
