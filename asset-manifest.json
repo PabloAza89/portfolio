@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.69db3aa9.css",
-    "main.js": "/portfolio/static/js/main.6af5b3e5.js",
+    "main.css": "/portfolio/static/css/main.3316595d.css",
+    "main.js": "/portfolio/static/js/main.4fc56e41.js",
     "static/media/error.gif": "/portfolio/static/media/error.c8a987390be23c2376be.gif",
     "static/media/food2.png": "/portfolio/static/media/food2.33251b4f71ace22ad726.png",
     "static/media/food3.png": "/portfolio/static/media/food3.0884ec17b8c03ed71400.png",
@@ -14,6 +14,7 @@
     "static/media/efSet.png": "/portfolio/static/media/efSet.70a4ba20ab286e8227ff.png",
     "static/media/tictac2.png": "/portfolio/static/media/tictac2.e303a3f640091233379f.png",
     "static/media/henry.png": "/portfolio/static/media/henry.bc6cc8847bd83df6cc48.png",
+    "static/media/attentionToDetail.png": "/portfolio/static/media/attentionToDetail.fa0c9a140b5d16e1d10a.png",
     "static/media/fccCertJS.png": "/portfolio/static/media/fccCertJS.2398854b79d8175858c1.png",
     "static/media/home.svg": "/portfolio/static/media/home.eb8e1991134358223a6ee700ae5e4fc9.svg",
     "static/media/javascript.png": "/portfolio/static/media/javascript.cf7522f436d6510da302.png",
@@ -24,11 +25,11 @@
     "static/media/node.png": "/portfolio/static/media/node.07d152a8a036951b8d14.png",
     "static/media/darth-vader.svg": "/portfolio/static/media/darth-vader.ab4aa42386ccc66a7de06c02e64d572c.svg",
     "index.html": "/portfolio/index.html",
-    "main.69db3aa9.css.map": "/portfolio/static/css/main.69db3aa9.css.map",
-    "main.6af5b3e5.js.map": "/portfolio/static/js/main.6af5b3e5.js.map"
+    "main.3316595d.css.map": "/portfolio/static/css/main.3316595d.css.map",
+    "main.4fc56e41.js.map": "/portfolio/static/js/main.4fc56e41.js.map"
   },
   "entrypoints": [
-    "static/css/main.69db3aa9.css",
-    "static/js/main.6af5b3e5.js"
+    "static/css/main.3316595d.css",
+    "static/js/main.4fc56e41.js"
   ]
 }
