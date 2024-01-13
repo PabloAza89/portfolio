@@ -52,10 +52,14 @@ export const topBottomHelper = ({ minPort, minLand, medPort, medLand }: topBotto
 
 export const background = () => {
   return {
-    ...flex, ...aic, ...column, ...jcsb,
+    //...flex, ...aic, ...column, ...jcsb,
+    display: 'flex',
+    position: 'relative',
     background: 'none',
     width: 'calc(100vw - 12px)',
-    height: 'calc(100vh - 12px)',
+    //height: 'calc(100vh - 12px)',
+    height: '100vh',
+    //height: 'fit-content',
   }
 }
 
@@ -70,13 +74,30 @@ interface genI {
 
 export const mainBox = ({ minPort, medPort, larPort, larLand }: genI) => {
   return {
-    ...flex, ...jcsb,
-    //background: 'darkred',
-    width: 'calc(100vw - 12px)',
-    minHeight: larLand ? '220px' : 'none',
-    height: minPort || medPort || larPort ? '80vh' : '50vh',
+    ...flex, //...jcsb,
+    background: 'darkred', /* DEV */
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    //minHeight: larLand ? '220px' : 'none',
+    //height: minPort || medPort || larPort ? '80vh' : '50vh',
+    overflow: 'scroll',
+    maxHeight: '100vh',
+    // '::-webkit-scrollbar': {
+    //   width: '0px',
+    //   height: '0px',
+    // },
+    position: 'relative',
+    //alignContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    width: '100vw',
   }
 }
+
+// .scoreTable::-webkit-scrollbar {
+//   width: 0px;
+//   height: 0px;
+// }
 
 interface leftRightHelperI {
   minPort: boolean,
@@ -95,27 +116,6 @@ export const leftRightHelper = ({ larLand }: leftRightHelperI) => {
   }
 }
 
-interface cardContainerI {
-  minPort: boolean,
-  minLand: boolean,
-  medPort: boolean,
-  medLand: boolean,
-  larPort: boolean,
-  larLand: boolean
-}
-
-export const cardContainer = ({ minPort, medPort, larPort, larLand }: cardContainerI) => {
-  return {
-    ...flex, ...aic, ...jcse,
-    flexDirection: minPort || medPort || larPort ? 'column' : 'row',
-    //background: 'blue',
-    minWidth: larLand ? '1200px' : 'none',
-    width: 'calc(100vw - 12px)',
-    minHeight: larPort ? '720px' : larLand ? '220px' : 'none',
-    height: minPort || medPort || larPort ? '80vh' : '50vh',
-  }
-}
-
 interface cardI {
   minPort: boolean,
   minLand: boolean,
@@ -127,11 +127,12 @@ interface cardI {
 
 export const card = ({ minPort, minLand, medPort, medLand }: cardI) => { // card
   return {
-    ...flex, ...relative, ...column, ...aic, ...jcsb,
+    ...flex, ...relative, ...column, ...aic, //...jcsb,
     //background: 'orange',
     minWidth: minPort ? '87vw' : minLand || medPort || medLand ? '32vw' : '400px', // minWidth
     width: minPort ? '87vw' : medPort ? '50vw' : minLand || medLand ? '32vw' : '400px', // minWidth
     height: minPort ? '25vh' : medPort ? '20vh' : minLand || medLand ? '35vh' : '220px', // height
+    justifyContent: 'space-evenly',
   }
 }
 

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import efSet from '../../images/efSet.png';
 import fccCertJS from '../../images/fccCertJS.png';
 import henry from '../../images/henry.png';
+import attention from '../../images/attentionToDetail.png';
 import loadingImage from '../../images/loadingImage.png';
 import * as s from '../../styles/CertificationsSX';
 import Bubbles from '../Bubbles/Bubbles';
@@ -54,6 +55,13 @@ function Certifications() {
       media: efSet,
       href: `https://www.efset.org/cert/T92ez2`,
       url: `https://efset.org`
+    },
+    {
+      id: 3,
+      title: english ? `Attention to Detail (Top 25%)` : `Atención al Detalle (Top 25%)`,
+      media: attention,
+      href: `https://www.testdome.com/certificates/9c613824828745bcad442dd13b8ec813`,
+      url: `https://testdome.com`
     }
   ]
 
@@ -62,7 +70,7 @@ function Certifications() {
     loaded: boolean
   }
 
-  const [loaded, setLoaded] = useState<any>(() => {
+  const [ loaded, setLoaded ] = useState<any>(() => {
     let total: setLoadedI[] = []
     array.forEach((x:any) => total.push({id: array.indexOf(x), loaded: false}))
     return total
@@ -80,11 +88,10 @@ function Certifications() {
 
   return (
     <Box sx={s.background}>
-      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })}></Box>
+      {/* <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })}></Box> */}
       <Bubbles />
       <Box sx={s.mainBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-        <Box sx={s.cardContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+        {/* <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box> */}
           {array.map((e) => {
             return (
               <Box
@@ -129,8 +136,7 @@ function Certifications() {
                 </Typography>
               </Box>)
           })}
-        </Box>
-        <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
+        {/* <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box> */}
       </Box>
 
       <Dialog
@@ -146,7 +152,7 @@ function Certifications() {
           alt="image"
         />
       </Dialog>
-      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })}></Box>
+      {/* <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })}></Box> */}
 
     </Box>
   )

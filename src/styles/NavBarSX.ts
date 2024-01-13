@@ -17,26 +17,36 @@ interface genI {
 export const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // background
   return {
     ...flex,
-    //background: 'blue',
-    flexDirection: minPort || medPort || larPort ? 'column' : 'row',
+    background: 'blue', /* DEV */
+    //flexDirection: minPort || medPort || larPort ? 'column' : 'row',
+    flexDirection: 'row',
     paddingTop: '10px',
     color: '#FFFFFF',
-    minWidth: minPort || medPort ? 'none' : minLand || medLand ? 'none' : larPort ? '526px' : '677px', // minWidth
-    minHeight: minPort || medPort ? '17vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '127px' : '100px', // minHeight
-    height: minPort || medPort ? '17vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '127px' : '100px', //height
-    justifyContent: minLand || minLand || medLand || larLand ? 'space-between' : 'none'
+    //minWidth: minPort || medPort ? 'none' : minLand || medLand ? 'none' : larPort ? '526px' : '677px', // minWidth
+    //minHeight: minPort || medPort ? '17vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '127px' : '100px', // minHeight
+    //height: minPort || medPort ? '17vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '127px' : '100px', //height
+    //justifyContent: minLand || minLand || medLand || larLand ? 'space-between' : 'none',
+    flexWrap: 'wrap',
+    //justifyContent: 'center',
+    //justifyContent: 'space-between',
+    justifyContent: 'space-around',
   }
 }
 
 export const mainLeft = ({ minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // mainLeft
   return {
     ...flex, ...row, ...aic, ...jcc,
-    //background: 'red',
-    minWidth: minPort || minLand || medPort || medLand ? '30vw' : larPort ? '491px' : '580px', // minWidth
-    height: minPort || medPort ? '11vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '82px' : '100px', // height
+    background: 'red', /* DEV */
+    //width: '100%',
+    width: '500px',
+    minWidth: '500px',
+    maxWidth: '500px',
+    //minWidth: minPort || minLand || medPort || medLand ? '30vw' : larPort ? '491px' : '580px', // minWidth
+    height: minPort || medPort ? '11vw' : minLand ? '5vw' : medLand ? '70px' : '82px', // height
     color: '#FFFFFF',
     'alignSelf': minPort || minLand || medPort || larPort ? 'start' : 'center',
-    marginLeft: minPort || minLand || medPort || medLand ? '2vw' : larPort || larLand ? '25px' : 'none',
+    //marginLeft: minPort || minLand || medPort || medLand ? '2vw' : larPort || larLand ? '25px' : 'none',
+    
   }
 }
 
@@ -52,12 +62,13 @@ interface mainRightI {
 export const mainRight = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainRightI) => { // mainRight
   return {
     ...asc, ...flex, ...aic,
-    //background: 'yellow',
+    background: 'yellow', /* DEV */
     overflow: 'auto',
-    width: minLand ? '55vw' : minPort || medPort ? 'calc(100vw - 12px)' : medLand ? '60vw' : larPort ? '93vw' : '50vw', // width
-    minHeight: minPort || medPort ? '6vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '45px' : `100px`, // minHeight
-    paddingLeft: minPort || minLand || medPort ? '0px' : larLand ? '20px' : '20px',
-    paddingRight: medLand ? '35px' : larLand ? '50px' : '20px',
+    //width: '100%',
+    //width: minLand ? '55vw' : minPort || medPort ? 'calc(100vw - 12px)' : medLand ? '60vw' : larPort ? '93vw' : '50vw', // width
+    minHeight: minPort || medPort ? '6vw' : minLand ? '5vw' : medLand ? '70px' : '45px', // minHeight
+    //paddingLeft: minPort || minLand || medPort ? '0px' : larLand ? '20px' : '20px',
+    //paddingRight: medLand ? '35px' : larLand ? '50px' : '20px',
     color: '#FFFFFF',
     alignSelf: larPort ? 'flex-start' : 'unset',
     justifyContent:
@@ -79,9 +90,9 @@ export const lessThan = ({ minPort, minLand, medPort, medLand, larPort }: genII)
   return {
     ...noSelect, ...mix,
     //background: 'darkgray',
-    fontSize: minPort || medPort  ? '5vw' : minLand || medLand ? '2.3vw' : larPort ? '54px' : '54px', // fontSize
-    width: minPort || medPort ? '6vw' : minLand || medLand ? '3.5vw' : larPort ? '45px' : '45px', // width
-    height: minPort || medPort ? '8vw' : minLand || medLand ? '3.5vw' : larPort ? '80px' : '80px', // height
+    fontSize: minPort || medPort  ? '5vw' : minLand || medLand ? '2.3vw' : '54px', // fontSize
+    width: minPort || medPort ? '6vw' : minLand || medLand ? '3.5vw' : '38px', // width
+    height: minPort || medPort ? '8vw' : minLand || medLand ? '3.5vw' :'80px', // height
     textAlign: 'center'
   }
 }
@@ -99,10 +110,10 @@ export const name = ({ minPort, minLand, medPort, medLand, larPort }: nameI) => 
     ...noSelect,
     //background: 'navy',
     fontFamily: 'Allura',
-    fontSize: minPort || medPort  ? '7vw' : minLand || medLand ? '3.4vw' : larPort ? '60px' : '73px', // fontSize
+    fontSize: minPort || medPort  ? '7vw' : minLand || medLand ? '3.4vw' : '60px', // fontSize
     color: blue[600],
     fontWeight: 600,
-    height: minPort || medPort ? '10vw' : minLand || medLand ? '4.7vw' : larPort ? '82px' : '100px', // height
+    height: minPort || medPort ? '10vw' : minLand || medLand ? '4.7vw' : '82px', // height
     textAlign: 'center'
   }
 }
@@ -140,7 +151,7 @@ export const item = () => {
   return {
     transition: 'all .1s ease-in-out',
     //':hover': { transform: 'scale(1.05)' }
-    ':hover': { fontSize: '110%' }
+    //':hover': { fontSize: '110%' }
   }
 }
 

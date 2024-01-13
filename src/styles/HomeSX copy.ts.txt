@@ -17,11 +17,15 @@ export const background = ({ minPort, minLand, medPort, medLand, larPort, larLan
   return {
     ...flex, ...relative,
     //background: 'gray',
-    justifyContent: minPort ? 'space-evenly' : medPort || larPort ? 'space-evenly' : minLand ? 'space-evenly' : medLand ? 'space-evenly' : 'flex-start',
-    paddingLeft: larLand ? '55px' : 'none',
-    alignItems: larPort ? 'none' : 'center',
-    flexDirection: minPort || medPort || larPort ? 'column-reverse' : 'row',
-    minWidth: minPort || minLand || medPort || medLand ? 'calc(100vw - 12px)' : larPort ? '666px' : '600px', // minWidth
+    //justifyContent: minPort ? 'space-evenly' : medPort || larPort ? 'space-evenly' : minLand ? 'space-evenly' : medLand ? 'space-evenly' : 'flex-start',
+    //justifyContent: 'space-evenly',
+    justifyContent: 'flex-start',
+    //paddingLeft: larLand ? '55px' : 'none',
+    //alignItems: larPort ? 'none' : 'center',
+    alignItems: 'center',
+    //flexDirection: minPort || medPort || larPort ? 'column-reverse' : 'row',
+    flexDirection: 'row',
+    //minWidth: minPort || minLand || medPort || medLand ? 'calc(100vw - 12px)' : larPort ? '666px' : '600px', // minWidth
     width: 'calc(100vw - 12px)', // width
     minHeight: minPort ? '80vh' : medPort ? '74vh' : minLand ? '76vh' : medLand ? '76vh' : larPort ? '618px' : '543px', // minHeight
     height: minPort ? '80vh' : medPort ? '74vh' : minLand ? '76vh' : medLand ? '76vh' : larPort ? '80vh' : '75vh', // height
@@ -40,13 +44,14 @@ interface boxTextTechMessageI {
   return {
     ...flex, ...column, ...aic,
     //background: 'maroon',
-    justifyContent: larPort ? 'flex-start' : 'space-evenly',
+    //justifyContent: larPort ? 'flex-start' : 'space-evenly',
+    justifyContent: 'space-evenly',
     alignContent: 'space-evenly',
     minWidth: minPort || medPort ? 'calc(100vw - 12px)' : minLand || medLand ? '48vw' : larPort ? '666px' : '600px', // minWidth
     width: minPort || medPort ? 'calc(100vw - 12px)' : minLand || medLand ? '48vw' : larPort ? 'calc(100vw - 12px)' : '47%', // width
     minHeight: minPort ? '40vh' : medPort ? '37vh' : minLand ? '76vh' : medLand ? '69vh' : larPort ? '378px' : '546px', // minHeight
     height: minPort ? '40vh' : medPort ? '37vh' : minLand ? '76vh' : medLand ? '69vh' : larPort ? '47vh' : '100%', // height
-    flexFlow: medPort || larPort ? 'wrap' : 'none'
+    //flexFlow: medPort || larPort ? 'wrap' : 'none'
   }
 }
 

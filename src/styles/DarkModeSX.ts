@@ -26,28 +26,28 @@ export const background = ({ height, minPort, minLand, medPort, medLand, larPort
     bottom:
       minLand && height <= 380 && location === '/Skills' ? 'none' :
       minLand ? '20px' : '20px',
-    pointerEvents:
-      larPort && location === '/' && percentageResizedHeight < 0.788 ? 'none' :
-      larLand && location === '/' && percentageResizedHeight < 0.665 ? 'none' :
-      (larLand || larPort) && location === '/AboutMe' && percentageResizedHeight < 0.629 ? 'none' :
-      (larPort || larLand) && location === '/Contact' && percentageResizedHeight < 0.548 ? 'none' :
-      larPort && location === '/Certifications' && percentageResizedHeight < 0.829 ? 'none' :
-      larLand && location === '/Certifications' && percentageResizedHeight < 0.4 ? 'none' :
-      (larPort || larLand) && location === '/Projects' && percentageResizedHeight < 0.640 ? 'none' :
-      (larLand || larPort) && location === '/MessageMe' && percentageResizedHeight < 0.693 ? 'none' :
-      (larLand || larPort) && location === '/Skills' && percentageResizedHeight < 0.536 ? 'none' :
-      null,
-    opacity:
-      larPort && location === '/' && percentageResizedHeight < 0.788 ? '0' :
-      larLand && location === '/' && percentageResizedHeight < 0.665 ? '0' :
-      (larLand || larPort) && location === '/AboutMe' && percentageResizedHeight < 0.629 ? '0' :
-      (larPort || larLand) && location === '/Contact' && percentageResizedHeight < 0.548 ? '0' :
-      larPort && location === '/Certifications' && percentageResizedHeight < 0.829 ? '0' :
-      larLand && location === '/Certifications' && percentageResizedHeight < 0.4 ? '0' :
-      (larPort || larLand) && location === '/Projects' && percentageResizedHeight < 0.640 ? '0' :
-      (larLand || larPort) && location === '/MessageMe' && percentageResizedHeight < 0.693 ? '0' :
-      (larLand || larPort) && location === '/Skills' && percentageResizedHeight < 0.536 ? '0' :
-      '1',
+    // pointerEvents:
+    //   larPort && location === '/' && percentageResizedHeight < 0.788 ? 'none' :
+    //   larLand && location === '/' && percentageResizedHeight < 0.665 ? 'none' :
+    //   (larLand || larPort) && location === '/AboutMe' && percentageResizedHeight < 0.629 ? 'none' :
+    //   (larPort || larLand) && location === '/Contact' && percentageResizedHeight < 0.548 ? 'none' :
+    //   larPort && location === '/Certifications' && percentageResizedHeight < 0.829 ? 'none' :
+    //   larLand && location === '/Certifications' && percentageResizedHeight < 0.4 ? 'none' :
+    //   (larPort || larLand) && location === '/Projects' && percentageResizedHeight < 0.640 ? 'none' :
+    //   (larLand || larPort) && location === '/MessageMe' && percentageResizedHeight < 0.693 ? 'none' :
+    //   (larLand || larPort) && location === '/Skills' && percentageResizedHeight < 0.536 ? 'none' :
+    //   null,
+    // opacity:
+    //   larPort && location === '/' && percentageResizedHeight < 0.788 ? '0' :
+    //   larLand && location === '/' && percentageResizedHeight < 0.665 ? '0' :
+    //   (larLand || larPort) && location === '/AboutMe' && percentageResizedHeight < 0.629 ? '0' :
+    //   (larPort || larLand) && location === '/Contact' && percentageResizedHeight < 0.548 ? '0' :
+    //   larPort && location === '/Certifications' && percentageResizedHeight < 0.829 ? '0' :
+    //   larLand && location === '/Certifications' && percentageResizedHeight < 0.4 ? '0' :
+    //   (larPort || larLand) && location === '/Projects' && percentageResizedHeight < 0.640 ? '0' :
+    //   (larLand || larPort) && location === '/MessageMe' && percentageResizedHeight < 0.693 ? '0' :
+    //   (larLand || larPort) && location === '/Skills' && percentageResizedHeight < 0.536 ? '0' :
+    //   '1',
     'active': {
       'opacity': '0',
       'display': 'flex'

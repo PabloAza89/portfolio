@@ -60,7 +60,7 @@ function App() {
             <NavBar />
             <DarkMode />
             <Home />
-            <Language />
+            {/* <Language /> */}
             <News />
             <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort })}></Box>
           </>}/>
@@ -68,25 +68,25 @@ function App() {
             <AboutMe />
             <BackButton />
             <DarkMode />
-            <Language />
+            {/* <Language /> */}
           </>}/>
           <Route path="/Skills" element={<>
             <Skills />
             <BackButton />
-            <Language />
+            {/* <Language /> */}
             <DarkMode />
           </>}/>
           <Route path="/Projects" element={<>
             <Projects />
             <BackButton />
             <DarkMode />
-            <Language />
+            {/* <Language /> */}
           </>}/>
           <Route path="/Certifications" element={<>
             <Certifications />
             <BackButton />
             <DarkMode />
-            <Language />
+            {/* <Language /> */}
           </>}/>
           <Route path="/Contact" element={<>
             <Contact />
@@ -98,7 +98,7 @@ function App() {
             <MessageMe />
             <BackButton />
             <DarkMode />
-            <Language />
+            {/* <Language /> */}
           </>}/>
           <Route path="*" element={<>
             <BackButton />

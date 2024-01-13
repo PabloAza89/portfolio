@@ -33,7 +33,7 @@ interface backgroundI {
 
 export const background = ({ currentWidth, minPort, minLand, medPort, medLand, larPort, larLand }: backgroundI) => { // background (DO NOT USE 'POSITION' !)
   return {
-    order: minPort || medPort || larPort ? '1' : '0',
+    /* order: minPort || medPort || larPort ? '1' : '0', */
     ...asc, ...flex, ...aic,
     overflow: 'auto',
     width: minPort ? '100%' : medPort ? '85%' : minLand || medLand ? '100%' : larPort ? 'calc(100vw - 12px)' : larLand && currentWidth <= 655 ? 'calc(100vw - 67px)' : '100%', // width
