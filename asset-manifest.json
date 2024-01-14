@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.fcbaf558.css",
-    "main.js": "/portfolio/static/js/main.47f23cc2.js",
+    "main.css": "/portfolio/static/css/main.45ab8d61.css",
+    "main.js": "/portfolio/static/js/main.6b65d177.js",
     "static/media/error.gif": "/portfolio/static/media/error.c8a987390be23c2376be.gif",
     "static/media/food2.png": "/portfolio/static/media/food2.33251b4f71ace22ad726.png",
     "static/media/food3.png": "/portfolio/static/media/food3.0884ec17b8c03ed71400.png",
@@ -9,21 +9,27 @@
     "static/media/weatherify1.png": "/portfolio/static/media/weatherify1.cfea5a36b85f60795d4b.png",
     "static/media/weatherify2.png": "/portfolio/static/media/weatherify2.15d0d66d814eca488e90.png",
     "static/media/profile.png": "/portfolio/static/media/profile.7f49b905ba2a325c4661.png",
+    "static/media/react.png": "/portfolio/static/media/react.2f2532db663fd5ec5f95.png",
+    "static/media/material.png": "/portfolio/static/media/material.5955eca0663eaeb9b8d6.png",
     "static/media/efSet.png": "/portfolio/static/media/efSet.70a4ba20ab286e8227ff.png",
     "static/media/tictac2.png": "/portfolio/static/media/tictac2.e303a3f640091233379f.png",
     "static/media/henry.png": "/portfolio/static/media/henry.bc6cc8847bd83df6cc48.png",
     "static/media/attentionToDetail.png": "/portfolio/static/media/attentionToDetail.fa0c9a140b5d16e1d10a.png",
     "static/media/fccCertJS.png": "/portfolio/static/media/fccCertJS.2398854b79d8175858c1.png",
     "static/media/home.svg": "/portfolio/static/media/home.eb8e1991134358223a6ee700ae5e4fc9.svg",
+    "static/media/javascript.png": "/portfolio/static/media/javascript.cf7522f436d6510da302.png",
+    "static/media/redux.png": "/portfolio/static/media/redux.b426d97de12d4dab1c06.png",
+    "static/media/sequelize.png": "/portfolio/static/media/sequelize.844fb9182c0fbf41931d.png",
     "static/media/tictac1.png": "/portfolio/static/media/tictac1.d7cfda4175c8a8a57586.png",
     "static/media/loadingImage.png": "/portfolio/static/media/loadingImage.8af190ff0d46a12567d2.png",
+    "static/media/node.png": "/portfolio/static/media/node.07d152a8a036951b8d14.png",
     "static/media/darth-vader.svg": "/portfolio/static/media/darth-vader.ab4aa42386ccc66a7de06c02e64d572c.svg",
     "index.html": "/portfolio/index.html",
-    "main.fcbaf558.css.map": "/portfolio/static/css/main.fcbaf558.css.map",
-    "main.47f23cc2.js.map": "/portfolio/static/js/main.47f23cc2.js.map"
+    "main.45ab8d61.css.map": "/portfolio/static/css/main.45ab8d61.css.map",
+    "main.6b65d177.js.map": "/portfolio/static/js/main.6b65d177.js.map"
   },
   "entrypoints": [
-    "static/css/main.fcbaf558.css",
-    "static/js/main.47f23cc2.js"
+    "static/css/main.45ab8d61.css",
+    "static/js/main.6b65d177.js"
   ]
 }
