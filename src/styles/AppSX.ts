@@ -28,12 +28,35 @@ export const blackWhite = ( { darkMode, location }: blackWhiteI ) => {
     ...relative, ...flex, ...column, ...asc,
     width: 'calc(100vw - 12px)',
     height: 'calc(100vh - 12px)',
-    justifyContent:
-      location === '/'  ? 'space-between' :
-      location === '/MessageMe'  ? 'center' :
-      location === '/Contact' ||  location === '/AboutMe' ? 'space-between' :
-      'none',
-    background: darkMode ? 'linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%)' : 'linear-gradient(to bottom right, black 49.9%,white 50.1%)'
+    // justifyContent:
+    //   location === '/'  ? 'space-between' :
+    //   location === '/MessageMe'  ? 'center' :
+    //   location === '/Contact' ||  location === '/AboutMe' ? 'space-between' :
+    //   'none',
+    background: darkMode ? 'linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%)' : 'linear-gradient(to bottom right, black 49.9%,white 50.1%)',
+    /* overflow: 'scroll' */
+    overflowX: 'hidden',
+    /* '::-webkit-scrollbar': {
+      width: '0px',
+      height: '0px',
+    }, */
+
+    '::-webkit-scrollbar': {
+      /* left: '10px', */
+      width: '6px',
+      backgroundColor: '#F5F5F5'
+    },
+    '::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.3)',
+      backgroundColor: '#F5F5F5'
+    },
+    '::-webkit-scrollbar-thumb': {
+      backgroundColor: '#000000',
+      border: '5px solid #555555',
+    },
+    justifyContent: 'flex-start',
+
+
   }
 }
 

@@ -14,22 +14,18 @@ function Home() {
   return (
     <div className={css.background}>
       <div className={css.leftContainer}>
-        {/* <div className={css.boxTypography}> */}
-          <div className={css.auxLarPort}>
-            <div className={css.textOne}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</div>
-            <div className={css.textTwo}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</div>
-            <div className={css.textThree}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</div>
-          </div>
-        {/* </div> */}
-        {/* <Technologies /> */}
-        {/* <div className={css.boxButton}> */}
-          <Link style={{ textDecoration: 'none' }} to="/MessageMe">
-            <Button
-              className={css.buttonMessage}
-              variant='outlined'
-            >{ english ? `Message Me` : `Envíame un mensaje` }</Button>
-          </Link>
-        {/* </div> */}
+        <div className={css.auxLarPort}>
+          <div className={css.textOne}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</div>
+          <div className={css.textTwo}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</div>
+          <div className={css.textThree}>{ english ? `and I'm a Fullstack Developer.` : `y soy un Desarrollador Fullstack.`}</div>
+        </div>
+        <Technologies />
+        <Link style={{ textDecoration: 'none' }} to="/MessageMe">
+          <Button
+            className={css.buttonMessage}
+            variant='outlined'
+          >{ english ? `Message Me` : `Envíame un mensaje` }</Button>
+        </Link>
       </div>
       <div className={css.rightContainer}>
         <SvgIcon

@@ -1,0 +1,106 @@
+.background {
+
+    /* order: minPort || medPort || larPort ? '1' : '0', */
+    /* ...asc, ...flex, ...aic, */
+    display: flex;
+    background: yellow; /* DEV */
+    /* overflow: 'auto', */
+    /* width: minPort ? '100%' : medPort ? '85%' : minLand || medLand ? '100%' : larPort ? 'calc(100vw - 12px)' : larLand && currentWidth <= 655 ? 'calc(100vw - 67px)' : '100%', // width */
+    width: 100%;
+    /* height: minPort ? 'calc(10vw + 4.5vw + 2%)' : minLand ? 'calc(4.5vw + 1.8vw + 2%)' : medPort ? 'calc(6vw + 3.5vw + 2%)' : medLand ? 'calc(5vw + 2vw + 2%)' : larPort ? 'calc(55px + 21px + 2%)' : 'calc(65px + 24px + 2%)', */
+    /* height: 'calc(55px + 21px + 2%)', */
+    /* height: '80px', */
+    height: min(20vw, 80px);
+    align-self: flex-start;
+    /* justifyContent:
+      minPort ? 'space-around' :
+      minLand ? 'space-evenly' :
+      larPort ? 'space-between' :
+      'space-between', */
+    justify-content: space-between;
+    overflow: hidden;
+  
+}
+
+#eachBox {
+ 
+    /* ...flex, ...column, ...relative, ...noDeco, */
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    background: red; /* DEV */
+    /* width: minPort ? '15vw' : minLand ? '7vw' : medPort ? '12vw' : medLand ? '7vw' : larPort ? '111px' : '100px', // width */
+    width: min(15vw, 115px);
+    /* height: minPort ? 'calc(10vw + 4.5vw)' : minLand ? 'calc(4.5vw + 1.8vw)' : medPort ? 'calc(6vw + 3.5vw)' : medLand ? 'calc(5vw + 2vw)' : larPort ? 'calc(55px + 21px)' : 'calc(65px + 24px)', */
+    /* height: 100%; */
+    /* height: 250px; */
+    /* height: 'min(15vw, 115px)', */
+    /* height: 'calc(10vw + 4.5vw)', */
+    justify-content: flex-start;
+    align-items: center;
+  
+}
+
+#linkContainer  {
+
+    /* ...flex, ...mix, ...column, ...relative, ...noDeco, ...jcfe, */
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    background: lightblue;
+    /* //background: 'yellow', */
+    border: none;
+    /* width: minPort ? '15vw' : minLand ? '7vw' : medPort ? '12vw' : medLand ? '7vw' : larPort ? '111px' : '100px', // width */
+    /* width: '15vw', */
+    /* width: min(15vw, 90px); */
+    width: 80px;
+    height: 80px;
+    align-items: center;
+    /* height: minPort ? 'calc(10vw + 4.5vw)' : minLand ? 'calc(4.5vw + 1.8vw)' : medPort ? 'calc(6vw + 3.5vw)' : medLand ? 'calc(5vw + 2vw)' : larPort ? 'calc(55px + 21px)' : 'calc(65px + 24px)', */
+    /* height: calc(65px + 24px) */
+    transition: all .2s ease-in-out;
+    transform: scale(1.0)
+  
+}
+
+#linkContainer:hover {
+  transition: all .2s ease-in-out;
+  transform: scale(1.1)
+}
+
+.iconMedia {
+    /* ...absolute, ...flex, */
+    background: green; /* DEV */
+    display: flex;
+    position: relative;
+    /* background-repeat: 'no-repeat'; */
+    /* backgroundImage: `url(${url})`, */
+    /* //background: 'blue', */
+    /* //width: minPort ? '15vw' : minLand ? '7vw' : medPort ? '12vw' : medLand ? '7vw' : larPort ? '111px' : '100px', // width */
+    /* //width: '15vw', */
+    /* width: min(15vw, 115px); */
+    /* //height: minPort ? '10vw' : minLand ? '4.5vw' : medPort ? '6vw' : medLand ? '5vw' : larPort ? '55px' : '65px' , // height */
+    width: 60px !important;
+    height: 60px !important;
+    /* background-size: contain; */
+  
+}
+
+.title {
+    /* ...noSelect, ...flex, ...relative, ...jcc, */
+    display: flex;
+    position: relative;
+    background: rebeccapurple;
+    /* //fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : medPort ? '12px' : medLand ? '1.3vw' : larPort ? '14px' : '16px', // fontSize */
+    /* //fontSize: '14px', */
+    font-size: min(2.7vw, 14px);
+    /* color: darkMode ? '#b5b3b3' : '#FFFFFF', */
+    font-weight: 600;
+    width: fit-content;
+    /* //width: minPort ? '15vw' : minLand ? '7vw' : medPort ? '12vw' : medLand ? '7vw' : larPort ? '111px' : '100px', // width */
+    /* //width: '15vw', */
+    /* width: min(15vw, 80px); */
+    /* //height: minPort ? '4.5vw' : minLand ? '1.8vw' : medPort ? '3.5vw' : medLand ? '2vw' : larPort ? '21px' : '24px', */
+    /* //background: 'red', */
+
+}

@@ -30,6 +30,11 @@ export const background = ({ minPort, minLand, medPort, medLand, larPort, larLan
     //justifyContent: 'center',
     //justifyContent: 'space-between',
     justifyContent: 'space-around',
+
+    position: 'sticky', /*  */
+    /* top: '-50px', */ /*  */
+    top: '0px', /*  */
+    zIndex: 4000,
   }
 }
 
@@ -78,6 +83,8 @@ export const mainRight = ({ minPort, minLand, medPort, medLand, larPort, larLand
       minPort || minLand || minLand || medPort ? 'space-around' :
       larPort ? 'space-between' :
       'space-between',
+    
+    
   }
 }
 
@@ -123,7 +130,7 @@ export const name = ({ minPort, minLand, medPort, medLand, larPort }: nameI) => 
     //height: minPort || medPort ? '10vw' : minLand || medLand ? '4.7vw' : '82px', // height
     textAlign: 'center',
     //top: '4px',
-    top: '0.7vw',
+    top: 'min(0.7vw, 7px)',
   }
 }
 

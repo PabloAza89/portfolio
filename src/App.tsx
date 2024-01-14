@@ -62,7 +62,7 @@ function App() {
             <Home />
             {/* <Language /> */}
             {/* <News /> */}
-            <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort })}></Box>
+            {/* <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort })}></Box> */}
           </>}/>
           <Route path="/AboutMe" element={<>
             <AboutMe />

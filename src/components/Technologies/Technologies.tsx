@@ -8,41 +8,14 @@ import node from '../../images/node.png';
 import react from '../../images/react.png';
 import redux from '../../images/redux.png';
 import sequelize from '../../images/sequelize.png';
-import ScrollContainer from 'react-indiana-drag-scroll';
-import * as s from '../../styles/TechnologiesSX';
+//import ScrollContainer from 'react-indiana-drag-scroll';
+import css from '../../styles/TechnologiesCSS.module.css';
 import $ from 'jquery';
 
 function Technologies() {
 
   const darkMode = useSelector((state: { darkMode:boolean }) => state.darkMode)
   const english = useSelector((state: { english:boolean }) => state.english)
-  const minPort = useSelector((state: { minPort:boolean }) => state.minPort)
-  const minLand = useSelector((state: { minLand:boolean }) => state.minLand)
-  const medPort = useSelector((state: { medPort:boolean }) => state.medPort)
-  const medLand = useSelector((state: { medLand:boolean }) => state.medLand)
-  const larPort = useSelector((state: { larPort:boolean }) => state.larPort)
-  const larLand = useSelector((state: { larLand:boolean }) => state.larLand)
-  const currentWidth = useSelector((state: { currentWidth:number }) => state.currentWidth)
-
-  function useHorizontalScroll() {
-    const elRef = useRef<any>(null);
-    useEffect(() => {
-      const el:any = elRef.current;
-      if (el) {
-        const onWheel = (e:any) => {
-          if (e.deltaY === 0) return;
-          e.preventDefault();
-          el.scrollTo({
-            left: el.scrollLeft + e.deltaY * 4,
-            behavior: "smooth"
-          });
-        };
-        el.addEventListener("wheel", onWheel);
-        return () => el.removeEventListener("wheel", onWheel);
-      }
-    }, []);
-    return elRef;
-  }
 
   // icon = 5vw MED LAND
   // text = 25px
@@ -69,42 +42,31 @@ function Technologies() {
     { id: 5, icon: node, title: `Node.js`, url: english ? `https://nodejs.org/en` : `https://nodejs.org/es ` },
   ]
 
-  $(function(){
-    s.hover(array)
-  })
+  // $(function(){
+  //   s.hover(array)
+  // })
 
   return (
-    <ScrollContainer style={s.background({ currentWidth, minPort, minLand, medPort, medLand, larPort, larLand })}
-      innerRef={useHorizontalScroll()}
-      horizontal={true}
-    >
+    <div className={css.background}>
       {array.map((e) => {
         return (
-          <Box
-            className={`container${e.id}`}
-            key={e.title}
-            sx={s.container({ minPort, minLand, medPort, medLand, larPort })}
-          >
-            <Box
+         
+            <a
               className={`titleClass${e.id}`}
-              sx={s.iconBox({ minPort, minLand, medPort, medLand, larPort })}
-              component={Link}
-              to={e.url}
+              id={css.linkContainer}
+              key={e.id}
+              //component={Link}
+              href={e.url}
               target="_blank"
+              rel="noreferrer"
             >
-              <Typography sx={s.title({ darkMode, minPort, minLand, medPort, medLand, larPort })}>{e.title}</Typography>
-            </Box>
-            <CardMedia
-              className={`iconClass${e.id}`}
-              component={Link}
-              to={e.url}
-              target="_blank"
-              sx={s.iconMedia({ url:e.icon, minPort, minLand, medPort, medLand, larPort })}
-            />
-          </Box>
+              <img src={e.icon} className={css.iconMedia} alt=""></img>
+              <div className={css.title}>{e.title}</div>
+            </a>
+           
         )
       })}
-    </ScrollContainer>
+    </div>
   )
 }
 

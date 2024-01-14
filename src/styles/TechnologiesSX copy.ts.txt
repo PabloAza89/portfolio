@@ -1,0 +1,111 @@
+import {
+  flex, relative, absolute, column,
+  aic, asc, jcc, jcfe,
+  noDeco, mix, noSelect
+} from './CommonsSX';
+import $ from 'jquery';
+
+interface arrayI {
+  id: number,
+}
+
+export const hover = (array: arrayI[]) => {
+  array.forEach(e => {
+    $(`.container${e.id}`).on("mouseenter", function () {
+      $(`.titleClass${e.id}`).css('transition', 'all .1s ease-in-out').css('transform', 'scale(1.1)')
+      $(`.iconClass${e.id}`).css('transition', 'all .1s ease-in-out').css('transform', 'scale(1.1)')
+    }).on("mouseleave", function () {
+      $(`.titleClass${e.id}`).css('transition', 'all .1s ease-in-out').css('transform', 'scale(1)')
+      $(`.iconClass${e.id}`).css('transition', 'all .1s ease-in-out').css('transform', 'scale(1)')
+    })
+  })
+}
+
+export const background = () => {
+  return {
+    /* order: minPort || medPort || larPort ? '1' : '0', */
+    ...asc, ...flex, ...aic,
+    background: 'yellow', /* DEV */
+    //overflow: 'auto',
+    //width: minPort ? '100%' : medPort ? '85%' : minLand || medLand ? '100%' : larPort ? 'calc(100vw - 12px)' : larLand && currentWidth <= 655 ? 'calc(100vw - 67px)' : '100%', // width
+    width: '100%',
+    //height: minPort ? 'calc(10vw + 4.5vw + 2%)' : minLand ? 'calc(4.5vw + 1.8vw + 2%)' : medPort ? 'calc(6vw + 3.5vw + 2%)' : medLand ? 'calc(5vw + 2vw + 2%)' : larPort ? 'calc(55px + 21px + 2%)' : 'calc(65px + 24px + 2%)',
+    //height: 'calc(55px + 21px + 2%)',
+    //height: '80px',
+    height: 'min(20vw, 80px)',
+    alignSelf: 'flex-start',
+    /* justifyContent:
+      minPort ? 'space-around' :
+      minLand ? 'space-evenly' :
+      larPort ? 'space-between' :
+      'space-between', */
+    justifyContent: 'space-between',
+    overflow: 'hidden'
+  }
+}
+
+export const container = () => {
+  return {
+    ...flex, ...column, ...relative, ...noDeco,
+    position: 'relative',
+    background: 'red', /* DEV */
+    //width: minPort ? '15vw' : minLand ? '7vw' : medPort ? '12vw' : medLand ? '7vw' : larPort ? '111px' : '100px', // width
+    width: 'min(15vw, 115px)',
+    //height: minPort ? 'calc(10vw + 4.5vw)' : minLand ? 'calc(4.5vw + 1.8vw)' : medPort ? 'calc(6vw + 3.5vw)' : medLand ? 'calc(5vw + 2vw)' : larPort ? 'calc(55px + 21px)' : 'calc(65px + 24px)',
+    height: '100%',
+    //height: 'min(15vw, 115px)',
+    //height: 'calc(10vw + 4.5vw)',
+  }
+}
+
+export const iconBox = () => {
+  return {
+    ...flex, ...mix, ...column, ...relative, ...noDeco, ...jcfe,
+    //background: 'yellow',
+    border: 'none',
+    //width: minPort ? '15vw' : minLand ? '7vw' : medPort ? '12vw' : medLand ? '7vw' : larPort ? '111px' : '100px', // width
+    //width: '15vw',
+    width: 'min(15vw, 115px)',
+    //height: minPort ? 'calc(10vw + 4.5vw)' : minLand ? 'calc(4.5vw + 1.8vw)' : medPort ? 'calc(6vw + 3.5vw)' : medLand ? 'calc(5vw + 2vw)' : larPort ? 'calc(55px + 21px)' : 'calc(65px + 24px)',
+    height: 'calc(65px + 24px)'
+  }
+}
+
+interface iconMediaI {
+  url: string
+}
+
+export const iconMedia = ({ url }: iconMediaI) => { // iconMedia
+  return {
+    ...absolute, ...flex,
+    backgroundRepeat: 'no-repeat',
+    backgroundImage: `url(${url})`,
+    //background: 'blue',
+    //width: minPort ? '15vw' : minLand ? '7vw' : medPort ? '12vw' : medLand ? '7vw' : larPort ? '111px' : '100px', // width
+    //width: '15vw',
+    width: 'min(15vw, 115px)',
+    //height: minPort ? '10vw' : minLand ? '4.5vw' : medPort ? '6vw' : medLand ? '5vw' : larPort ? '55px' : '65px' , // height
+    height: '60px',
+    backgroundSize: 'contain',
+  }
+}
+
+interface titleI {
+  darkMode: boolean
+}
+
+export const title = ({ darkMode }: titleI) => { // title
+  return {
+    ...noSelect, ...flex, ...relative, ...jcc,
+    //fontSize: minPort ? '2.9vw' : minLand ? '2.40vh' : medPort ? '12px' : medLand ? '1.3vw' : larPort ? '14px' : '16px', // fontSize
+    //fontSize: '14px',
+    fontSize: 'min(2.7vw, 14px)',
+    color: darkMode ? '#b5b3b3' : '#FFFFFF',
+    fontWeight: 600,
+    //width: minPort ? '15vw' : minLand ? '7vw' : medPort ? '12vw' : medLand ? '7vw' : larPort ? '111px' : '100px', // width
+    //width: '15vw',
+    width: 'min(15vw, 115px)',
+    //height: minPort ? '4.5vw' : minLand ? '1.8vw' : medPort ? '3.5vw' : medLand ? '2vw' : larPort ? '21px' : '24px',
+    //background: 'red',
+  }
+}
