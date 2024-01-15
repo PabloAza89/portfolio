@@ -1,0 +1,26 @@
+
+.testTest2 {
+  /* background: red */
+}
+
+/* html:not([data-scroll='7']) .testTestt {
+  background: red;
+} */
+
+/* body:not([data-scroll='0']) .testTestt {
+  background: red;
+} */
+
+/* .testTest1::-webkit-scrollbar {
+  width: 10px !important;
+  background-color: #F5F5F5
+} */
+
+/* .testTest1:not([data-scroll='6']) .testTest2 {
+  background: red;
+} */
+
+/* html:not([data-scroll="6"]) .testTest2 {
+  background: red;
+}
+ */

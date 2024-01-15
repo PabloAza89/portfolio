@@ -16,12 +16,14 @@ interface genI {
 
 export const background = ({ minPort, minLand, medPort, medLand, larPort, larLand }: genI) => { // background
   return {
-    ...flex,
+    /* ...flex, */
     background: 'blue', /* DEV */
     //flexDirection: minPort || medPort || larPort ? 'column' : 'row',
     flexDirection: 'row',
     paddingTop: '10px',
     color: '#FFFFFF',
+    top: '0px',
+    /* height: '30%', */
     //minWidth: minPort || medPort ? 'none' : minLand || medLand ? 'none' : larPort ? '526px' : '677px', // minWidth
     //minHeight: minPort || medPort ? '17vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '127px' : '100px', // minHeight
     //height: minPort || medPort ? '17vw' : minLand ? '5vw' : medLand ? '70px' : larPort ? '127px' : '100px', //height
@@ -30,10 +32,11 @@ export const background = ({ minPort, minLand, medPort, medLand, larPort, larLan
     //justifyContent: 'center',
     //justifyContent: 'space-between',
     justifyContent: 'space-around',
-
-    position: 'sticky', /*  */
+    display: 'flex',
+    position: 'relative',
+    /* position: 'sticky', */ /*  */
     /* top: '-50px', */ /*  */
-    top: '0px', /*  */
+    /* top: '0px', */ /*  */
     zIndex: 4000,
   }
 }
@@ -42,7 +45,7 @@ export const mainLeft = ({ minPort, minLand, medPort, medLand, larPort, larLand 
   return {
     ...flex, ...row, ...aic, ...jcc,
     position: 'relative',
-    background: 'red', /* DEV */
+    /* background: 'red', */ /* DEV */
     //width: '100%',
     width: '500px',
     minWidth: '500px',
@@ -70,7 +73,7 @@ interface mainRightI {
 export const mainRight = ({ minPort, minLand, medPort, medLand, larPort, larLand }: mainRightI) => { // mainRight
   return {
     ...asc, ...flex, ...aic,
-    background: 'yellow', /* DEV */
+    /* background: 'yellow', */ /* DEV */
     overflow: 'auto',
     width: 'min(100%, 800px)',
     //width: minLand ? '55vw' : minPort || medPort ? 'calc(100vw - 12px)' : medLand ? '60vw' : larPort ? '93vw' : '50vw', // width

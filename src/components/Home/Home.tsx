@@ -5,14 +5,29 @@ import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
 //import * as s from '../../styles/HomeSX';
 import css from '../../styles/HomeCSS.module.css';
+import $ from 'jquery';
 
 function Home() {
 
   const darkMode = useSelector((state: {darkMode:boolean}) => state.darkMode)
   const english = useSelector((state: {english:boolean}) => state.english)
 
+  $(function() {
+    $('#testTest1').on("scroll", function() {
+      let qq = document.getElementById("testTest2")
+      if (qq !== null) {
+        console.log("QQ", ($(`#testTest1`).scrollTop()))
+        if ($(this).scrollTop() === 0) {
+          qq.style.background = "blue";
+        } else {
+          qq.style.background = "red";
+        }
+      }
+    });
+  });
+
   return (
-    <div className={css.background}>
+    <div id={`testTest1`} className={css.background}>
       <div className={css.leftContainer}>
         <div className={css.auxLarPort}>
           <div className={css.textOne}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</div>

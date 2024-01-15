@@ -1,28 +1,46 @@
 
 .background  {
+  /* ...flex, ...relative, */
+  display: flex;
+  position: relative;
+  /* background: gray; */ /* DEV */
+  /* justifyContent: minPort ? 'space-evenly' : medPort || larPort ? 'space-evenly' : minLand ? 'space-evenly' : medLand ? 'space-evenly' : 'flex-start', */
+  /* justifyContent: 'space-evenly', */
+  /* justify-content: flex-start; */
+  /* paddingLeft: larLand ? '55px' : 'none', */
+  /* alignItems: larPort ? 'none' : 'center', */
+  /* align-Items: center; */ /* DO NOT USE IT !! */
+  /* min-height: fit-content; */
+  /* top: 0px; */
+  /* height: calc(100vh - 120px); */
+  /* height: 100vh; */
+  height: calc(100% - 12px);
+  /* min-height: 546px; */
+  /* margin-top: 150px; */
+  /* bottom: 0px; */
+  /* margin-top: 10px; */
+  /* max-height: 100%; */
+  /* max-height: 370px; */
+  /* height: calc(100% - 130px); */
+  /* flexDirection: minPort || medPort || larPort ? 'column-reverse' : 'row', */
+  flex-direction: row;
+  justify-content: center;
+  overflow: auto;
+  /* overflow: 'scroll' */
+  overflow-x: hidden;
+}
 
-    /* ...flex, ...relative, */
-    display: flex;
-    position: relative;
-    background: gray; /* DEV */
-    /* justifyContent: minPort ? 'space-evenly' : medPort || larPort ? 'space-evenly' : minLand ? 'space-evenly' : medLand ? 'space-evenly' : 'flex-start', */
-    /* justifyContent: 'space-evenly', */
-    /* justify-content: flex-start; */
-    /* paddingLeft: larLand ? '55px' : 'none', */
-    /* alignItems: larPort ? 'none' : 'center', */
-    align-Items: center;
-    /* flexDirection: minPort || medPort || larPort ? 'column-reverse' : 'row', */
-    flex-direction: row;
-    /* minWidth: minPort || minLand || medPort || medLand ? 'calc(100vw - 12px)' : larPort ? '666px' : '600px', // minWidth */
-    /* width: calc(100vw - 12px); */
-    /* min-height: minPort ? '80vh' : medPort ? '74vh' : minLand ? '76vh' : medLand ? '76vh' : larPort ? '618px' : '543px', // minHeight */
-    min-height: 543px;
-    /* height: minPort ? '80vh' : medPort ? '74vh' : minLand ? '76vh' : medLand ? '76vh' : larPort ? '80vh' : '75vh', // height */
-    height: 75vh;
-    justify-content: center;
-    /* overflow: scroll */
-    /* overflow: 'scroll' */
-    /* overflow-x: hidden; */
+.background::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F5F5F5
+}
+.background::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5
+}
+.background::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: 5px solid #555555
 }
 
  .leftContainer { 
@@ -40,11 +58,15 @@
     /* width: minPort || medPort ? 'calc(100vw - 12px)' : minLand || medLand ? '48vw' : larPort ? 'calc(100vw - 12px)' : '47%', // width */
     /* width: 47%; */ /* // width */
     width: 100%;
+    min-height: 546px;
+    /* height: calc(100vh - 130px); */
+    /* height: 100%; */
     /* minHeight: minPort ? '40vh' : medPort ? '37vh' : minLand ? '76vh' : medLand ? '69vh' : larPort ? '378px' : '546px', // minHeight */
-    min-height: 546px; /* // minHeight */
+    /* min-height: 546px; */ /* // minHeight */
     /* height: minPort ? '40vh' : medPort ? '37vh' : minLand ? '76vh' : medLand ? '69vh' : larPort ? '47vh' : '100%', // height */
-    height: 100%; /* // height */
+    /* height: 100%; */ /* // height */
     /* //flexFlow: medPort || larPort ? 'wrap' : 'none' */
+    height: fit-content;
   
 }
 
@@ -59,10 +81,11 @@
     min-width: 631px; /* // minWidth */
     /* width: minPort ? '40h' : medPort ? '50vh' : minLand ? '76vh' : medLand ? '65vh' : larPort ? 'calc(100vw - 12px)' : '50%', // width */
     width: 50%; /* // width */
+    min-height: 546px;
     /* minHeight: minPort ? '40h' : medPort ? '37vh' : minLand ? '76vh' : medLand ? '65vh' : larPort ? '240px' : '546px', // minHeight */
-    min-height: 546px; /* // minHeight */
+    /* min-height: 546px; */ /* // minHeight */
     /* height: minPort ? '40h' : medPort ? '37vh' : minLand ? '76vh' : medLand ? '65vh' : larPort ? '25vh' : '100%', // height */
-    height: 100%; /* // height */
+    /* height: 100%; */ /* // height */
 }
 
 

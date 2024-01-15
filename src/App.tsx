@@ -13,6 +13,7 @@ import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
 import News from './components/News/News';
 import * as s from './styles/AppSX';
+import './styles/AppCSS.css';
 import { Box } from '@mui/material';
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,6 +22,7 @@ import {
   setLarPort, setMedLand, setMedPort, setMinLand,
   setMinPort, setPercentageResizedHeight, setWidth, setFullScreen
 } from './actions';
+import $ from 'jquery';
 
 function App() {
 
@@ -52,13 +54,33 @@ function App() {
   const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
   const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
 
+  // useEffect(() => {
+  //   console.log("QQ", $("#testTest1").scrollTop())
+  // })
+
+
+ /*  $(function() {
+    $('#testTest1').on("scroll", function() {
+      let qq = document.getElementById("testTest2")
+      if (qq !== null) {
+        console.log("QQ", ($(`#testTest1`).scrollTop()))
+        if ($(this).scrollTop() === 0) {
+          qq.style.background = "blue";
+        } else {
+          qq.style.background = "red";
+        }
+      }
+      
+    });
+  }); */
+
   return (
     <Box sx={s.background({ darkMode })} >
-      <Box sx={s.blackWhite({ darkMode, location:location.pathname })} >
+      <Box /* id={`testTest1`} */ sx={s.blackWhite({ darkMode, location:location.pathname })} >
         <Routes>
           <Route path="/" element={<>
             <NavBar />
-            <DarkMode />
+            {/* <DarkMode /> */}
             <Home />
             {/* <Language /> */}
             {/* <News /> */}

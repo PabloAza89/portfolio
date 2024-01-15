@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
 import * as s from '../../styles/NavBarSX';
-import '../../styles/ContactSX.css';
+//import css from '../../styles/NavBarCSS.module.css';
+import '../../styles/NavBarCSS.css';
+//import '../../styles/ContactSX.css';
+import $ from 'jquery';
 
 function NavBar() {
 
@@ -40,8 +43,25 @@ function NavBar() {
   // MED HEIGHT 10 + 70
   // LAR HEIGHT 10 + 87
 
+  useEffect(() => {
+    let qq = document.getElementById("testTest1")
+    if (qq) console.log("QQ", qq.scrollTop)
+  })
+
+  let qq = document.getElementById("testTest1")
+    //if (qq) console.log("QQ", qq.scrollTop)
+
+  if (qq !== null) window.addEventListener("scroll", () => {
+    //if (qq) console.log("QQ", qq.scrollTop)
+    console.log("QQ", $("#testTest1").scrollTop())
+  })
+
+  // useEffect(() => {
+  //   console.log("QQ", $("#testTest1").scrollTop())
+  // })
+
   return (
-    <Box sx={s.background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+    <Box id={`testTest2`} sx={s.background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
       <Box sx={s.mainLeft({ minPort, minLand, medPort, medLand, larPort, larLand })}>
         <Typography sx={s.lessThan({ minPort, minLand, medPort, medLand, larPort })}>{`<`}</Typography>
         <Typography sx={s.name({ minPort, minLand, medPort, medLand, larPort })}>{`Pablo Azambuyo`}</Typography>

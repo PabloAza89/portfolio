@@ -80,8 +80,8 @@ export const mainBox = ({ minPort, medPort, larPort, larLand }: genI) => {
     justifyContent: 'center',
     //minHeight: larLand ? '220px' : 'none',
     //height: minPort || medPort || larPort ? '80vh' : '50vh',
-    overflow: 'scroll',
-    maxHeight: '100vh',
+    /* overflow: 'scroll', */
+    maxHeight: 'calc(100vh - 12px)',
     // '::-webkit-scrollbar': {
     //   width: '0px',
     //   height: '0px',
@@ -91,6 +91,23 @@ export const mainBox = ({ minPort, medPort, larPort, larLand }: genI) => {
     alignItems: 'center',
     alignSelf: 'center',
     width: '100vw',
+
+    overflow: 'auto',
+    overflowX: 'hidden',
+    '::-webkit-scrollbar': {
+      width: '6px',
+      backgroundColor: '#F5F5F5'
+    },
+    '::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.3)',
+      backgroundColor: '#F5F5F5'
+    },
+    '::-webkit-scrollbar-thumb': {
+      backgroundColor: '#000000',
+      border: '5px solid #555555',
+    },
+    /* marginTop: '6px',
+    marginBottom: '12px' */
   }
 }
 
