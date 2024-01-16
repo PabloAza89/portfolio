@@ -18,29 +18,17 @@ export const background = () => {
     //...flex, ...aic, ...column, ...jcsb,
     display: 'flex',
     position: 'relative',
-    background: 'none',
+    background: 'darkred', /* DEV */
     width: 'calc(100vw - 12px)',
+    /* width: '100vw !important', */
     //height: 'calc(100vh - 12px)',
-    height: '100vh',
+    /* height: '100vh', */
+    /* height: '100%', */
     //height: 'fit-content',
 
   }
 }
 
-export const innerMainContainer = () => {
-  return {
-    ...column, ...jcsb, ...flex,
-    //background: 'blue',
-  }
-}
-
-export const innerTopBottomHelper = () => {
-  return {
-    ...flex,
-    //background: 'yellow',
-    minHeight: '50px'
-  }
-}
 
 export const innerBlueBoxHelper = () => {
   return {
@@ -109,8 +97,10 @@ export const mainContainer = ({ larPort, larLand }: mainContainerI) => {
     justifyContent: 'center',
     //minHeight: larLand ? '220px' : 'none',
     //height: minPort || medPort || larPort ? '80vh' : '50vh',
-    overflow: 'scroll',
-    maxHeight: '100vh',
+    overflowX: 'hidden',
+    overflow: 'auto',
+    height: '100vh',
+    /* maxHeight: '100vh', */
     //maxHeight: '600px',
     //minHeight: '600px',
     // '::-webkit-scrollbar': {
@@ -121,7 +111,22 @@ export const mainContainer = ({ larPort, larLand }: mainContainerI) => {
     //alignContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    width: '90vw',
+    /* width: '90vw', */
+    width: '100%',
+    padding: '0px 10px',
+
+    '::-webkit-scrollbar': {
+      width: '6px',
+      backgroundColor: '#F5F5F5'
+    },
+    '::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.3)',
+      backgroundColor: '#F5F5F5'
+    },
+    '::-webkit-scrollbar-thumb': {
+      backgroundColor: '#000000',
+      border: '5px solid #555555',
+    },
 
   }
 }

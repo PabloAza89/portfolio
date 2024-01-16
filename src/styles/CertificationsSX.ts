@@ -76,8 +76,7 @@ export const mainBox = ({ minPort, medPort, larPort, larLand }: genI) => {
   return {
     ...flex, //...jcsb,
     background: 'darkred', /* DEV */
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    
     //minHeight: larLand ? '220px' : 'none',
     //height: minPort || medPort || larPort ? '80vh' : '50vh',
     /* overflow: 'scroll', */
@@ -86,10 +85,13 @@ export const mainBox = ({ minPort, medPort, larPort, larLand }: genI) => {
     //   width: '0px',
     //   height: '0px',
     // },
+    flexWrap: 'wrap',
+    justifyContent: 'center',
     position: 'relative',
-    //alignContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
+    //alignContent: 'center',
+    
     width: '100vw',
 
     overflow: 'auto',
