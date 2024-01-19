@@ -104,7 +104,7 @@ function Certifications() {
               <Box
                 sx={s.boxMediaWrapper({ darkMode, minPort, minLand, medPort, medLand, larPort })}
               >
-                <a href={e.media} target="_blank">
+                <a href={e.media} target="_blank" rel="noreferrer">
                 <Box
                   className={`imageClass${e.id}`}
                   component="img"

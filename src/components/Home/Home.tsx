@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
 //import * as s from '../../styles/HomeSX';
-import css from '../../styles/HomeCSS.module.css';
+import css from './HomeCSS.module.css';
 import $ from 'jquery';
 
 function Home() {
@@ -18,9 +18,12 @@ function Home() {
       if (qq !== null) {
         console.log("QQ", ($(`#testTest1`).scrollTop()))
         if ($(this).scrollTop() === 0) {
-          qq.style.background = "blue";
+          /* qq.style.background = "blue"; */
+          qq.style.background = "rgba(0, 0, 0, 0)";
+          qq.style.boxShadow = "none";
         } else {
-          qq.style.background = "red";
+          qq.style.background = "rgba(255, 255, 255, 0.05)";
+          qq.style.boxShadow = "0 0 .5em rgba(255, 255, 255, 0.5)";
         }
       }
     });

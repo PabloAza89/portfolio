@@ -28,6 +28,8 @@
   overflow: auto;
   /* overflow: 'scroll' */
   overflow-x: hidden;
+  z-index: 1;
+  mix-blend-mode: difference;
 }
 
 .background::-webkit-scrollbar {
@@ -43,12 +45,12 @@
   border: 5px solid #555555
 }
 
- .leftContainer { 
+ .leftContainer {
     /* ...flex, ...column, ...aic, */
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: maroon; /* DEV */
+    /* background: maroon; */ /* DEV */
     /* //justifyContent: larPort ? 'flex-start' : 'space-evenly', */
     justify-content: space-evenly;
     align-content: space-evenly;
@@ -76,7 +78,7 @@
     position: relative;
     justify-content: center;
     align-items: center;
-    background: purple; /* DEV */
+    /* background: purple; */ /* DEV */
     /* minWidth: minPort ? '40h' : medPort ? '50h' : minLand ? '76vh' : medLand ? '65vh' : larPort ? 'calc(100vw - 12px)' : '631px', // minWidth */
     min-width: 631px; /* // minWidth */
     /* width: minPort ? '40h' : medPort ? '50vh' : minLand ? '76vh' : medLand ? '65vh' : larPort ? 'calc(100vw - 12px)' : '50%', // width */

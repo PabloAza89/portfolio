@@ -258,6 +258,7 @@ and (max-device-height: 300px) {
   background: yellow;
   font-size: 39px;
   text-decoration: none;
+  cursor: pointer;
     /* ...noSelect, ...relative, ...mix, ...pointer, */
     /* fontFamily: Lucida Console;
     fontSize: minPort ? '23px' : minLand ? '20px' : medPort || medLand ? '26px' : larPort ? '39px' : 39px;

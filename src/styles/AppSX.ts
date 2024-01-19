@@ -36,7 +36,8 @@ export const blackWhite = ( { darkMode, location }: blackWhiteI ) => {
     //   location === '/MessageMe'  ? 'center' :
     //   location === '/Contact' ||  location === '/AboutMe' ? 'space-between' :
     //   'none',
-    /* background: darkMode ? 'linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%)' : 'linear-gradient(to bottom right, black 49.9%,white 50.1%)', */
+    background: darkMode ? 'linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%)' : 'linear-gradient(to bottom right, black 49.9%,white 50.1%)',
+    /* zIndex: 0, */
     /* overflow: 'scroll' */
     /* overflowX: 'hidden', */
     /* '::-webkit-scrollbar': {
