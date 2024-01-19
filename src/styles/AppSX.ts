@@ -45,23 +45,14 @@ export const blackWhite = ( { darkMode, location }: blackWhiteI ) => {
     }, */
 
     overflow: 'hidden',
-  /*   '::-webkit-scrollbar': {
-      width: '6px',
-      backgroundColor: '#F5F5F5'
-    },
-    '::-webkit-scrollbar-track': {
-      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.3)',
-      backgroundColor: '#F5F5F5'
-    },
-    '::-webkit-scrollbar-thumb': {
-      backgroundColor: '#000000',
-      border: '5px solid #555555',
-    }, */
+
     justifyContent: 'flex-start',
 
 
   }
 }
+
+
 
 interface topBottomHelperI {
   minPort: boolean,

@@ -88,58 +88,60 @@ function Certifications() {
 
   return (
     <Box sx={s.background}>
-      {/* <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })}></Box> */}
       <Bubbles />
       <Box sx={s.mainBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-        {/* <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box> */}
-          {array.map((e) => {
-            return (
+        {array.map((e) => {
+          return (
+            <Box
+              className={`cardClass${e.id}`}
+              key={e.title}
+              sx={s.card({ minPort, minLand, medPort, medLand, larPort, larLand })}
+            >
+              <Typography
+                className={`titleClass${e.id}`}
+                sx={s.title({ minPort, minLand, medPort, medLand, larPort, larLand })}
+              >{e.title}</Typography>
               <Box
-                className={`cardClass${e.id}`}
-                key={e.title}
-                sx={s.card({ minPort, minLand, medPort, medLand, larPort, larLand })}
+                sx={s.boxMediaWrapper({ darkMode, minPort, minLand, medPort, medLand, larPort })}
               >
-                <Typography
-                  className={`titleClass${e.id}`}
-                  sx={s.title({ minPort, minLand, medPort, medLand, larPort, larLand })}
-                >{e.title}</Typography>
+                <a href={e.media} target="_blank">
                 <Box
-                  sx={s.boxMediaWrapper({ darkMode, minPort, minLand, medPort, medLand, larPort })}
-                >
-                  <Box
-                    className={`imageClass${e.id}`}
-                    component="img"
-                    onLoad={() => loadedUpdater(array.map(r => r.media).indexOf(e.media))}
-                    src={e.media}
-                    onClick={() => {setName(e.media); setShow(!show)}}
-                    sx={s.boxMedia({ darkMode, minPort, minLand, medPort, medLand, larPort })}
-                  />
-                  <Box
-                    component="img"
-                    sx={s.placeholderBackground({ darkMode, loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
-                  />
-                  <Box
-                    component="img"
-                    src={loadingImage}
-                    sx={s.placeholderAnimation({ loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
-                  />
-                </Box>
-                <Typography
-                  className={`urlClass${e.id}`}
-                  sx={s.url({ minPort, minLand, medPort, medLand, larPort })}
-                >
-                  <Link
-                    style={s.anchor({ loaded:loaded[array.map(r => r.media).indexOf(e.media)].loaded })}
-                    to={e.href}
-                    target="_blank"
-                  >{e.url}</Link>
-                </Typography>
-              </Box>)
-          })}
-        {/* <Box sx={s.leftRightHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box> */}
+                  className={`imageClass${e.id}`}
+                  component="img"
+                  onLoad={() => loadedUpdater(array.map(r => r.media).indexOf(e.media))}
+                  src={e.media}
+                  onClick={() => {setName(e.media); setShow(!show)}}
+                  sx={s.boxMedia({ darkMode, minPort, minLand, medPort, medLand, larPort })}
+                />
+                </a>
+                {/* <a href={e.media} target="_blank">
+                  <img width="220" height="250" border="0" align="center"  src={e.media}/>
+                </a> */}
+                <Box
+                  component="img"
+                  sx={s.placeholderBackground({ darkMode, loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
+                />
+                <Box
+                  component="img"
+                  src={loadingImage}
+                  sx={s.placeholderAnimation({ loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
+                />
+              </Box>
+              <Typography
+                className={`urlClass${e.id}`}
+                sx={s.url({ minPort, minLand, medPort, medLand, larPort })}
+              >
+                <Link
+                  style={s.anchor({ loaded:loaded[array.map(r => r.media).indexOf(e.media)].loaded })}
+                  to={e.href}
+                  target="_blank"
+                >{e.url}</Link>
+              </Typography>
+            </Box>)
+        })}
       </Box>
 
-      <Dialog
+      {/* <Dialog
         open={show}
         onClick={() => {setShow(false)}}
         style={s.dialogStyle()}
@@ -151,9 +153,7 @@ function Certifications() {
           src={name}
           alt="image"
         />
-      </Dialog>
-      {/* <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })}></Box> */}
-
+      </Dialog> */}
     </Box>
   )
 }

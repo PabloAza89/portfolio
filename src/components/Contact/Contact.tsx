@@ -1,9 +1,8 @@
-import { Box, Typography, Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
 import profile from '../../images/profile.png';
 import Swal from 'sweetalert2';
-import * as s from '../../styles/ContactSX';
+//import * as s from '../../styles/ContactSX';
+import css from './ContactCSS.module.css';
 import '../../styles/ContactSX.css';
 
 function Contact() {
@@ -104,46 +103,40 @@ function Contact() {
   }
 
   return (
-      <Box sx={s.background}>
-        <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })} />
-        <Box sx={s.mainContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-
-          <Avatar
+      <div className={css.background}>
+        <div className={css.mainContainer}>
+          <img
             alt="Pablo Azambuyo"
             src={profile}
-            sx={s.avatar({ minPort, minLand, medPort, medLand, larPort })}
+            className={css.avatar}
           />
-
-          <Box sx={s.separatorY({ minPort, minLand, medPort, medLand })}></Box>
-          <Box sx={s.separatorX({ minPort })}></Box>
-          <Box sx={s.typographyBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-            <Typography sx={s.text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>
-              <Link
-                style={s.textNoDeco()}
-                to="https://www.linkedin.com/in/juan-pablo-azambuyo/"
-                target="_blank"
-              >LinkedIn</Link>
-            </Typography>
-            <Typography onClick={() => notifCopyEmail()} sx={s.text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>Email</Typography>
-            <Typography onClick={() => notifCopyPhone()} sx={s.text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>Whatsapp</Typography>
-            <Typography sx={s.text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>
-              <Link
-                style={s.textNoDeco()}
-                to="https://twitter.com/jpazambuyo"
-                target="_blank"
-              >Twitter</Link>
-            </Typography>
-            <Typography sx={s.text({ darkMode, minPort, minLand, medPort, medLand, larPort })}>
-              <Link
-                style={s.textNoDeco()}
-                to="https://www.instagram.com/pabloaza_/"
-                target="_blank"
-              >Instagram</Link>
-            </Typography>
-          </Box>
-        </Box>
-        <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand })}></Box>
-      </Box>
+          <div className={css.separatorX} />
+          <div className={css.separatorY} />
+          <div className={css.rightContainer}>
+            <a
+              className={css.text}
+              href="https://www.linkedin.com/in/juan-pablo-azambuyo"
+              target="_blank"
+              rel="noreferrer"
+            >LinkedIn</a>
+            <div onClick={() => notifCopyEmail()} className={css.text}>Email</div>
+            <div onClick={() => notifCopyPhone()} className={css.text}>Whatsapp</div>
+            <a
+              className={css.text}
+              href="https://twitter.com/jpazambuyo"
+              target="_blank"
+              rel="noreferrer"
+            >Twitter</a>
+            <a
+              className={css.text}
+              href="https://www.instagram.com/pabloaza_"
+              target="_blank"
+              rel="noreferrer"
+            >Instagram</a>
+          </div>
+        </div>
+       
+      </div>
   )
 }
 

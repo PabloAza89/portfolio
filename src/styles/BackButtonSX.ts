@@ -15,7 +15,8 @@ interface backgroundI {
 
 export const background = ({ minPort, minLand, medPort, medLand }: backgroundI) => {
   return {
-    ...column, ...absolute, ...jcc, ...aic,
+    ...column, /* ...absolute, */ ...jcc, ...aic,
+    position: 'fixed',
     padding: '0vw !important',
     minWidth: '0vh !important',
     width: minPort || minLand ? `30px !important`  : medPort || medLand ? `32.5px !important`  : `35px !important` ,

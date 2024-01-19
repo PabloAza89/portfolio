@@ -114,7 +114,7 @@ function App() {
             <Contact />
             <BackButton />
             <DarkMode />
-            <Language />
+            {/* <Language /> */}
           </>}/>
           <Route path="/MessageMe" element={<>
             <MessageMe />

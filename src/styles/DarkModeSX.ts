@@ -14,13 +14,16 @@ interface backgroundI {
 
 export const background = ({ height, minPort, minLand, medPort, medLand, larPort, larLand, location, percentageResizedHeight }: backgroundI) => {
   return {
-    ...column, ...absolute, ...jcc, ...aic,
+    ...column, /* ...absolute, */ ...jcc, ...aic,
+    position: 'fixed',
+    /* position: 'absolute', */
     zIndex: 1000,
     padding: '0vw !important',
     minWidth: '0vh !important',
     width: minPort || minLand ? `30px !important` : medPort || medLand ? `32.5px !important` : `35px !important` ,
     height: minPort || minLand ? `30px !important` : medPort || medLand ? `32.5px !important` : `35px !important` ,
     right: '20px',
+    /* right: '6px', */
     top:
       minLand && height <= 380 && location === '/Skills' ? '20px' : 'none',
     bottom:

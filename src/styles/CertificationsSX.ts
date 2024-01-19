@@ -57,9 +57,7 @@ export const background = () => {
     position: 'relative',
     background: 'none',
     width: 'calc(100vw - 12px)',
-    //height: 'calc(100vh - 12px)',
     height: '100vh',
-    //height: 'fit-content',
   }
 }
 
@@ -74,26 +72,15 @@ interface genI {
 
 export const mainBox = ({ minPort, medPort, larPort, larLand }: genI) => {
   return {
-    ...flex, //...jcsb,
+    ...flex,
     background: 'darkred', /* DEV */
-    
-    //minHeight: larLand ? '220px' : 'none',
-    //height: minPort || medPort || larPort ? '80vh' : '50vh',
-    /* overflow: 'scroll', */
     maxHeight: 'calc(100vh - 12px)',
-    // '::-webkit-scrollbar': {
-    //   width: '0px',
-    //   height: '0px',
-    // },
     flexWrap: 'wrap',
     justifyContent: 'center',
     position: 'relative',
     alignItems: 'center',
     alignSelf: 'center',
-    //alignContent: 'center',
-    
     width: '100vw',
-
     overflow: 'auto',
     overflowX: 'hidden',
     '::-webkit-scrollbar': {
@@ -107,9 +94,7 @@ export const mainBox = ({ minPort, medPort, larPort, larLand }: genI) => {
     '::-webkit-scrollbar-thumb': {
       backgroundColor: '#000000',
       border: '5px solid #555555',
-    },
-    /* marginTop: '6px',
-    marginBottom: '12px' */
+    }
   }
 }
 
