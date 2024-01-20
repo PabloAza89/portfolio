@@ -2,7 +2,7 @@ import { grey } from '@mui/material/colors';
 import {
   flex, relative, absolute, column,
   asc, jcc
-  } from './CommonsSX';
+  } from './styles/CommonsSX';
 
 interface backgroundI {
   darkMode: boolean

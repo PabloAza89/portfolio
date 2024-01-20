@@ -28,9 +28,21 @@ function DarkMode() {
     if (night === 'true') dispatch(setDarkMode(true))
   })
 
+  //document.documentElement.setAttribute("data-theme", "dark")
+  //document.documentElement.setAttribute("data-theme", "dark")
+  //console.log("qq", document.documentElement.setAttribute("data-theme", "dark"))
+  //console.log("ww", document.documentElement.getAttribute("data-theme"))
+  console.log("ww", window.matchMedia("(prefers-color-scheme: light)").matches)
+  //console.log("ww", window.matchMedia("(prefers-color-scheme: dark)").matches)
+  
+
   return (
     <Button
-      onClick={() => { localStorage.setItem('night', (!darkMode).toString()); dispatch(setDarkMode(!darkMode)) }}
+      //onClick={() => { localStorage.setItem('night', (!darkMode).toString()); dispatch(setDarkMode(!darkMode)) }}
+      onClick={() => {
+        console.log("CLICKED")
+        document.documentElement.setAttribute("data-theme", "dark")
+      }}
       variant="contained"
       sx={s.background({ height,minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname, percentageResizedHeight })}
     >

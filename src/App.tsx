@@ -12,8 +12,8 @@ import Skills from './components/Skills/Skills';
 import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
 import News from './components/News/News';
-import * as s from './styles/AppSX';
-import './styles/AppCSS.css';
+import css from './AppCSS.module.css';
+//import './styles/AppCSS.css';
 import { Box } from '@mui/material';
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -75,16 +75,16 @@ function App() {
   }); */
 
   return (
-    <Box sx={s.background({ darkMode })} >
-      <Box /* id={`testTest1`} */ sx={s.blackWhite({ darkMode, location:location.pathname })} >
+    <div className={css.background} >
+      <div /* id={`testTest1`} */ className={css.blackWhite} >
         <Routes>
           <Route path="/" element={<>
             <NavBar />
-            {/* <DarkMode /> */}
+            <DarkMode />
             <Home />
             {/* <Language /> */}
             {/* <News /> */}
-            {/* <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort })}></Box> */}
+            {/* <Box className={css.topBottomHelper({ minPort, minLand, medPort, medLand, larPort })}></Box> */}
           </>}/>
           <Route path="/AboutMe" element={<>
             <AboutMe />
@@ -127,12 +127,12 @@ function App() {
             <Error />
           </>}/>
         </Routes>
-      </Box>
-      <Box sx={s.greyLeft({ darkMode })} />
-      <Box sx={s.greyRight({ darkMode })} />
-      <Box sx={s.greyTop({ darkMode })} />
-      <Box sx={s.greyBottom({ darkMode })} />
-    </Box>
+      </div>
+      <div className={css.greyLeft} />
+      <div className={css.greyRight} />
+      <div className={css.greyTop} />
+      <div className={css.greyBottom} />
+    </div>
   );
 }
 

@@ -1,0 +1,94 @@
+.background {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  /* backgroundColor: darkMode ? grey[800] : grey[400], */
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  /* height: 70vh; */
+}
+
+.blackWhite {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-self: center;
+  width: calc(100vw - 12px);
+  height: calc(100vh - 12px);
+  /* background: darkMode ? 'linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%)' : linear-gradient(to bottom right, black 49.9%,white 50.1%); */
+  /* background: linear-gradient(to bottom right, black 49.9%,white 50.1%); */
+  background: gray;
+  overflow: hidden;
+  justify-content: flex-start;
+}
+
+.topBottomHelper {
+  display: flex;
+  position: relative;
+  /* background: orange; */ /* DEV */
+  width: 20px;
+  /* minHeight: minPort ? '60px' : minLand ? '35px' : medPort || medLand ? '65px' : larPort ? '70px' : 85px; */
+}
+
+.greyTop {
+  display: flex;
+  position: absolute;
+  /* background: darkMode ? grey[800] : grey[400], */
+  /* //background: darkMode ? 'red' : blue; */
+  height: 6px;
+  width: calc(100vw - 12px);
+  top: 0px;
+  z-index: 2000
+}
+
+.greyBottom {
+  display: flex;
+  position: absolute;
+  /* //background: darkred; */
+  /* background: darkMode ? grey[800] : grey[400], */
+  height: 6px;
+  width: calc(100vw - 12px);
+  bottom: 0px;
+  z-index: 2000
+}
+
+.greyLeft {
+  display: flex;
+  position: absolute;
+  /* background: darkMode ? grey[800] : grey[400], */
+  /* //background: darkMode ? 'red' : blue; */
+  height: 100vh;
+  width: 6px;
+  left: 0px;
+  z-index: 2000
+}
+
+.greyRight {
+  display: flex;
+  position: absolute;
+  /* background: darkMode ? grey[800] : grey[400], */
+  /* //background: orange; */
+  height: 100vh;
+  width: 6px;
+  right: 0px;
+  z-index: 2000
+}
+
+/* [data-theme="dark"] {
+  .blackWhite {
+    background: linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%);
+  }
+} */
+
+/* @media (prefers-color-scheme: light) {
+  .blackWhite {
+    background: blue;
+  }
+} */
+
+@media (prefers-color-scheme: dark) {
+  .blackWhite {
+    background: blue;
+  }
+}
