@@ -5,10 +5,17 @@ export function languageChanger(languageChanger:boolean) {
   }
 };
 
-export function setDarkMode(setDarkMode:boolean) {
+/* export function setDarkMode(setDarkMode:boolean) {
   return {
     type: 'SET_DARK_MODE',
     payload: setDarkMode
+  }
+}; */
+
+export function setTheme(value:any) {
+  return {
+    type: 'SET_THEME',
+    payload: value
   }
 };
 

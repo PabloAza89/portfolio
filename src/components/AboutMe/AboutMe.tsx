@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Typography, Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
-//import * as s from '../../styles/AboutMeSX';
 import css from './AboutMeCSS.module.css';
 
 function AboutMe() {

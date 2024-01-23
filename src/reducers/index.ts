@@ -1,6 +1,7 @@
 interface initialStateI {
   english: boolean,
-  darkMode: boolean,
+  //darkMode: boolean,
+  theme: any,
   width: number,
   height: number,
   minPort: boolean,
@@ -19,7 +20,9 @@ interface initialStateI {
 
 const initialState: initialStateI = {
   english: localStorage.getItem('langEn') === null ? true : JSON.parse(`${localStorage.getItem('langEn')}`),
-  darkMode: localStorage.getItem('night') === null ? false : JSON.parse(`${localStorage.getItem('night')}`),
+  //darkMode: localStorage.getItem('night') === null ? false : JSON.parse(`${localStorage.getItem('night')}`),
+  //theme: "auto",
+  theme: "auto",
   width: window.screen.width,
   height: window.screen.height,
   minPort: window.screen.width < 425 && window.matchMedia("(orientation: portrait)").matches ? true : false,
@@ -44,10 +47,10 @@ const reducer = (state = initialState, action: {type: string; payload: any}) => 
         ...state,
         english: action.payload
       };
-    case 'SET_DARK_MODE':
+    case 'SET_THEME':
       return {
         ...state,
-        darkMode: action.payload
+        theme: action.payload
     };
     case 'SET_WIDTH':
       return {

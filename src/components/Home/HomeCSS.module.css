@@ -41,12 +41,10 @@
   position: relative;
   align-items: center;
   justify-content: center;
-  
   min-width: 631px;
   width: 50%;
   min-height: 546px;
 }
-
 
 .imageSVG {
   display: flex;
@@ -57,8 +55,6 @@
   height: 70vh;
   /* mix-blend-mode: difference; */
 }
-
-
 
 .boxTypography {
   display: flex;
@@ -113,7 +109,8 @@
 .buttonContainer {
   display: flex;
   position: relative;
-  text-decoration: none
+  text-decoration: none;
+  /* transition: all .2s ease-in-out; */
 }
 
 .buttonMessage  {
@@ -123,26 +120,18 @@
   width: min(50vw, 370px);
   color: #FFFFFF;
   font-size: min(4vw, 28px) !important;
-  transition: all .2s ease-in-out;
-  transform: scale(1);
-  transition: all .1s ease-in-out;
+  /* transition: all .2s ease-in-out; */
 }
 
 .buttonContainer:hover .buttonMessage {
-  /* transition: all .1s ease-in-out; */
   transition: all .2s ease-in-out;
   transform: scale(1.05)
 }
 
 .buttonContainer:not(:hover) .buttonMessage {
-  /* transition: all .1s ease-in-out; */
   transition: all .2s ease-in-out;
   transform: scale(1.0)
 }
-
-
-
-
 
 /* WIDTH LESS THAN 1280px */
 @media screen

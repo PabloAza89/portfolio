@@ -7,7 +7,7 @@ import fccCertJS from '../../images/fccCertJS.png';
 import henry from '../../images/henry.png';
 import attention from '../../images/attentionToDetail.png';
 import loadingImage from '../../images/loadingImage.png';
-import * as s from '../../styles/CertificationsSX';
+import css from './CertificationsCSS.module.css';
 import Bubbles from '../Bubbles/Bubbles';
 import $ from 'jquery';
 
@@ -65,96 +65,76 @@ function Certifications() {
     }
   ]
 
-  interface setLoadedI {
+  /* interface setLoadedI {
     id: number,
     loaded: boolean
-  }
+  } */
 
-  const [ loaded, setLoaded ] = useState<any>(() => {
+ /*  const [ loaded, setLoaded ] = useState<any>(() => {
     let total: setLoadedI[] = []
     array.forEach((x:any) => total.push({id: array.indexOf(x), loaded: false}))
     return total
-  })
+  }) */
 
-  const loadedUpdater = (index: number) => {
+ /*  const loadedUpdater = (index: number) => {
     let cloned = [...loaded]
     cloned[index] = {id: index, loaded: true}
     setLoaded(cloned)
-  }
+  } */
 
-  $(function(){
+  /* $(function(){
     s.hover({ array, loaded })
-  })
+  }) */
 
   return (
-    <Box sx={s.background}>
+    <div className={css.background}>
       <Bubbles />
-      <Box sx={s.mainBox({ minPort, minLand, medPort, medLand, larPort, larLand })}>
+      <div className={css.mainBox}>
         {array.map((e) => {
           return (
-            <Box
-              className={`cardClass${e.id}`}
+            <div
               key={e.title}
-              sx={s.card({ minPort, minLand, medPort, medLand, larPort, larLand })}
+              className={css.card}
             >
-              <Typography
-                className={`titleClass${e.id}`}
-                sx={s.title({ minPort, minLand, medPort, medLand, larPort, larLand })}
-              >{e.title}</Typography>
-              <Box
-                sx={s.boxMediaWrapper({ darkMode, minPort, minLand, medPort, medLand, larPort })}
-              >
+              <div className={css.title}>{e.title}</div>
+              <div className={css.boxMediaWrapper}>
                 <a href={e.media} target="_blank" rel="noreferrer">
-                <Box
-                  className={`imageClass${e.id}`}
-                  component="img"
-                  onLoad={() => loadedUpdater(array.map(r => r.media).indexOf(e.media))}
-                  src={e.media}
-                  onClick={() => {setName(e.media); setShow(!show)}}
-                  sx={s.boxMedia({ darkMode, minPort, minLand, medPort, medLand, larPort })}
-                />
+                  <img
+                    className={css.boxMedia}
+                    onLoad={() => {
+                      let qq = document.getElementById(`toHide${e.id}`)
+                      if (qq !== null) qq.style.display = "none"
+                      let qqq = document.getElementById(`toHidee${e.id}`)
+                      if (qqq !== null) qqq.style.display = "none"
+                    }}
+                    src={e.media}
+                    onClick={() => {setName(e.media); setShow(!show)}}
+                    alt=""
+                  />
                 </a>
-                {/* <a href={e.media} target="_blank">
-                  <img width="220" height="250" border="0" align="center"  src={e.media}/>
-                </a> */}
-                <Box
-                  component="img"
-                  sx={s.placeholderBackground({ darkMode, loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
+                <img
+                  id={`toHide${e.id}`}
+                  className={css.placeholderBackground}
+                  alt=""
                 />
-                <Box
-                  component="img"
+                <img
+                  id={`toHidee${e.id}`}
+                  className={css.placeholderAnimation}
                   src={loadingImage}
-                  sx={s.placeholderAnimation({ loaded: loaded[array.map(r => r.media).indexOf(e.media)].loaded, minPort, minLand, medPort, medLand })}
+                  alt=""
                 />
-              </Box>
-              <Typography
-                className={`urlClass${e.id}`}
-                sx={s.url({ minPort, minLand, medPort, medLand, larPort })}
-              >
+              </div>
+              <div className={css.url}>
                 <Link
-                  style={s.anchor({ loaded:loaded[array.map(r => r.media).indexOf(e.media)].loaded })}
+                  className={css.anchor}
                   to={e.href}
                   target="_blank"
                 >{e.url}</Link>
-              </Typography>
-            </Box>)
+              </div>
+            </div>)
         })}
-      </Box>
-
-      {/* <Dialog
-        open={show}
-        onClick={() => {setShow(false)}}
-        style={s.dialogStyle()}
-        PaperProps={{sx: s.dialogPaper({ minPort, minLand, medPort, medLand, larPort })}}
-      >
-        <Box
-          component="img"
-          sx={s.dialogBox({ minPort, minLand, medPort, medLand, larPort })}
-          src={name}
-          alt="image"
-        />
-      </Dialog> */}
-    </Box>
+      </div>
+    </div>
   )
 }
 

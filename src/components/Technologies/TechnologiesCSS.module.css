@@ -49,7 +49,6 @@
   transition: all .2s ease-in-out;
 }
 
-
 .linkContainer:hover .iconMedia {
   transform: scale(1.2) translate(0px, -3px);
 }

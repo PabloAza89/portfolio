@@ -3,52 +3,70 @@ import LightMode from '@mui/icons-material/LightMode';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from "react-router-dom";
-import { setDarkMode } from '../../actions';
+import { setTheme } from '../../actions';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import * as s from '../../styles/DarkModeSX';
+import css from './DarkModeCSS.module.css';
 
 function DarkMode() {
 
   const location = useLocation()
   const dispatch = useDispatch()
 
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-  const height = useSelector((state: {height:number}) => state.height)
-  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
-  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-  const percentageResizedHeight = useSelector((state: {percentageResizedHeight:number}) => state.percentageResizedHeight)
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
+  //const theme = useSelector( (state: {darkMode:boolean}) => state.darkMode)
+  const theme = useSelector( (state: {theme:any}) => state.theme)
 
-  useEffect(() => {
+  /* useEffect(() => {
     let night: string | null = localStorage.getItem('night');
     if (night === ( null || 'false' )) dispatch(setDarkMode(false))
     if (night === 'true') dispatch(setDarkMode(true))
+  }) */
+
+  useEffect(() => {
+    if (theme === "auto") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.setAttribute("data-theme", "dark")
+      else document.documentElement.setAttribute("data-theme", "light")
+    }
+    if (theme === "light") document.documentElement.setAttribute("data-theme", "light")
+    if (theme === "dark") document.documentElement.setAttribute("data-theme", "dark")
   })
 
-  //document.documentElement.setAttribute("data-theme", "dark")
-  //document.documentElement.setAttribute("data-theme", "dark")
-  //console.log("qq", document.documentElement.setAttribute("data-theme", "dark"))
-  //console.log("ww", document.documentElement.getAttribute("data-theme"))
-  console.log("ww", window.matchMedia("(prefers-color-scheme: light)").matches)
-  //console.log("ww", window.matchMedia("(prefers-color-scheme: dark)").matches)
-  
+  const abc = (e:any) => {
+    if (e.matches && theme === "auto") document.documentElement.setAttribute("data-theme", "dark")
+    else if (theme === "auto")document.documentElement.setAttribute("data-theme", "light")
+  }
+
+  useEffect(() => {
+    let OSValue = window.matchMedia("(prefers-color-scheme: dark)");
+    OSValue.addEventListener("change", abc)
+    return () => OSValue.removeEventListener("change", abc)
+  })
+
+  console.log("theme theme", theme)
+
+  let arr = [ "auto", "light", "dark" ]
 
   return (
     <Button
       //onClick={() => { localStorage.setItem('night', (!darkMode).toString()); dispatch(setDarkMode(!darkMode)) }}
       onClick={() => {
         console.log("CLICKED")
-        document.documentElement.setAttribute("data-theme", "dark")
+        arr.indexOf(theme) + 1 === arr.length ?
+        dispatch(setTheme(arr[0])) :
+        dispatch(setTheme(arr[arr.indexOf(theme) + 1]))
+        //dispatch(setTheme(arr[1]))
+        //arr[arr.indexOf(theme)++]
+        //document.documentElement.setAttribute("data-theme", "dark")
       }}
       variant="contained"
-      sx={s.background({ height,minPort, minLand, medPort, medLand, larPort, larLand, location:location.pathname, percentageResizedHeight })}
+      className={css.background}
     >
-      { darkMode ?
-        <LightMode sx={s.iconDay({ minPort, minLand, medPort, medLand, larPort })} /> :
-        <DarkModeIcon sx={s.iconNight({ minPort, minLand, medPort, medLand, larPort })}/> }
+      {
+        theme === "auto" ?
+        <div  className={css.auto}>auto</div> :
+        theme === "light" ?
+        <LightMode className={css.iconDay} /> :
+        <DarkModeIcon className={css.iconNight}/>
+      }
     </Button>
   )
 }

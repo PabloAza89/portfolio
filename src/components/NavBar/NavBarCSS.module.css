@@ -6,7 +6,7 @@
   margin-top: 6px;
 }
 
-.background2 {
+.backgroundContainer {
   flex-direction: row;
   padding-top: 5px;
   color: #FFFFFF;
@@ -15,6 +15,17 @@
   justify-content: space-around;
   display: flex;
   position: relative;
+}
+
+.backgroundScrollEffect {
+  pointer-events: none;
+  display: flex;
+  bottom: 0px;
+  position: absolute;
+  width: 100%;
+  height: calc(100% + 11px);
+  mix-blend-mode: difference;
+  z-index: 2;
 }
 
 .mainLeft {

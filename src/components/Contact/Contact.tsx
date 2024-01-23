@@ -135,7 +135,6 @@ function Contact() {
             >Instagram</a>
           </div>
         </div>
-       
       </div>
   )
 }

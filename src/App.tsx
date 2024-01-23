@@ -47,36 +47,9 @@ function App() {
     return () => window.removeEventListener("resize", handleResize);
   });
 
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
-  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-
-  // useEffect(() => {
-  //   console.log("QQ", $("#testTest1").scrollTop())
-  // })
-
-
- /*  $(function() {
-    $('#testTest1').on("scroll", function() {
-      let qq = document.getElementById("testTest2")
-      if (qq !== null) {
-        console.log("QQ", ($(`#testTest1`).scrollTop()))
-        if ($(this).scrollTop() === 0) {
-          qq.style.background = "blue";
-        } else {
-          qq.style.background = "red";
-        }
-      }
-      
-    });
-  }); */
-
   return (
     <div className={css.background} >
-      <div /* id={`testTest1`} */ className={css.blackWhite} >
+      <div className={css.blackWhite} >
         <Routes>
           <Route path="/" element={<>
             <NavBar />

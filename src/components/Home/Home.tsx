@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Box, Button, SvgIcon, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
@@ -29,27 +30,13 @@ function Home() {
           qq.style.boxShadow = "none";
         } else {
           qq.style.background = "rgba(255, 255, 255, 0.05)";
+          //qq.style.boxShadow = "0 0 .5em rgba(255, 255, 255, 0.5)";
           qq.style.boxShadow = "0 0 .5em rgba(255, 255, 255, 0.5)";
+          //qq.style.boxShadow = "0px 0px .5em rgba(255, 255, 255, 0.1)";
         }
       }
     });
   });
-
-  interface arrayI {
-    id: number,
-    icon: any,
-    title: string,
-    url: string
-  }
-
-  const array: arrayI[] = [
-    { id: 0, icon: react, title: `React`, url: english ? `https://react.dev/` : `https://es.react.dev/` },
-    { id: 1, icon: redux, title: `Redux`, url: english ? `https://redux.js.org/` : `https://es.redux.js.org/` },
-    { id: 2, icon: javascript, title: `Javascript`, url: english ? `https://developer.mozilla.org/en-US/docs/Web/JavaScript` : `https://developer.mozilla.org/es/docs/Web/JavaScript` },
-    { id: 3, icon: sequelize, title: `Sequelize`, url: english ? `https://sequelize.org/ ` : `https://translate.google.com/translate?sl=en&tl=es&hl=es&u=https://sequelize.org/` },
-    { id: 4, icon: material, title: `Material UI`, url: english ? `https://mui.com/ ` : `https://translate.google.com/translate?sl=en&tl=es&hl=es&u=https://mui.com/` },
-    { id: 5, icon: node, title: `Node.js`, url: english ? `https://nodejs.org/en` : `https://nodejs.org/es ` },
-  ]
 
   return (
     <div id={`testTest1`} className={css.background}>
