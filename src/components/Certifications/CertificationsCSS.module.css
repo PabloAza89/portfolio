@@ -1,7 +1,7 @@
 :root {
-  --placeholderBG: #ff8c00;
-  --hoverBright: brightness(.9);
-  --filter: none;
+  --placeholderCert: #ff8c00;
+  --hoverCert: brightness(.9);
+  --filterCert: none;
 }
 
 .background {
@@ -72,12 +72,12 @@
   display: flex;
   width: 220px;
   height: 120px;
-  filter: var(--filter);
+  filter: var(--filterCert);
   z-index: 1000,
 }
 
 .boxMedia:hover {
-  filter: var(--hoverBright)
+  filter: var(--hoverCert)
 }
 
 .boxMediaWrapper {
@@ -90,7 +90,7 @@
 .placeholderBackground {
   display: flex;
   position: relative;
-  background: var(--placeholderBG);
+  background: var(--placeholderCert);
   margin-left: -220px;
   width: 220px;
   height: 120px;
@@ -142,7 +142,7 @@
 }
 
 [data-theme="dark"] {
-  --placeholderBG: #a66d28;
-  --hoverBright: brightness(.65);
-  --filter: brightness(.6);
+  --placeholderCert: #a66d28;
+  --hoverCert: brightness(.65);
+  --filterCert: brightness(.6);
 }

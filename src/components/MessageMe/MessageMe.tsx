@@ -1,32 +1,37 @@
 import { useState, useEffect } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import * as s from '../../styles/MessageMeSX';
+import css from './MessageMeCSS.module.css';
+import './MessageMeCSS.css';
 import TextField from '@mui/material/TextField';
 import Swal from 'sweetalert2'
 import { setTimer, stopTimer, setNumberTimer, setTimerEnabled } from '../../actions';
 import store from '../../store/store';
-import '../../styles/MessageMeSX.css';
 
 function MessageMe() {
 
   const dispatch = useDispatch()
-
   const english = useSelector((state: {english:boolean}) => state.english)
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
-  const height = useSelector((state: {height:number}) => state.height)
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
-  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
   const [name, setName] = useState<string>("")
   const [text, setText] = useState<string>("")
   const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
   const [clearButtonDisabled, setClearButtonDisabled] = useState<boolean>(false)
   const [showMessageSpinner, setShowMessageSpinner] = useState<boolean>(false)
+
+  useEffect(() => {
+    let spinnerCircle = document.querySelector("[class*='messageLoadingSpinner']") as HTMLElement
+    let loadingText = document.querySelector("[class*='loadingText']") as HTMLElement
+    if (showMessageSpinner && spinnerCircle && loadingText) {
+      spinnerCircle.style.display = "flex"
+      loadingText.style.display = "flex"
+    }
+    else if (!showMessageSpinner && spinnerCircle && loadingText) {
+      spinnerCircle.style.display = "none"
+      loadingText.style.display = "none"
+    }
+
+  },[showMessageSpinner])
 
   useEffect(() => {
     let name: string | null = localStorage.getItem('name');
@@ -38,12 +43,25 @@ function MessageMe() {
   },[])
 
   useEffect(() => { // name & text length handler
-    if ( name.length > 70 || text.length > 1250 ) {
-      setSentButtonDisabled(true)
-      if (name.length > 70) s.doShake()
-      else s.doNotShake()
+    if (name.length > 50 || text.length > 800) setSentButtonDisabled(true);
+    else setSentButtonDisabled(false);
+    let div = document.querySelector("[class*='MessageMeCSS_name']") as HTMLElement
+    let inputText = document.getElementById("name123")
+    let leftCounter = document.querySelector("[class*='leftCounter']") as HTMLElement
+    if (name.length > 50 && div && inputText) {
+      div.style.animation = 'shakeLR 2.5s linear infinite';
+      inputText.style.color = "red"
     }
-    else { setSentButtonDisabled(false); s.doNotShake() }
+    else if (name.length <= 50 && div && inputText) {
+      div.style.animation = 'none';
+      inputText.style.color = "inherit"
+    }
+    if (text.length > 800 && leftCounter) {
+      leftCounter.style.color = 'red'
+    }
+    else if (text.length <= 800 && leftCounter) {
+      leftCounter.style.color = 'white'
+    }
   },[name, text])
 
   var Toast: any = Swal
@@ -157,66 +175,68 @@ function MessageMe() {
   }
 
   return (
-    <Box sx={s.background({ larPort, larLand })}>
-      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-      <Box sx={s.mainContainer({ larPort, larLand })}>
-        <Box sx={s.leftRightHelper({ larPort, larLand })}></Box>
-        <Box sx={s.formContainer({ minPort, minLand, medPort, medLand, darkMode })}>
-          <Box sx={s.lengthContainer({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-            <Typography sx={s.leftCounter({ length: text.length, minPort, minLand, medPort, medLand })}>{text.length} </Typography>
-            <Typography sx={s.rightCounter({ minPort, minLand, medPort, medLand })}>/ 1250</Typography>
-          </Box>
+    <div className={css.background}>
+      <div className={css.formContainer}>
+        <div className={css.header}>
+          <div className={css.counter}>
+            <div className={css.leftCounter}>{text.length} </div>
+            <div className={css.rightCounter}>/ 800</div>
+          </div>
           <Button
             disabled={clearButtonDisabled}
             variant="contained"
             size="small"
             onClick={() => clearBoth()}
-            sx={s.clearButton({ minPort, minLand, medPort, medLand, larPort, larLand })}
+            className={css.clearButton}
           >
             { english ? 'CLEAR' : 'LIMPIAR' }
           </Button>
-          <TextField
-            className={`nameInput`}
-            label={english ? "Your name here" : "Tu nombre aquí"}
-            size="small"
-            value={name}
-            InputLabelProps={{ style: s.labelStyle({ darkMode }) }}
-            InputProps={{ style: s.inputStyleName({ darkMode, length: name.length }) }}
-            sx={s.nameBox({ minPort, minLand, medPort, medLand, darkMode })}
-            onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
-          />
-          <TextField
-            label={ english ? "Your message here" : "Tu mensaje aquí"}
-            multiline
-            rows={ minPort ? height / 55 : minLand ? height / 74 : medPort ? height / 75 : medLand ? height / 60 : 15 }
-            value={text}
-            size="small"
-            InputLabelProps={{ style: s.labelStyle({ darkMode }) }}
-            InputProps={{ style: s.inputStyleText({ darkMode }) }}
-            onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
-            sx={s.messageBox({ minPort, minLand, medPort, medLand, darkMode })}
-          />
-          <Button
-            disabled={sentButtonDisabled}
-            variant="contained"
-            size="small"
-            onClick={(e) => handleSubmit(e)}
-            sx={s.sendMessageButton({ minPort, minLand, medPort, medLand })}
-          >
-            { english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
-          </Button>
-        </Box>
-        <Box sx={s.messageLoadingSpinner({ show:showMessageSpinner })} >
-          <Typography sx={s.loadingText}>{ english ? `SENDING MESSAGE..` : `ENVIANDO MENSAJE..` }</Typography>
-          <Box component="div"></Box>
-          <Box component="div"></Box>
-          <Box component="div"></Box>
-          <Box component="div"></Box>
-        </Box>
-        <Box sx={s.leftRightHelper({ larPort, larLand })}></Box>
-      </Box>
-      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-    </Box>
+        </div>
+        <TextField
+          id={"name123"}
+          className={css.name}
+          label={english ? "Your name here" : "Tu nombre aquí"}
+          size="small"
+          value={name}
+          InputLabelProps={{ className: css.label }}
+          InputProps={{ className: css.input }}
+          onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
+        />
+        <TextField
+          label={ english ? "Your message here" : "Tu mensaje aquí"}
+          multiline
+          minRows={6}
+          value={text}
+          size="small"
+          InputLabelProps={{ className: css.label }}
+          InputProps={{ className: css.input }}
+          onChange={e => {setText(e.target.value); localStorage.setItem('text', e.target.value)}}
+          className={css.message}
+        />
+        <Button
+          disabled={sentButtonDisabled}
+          variant="contained"
+          size="small"
+          onClick={(e) => handleSubmit(e)}
+          className={css.sendMessageButton}
+        >
+          { english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
+        </Button>
+      </div>
+      <div className={css.messageLoadingSpinner} >
+        <div className={css.divSpinner} />
+        <div className={css.divSpinner} />
+        <div className={css.divSpinner} />
+        <div className={css.divSpinner} />
+      </div>
+      <div className={css.loadingText}>
+        {
+          english ?
+          `SENDING MESSAGE..` :
+          `ENVIANDO MENSAJE..`
+        }
+      </div>
+    </div>
   )
 }
 

@@ -229,7 +229,7 @@ export const placeholderAnimation = ({ loaded, minPort, minLand }: placeholderI)
     animationTimingFunction: 'steps(12, end)',
     '@keyframes proj': {
       '0%': { transform: 'rotate(0deg)' },
-      '100%': { transform: 'rotate(360deg)' }, // 99.96
+      '100%': { transform: 'rotate(360deg)' },
     }
   }
 }

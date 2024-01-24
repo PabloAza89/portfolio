@@ -1,0 +1,83 @@
+.background {
+  display: flex;
+  position: fixed;
+  /* background: yellow; */ /* DEV */
+  width: 0px;
+  height: 120px;
+  /* top: 100px; */
+  /* bottom: 130px; */
+  top: 50%;
+  z-index: 3000,
+}
+
+.sliderBox {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* background: orange; */ /* DEV */
+  left: 0px;
+  justify-content: flex-start;
+  height: fit-content;
+}
+
+.button {
+  display: flex;
+  position: fixed;
+  width: 40px !important;
+  height: 25px !important;
+  color: darkblue !important;
+  font-size: 14px !important;
+  border-radius: 0px !important;
+  background: lightblue !important;
+}
+
+.button:hover {
+  filter: brightness(.9);
+}
+
+.buttonTypo {
+  display: flex;
+  align-items: center;
+  font-family: Roboto;
+  /* background: gray; */ /* DEV */
+  font-size: 14px;
+  font-weight: 500;
+  transform: rotate(270deg);
+  height: 30px;
+  text-wrap: nowrap;
+}
+
+.lanEnFlag {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 42px;
+  width: 60px;
+  transition: all .1s ease-in-out;
+  margin-bottom: 1px;
+}
+
+.lanEnFlag:hover {
+  filter: brightness(.9);
+  transform: scale(1.01)
+}
+
+.lanEsFlag {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 42px;
+  width: 60px;
+  transition: all .1s ease-in-out;
+}
+
+.lanEsFlag:hover {
+  filter: brightness(.9);
+  transform: scale(1.01)
+}

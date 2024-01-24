@@ -2,17 +2,13 @@ import { useEffect } from 'react';
 import LightMode from '@mui/icons-material/LightMode';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from "react-router-dom";
 import { setTheme } from '../../actions';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import css from './DarkModeCSS.module.css';
 
 function DarkMode() {
 
-  const location = useLocation()
   const dispatch = useDispatch()
-
-  //const theme = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const theme = useSelector( (state: {theme:any}) => state.theme)
 
   /* useEffect(() => {
@@ -47,15 +43,11 @@ function DarkMode() {
 
   return (
     <Button
-      //onClick={() => { localStorage.setItem('night', (!darkMode).toString()); dispatch(setDarkMode(!darkMode)) }}
       onClick={() => {
         console.log("CLICKED")
         arr.indexOf(theme) + 1 === arr.length ?
         dispatch(setTheme(arr[0])) :
         dispatch(setTheme(arr[arr.indexOf(theme) + 1]))
-        //dispatch(setTheme(arr[1]))
-        //arr[arr.indexOf(theme)++]
-        //document.documentElement.setAttribute("data-theme", "dark")
       }}
       variant="contained"
       className={css.background}

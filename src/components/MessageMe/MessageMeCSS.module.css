@@ -1,0 +1,227 @@
+:root {
+  --backgroundMessage: #5f9ea0;
+  --nameOrMessageMessage: white;
+  --textColorMessage: rgba(0, 0, 0, 0.87);
+  --labelColorMessage: rgba(0, 0, 0, 0.6);
+}
+
+.background {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* background: darkred; */ /* DEV */
+  width: calc(100vw - 12px);
+  height: calc(100vh - 12px);
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: auto;
+  padding: 10px 0px;
+}
+
+.background::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F5F5F5
+}
+.background::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5
+}
+.background::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: 5px solid #555555
+}
+
+.formContainer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  border-radius: 4px;
+  background: var(--backgroundMessage);
+  opacity: 0.95;
+  max-width: 550px !important;
+  flex-flow: wrap;
+  padding: 14px 14px;
+  justify-content: center;
+  align-content: flex-start;
+  margin: 0px 10px;
+}
+
+.header {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 32px;
+  flex-direction: row;
+  /* background: red; */ /* DEV */
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.label {
+  background: var(--nameOrMessageMessage);
+  border-radius: 4px;
+  padding: 0px 8px !important;
+  left: -5px !important;
+  color: var(--labelColorMessage) !important;
+}
+
+.name {
+  align-self: center;
+  display: flex;
+  position: relative;
+  /* background: yellow; */ /* DEV */
+  background: var(--nameOrMessageMessage) !important;
+  opacity: 0.90;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 14px !important;
+}
+
+.message {
+  align-self: center;
+  display: flex;
+  position: relative;
+  /* background: yellow; */ /* DEV */
+  background: var(--nameOrMessageMessage);
+  opacity: 0.90;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 14px !important;
+}
+
+.input {
+  color: var(--textColorMessage) !important;
+}
+
+.counter {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: none;
+  top: none;
+  /* background: yellow; */ /* DEV */
+  font-weight: 500;
+  width: 100px;
+  order: 0;
+}
+
+.leftCounter {
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  top: 4%;
+  /* background: gray; */ /* DEV */
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  width: 50%;
+}
+
+.rightCounter {
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  top: 4%;
+  /* background: lightgray; */ /* DEV */
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  width: 50%;
+}
+
+.clearButton {
+  display: flex;
+  position: relative !important;
+  color: white;
+  background: gray !important;
+  padding: 0px !important;
+  font-size: 16px !important;
+  width: 90px;
+  height: 32px;
+  order: 0;
+}
+
+.sendMessageButton {
+  display: flex;
+  position: relative;
+  align-self: center;
+  padding: 0px !important;
+  line-height: unset;
+  color: white;
+  background: gray !important;
+  font-size: 16px !important;
+  width: 160px;
+  height: 32px;
+  order: 0;
+}
+
+.loadingText {
+  display: none;
+  position: absolute;
+  font-size: 12px;
+  color: black;
+  font-weight: 900;
+  animation: flickerAnimation 1.2s infinite;
+}
+
+@keyframes flickerAnimation {
+  0% { opacity: 1 }
+  50% { opacity: 0 }
+  100% { opacity: 1 }
+}
+
+.messageLoadingSpinner {
+  display: none;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100px;
+  z-index: 1000;
+  animation: secondRotate 4s linear infinite;
+}
+
+@keyframes secondRotate {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
+
+.divSpinner {
+  position: absolute;
+  box-sizing: border-box;
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: black transparent transparent transparent;
+}
+
+.divSpinner:nth-of-type(1) {
+  animation-delay: -0.45s
+}
+
+.divSpinner:nth-of-type(2) {
+  animation-delay: -0.3s
+}
+
+.divSpinner:nth-of-type(3) {
+  animation-delay: -0.15s
+}
+
+@keyframes ring {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
+
+[data-theme="dark"] {
+  --backgroundMessage: #325b5c;
+  --nameOrMessageMessage: #615f5f;
+  --textColorMessage: white;
+  --labelColorMessage: white;
+}

@@ -1,45 +1,24 @@
-
-
 .background {
-  /* ...column, */ /* ...absolute, */ /* ...jcc, ...aic, */
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   position: fixed !important;
-  /* position: 'absolute', */
   z-index: 1000 !important;
   padding: 0vw !important;
   min-width: 0vh !important;
-  /* width: minPort || minLand ? `30px !important` : medPort || medLand ? `32.5px !important` : `35px !important` ,
-  height: minPort || minLand ? `30px !important` : medPort || medLand ? `32.5px !important` : `35px !important` , */
   width: 35px !important;
   height: 35px !important;
   right: 20px !important;
   bottom: 20px !important;
-  /* right: '6px', */
-  /* top:
-    minLand && height <= 380 && location === '/Skills' ? '20px' : 'none', */
-  /* bottom:
-    minLand && height <= 380 && location === '/Skills' ? 'none' :
-    minLand ? '20px' : '20px', */
-  
-  /* 'active': {
-    'opacity': '0',
-    'display': 'flex'
-  }, */
 }
 
-.auto {
-  font-size: 11px;
-}
+.auto { font-size: 11px }
 
 .iconDay {
   display: flex;
   position: absolute;
   flex-direction: column;
   min-width: 0px;
-  /* width: minPort || minLand ? `17px !important` : medPort || medLand ? `19.5px !important`  : `22px !important` ,
-  height: minPort || minLand ? `17px !important` : medPort || medLand ? `19.5px !important`  : `22px !important` */
   width: 22px !important;
   height: 22px !important;
 }
@@ -50,11 +29,6 @@
   position: absolute;
   flex-direction: column;
   min-width: 0px;
-  /* width: minPort || minLand ? `17px !important` : medPort || medLand ? `18.5px !important`  : `20px !important` ,
-  height: minPort || minLand ? `17px !important` : medPort || medLand ? `18.5px !important`  : `20px !important` */
   width: 20px !important;
   height: 20px !important;
 }
-
-
-

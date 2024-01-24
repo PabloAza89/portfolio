@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
 import Swal from 'sweetalert2';
-//import * as s from '../../styles/ContactSX';
 import css from './ContactCSS.module.css';
 import '../../styles/ContactSX.css';
 

@@ -1,6 +1,4 @@
-import { Box, Dialog, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import efSet from '../../images/efSet.png';
 import fccCertJS from '../../images/fccCertJS.png';
@@ -9,21 +7,10 @@ import attention from '../../images/attentionToDetail.png';
 import loadingImage from '../../images/loadingImage.png';
 import css from './CertificationsCSS.module.css';
 import Bubbles from '../Bubbles/Bubbles';
-import $ from 'jquery';
 
 function Certifications() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
-  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-
-  const [show, setShow] = useState(false)
-  const [name, setName] = useState("")
 
  interface arrayI {
     id: number,
@@ -65,26 +52,12 @@ function Certifications() {
     }
   ]
 
-  /* interface setLoadedI {
-    id: number,
-    loaded: boolean
-  } */
-
- /*  const [ loaded, setLoaded ] = useState<any>(() => {
-    let total: setLoadedI[] = []
-    array.forEach((x:any) => total.push({id: array.indexOf(x), loaded: false}))
-    return total
-  }) */
-
- /*  const loadedUpdater = (index: number) => {
-    let cloned = [...loaded]
-    cloned[index] = {id: index, loaded: true}
-    setLoaded(cloned)
-  } */
-
-  /* $(function(){
-    s.hover({ array, loaded })
-  }) */
+  const loadedUpdater = (id: any) => {
+    let backgroundPH = document.getElementById(`backgroundPH${id}`)
+    if (backgroundPH !== null) backgroundPH.style.display = "none"
+    let animationPH = document.getElementById(`animationPH${id}`)
+    if (animationPH !== null) animationPH.style.display = "none"
+  }
 
   return (
     <div className={css.background}>
@@ -101,24 +74,18 @@ function Certifications() {
                 <a href={e.media} target="_blank" rel="noreferrer">
                   <img
                     className={css.boxMedia}
-                    onLoad={() => {
-                      let qq = document.getElementById(`toHide${e.id}`)
-                      if (qq !== null) qq.style.display = "none"
-                      let qqq = document.getElementById(`toHidee${e.id}`)
-                      if (qqq !== null) qqq.style.display = "none"
-                    }}
+                    onLoad={() => loadedUpdater(e.id)}
                     src={e.media}
-                    onClick={() => {setName(e.media); setShow(!show)}}
                     alt=""
                   />
                 </a>
                 <img
-                  id={`toHide${e.id}`}
+                  id={`backgroundPH${e.id}`}
                   className={css.placeholderBackground}
                   alt=""
                 />
                 <img
-                  id={`toHidee${e.id}`}
+                  id={`animationPH${e.id}`}
                   className={css.placeholderAnimation}
                   src={loadingImage}
                   alt=""

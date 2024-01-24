@@ -55,9 +55,8 @@ function App() {
             <NavBar />
             <DarkMode />
             <Home />
-            {/* <Language /> */}
-            {/* <News /> */}
-            {/* <Box className={css.topBottomHelper({ minPort, minLand, medPort, medLand, larPort })}></Box> */}
+            <Language />
+            <News />
           </>}/>
           <Route path="/AboutMe" element={<>
             <AboutMe />
@@ -93,7 +92,7 @@ function App() {
             <MessageMe />
             <BackButton />
             <DarkMode />
-            {/* <Language /> */}
+            <Language />
           </>}/>
           <Route path="*" element={<>
             <BackButton />

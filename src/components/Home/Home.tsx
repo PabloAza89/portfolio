@@ -1,18 +1,10 @@
-import { useState } from 'react';
-import { Box, Button, SvgIcon, Typography } from '@mui/material';
+import { Button, SvgIcon } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
-//import * as s from '../../styles/HomeSX';
 import css from './HomeCSS.module.css';
 import $ from 'jquery';
-import javascript from '../../images/javascript.png';
-import material from '../../images/material.png';
-import node from '../../images/node.png';
-import react from '../../images/react.png';
-import redux from '../../images/redux.png';
-import sequelize from '../../images/sequelize.png';
 
 function Home() {
 
@@ -25,14 +17,11 @@ function Home() {
       if (qq !== null) {
         console.log("QQ", ($(`#testTest1`).scrollTop()))
         if ($(this).scrollTop() === 0) {
-          /* qq.style.background = "blue"; */
           qq.style.background = "rgba(0, 0, 0, 0)";
           qq.style.boxShadow = "none";
         } else {
           qq.style.background = "rgba(255, 255, 255, 0.05)";
-          //qq.style.boxShadow = "0 0 .5em rgba(255, 255, 255, 0.5)";
           qq.style.boxShadow = "0 0 .5em rgba(255, 255, 255, 0.5)";
-          //qq.style.boxShadow = "0px 0px .5em rgba(255, 255, 255, 0.1)";
         }
       }
     });

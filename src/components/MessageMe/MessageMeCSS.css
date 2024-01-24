@@ -1,4 +1,4 @@
-@keyframes shakeLeftRight {
+@keyframes shakeLR {
   0% { transform: translate(-2px, 0px) }
   2% { transform: translate(0px, 0px) }
   4% { transform: translate(-2px, 0px) }

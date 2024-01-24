@@ -6,6 +6,12 @@
   justify-content: center;
   overflow: auto;
   overflow-x: hidden;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .background::-webkit-scrollbar {
@@ -32,7 +38,6 @@
   max-width: 800px;
   width: 100%;
   min-height: 546px;
-  /* height: fit-content; */
 }
 
 .rightContainer {
@@ -53,7 +58,6 @@
   width: 70vh;
   min-height: 546px;
   height: 70vh;
-  /* mix-blend-mode: difference; */
 }
 
 .boxTypography {
@@ -69,7 +73,6 @@
 .textContainer {
   flex-direction: column;
   justify-content: space-between;
-  /* mix-blend-mode: difference; */
 }
 
 .technologiesContainer {
@@ -110,17 +113,14 @@
   display: flex;
   position: relative;
   text-decoration: none;
-  /* transition: all .2s ease-in-out; */
 }
 
 .buttonMessage  {
-  /* mix-blend-mode: difference; */
   background: none;
   padding: 0px !important;
   width: min(50vw, 370px);
   color: #FFFFFF;
   font-size: min(4vw, 28px) !important;
-  /* transition: all .2s ease-in-out; */
 }
 
 .buttonContainer:hover .buttonMessage {

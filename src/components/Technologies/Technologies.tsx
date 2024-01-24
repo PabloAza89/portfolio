@@ -5,9 +5,7 @@ import node from '../../images/node.png';
 import react from '../../images/react.png';
 import redux from '../../images/redux.png';
 import sequelize from '../../images/sequelize.png';
-//import ScrollContainer from 'react-indiana-drag-scroll';
 import css from './TechnologiesCSS.module.css';
-import $ from 'jquery';
 
 function Technologies() {
 
