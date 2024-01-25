@@ -1,0 +1,147 @@
+:root {
+  --backgroundNews:
+    linear-gradient(
+      to right,
+      lightcoral 0px, lightcoral 80px,
+      lightgreen 80px, lightgreen 500px
+    );
+  --backgroundHoverNews:
+    linear-gradient(
+      to right,
+      #bd7979 0px, #bd7979 80px,
+      #76b376 80px, #76b376 500px
+    );
+  --buttonNews: lightblue;
+}
+
+.background {
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  top: none;
+  bottom: 100px;
+  right: calc(100vw - 6px);
+  width: 350px;
+  /* background: yellow; */ /* DEV */
+  justify-content: end;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sliderBoxNews {
+  display: flex;
+  position: relative;
+  flex-direction : column-reverse;
+  left: 30px;
+  max-width: 500px;
+  height: 168px;
+  transition-duration: 1.5s;
+  background: var(--backgroundNews)
+}
+
+.clicked {
+  left: 560px;
+}
+
+.buttonNews {
+  display: flex;
+  position: fixed;
+  left: 30px;
+  right: 800px;
+  min-width: 30px !important;
+  width: 30px !important;
+  min-height: 120px !important;
+  height: 120px !important;
+  color: darkblue !important;
+  font-size: 14px !important;
+  border-radius: 0px !important;
+  background: var(--buttonNews) !important;
+}
+
+.changeLogTypo {
+  display: flex;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 500;
+  transform: rotate(270deg);
+  text-wrap: nowrap;
+}
+
+.buttonsContainer {
+  display: flex;
+  position: absolute;
+  top: -20px;
+  flex-direction : row;
+  /* background: orange; */ /* DEV */
+  height: 20px;
+}
+
+.eachDescription {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  height: 24px;
+  min-height: 24px;
+}
+
+.date {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  width: 80px;
+  min-width: 80px;
+  font-size: 16px;
+}
+
+.text {
+  display: flex;
+  position: relative;
+  width: 420px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  text-wrap: nowrap;
+  font-size: 16px;
+}
+
+button:disabled {
+  background: rgb(87, 87, 87);
+  border-radius: 2px;
+}
+
+.eachDescription {
+  background: var(--backgroundNews)
+}
+
+.eachDescription:hover {
+  background: var(--backgroundHoverNews)
+}
+
+@media screen
+and (width <= 542px) {
+  .text {
+    width: calc(100vw - 122px);
+  }
+  .clicked {
+    left: calc(100vw + 18px);
+  }
+}
+
+[data-theme="dark"] {
+  --backgroundNews:
+    linear-gradient(
+      to right,
+      #bd7979 0px, #bd7979 80px,
+      #76b376 80px, #76b376 500px
+    );
+  --backgroundHoverNews:
+    linear-gradient(
+      to right,
+      lightcoral 0px, lightcoral 80px,
+      lightgreen 80px, lightgreen 500px
+    );
+  --buttonNews: #708f99;
+}

@@ -1,29 +1,15 @@
-import { Box, Typography, Button } from '@mui/material';
-import { useState, useEffect, useRef } from 'react';
+import { Button } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import * as s from '../../styles/NewsSX';
+import css from './NewsCSS.module.css';
+import './NewsCSS.css';
 import $ from 'jquery';
-import '../../styles/NewsSX.css';
-import { easings } from '../../styles/CommonsSX';
 
 function News() {
 
-  let isRunning = useRef(false)
-
-  easings() // Jquery easings..
-
-  const width = useSelector((state: {width: number}) => state.width)
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
   const english = useSelector((state: {english:boolean}) => state.english)
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
-  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
 
   const [ show, setShow ] = useState<boolean>(false)
-  const [ animRunning, setAnimRunning ] = useState<boolean>(false)
 
   const preArray = [
     {id: 11, date: '23-12-07', text: english ? ' Start using powerful Web Audio API  ' : ' Se empezó a utilizar la poderosa Web Audio API  '},
@@ -65,52 +51,73 @@ function News() {
 
   let array: arrayI[] = preArray.slice(startIndex, endIndex)
 
-  useEffect(() => { // hover color handler
-    if (darkMode) $(function() { s.colorAndHoverIsDark({ array })})
-    else $(function() { s.colorAndHoverNotDark({ array })})
-  },[darkMode, array])
-
-  useEffect(() => { // size & animation handler
-    $(function() {
-      if (show && ( minPort || medPort || larPort )) s.shownHiddenPort({ animRunning, isRunning, minPort, minLand, setAnimRunning })
-      else if (!show && ( minPort || medPort || larPort )) s.hiddenShowPort({ animRunning, isRunning, minPort, minLand, setAnimRunning })
-      else if (show && ( minLand || medLand || larLand )) s.showHiddenLand({ animRunning, isRunning, minPort, minLand, setAnimRunning })
-      else if (!show && ( minLand || medLand || larLand )) s.hiddenShownLand({ animRunning, isRunning, minPort, minLand, setAnimRunning })
+  useEffect(() => {
+    array.forEach(e => {
+      $(`#text${e.id}`).on("mouseenter", function() {
+        $(this)
+          .stop(true, true)
+          .delay(400)
+          .animate({scrollLeft: 420}, 8000)
+      })
+      $(`#text${e.id}`).on("mouseleave", function() {
+        $(this)
+          .stop(true, true)
+          .animate({scrollLeft: 0}, 0)
+      })
     })
-  },[show, minPort, minLand, medPort, medLand, larPort, larLand, width, animRunning])
+  }, [array])
 
-  const animRunningHandler: any = () => { setAnimRunning(true); isRunning.current = true }
+  const inputRef = useRef<HTMLDivElement>(null);
+
+  $(function(){
+    $('#buttonShow').on('click',function(){
+      if (inputRef.current) inputRef.current.classList.toggle(css.clicked);
+    });
+  });
+
+  useEffect(() => {
+    var timer: any;
+    const removeTransition = () => {
+      $(`[class*='sliderBoxNews']`).css("transition", "none")
+      const addTransition = () => $(`[class*='sliderBoxNews']`).css("transition", "all 1.5s")
+      clearTimeout(timer);
+      timer = setTimeout(addTransition, 100);
+    }
+    window.addEventListener('resize', removeTransition);
+  },[])
 
   return (
-    <Box sx={s.background({ minPort, minLand, medPort, medLand, larPort, larLand })}>
-      <Box
-        sx={s.sliderBox({ larPort, darkMode })}
-        className={`dateAndText`}
+    <div
+      className={css.background}
+    >
+      <div
+        ref={inputRef}
+        className={css.sliderBoxNews}
         id={`dateAndText`}
       >
-        {array.map(e => {
+        {array.map((e, index) => {
           return (
-            <Box
-              className={`eachDescription`}
+            <div
+              id={`eachDescription`}
               key={e.id}
-              sx={s.eachDescription({ animRunning, show, minPort, larPort })}
+              className={css.eachDescription}
             >
-              <Typography
-                className={`date${e.id}`}
-                sx={s.date({ darkMode, minPort, minLand })}
+              <div
+                id={`date${e.id}`}
+                className={css.date}
               >
                 {e.date}
-              </Typography>
-              <Typography
-                className={`text${e.id}`}
-                sx={s.text({ darkMode, minPort, minLand })}
+              </div>
+              <div
+                id={`text${e.id}`}
+                className={css.text}
               >
                 {e.text}
-              </Typography>
-            </Box>
+              </div>
+            </div>
           )
         })}
-        <Box sx={s.buttonsContainer()} >
+        <div className={css.buttonsContainer} >
           <button
             onClick={() => leftHandler()}
             disabled={endIndex >= preArray.length}
@@ -119,19 +126,18 @@ function News() {
             onClick={() => rightHandler()}
             disabled={startIndex === 0}
           >{`>`}</button>
-        </Box>
-      </Box>
+        </div>
+      </div>
       <Button
-        className={`buttonShow`}
         id={`buttonShow`}
-        onClick={() => { animRunningHandler(!show); setShow(!show) }}
-        sx={s.buttonNews({ darkMode, minPort, minLand })}
+        onClick={() => setShow(!show) }
+        className={css.buttonNews}
       >
-        <Typography sx={s.changeLogTypo({ english, minPort, minLand, larPort, larLand })}>
+        <div className={css.changeLogTypo}>
           {english ? `CHANGELOG` : `REG. DE CAMBIOS`}
-        </Typography>
+        </div>
       </Button>
-    </Box>
+    </div>
   )
 }
 
