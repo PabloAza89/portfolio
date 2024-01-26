@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
 import Swal from 'sweetalert2';
 import css from './ContactCSS.module.css';
-import '../../styles/ContactSX.css';
+import './ContactCSS.css';
 
 function Contact() {
 

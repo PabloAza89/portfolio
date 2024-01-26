@@ -24,7 +24,7 @@ function Certifications() {
   [
     {
       id: 0,
-      title: english ? `JavaScript Algorithms and Data Structures` : `Algoritmos Javascript y Estructura de Datos`,
+      title: english ? `JavaScript Algorithms and Data Structures` : `Algoritmos Javascript y Estructuras de Datos`,
       media: fccCertJS,
       href: `https://www.freecodecamp.org/certification/fcc4dacfa43-3a86-4f27-9ef6-4b74318b8b7a/javascript-algorithms-and-data-structures`,
       url: `https://freecodecamp.org`

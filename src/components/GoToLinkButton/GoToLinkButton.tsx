@@ -1,18 +1,12 @@
 import ReplyIcon from '@mui/icons-material/Reply';
-import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
-import * as s from '../../styles/GoToLinkButtonSX';
+import css from './GoToLinkButtonCSS.module.css';
 
 interface GoToLinkButtonI {
   link: string
 }
 
 function GoToLinkButton({ link }: GoToLinkButtonI) {
-
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
 
   return (
     <a
@@ -21,11 +15,11 @@ function GoToLinkButton({ link }: GoToLinkButtonI) {
       rel="noopener noreferrer"
     >
       <Button
-        className={`linkButton`}
+        //id={`linkButton`}
         variant="contained"
-        sx={s.background({ darkMode, minPort, minLand, larPort })}
+        className={css.background}
       >
-        <ReplyIcon sx={s.icon({ minPort, minLand, larPort })} />
+        <ReplyIcon className={css.icon} />
       </Button>
     </a>
   )

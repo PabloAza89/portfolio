@@ -1,5 +1,4 @@
-import { Box, Typography } from '@mui/material';
-import { Dialog, FormControl, MenuItem, Select } from '@mui/material/';
+import { FormControl, MenuItem, Select } from '@mui/material/';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
@@ -11,25 +10,13 @@ import weatherify2 from '../../images/weatherify2.png';
 import tictac1 from '../../images/tictac1.png';
 import tictac2 from '../../images/tictac2.png';
 import loadingImage from '../../images/loadingImage.png';
-import * as s from '../../styles/ProjectsSX';
+import css from './ProjectsCSS.module.css';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 import $ from 'jquery';
-import '../../styles/SkillsSX.css';
 
 function Projects() {
 
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
-  const height = useSelector((state: {height:number}) => state.height)
   const english = useSelector((state: {english:boolean}) => state.english)
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
-  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
-
-  const [show, setShow] = useState<boolean>(false)
-  const [name, setName] = useState<string>("")
   const [scrollSpeed, setScrollSpeed] = useState<any>(30)
 
   function useHorizontalScroll() {
@@ -80,121 +67,22 @@ function Projects() {
     preArray :
     preArray.filter(e => e.type === projectChosen)
 
-  // mediaMeasures MIN PORT:
-  // total height: 270
-  // titleheight: 50 **
-  // image height: 220 **
-  // image width: 400
-  // separators width: 14
-  // each width: 414 / 6 = 69
-
-  // mediaMeasures MIN LAND:
-  // total height: 220
-  // titleheight: 35
-  // image height: 160
-  // image width: 400
-  // separators width: 14
-  // each width: 414 / 6 = 69
-
-  // mediaMeasures MED & LAR:
-  // total height: 340
-  // titleheight: 60
-  // image height: 280
-  // image width: 550
-  // separators width: 14
-  // each width: 564 / 6 = 94
-
-  $(`.linkButton`) // make link button shake
-    .css(`animationName`,`shakeKF`)
-    .css(`animationDuration`,`4s`) // button shake duration
-    .css(`animationDelay`,`1.5s`)
-    .css(`animationIterationCount`,`infinite`)
-
-  const [ current, setCurrent ] = useState(array.map(e => e.media).flat().length)
-
-  useEffect(() => {
-    setCurrent(array.map(e => e.media).flat().length)
-  },[array])
-
-  useEffect(() => { // when hover image, extra pixels helper on right
-    loaded.forEach((el: any, idx: any) => {
-      $(`.extraPXImage${idx}`).off("mouseenter");
-      $(`.extraPXImage${idx}`).off("mouseleave");
-    })
-
-    $(`.extraPXImage${current - 1}`)
-      .on( "mouseenter", function() {
-        $(`.extraPXSolid`)
-          .css("transition", "all .2s ease-in-out")
-          .width( minPort || minLand ? `calc((${current} * 414px) + 3px)` : `calc((${current} * 564px) + 3px)` )
-        $(`.extraPXCenterStripe`)
-          .css("transition", "all .2s ease-in-out")
-          .width( minPort || minLand ? `calc((${current} * 414px) + 3px)` : `calc((${current} * 564px) + 3px)` )
-      })
-      .on( "mouseleave", function() {
-        $(`.extraPXSolid`)
-          .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-        $(`.extraPXCenterStripe`)
-          .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-      });
-    $(`.extraPXSolid`)
-      .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-    $(`.extraPXCenterStripe`)
-      .width( minPort || minLand ? `calc(${current} * 414px)` : `calc(${current} * 564px)` )
-    // eslint-disable-next-line
-  }, [array])
-
-  const [loaded, setLoaded] = useState<any>(
-    Array.from(
-      { length: preArray.map(t => t.media).flat().length },
-      (e, i) => ({
-        media: preArray.map(t => t.media).flat()[i],
-        loaded: false,
-        type: preArray[preArray.findIndex(e => e.media.some(r => r === preArray.map(t => t.media).flat()[i]))].type
-      })
-    )
-  )
-
-  const onChangeUpdater = (type: any) => {
-    let cloned = [...loaded]
-    let toInitialStatus = cloned.filter(e => e.type !== type).map(e => {
-      let copyMedia = e.media;
-      let copyType = e.type;
-      return { media: copyMedia, loaded: false, type: copyType }
-    })
-    let keepLoaded = cloned.filter(e => e.type === type)
-    setLoaded(toInitialStatus.concat(keepLoaded))
+  const loadedUpdater = (id: any) => {
+    let backgroundPH = document.getElementById(`backgroundPHProjects${id}`)
+    if (backgroundPH !== null) backgroundPH.style.display = "none"
+    let animationPH = document.getElementById(`animationPHProjects${id}`)
+    if (animationPH !== null) animationPH.style.display = "none"
   }
-
-  const loadedUpdater = (media: any) => {
-    let cloned = [...loaded]
-    let targetIndex = cloned.findIndex(e => e.media === media)
-    let copyTypeValue = cloned[targetIndex].type
-    cloned[targetIndex] = { media: media, loaded: true, type: copyTypeValue }
-    setLoaded(cloned)
-  }
-
-  const [ tall, setTall ] = useState(false)
-
-  useEffect(() => {
-    let buttonIn = document.getElementById('textContainerID')
-    buttonIn && new ResizeObserver(textHeightChecker).observe(buttonIn)
-    function textHeightChecker() {
-      if (buttonIn?.clientHeight === 72) setTall(true)
-      else setTall(false)
-    }
-  })
 
   return (
-  <Box sx={s.background}>
+  <div className={css.background}>
     <Select
       size="small"
-      sx={s.selectType({ darkMode })}
+      className={css.selectType}
       value={projectChosen}
       onChange={(e: any) => {
         $(`.autoScrollOnChange`).animate({scrollLeft: 0}, 0)
         setProjectChosen(e.target.value)
-        if (e.target.value !== `All Projects`) onChangeUpdater(e.target.value)
       }}
     >
       <MenuItem value={"All Projects"}>All Projects</MenuItem>
@@ -202,135 +90,93 @@ function Projects() {
       <MenuItem value={"Server Handle"}>Server Handle</MenuItem>
       <MenuItem value={"Games"}>Games</MenuItem>
     </Select>
-    <Box sx={s.topBottomHelper({ larPort, larLand })}></Box>
-    <Box sx={s.mainContainer}>
-      <ScrollContainer
-        className={`autoScrollOnChange`}
-        innerRef={useHorizontalScroll()}
-        style={s.scroll()}
-        vertical={false}
-      >
-        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
-        <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
-        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
+    <ScrollContainer
+      innerRef={useHorizontalScroll()}
+      className={css.mainContainer}
+    >
+      <div className={css.scroll}>
+        <div className={css.solid} />
+        <div className={css.intercalated} />
+        <div className={css.solid} />
 
-        <Box className={`extraPXCenterStripe`} sx={s.centerStripe({ length:array.map(e => e.media).flat().length, minPort, minLand })} >
+        <div className={css.centerStripe} >
           {array.map((e) => {
             return (
-              <Box key={e.title} sx={s.card({ minPort, minLand, larPort })}>
-                <Box sx={s.cardLeft}></Box>
-                <Box sx={{ display: 'flex', flexDirection: 'column', }}>
-                  <Box sx={s.boxTitle({ minPort, minLand, larPort, darkMode })}>
-                    <Typography sx={s.title({ darkMode, minPort, minLand, larPort })}>{e.title}</Typography>
+              <div key={e.title} className={css.card}>
+                <div className={css.leftBar}></div>
+                <div className={css.test123}>
+                  <div className={css.boxTitle}>
+                    <div className={css.title}>{e.title}</div>
                     <GoToLinkButton link={e.href} />
-                  </Box>
-                  <Box sx={s.boxMedia}>
+                  </div>
+                  <div className={css.boxMedia}>
                     {e.media.map((m,i) => {
                       return (
-                        <Box key={m} sx={{ display:'flex', flexDirection: 'row', border: '0px solid blue' }}>
-                          <Box
-                            className={`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`}
-                            id={`extraPXImage${array.map(e => e.media).flat().indexOf(m)}`}
-                            component="img"
-                            onLoad={() => loadedUpdater(m)}
+                        <div key={m} className={css.test333}>
+                          <a className={css.anchor} href={m} target="_blank" rel="noreferrer">
+                            <img
+                              className={css.cardMedia}
+                              onLoad={() => loadedUpdater(array.map(e => e.media).flat().indexOf(m))}
+                              alt=""
+                              src={m}
+                            />
+                          </a>
+                          <img
+                            id={`backgroundPHProjects${array.map(e => e.media).flat().indexOf(m)}`}
+                            className={css.placeholderBackground}
                             alt=""
-                            src={m}
-                            onClick={() => {setName(m); setShow(!show)}}
-                            sx={s.cardMedia({ darkMode, minPort, minLand })}
                           />
-                          <Box
-                            component="img"
-                            sx={s.placeholderBackground({ darkMode, loaded: loaded[loaded.map((e: any) => e.media).indexOf(m)].loaded , minPort, minLand })}
-                          />
-                          <Box
-                            component="img"
+                          <img
+                            id={`animationPHProjects${array.map(e => e.media).flat().indexOf(m)}`}
                             src={loadingImage}
-                            sx={s.placeholderAnimation({ loaded: loaded[loaded.map((e: any) => e.media).indexOf(m)].loaded, minPort, minLand })}
+                            className={css.placeholderAnimation}
+                            alt=""
                           />
-                          <Box
-                            sx={s.betweenMedia({ darkMode, indexOf:e.media.indexOf(m), length:e.media.length-1 })}
-                          />
-                        </Box>
+                          <div className={css.betweenBar} />
+                        </div>
                       )
                     })}
-                  </Box>
-                </Box>
-              </Box>
+                  </div>
+                </div>
+              </div>
           )})}
-        </Box>
+        </div>
 
-        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
-        <Box sx={s.intercalated({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
-        <Box className={`extraPXSolid`} sx={s.solid({ length:array.map(e => e.media).flat().length, minPort, minLand })}></Box>
+        <div className={css.solid} />
+        <div className={css.intercalated} />
+        <div className={css.solid} />
 
-      </ScrollContainer>
+      </div>
 
-      <Dialog
-        open={show}
-        onClick={() => {setShow(false)}}
-        style={s.dialogStyle()}
-        PaperProps={{sx: s.dialogPaper({ minPort, minLand, medPort, medLand, larPort })}}
-      >
-        <Box
-          component="img"
-          sx={s.dialogBox({ minPort, minLand, medPort, medLand, larPort })}
-          src={name}
-          alt="image"
-        />
-      </Dialog>
 
-      <Box sx={s.boxLower({ height, minPort, minLand, medLand })}>
-        <Box id={`textContainerID`} sx={s.textContainer( larPort )} style={{ marginRight: '40px' }}>
-          {
-            english ?
-            null :
-            <Box sx={s.eachText}>
-              <Box sx={s.onlyMix}>Velocidad de Rueda</Box>
-            </Box>
-          }
-          {
-            english ?
-            <Box sx={s.eachText} >
-              <Box sx={s.selectContainer({ tall })} style={{ marginRight: 'auto' }}>
-                <FormControl>
-                  <Select
-                    sx={s.select({ darkMode })}
-                    value={scrollSpeed}
-                    label="Scroll"
-                    onChange={(e) => setScrollSpeed(parseInt(e.target.value))}
-                  >
-                    <MenuItem value={10}>1x</MenuItem>
-                    <MenuItem value={30}>2x</MenuItem>
-                    <MenuItem value={50}>3x</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-              <Box sx={s.onlyMix}>Scroll Wheel Speed:</Box>
-            </Box> :
-            <Box sx={s.eachText}>
-              <Box sx={s.selectContainer({ tall })} style={{ marginRight: 'auto' }}>
-                <FormControl>
-                  <Select
-                    sx={s.select({ darkMode })}
-                    value={scrollSpeed}
-                    label="Scroll"
-                    onChange={(e) => setScrollSpeed(parseInt(e.target.value))}
-                  >
-                    <MenuItem value={10}>1x</MenuItem>
-                    <MenuItem value={30}>2x</MenuItem>
-                    <MenuItem value={50}>3x</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-              <Box sx={s.onlyMix}>de Desplazamiento:</Box>
-            </Box>
-          }
-        </Box>
-      </Box>
+      
 
-    </Box>
-    <Box sx={s.topBottomHelper({ larPort, larLand })}></Box>
-  </Box>
+    </ScrollContainer>
+
+    <div className={css.boxLower}>
+      <div className={css.textContainer} style={{ marginRight: '40px' }}>
+        {
+          english ?
+          `Scroll Wheel Speed` :
+          `Velocidad de Rueda de Desplazamiento`
+        }
+      </div>
+      <div className={css.selectContainer}>
+        <FormControl>
+          <Select
+            className={css.select}
+            value={scrollSpeed}
+            label="Scroll"
+            onChange={(e) => setScrollSpeed(parseInt(e.target.value))}
+          >
+            <MenuItem value={10}>1x</MenuItem>
+            <MenuItem value={30}>2x</MenuItem>
+            <MenuItem value={50}>3x</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+    </div>
+  </div>
   )
 }
 

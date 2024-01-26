@@ -74,7 +74,7 @@ function App() {
             <Projects />
             <BackButton />
             <DarkMode />
-            {/* <Language /> */}
+            <Language />
           </>}/>
           <Route path="/Certifications" element={<>
             <Certifications />

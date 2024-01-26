@@ -66,6 +66,8 @@
   font-size: 20px;
   mix-blend-mode: difference;
   transition: all .2s ease-in-out;
+  /* text-align: center; */
+  text-wrap: nowrap;
 }
 
 .boxMedia {
