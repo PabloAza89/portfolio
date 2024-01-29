@@ -1,7 +1,13 @@
 :root {
-  --placeholderCert: #ff8c00;
+  --placeholderCert: darkcyan;
   --hoverCert: brightness(.9);
   --filterCert: none;
+}
+
+[data-theme="dark"] {
+  --placeholderCert: #196b6b;
+  --hoverCert: brightness(.65);
+  --filterCert: brightness(.6);
 }
 
 .background {
@@ -141,10 +147,4 @@
 
 .card:hover .url {
   transform: scale(1.05) translate(0px, 3px);
-}
-
-[data-theme="dark"] {
-  --placeholderCert: #a66d28;
-  --hoverCert: brightness(.65);
-  --filterCert: brightness(.6);
 }

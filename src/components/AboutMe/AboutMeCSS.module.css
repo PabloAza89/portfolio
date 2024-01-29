@@ -2,6 +2,10 @@
   --backgroundAbout: #3C6478;
 }
 
+[data-theme="dark"] {
+  --backgroundAbout: #253740;
+}
+
 .background {
   display: flex;
   position: relative;
@@ -61,6 +65,3 @@
   border-radius: 50%;
 }
 
-[data-theme="dark"] {
-  --backgroundAbout: #253740;
-}

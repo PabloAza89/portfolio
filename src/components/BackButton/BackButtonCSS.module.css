@@ -1,0 +1,29 @@
+.background {
+  display: flex;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1;
+}
+
+.button {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0vw !important;
+  min-width: 0vh !important;
+  width: 35px !important;
+  height: 35px !important;
+}
+
+.icon {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  transform: rotate(180deg);
+  min-width: 0vh;
+  width: 23px !important;
+  height: 23px !important;
+}

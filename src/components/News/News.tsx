@@ -1,8 +1,8 @@
 import { Button } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, createRef } from 'react';
 import { useSelector } from 'react-redux';
 import css from './NewsCSS.module.css';
-import './NewsCSS.css';
+//import './NewsCSS.css';
 import $ from 'jquery';
 
 function News() {
@@ -69,8 +69,8 @@ function News() {
 
   const inputRef = useRef<HTMLDivElement>(null);
 
-  $(function(){
-    $('#buttonShow').on('click',function(){
+  $(function() {
+    $('#buttonShow').on('click',function() {
       if (inputRef.current) inputRef.current.classList.toggle(css.clicked);
     });
   });

@@ -97,6 +97,8 @@ function App() {
           <Route path="*" element={<>
             <BackButton />
             <Error />
+            <DarkMode />
+            <Language />
           </>}/>
         </Routes>
       </div>

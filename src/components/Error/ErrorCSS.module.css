@@ -1,0 +1,70 @@
+.background {
+  display: flex;
+  /* justify-content: space-between; */
+  /* background: darkorange; */ /* DEV */
+  height: calc(100vh - 12px);
+  /* min-height: 530px; */
+  justify-content: center;
+  align-items: center;
+  /* overflow: auto; */
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex-wrap: wrap;
+}
+
+.background::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F5F5F5
+}
+.background::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5
+}
+.background::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: 5px solid #555555
+}
+
+.mainContainer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* background: red; */ /* DEV */
+  /* width: 500px; */
+  height: fit-content;
+  margin: 10px 0px;
+}
+
+.errorGif {
+  display: flex;
+  position: relative;
+  width: 280px;
+  height: 280px;
+  visibility: hidden;
+}
+
+.placeholderAnimation {
+  display: flex;
+  position: relative;
+  margin-top: -280px;
+  width: 280px;
+  height: 280px;
+  z-index: 1001;
+  animation: error .8s linear infinite;
+  animation-timing-function: steps(12, end);
+}
+
+@keyframes error {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
+
+.message {
+  display: flex;
+  position: relative;
+  color: white;
+  mix-blend-mode: difference;
+  font-size: 27px;
+}

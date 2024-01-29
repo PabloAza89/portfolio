@@ -5,6 +5,8 @@
   --selectProjects: #2196f3;
   --selectTypeProjects: lightblue;
   --titleProjects: #ffffff;
+  --cardMediaFilterProjects: none;
+  --cardMediaFilterHoverProjects: brightness(.95);
 }
 
 [data-theme="dark"] {
@@ -14,6 +16,8 @@
   --selectProjects: #48555e;
   --selectTypeProjects: #708f99;
   --titleProjects: #b5b3b3;
+  --cardMediaFilterProjects: brightness(.6);
+  --cardMediaFilterHoverProjects: brightness(.65);
 }
 
 .background {
@@ -150,7 +154,7 @@
 .cardMedia {
   width: 550px;
   height: 280px;
-  filter: none;
+  filter: var(--cardMediaFilterProjects);
   transition: all .2s ease-in-out;
   z-index: 900;
   animation: none;
@@ -158,7 +162,7 @@
 }
 
 .cardMedia:hover {
-  filter: brightness(.9);
+  filter: var(--cardMediaFilterHoverProjects);
   transform: scale(1.01);
 }
 

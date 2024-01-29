@@ -1,17 +1,31 @@
+:root {
+  --backgroundGoToLinkButton: #1976d2;
+  --backgroundHoverGoToLinkButton: #1565c0;
+}
+
+[data-theme="dark"] {
+  --backgroundGoToLinkButton: #48555e;
+  --backgroundHoverGoToLinkButton: #54636e;
+  
+}
+
 .background {
   display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* background: darkMode ? '#48555e' : null, */
-  background: null;
+  background: var(--backgroundGoToLinkButton) !important;
   padding: 0vw !important;
   min-width: 35px !important;
   min-height: 35px !important;
   width: 35px !important;
   height: 35px !important;
   animation: shakeKF 4s infinite;
+}
+
+.background:hover {
+  background: var(--backgroundHoverGoToLinkButton) !important;
 }
 
 @keyframes shakeKF {

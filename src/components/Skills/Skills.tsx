@@ -1,10 +1,12 @@
-import { Box, Typography, SvgIcon } from '@mui/material';
-import { useState, useEffect, useRef, useMemo } from 'react';
-import * as s from '../../styles/SkillsSX';
+import { Typography, SvgIcon } from '@mui/material';
+import { useState, useEffect, useRef, useMemo, createRef, MutableRefObject } from 'react';
+/* import * as s from '../../styles/SkillsSX'; */
+import css from './SkillsCSS.module.css';
 import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
-import '../../styles/SkillsSX.css';
+import { CSSRuleExtended } from '../../interfaces/interfaces';
+import './SkillsSX.css';
 import $ from 'jquery';
 
 
@@ -14,14 +16,7 @@ function Skills() {
   let two = useRef(false) // animation moving ? click handler number Two
 
   const english = useSelector((state: {english:boolean}) => state.english)
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
-  const larPort = useSelector((state: {larPort:boolean}) => state.larPort)
-  const larLand = useSelector((state: {larLand:boolean}) => state.larLand)
   const currentWidth = useSelector((state: {currentWidth: number}) => state.currentWidth)
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
 
   function useHorizontalScroll() {
     const elRef = useRef<HTMLInputElement>(null);
@@ -71,66 +66,15 @@ function Skills() {
   }
 
   const levels = useMemo(() =>  [
-    { id: 0, firstA: english ? `I'm the `: `Soy el `, firstB: english ?  bold(`master`) : bold(`maestro`), second: english ? `of the universe.` : `del universo.`, color: `#000000`, svg: <MySvg/> },
-    { id: 1, firstB: english ? bold(`High,`) : bold(`Alto,`), second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `#8ebd7b` },
-    { id: 2, firstA: english ? bold(`Medium, `) : bold(`Medio, `), firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `#beca7d` },
-    { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `#f4b800` },
-    { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `#f44b00` }
+    { id: 0, firstA: english ? `I'm the `: `Soy el `, firstB: english ?  bold(`master`) : bold(`maestro`), second: english ? `of the universe.` : `del universo.`, color: `0, 0, 0`, svg: <MySvg/> },
+    { id: 1, firstB: english ? bold(`High,`) : bold(`Alto,`), second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `142, 189, 123` },
+    { id: 2, firstA: english ? bold(`Medium, `) : bold(`Medio, `), firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `190, 202, 125` },
+    { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `244, 184, 0` },
+    { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `244, 75, 0` }
   ], [english]);
 
-  const HandleColorClick: any = (index: number) => {
 
-    setAnimRunning(true)
-    if (!one.current && !two.current) {
-      one.current = true
-      two.current = false
-      setTimeout(() => {
-        if (one.current && !two.current) {
-          one.current = false
-          two.current = false
-          setAnimRunning(false)
-        }
-      }, 2500)
-    }
-
-    else if (one.current && !two.current) {
-      one.current = false
-      two.current = true
-      setTimeout(() => {
-        if (!one.current && two.current) {
-          one.current = false;
-          two.current = false;
-          setAnimRunning(false)
-        }
-      }, 2500)
-    }
-
-    else if (!one.current && two.current) {
-      one.current = true
-      two.current = true
-      setTimeout(() => {
-        if (one.current && two.current) {
-          one.current = false;
-          two.current = false;
-          setAnimRunning(false)
-        }
-      }, 2500)
-    }
-
-     else if (one.current && two.current) {
-      one.current = false
-      two.current = false
-      setTimeout(() => {
-        if (!one.current && !two.current) {
-          one.current = false;
-          two.current = false;
-          setAnimRunning(false)
-        }
-      }, 2500)
-    }
-  }
-
-  useEffect(() => {
+/*   useEffect(() => {
     if (graphDontFit)  {
       $(function(){
         s.graphDontFit({ levels, animRunning })
@@ -138,94 +82,290 @@ function Skills() {
     } else {
       s.graphFit(levels)
     }
-  },[graphDontFit, levels, animRunning])
+  },[graphDontFit, levels, animRunning]) */
+
+
+  const findTargetStyleSheet = async () => {
+    for (const ssI in document.styleSheets) {
+      if (document.styleSheets[ssI].href === null) {
+        for (const cssrI in document.styleSheets[ssI].cssRules) {
+          if (document.styleSheets[ssI].cssRules[cssrI].cssText !== undefined) {
+            if (
+              document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined &&
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (max-width: 1px)'
+            ) {
+                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${(array.length * 92) + 206}px)`
+                //break;
+            }
+            if (
+              document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined &&
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width >= 2px)'
+            ) {
+              console.log("EXECUTED aaa");
+                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width >= ${(array.length * 92) + 206}px)`
+                //break;
+            }
+            if (
+              document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined &&
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (max-width: 3px)'
+            ) {
+                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${(array.length * 92) + 212}px)`
+                //break;
+            }
+            if (
+              document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined &&
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (max-width: 4px)'
+            ) {
+                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${(array.length * 92) + 115}px)` // 759px
+                //break;
+            }
+        
+          }
+        }
+      }
+    }
+    // for (const ssI in document.styleSheets) {
+    //   if (document.styleSheets[ssI].href === null) {
+    //     for (const cssrI in document.styleSheets[ssI].cssRules) {
+    //       if (document.styleSheets[ssI].cssRules[cssrI].cssText !== undefined) {
+            
+    //       }
+    //     }
+    //   }
+    // }
+
+  }
+ 
+
+  useEffect(() => {
+    window.onload = () => {
+      console.log("CSS LOADED")
+      findTargetStyleSheet()
+      .then(() => {
+        $(`[class*='entireBar']`)
+          .css("visibility", "visible")
+      })
+    }
+
+    if (document.readyState === "complete") {
+      findTargetStyleSheet()
+      .then(() => {
+        $(`[class*='entireBar']`)
+          .css("visibility", "visible")
+      })
+
+    }
+
+  }, [])
+
+  //let inputRef = useRef<HTMLDivElement>(null);
+  //let inputRef = useRef<HTMLDivElement[]>([]);
+  //let inputRef = useRef<any>().current;
+  //const self = useRef<any>({}).current
+  //const saveRef = (key: any) => (r:any) => { self[key] = r }
+  //let inputRef = useRef<any>([]);
+  //const inputRef = useRef<any>(Array.from({length: array.length}, (e,i) => ( createRef )));
+
+  //const [ timeoutLanguage, setTimeoutLanguage ] = useState<any>(Array.from({length: array.length}, (e,i) => ([])));
+  //const [ timeoutLanguage, setTimeoutLanguage ] = useState<ReturnType<typeof setTimeout>>()
+  //const autoHideLanguage = () => $(() => $(`#buttonShowLanguage`).trigger("click"))
+  //const autoHideLanguage = () => $(`#buttonTest1230`).trigger("click")
+
+  //const [ timeoutLanguage, setTimeoutLanguage ] = useState<ReturnType<typeof setTimeout>>()
+  //const autoHideLanguage = () => $(`#buttonTest1230`).trigger("click")
+
+  //const inputRef = useRef<HTMLDivElement>(null);
+  //const inputRef = useRef<HTMLDivElement[]>([]);
+  //const inputRef: any = useRef<any>([]);
+
+  /* const self: any = useRef({})
+  const saveRef = (key:any) => (r:any) => { self.current[key] = r } */
+  const inputRef: MutableRefObject<any> = useRef<HTMLDivElement[] | null>([]);
+  //const [ timeoutLanguage, setTimeoutLanguage ] = useState<ReturnType<typeof setTimeout>>()
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  // LegacyRef<HTMLDivElement>
+  
+
+  // $(function(){
+  //   $('#buttonTest1230').on('click',function() {
+  //     if (inputRef.current) inputRef.current.classList.toggle(css.test222);
+  //   });
+  // });
+
+  const handleTest = (id: any) => {
+    /* $(`[class*='entireBar']`).css("transition", "all 1.5s") */
+    $(`[class*='entireBar']`)
+      //.css("visibility", "visible")
+      .css("transition", "all 1.5s")
+      //.css("transition-duration", "1.5s")
+    clearTimeout(timeoutRef.current[id])
+    //console.log("inputRef.current[id].classList", inputRef.current[id].classList.length)
+      if (inputRef.current[id] !== null) {
+        inputRef.current[id].classList.toggle(css.test222);
+      }
+      const autoHideLanguage = () => {
+
+        if (inputRef.current[id].classList.length === 2) {
+          $(`#buttonTest123${id}`).trigger("click");
+          clearTimeout(timeoutRef.current[id])
+        }
+      }
+      timeoutRef.current[id] = (setTimeout(autoHideLanguage, 3000))
+
+
+  }
+
+/*   useEffect(() => {
+    var timer: any;
+    const removeTransitionn = () => {
+      //$(`[class*='entireBar']`).css("transition", "none")
+      $(`[class*='entireBar']`).css("transition", "none")
+      const addTransitionn = () => $(`[class*='entireBar']`).css("transition", "all 1.5s")
+      clearTimeout(timer);
+      timer = setTimeout(addTransitionn, 100);
+    }
+    window.addEventListener('resize', removeTransitionn);
+  },[])
+  */
+
+  useEffect(() => {
+    var timer: any;
+    const removeTransitionn = () => {
+      $(`[class*='entireBar']`).css("transition", "none")
+      const addTransitionn = () => $(`[class*='entireBar']`).css("transition", "all 1.5s")
+      clearTimeout(timer);
+      timer = setTimeout(addTransitionn, 100);
+    }
+    window.addEventListener('resize', removeTransitionn);
+  },[])
+
+ /*  useEffect(() => {
+    var timer: any;
+    const removeTransitionn = () => {
+      // $(`[class*='entireBar']`).css("transition", "none")
+      // const addTransitionn = () => $(`[class*='entireBar']`).css("transition", "all 1.5s")
+      // clearTimeout(timer);
+      // timer = setTimeout(addTransitionn, 100);
+      document.body.classList.add(css.stopTransition);
+
+    }
+    window.addEventListener('resize', removeTransitionn);
+  },[]) */
 
   return (
-    <Box sx={s.background}>
-      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-      <Box sx={s.middle({ minPort, minLand })}>
-        <Box sx={s.leftRightHelper({ graphDontFit, larPort, larLand })}></Box>
-        <Box sx={s.mainContainer({ length:array.length, minLand })}>
-          <Typography sx={s.skills({ minLand })}>{english ? `My skills` : `Mis habilidades`}</Typography>
-          <ScrollContainer innerRef={useHorizontalScroll()} style={s.scroll({ graphDontFit, minLand })} >
-          <Box sx={s.chartContainer({ graphDontFit, currentWidth, length:array.length, minLand })}>
-              <Box sx={s.upperChartContainer}>
-                <Box sx={s.chartRow({ length:array.length })}>
+    <div
+      /* style={{ "--testTest": (array.length * 92) + 206 } as React.CSSProperties} */
+      id={`testTestID`}
+      className={css.background}
+    >
+      {/* (array.length * 92) + 206) */}
+      {/* <div className={css.testTEST}> */}
+        <div className={css.mainContainer}>
+          <div className={css.skills}>{ english ? `My skills` : `Mis habilidades` }</div>
+          <ScrollContainer innerRef={useHorizontalScroll()} className={css.scroll} >
+          <div className={css.chartContainer} style={{ "--titlesBoxLength": array.length } as React.CSSProperties}>
+              <div className={css.upperChartContainer}>
+                <div className={css.chartRow}>
                   {array.map((e, index) => {
                     return (
-                      <Box key={array.indexOf(e)}>
-                        <Box sx={s.columnBar({ id:e.id, darkMode, percentage:e.percentage })}>
-                          <Box sx={s.fixedToppingMinLand({ darkMode, minLand })} />
-                          <Box sx={s.leftSide({ id:e.id, darkMode, percentage:e.percentage })}></Box>
-                          <Box
-                            sx={s.centerSide({ id:e.id, darkMode, percentage:e.percentage,  })}
-                            className={`center${index}`}
-                          />
-                          <Box sx={s.rightSide({ id:e.id, darkMode, percentage:e.percentage })}></Box>
-                        </Box>
-                        <Box
-                          sx={s.onlyMinLand({ minLand, percentage:e.percentage })}
+                      <div className={css.testTest} key={index}>
+                        <div
+                          style={{ "--percentage": e.percentage } as React.CSSProperties}
+                          className={css.columnBar}
                         >
-                          <Typography sx={s.titlesOnlyMinLand}>
+                          {/* <div className={css.fixedToppingMinLand} /> */}
+                          <div className={css.leftSide}></div>
+                          <div
+                            style={{ "--percentage": e.percentage } as React.CSSProperties}
+                            className={css.centerSide}
+                            id={`center${index}`}
+                          />
+                          <div className={css.rightSide}></div>
+                        </div>
+                        <div
+                          style={{ "--percentage": e.percentage } as React.CSSProperties}
+                          className={css.titlesHorizontalContainer}
+                        >
+                          <div className={css.titlesHorizontal}>
                             {e.title}
-                          </Typography>
-                        </Box>
-                      </Box>
+                          </div>
+                        </div>
+                      </div>
                     )
                   })}
-                </Box>
-                <Box sx={s.upperChartContainerRight({ graphDontFit })}>
+                </div>
+                <div className={css.upperChartContainerRight}>
                   {levels.map((e, index) => {
                     return (
-                      <Box
+                      <div
                         key={levels.indexOf(e)}
-                        sx={s.entireBarContainer({ graphDontFit })}
+                        className={css.entireBarContainer}
                       >
-                        <Box
-                          sx={s.entireBar({ graphDontFit, bgColor:e.color })}
-                          className={`entireBarMoveCl${index}`}
+                        <div
+                          //ref={inputRef[e.id]}
+                          //ref={saveRef(`${e.id}}`)}
+                          //ref={e => inputRef.current.push(e)}
+                          ref={el => inputRef.current[e.id] = el}
+                          //className={`entireBar`}
+                          style={{ "--colorBar": e.color } as React.CSSProperties}
+                          className={css.entireBar}
+                          //className={`${css.entireBar} ${e.id}`}
+                          id={`entireBarMoveCl${index}`}
                         >
-                          <Box
-                            sx={s.innerLevel({ graphDontFit })}>
-                            <Typography sx={s.levelTitle}>{e.firstA}{e.firstB}</Typography>
-                            <Typography sx={s.levelTitle}>{e.second}</Typography>
-                          </Box>
-                          <Box sx={s.boxSVG}>
+                          <div
+                            className={css.innerLevel}>
+                            <div className={css.levelTitle}>{ e.firstA }{ e.firstB }</div>
+                            <div className={css.levelTitle}>{ e.second }</div>
+                          </div>
+                          <div className={css.boxSVG}>
                             <SvgIcon
                               viewBox='0 0 36 30'
-                              sx={s.imageSVG({ graphDontFit })}
+                              className={css.imageSVG}
                             >
                               {e.svg}
                             </SvgIcon>
-                          </Box>
-                        </Box>
-                        <Box
-                          className={`colorFixedCl${index}`}
-                          sx={s.colorFixed({ graphDontFit, color:e.color })}
-                          onClick={() => HandleColorClick(index)}
+                          </div>
+                        </div>
+                        <button
+                          id={`buttonTest123${e.id}`}
+                          style={{ "--colorBar": e.color } as React.CSSProperties}
+                          className={css.colorFixed}
+                          onClick={() => {
+                            handleTest(e.id)
+                            //clearTimeout(timeoutLanguage);
+                            //setTimeoutLanguage(setTimeout(autoHideLanguage, 1000))
+                          }
+                        }
                         />
-                      </Box>
+                      </div>
                     )
                   })}
-                </Box>
-              </Box>
-              <Box sx={s.titlesBox({ minLand, length:array.length })}>
-                {array.map((e) => {
-                  return (
-                    <Typography key={array.indexOf(e)} sx={s.titles}>
-                      {e.title}
-                    </Typography>
-                  )
-                })}
-                <Box sx={s.titlesNext({ currentWidth, graphDontFit })} />
-              </Box>
-          </Box>
+                </div>
+              </div>
+              <div className={css.titlesBox}>
+                {
+                  array.map((e) => {
+                    return (
+                      <div
+                        key={array.indexOf(e)}
+                        className={css.titles}
+                      >
+                        {e.title}
+                      </div>
+                    )
+                  })
+                }
+                <div className={css.titlesNext} />
+              </div>
+          </div>
           </ScrollContainer>
-        </Box>
-        <Box sx={s.leftRightHelper({ graphDontFit, larPort, larLand })}></Box>
-      </Box>
-      <Box sx={s.topBottomHelper({ minPort, minLand, medPort, medLand, larPort, larLand })}></Box>
-    </Box>
+        </div>
+      {/* </div> */}
+    </div>
   )
 }
 

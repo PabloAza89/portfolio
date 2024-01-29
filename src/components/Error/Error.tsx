@@ -1,43 +1,43 @@
-import { Box, Typography } from '@mui/material';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import error from '../../images/error.gif';
-import * as s from '../../styles/ErrorSX';
+import css from './ErrorCSS.module.css';
 import loadingImage from '../../images/loadingImage.png';
 
 function Error() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
-  const minPort = useSelector((state: {minPort:boolean}) => state.minPort)
-  const minLand = useSelector((state: {minLand:boolean}) => state.minLand)
-  const medPort = useSelector((state: {medPort:boolean}) => state.medPort)
-  const medLand = useSelector((state: {medLand:boolean}) => state.medLand)
 
-  const [loaded, setLoaded] = useState<boolean>(false)
+  const loadedUpdater = () => {
+    console.log("LOADED ALL GIF")
+    let backgroundPH = document.getElementById(`placeholderAnimationError`)
+    if (backgroundPH !== null) backgroundPH.style.display = "none"
+    let errorGIF = document.getElementById(`errorGif`)
+    if (errorGIF !== null) errorGIF.style.visibility = "visible"
+  }
 
   return (
-    <Box sx={s.background({ minPort, minLand })}>
-      <Box sx={s.leftRightHelper({ minPort, minLand })} />
-      <Box sx={s.mainContainer({ minPort, minLand, medPort, medLand })}>
-        <Box>
-          <Box
-            component="img"
+    <div className={css.background}>
+      <div className={css.mainContainer}>
+        <div>
+          <img
             src={error}
-            onLoad={() => setLoaded(true)}
-            sx={s.errorGif({ loaded, minPort, minLand, medPort, medLand })}
+            onLoad={() => loadedUpdater()}
+            id={`errorGif`}
+            className={css.errorGif}
+            alt=""
           />
-          <Box
-            component="img"
+          <img
             src={loadingImage}
-            sx={s.placeholderAnimation({ loaded, minPort, minLand, medPort, medLand })}
+            id={`placeholderAnimationError`}
+            className={css.placeholderAnimation}
+            alt=""
           />
-        </Box>
-        <Typography sx={s.message({ minPort, minLand, medPort, medLand })}>
+        </div>
+        <div className={css.message}>
           { english ? `This page does not exist.` : `Esta página no existe.` }
-        </Typography>
-      </Box>
-      <Box sx={s.leftRightHelper({ minPort, minLand })} />
-    </Box>
+        </div>
+      </div>
+    </div>
   )
 }
 

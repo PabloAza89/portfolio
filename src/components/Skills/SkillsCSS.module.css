@@ -1,0 +1,672 @@
+.background {
+  /* ...flex, ...relative, ...jcsb, ...column, ...aifs, */
+  /* display: flex;
+  position: relative; */
+  /* justify-content: space-between; */
+  /* flex-direction: column; */
+  /* align-items: flex-start; */
+  background: darkred; /* DEV */
+  /* width: calc(100vw - 12px);
+  height: calc(100vh - 12px);
+  justify-content: center;
+  align-items: center; */
+
+  display: flex;
+  position: relative;
+  /* background: yellow; */ /* DEV */
+  /* padding: 0px 10px 10px 10px; */
+  flex-wrap: wrap;
+  /* justify-content: center; */
+  position: relative;
+  align-items: center;
+  height: calc(100vh - 12px);
+  overflow-x: hidden;
+  overflow: auto;
+  /* padding-top: 60px; */
+  justify-content: center;
+
+
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* padding-left: 10px;
+  padding-right: 10px; */
+  /* overflow: hidden; */
+  /* overflow: hidden; */
+}
+
+.testTEST {
+  display: flex;
+  position: relative;
+  background: turquoise;
+  width: 100%;
+
+}
+
+@media screen
+and (max-width: 1px) {
+  /* .textContainer { width: min-content; } */
+  .background {
+    background: yellow;
+    /* justify-content: flex-start; */
+    width: 100%;
+    /* overflow: hidden; */
+  }
+  .mainContainer {
+    /* margin-left: 6px; */
+  }
+  .colorFixed {
+    /* position: absolute !important; */
+    position: fixed !important;
+    pointer-events: auto !important;
+    /* right: 250px !important; */
+    /* left: -100px !important; */
+    /* right: calc(100vw + 600px); */
+    /* right: 50vw !important; */
+    /* right: calc((100vw * 100%) + 700px) !important; */
+  }
+  .entireBar {
+    right: -200px !important;
+    /* transition: none !important; */
+    /* visibility: hidden !important; */
+    /* visibility: hidden !important; */
+    /* position: absolute !important; */
+    position: fixed !important;
+        /* right: calc(844px - 100vw) !important; */
+  }
+}
+
+@media screen
+and (width >= 2px) {
+  /* .textContainer { width: min-content; } */
+
+  .entireBar {
+    transition: none !important;
+    /* visibility: visible; */
+    /* visibility: visible !important; */
+    /* position: fixed !important; */
+    /* transition: none !important; */
+    /* right: 0px !important; */
+  }
+  
+}
+
+@media screen
+and (max-width: 3px) {
+  /* .textContainer { width: min-content; } */
+  .background {
+    /* background: yellow;
+    justify-content: flex-start;
+    width: 100%; */
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+  .mainContainer {
+    /* margin-left: 6px; */
+  }
+
+}
+
+@media screen
+and (max-width: 4px) {
+  /* .textContainer { width: min-content; } */
+  /* .background {
+    justify-content: flex-start;
+    overflow: hidden;
+  } */
+  /* .mainContainer {
+    width: 759px;
+  } */
+  /* .titlesNext {
+    display: contents;
+  } */
+  .chartContainer {
+    /* width: 1200px !important; */
+    /* width: 731px !important; */
+  }
+  .scroll {
+    width: calc(100vw + 90px);
+  }
+
+}
+
+@media screen
+and (max-height: 407px) {
+  .titlesBox {
+    display: none !important;
+    /* display: contents !important; */
+  }
+  .mainContainer {
+    height: 297px !important;
+  }
+  .titlesHorizontalContainer {
+    display: flex !important;
+  }
+  .leftSide {
+    /* height: calc((var(--percentage) + 5) * 2px); */
+    animation: growAnimatioon 1.2s linear !important;
+  }
+  .centerSide {
+    /* height: calc((var(--percentage) + 5) * 2px); */
+    animation: growAnimatioon 1.2s linear !important;
+  }
+  .rightSide {
+    /* height: calc((var(--percentage) + 5) * 2px); */
+    animation: growAnimatioon 1.2s linear !important;
+  }
+}
+
+@keyframes growAnimatioon {
+  from { height: 0px; }
+  to { height: calc((var(--percentage) + 5) * 2px) }
+}
+
+@media screen
+and (max-height: 308px) {
+  .skills {
+    display: none !important;
+  }
+  .mainContainer {
+    height: 261px !important;
+  }
+}
+
+
+.stopTransition {
+  transition: none !important;
+}
+
+.test222 {
+  /* left: 560px; */
+  /* position: fixed !important; */
+  /* transition-duration: 1.5s; */
+  /* left: -194px !important; */
+  right: 0px !important;
+}
+
+.mainContainer {
+  /* border-radius: 20px; */
+  /* max-width: 700px; */
+  /* flex-wrap: wrap; */
+  /* justify-content: center; */
+  position: relative;
+  /* align-items: center; */
+  /* flex-wrap: wrap; */
+  /* justify-content: center; */
+  height: fit-content;
+  position: relative;
+  /* align-items: center; */
+  /* width: 100%; */
+  /* font-size: 26px; */
+  color: white;
+  /* padding: 60px 40px 60px 40px; */
+  /* text-align: center; */
+  background: darkorange; /* DEV */
+  /* width: ${(length*92)+200}$px,
+  height: minLand ? '261px' : 397px; // 50 + 1 + 210 + 100 + 36 = 397 */
+ /*  margin-left: 10px;
+  margin-right: 10px; */
+  /* margin-left: 6px; */
+}
+
+
+.colorFixed {
+  display: flex;
+  position: absolute;
+  right: 6px;
+  background: rgba(var(--colorBar));
+  /* min-width: 0px !important; */
+  padding: 0px !important;
+  width: 6px;
+  height: 38px;
+  border: 0px;
+  pointer-events: none;
+  z-index: 6000;
+}
+
+/* .colorFixed:active .entireBar{
+  background: darkcyan;
+} */
+
+/* .colorFixed:active .entireBar{
+  background: darkcyan;
+}
+ */
+/* .entireBarContainer:active:has(
+  > .colorFixed:active
+) > :is(div.entireBar) {
+  background: darkcyan;
+  animation: entireBarMoveClKF 2.5s;
+}
+ */
+/* @keyframes entireBarMoveClKF {
+  0% { transform: translateX(0px) }
+  50% { transform: translateX(-194px) }
+  75% { transform: translateX(-194px) }
+  100% { transform: translateX(0px) }
+} */
+
+/* .css(`animationName`,`entireBarMoveClKF`)
+          .css(`animationDuration`,`2.5s`) */
+
+
+
+
+/* .colorFixed:focus {
+  background: red !important;
+}
+ */
+.titlesNext {
+  /* ...flex, ...absolute, */
+  display: flex;
+  position: absolute;
+  /* right: graphDontFit ? '10px' : 0px; */
+  right: 0px;
+  background: rgba(128, 128, 128, 0.400);
+  /* width: graphDontFit ? ${94-(850-currentWidth)}px : 98px; */
+  width: 98px;
+  height: 100px;
+}
+
+.entireBarContainer {
+  /* ...flex, ...relative, ...row, ...jcsb, */
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 200px;
+  height: 49px;
+  /* marginBottom: 1px; */
+  margin-bottom: 1px;
+  /* background: yellow; */ /* DEV */
+  align-items: flex-end;
+  /* right: graphDontFit ? '-194px' : 0px; */
+  right: 0px;
+}
+
+.entireBar {
+  /* .entireBar { */
+  /* ...flex, ...row, ...jcsb, ...relative, */
+  display: flex;
+  position: absolute;
+  /* background: yellow; */
+  /* position: fixed; */
+  right: 0px;
+  /* right: -200px !important; */
+  flex-direction: row;
+  justify-content: space-between;
+  width: 200px;
+  height: 49px;
+  margin-bottom: 0px;
+  /* background: graphDontFit ? ${bgColor}80 : none; */
+  /* background: darkred; */ /* DEV */
+  /* background: red; */
+  /* background: calc(var(--colorBar)+80); */
+  /* background: rgba(var(--colorBar)80); */
+  background: rgba(var(--colorBar), 0.8);
+  align-items: flex-end;
+  border-radius: 10px 0px 0px 0px;
+  /* transition: all 1.5s; */
+  /* transition-duration: 1.5s; */
+  /* transition: all .1s ease-in-out; */
+  /* transition: all 1s ease-in-out; */
+  visibility: hidden;
+}
+
+/* .classname {
+  animation: test444 1s;
+} */
+
+@keyframes test444 {
+  0% { transform: translateX(0px) }
+  50% { transform: translateX(-194px) }
+  75% { transform: translateX(-194px) }
+  100% { transform: translateX(0px) }
+}
+
+
+.middle {
+  /* ...relative, ...jcsb, ...aic, */
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  /* background: orange; */ /* DEV */
+  /* display: minPort ? 'contents' : flex; */
+  width: calc(100vw - 12px);
+  /* minHeight: minLand ? '260px' : 397px;
+  height: minLand ? '260px' : 397px; */
+  min-height: 397px;
+  height: 397px;
+}
+
+
+
+
+.skills {
+  /* ...noSelect, */
+  /* display: minLand ? 'none' : flex; */
+  display: flex;
+  background: #b86b5a;
+  width: fit-content;
+  font-family: NillandRegular, serif;
+  color: white;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.19;
+  height: 36px;
+  padding: 0px 5px;
+}
+
+.chartContainer {
+  /* ...flex, ...relative, ...column, ...jcfs, */
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* background: red; */ /* DEV */
+  align-items: flex-start;
+  /* width: graphDontFit ? ${currentWidth}px : ${(length*92)+200}px,
+  height: minLand ? '261px' : 361px; // 50 + 1 + 210 + 100 = 361 */
+  height: 361px;
+}
+
+.scroll {  
+  overflow: auto;
+  /* border-radius: graphDontFit ? '0px 0px 10px 0px' : minLand ? '0px 0px 10px 0px' : 0px 0px 10px 10px; */
+  border-radius: 0px 0px 10px 10px;
+  /* height: minLand ? '261px' : 361px; */
+  height: 361px;
+  background:
+  linear-gradient(
+    to bottom,
+    rgba(128, 128, 128, 0.400) 0px, rgba(128, 128, 128, 0.400) 49px,
+    steelblue 49px, steelblue 50px,
+    rgba(128, 128, 128, 0.400) 50px, rgba(128, 128, 128, 0.400) 99px,
+    steelblue 99px, steelblue 100px,
+    rgba(128, 128, 128, 0.400) 100px, rgba(128, 128, 128, 0.400) 149px,
+    steelblue 149px, steelblue 150px,
+    rgba(128, 128, 128, 0.400) 150px, rgba(128, 128, 128, 0.400) 199px,
+    steelblue 199px, steelblue 200px,
+    rgba(128, 128, 128, 0.400) 200px, rgba(128, 128, 128, 0.400) 249px,
+    steelblue 249px, steelblue 250px,
+    rgba(128, 128, 128, 0.400) 250px, rgba(128, 128, 128, 0.400) 261px,
+    transparent 261px, transparent
+  )
+}
+
+.upperChartContainer {
+  /* ...flex, ...relative, ...row, */
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  /* background: darkgreen; */ /* DEV */
+  height: 261px;
+}
+
+.upperChartContainerRight {
+  /* ...flex, ...column, */
+  display: flex;
+  flex-direction: column;
+  /* position: graphDontFit ? 'fixed' : relative;
+  right: graphDontFit ? '200px' : 0px;
+  width: graphDontFit ? '0px' : 200px; */
+  position: relative;
+  right: 0px;
+  width: 200px;
+  height: 261px;
+  /* background: yellow; */ /* DEV */
+  z-index: 3
+}
+
+.chartRow {
+  /* ...flex, ...relative, ...row, ...jcfs, */
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  /* width: ${92*length}px, */
+  height: 211px;
+  margin-top: 50px;
+}
+
+/* const growAnim = (percentage: number) => { return keyframes({ from: { height: 0px }, to: { height: ${(percentage  + 5)* 2}px } }) } */
+/* const growAnimDuration: number = 1.2 */
+/* const growAnimDuration: number = 10 */
+
+.columnBar {
+  /* ...flex, ...relative, ...row, ...jcc, */
+  display: flex;
+  /* display: none; */
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  width: 90px;
+  /* height: calc(${percentage + 5}px * 2), */
+  /* height: 200px; */
+  /* animation: ${growAnim(percentage)} ${growAnimDuration}s linear, */
+  /* animation: growAnimation 1.2s linear; */
+  border-bottom: 2px solid black;
+  /* border-left: 2px solid black; */
+  /* border-left: linear-gradient(to top, black 0px, black 20px, transparent 20px) 1; */
+  /* border-image: linear-gradient(to top, black 0px, black 20px, transparent 20px) 1; */
+  /* border-image: linear-gradient(to top, black 0px, black 20px, transparent 20px) 1; */
+  overflow: hidden;
+}
+
+@keyframes growAnimation {
+  from { height: 0px; }
+  to { height: calc((var(--percentage) + 5) * 2px) }
+}
+
+.testTest {
+  /* height: 100px; */
+  /* min-height: 20px; */
+  /* background: orange; */ /* DEV */
+  border-left: 2px solid black;
+  border-image: linear-gradient(to top, black 0px, black 20px, transparent 20px) 1;
+}
+
+/* height: ${(percentage  + 5)* 2}px } */
+
+/* // 025 + 10.5 + 035.5 // EXAMPLES
+// 050 + 21.0 + 071.0
+// 075 + 31.5 + 106.5
+// 100 + 42.0 + 142.0
+// each barr 90 + 2 (92) + green 200 */
+
+.leftSide {
+  /* displa */
+  width: 10px;
+  /* height: 200px; */
+  /* height: var(--percentage)px; */
+  /* height: calc((var(--percentage) + 5) * 2px); */
+  animation: growAnimation 1.2s linear;
+  /* height: ${(percentage + 5)* 2}px, */
+  /* animation: ${growAnim(percentage)} ${growAnimDuration}s linear, */
+  
+  /* background: darkMode ?
+    linear-gradient(225deg, gray 7px, #141414 7px, transparent),
+      linear-gradient(45deg, #0000 7px, silver 0) :
+    linear-gradient(225deg, gray 7px, silver 7px, transparent),
+      linear-gradient(45deg, #0000 7px, silver 0) */
+  background:
+    linear-gradient(225deg, gray 7px, silver 7px, transparent),
+    linear-gradient(45deg, #0000 7px, silver 0)
+}
+
+.centerSide {
+  /* ...flex, ...relative, ...aic, ...jcfs, */
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 30px;
+  height: calc((var(--percentage) + 5) * 2px);
+  animation: growAnimation 1.2s linear;
+  /* height: ${(percentage  + 5)* 2}px, */
+  /* animation: ${growAnim(percentage)} ${growAnimDuration}s linear, */
+  flex-direction: column-reverse;
+  /* background: darkMode ?
+    'linear-gradient(to bottom, gray 10px, #595959 0px)' :
+    'linear-gradient(to bottom, gray 10px, darkgrey 10px); */
+  background:
+    linear-gradient(to bottom, gray 10px, darkgrey 10px);
+  /* background: blue; */ /* DEV */
+  text-wrap: nowrap;
+}
+
+.fixedToppingMinLand {
+  /* ...row, ...absolute, */
+  display: none;
+  /* display:  minLand ? 'flex' : none; */
+  /* background: linear-gradient(180deg, darkblue 10px, darkred 0), */
+  /* background:  darkMode ?
+    linear-gradient(180deg, gray 10px, #595959 0) :
+    linear-gradient(180deg, gray 10px, darkgrey 0),
+  marginLeft: 0px;
+  width: 30px;
+  height: 20px;
+  zIndex: 1, */
+}
+
+
+
+
+@keyframes growAnimationn {
+  from { height: 0px; }
+  to { height: calc(((var(--percentage) + 5) * 2px) - 30px) }
+}
+
+.titlesHorizontalContainer {
+  /* ...absolute, ...aic, ...jcfe, ...column, */
+
+  display: none;
+  /* display: flex; */
+  position: absolute;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  /* display: minLand ? 'flex' : none; */
+  width: 37px;
+  /* height: ${((percentage + 5)* 2)}px, */
+  /* height: 150px; */
+  height: calc(((var(--percentage) + 5) * 2px) - 30px);
+  animation: growAnimationn 1.2s linear;
+  /* animation: ${growAnim(percentage)} ${growAnimDuration}s linear, */
+  /* background: blue; */
+  text-wrap: nowrap;
+  bottom: 0px;
+  margin-left: 33px;
+  overflow: hidden;
+  background: gray;
+  /* transform: rotate(270deg); */
+}
+
+.titlesHorizontal {
+  /* ...flex, ...relative, */
+  display: flex;
+  position: relative;
+  transform: rotate(270deg);
+  /* background: darkred; */ /* DEV */
+  width: 180px;
+  margin-bottom: 90px;
+}
+
+.rightSide {
+  /* ...flex, */
+  display: flex;
+  width: 10px;
+  height: calc((var(--percentage) + 5) * 2px);
+  animation: growAnimation 1.2s linear;
+  /* height: ${(percentage + 5) * 2}px, */
+  /* animation: ${growAnim(percentage)} ${growAnimDuration}s linear, */
+  /* background: darkMode ?
+    linear-gradient(180deg, #0000 10px, #595959 0),
+      linear-gradient(225deg, #0000 7px, gray 7px) :
+    linear-gradient(180deg, #0000 10px, darkgrey 0),
+      linear-gradient(225deg, #0000 7px, gray 7px), */
+  background:
+    linear-gradient(180deg, #0000 10px, darkgrey 0),
+    linear-gradient(225deg, #0000 7px, gray 7px)
+}
+
+.titlesBox {
+  /* ...row, ...aic, ...noSelect, */
+  display: flex;
+  /* display: minLand ? 'none' : flex; */
+  background: darkgreen; /* DEV */
+  /* background: rgba(128, 128, 128, 0.400); */
+  border-radius: 0px 0px 0px 10px;
+  height: 100px;
+  /* width: ${length * 92}px, */
+  /* width: calc(var(--titlesBoxLength) * 92)px; */
+  width: calc(var(--titlesBoxLength) * 92px);
+  /* width: 644px; */
+  padding-left: 57px;
+  padding-right: 45px;
+  border-color: transparent;
+}
+
+.titles {
+  display: flex;
+  position: relative;
+  /* position: absolute; */
+  top: 33px;
+  width: 125px;
+  height: 30px;
+  background: gray;
+  transform: rotate(45deg) skew(135deg);
+  /* margin: 0px -14px; */
+  margin: 0px -18px;
+  line-height: 1.9;
+  padding-left: 5px;
+  font-weight: 600;
+  text-wrap: nowrap;
+}
+
+
+.innerLevel {
+  /* ...flex, ...column, ...noSelect, */
+  display: flex;
+  flex-direction: column;
+  /* paddingLeft: graphDontFit ? '10px' : 0px; */
+  /* paddingLeft: graphDontFit ? '10px' : 0px; */
+  padding-left: 10px;
+}
+
+.levelTitle {
+  /* ...row, ...relative, ...jcfe, */
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  display: inline;
+  width: 135px;
+  height: 20px;
+  /* background: darkorange; */ /* DEV */
+  font-size: 14px;
+  color: white;
+}
+
+.boxSVG {
+  /* ...flex, ...relative, ...jcc, ...aic, */
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  /* background: gray; */ /* DEV */
+  width: 49px;
+  height: 49px;
+}
+
+.imageSVG {
+  width: 45px !important;
+  height: 45px !important;
+  /* marginRight: graphDontFit ? '65px' : 58px; */
+  margin-right: 58px;
+  color: black !important;
+}
