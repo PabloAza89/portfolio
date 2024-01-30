@@ -1,42 +1,16 @@
-import { Typography, SvgIcon } from '@mui/material';
-import { useState, useEffect, useRef, useMemo, createRef, MutableRefObject } from 'react';
-/* import * as s from '../../styles/SkillsSX'; */
+import { SvgIcon } from '@mui/material';
+import { useState, useEffect, useRef, useMemo, MutableRefObject } from 'react';
 import css from './SkillsCSS.module.css';
 import { useSelector } from 'react-redux';
-import ScrollContainer from 'react-indiana-drag-scroll';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
 import { CSSRuleExtended } from '../../interfaces/interfaces';
 import './SkillsSX.css';
 import $ from 'jquery';
 
-
 function Skills() {
-
-  let one = useRef(false) // animation moving ? click handler number One
-  let two = useRef(false) // animation moving ? click handler number Two
 
   const english = useSelector((state: {english:boolean}) => state.english)
   const currentWidth = useSelector((state: {currentWidth: number}) => state.currentWidth)
-
-  function useHorizontalScroll() {
-    const elRef = useRef<HTMLInputElement>(null);
-    useEffect(() => {
-      const el:any = elRef.current;
-      if (el) {
-        const onWheel = (e:any) => {
-          if (e.deltaY === 0) return;
-          e.preventDefault();
-          el.scrollTo({
-            left: el.scrollLeft + e.deltaY * 30,
-            behavior: "smooth"
-          });
-        };
-        el.addEventListener("wheel", onWheel);
-        return () => el.removeEventListener("wheel", onWheel);
-      }
-    }, []);
-    return elRef;
-  }
 
   interface arrayI {
     id: number,
@@ -53,14 +27,7 @@ function Skills() {
     { id: 5, title: english ? 'BBQ' : 'Asado', percentage: 100 },
     { id: 6, title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }
   ]
-
-  const [ graphDontFit, setGraphDontFit ] = useState<any>(currentWidth < ((array.length * 92) + 206) ? true : false)
-  const [ animRunning, setAnimRunning ] = useState<boolean>(false)
-
-  useEffect(() => {
-    setGraphDontFit(currentWidth < ((array.length * 92) + 206) ? true : false)
-  }, [currentWidth, array.length]);
-
+ 
   const bold = (string: string) => {
     return <b style={{ color: 'black' }}>{string}</b>
   }
@@ -73,18 +40,6 @@ function Skills() {
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `244, 75, 0` }
   ], [english]);
 
-
-/*   useEffect(() => {
-    if (graphDontFit)  {
-      $(function(){
-        s.graphDontFit({ levels, animRunning })
-      })
-    } else {
-      s.graphFit(levels)
-    }
-  },[graphDontFit, levels, animRunning]) */
-
-
   const findTargetStyleSheet = async () => {
     for (const ssI in document.styleSheets) {
       if (document.styleSheets[ssI].href === null) {
@@ -93,9 +48,9 @@ function Skills() {
             if (
               document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
               (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined &&
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (max-width: 1px)'
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width < 1px)'
             ) {
-                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${(array.length * 92) + 206}px)`
+                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth}px)`// Nº1 850
                 //break;
             }
             if (
@@ -104,15 +59,15 @@ function Skills() {
               (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width >= 2px)'
             ) {
               console.log("EXECUTED aaa");
-                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width >= ${(array.length * 92) + 206}px)`
+                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width >= ${targetWidth}px)` // Nº2 850
                 //break;
             }
             if (
               document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
               (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined &&
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (max-width: 3px)'
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width < 3px)'
             ) {
-                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${(array.length * 92) + 212}px)`
+                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº3 856
                 //break;
             }
             if (
@@ -120,33 +75,21 @@ function Skills() {
               (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined &&
               (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (max-width: 4px)'
             ) {
-                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${(array.length * 92) + 115}px)` // 759px
-                //break;
+                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${targetWidth + 91}px)` // Nº4 759px
+                break;
             }
-        
           }
         }
       }
     }
-    // for (const ssI in document.styleSheets) {
-    //   if (document.styleSheets[ssI].href === null) {
-    //     for (const cssrI in document.styleSheets[ssI].cssRules) {
-    //       if (document.styleSheets[ssI].cssRules[cssrI].cssText !== undefined) {
-            
-    //       }
-    //     }
-    //   }
-    // }
-
   }
- 
 
   useEffect(() => {
     window.onload = () => {
       console.log("CSS LOADED")
       findTargetStyleSheet()
       .then(() => {
-        $(`[class*='entireBar']`)
+        $(`[class*='barInner']`)
           .css("visibility", "visible")
       })
     }
@@ -154,7 +97,7 @@ function Skills() {
     if (document.readyState === "complete") {
       findTargetStyleSheet()
       .then(() => {
-        $(`[class*='entireBar']`)
+        $(`[class*='barInner']`)
           .css("visibility", "visible")
       })
 
@@ -162,209 +105,282 @@ function Skills() {
 
   }, [])
 
-  //let inputRef = useRef<HTMLDivElement>(null);
-  //let inputRef = useRef<HTMLDivElement[]>([]);
-  //let inputRef = useRef<any>().current;
-  //const self = useRef<any>({}).current
-  //const saveRef = (key: any) => (r:any) => { self[key] = r }
-  //let inputRef = useRef<any>([]);
-  //const inputRef = useRef<any>(Array.from({length: array.length}, (e,i) => ( createRef )));
-
-  //const [ timeoutLanguage, setTimeoutLanguage ] = useState<any>(Array.from({length: array.length}, (e,i) => ([])));
-  //const [ timeoutLanguage, setTimeoutLanguage ] = useState<ReturnType<typeof setTimeout>>()
-  //const autoHideLanguage = () => $(() => $(`#buttonShowLanguage`).trigger("click"))
-  //const autoHideLanguage = () => $(`#buttonTest1230`).trigger("click")
-
-  //const [ timeoutLanguage, setTimeoutLanguage ] = useState<ReturnType<typeof setTimeout>>()
-  //const autoHideLanguage = () => $(`#buttonTest1230`).trigger("click")
-
-  //const inputRef = useRef<HTMLDivElement>(null);
-  //const inputRef = useRef<HTMLDivElement[]>([]);
-  //const inputRef: any = useRef<any>([]);
-
-  /* const self: any = useRef({})
-  const saveRef = (key:any) => (r:any) => { self.current[key] = r } */
   const inputRef: MutableRefObject<any> = useRef<HTMLDivElement[] | null>([]);
-  //const [ timeoutLanguage, setTimeoutLanguage ] = useState<ReturnType<typeof setTimeout>>()
   const timeoutRef = useRef<ReturnType<typeof setTimeout>[]>([]);
-  // LegacyRef<HTMLDivElement>
-  
-
-  // $(function(){
-  //   $('#buttonTest1230').on('click',function() {
-  //     if (inputRef.current) inputRef.current.classList.toggle(css.test222);
-  //   });
-  // });
 
   const handleTest = (id: any) => {
-    /* $(`[class*='entireBar']`).css("transition", "all 1.5s") */
-    $(`[class*='entireBar']`)
-      //.css("visibility", "visible")
-      .css("transition", "all 1.5s")
-      //.css("transition-duration", "1.5s")
+    $(`[class*='barInner']`)
+      .css("transition", "right 1.5s")
     clearTimeout(timeoutRef.current[id])
-    //console.log("inputRef.current[id].classList", inputRef.current[id].classList.length)
-      if (inputRef.current[id] !== null) {
-        inputRef.current[id].classList.toggle(css.test222);
+    if (inputRef.current[id] !== null) inputRef.current[id].classList.toggle(css.toggleClass);
+    const autoHideLanguage = () => {
+      if (inputRef.current[id].classList.length === 2) {
+        $(`#buttonTest123${id}`).trigger("click");
+        clearTimeout(timeoutRef.current[id])
       }
-      const autoHideLanguage = () => {
-
-        if (inputRef.current[id].classList.length === 2) {
-          $(`#buttonTest123${id}`).trigger("click");
-          clearTimeout(timeoutRef.current[id])
-        }
-      }
-      timeoutRef.current[id] = (setTimeout(autoHideLanguage, 3000))
-
-
+    }
+    timeoutRef.current[id] = (setTimeout(autoHideLanguage, 3000))
   }
 
-/*   useEffect(() => {
-    var timer: any;
-    const removeTransitionn = () => {
-      //$(`[class*='entireBar']`).css("transition", "none")
-      $(`[class*='entireBar']`).css("transition", "none")
-      const addTransitionn = () => $(`[class*='entireBar']`).css("transition", "all 1.5s")
-      clearTimeout(timer);
-      timer = setTimeout(addTransitionn, 100);
-    }
-    window.addEventListener('resize', removeTransitionn);
-  },[])
-  */
+  let targetWidth = (array.length * 92) + 206
 
   useEffect(() => {
-    var timer: any;
     const removeTransitionn = () => {
-      $(`[class*='entireBar']`).css("transition", "none")
-      const addTransitionn = () => $(`[class*='entireBar']`).css("transition", "all 1.5s")
-      clearTimeout(timer);
-      timer = setTimeout(addTransitionn, 100);
+      if (window.matchMedia(`(width > ${targetWidth - 1}px)`).matches) {
+        timeoutRef.current.forEach((e, idx) => {
+          if (inputRef.current[idx].classList.length === 2) {
+            console.log("EEE")
+            $(`#buttonTest123${idx}`).trigger("click");
+          }
+        })
+      }
+      let { innerHeight, innerWidth } = window
+      setHeightDev(innerHeight);
+      setWidthDev(innerWidth);
     }
     window.addEventListener('resize', removeTransitionn);
   },[])
 
- /*  useEffect(() => {
-    var timer: any;
-    const removeTransitionn = () => {
-      // $(`[class*='entireBar']`).css("transition", "none")
-      // const addTransitionn = () => $(`[class*='entireBar']`).css("transition", "all 1.5s")
-      // clearTimeout(timer);
-      // timer = setTimeout(addTransitionn, 100);
-      document.body.classList.add(css.stopTransition);
+  const [ heightDev, setHeightDev ] = useState<number>(window.innerHeight)
+  const [ widthDev, setWidthDev ] = useState<number>(window.innerWidth)
 
+  useEffect(() => { // MOUSE GRAB & DRAG EFFECT ON MOUSE DEVICES
+    const el = document.getElementById('sliderBoxY');
+    if (el !== null) {
+      const mouseEnterOnScoreY = () => {
+        //if (heightDev <= 273) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
+        //if (heightDev <= 273 || widthDev <= 758) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
+        if (heightDev < 273) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
+        
+        let pos = { top: 0, y: 0 };
+
+        const mouseDownHandlerY = function (e: any) {
+          //el.style.cursor = 'grabbing';
+          //el.style.userSelect = 'none';
+          pos = {
+            
+            top: el.scrollTop,
+            
+            y: e.clientY,
+          }
+          if (heightDev < 273) {
+            el.addEventListener('mousemove', mouseMoveHandlerY)
+            el.addEventListener('mouseup', mouseUpHandlerY)
+          } else {
+            el.removeEventListener('mousemove', mouseMoveHandlerY);
+            el.removeEventListener('mouseup', mouseUpHandlerY);
+            el.style.cursor = 'default';
+          }
+        }
+
+        const mouseMoveHandlerY = function (e: any) { // HOW MUCH MOUSE HAS MOVED
+          //const dx = e.clientX - pos.x;
+          const dy = e.clientY - pos.y;
+          el.scrollTop = pos.top - dy;
+          //el.scrollLeft = pos.left - dx;
+        }
+
+        const mouseUpHandlerY = function () {
+          //el.style.cursor = 'grab'
+          el.style.removeProperty('user-select')
+          el.removeEventListener('mousemove', mouseMoveHandlerY)
+          el.removeEventListener('mouseup', mouseUpHandlerY)
+        }
+
+        el.addEventListener('mousedown', mouseDownHandlerY);
+        el.addEventListener('mouseleave', function() {
+          el.removeEventListener('mouseup', mouseUpHandlerY);
+          el.removeEventListener('mousedown', mouseDownHandlerY)
+          el.removeEventListener('mousemove', mouseMoveHandlerY);
+          //el.style.cursor = 'default'
+        })
+      }
+      el.addEventListener("mouseenter", mouseEnterOnScoreY)
+
+      return () => el.removeEventListener("mouseenter", mouseEnterOnScoreY)
     }
-    window.addEventListener('resize', removeTransitionn);
-  },[]) */
+  })
+
+  useEffect(() => { // MOUSE GRAB & DRAG EFFECT ON MOUSE DEVICES
+    const el = document.getElementById('sliderBoxX');
+    if (el !== null) {
+      const mouseEnterOnScoreX = () => {
+        if (
+          (widthDev < 758 && heightDev > 407) ||
+          (widthDev < 656 && heightDev <= 407) ||
+          (heightDev < 273)
+          /* (widthDev < 758 && heightDev > 407) */
+        ) {
+          el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
+        }
+        //if (true) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
+        let pos = { left: 0, x: 0, };
+
+        const mouseDownHandlerX = function (e: any) {
+          el.style.cursor = 'grabbing';
+          el.style.userSelect = 'none';
+          pos = {
+            left: el.scrollLeft,
+            
+            x: e.clientX,
+      
+          }
+          //if (heightDev <= 550) {
+          if (
+            (widthDev < 758 && heightDev > 407) ||
+            (widthDev < 656 && heightDev <= 407) ||
+            (heightDev < 273)
+            /* (widthDev < 758 && heightDev > 407) */
+          ) {
+            el.addEventListener('mousemove', mouseMoveHandlerX)
+            el.addEventListener('mouseup', mouseUpHandlerX)
+          } else {
+            el!.removeEventListener('mousemove', mouseMoveHandlerX);
+            el!.removeEventListener('mouseup', mouseUpHandlerX);
+            el!.style.cursor = 'default';
+          }
+        }
+
+        const mouseMoveHandlerX = function (e: any) { // HOW MUCH MOUSE HAS MOVED
+          const dx = e.clientX - pos.x;
+          //const dy = e.clientY - pos.y;
+          //el.scrollTop = pos.top - dy;
+          el.scrollLeft = pos.left - dx;
+        }
+
+        const mouseUpHandlerX = function () {
+          el.style.cursor = 'grab'
+          el.style.removeProperty('user-select')
+          el.removeEventListener('mousemove', mouseMoveHandlerX)
+          el.removeEventListener('mouseup', mouseUpHandlerX)
+        }
+
+        el.addEventListener('mousedown', mouseDownHandlerX);
+        el.addEventListener('mouseleave', function() {
+          el.removeEventListener('mouseup', mouseUpHandlerX);
+          el.removeEventListener('mousedown', mouseDownHandlerX)
+          el.removeEventListener('mousemove', mouseMoveHandlerX);
+          el.style.cursor = 'default'
+        })
+      }
+      el.addEventListener("mouseenter", mouseEnterOnScoreX)
+
+      return () => el.removeEventListener("mouseenter", mouseEnterOnScoreX)
+    }
+  })
 
   return (
     <div
       /* style={{ "--testTest": (array.length * 92) + 206 } as React.CSSProperties} */
-      id={`testTestID`}
+      //id={`testTestID`}
       className={css.background}
+      id={`sliderBoxY`}
     >
+      
       {/* (array.length * 92) + 206) */}
       {/* <div className={css.testTEST}> */}
-        <div className={css.mainContainer}>
-          <div className={css.skills}>{ english ? `My skills` : `Mis habilidades` }</div>
-          <ScrollContainer innerRef={useHorizontalScroll()} className={css.scroll} >
-          <div className={css.chartContainer} style={{ "--titlesBoxLength": array.length } as React.CSSProperties}>
-              <div className={css.upperChartContainer}>
-                <div className={css.chartRow}>
-                  {array.map((e, index) => {
-                    return (
-                      <div className={css.testTest} key={index}>
-                        <div
-                          style={{ "--percentage": e.percentage } as React.CSSProperties}
-                          className={css.columnBar}
-                        >
-                          {/* <div className={css.fixedToppingMinLand} /> */}
-                          <div className={css.leftSide}></div>
-                          <div
-                            style={{ "--percentage": e.percentage } as React.CSSProperties}
-                            className={css.centerSide}
-                            id={`center${index}`}
-                          />
-                          <div className={css.rightSide}></div>
-                        </div>
-                        <div
-                          style={{ "--percentage": e.percentage } as React.CSSProperties}
-                          className={css.titlesHorizontalContainer}
-                        >
-                          <div className={css.titlesHorizontal}>
-                            {e.title}
-                          </div>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-                <div className={css.upperChartContainerRight}>
-                  {levels.map((e, index) => {
-                    return (
+      <div
+        className={css.mainContainer}
+        style={{ "--titlesBoxLength": array.length } as React.CSSProperties}
+      >
+        <div className={css.skills}>{ english ? `My skills` : `Mis habilidades` }</div>
+        <div
+          //innerRef={useHorizontalScroll()}
+          className={css.scroll}
+          id={`sliderBoxX`}
+          //vertical={true}
+        >
+        <div 
+          className={css.chartContainer}
+          style={{ "--titlesBoxLength": array.length } as React.CSSProperties}
+        >
+            <div className={css.upperChartContainer}>
+              <div className={css.chartRow}>
+                {array.map((e, index) => {
+                  return (
+                    <div className={css.testBorder} key={index}>
                       <div
-                        key={levels.indexOf(e)}
-                        className={css.entireBarContainer}
+                        style={{ "--percentage": e.percentage } as React.CSSProperties}
+                        className={css.columnBar}
                       >
+                        <div className={css.leftSide}></div>
                         <div
-                          //ref={inputRef[e.id]}
-                          //ref={saveRef(`${e.id}}`)}
-                          //ref={e => inputRef.current.push(e)}
-                          ref={el => inputRef.current[e.id] = el}
-                          //className={`entireBar`}
-                          style={{ "--colorBar": e.color } as React.CSSProperties}
-                          className={css.entireBar}
-                          //className={`${css.entireBar} ${e.id}`}
-                          id={`entireBarMoveCl${index}`}
-                        >
-                          <div
-                            className={css.innerLevel}>
-                            <div className={css.levelTitle}>{ e.firstA }{ e.firstB }</div>
-                            <div className={css.levelTitle}>{ e.second }</div>
-                          </div>
-                          <div className={css.boxSVG}>
-                            <SvgIcon
-                              viewBox='0 0 36 30'
-                              className={css.imageSVG}
-                            >
-                              {e.svg}
-                            </SvgIcon>
-                          </div>
-                        </div>
-                        <button
-                          id={`buttonTest123${e.id}`}
-                          style={{ "--colorBar": e.color } as React.CSSProperties}
-                          className={css.colorFixed}
-                          onClick={() => {
-                            handleTest(e.id)
-                            //clearTimeout(timeoutLanguage);
-                            //setTimeoutLanguage(setTimeout(autoHideLanguage, 1000))
-                          }
-                        }
+                          style={{ "--percentage": e.percentage } as React.CSSProperties}
+                          className={css.centerSide}
+                          id={`center${index}`}
                         />
+                        <div className={css.rightSide}></div>
                       </div>
-                    )
-                  })}
+                      <div
+                        style={{ "--percentage": e.percentage } as React.CSSProperties}
+                        className={css.titlesHorizontalContainer}
+                      >
+                        <div className={css.titlesHorizontal}>
+                          {e.title}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+            <div className={css.titlesBox}>
+              {
+                array.map((e) => {
+                  return (
+                    <div
+                      key={array.indexOf(e)}
+                      className={css.titles}
+                    >
+                      {e.title}
+                    </div>
+                  )
+                })
+              }
+              <div className={css.titlesNext} />
+            </div>
+        </div>
+        </div>
+      </div>
+      <div className={css.barsMapContainer}>
+        {levels.map((e, index) => {
+          return (
+            <div
+              key={levels.indexOf(e)}
+              className={css.entireBarContainer}
+            >
+              <div
+                ref={el => inputRef.current[e.id] = el}
+                style={{ "--colorBar": e.color } as React.CSSProperties}
+                className={css.barInner}
+                id={`entireBarMoveCl${index}`}
+              >
+                <div
+                  className={css.innerLevel}>
+                  <div className={css.levelTitle}>{ e.firstA }{ e.firstB }</div>
+                  <div className={css.levelTitle}>{ e.second }</div>
+                </div>
+                <div className={css.boxSVG}>
+                  <SvgIcon
+                    viewBox='0 0 36 30'
+                    className={css.imageSVG}
+                  >
+                    {e.svg}
+                  </SvgIcon>
                 </div>
               </div>
-              <div className={css.titlesBox}>
-                {
-                  array.map((e) => {
-                    return (
-                      <div
-                        key={array.indexOf(e)}
-                        className={css.titles}
-                      >
-                        {e.title}
-                      </div>
-                    )
-                  })
-                }
-                <div className={css.titlesNext} />
-              </div>
-          </div>
-          </ScrollContainer>
-        </div>
-      {/* </div> */}
+              <button
+                id={`buttonTest123${e.id}`}
+                style={{ "--colorBar": e.color } as React.CSSProperties}
+                className={css.colorFixed}
+                onClick={() => {
+                  handleTest(e.id)
+                }}
+              />
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
