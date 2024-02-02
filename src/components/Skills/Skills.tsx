@@ -1,21 +1,43 @@
 import { SvgIcon } from '@mui/material';
 import { useState, useEffect, useRef, useMemo, MutableRefObject } from 'react';
 import css from './SkillsCSS.module.css';
+import './SkillsSX.css';
+import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
 import { CSSRuleExtended } from '../../interfaces/interfaces';
-import './SkillsSX.css';
 import $ from 'jquery';
 
 function Skills() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
-  const currentWidth = useSelector((state: {currentWidth: number}) => state.currentWidth)
 
   interface arrayI {
     id: number,
     title: string,
     percentage: number
+  }
+
+  function useHorizontalScroll() {
+    const elRef = useRef<HTMLInputElement>(null);
+    useEffect(() => {
+      const el:any = elRef.current;
+      if (el) {
+        const onWheel = (e:any) => {
+          if (e.deltaY === 0) return;
+          e.preventDefault();
+          el.scrollTo({
+            left: el.scrollLeft + e.deltaY * 4,
+            behavior: "smooth"
+          });
+        };
+        el.addEventListener("wheel", onWheel, {
+          passive: true
+        });
+        return () => el.removeEventListener("wheel", onWheel);
+      }
+    }, []);
+    return elRef;
   }
 
   const array: arrayI[] = [
@@ -27,7 +49,7 @@ function Skills() {
     { id: 5, title: english ? 'BBQ' : 'Asado', percentage: 100 },
     { id: 6, title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }
   ]
- 
+
   const bold = (string: string) => {
     return <b style={{ color: 'black' }}>{string}</b>
   }
@@ -86,37 +108,51 @@ function Skills() {
 
   useEffect(() => {
     window.onload = () => {
-      console.log("CSS LOADED")
       findTargetStyleSheet()
       .then(() => {
         $(`[class*='barInner']`)
           .css("visibility", "visible")
       })
     }
-
     if (document.readyState === "complete") {
       findTargetStyleSheet()
       .then(() => {
         $(`[class*='barInner']`)
           .css("visibility", "visible")
       })
-
     }
-
   }, [])
 
   const inputRef: MutableRefObject<any> = useRef<HTMLDivElement[] | null>([]);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
+  useEffect(() => {
+    levels.forEach(e => {
+      $(`#buttonTest123${e.id}`)
+        .css('animation', `shakeKF 6s calc(2.5s + (${e.id} * .1s)) infinite`)
+    })
+  })
+
   const handleTest = (id: any) => {
-    $(`[class*='barInner']`)
-      .css("transition", "right 1.5s")
+    levels.forEach(e => {
+      $(`#buttonTest123${e.id}`)
+        .css(`animation`,`none`)
+    })
+
     clearTimeout(timeoutRef.current[id])
     if (inputRef.current[id] !== null) inputRef.current[id].classList.toggle(css.toggleClass);
     const autoHideLanguage = () => {
       if (inputRef.current[id].classList.length === 2) {
         $(`#buttonTest123${id}`).trigger("click");
         clearTimeout(timeoutRef.current[id])
+        $(`#barInner${id}`)
+          .on("transitionend webkitTransitionEnd oTransitionEnd", function(){
+            console.log("END")
+            levels.forEach(e => {
+              $(`#buttonTest123${e.id}`)
+                .css('animation', `shakeKF 6s calc(2.5s + (${e.id} * .1s)) infinite`)
+            })
+          })
       }
     }
     timeoutRef.current[id] = (setTimeout(autoHideLanguage, 3000))
@@ -125,12 +161,13 @@ function Skills() {
   let targetWidth = (array.length * 92) + 206
 
   useEffect(() => {
-    const removeTransitionn = () => {
+    const autoHideOnResize = () => {
       if (window.matchMedia(`(width > ${targetWidth - 1}px)`).matches) {
         timeoutRef.current.forEach((e, idx) => {
           if (inputRef.current[idx].classList.length === 2) {
             console.log("EEE")
-            $(`#buttonTest123${idx}`).trigger("click");
+            $(`#buttonTest123${idx}`)
+              .trigger("click")
           }
         })
       }
@@ -138,7 +175,7 @@ function Skills() {
       setHeightDev(innerHeight);
       setWidthDev(innerWidth);
     }
-    window.addEventListener('resize', removeTransitionn);
+    window.addEventListener('resize', autoHideOnResize);
   },[])
 
   const [ heightDev, setHeightDev ] = useState<number>(window.innerHeight)
@@ -199,86 +236,77 @@ function Skills() {
 
       return () => el.removeEventListener("mouseenter", mouseEnterOnScoreY)
     }
-  })
+  }, [heightDev, widthDev])
 
   useEffect(() => { // MOUSE GRAB & DRAG EFFECT ON MOUSE DEVICES
     const el = document.getElementById('sliderBoxX');
     if (el !== null) {
-      const mouseEnterOnScoreX = () => {
+      const mouseEnterOnScore = () => {
         if (
-          (widthDev < 758 && heightDev > 407) ||
-          (widthDev < 656 && heightDev <= 407) ||
-          (heightDev < 273)
-          /* (widthDev < 758 && heightDev > 407) */
-        ) {
-          el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
-        }
-        //if (true) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
-        let pos = { left: 0, x: 0, };
+          heightDev < 273 ||
+          (heightDev < 408 && widthDev < 656) ||
+          (heightDev > 407 && widthDev < 758)
+          //(heightDev < 408 && widthDev < 758)
+        ) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
+        let pos = { top: 0, left: 0, x: 0, y: 0 };
 
-        const mouseDownHandlerX = function (e: any) {
+        const mouseDownHandler = function (e: any) {
           el.style.cursor = 'grabbing';
           el.style.userSelect = 'none';
           pos = {
             left: el.scrollLeft,
-            
+            top: el.scrollTop,
             x: e.clientX,
-      
+            y: e.clientY,
           }
-          //if (heightDev <= 550) {
           if (
-            (widthDev < 758 && heightDev > 407) ||
-            (widthDev < 656 && heightDev <= 407) ||
-            (heightDev < 273)
-            /* (widthDev < 758 && heightDev > 407) */
+            heightDev < 273 ||
+            (heightDev < 408 && widthDev < 656) ||
+            (heightDev > 407 && widthDev < 758)
+            //(heightDev < 408 && widthDev < 758)
           ) {
-            el.addEventListener('mousemove', mouseMoveHandlerX)
-            el.addEventListener('mouseup', mouseUpHandlerX)
+            el.addEventListener('mousemove', mouseMoveHandler)
+            el.addEventListener('mouseup', mouseUpHandler)
           } else {
-            el!.removeEventListener('mousemove', mouseMoveHandlerX);
-            el!.removeEventListener('mouseup', mouseUpHandlerX);
-            el!.style.cursor = 'default';
+            el.removeEventListener('mousemove', mouseMoveHandler);
+            el.removeEventListener('mouseup', mouseUpHandler);
+            el.style.cursor = 'default';
           }
         }
 
-        const mouseMoveHandlerX = function (e: any) { // HOW MUCH MOUSE HAS MOVED
+        const mouseMoveHandler = function (e: any) { // HOW MUCH MOUSE HAS MOVED
           const dx = e.clientX - pos.x;
-          //const dy = e.clientY - pos.y;
-          //el.scrollTop = pos.top - dy;
+          const dy = e.clientY - pos.y;
+          el.scrollTop = pos.top - dy;
           el.scrollLeft = pos.left - dx;
         }
 
-        const mouseUpHandlerX = function () {
+        const mouseUpHandler = function () {
           el.style.cursor = 'grab'
           el.style.removeProperty('user-select')
-          el.removeEventListener('mousemove', mouseMoveHandlerX)
-          el.removeEventListener('mouseup', mouseUpHandlerX)
+          el.removeEventListener('mousemove', mouseMoveHandler)
+          el.removeEventListener('mouseup', mouseUpHandler)
         }
 
-        el.addEventListener('mousedown', mouseDownHandlerX);
+        el.addEventListener('mousedown', mouseDownHandler);
         el.addEventListener('mouseleave', function() {
-          el.removeEventListener('mouseup', mouseUpHandlerX);
-          el.removeEventListener('mousedown', mouseDownHandlerX)
-          el.removeEventListener('mousemove', mouseMoveHandlerX);
+          el.removeEventListener('mouseup', mouseUpHandler);
+          el.removeEventListener('mousedown', mouseDownHandler)
+          el.removeEventListener('mousemove', mouseMoveHandler);
           el.style.cursor = 'default'
         })
       }
-      el.addEventListener("mouseenter", mouseEnterOnScoreX)
+      el.addEventListener("mouseenter", mouseEnterOnScore)
 
-      return () => el.removeEventListener("mouseenter", mouseEnterOnScoreX)
+      return () => el.removeEventListener("mouseenter", mouseEnterOnScore)
     }
-  })
+  }, [heightDev, widthDev])
 
   return (
     <div
-      /* style={{ "--testTest": (array.length * 92) + 206 } as React.CSSProperties} */
-      //id={`testTestID`}
       className={css.background}
       id={`sliderBoxY`}
     >
-      
-      {/* (array.length * 92) + 206) */}
-      {/* <div className={css.testTEST}> */}
       <div
         className={css.mainContainer}
         style={{ "--titlesBoxLength": array.length } as React.CSSProperties}
@@ -290,7 +318,7 @@ function Skills() {
           id={`sliderBoxX`}
           //vertical={true}
         >
-        <div 
+        <div
           className={css.chartContainer}
           style={{ "--titlesBoxLength": array.length } as React.CSSProperties}
         >
@@ -337,10 +365,10 @@ function Skills() {
                   )
                 })
               }
-              <div className={css.titlesNext} />
             </div>
         </div>
         </div>
+        <div className={css.titlesNext} />
       </div>
       <div className={css.barsMapContainer}>
         {levels.map((e, index) => {
@@ -353,7 +381,7 @@ function Skills() {
                 ref={el => inputRef.current[e.id] = el}
                 style={{ "--colorBar": e.color } as React.CSSProperties}
                 className={css.barInner}
-                id={`entireBarMoveCl${index}`}
+                id={`barInner${index}`}
               >
                 <div
                   className={css.innerLevel}>
@@ -370,8 +398,12 @@ function Skills() {
                 </div>
               </div>
               <button
+                tabIndex={-1}
                 id={`buttonTest123${e.id}`}
-                style={{ "--colorBar": e.color } as React.CSSProperties}
+                style={{ "--colorBar": e.color, "--delay": e.id } as React.CSSProperties}
+                //style={{ "--colorBar": e.color } as React.CSSProperties}
+                //style={{ "--colorBar": e.color, "--delay": e.id } as React.CSSProperties}
+                /* style={{ "--percentage": e.percentage } as React.CSSProperties} */
                 className={css.colorFixed}
                 onClick={() => {
                   handleTest(e.id)

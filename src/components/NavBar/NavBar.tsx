@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
 import css from './NavBarCSS.module.css';
-import $ from 'jquery';
+//import $ from 'jquery';
 
 function NavBar() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
-  const darkMode = useSelector( (state: {darkMode:boolean}) => state.darkMode)
 
   function useHorizontalScroll() {
     const elRef = React.useRef<HTMLInputElement>(null);
@@ -44,14 +43,14 @@ function NavBar() {
         <ScrollContainer className={css.mainRight}
           innerRef={useHorizontalScroll()}
         >
-          <Link className={css.text} to="/AboutMe">{english ? `About Me` : `Acerca De Mi` }</Link>
+          <Link className={css.text} to="/AboutMe">{english ? `About Me` : `Acerca` }</Link>
           <Link className={css.text} to="/Skills">{ english ? `Skills` : `Habilidades` }</Link>
           <Link className={css.text} to="/Projects">{ english ? `Projects` : `Proyectos` }</Link>
-          <Link className={css.text} to="/Certifications">{ english ? `Certifications` : `Certificaciones` }</Link>
+          <Link className={css.text} to="/Certifications">{ english ? `Certifications` : `Certificados` }</Link>
           <Link className={css.text} to="/Contact">{ english ? `Contact` : `Contacto` }</Link>
         </ScrollContainer>
       </div>
-      <div className={css.backgroundScrollEffect}></div>
+      <div id={`backgroundScrollEffect`} className={css.backgroundScrollEffect}></div>
     </div>
   )
 }

@@ -12,7 +12,7 @@ function Certifications() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
 
- interface arrayI {
+  interface arrayI {
     id: number,
     title: string,
     media: any,
@@ -20,8 +20,7 @@ function Certifications() {
     url: string
   }
 
-  const array: arrayI[] =
-  [
+  const array: arrayI[] = [
     {
       id: 0,
       title: english ? `JavaScript Algorithms and Data Structures` : `Algoritmos Javascript y Estructuras de Datos`,
@@ -61,45 +60,48 @@ function Certifications() {
 
   return (
     <div className={css.background}>
-      <Bubbles />
+      {/* <Bubbles /> */}
       <div className={css.mainBox}>
-        {array.map((e) => {
-          return (
-            <div
-              key={e.title}
-              className={css.card}
-            >
-              <div className={css.title}>{e.title}</div>
-              <div className={css.boxMediaWrapper}>
-                <a href={e.media} target="_blank" rel="noreferrer">
+        {
+          array.map((e) => {
+            return (
+              <div
+                key={e.title}
+                className={css.card}
+              >
+                <div className={css.title}>{e.title}</div>
+                <div className={css.boxMediaWrapper}>
+                  <a href={e.media} target="_blank" rel="noreferrer">
+                    <img
+                      className={css.boxMedia}
+                      onLoad={() => loadedUpdater(e.id)}
+                      src={e.media}
+                      alt=""
+                    />
+                  </a>
                   <img
-                    className={css.boxMedia}
-                    onLoad={() => loadedUpdater(e.id)}
-                    src={e.media}
+                    id={`backgroundPH${e.id}`}
+                    className={css.placeholderBackground}
                     alt=""
                   />
-                </a>
-                <img
-                  id={`backgroundPH${e.id}`}
-                  className={css.placeholderBackground}
-                  alt=""
-                />
-                <img
-                  id={`animationPH${e.id}`}
-                  className={css.placeholderAnimation}
-                  src={loadingImage}
-                  alt=""
-                />
+                  <img
+                    id={`animationPH${e.id}`}
+                    className={css.placeholderAnimation}
+                    src={loadingImage}
+                    alt=""
+                  />
+                </div>
+                <div className={css.url}>
+                  <Link
+                    className={css.anchor}
+                    to={e.href}
+                    target="_blank"
+                  >{e.url}</Link>
+                </div>
               </div>
-              <div className={css.url}>
-                <Link
-                  className={css.anchor}
-                  to={e.href}
-                  target="_blank"
-                >{e.url}</Link>
-              </div>
-            </div>)
-        })}
+            )
+          })
+        }
       </div>
     </div>
   )

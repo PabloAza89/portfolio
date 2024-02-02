@@ -12,6 +12,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* background: red !important; */
+  /* background: #1976d2 !important; */
+  /* background: blue !important; */
   padding: 0vw !important;
   min-width: 0vh !important;
   width: 35px !important;

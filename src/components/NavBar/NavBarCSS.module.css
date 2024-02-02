@@ -1,3 +1,11 @@
+:root {
+  --mixBlendModeScrollEffectNavBar: difference;
+}
+
+[data-theme="dark"] {
+  --mixBlendModeScrollEffectNavBar: exclusion;
+}
+
 .background  {
   flex-direction: column;
   display: flex;
@@ -30,9 +38,13 @@
   position: absolute;
   width: 100%;
   height: calc(100% + 11px);
-  mix-blend-mode: difference;
+  mix-blend-mode: var(--mixBlendModeScrollEffectNavBar);
   z-index: 2;
+  /* background: rgba(255, 0, 0, 0.2); */
+  transition: background 1s ease-in-out;
 }
+
+
 
 .mainLeft {
   display: flex;

@@ -37,7 +37,7 @@
   height: 6px;
   width: calc(100vw - 12px);
   top: 0px;
-  z-index: 2000
+  z-index: 10000
 }
 
 .greyBottom {
@@ -48,7 +48,7 @@
   height: 6px;
   width: calc(100vw - 12px);
   bottom: 0px;
-  z-index: 2000
+  z-index: 10000
 }
 
 .greyLeft {
@@ -59,7 +59,7 @@
   height: 100vh;
   width: 6px;
   left: 0px;
-  z-index: 2000
+  z-index: 10000
 }
 
 .greyRight {
@@ -70,6 +70,6 @@
   height: 100vh;
   width: 6px;
   right: 0px;
-  z-index: 2000
+  z-index: 10000
 }
 

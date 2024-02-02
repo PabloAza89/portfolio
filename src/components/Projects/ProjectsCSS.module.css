@@ -20,10 +20,9 @@
   --cardMediaFilterHoverProjects: brightness(.65);
 }
 
-.background {
+/* .background {
   display: flex;
   flex-direction: column;
-  /* background: darkred; */ /* DEV */
   position: relative;
   height: calc(100vh - 12px);
   width: 100%;
@@ -33,17 +32,75 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  justify-content: center;
+  overflow: auto;
+  overflow-x: hidden; */
+  /* background: orange; */ /* DEV */
+/* } */
+
+.background {
+  display: flex;
+  position: relative;
+  /* background: yellow; */ /* DEV */
+  /* padding: 0px 10px 10px 10px; */
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+  height: calc(100vh - 12px);
+  /* overflow: auto; */
+  /* overflow: auto;
+  overflow-x: hidden; */
+  /* padding-top: 60px; */
+
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: auto;
+}
+
+.background::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F5F5F5
+}
+
+.background::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5
+}
+
+.background::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: 5px solid #555555
+}
+
+.testTest {
+  background: orange;
+  height: fit-content;
+  width: 100%;
 }
 
 .mainContainer {
-  display: flex;
+  /* display: flex; */
+  display: block;
   position: relative;
   width: 100%;
   flex-direction: column;
   /* background: yellow; */ /* DEV */
   text-align: -webkit-center;
-  overflow-y: hidden;
-  overflow-x: auto;
+  /* overflow-y: hidden;
+  overflow-x: auto; */
+  min-height: 448px;
+  /* overflow: hidden; */
+  overflow: auto;
+}
+
+.mainContainer::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
 }
 
 .scroll {
@@ -57,9 +114,9 @@
 
 .selectType {
   display: flex;
-  position: fixed;
+  position: fixed !important;
   left: calc(50% - 75px);
-  top: 0px;
+  top: 6px;
   background: var(--selectTypeProjects) !important;
   width: 150px !important;
   border-radius: 0px 0px 4px 4px !important;
@@ -146,9 +203,13 @@
   border: 0px solid blue;
 }
 
+/* .anchorTargetProjects { */
 .anchor {
   width: 550px;
   height: 280px;
+  cursor: inherit;
+  /* pointer-events: none; */
+  /* pointer-events: auto; */
 }
 
 .cardMedia {
@@ -211,7 +272,7 @@
 }
 
 .boxLower {
-  /* background: yellow; */ /* DEV */
+  background: yellow; /* DEV */
   display: flex;
   position: relative;
   flex-direction: row;
@@ -243,6 +304,7 @@
   position: relative;
   align-items: center;
   margin-top: 3px;
+  align-self: center;
 }
 
 .select {
@@ -256,4 +318,31 @@
 @media screen
 and (width < 600px) {
   .textContainer { width: min-content; }
+}
+
+@media screen
+and (height < 543px) {
+  .boxLower {
+    /* width: min-content; */
+    position: fixed;
+    bottom: 6px;
+    /* background: rgba(173, 216, 230, 1); */
+    background: rgb(173 216 230 / 80%);
+    /* left: calc(50% - 75px); */
+    /* left: 50%; */
+    left: 50%;
+    transform: translate(-50%);
+    padding: 0px 10px;
+    border-radius: 4px 4px 0px 0px;
+  }
+}
+
+@media only screen
+and (hover: none)
+and (pointer: coarse) {
+  .boxLower {
+    display: none;
+  }
+  /* Regular CSS rules here*/
+  
 }

@@ -1,3 +1,11 @@
+:root {
+  --firstPopupBackgroundContact: white;
+}
+
+[data-theme="dark"] {
+  --firstPopupBackgroundContact: rgb(25 71 87);
+}
+
 .background {
   flex-direction: row;
   /* background: orange; */ /* DEV */
@@ -8,6 +16,26 @@
   height: calc(100vh - 12px);
   align-items: center;
 }
+
+/* BEGIN SWEETALERT2 */
+
+.firstPopup {
+  width: fit-content !important;
+  max-width: calc(100vw - 55px);
+  font-size: 12px !important;
+  background: var(--firstPopupBackgroundContact) !important;
+  z-index: 100000 !important;
+}
+
+.secondPopup {
+  width: fit-content !important;
+  max-width: calc(100vw - 55px);
+  font-size: 12px !important;
+  background: var(--firstPopupBackgroundContact) !important;
+  z-index: 100000 !important;
+}
+
+/* END SWEETALERT2 */
 
 .mainContainer {
   display: flex;
@@ -85,7 +113,7 @@
   margin: 10px 40px;
   background: #ffffff;
   mix-blend-mode: difference;
-  z-index: 40000 !important;
+  z-index: 1000 !important;
   animation: ttb 1s;
 }
 
@@ -98,7 +126,7 @@
   min-height: 15px;
   margin: 20px 0px;
   animation: ltr 1s;
-  z-index: 40000 !important;
+  z-index: 1000 !important;
   mix-blend-mode: difference;
 }
 
@@ -167,6 +195,7 @@ and (height > 530px) {
     flex-direction: column;
     height: fit-content;
     align-items: center;
+    overflow: visible;
   }
   .separatorY { display: none }
   .separatorX { display: flex }

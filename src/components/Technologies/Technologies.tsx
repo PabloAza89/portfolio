@@ -9,7 +9,6 @@ import css from './TechnologiesCSS.module.css';
 
 function Technologies() {
 
-  const darkMode = useSelector((state: { darkMode:boolean }) => state.darkMode)
   const english = useSelector((state: { english:boolean }) => state.english)
 
   interface arrayI {
@@ -30,20 +29,44 @@ function Technologies() {
 
   return (
     <div className={css.background}>
-      {array.map((e) => {
-        return (
-          <a
-            className={css.linkContainer}
-            key={e.id}
-            href={e.url}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src={e.icon} className={css.iconMedia} alt=""></img>
-            <div className={css.title}>{e.title}</div>
-          </a>
-        )
-      })}
+      
+        <div className={css.testTest}>
+          {
+            array.slice(0, Math.floor(array.length / 2)).map((e) => {
+              return (
+                <a
+                  className={css.linkContainer}
+                  key={e.id}
+                  href={e.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src={e.icon} className={css.iconMedia} alt=""></img>
+                  <div className={css.title}>{e.title}</div>
+                </a>
+              )
+            })
+          }
+        </div>
+        <div className={css.testTest}>
+          {
+            array.slice(Math.floor(array.length / 2)).map((e) => {
+              return (
+                <a
+                  className={css.linkContainer}
+                  key={e.id}
+                  href={e.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src={e.icon} className={css.iconMedia} alt=""></img>
+                  <div className={css.title}>{e.title}</div>
+                </a>
+              )
+            })
+          }
+        </div>
+      
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import { Button } from '@mui/material';
-import { useEffect, useRef, useState, createRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import css from './NewsCSS.module.css';
-//import './NewsCSS.css';
+import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
 import $ from 'jquery';
 
 function News() {
@@ -12,18 +12,18 @@ function News() {
   const [ show, setShow ] = useState<boolean>(false)
 
   const preArray = [
-    {id: 11, date: '23-12-07', text: english ? ' Start using powerful Web Audio API  ' : ' Se empezó a utilizar la poderosa Web Audio API  '},
-    {id: 10, date: '23-11-24', text: english ? ' Start developing new project: TicTacToe  ' : ' Se empezó a desarrollar un nuevo proyecto: TicTacToe  '},
-    {id: 9, date: '23-10-31', text: english ? ' Start using .yml files for GitHub actions/workflow  ' : ' Se empezó a utilizar archivos .yml para las actions/workflow de GitHub  '},
-    {id: 8, date: '23-09-09', text: english ? ' Using httpOnly cookies for secure login & data flow  ' : ' Usando cookies httpOnly para login y flujo de datos seguro  '},
-    {id: 7, date: '23-08-30', text: english ? ' badWords searcher & highlighter algorithm done.  ' : ' Algorithmo buscador y resaltador de malas palabras listo.  '},
-    {id: 6, date: '23-07-01', text: english ? ' Start using LocalStorage for data persistance  ' : ' Se empezó a utilizar LocalStorage para la persistencia de datos  '},
-    {id: 5, date: '23-06-03', text: english ? ' Developing Skills Component (the most difficult)  ' : ' Desarrollando el Componente Habilidades (El más dificultoso)  '},
-    {id: 4, date: '23-05-08', text: english ? ' Using own solution for use styles with variables  ' : ' Utilizando una solución propia para el uso de estilos con variables  '},
-    {id: 3, date: '23-04-27', text: english ? ' Start using TS & screen size handlers  ' : ' Se empieza a usar TS & manejadores de tamaño de pantalla  '},
-    {id: 2, date: '23-03-30', text: english ? ' Break for moving ;)  ' : ' Pausa por mudanza ;)  '},
-    {id: 1, date: '23-02-21', text: english ? ' Break for vacations !  ' : ' Descanso de vacaciones !  '},
-    {id: 0, date: '23-01-20', text: english ? ' Start developing my own first portfolio !  ' : ' Empezando a desarrollar mi primer portfolio propio !  '},
+    { id: 11, date: '23-12-07', text: english ? ' Start using powerful Web Audio API  ' : ' Se empezó a utilizar la poderosa Web Audio API  ' },
+    { id: 10, date: '23-11-24', text: english ? ' Start developing new project: TicTacToe  ' : ' Se empezó a desarrollar un nuevo proyecto: TicTacToe  ' },
+    { id: 9, date: '23-10-31', text: english ? ' Start using .yml files for GitHub actions/workflow  ' : ' Se empezó a utilizar archivos .yml para las actions/workflow de GitHub  ' },
+    { id: 8, date: '23-09-09', text: english ? ' Using httpOnly cookies for secure login & data flow  ' : ' Usando cookies httpOnly para login y flujo de datos seguro  ' },
+    { id: 7, date: '23-08-30', text: english ? ' badWords searcher & highlighter algorithm done.  ' : ' Algorithmo buscador y resaltador de malas palabras listo.  ' },
+    { id: 6, date: '23-07-01', text: english ? ' Start using LocalStorage for data persistance  ' : ' Se empezó a utilizar LocalStorage para la persistencia de datos  ' },
+    { id: 5, date: '23-06-03', text: english ? ' Developing Skills Component (the most difficult)  ' : ' Desarrollando el Componente Habilidades (El más dificultoso)  ' },
+    { id: 4, date: '23-05-08', text: english ? ' Using own solution for use styles with variables  ' : ' Utilizando una solución propia para el uso de estilos con variables  ' },
+    { id: 3, date: '23-04-27', text: english ? ' Start using TS & screen size handlers  ' : ' Se empieza a usar TS & manejadores de tamaño de pantalla  ' },
+    { id: 2, date: '23-03-30', text: english ? ' Break for moving ;)  ' : ' Pausa por mudanza ;)  ' },
+    { id: 1, date: '23-02-21', text: english ? ' Break for vacations !  ' : ' Descanso de vacaciones !  ' },
+    { id: 0, date: '23-01-20', text: english ? ' Start developing my own first portfolio !  ' : ' Empezando a desarrollar mi primer portfolio propio !  ' },
   ]
 
   interface arrayI {
@@ -70,8 +70,8 @@ function News() {
   const inputRef = useRef<HTMLDivElement>(null);
 
   $(function() {
-    $('#buttonShow').on('click',function() {
-      if (inputRef.current) inputRef.current.classList.toggle(css.clicked);
+    $('#buttonShowNews').on('click',function() {
+      if (inputRef.current) inputRef.current.classList.toggle(css.moveSliderBoxNews);
     });
   });
 
@@ -86,37 +86,39 @@ function News() {
     window.addEventListener('resize', removeTransition);
   },[])
 
+  // console.log("SHOW", show)
+
   return (
-    <div
-      className={css.background}
-    >
+    <div className={css.background}>
       <div
         ref={inputRef}
         className={css.sliderBoxNews}
         id={`dateAndText`}
       >
-        {array.map((e, index) => {
-          return (
-            <div
-              id={`eachDescription`}
-              key={e.id}
-              className={css.eachDescription}
-            >
+        {
+          array.map((e, index) => {
+            return (
               <div
-                id={`date${e.id}`}
-                className={css.date}
+                id={`eachDescription`}
+                key={e.id}
+                className={css.eachDescription}
               >
-                {e.date}
+                <div
+                  id={`date${e.id}`}
+                  className={css.date}
+                >
+                  {e.date}
+                </div>
+                <div
+                  id={`text${e.id}`}
+                  className={css.text}
+                >
+                  {e.text}
+                </div>
               </div>
-              <div
-                id={`text${e.id}`}
-                className={css.text}
-              >
-                {e.text}
-              </div>
-            </div>
-          )
-        })}
+            )
+          })
+        }
         <div className={css.buttonsContainer} >
           <button
             onClick={() => leftHandler()}
@@ -129,13 +131,12 @@ function News() {
         </div>
       </div>
       <Button
-        id={`buttonShow`}
+        id={`buttonShowNews`}
+        variant="contained"
+        className={css.buttonSettings}
         onClick={() => setShow(!show) }
-        className={css.buttonNews}
       >
-        <div className={css.changeLogTypo}>
-          {english ? `CHANGELOG` : `REG. DE CAMBIOS`}
-        </div>
+        <ManageHistoryIcon />
       </Button>
     </div>
   )

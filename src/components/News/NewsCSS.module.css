@@ -31,36 +31,45 @@
 }
 
 .background {
-  display: flex;
+  display: flex !important;
   position: fixed;
-  flex-direction: row;
-  top: none;
-  bottom: 100px;
-  right: calc(100vw - 6px);
-  width: 350px;
-  /* background: yellow; */ /* DEV */
-  justify-content: flex-end;
-  -webkit-touch-callout: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  z-index: 2001 !important;
+  width: 35px !important;
+  height: 35px !important;
+  left: 20px !important;
+  bottom: 20px !important;
+  /* background: yellow !important; */
+  border-radius: 4px;
+}
+
+.buttonSettings {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 2001 !important;
+  padding: 0vw !important;
+  min-width: 0vh !important;
+  width: 35px !important;
+  height: 35px !important;
 }
 
 .sliderBoxNews {
   display: flex;
-  position: relative;
+  /* position: relative; */
+  position: absolute;
   flex-direction : column-reverse;
-  left: 30px;
+  /* left: -14px; */
+  left: -514px;
+  bottom: 49px;
   max-width: 500px;
   height: 168px;
   transition-duration: 1.5s;
   background: var(--backgroundNews)
 }
 
-.clicked {
-  left: 560px;
+.moveSliderBoxNews {
+  /* left: 560px; */
+  left: -14px;
 }
 
 .buttonNews {
@@ -138,10 +147,13 @@ button:disabled {
 
 @media screen
 and (width <= 542px) {
-  .text {
+  /* .text {
     width: calc(100vw - 122px);
+  } */
+  .text {
+    width: calc(100vw - 92px);
   }
-  .clicked {
+  /* .moveSliderBoxNews {
     left: calc(100vw + 18px);
-  }
+  } */
 }

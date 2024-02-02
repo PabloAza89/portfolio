@@ -195,7 +195,7 @@ function MessageMe() {
         <TextField
           id={"name123"}
           className={css.name}
-          label={english ? "Your name here" : "Tu nombre aquí"}
+          label={ english ? "Your name here" : "Tu nombre aquí" }
           size="small"
           value={name}
           InputLabelProps={{ className: css.label }}
@@ -203,7 +203,7 @@ function MessageMe() {
           onChange={e => {setName(e.target.value); localStorage.setItem('name', e.target.value)}}
         />
         <TextField
-          label={ english ? "Your message here" : "Tu mensaje aquí"}
+          label={ english ? "Your message here" : "Tu mensaje aquí" }
           multiline
           minRows={6}
           value={text}
