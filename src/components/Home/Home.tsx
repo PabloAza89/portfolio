@@ -5,30 +5,27 @@ import { Link } from "react-router-dom";
 import { ReactComponent as MySvg } from '../../images/home.svg';
 import Technologies from '../Technologies/Technologies';
 import css from './HomeCSS.module.css';
-import $ from 'jquery';
 
 function Home() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
 
   useEffect(() => {
-    $(function() {
-      $('#homeBackground').on("scroll", function() {
-        let el = document.getElementById("backgroundScrollEffect")
-        if (el !== null) {
-          //console.log("QQ", ($(`#testTest1`).scrollTop()))
-          if ($(this).scrollTop() === 0) {
-            el.style.background = "rgba(0, 0, 0, 0)";
-            el.style.boxShadow = "none";
+    let el = document.getElementById("homeBackground")
+    let target = document.getElementById("backgroundScrollEffect")
+    if (el !== null) {
+      el.addEventListener("scroll", () => {
+        if (el !== null && target !== null) {
+          if (el.scrollTop === 0) {
+            target.style.background = "rgba(0, 0, 0, 0)";
+            target.style.boxShadow = "none";
           } else {
-            /* el.style.background = "rgba(255, 255, 255, 0.05)"; */
-            /* el.style.background = "rgba(255, 0, 0, 0.2)"; */
-            el.style.background = "rgb(0 135 255 / 20%) ";
-            el.style.boxShadow = "0 0 .5em rgba(255, 255, 255, 0.5)";
+            target.style.background = "rgb(0 135 255 / 20%) ";
+            target.style.boxShadow = "0 0 .5em rgba(255, 255, 255, 0.5)";
           }
         }
-      });
-    });
+      })
+    }
   })
 
   return (

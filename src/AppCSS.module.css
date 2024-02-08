@@ -1,11 +1,25 @@
+@property --whiteApp {
+  syntax: '<color>';
+  initial-value: white;
+  inherits: false;
+}
+
+@property --blackApp {
+  syntax: '<color>';
+  initial-value: black;
+  inherits: false;
+}
+
 :root {
-  --background: linear-gradient(to bottom right, black 49.9%,white 50.1%);
-  --border: #bdbdbd;
+  --borderApp: #bdbdbd;
 }
 
 [data-theme="dark"] {
-  --background: linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%);
-  --border: #424242
+  .blackWhite {
+    --whiteApp: #696868;
+    --blackApp: #2b2b2b;
+  };
+  --borderApp: #424242;
 }
 
 .background {
@@ -24,52 +38,40 @@
   align-self: center;
   width: calc(100vw - 12px);
   height: calc(100vh - 12px);
-  background: var(--background);
+  background:
+    linear-gradient(
+      to bottom right,
+      var(--blackApp) 49.9%,
+      var(--whiteApp) 50.1%
+    );
+  transition: --blackApp 1s, --whiteApp 1s;
   overflow: hidden;
   justify-content: flex-start;
 }
 
-.greyTop {
+.grey {
   display: flex;
   position: absolute;
   /* background: orange; */ /* DEV */
-  background: var(--border);
+  background: var(--borderApp);
+  transition: background 1s;
+  z-index: 10000
+}
+
+.topBottom {
   height: 6px;
   width: calc(100vw - 12px);
-  top: 0px;
-  z-index: 10000
 }
 
-.greyBottom {
-  display: flex;
-  position: absolute;
-  /* background: orange; */ /* DEV */
-  background: var(--border);
-  height: 6px;
-  width: calc(100vw - 12px);
-  bottom: 0px;
-  z-index: 10000
-}
-
-.greyLeft {
-  display: flex;
-  position: absolute;
-  /* background: orange; */ /* DEV */
-  background: var(--border);
+.leftRight {
   height: 100vh;
   width: 6px;
-  left: 0px;
-  z-index: 10000
 }
 
-.greyRight {
-  display: flex;
-  position: absolute;
-  /* background: orange; */ /* DEV */
-  background: var(--border);
-  height: 100vh;
-  width: 6px;
-  right: 0px;
-  z-index: 10000
-}
+.top { top: 0px }
 
+.bottom { bottom: 0px }
+
+.left { left: 0px }
+
+.right { right: 0px }

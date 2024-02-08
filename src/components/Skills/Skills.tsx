@@ -2,7 +2,6 @@ import { SvgIcon } from '@mui/material';
 import { useState, useEffect, useRef, useMemo, MutableRefObject } from 'react';
 import css from './SkillsCSS.module.css';
 import './SkillsSX.css';
-import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
 import { CSSRuleExtended } from '../../interfaces/interfaces';
@@ -16,28 +15,6 @@ function Skills() {
     id: number,
     title: string,
     percentage: number
-  }
-
-  function useHorizontalScroll() {
-    const elRef = useRef<HTMLInputElement>(null);
-    useEffect(() => {
-      const el:any = elRef.current;
-      if (el) {
-        const onWheel = (e:any) => {
-          if (e.deltaY === 0) return;
-          e.preventDefault();
-          el.scrollTo({
-            left: el.scrollLeft + e.deltaY * 4,
-            behavior: "smooth"
-          });
-        };
-        el.addEventListener("wheel", onWheel, {
-          passive: true
-        });
-        return () => el.removeEventListener("wheel", onWheel);
-      }
-    }, []);
-    return elRef;
   }
 
   const array: arrayI[] = [
@@ -123,9 +100,6 @@ function Skills() {
     }
   }, [])
 
-  const inputRef: MutableRefObject<any> = useRef<HTMLDivElement[] | null>([]);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>[]>([]);
-
   useEffect(() => {
     levels.forEach(e => {
       $(`#buttonTest123${e.id}`)
@@ -133,12 +107,14 @@ function Skills() {
     })
   })
 
+  const inputRef: MutableRefObject<any> = useRef<HTMLDivElement[] | null>([]);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
   const handleTest = (id: any) => {
     levels.forEach(e => {
       $(`#buttonTest123${e.id}`)
         .css(`animation`,`none`)
     })
-
     clearTimeout(timeoutRef.current[id])
     if (inputRef.current[id] !== null) inputRef.current[id].classList.toggle(css.toggleClass);
     const autoHideLanguage = () => {
@@ -246,7 +222,6 @@ function Skills() {
           heightDev < 273 ||
           (heightDev < 408 && widthDev < 656) ||
           (heightDev > 407 && widthDev < 758)
-          //(heightDev < 408 && widthDev < 758)
         ) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
         let pos = { top: 0, left: 0, x: 0, y: 0 };
 
@@ -263,7 +238,6 @@ function Skills() {
             heightDev < 273 ||
             (heightDev < 408 && widthDev < 656) ||
             (heightDev > 407 && widthDev < 758)
-            //(heightDev < 408 && widthDev < 758)
           ) {
             el.addEventListener('mousemove', mouseMoveHandler)
             el.addEventListener('mouseup', mouseUpHandler)
@@ -313,10 +287,8 @@ function Skills() {
       >
         <div className={css.skills}>{ english ? `My skills` : `Mis habilidades` }</div>
         <div
-          //innerRef={useHorizontalScroll()}
           className={css.scroll}
           id={`sliderBoxX`}
-          //vertical={true}
         >
         <div
           className={css.chartContainer}
@@ -341,9 +313,9 @@ function Skills() {
                       </div>
                       <div
                         style={{ "--percentage": e.percentage } as React.CSSProperties}
-                        className={css.titlesHorizontalContainer}
+                        className={css.titlesVerticalContainer}
                       >
-                        <div className={css.titlesHorizontal}>
+                        <div className={css.titlesVertical}>
                           {e.title}
                         </div>
                       </div>
@@ -401,9 +373,6 @@ function Skills() {
                 tabIndex={-1}
                 id={`buttonTest123${e.id}`}
                 style={{ "--colorBar": e.color, "--delay": e.id } as React.CSSProperties}
-                //style={{ "--colorBar": e.color } as React.CSSProperties}
-                //style={{ "--colorBar": e.color, "--delay": e.id } as React.CSSProperties}
-                /* style={{ "--percentage": e.percentage } as React.CSSProperties} */
                 className={css.colorFixed}
                 onClick={() => {
                   handleTest(e.id)

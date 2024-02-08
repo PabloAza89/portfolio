@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, MutableRefObject } from 'react';
 import { useSelector } from 'react-redux';
 import css from './NewsCSS.module.css';
 import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
@@ -19,7 +19,7 @@ function News() {
     { id: 7, date: '23-08-30', text: english ? ' badWords searcher & highlighter algorithm done.  ' : ' Algorithmo buscador y resaltador de malas palabras listo.  ' },
     { id: 6, date: '23-07-01', text: english ? ' Start using LocalStorage for data persistance  ' : ' Se empezó a utilizar LocalStorage para la persistencia de datos  ' },
     { id: 5, date: '23-06-03', text: english ? ' Developing Skills Component (the most difficult)  ' : ' Desarrollando el Componente Habilidades (El más dificultoso)  ' },
-    { id: 4, date: '23-05-08', text: english ? ' Using own solution for use styles with variables  ' : ' Utilizando una solución propia para el uso de estilos con variables  ' },
+    { id: 4, date: '23-05-08', text: english ? ' Using own solution for use styles with variables (deprecated: performance leaks)  ' : ' Utilizando una solución propia para el uso de estilos con variables (obsoleto: mal performance)  ' },
     { id: 3, date: '23-04-27', text: english ? ' Start using TS & screen size handlers  ' : ' Se empieza a usar TS & manejadores de tamaño de pantalla  ' },
     { id: 2, date: '23-03-30', text: english ? ' Break for moving ;)  ' : ' Pausa por mudanza ;)  ' },
     { id: 1, date: '23-02-21', text: english ? ' Break for vacations !  ' : ' Descanso de vacaciones !  ' },
@@ -51,21 +51,23 @@ function News() {
 
   let array: arrayI[] = preArray.slice(startIndex, endIndex)
 
-  useEffect(() => {
-    array.forEach(e => {
-      $(`#text${e.id}`).on("mouseenter", function() {
-        $(this)
-          .stop(true, true)
-          .delay(400)
-          .animate({scrollLeft: 420}, 8000)
-      })
-      $(`#text${e.id}`).on("mouseleave", function() {
-        $(this)
-          .stop(true, true)
-          .animate({scrollLeft: 0}, 0)
-      })
-    })
-  }, [array])
+  const intervalRef = useRef<ReturnType<typeof setInterval>[]>([]);
+  const textRef: MutableRefObject<any> = useRef<HTMLDivElement[] | null>([]);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  const handleEnter = (id: number) => {
+    timeoutRef.current[id] = setTimeout(() => {
+      intervalRef.current[id] = setInterval(() => {
+        textRef.current[id].scrollLeft += 1;
+      }, 15)
+    }, 700)
+  }
+
+  const handleLeave = (id: number) => {
+    textRef.current[id].scrollLeft = 0;
+    clearInterval(intervalRef.current[id])
+    clearTimeout(timeoutRef.current[id])
+  }
 
   const inputRef = useRef<HTMLDivElement>(null);
 
@@ -85,8 +87,6 @@ function News() {
     }
     window.addEventListener('resize', removeTransition);
   },[])
-
-  // console.log("SHOW", show)
 
   return (
     <div className={css.background}>
@@ -110,8 +110,11 @@ function News() {
                   {e.date}
                 </div>
                 <div
+                  ref={(el) => textRef.current[e.id] = el }
                   id={`text${e.id}`}
                   className={css.text}
+                  onMouseEnter={() => handleEnter(e.id)}
+                  onMouseLeave={() => handleLeave(e.id)}
                 >
                   {e.text}
                 </div>

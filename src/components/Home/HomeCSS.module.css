@@ -129,14 +129,9 @@
   background: none;
   padding: 0px !important;
   width: min(50vw, 370px);
-  /* color: #FFFFFF; */
-  /* color: red !important; */
-  /* background: red !important; */
-  /* color: red !important;
-  border-color: red !important; */
   color: var(--buttonMessageHome) !important;
   border-color: var(--buttonMessageHome) !important;
-  /* background: #1976d2 !important; */
+  transition: color 1s, border-color 1s !important;
   font-size: min(4vw, 28px) !important;
 }
 
@@ -150,7 +145,6 @@
   transform: scale(1.0)
 }
 
-/* WIDTH LESS THAN 1280px */
 @media screen
 and (orientation: landscape)
 and (width < 1280px),

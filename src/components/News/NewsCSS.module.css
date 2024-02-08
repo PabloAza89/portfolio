@@ -1,32 +1,28 @@
+@property --coralNews {
+  syntax: '<color>';
+  initial-value: lightcoral;
+  inherits: false;
+}
+
+@property --greenNews {
+  syntax: '<color>';
+  initial-value: lightgreen;
+  inherits: false;
+}
+
 :root {
-  --backgroundNews:
-    linear-gradient(
-      to right,
-      lightcoral 0px, lightcoral 80px,
-      lightgreen 80px, lightgreen 500px
-    );
-  --backgroundHoverNews:
-    linear-gradient(
-      to right,
-      #bd7979 0px, #bd7979 80px,
-      #76b376 80px, #76b376 500px
-    );
   --buttonNews: lightblue;
 }
 
 [data-theme="dark"] {
-  --backgroundNews:
-    linear-gradient(
-      to right,
-      #bd7979 0px, #bd7979 80px,
-      #76b376 80px, #76b376 500px
-    );
-  --backgroundHoverNews:
-    linear-gradient(
-      to right,
-      lightcoral 0px, lightcoral 80px,
-      lightgreen 80px, lightgreen 500px
-    );
+  .eachDescription, .sliderBoxNews {
+    --coralNews: #bd7979;
+    --greenNews: #76b376;
+  };
+  .eachDescription:hover {
+    --coralNews: lightcoral;
+    --greenNews: lightgreen;
+  };
   --buttonNews: #708f99;
 }
 
@@ -40,6 +36,12 @@
   bottom: 20px !important;
   /* background: yellow !important; */
   border-radius: 4px;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .buttonSettings {
@@ -55,20 +57,22 @@
 
 .sliderBoxNews {
   display: flex;
-  /* position: relative; */
   position: absolute;
   flex-direction : column-reverse;
-  /* left: -14px; */
   left: -514px;
   bottom: 49px;
   max-width: 500px;
   height: 168px;
-  transition-duration: 1.5s;
-  background: var(--backgroundNews)
+  background:
+    linear-gradient(
+      to right,
+      var(--coralNews) 0px, var(--coralNews) 80px,
+      var(--greenNews) 80px, var(--greenNews) 500px
+    );
+  transition: --coralNews 1s, --greenNews 1s, left 1.5s;
 }
 
 .moveSliderBoxNews {
-  /* left: 560px; */
   left: -14px;
 }
 
@@ -111,6 +115,18 @@
   position: relative;
   height: 24px;
   min-height: 24px;
+  background:
+    linear-gradient(
+      to right,
+      var(--coralNews) 0px, var(--coralNews) 80px,
+      var(--greenNews) 80px, var(--greenNews) 500px
+    );
+  transition: --coralNews 1s, --greenNews 1s;
+}
+
+.eachDescription:hover {
+  --coralNews: #bd7979;
+  --greenNews: #76b376;
 }
 
 .date {
@@ -137,23 +153,9 @@ button:disabled {
   border-radius: 2px;
 }
 
-.eachDescription {
-  background: var(--backgroundNews)
-}
-
-.eachDescription:hover {
-  background: var(--backgroundHoverNews)
-}
-
 @media screen
-and (width <= 542px) {
-  /* .text {
-    width: calc(100vw - 122px);
-  } */
+and (width < 543px) {
   .text {
     width: calc(100vw - 92px);
   }
-  /* .moveSliderBoxNews {
-    left: calc(100vw + 18px);
-  } */
 }

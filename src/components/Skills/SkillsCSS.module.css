@@ -1,39 +1,49 @@
+@property --leftSkills {
+  syntax: '<color>';
+  initial-value: silver;
+  inherits: false;
+}
+
+@property --centerSkills {
+  syntax: '<color>';
+  initial-value: darkgrey;
+  inherits: false;
+}
+
+@property --rightSkills {
+  syntax: '<color>';
+  initial-value: darkgrey;
+  inherits: false;
+}
+
 :root {
-  --leftSideSkills:
-    linear-gradient(225deg, gray 7px, silver 7px, transparent),
-    linear-gradient(45deg, #0000 7px, silver 0);
-  --centerSideSkills: linear-gradient(to bottom, gray 10px, darkgrey 10px);
-  --rightSideSkills:
-    linear-gradient(180deg, #0000 10px, darkgrey 0),
-    linear-gradient(225deg, #0000 7px, gray 7px);
   --skillsTitleSkills: #b86b5a;
   --skillsTitleColorSkills: white;
-  --titlesHorizontalColorSkills: #e8e8e8;
+  --titlesVerticalColorSkills: #e8e8e8;
 }
 
 [data-theme="dark"] {
-  --leftSideSkills:
-    linear-gradient(225deg, gray 7px, #141414 7px, transparent),
-    linear-gradient(45deg, #0000 7px, silver 0);
-  --centerSideSkills: linear-gradient(to bottom, gray 10px, #595959 0px);
-  --rightSideSkills:
-    linear-gradient(180deg, #0000 10px, #595959 0),
-    linear-gradient(225deg, #0000 7px, gray 7px);
+  .leftSide {
+    --leftSkills: #141414
+  };
+  .centerSide {
+    --centerSkills: #595959
+  };
+  .rightSide {
+    --rightSkills: #595959
+  };
   --skillsTitleSkills: #7b5047;
   --skillsTitleColorSkills: #bbbbbb;
-  --titlesHorizontalColorSkills: #b9b9b9;
+  --titlesVerticalColorSkills: #b9b9b9;
 }
 
 .background {
   /* background: darkred; */ /* DEV */
   display: flex;
   position: relative;
-  /* flex-wrap: wrap; */
   position: relative;
   align-items: center;
   height: calc(100vh - 12px);
-  /* overflow-x: hidden; */
-  /* overflow: auto; */
   justify-content: center;
   -webkit-touch-callout: none;
   -moz-user-select: none;
@@ -42,7 +52,6 @@
   -ms-user-select: none;
   user-select: none;
   flex-wrap: nowrap;
-  /* overflow-y: hidden !important; */
   overflow: hidden !important;
 }
 
@@ -95,8 +104,6 @@
   border: 0px;
   pointer-events: none;
   z-index: 6000;
-  /* animation: none !important; */
-  /* animation: shakeKF 6s 2.5s infinite; */
 }
 
 @keyframes shakeKF {
@@ -115,15 +122,11 @@
   display: flex;
   position: absolute;
   bottom: 0px;
-  /* position: relative; */
   right: calc(100% - 844px);
   /* background: darkgoldenrod; /* DEV */
   background: rgba(128, 128, 128, 0.400);
   border-radius: 0px 0px 10px 0px;
   width: 98px;
-  /* width: calc(100vw - 844px); */
-  /* width: calc(100% - 700px); */
-  /* width: calc(100vw - 650px); */
   height: 100px;
 }
 
@@ -178,15 +181,16 @@
 
 .skills {
   display: flex;
-  background: var(--skillsTitleSkills);
   width: fit-content;
   font-family: NillandRegular, serif;
-  color: var(--skillsTitleColorSkills);
   font-size: 30px;
   font-weight: 600;
   line-height: 1.19;
   height: 36px;
   padding: 0px 5px;
+  background: var(--skillsTitleSkills);
+  color: var(--skillsTitleColorSkills);
+  transition: color 1s, background 1s;
 }
 
 .chartContainer {
@@ -199,14 +203,6 @@
 }
 
 .scroll {
-
-  /* display: flex;
-  max-width: 50vw; */
-  /* max-width: 100vw;
-  display: flex; */
-  /* max-width: 100%; */
-
-  /* overflow: hidden !important; */
   height: 361px;
   background:
   linear-gradient(
@@ -224,10 +220,7 @@
     rgba(128, 128, 128, 0.400) 250px, rgba(128, 128, 128, 0.400) 261px,
     transparent 261px, transparent
   );
-
   overflow: auto;
-  /* overflow-x: hidden; */
-  
 }
 
 .scroll::-webkit-scrollbar {
@@ -260,7 +253,6 @@
   justify-content: center;
   width: 90px;
   border-bottom: 2px solid black;
-  /* overflow: hidden; */
 }
 
 @keyframes growAnimation {
@@ -276,7 +268,10 @@
 .leftSide {
   width: 10px;
   animation: growAnimation 1.2s linear;
-  background: var(--leftSideSkills);
+  background:
+    linear-gradient(225deg, gray 7px, var(--leftSkills) 7px, transparent),
+    linear-gradient(45deg, #0000 7px, silver 0);
+  transition: --leftSkills 1s;
 }
 
 .centerSide {
@@ -288,9 +283,10 @@
   height: calc((var(--percentage) + 5) * 2px);
   animation: growAnimation 1.2s linear;
   flex-direction: column-reverse;
-  background: var(--centerSideSkills);
-  /* background: blue; */ /* DEV */
   text-wrap: nowrap;
+  /* background: blue; */ /* DEV */
+  background: linear-gradient(to bottom, gray 10px, var(--centerSkills) 10px);
+  transition: --centerSkills 1s;
 }
 
 .rightSide {
@@ -298,7 +294,10 @@
   width: 10px;
   height: calc((var(--percentage) + 5) * 2px);
   animation: growAnimation 1.2s linear;
-  background: var(--rightSideSkills);
+  background:
+    linear-gradient(180deg, #0000 10px, var(--rightSkills) 0),
+    linear-gradient(225deg, #0000 7px, gray 7px);
+  transition: --rightSkills 1s;
 }
 
 @keyframes growAnimationn {
@@ -306,7 +305,7 @@
   to { height: calc(((var(--percentage) + 5) * 2px) - 30px) }
 }
 
-.titlesHorizontalContainer {
+.titlesVerticalContainer {
   display: none;
   position: absolute;
   align-items: center;
@@ -322,7 +321,7 @@
   /* background: gray; */ /* DEV */
 }
 
-.titlesHorizontal {
+.titlesVertical {
   display: flex;
   /* background: gray; */ /* DEV */
   position: relative;
@@ -330,8 +329,8 @@
   width: 180px;
   margin-bottom: 90px;
   font-weight: 700;
-  color: var(--titlesHorizontalColorSkills)
-  /* color: white; */
+  color: var(--titlesVerticalColorSkills);
+  transition: color 1s;
 }
 
 .titlesBox {
@@ -343,8 +342,6 @@
   width: calc(var(--titlesBoxLength) * 92px);
   padding-left: 57px;
   padding-right: 45px;
-  /* border-color: transparent; */
-  /* color: #000000 */
 }
 
 .titles {
@@ -401,7 +398,6 @@
 and (width >= 2px) { /* Nº2 850 */
   .barInner {
     transition: none !important;
-    /* transition: right 1.5s; */
   }
   .colorFixed {
     animation: none !important;
@@ -442,24 +438,13 @@ and (width < 1px) { /* Nº1 850 */
   .colorFixed {
     right: 200px !important;
     pointer-events: auto !important;
-    /* animation: shakeKF 6s 2.5s infinite; */
-    /* animation: shakeKF 6s calc(2.5s + (var(--delay) * 1)) infinite; */
-    /* animation: shakeKF 6s calc(2.5s + (var(--delay) * .1s)) infinite; */
-    /* --delay */
-    /* .css(`animationDelay`,`calc(2.5s + 0.${e.id}s)`) */
   }
   .barInner {
     background: rgba(var(--colorBar), 0.4);
     right: 0px;
-    /* transition: right 1.5s !important; */
   }
-/*   .colorFixed {
-    animation: shakeKF 6s 2.5s infinite;
-  } */
   .scroll {
-    /* width: calc(100vw - 12px); */
     width: calc(100vw - 12px);
-    /* overflow: auto; */
   }
 }
 
@@ -475,7 +460,7 @@ and (max-height: 407px) {
   .mainContainer {
     height: 297px !important;
   }
-  .titlesHorizontalContainer {
+  .titlesVerticalContainer {
     display: flex !important;
   }
   .barsMapContainer {
@@ -515,9 +500,6 @@ and (max-height: 273px) {
     overflow-y: auto !important;
     flex-wrap: nowrap !important;
     align-items: flex-start;
-  }
-  .mainContainer {
-    /* overflow: auto !important; */
   }
   .barsMapContainer {
     margin-top: 0px;

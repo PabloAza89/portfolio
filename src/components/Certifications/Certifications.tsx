@@ -60,7 +60,7 @@ function Certifications() {
 
   return (
     <div className={css.background}>
-      {/* <Bubbles /> */}
+      <Bubbles />
       <div className={css.mainBox}>
         {
           array.map((e) => {

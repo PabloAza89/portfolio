@@ -1,10 +1,10 @@
 :root {
-  --backgroundAbout: #3C6478;
+  --blueBoxAbout: #3C6478;
   --textColorAbout: white;
 }
 
 [data-theme="dark"] {
-  --backgroundAbout: #253740;
+  --blueBoxAbout: #253740;
   --textColorAbout: #b9b9b9;
 }
 
@@ -39,8 +39,6 @@
 }
 
 .blueBox {
-  /* background: orange; */ /* DEV */
-  background: var(--backgroundAbout);
   border-radius: 20px;
   max-width: 700px;
   flex-wrap: wrap;
@@ -54,9 +52,12 @@
   align-items: center;
   width: 100%;
   font-size: 26px;
-  color: var(--textColorAbout);
   padding: 60px 40px 60px 40px;
   text-align: center;
+  color: var(--textColorAbout);
+  /* background: orange; */ /* DEV */
+  background: var(--blueBoxAbout);
+  transition: background 1s, color 1s;
 }
 
 .avatar {

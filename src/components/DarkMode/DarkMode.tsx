@@ -8,6 +8,16 @@ import {
   DarkMode as DarkModeIcon
 } from '@mui/icons-material/';
 import css from './DarkModeCSS.module.css';
+import { CSSRuleExtended } from '../../interfaces/interfaces';
+declare namespace CSS {
+  interface PropertyDefinition {
+    name: string
+    syntax?: string
+    inherits: boolean
+    initialValue?: string
+  }
+  function registerProperty (propertyDefinition: PropertyDefinition): undefined
+}
 
 function DarkMode() {
 
@@ -20,13 +30,19 @@ function DarkMode() {
     if (night === 'true') dispatch(setDarkMode(true))
   }) */
 
+ /*  interface CSS {
+    registerProperty: (any) => any
+  } */
+
+  
+
   useEffect(() => {
     if (dataTheme === "os") {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.setAttribute("data-theme", "dark")
       else document.documentElement.setAttribute("data-theme", "light")
     }
     if (dataTheme === "light") document.documentElement.setAttribute("data-theme", "light")
-    if (dataTheme === "dark") document.documentElement.setAttribute("data-theme", "dark")
+    if (dataTheme === "dark") document.documentElement.setAttribute("data-theme", "dark");
   })
 
   const abc = (e:any) => {
@@ -55,7 +71,7 @@ function DarkMode() {
           dispatch(setDataTheme(arr[arr.indexOf(dataTheme) + 1]))
           localStorage.setItem('dataTheme', (arr[arr.indexOf(dataTheme) + 1]).toString());
         }
-        //localStorage.setItem('langEn', (!english).toString());
+        //console.log("111", dataTheme)
       }}
       variant="contained"
       className={css.background}
