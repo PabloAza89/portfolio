@@ -129,20 +129,16 @@
   background: none;
   padding: 0px !important;
   width: min(50vw, 370px);
+  font-size: min(4vw, 28px) !important;
   color: var(--buttonMessageHome) !important;
   border-color: var(--buttonMessageHome) !important;
-  transition: color 1s, border-color 1s !important;
-  font-size: min(4vw, 28px) !important;
+  transform: scale(1) !important;
+  transition: transform .2s, color 1s, border-color 1s !important;
+  will-change: transform;
 }
 
 .buttonContainer:hover .buttonMessage {
-  transition: all .2s ease-in-out;
-  transform: scale(1.05)
-}
-
-.buttonContainer:not(:hover) .buttonMessage {
-  transition: all .2s ease-in-out;
-  transform: scale(1.0)
+  transform: scale(1.05) !important;
 }
 
 @media screen

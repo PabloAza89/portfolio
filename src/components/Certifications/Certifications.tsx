@@ -71,8 +71,14 @@ function Certifications() {
               >
                 <div className={css.title}>{e.title}</div>
                 <div className={css.boxMediaWrapper}>
-                  <a href={e.media} target="_blank" rel="noreferrer">
+                  <a
+                    draggable="false"
+                    href={e.media}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <img
+                      draggable="false"
                       className={css.boxMedia}
                       onLoad={() => loadedUpdater(e.id)}
                       src={e.media}
@@ -93,6 +99,7 @@ function Certifications() {
                 </div>
                 <div className={css.url}>
                   <Link
+                    draggable="false"
                     className={css.anchor}
                     to={e.href}
                     target="_blank"

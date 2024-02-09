@@ -3,6 +3,7 @@
   --nameOrMessageMessage: white;
   --textColorMessage: rgba(0, 0, 0, 0.87);
   --labelColorMessage: rgba(0, 0, 0, 0.6);
+  --popupBackgroundMessage: white;
 }
 
 [data-theme="dark"] {
@@ -10,7 +11,21 @@
   --nameOrMessageMessage: #615f5f;
   --textColorMessage: white;
   --labelColorMessage: white;
+  --popupBackgroundMessage: rgb(25 71 87);
 }
+
+/* BEGIN SWEETALERT2 */
+
+.popup {
+  width: fit-content !important;
+  max-width: calc(100vw - 55px);
+  font-size: 12px !important;
+  background: var(--popupBackgroundMessage) !important;
+  transition: background 1s;
+  z-index: 100000 !important;
+}
+
+/* END SWEETALERT2 */
 
 .background {
   display: flex;
@@ -23,16 +38,24 @@
   flex-wrap: wrap;
   overflow: auto;
   padding: 10px 0px;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .background::-webkit-scrollbar {
   width: 6px;
   background-color: #F5F5F5
 }
+
 .background::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   background-color: #F5F5F5
 }
+
 .background::-webkit-scrollbar-thumb {
   background-color: #000000;
   border: 5px solid #555555
@@ -43,7 +66,6 @@
   position: relative;
   flex-direction: column;
   border-radius: 4px;
-  background: var(--backgroundMessage);
   opacity: 0.95;
   max-width: 550px !important;
   flex-flow: wrap;
@@ -51,6 +73,8 @@
   justify-content: center;
   align-content: flex-start;
   margin: 0px 10px;
+  background: var(--backgroundMessage);
+  transition: background 1s;
 }
 
 .header {
@@ -65,11 +89,17 @@
 }
 
 .label {
-  background: var(--nameOrMessageMessage);
   border-radius: 4px;
   padding: 0px 8px !important;
   left: -5px !important;
   color: var(--labelColorMessage) !important;
+  background-color: var(--nameOrMessageMessage);
+  /* transition: inherit !important; */
+  transition:
+    color 1s,
+    transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,
+    max-width 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,
+    background 1s !important;
 }
 
 .name {
@@ -77,11 +107,12 @@
   display: flex;
   position: relative;
   /* background: yellow; */ /* DEV */
-  background: var(--nameOrMessageMessage) !important;
   opacity: 0.90;
   border-radius: 4px;
   width: 100%;
   margin-bottom: 14px !important;
+  background: var(--nameOrMessageMessage) !important;
+  transition: background 1s;
 }
 
 .message {
@@ -89,15 +120,17 @@
   display: flex;
   position: relative;
   /* background: yellow; */ /* DEV */
-  background: var(--nameOrMessageMessage);
   opacity: 0.90;
   border-radius: 4px;
   width: 100%;
   margin-bottom: 14px !important;
+  background: var(--nameOrMessageMessage);
+  transition: background 1s;
 }
 
 .input {
   color: var(--textColorMessage) !important;
+  transition: color 1s;
 }
 
 .counter {
@@ -177,6 +210,16 @@
   0% { opacity: 1 }
   50% { opacity: 0 }
   100% { opacity: 1 }
+}
+
+@keyframes shakeLRMessage {
+  0% { transform: translate(-2px, 0px) }
+  2% { transform: translate(0px, 0px) }
+  4% { transform: translate(-2px, 0px) }
+  6% { transform: translate(0px, 0px) }
+  8% { transform: translate(-2px, 0px) }
+  10% { transform: translate(0px, 0px) }
+  100% { transform: translate(0px, 0px) }
 }
 
 .messageLoadingSpinner {

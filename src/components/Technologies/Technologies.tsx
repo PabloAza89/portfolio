@@ -29,44 +29,49 @@ function Technologies() {
 
   return (
     <div className={css.background}>
-      
-        <div className={css.testTest}>
-          {
-            array.slice(0, Math.floor(array.length / 2)).map((e) => {
-              return (
-                <a
-                  className={css.linkContainer}
-                  key={e.id}
-                  href={e.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src={e.icon} className={css.iconMedia} alt=""></img>
-                  <div className={css.title}>{e.title}</div>
-                </a>
-              )
-            })
-          }
-        </div>
-        <div className={css.testTest}>
-          {
-            array.slice(Math.floor(array.length / 2)).map((e) => {
-              return (
-                <a
-                  className={css.linkContainer}
-                  key={e.id}
-                  href={e.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src={e.icon} className={css.iconMedia} alt=""></img>
-                  <div className={css.title}>{e.title}</div>
-                </a>
-              )
-            })
-          }
-        </div>
-      
+      <div className={css.testTest}>
+        {
+          array.slice(0, Math.floor(array.length / 2)).map((e) => {
+            return (
+              <a
+                className={css.linkContainer}
+                key={e.id}
+                href={e.url}
+                target="_blank"
+                rel="noreferrer"
+                draggable="false"
+              >
+                <img draggable="false" src={e.icon} className={css.iconMedia} alt=""></img>
+                <div className={css.title}>{e.title}</div>
+              </a>
+            )
+          })
+        }
+      </div>
+      <div className={css.testTest}>
+        {
+          array.slice(Math.floor(array.length / 2)).map((e) => {
+            return (
+              <a
+                className={css.linkContainer}
+                key={e.id}
+                href={e.url}
+                target="_blank"
+                rel="noreferrer"
+                draggable="false"
+              >
+                <img
+                  draggable="false"
+                  src={e.icon}
+                  className={css.iconMedia}
+                  alt=""
+                />
+                <div className={css.title}>{e.title}</div>
+              </a>
+            )
+          })
+        }
+      </div>
     </div>
   )
 }

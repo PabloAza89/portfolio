@@ -2,22 +2,19 @@ import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
 import Swal from 'sweetalert2';
 import css from './ContactCSS.module.css';
-import './ContactCSS.css';
 
 function Contact() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
 
   const notifCopyEmail = () => {
-
     Swal.fire({
       title: `<strong>juanpablo<wbr>azambuyo<wbr>@gmail.com</strong>`,
       iconHtml: `<i class="fa-regular fa-envelope fa-bounce fa-xl"></i>`,
       focusConfirm: false,
-      //background: darkMode ? 'rgb(49, 18, 85)' : 'white',
       confirmButtonText: '<i class="fas fa-clipboard fa-2x"></i>',
       customClass: {
-        popup:  `${css.firstPopup}`,
+        popup: `${css.popup}`,
         icon: 'icon-class'
       }
     }).then((result) => {
@@ -25,11 +22,10 @@ function Contact() {
         Swal.fire({
           title: english ? 'Copied to clipboard !' : 'Copiado al portapapeles !',
           showConfirmButton: false,
-          //background: darkMode ? 'rgb(49, 18, 85)' : 'white',
           icon: 'success',
           timer: 1000,
           customClass: {
-            popup: `${css.secondPopup}`,
+            popup: `${css.popup}`,
           }
         })
       }
@@ -39,15 +35,13 @@ function Contact() {
   }
 
   const notifCopyPhone = () => {
-
     Swal.fire({
       title: '<strong>+54 9 11 2468-8005</strong>',
       iconHtml: `<i class="fa-brands fa-whatsapp fa-bounce fa-xl"></i>`,
       focusConfirm: false,
-      //background: darkMode ? 'rgb(49, 18, 85)' : 'white',
       confirmButtonText: '<i class="fas fa-clipboard fa-2x"></i>',
       customClass: {
-        popup:  `${css.firstPopup}`,
+        popup:  `${css.popup}`,
         icon: 'icon-class'
       }
     }).then((result) => {
@@ -55,11 +49,10 @@ function Contact() {
         Swal.fire({
           title: english ? 'Copied to clipboard !' : 'Copiado al portapapeles !',
           showConfirmButton: false,
-          //background: darkMode ? 'rgb(49, 18, 85)' : 'white',
           icon: 'success',
           timer: 1000,
           customClass: {
-            popup: `${css.secondPopup}`,
+            popup: `${css.popup}`,
           }
         })
       }
@@ -72,6 +65,7 @@ function Contact() {
       <div className={css.background}>
         <div className={css.mainContainer}>
           <img
+            onDragStart={(e) => e.preventDefault()}
             alt="Pablo Azambuyo"
             src={profile}
             className={css.avatar}
@@ -80,6 +74,7 @@ function Contact() {
           <div className={css.separatorY} />
           <div className={css.rightContainer}>
             <a
+              draggable="false"
               className={css.text}
               href="https://www.linkedin.com/in/juan-pablo-azambuyo"
               target="_blank"
@@ -88,12 +83,14 @@ function Contact() {
             <div onClick={() => notifCopyEmail()} className={css.text}>Email</div>
             <div onClick={() => notifCopyPhone()} className={css.text}>Whatsapp</div>
             <a
+              draggable="false"
               className={css.text}
               href="https://twitter.com/jpazambuyo"
               target="_blank"
               rel="noreferrer"
             >Twitter</a>
             <a
+              draggable="false"
               className={css.text}
               href="https://www.instagram.com/pabloaza_"
               target="_blank"

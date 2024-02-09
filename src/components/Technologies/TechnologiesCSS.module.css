@@ -3,40 +3,28 @@
   display: flex;
   position: relative;
   width: 100%;
-  /* height: min(20vw, 80px); */
   align-self: flex-start;
   justify-content: space-between;
   overflow: visible;
   max-width: 650px;
   align-self: center;
-  /* justify-content: space-evenly; */
-  /* justify-content: center; */
   flex-wrap: wrap;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .testTest {
   display: flex;
   position: relative;
   flex-direction: row;
-  /* background: orange; */
-  /* box-shadow: 0 0 0 2px blue inset; */ /* DEV */
-  /* width: 50%; */
-  /* width: min(100%, 50%); */
-  /* min-width: ; */
-  /* min-width: fit-content; */
+  /* background: orange; */ /* DEV */
   flex-grow: 1;
   justify-content: space-around;
- /*  min-width: 100%;
-  max-width: 50%; */ 
-  /* width: 100%; */
-  /* flex-basis: 50%; */
- /*  width: 50%;
-  box-sizing: border-box; */
 }
-
-/* *, *::before, *::after {
-  box-sizing: border-box;
-} */
 
 .linkContainer {
   display: flex;
@@ -48,19 +36,14 @@
   width: 80px;
   height: 80px;
   align-items: center;
-  /* flex-basis: 33.33%; */
-  /* flex-basis: max(33.33%, 16.60%); */
-  /* flex-basis: 16.60%; */
-  /* flex-basis:content */
-  /* height: 100px; */
-  /* flex: 0 0 215px; */
-  /* flex: 0 0 16.6%; */
-  /* margin: 1em 20px; */
-  /* border: 2px blue solid; */
 }
 
-.linkContainer:hover {
-  transition: all .2s ease-in-out;
+.linkContainer:hover .iconMedia {
+  transform: scale(1.2) translate(0px, -3px);
+}
+
+.linkContainer:hover .title {
+  transform: scale(1.2) translate(0px, 3px);
 }
 
 .iconMedia {
@@ -70,7 +53,8 @@
   width: 60px !important;
   height: 60px !important;
   isolation: isolate;
-  transition: all .2s ease-in-out;
+  transform: scale(1) translate(0px, 0px);
+  transition: transform .2s ease-in-out;
 }
 
 .title {
@@ -82,13 +66,7 @@
   font-weight: 600;
   width: fit-content;
   mix-blend-mode: difference;
-  transition: all .2s ease-in-out;
-}
-
-.linkContainer:hover .iconMedia {
-  transform: scale(1.2) translate(0px, -3px);
-}
-
-.linkContainer:hover .title {
-  transform: scale(1.2) translate(0px, 3px);
+  transform: scale(1) translate(0px, 0px);
+  will-change: transform;
+  transition: transform .2s ease-in-out;
 }

@@ -1,3 +1,13 @@
+:root {
+  --blueBubbles: #4fc3dc;
+  --pinkBubbles: #ff2d75;
+}
+
+[data-theme="dark"] {
+  --blueBubbles: #4799c3;
+  --pinkBubbles: #8e6c78;
+}
+
 .background {
   display: flex;
   position: fixed;
@@ -13,9 +23,13 @@
   min-height: 22px;
   width: 22px;
   height: 22px;
-  background: #4fc3dc;
+  background: var(--blueBubbles);
+  transition: background 1s;
   border-radius: 50%;
-  box-shadow: 0 0 0 0.49vw #4fc3dc44, 0 0 2.49vw #4fc3dc, 0 0 4.99vw #4fc3dc;
+  box-shadow:
+    0 0 0 0.49vw #4fc3dc44,
+    0 0 2.49vw #4fc3dc,
+    0 0 4.99vw #4fc3dc;
   animation: animate 17s linear infinite;
   animation-duration: calc(125s / var(--i));
 }
@@ -26,7 +40,10 @@
 }
 
 .eachCircle:nth-of-type(even) {
-  background: #ff2d75;
-  box-shadow: 0 0 0 0.49vw #4fc3dc44, 0 0 2.49vw #ff2d75, 0 0 4.99vw #ff2d75;
+  background: var(--pinkBubbles);
+  box-shadow:
+    0 0 0 0.49vw #4fc3dc44,
+    0 0 2.49vw #ff2d75,
+    0 0 4.99vw #ff2d75;
   animation-duration: calc(125s / var(--i));
 }

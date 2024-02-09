@@ -17,7 +17,6 @@
   flex-direction: column;
   left: 0px;
   width: 100%;
-  /* width: calc(100vw - 12px); */
   height: 100vh;
   justify-content: center;
   -webkit-touch-callout: none;
@@ -34,7 +33,6 @@
   /* background: darkred; */ /* DEV */
   position: relative;
   max-height: calc(100vh - 12px);
-  /* max-width: calc(100% - 12px); */
   width: 100%;
   flex-wrap: wrap;
   justify-content: center;
@@ -77,10 +75,18 @@
   color: #FFFFFF;
   font-size: 18px;
   mix-blend-mode: difference;
-  transition: all .2s ease-in-out;
-  /* text-align: center; */
   text-wrap: nowrap;
-  /* flex-wrap: wrap; */
+  transform: scale(1) translate(0px, 0px);
+  transition: transform .2s ease-in-out;
+  will-change: transform;
+}
+
+.boxMediaWrapper {
+  display: flex;
+  width: 220px;
+  height: 120px;
+  transform: scale(1) translate(0px, 0px);
+  transition: transform .2s ease-in-out;
 }
 
 .url {
@@ -89,8 +95,22 @@
   padding-top: 0vw;
   font-size: 18px;
   mix-blend-mode: difference;
-  transition: all .2s ease-in-out;
+  transform: scale(1) translate(0px, 0px);
+  transition: transform .2s ease-in-out;
+  will-change: transform;
   /* background: gray; */ /* DEV */
+}
+
+.card:hover .title {
+  transform: scale(1.05) translate(0px, -3px);
+}
+
+.card:hover .boxMediaWrapper {
+  transform: scale(1.05) translate(0px, 0px);
+}
+
+.card:hover .url {
+  transform: scale(1.05) translate(0px, 3px);
 }
 
 .anchor {
@@ -104,18 +124,13 @@
   width: 220px;
   height: 120px;
   filter: var(--filterCert);
+  transition: filter 1s;
   z-index: 1000,
 }
 
 .boxMedia:hover {
-  filter: var(--hoverCert)
-}
-
-.boxMediaWrapper {
-  display: flex;
-  width: 220px;
-  height: 120px;
-  transition: all .2s ease-in-out;
+  filter: var(--hoverCert);
+  transition: filter 0s;
 }
 
 .placeholderBackground {
@@ -142,20 +157,6 @@
 @keyframes spinner {
   0% { transform: rotate(0deg) }
   100% { transform: rotate(360deg) }
-}
-
-
-
-.card:hover .title {
-  transform: scale(1.05) translate(0px, -3px);
-}
-
-.card:hover .boxMediaWrapper {
-  transform: scale(1.05) translate(0px, 0px);
-}
-
-.card:hover .url {
-  transform: scale(1.05) translate(0px, 3px);
 }
 
 @media screen

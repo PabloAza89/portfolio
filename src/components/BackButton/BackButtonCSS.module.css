@@ -4,6 +4,7 @@
   bottom: 20px;
   left: 20px;
   z-index: 1;
+  text-decoration: none !important;
 }
 
 .button {
@@ -12,9 +13,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background: red !important; */
-  /* background: #1976d2 !important; */
-  /* background: blue !important; */
+  /* background: red !important; */ /* DEV */
   padding: 0vw !important;
   min-width: 0vh !important;
   width: 35px !important;

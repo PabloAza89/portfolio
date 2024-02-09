@@ -344,9 +344,7 @@ function Projects() {
             <button
               id={`buttonFlap`}
               tabIndex={-1}
-              onClick={() => {
-                handleClickFlap()
-              }}
+              onClick={() => handleClickFlap()}
               className={css.flap}>
             </button>
             <div className={css.textContainer}>
@@ -357,10 +355,8 @@ function Projects() {
               }
             </div>
             <FormControl
-              /* style={{ isolation: "isolate" }} */
               size="small"
               className={css.formControl}
-              //onClick={() => console.log("CLICKED")}
             >
               <Select
                 className={css.select}
@@ -368,19 +364,14 @@ function Projects() {
                 label="Scroll"
                 sx={{ '& .MuiSelect-select': { textOverflow: 'clip' } }}
                 onChange={(e) => setScrollSpeed(parseInt(e.target.value))}
-                //onClick={() => console.log("CLICKED")}
                 onFocus={() => handleSelectFocus()}
-                //onSelect={() => console.log("CLICKED")}
               >
                 <MenuItem value={10}>1x</MenuItem>
                 <MenuItem value={30}>2x</MenuItem>
                 <MenuItem value={50}>3x</MenuItem>
               </Select>
             </FormControl>
-            
           </div>
-            
-          
         </div>
       </div>
     </div>

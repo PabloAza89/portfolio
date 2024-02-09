@@ -10,6 +10,7 @@ function AboutMe() {
     <div className={css.background}>
       <div className={css.blueBox}>
         <img
+          onDragStart={(e) => e.preventDefault()}
           alt="Pablo Azambuyo"
           src={profile}
           className={css.avatar}

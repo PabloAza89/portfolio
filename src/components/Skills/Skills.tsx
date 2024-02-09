@@ -1,7 +1,6 @@
 import { SvgIcon } from '@mui/material';
 import { useState, useEffect, useRef, useMemo, MutableRefObject } from 'react';
 import css from './SkillsCSS.module.css';
-import './SkillsSX.css';
 import { useSelector } from 'react-redux';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
 import { CSSRuleExtended } from '../../interfaces/interfaces';
@@ -103,7 +102,7 @@ function Skills() {
   useEffect(() => {
     levels.forEach(e => {
       $(`#buttonTest123${e.id}`)
-        .css('animation', `shakeKF 6s calc(2.5s + (${e.id} * .1s)) infinite`)
+        .css('animation', `${css.shakeKFSkills} 6s calc(2.5s + (${e.id} * .1s)) infinite`)
     })
   })
 
@@ -126,7 +125,7 @@ function Skills() {
             console.log("END")
             levels.forEach(e => {
               $(`#buttonTest123${e.id}`)
-                .css('animation', `shakeKF 6s calc(2.5s + (${e.id} * .1s)) infinite`)
+                .css('animation', `${css.shakeKFSkills} 6s calc(2.5s + (${e.id} * .1s)) infinite`)
             })
           })
       }

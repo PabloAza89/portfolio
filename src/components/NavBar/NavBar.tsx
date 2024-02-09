@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
 import css from './NavBarCSS.module.css';
-//import $ from 'jquery';
 
 function NavBar() {
 

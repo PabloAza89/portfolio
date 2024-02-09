@@ -5,7 +5,7 @@ import css from './BackButtonCSS.module.css';
 
 function BackButton() {
   return (
-    <Link className={css.background} style={{ textDecoration: 'none' }} to="/">
+    <Link draggable="false" className={css.background} to="/">
       <Button variant="contained" className={css.button}>
         <ForwardIcon className={css.icon}/>
       </Button>

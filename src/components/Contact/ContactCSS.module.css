@@ -15,23 +15,32 @@
   width: calc(100vw - 12px);
   height: calc(100vh - 12px);
   align-items: center;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* BEGIN SWEETALERT2 */
 
-.firstPopup {
-  width: fit-content !important;
-  max-width: calc(100vw - 55px);
-  font-size: 12px !important;
-  background: var(--firstPopupBackgroundContact) !important;
-  z-index: 100000 !important;
+:global(.swal2-success-circular-line-left),
+:global(.swal2-success-fix),
+:global(.swal2-success-circular-line-right) {
+  background: transparent !important;
 }
 
-.secondPopup {
+:global(.icon-class) {
+  border: 0 !important;
+}
+
+.popup {
   width: fit-content !important;
   max-width: calc(100vw - 55px);
   font-size: 12px !important;
   background: var(--firstPopupBackgroundContact) !important;
+  transition: background 1s;
   z-index: 100000 !important;
 }
 
@@ -139,7 +148,9 @@
   cursor: pointer;
   mix-blend-mode: difference;
   animation: rtl 1s;
-  transition: all .2s ease-in-out;
+  transform: scale(1);
+  transition: transform .2s ease-in-out;
+  will-change: transform;
 }
 
 .text:hover {

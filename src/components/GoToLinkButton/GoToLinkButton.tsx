@@ -11,6 +11,7 @@ function GoToLinkButton({ link }: GoToLinkButtonI) {
       href={link}
       target="_blank"
       rel="noopener noreferrer"
+      draggable="false"
     >
       <Button
         variant="contained"

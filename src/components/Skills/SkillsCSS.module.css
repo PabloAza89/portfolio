@@ -106,7 +106,7 @@
   z-index: 6000;
 }
 
-@keyframes shakeKF {
+@keyframes shakeKFSkills {
   0% { transform: translateX(-2px) }
   1% { transform: translateX(0px) }
   2% { transform: translateX(-2px) }

@@ -40,11 +40,8 @@
   height: calc(100% + 11px);
   mix-blend-mode: var(--mixBlendModeScrollEffectNavBar);
   z-index: 2;
-  /* background: rgba(255, 0, 0, 0.2); */
   transition: background 1s ease-in-out;
 }
-
-
 
 .mainLeft {
   display: flex;
@@ -58,7 +55,6 @@
   color: #FFFFFF;
   align-self: center;
   top: -6px;
-  /* padding-bottom: 10px */
   margin-bottom: 6px;
 }
 
@@ -122,10 +118,12 @@
   font-family: Roboto;
   font-weight: 600;
   mix-blend-mode: difference;
-  transition: all .2s ease-in-out;
+  backface-visibility: hidden;
+  transform: scale(1) translate3d(0, 0, 0) perspective(1px);
+  transition: transform .2s;
+  will-change: transform;
 }
 
 .text:hover {
-  transform: scale(1.05) /* translate(0px, 0px); */
-  /* transform: scale(1.05) */
+  transform: scale(1.05) translate3d(0, 0, 0) perspective(1px);
 }
