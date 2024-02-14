@@ -90,7 +90,6 @@
 }
 
 .url {
-  color: #FFFFFF;
   padding-right: 0vw;
   padding-top: 0vw;
   font-size: 18px;
@@ -98,6 +97,9 @@
   transform: scale(1) translate(0px, 0px);
   transition: transform .2s ease-in-out;
   will-change: transform;
+  align-self: center;
+  color: #FFFFFF;
+  text-decoration: none;
   /* background: gray; */ /* DEV */
 }
 
@@ -113,11 +115,11 @@
   transform: scale(1.05) translate(0px, 3px);
 }
 
-.anchor {
+/* .anchor {
   align-self: center;
   color: #FFFFFF;
   text-decoration: none;
-}
+} */
 
 .boxMedia {
   display: flex;

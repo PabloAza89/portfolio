@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import css from './MessageMeCSS.module.css';
@@ -9,24 +9,6 @@ import store from '../../store/store';
 
 function MessageMe() {
 
-  let [ currentDate, setCurrentDate ] = useState(0)
-  let [ lastMessage, setLastMessage ] = useState(0)
-
-  // useEffect(() => {
-  //   let firstDate = Date.now()
-  //   //let secondDate
-  //   setTimeout(() => {
-  //     let secondDate = Date.now()
-  //     console.log("DATE 2", secondDate)
-  //     //console.log("RESULT", (secondDate - firstDate) / 1000)
-  //     //console.log("RESULT", (firstDate - secondDate) / 1000)
-  //   },5000)
-    
-  //   console.log("DATE 1", firstDate)
-    
-  // }, [])
-  
-
   const dispatch = useDispatch()
   const english = useSelector((state: {english:boolean}) => state.english)
 
@@ -35,20 +17,31 @@ function MessageMe() {
   const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
   const [clearButtonDisabled, setClearButtonDisabled] = useState<boolean>(false)
   const [showMessageSpinner, setShowMessageSpinner] = useState<boolean>(false)
+  const [disableInputs, setDisableInputs] = useState<boolean>(false)
+
+  let svSleepTimeout: any = useRef()
 
   useEffect(() => {
     let spinnerCircle = document.querySelector("[class*='messageLoadingSpinner']") as HTMLElement
-    let loadingText = document.querySelector("[class*='loadingText']") as HTMLElement
+    let loadingText = document.querySelector("[class*='loadingTextContainer']") as HTMLElement
+    let serverSleep = document.querySelector("[class*='serverSleepText']") as HTMLElement
     if (showMessageSpinner && spinnerCircle && loadingText) {
-      spinnerCircle.style.display = "flex"
-      loadingText.style.display = "flex"
+      setDisableInputs(true)
+      spinnerCircle.style.display = "flex";
+      loadingText.style.display = "flex";
+      svSleepTimeout.current = setTimeout(() => {
+        console.log("TIMEs UP")
+        serverSleep.style.display = "flex";
+      }, 2400)
     }
     else if (!showMessageSpinner && spinnerCircle && loadingText) {
-      spinnerCircle.style.display = "none"
-      loadingText.style.display = "none"
+      setDisableInputs(false)
+      spinnerCircle.style.display = "none";
+      loadingText.style.display = "none";
+      serverSleep.style.display = "none";
+      clearTimeout(svSleepTimeout.current)
     }
-
-  },[showMessageSpinner])
+  }, [showMessageSpinner])
 
   useEffect(() => {
     let name: string | null = localStorage.getItem('name');
@@ -57,13 +50,13 @@ function MessageMe() {
     if (name !== null) setName(name)
     if (message === null) setMessage("")
     if (message !== null) setMessage(message)
-  },[])
+  }, [])
 
   useEffect(() => {
     if (name.length > 50 || message.length > 800) setSentButtonDisabled(true);
     else setSentButtonDisabled(false);
     let div = document.querySelector("[class*='MessageMeCSS_name']") as HTMLElement
-    let inputText = document.getElementById("name123")
+    let inputText = document.getElementById("inputNameMessage")
     let leftCounter = document.querySelector("[class*='leftCounter']") as HTMLElement
     if (name.length > 50 && div && inputText) {
       div.style.animation = `${css.shakeLRMessage} 2.5s linear infinite`;
@@ -73,13 +66,9 @@ function MessageMe() {
       div.style.animation = 'none';
       inputText.style.color = "inherit"
     }
-    if (message.length > 800 && leftCounter) {
-      leftCounter.style.color = 'red'
-    }
-    else if (message.length <= 800 && leftCounter) {
-      leftCounter.style.color = 'white'
-    }
-  },[name, message])
+    if (message.length > 800 && leftCounter) leftCounter.style.color = 'red'
+    else if (message.length <= 800 && leftCounter) leftCounter.style.color = 'white'
+  }, [name, message])
 
   var Toast: any = Swal
 
@@ -98,9 +87,7 @@ function MessageMe() {
       icon: 'success',
       title: english ? 'Message sent!' : 'Mensaje enviado!',
       text: english ? 'The message was received.' : 'El mensaje fue recibido.',
-      customClass: {
-        popup: `${css.popup}`
-      }
+      customClass: { popup: `${css.popup}` }
     })
   }
 
@@ -112,9 +99,7 @@ function MessageMe() {
       icon: 'error',
       title: english ? 'Message not sent!' : 'Mensaje no enviado!',
       text: english ? 'There was an error.. Please try Again.' : 'Hubo un error.. por favor intentá de nuevo.',
-      customClass: {
-        popup: `${css.popup}`
-      }
+      customClass: { popup: `${css.popup}` }
     })
   }
 
@@ -126,120 +111,100 @@ function MessageMe() {
       icon: 'error',
       title: english ? 'Fields cannot be empty!' : 'Los campos no pueden estar vacíos',
       text: english ? 'Please, fill all fields.' : 'Por favor, llena todos los campos.',
-      customClass: {
-        popup: `${css.popup}`
-      }
+      customClass: { popup: `${css.popup}` }
     })
   }
 
+  let currentSec: any = useRef()
+  let display: any = useRef({ text: { en: "seconds", es: "segundos" }, secs: 0 })
+
   const MustWait: any = () => {
-
-    let current = () => {
-      if (lastMessageLS !== null) {
-        if (5 - ((Date.now() - parseInt(lastMessageLS, 10)) / 1000) < 1 && (5 - (Date.now() - parseInt(lastMessageLS, 10)) / 1000) > 0) {
-          return { text: "second", time: 1 }
-        }
-        else if (5 - ((Date.now() - parseInt(lastMessageLS, 10)) / 1000) < 0) {
-          return { text: "second", time: 0 }
-        }
-        else {
-          return { text: "seconds", time: (5 - ((Date.now() - parseInt(lastMessageLS, 10)) / 1000)).toFixed(0) }
-        }
-      }
-    }
-
     let lastMessageLS: string | null = localStorage.getItem('lastMessage');
+
     if (lastMessageLS !== null) {
+      currentSec.current = ((5000 - (Date.now() - parseInt(lastMessageLS))) / 1000).toFixed(0)
+
+      let updateDisplay = () => {
+        console.log("NEXT targetSec.current",  currentSec.current)
+        if (currentSec.current > 1) display.current = { text: { en: "seconds", es: "segundos" }, secs: currentSec.current }
+        //else if (currentSec.current < 1) display.current = { text: { en: "seconds", es: "segundos" }, secs: 0 }
+        else display.current = { text: { en: "second", es: "segundo" }, secs: 1 }
+      }
+
+      updateDisplay()
+      console.log("FIRST targetSec.current",  currentSec.current)
+
       Toast.fire({
         showConfirmButton: false,
         icon: 'error',
-        title: english ? 'You must wait to send another message!' : 'Debes esperar para enviar otro mensaje',
+        title:
+          english ?
+          'You must wait to send another message !' :
+          'Debes esperar para enviar otro mensaje !',
         timerProgressBar: true,
+        //timerProgressBar: false,
         html:
           english ?
-          `Please, wait <strong>${current()?.time}</strong> <sec-handler>seconds</sec-handler>.<br/><br/>` :
-          `Por favor, espera <strong>${current()?.time}</strong> segundos.<br/><br/>`,
+          `Please, wait <strong>${display.current.secs}</strong> ${display.current.text.en}.<br/><br/>` :
+          `Por favor, espera <strong>${display.current.secs}</strong> ${display.current.text.es}.<br/><br/>`,
+        //timer: 200500,
         timer: 2500,
-        customClass: {
-          popup: `${css.popup}`
-        },
+        customClass: { popup: `${css.popup}` },
         willClose: () => clearInterval(interval)
       });
+
+      let interval = setInterval(() => {
+        currentSec.current -= 1
+
+        if (currentSec.current <= 0) {
+          //Toast.getHtmlContainer().innerHTML = `Please, wait.<br/><br/>`
+
+          Toast.stopTimer()
+          let el = document.querySelector('.swal2-timer-progress-bar') as HTMLElement
+          if (el !== null) el.style.display = 'none';
+          Toast.update({
+            title: "Now you can send another message !",
+            icon: "success",
+            html: null,
+            showConfirmButton: true,
+            confirmButtonText: `OK`,
+            confirmButtonColor: '#4baaa1'
+          })
+          console.log("ENTRO 1")
+          clearInterval(interval)
+        } else {
+          console.log("ENTRO 2")
+          updateDisplay()
+          if (lastMessageLS !== null) {
+            Toast.getHtmlContainer().innerHTML =
+              english ?
+              `Please, wait <strong>${display.current.secs}</strong> ${display.current.text.en}.<br/><br/>` :
+              `Por favor, espera <strong>${display.current.secs}</strong> ${display.current.text.es}.<br/><br/>`;
+     
+          }
+        }
+      }, 1000)
     }
-
-    let interval = setInterval(() => {
-      if (lastMessageLS !== null) {
-        Toast.getHtmlContainer().innerHTML =
-          english ?
-          `Please, wait <strong>${current()?.time}</strong> <sec-handler>seconds</sec-handler>.<br/><br/>` :
-          `Por favor, espera <strong>${current()?.time}</strong> segundos.<br/><br/>`
-      }
-    }, 1000)
-
   }
-
-
-  // const MustWait: any = () => {
-
-  //   let timerInterval: any;
-  //   let timerIntervalTwo: any;
-
-  //   Toast.fire({
-  //     showConfirmButton: false,
-  //     icon: 'error',
-  //     title: english ? 'You must wait to send another message!' : 'Debes esperar para enviar otro mensaje',
-  //     timerProgressBar: true,
-  //     html: english ? `Please, wait <strong></strong> <sec-handler>seconds</sec-handler>.<br/><br/>` : `Por favor, espera <strong></strong> segundos.<br/><br/>`,
-  //     timer: 2500,
-  //     customClass: {
-  //       popup: `${css.popup}`
-  //     },
-  //     didOpen: () => {
-  //       timerInterval = setInterval(() => {
-  //         Toast.getHtmlContainer().querySelector('strong')
-  //           .textContent = (store.getState()?.timer === 60 ? 0 : store.getState()?.timer)
-  //             .toFixed(0)
-  //       }, 100)
-  //       timerIntervalTwo = setInterval(() => {
-  //         Toast.getHtmlContainer().querySelector('sec-handler')
-  //           .textContent = (store.getState()?.timer === 1 ? "second" : "seconds")
-  //       }, 100)
-  //     },
-  //     willClose: () => {
-  //       clearInterval(timerInterval);
-  //       clearInterval(timerIntervalTwo)
-  //     }
-  //   })
-  // }
 
   const handleSubmit = (e: any) => {
 
-    //if (store.getState().timerEnabled) return MustWait()
     let lastMessageLS: string | null = localStorage.getItem('lastMessage');
-    if (lastMessageLS !== null &&
-      (Date.now() - parseInt(lastMessageLS, 10)) < 60000
-    ) {
-      console.log("RESP true/false", (Date.now() - parseInt(lastMessageLS, 10)) < 60000)
-      console.log("RESP ms", Date.now() - parseInt(lastMessageLS, 10))
-      return MustWait()
-    }
-    //if (Date.now())
+    if (lastMessageLS !== null && (Date.now() - parseInt(lastMessageLS, 10)) < 60000) return MustWait()
 
     function fetchData() {
       //fetch(`http://localhost:3001/`, {
       fetch(`https://oval-transparent-ornament.glitch.me/`, {
-      method: "POST",
-      body: JSON.stringify({name: name, message: message}),
-      headers: {
-        "Content-Type": "application/json"
-      }})
+        method: "POST",
+        body: JSON.stringify({ name: name, message: message }),
+        headers: { "Content-Type": "application/json" }
+      })
       .then(res => res.json())
-      .then(res => { if(!res.success) throw new Error(); return res })
+      .then(res => { if (!res.success) throw new Error(); return res })
       .then(() => {
         sentNotif(); handleTimerStart();
         setSentButtonDisabled(false); setClearButtonDisabled(false);
         setShowMessageSpinner(false); clearBoth();
-        //setLastMessage(Date.now())
         localStorage.setItem('lastMessage', `${Date.now().toString()}`);
       })
       .catch(error => {console.error("Error:", error); noSentNotif(); setSentButtonDisabled(false); setClearButtonDisabled(false); setShowMessageSpinner(false) })
@@ -286,7 +251,8 @@ function MessageMe() {
           </Button>
         </div>
         <TextField
-          id={"name123"}
+          id={"inputNameMessage"}
+          disabled={disableInputs}
           className={css.name}
           label={ english ? "Your name here" : "Tu nombre aquí" }
           size="small"
@@ -297,6 +263,7 @@ function MessageMe() {
         />
         <TextField
           className={css.message}
+          disabled={disableInputs}
           label={ english ? "Your message here" : "Tu mensaje aquí" }
           multiline
           minRows={6}
@@ -322,12 +289,23 @@ function MessageMe() {
         <div className={css.divSpinner} />
         <div className={css.divSpinner} />
       </div>
-      <div className={css.loadingText}>
-        {
-          english ?
-          `SENDING MESSAGE..` :
-          `ENVIANDO MENSAJE..`
-        }
+      <div className={css.loadingTextContainer}>
+        <div className={css.loadingText}>
+          {
+            english ?
+            `SENDING MESSAGE..` :
+            `ENVIANDO MENSAJE..`
+          }
+        </div>
+        
+        <div className={css.serverSleepText}>
+          <div className={css.serverSleepBG}></div>
+          {
+            english ?
+            <div>IT'S SEEMS SERVER IS SLEEPING..<br/>WAKING UP SERVER..<br/>PLEASE WAIT..</div> :
+            <div>PARECE QUE EL SERVIDOR ESTÁ DURMIENDO..<br/>DESPERTANDO SERVIDOR..<br/>POR FAVOR ESPERE..</div>
+          }
+        </div>
       </div>
     </div>
   )

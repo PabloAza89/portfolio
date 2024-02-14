@@ -73,7 +73,7 @@ function Certifications() {
                 <div className={css.boxMediaWrapper}>
                   <a
                     draggable="false"
-                    href={e.media}
+                    href={e.href}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -97,14 +97,29 @@ function Certifications() {
                     alt=""
                   />
                 </div>
-                <div className={css.url}>
+                <a 
+                  /* draggable="false" */
+                  className={`${css.url} ${css.anchor}`}
+                  href={e.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {e.url}
+                  {/* <Link
+                    draggable="false"
+                    className={css.anchor}
+                    to={e.href}
+                    target="_blank"
+                  >{e.url}</Link> */}
+                </a>
+                {/* <div className={css.url}>
                   <Link
                     draggable="false"
                     className={css.anchor}
                     to={e.href}
                     target="_blank"
                   >{e.url}</Link>
-                </div>
+                </div> */}
               </div>
             )
           })
