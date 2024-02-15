@@ -3,16 +3,10 @@
   justify-content: center !important;
   align-items: center !important;
   position: relative;
-  /* z-index: 2001 !important; */
   padding: 0vw !important;
   min-width: 0vh !important;
   width: 35px !important;
   height: 35px !important;
-  /* right: 20px !important;
-  bottom: 20px !important; */
-  /* background: yellow !important; */
-  /* background-image: url('../../images/lanEn.png'); */
-  /* background-image: url('../../images/lanEs.png'); */
   background-size: cover;
   border: 1px solid black !important;
 }
@@ -21,20 +15,15 @@
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-/*   position: fixed !important; */
-  /* z-index: 2001 !important; */
   padding: 0vw !important;
   min-width: 0vh !important;
   width: 35px !important;
   height: 35px !important;
-  /* right: 20px !important;
-  bottom: 20px !important; */
 }
 
 .moveTop {
   background: red;
   display: flex;
-  /* position: relative; */
   position: absolute;
   bottom: 0px;
   right: 0px;

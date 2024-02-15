@@ -8,7 +8,6 @@ function Error() {
   const english = useSelector((state: {english:boolean}) => state.english)
 
   const loadedUpdater = () => {
-    console.log("LOADED ALL GIF")
     let backgroundPH = document.getElementById(`placeholderAnimationError`)
     if (backgroundPH !== null) backgroundPH.style.display = "none"
     let errorGIF = document.getElementById(`errorGif`)

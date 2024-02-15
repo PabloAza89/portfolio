@@ -115,12 +115,6 @@
   transform: scale(1.05) translate(0px, 3px);
 }
 
-/* .anchor {
-  align-self: center;
-  color: #FFFFFF;
-  text-decoration: none;
-} */
-
 .boxMedia {
   display: flex;
   width: 220px;

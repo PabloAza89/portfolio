@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import efSet from '../../images/efSet.png';
 import fccCertJS from '../../images/fccCertJS.png';
@@ -7,20 +6,13 @@ import attention from '../../images/attentionToDetail.png';
 import loadingImage from '../../images/loadingImage.png';
 import css from './CertificationsCSS.module.css';
 import Bubbles from '../Bubbles/Bubbles';
+import { arrayCertificationsI } from '../../interfaces/interfaces';
 
 function Certifications() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
 
-  interface arrayI {
-    id: number,
-    title: string,
-    media: any,
-    href: string,
-    url: string
-  }
-
-  const array: arrayI[] = [
+  const array: arrayCertificationsI[] = [
     {
       id: 0,
       title: english ? `JavaScript Algorithms and Data Structures` : `Algoritmos Javascript y Estructuras de Datos`,
@@ -97,29 +89,14 @@ function Certifications() {
                     alt=""
                   />
                 </div>
-                <a 
-                  /* draggable="false" */
+                <a
                   className={`${css.url} ${css.anchor}`}
                   href={e.href}
                   target="_blank"
                   rel="noreferrer"
                 >
                   {e.url}
-                  {/* <Link
-                    draggable="false"
-                    className={css.anchor}
-                    to={e.href}
-                    target="_blank"
-                  >{e.url}</Link> */}
                 </a>
-                {/* <div className={css.url}>
-                  <Link
-                    draggable="false"
-                    className={css.anchor}
-                    to={e.href}
-                    target="_blank"
-                  >{e.url}</Link>
-                </div> */}
               </div>
             )
           })

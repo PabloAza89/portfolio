@@ -35,8 +35,6 @@ function Settings() {
     }
   }, [show])
 
-  console.log("SHOW", show)
-
   const keepAnimation = () => {
     setShow(true)
     clearTimeout(timeoutSettings.current)

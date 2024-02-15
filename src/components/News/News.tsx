@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import css from './NewsCSS.module.css';
 import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
 import $ from 'jquery';
+import { arrayNewsI } from '../../interfaces/interfaces';
 
 function News() {
 
@@ -26,12 +27,6 @@ function News() {
     { id: 0, date: '23-01-20', text: english ? ' Start developing my own first portfolio !  ' : ' Empezando a desarrollar mi primer portfolio propio !  ' },
   ]
 
-  interface arrayI {
-    id: number,
-    date: string,
-    text: string,
-  }
-
   let [ startIndex, setStartIndex ]  = useState(0)
   let [ endIndex, setEndIndex ] = useState(7)
 
@@ -49,7 +44,7 @@ function News() {
     }
   }
 
-  let array: arrayI[] = preArray.slice(startIndex, endIndex)
+  let array: arrayNewsI[] = preArray.slice(startIndex, endIndex)
 
   const intervalRef = useRef<ReturnType<typeof setInterval>[]>([]);
   const textRef: MutableRefObject<any> = useRef<HTMLDivElement[] | null>([]);

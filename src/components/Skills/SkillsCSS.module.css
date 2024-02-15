@@ -162,13 +162,6 @@
   right: 200px !important;
 }
 
-@keyframes test444 {
-  0% { transform: translateX(0px) }
-  50% { transform: translateX(-194px) }
-  75% { transform: translateX(-194px) }
-  100% { transform: translateX(0px) }
-}
-
 .middle {
   display: flex;
   position: relative;
@@ -260,7 +253,7 @@
   to { height: calc((var(--percentage) + 5) * 2px) }
 }
 
-.testBorder {
+.borderLeftSeparator {
   border-left: 2px solid black;
   border-image: linear-gradient(to top, black 0px, black 20px, transparent 20px) 1;
 }

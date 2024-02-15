@@ -1,17 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import css from './MessageMeCSS.module.css';
 import TextField from '@mui/material/TextField';
 import Swal from 'sweetalert2'
-import { setTimer, stopTimer, setNumberTimer, setTimerEnabled } from '../../actions';
-import store from '../../store/store';
 
 function MessageMe() {
 
-  const dispatch = useDispatch()
   const english = useSelector((state: {english:boolean}) => state.english)
-
   const [name, setName] = useState<string>("")
   const [message, setMessage] = useState<string>("")
   const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
@@ -29,10 +25,7 @@ function MessageMe() {
       setDisableInputs(true)
       spinnerCircle.style.display = "flex";
       loadingText.style.display = "flex";
-      svSleepTimeout.current = setTimeout(() => {
-        console.log("TIMEs UP")
-        serverSleep.style.display = "flex";
-      }, 2400)
+      svSleepTimeout.current = setTimeout(() => serverSleep.style.display = "flex", 2400)
     }
     else if (!showMessageSpinner && spinnerCircle && loadingText) {
       setDisableInputs(false)
@@ -122,17 +115,14 @@ function MessageMe() {
     let lastMessageLS: string | null = localStorage.getItem('lastMessage');
 
     if (lastMessageLS !== null) {
-      currentSec.current = ((5000 - (Date.now() - parseInt(lastMessageLS))) / 1000).toFixed(0)
+      currentSec.current = ((60000 - (Date.now() - parseInt(lastMessageLS))) / 1000).toFixed(0)
 
       let updateDisplay = () => {
-        console.log("NEXT targetSec.current",  currentSec.current)
         if (currentSec.current > 1) display.current = { text: { en: "seconds", es: "segundos" }, secs: currentSec.current }
-        //else if (currentSec.current < 1) display.current = { text: { en: "seconds", es: "segundos" }, secs: 0 }
         else display.current = { text: { en: "second", es: "segundo" }, secs: 1 }
       }
 
       updateDisplay()
-      console.log("FIRST targetSec.current",  currentSec.current)
 
       Toast.fire({
         showConfirmButton: false,
@@ -142,12 +132,10 @@ function MessageMe() {
           'You must wait to send another message !' :
           'Debes esperar para enviar otro mensaje !',
         timerProgressBar: true,
-        //timerProgressBar: false,
         html:
           english ?
           `Please, wait <strong>${display.current.secs}</strong> ${display.current.text.en}.<br/><br/>` :
           `Por favor, espera <strong>${display.current.secs}</strong> ${display.current.text.es}.<br/><br/>`,
-        //timer: 200500,
         timer: 2500,
         customClass: { popup: `${css.popup}` },
         willClose: () => clearInterval(interval)
@@ -157,8 +145,6 @@ function MessageMe() {
         currentSec.current -= 1
 
         if (currentSec.current <= 0) {
-          //Toast.getHtmlContainer().innerHTML = `Please, wait.<br/><br/>`
-
           Toast.stopTimer()
           let el = document.querySelector('.swal2-timer-progress-bar') as HTMLElement
           if (el !== null) el.style.display = 'none';
@@ -170,17 +156,14 @@ function MessageMe() {
             confirmButtonText: `OK`,
             confirmButtonColor: '#4baaa1'
           })
-          console.log("ENTRO 1")
           clearInterval(interval)
         } else {
-          console.log("ENTRO 2")
           updateDisplay()
           if (lastMessageLS !== null) {
             Toast.getHtmlContainer().innerHTML =
               english ?
               `Please, wait <strong>${display.current.secs}</strong> ${display.current.text.en}.<br/><br/>` :
-              `Por favor, espera <strong>${display.current.secs}</strong> ${display.current.text.es}.<br/><br/>`;
-     
+              `Por favor, espera <strong>${display.current.secs}</strong> ${display.current.text.es}.<br/><br/>`
           }
         }
       }, 1000)
@@ -202,9 +185,8 @@ function MessageMe() {
       .then(res => res.json())
       .then(res => { if (!res.success) throw new Error(); return res })
       .then(() => {
-        sentNotif(); handleTimerStart();
-        setSentButtonDisabled(false); setClearButtonDisabled(false);
-        setShowMessageSpinner(false); clearBoth();
+        sentNotif(); setSentButtonDisabled(false);
+        setClearButtonDisabled(false); setShowMessageSpinner(false); clearBoth();
         localStorage.setItem('lastMessage', `${Date.now().toString()}`);
       })
       .catch(error => {console.error("Error:", error); noSentNotif(); setSentButtonDisabled(false); setClearButtonDisabled(false); setShowMessageSpinner(false) })
@@ -214,23 +196,6 @@ function MessageMe() {
     if (name?.length !== 0 && name?.trim() !== "" && message?.length !== 0 && message?.trim() !== "") {setSentButtonDisabled(true); setClearButtonDisabled(true); setShowMessageSpinner(true); fetchData()}
     else emptyMessage()
   };
-
-  let timerID: any
-
-  const handleTimerStart = () => {
-    timerID = setInterval(handleTimerStartCB, 1000);
-    dispatch(setNumberTimer(timerID))
-    dispatch(setTimerEnabled(true))
-  }
-
-  const handleTimerStartCB = () => {
-    if (store.getState().timerEnabled) dispatch(setTimer(1))
-    if (store.getState().timer === 0) {
-      dispatch(setTimerEnabled(false))
-      clearInterval(store.getState().numberTimer);
-      dispatch(stopTimer(60))
-    }
-  }
 
   return (
     <div className={css.background}>
@@ -283,7 +248,7 @@ function MessageMe() {
           { english ? 'SEND MESSAGE' : 'ENVIAR MENSAJE' }
         </Button>
       </div>
-      <div className={css.messageLoadingSpinner} >
+      <div className={css.messageLoadingSpinner}>
         <div className={css.divSpinner} />
         <div className={css.divSpinner} />
         <div className={css.divSpinner} />
@@ -297,9 +262,8 @@ function MessageMe() {
             `ENVIANDO MENSAJE..`
           }
         </div>
-        
         <div className={css.serverSleepText}>
-          <div className={css.serverSleepBG}></div>
+          <div className={css.serverSleepBG} />
           {
             english ?
             <div>IT'S SEEMS SERVER IS SLEEPING..<br/>WAKING UP SERVER..<br/>PLEASE WAIT..</div> :

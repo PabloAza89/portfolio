@@ -6,19 +6,13 @@ import react from '../../images/react.png';
 import redux from '../../images/redux.png';
 import sequelize from '../../images/sequelize.png';
 import css from './TechnologiesCSS.module.css';
+import { arrayTechnologiesI } from '../../interfaces/interfaces';
 
 function Technologies() {
 
   const english = useSelector((state: { english:boolean }) => state.english)
 
-  interface arrayI {
-    id: number,
-    icon: any,
-    title: string,
-    url: string
-  }
-
-  const array: arrayI[] = [
+  const array: arrayTechnologiesI[] = [
     { id: 0, icon: react, title: `React`, url: english ? `https://react.dev/` : `https://es.react.dev/` },
     { id: 1, icon: redux, title: `Redux`, url: english ? `https://redux.js.org/` : `https://es.redux.js.org/` },
     { id: 2, icon: javascript, title: `Javascript`, url: english ? `https://developer.mozilla.org/en-US/docs/Web/JavaScript` : `https://developer.mozilla.org/es/docs/Web/JavaScript` },
@@ -29,7 +23,7 @@ function Technologies() {
 
   return (
     <div className={css.background}>
-      <div className={css.testTest}>
+      <div className={css.eachTechRow}>
         {
           array.slice(0, Math.floor(array.length / 2)).map((e) => {
             return (
@@ -48,7 +42,7 @@ function Technologies() {
           })
         }
       </div>
-      <div className={css.testTest}>
+      <div className={css.eachTechRow}>
         {
           array.slice(Math.floor(array.length / 2)).map((e) => {
             return (

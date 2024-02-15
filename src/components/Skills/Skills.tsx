@@ -3,20 +3,14 @@ import { useState, useEffect, useRef, useMemo, MutableRefObject } from 'react';
 import css from './SkillsCSS.module.css';
 import { useSelector } from 'react-redux';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
-import { CSSRuleExtended } from '../../interfaces/interfaces';
+import { CSSRuleExtended, arraySkillsI } from '../../interfaces/interfaces';
 import $ from 'jquery';
 
 function Skills() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
 
-  interface arrayI {
-    id: number,
-    title: string,
-    percentage: number
-  }
-
-  const array: arrayI[] = [
+  const array: arraySkillsI[] = [
     { id: 0, title: 'HTML & CSS', percentage: 70 },
     { id: 1, title: 'Sequelize', percentage: 60 },
     { id: 2, title: 'Javascript', percentage: 90 },
@@ -42,40 +36,23 @@ function Skills() {
     for (const ssI in document.styleSheets) {
       if (document.styleSheets[ssI].href === null) {
         for (const cssrI in document.styleSheets[ssI].cssRules) {
-          if (document.styleSheets[ssI].cssRules[cssrI].cssText !== undefined) {
+          if (
+            document.styleSheets[ssI].cssRules[cssrI].cssText !== undefined &&
+            document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+            (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined
+          ) {
             if (
-              document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined &&
               (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width < 1px)'
-            ) {
-                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth}px)`// Nº1 850
-                //break;
-            }
+            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth}px)`// Nº1 850
             if (
-              document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined &&
               (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width >= 2px)'
-            ) {
-              console.log("EXECUTED aaa");
-                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width >= ${targetWidth}px)` // Nº2 850
-                //break;
-            }
+            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width >= ${targetWidth}px)` // Nº2 850
             if (
-              document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined &&
               (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width < 3px)'
-            ) {
-                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº3 856
-                //break;
-            }
+            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº3 856
             if (
-              document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined &&
               (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (max-width: 4px)'
-            ) {
-                (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${targetWidth + 91}px)` // Nº4 759px
-                break;
-            }
+            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${targetWidth + 91}px)` // Nº4 759px 
           }
         }
       }
@@ -101,7 +78,7 @@ function Skills() {
 
   useEffect(() => {
     levels.forEach(e => {
-      $(`#buttonTest123${e.id}`)
+      $(`#buttonColorFixed${e.id}`)
         .css('animation', `${css.shakeKFSkills} 6s calc(2.5s + (${e.id} * .1s)) infinite`)
     })
   })
@@ -109,22 +86,21 @@ function Skills() {
   const inputRef: MutableRefObject<any> = useRef<HTMLDivElement[] | null>([]);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  const handleTest = (id: any) => {
+  const handleAnimation = (id: any) => {
     levels.forEach(e => {
-      $(`#buttonTest123${e.id}`)
+      $(`#buttonColorFixed${e.id}`)
         .css(`animation`,`none`)
     })
     clearTimeout(timeoutRef.current[id])
     if (inputRef.current[id] !== null) inputRef.current[id].classList.toggle(css.toggleClass);
     const autoHideLanguage = () => {
       if (inputRef.current[id].classList.length === 2) {
-        $(`#buttonTest123${id}`).trigger("click");
+        $(`#buttonColorFixed${id}`).trigger("click");
         clearTimeout(timeoutRef.current[id])
         $(`#barInner${id}`)
           .on("transitionend webkitTransitionEnd oTransitionEnd", function(){
-            console.log("END")
             levels.forEach(e => {
-              $(`#buttonTest123${e.id}`)
+              $(`#buttonColorFixed${e.id}`)
                 .css('animation', `${css.shakeKFSkills} 6s calc(2.5s + (${e.id} * .1s)) infinite`)
             })
           })
@@ -140,8 +116,7 @@ function Skills() {
       if (window.matchMedia(`(width > ${targetWidth - 1}px)`).matches) {
         timeoutRef.current.forEach((e, idx) => {
           if (inputRef.current[idx].classList.length === 2) {
-            console.log("EEE")
-            $(`#buttonTest123${idx}`)
+            $(`#buttonColorFixed${idx}`)
               .trigger("click")
           }
         })
@@ -160,19 +135,13 @@ function Skills() {
     const el = document.getElementById('sliderBoxY');
     if (el !== null) {
       const mouseEnterOnScoreY = () => {
-        //if (heightDev <= 273) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
-        //if (heightDev <= 273 || widthDev <= 758) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
         if (heightDev < 273) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
-        
+
         let pos = { top: 0, y: 0 };
 
         const mouseDownHandlerY = function (e: any) {
-          //el.style.cursor = 'grabbing';
-          //el.style.userSelect = 'none';
           pos = {
-            
             top: el.scrollTop,
-            
             y: e.clientY,
           }
           if (heightDev < 273) {
@@ -186,14 +155,11 @@ function Skills() {
         }
 
         const mouseMoveHandlerY = function (e: any) { // HOW MUCH MOUSE HAS MOVED
-          //const dx = e.clientX - pos.x;
           const dy = e.clientY - pos.y;
           el.scrollTop = pos.top - dy;
-          //el.scrollLeft = pos.left - dx;
         }
 
         const mouseUpHandlerY = function () {
-          //el.style.cursor = 'grab'
           el.style.removeProperty('user-select')
           el.removeEventListener('mousemove', mouseMoveHandlerY)
           el.removeEventListener('mouseup', mouseUpHandlerY)
@@ -204,7 +170,6 @@ function Skills() {
           el.removeEventListener('mouseup', mouseUpHandlerY);
           el.removeEventListener('mousedown', mouseDownHandlerY)
           el.removeEventListener('mousemove', mouseMoveHandlerY);
-          //el.style.cursor = 'default'
         })
       }
       el.addEventListener("mouseenter", mouseEnterOnScoreY)
@@ -297,7 +262,7 @@ function Skills() {
               <div className={css.chartRow}>
                 {array.map((e, index) => {
                   return (
-                    <div className={css.testBorder} key={index}>
+                    <div className={css.borderLeftSeparator} key={index}>
                       <div
                         style={{ "--percentage": e.percentage } as React.CSSProperties}
                         className={css.columnBar}
@@ -370,11 +335,11 @@ function Skills() {
               </div>
               <button
                 tabIndex={-1}
-                id={`buttonTest123${e.id}`}
+                id={`buttonColorFixed${e.id}`}
                 style={{ "--colorBar": e.color, "--delay": e.id } as React.CSSProperties}
                 className={css.colorFixed}
                 onClick={() => {
-                  handleTest(e.id)
+                  handleAnimation(e.id)
                 }}
               />
             </div>

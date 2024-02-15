@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-//import LightMode from '@mui/icons-material/LightMode';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDataTheme } from '../../actions';
@@ -8,33 +7,11 @@ import {
   DarkMode as DarkModeIcon
 } from '@mui/icons-material/';
 import css from './DarkModeCSS.module.css';
-import { CSSRuleExtended } from '../../interfaces/interfaces';
-declare namespace CSS {
-  interface PropertyDefinition {
-    name: string
-    syntax?: string
-    inherits: boolean
-    initialValue?: string
-  }
-  function registerProperty (propertyDefinition: PropertyDefinition): undefined
-}
 
 function DarkMode() {
 
   const dispatch = useDispatch()
   const dataTheme = useSelector((state: { dataTheme: string }) => state.dataTheme)
-
-  /* useEffect(() => {
-    let night: string | null = localStorage.getItem('night');
-    if (night === ( null || 'false' )) dispatch(setDarkMode(false))
-    if (night === 'true') dispatch(setDarkMode(true))
-  }) */
-
- /*  interface CSS {
-    registerProperty: (any) => any
-  } */
-
-  
 
   useEffect(() => {
     if (dataTheme === "os") {
@@ -56,14 +33,11 @@ function DarkMode() {
     return () => OSValue.removeEventListener("change", abc)
   })
 
-  console.log("theme theme", dataTheme)
-
   let arr = [ "os", "light", "dark" ]
 
   return (
     <Button
       onClick={() => {
-        //console.log("CLICKED")
         if (arr.indexOf(dataTheme) + 1 === arr.length) {
           dispatch(setDataTheme(arr[0]))
           localStorage.setItem('dataTheme', (arr[0]).toString());
@@ -71,7 +45,6 @@ function DarkMode() {
           dispatch(setDataTheme(arr[arr.indexOf(dataTheme) + 1]))
           localStorage.setItem('dataTheme', (arr[arr.indexOf(dataTheme) + 1]).toString());
         }
-        //console.log("111", dataTheme)
       }}
       variant="contained"
       className={css.background}

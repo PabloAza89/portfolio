@@ -68,9 +68,7 @@ function Projects() {
           el.style.userSelect = 'none';
           pos = {
             left: el.scrollLeft,
-            //top: el.scrollTop,
             x: e.clientX,
-            //y: e.clientY,
           }
           if (
             children.clientWidth > parent.clientWidth ||
@@ -87,8 +85,6 @@ function Projects() {
 
         const mouseMoveHandler = function (e: any) { // HOW MUCH MOUSE HAS MOVED
           const dx = e.clientX - pos.x;
-          //const dy = e.clientY - pos.y;
-          //el.scrollTop = pos.top - dy;
           el.scrollLeft = pos.left - dx;
         }
 
@@ -154,19 +150,11 @@ function Projects() {
     const el = document.getElementById('sliderBoxYProjects');
     if (el !== null) {
       const mouseEnterOnScoreY = () => {
-        //if (heightDev <= 273) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
-        //if (heightDev <= 273 || widthDev <= 758) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
-        //if (heightDev < 456) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
-        
         let pos = { top: 0, y: 0 };
 
         const mouseDownHandlerY = function (e: any) {
-          //el.style.cursor = 'grabbing';
-          //el.style.userSelect = 'none';
           pos = {
-            
             top: el.scrollTop,
-            
             y: e.clientY,
           }
           if (heightDev < 456) {
@@ -180,14 +168,11 @@ function Projects() {
         }
 
         const mouseMoveHandlerY = function (e: any) { // HOW MUCH MOUSE HAS MOVED
-          //const dx = e.clientX - pos.x;
           const dy = e.clientY - pos.y;
           el.scrollTop = pos.top - dy;
-          //el.scrollLeft = pos.left - dx;
         }
 
         const mouseUpHandlerY = function () {
-          //el.style.cursor = 'grab'
           el.style.removeProperty('user-select')
           el.removeEventListener('mousemove', mouseMoveHandlerY)
           el.removeEventListener('mouseup', mouseUpHandlerY)
@@ -198,7 +183,6 @@ function Projects() {
           el.removeEventListener('mouseup', mouseUpHandlerY);
           el.removeEventListener('mousedown', mouseDownHandlerY)
           el.removeEventListener('mousemove', mouseMoveHandlerY);
-          //el.style.cursor = 'default'
         })
       }
       el.addEventListener("mouseenter", mouseEnterOnScoreY)
@@ -219,7 +203,6 @@ function Projects() {
     if (el !== null) {
       el.classList.toggle(css.boxLowerToggle);
     }
-    //let ell = document.getElementById(`boxLower`)
     if (el !== null && el.classList.length === 2) {
       clearTimeout(timeoutProjects.current)
       timeoutProjects.current = (setTimeout(autoHideProjects, 4000))
@@ -257,7 +240,7 @@ function Projects() {
         <MenuItem value={"Games"}>Games</MenuItem>
       </Select>
 
-      <div className={css.testTest}>
+      <div className={css.projectsOuterContainer}>
         <div
           ref={useHorizontalScroll()}
           id={`sliderRollProjects`}
