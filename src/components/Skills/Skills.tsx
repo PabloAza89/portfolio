@@ -4,7 +4,6 @@ import css from './SkillsCSS.module.css';
 import { useSelector } from 'react-redux';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
 import { CSSRuleExtended, arraySkillsI } from '../../interfaces/interfaces';
-import $ from 'jquery';
 
 function Skills() {
 
@@ -33,26 +32,20 @@ function Skills() {
   ], [english]);
 
   const findTargetStyleSheet = async () => {
-    for (const ssI in document.styleSheets) {
-      if (document.styleSheets[ssI].href === null) {
-        for (const cssrI in document.styleSheets[ssI].cssRules) {
+    let sheets = document.styleSheets
+    for (const ssI in sheets) {
+      if (sheets[ssI].href === null) {
+        let cssRules = sheets[ssI].cssRules
+        for (const cssrI in cssRules) {
           if (
-            document.styleSheets[ssI].cssRules[cssrI].cssText !== undefined &&
-            document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
-            (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined
+            cssRules[cssrI].cssText !== undefined &&
+            cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+            (cssRules[cssrI] as CSSRuleExtended).media !== undefined
           ) {
-            if (
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width < 1px)'
-            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth}px)`// Nº1 850
-            if (
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width >= 2px)'
-            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width >= ${targetWidth}px)` // Nº2 850
-            if (
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width < 3px)'
-            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº3 856
-            if (
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (max-width: 4px)'
-            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${targetWidth + 91}px)` // Nº4 759px 
+            let t = (cssRules[cssrI] as CSSRuleExtended).media // target
+            if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
+            if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
+            if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
           }
         }
       }
@@ -60,26 +53,21 @@ function Skills() {
   }
 
   useEffect(() => {
+    let barInner = document.querySelectorAll("[class*='barInner']") as NodeListOf<HTMLElement>
     window.onload = () => {
       findTargetStyleSheet()
-      .then(() => {
-        $(`[class*='barInner']`)
-          .css("visibility", "visible")
-      })
+      .then(() => barInner.forEach(e => e.style.visibility = "visible"))
     }
     if (document.readyState === "complete") {
       findTargetStyleSheet()
-      .then(() => {
-        $(`[class*='barInner']`)
-          .css("visibility", "visible")
-      })
+      .then(() => barInner.forEach(e => e.style.visibility = "visible"))
     }
   }, [])
 
   useEffect(() => {
     levels.forEach(e => {
-      $(`#buttonColorFixed${e.id}`)
-        .css('animation', `${css.shakeKFSkills} 6s calc(2.5s + (${e.id} * .1s)) infinite`)
+      let button = document.getElementById(`buttonColorFixed${e.id}`) as HTMLElement
+      button.style.animation = `${css.shakeKFSkills} 6s calc(2.5s + (${e.id} * .1s)) infinite`
     })
   })
 
@@ -88,22 +76,21 @@ function Skills() {
 
   const handleAnimation = (id: any) => {
     levels.forEach(e => {
-      $(`#buttonColorFixed${e.id}`)
-        .css(`animation`,`none`)
+      let currentButton = document.getElementById(`buttonColorFixed${e.id}`) as HTMLElement
+      currentButton.style.animation = `none`
     })
     clearTimeout(timeoutRef.current[id])
     if (inputRef.current[id] !== null) inputRef.current[id].classList.toggle(css.toggleClass);
     const autoHideLanguage = () => {
       if (inputRef.current[id].classList.length === 2) {
-        $(`#buttonColorFixed${id}`).trigger("click");
-        clearTimeout(timeoutRef.current[id])
-        $(`#barInner${id}`)
-          .on("transitionend webkitTransitionEnd oTransitionEnd", function(){
-            levels.forEach(e => {
-              $(`#buttonColorFixed${e.id}`)
-                .css('animation', `${css.shakeKFSkills} 6s calc(2.5s + (${e.id} * .1s)) infinite`)
-            })
+        (document.getElementById(`buttonColorFixed${id}`) as HTMLElement).click()
+        clearTimeout(timeoutRef.current[id]);
+        (document.getElementById(`barInner${id}`) as HTMLElement).addEventListener("transitionend", () => {
+          levels.forEach(e => {
+            let currentButton = document.getElementById(`buttonColorFixed${e.id}`) as HTMLElement
+            currentButton.style.animation = `${css.shakeKFSkills} 6s calc(2.5s + (${e.id} * .1s)) infinite`
           })
+        });
       }
     }
     timeoutRef.current[id] = (setTimeout(autoHideLanguage, 3000))
@@ -116,8 +103,7 @@ function Skills() {
       if (window.matchMedia(`(width > ${targetWidth - 1}px)`).matches) {
         timeoutRef.current.forEach((e, idx) => {
           if (inputRef.current[idx].classList.length === 2) {
-            $(`#buttonColorFixed${idx}`)
-              .trigger("click")
+            (document.getElementById(`buttonColorFixed${idx}`) as HTMLElement).click()
           }
         })
       }

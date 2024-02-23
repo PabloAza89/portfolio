@@ -11,7 +11,6 @@ import tictac2 from '../../images/tictac2.png';
 import loadingImage from '../../images/loadingImage.png';
 import css from './ProjectsCSS.module.css';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
-import $ from 'jquery';
 
 function Projects() {
 
@@ -61,7 +60,7 @@ function Projects() {
           children.clientWidth > parent.clientWidth ||
           heightDev < 456
         ) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
-        let pos = { /* top: 0, */ left: 0, x: 0, /* y: 0 */ };
+        let pos = { left: 0, x: 0 };
 
         const mouseDownHandler = function (e: any) {
           el.style.cursor = 'grabbing';
@@ -193,9 +192,18 @@ function Projects() {
 
   const timeoutProjects = useRef<ReturnType<typeof setTimeout>>();
   const autoHideProjects = () => {
-    $(`#buttonFlap`).trigger("click")
+    (document.getElementById(`buttonFlap`) as HTMLElement).click()
     clearTimeout(timeoutProjects.current)
   }
+
+  useEffect(() => {
+    let el = document.getElementById(`boxLower`)
+    if (heightDev > 523) {
+      if (el !== null && el.classList.length === 2) {
+        (document.getElementById(`buttonFlap`) as HTMLElement).click()
+      }
+    }
+  }, [heightDev])
 
   const handleClickFlap = () => {
     clearTimeout(timeoutProjects.current)

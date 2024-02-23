@@ -2,10 +2,7 @@ import { useEffect } from 'react';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDataTheme } from '../../actions';
-import {
-  LightMode,
-  DarkMode as DarkModeIcon
-} from '@mui/icons-material/';
+import { LightMode, DarkMode as DarkModeIcon } from '@mui/icons-material/';
 import css from './DarkModeCSS.module.css';
 
 function DarkMode() {

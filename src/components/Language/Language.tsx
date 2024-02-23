@@ -5,12 +5,9 @@ import { Button } from '@mui/material';
 import css from './LanguageCSS.module.css';
 import lanEn from '../../images/lanEn.png';
 import lanEs from '../../images/lanEs.png';
-import $ from 'jquery';
-import { easings } from '../commons/CommonCSS';
 
 function Language() {
 
-  easings() // Jquery easings..
   const dispatch = useDispatch()
   const english = useSelector((state: {english:boolean}) => state.english)
 
@@ -26,8 +23,6 @@ function Language() {
   let languageHandler = () => {
     dispatch(languageChanger(!english))
     localStorage.setItem('langEn', (!english).toString());
-    $(`#buttonLanguage`)
-      .css('background-image', `url('../../images/lanEs.png')`)
   }
 
   return (

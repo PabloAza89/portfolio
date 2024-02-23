@@ -16,6 +16,12 @@
   inherits: false;
 }
 
+@property --percentageGradient {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}
+
 :root {
   --skillsTitleSkills: #b86b5a;
   --skillsTitleColorSkills: white;
@@ -144,6 +150,8 @@
 
 .barInner {
   display: flex;
+  background: red; /* DEV */
+  background: none;
   position: absolute;
   right: 0px;
   flex-direction: row;
@@ -151,7 +159,6 @@
   width: 200px;
   height: 49px;
   margin-bottom: 0px;
-  background: none;
   align-items: flex-end;
   border-radius: 10px 0px 0px 0px;
   visibility: hidden;
@@ -227,6 +234,7 @@
   flex-direction: row;
   /* background: darkgreen; */ /* DEV */
   height: 261px;
+  /* overflow: hidden; */ /* DEV */
 }
 
 .chartRow {
@@ -245,37 +253,60 @@
   flex-direction: row;
   justify-content: center;
   width: 90px;
-  border-bottom: 2px solid black;
+  animation: translate 1.2s linear;
+}
+
+@keyframes translate {
+  from { bottom: calc(((var(--percentage) + 5) * -2px) + 10px) }
+  to { bottom: 0px }
+}
+
+@keyframes translate-retrigger {
+  from { bottom: calc(((var(--percentage) + 5) * -2px) + 10px) }
+  to { bottom: 0px }
 }
 
 @keyframes growAnimation {
   from { height: 0px; }
-  to { height: calc((var(--percentage) + 5) * 2px) }
+  to { height: calc(((var(--percentage) + 5) * 2px) - 30px) }
 }
 
 .borderLeftSeparator {
+  /* background: #66bacc; */ /* DEV */
   border-left: 2px solid black;
   border-image: linear-gradient(to top, black 0px, black 20px, transparent 20px) 1;
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 100%,
+    33px 100%,
+    0% calc(100% - 32px));
 }
 
 .leftSide {
   width: 10px;
-  animation: growAnimation 1.2s linear;
   background:
-    linear-gradient(225deg, gray 7px, var(--leftSkills) 7px, transparent),
-    linear-gradient(45deg, #0000 7px, silver 0);
-  transition: --leftSkills 1s;
+    linear-gradient(225deg, gray 7px, var(--leftSkills) 7px, transparent var(--percentageGradient)),
+    linear-gradient(45deg, #0000 7px, silver 0px);
+  transition: --leftSkills 1.2s;
+  animation: gradient 1.2s linear;
+}
+
+@keyframes gradient {
+  from { --percentageGradient: 0% }
+  to { --percentageGradient: 100% }
+}
+
+@keyframes gradient-retrigger {
+  from { --percentageGradient: 0% }
+  to { --percentageGradient: 100% }
 }
 
 .centerSide {
   display: flex;
-  position: relative;
-  align-items: center;
-  justify-content: flex-start;
+  top: 0px;
   width: 30px;
   height: calc((var(--percentage) + 5) * 2px);
-  animation: growAnimation 1.2s linear;
-  flex-direction: column-reverse;
   text-wrap: nowrap;
   /* background: blue; */ /* DEV */
   background: linear-gradient(to bottom, gray 10px, var(--centerSkills) 10px);
@@ -286,27 +317,21 @@
   display: flex;
   width: 10px;
   height: calc((var(--percentage) + 5) * 2px);
-  animation: growAnimation 1.2s linear;
   background:
     linear-gradient(180deg, #0000 10px, var(--rightSkills) 0),
     linear-gradient(225deg, #0000 7px, gray 7px);
   transition: --rightSkills 1s;
 }
 
-@keyframes growAnimationn {
-  from { height: 0px; }
-  to { height: calc(((var(--percentage) + 5) * 2px) - 30px) }
-}
-
 .titlesVerticalContainer {
-  display: none;
+  display: none !important;
   position: absolute;
   align-items: center;
   justify-content: flex-end;
   flex-direction: column;
   width: 37px;
   height: calc(((var(--percentage) + 5) * 2px) - 30px);
-  animation: growAnimationn 1.2s linear;
+  animation: growAnimation 1.2s linear;
   text-wrap: nowrap;
   bottom: 0px;
   margin-left: 31px;
@@ -388,7 +413,7 @@
 }
 
 @media screen
-and (width >= 2px) { /* Nº2 850 */
+and (width > 1px) { /* Nº1 849 - DYNAMIC MEDIA QUERY */
   .barInner {
     transition: none !important;
   }
@@ -398,7 +423,7 @@ and (width >= 2px) { /* Nº2 850 */
 }
 
 @media screen
-and (width < 3px) { /* Nº3 856 */
+and (width < 2px) { /* Nº2 856 - DYNAMIC MEDIA QUERY */
   .background {
     justify-content: flex-start;
   }
@@ -414,7 +439,7 @@ and (width < 3px) { /* Nº3 856 */
 }
 
 @media screen
-and (width < 1px) { /* Nº1 850 */
+and (width < 3px) { /* Nº3 850 - DYNAMIC MEDIA QUERY */
   .background {
     /* background: yellow; */ /* DEV */
     width: 100%;
@@ -442,10 +467,6 @@ and (width < 1px) { /* Nº1 850 */
 }
 
 @media screen
-and (max-width: 4px) { /* Nº4 759 */
-}
-
-@media screen
 and (max-height: 407px) {
   .titlesBox, .titlesNext {
     display: none !important;
@@ -462,14 +483,11 @@ and (max-height: 407px) {
   .chartContainer, .scroll {
     height: 261px !important;
   }
+  .columnBar {
+    animation: translate-retrigger 1.2s linear;
+  }
   .leftSide {
-    animation: growAnimatioon 1.2s linear !important;
-  }
-  .centerSide {
-    animation: growAnimatioon 1.2s linear !important;
-  }
-  .rightSide {
-    animation: growAnimatioon 1.2s linear !important;
+    animation: gradient-retrigger 1.2s linear;
   }
 }
 
@@ -501,7 +519,3 @@ and (max-height: 273px) {
   }
 }
 
-@keyframes growAnimatioon {
-  from { height: 0px; }
-  to { height: calc((var(--percentage) + 5) * 2px) }
-}

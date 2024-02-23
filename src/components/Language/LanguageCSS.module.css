@@ -9,6 +9,7 @@
   height: 35px !important;
   background-size: cover;
   border: 1px solid black !important;
+  transition: background-image .2s ease-in-out !important;
 }
 
 .buttonSettings {

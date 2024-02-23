@@ -4,34 +4,26 @@ import DarkMode from '../DarkMode/DarkMode';
 import Language from '../Language/Language';
 import { Settings as SettingsIcon } from '@mui/icons-material/';
 import css from './SettingsCSS.module.css';
-import { easings } from '../commons/CommonCSS';
-import $ from 'jquery';
 
 function Settings() {
 
-  easings() // Jquery easings..
-
   const [ show, setShow ] = useState<boolean>(false)
   const timeoutSettings = useRef<ReturnType<typeof setTimeout>>();
-  const autoHideSettings = () => $(`#buttonSettings`).trigger("click")
+  const autoHideSettings = () => (document.getElementById(`buttonSettings`) as HTMLElement).click()
 
   useEffect(() => {
-    if (!show) { // show -> hidden
-      $(`#buttonSettings`).on("click", function() {
-        $(`#moveLeft`)
-          .animate({ left: -49 }, { queue: false, easing: 'easeOutCubic', duration: 800 })
-        $(`#moveTop`)
-          .animate({ top: -49 }, { queue: false, easing: 'easeOutCubic', duration: 800 })
-      })
+    if (!show) {
+      (document.getElementById(`buttonSettings`) as HTMLElement).addEventListener("click", () => {
+        (document.getElementById(`moveLeft`) as HTMLElement).style.left = '-49px';
+        (document.getElementById(`moveTop`) as HTMLElement).style.top = '-49px';
+      });
       clearTimeout(timeoutSettings.current)
     }
-    else if (show) { // hidden -> show
-      $(`#buttonSettings`).on("click", function() {
-        $(`#moveLeft`)
-          .animate({ left: 0 }, { queue: false, easing: 'easeOutCubic', duration: 800 })
-        $(`#moveTop`)
-          .animate({ top: 0 }, { queue: false, easing: 'easeOutCubic', duration: 800 })
-      })
+    else if (show) {
+      (document.getElementById(`buttonSettings`) as HTMLElement).addEventListener("click", () => {
+        (document.getElementById(`moveLeft`) as HTMLElement).style.left = '0px';
+        (document.getElementById(`moveTop`) as HTMLElement).style.top = '0px';
+      });
     }
   }, [show])
 

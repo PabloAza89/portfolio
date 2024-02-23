@@ -3,7 +3,6 @@ import { useEffect, useRef, useState, MutableRefObject } from 'react';
 import { useSelector } from 'react-redux';
 import css from './NewsCSS.module.css';
 import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
-import $ from 'jquery';
 import { arrayNewsI } from '../../interfaces/interfaces';
 
 function News() {
@@ -66,17 +65,18 @@ function News() {
 
   const inputRef = useRef<HTMLDivElement>(null);
 
-  $(function() {
-    $('#buttonShowNews').on('click',function() {
+  useEffect(() => {
+    (document.getElementById(`buttonShowNews`) as HTMLElement).addEventListener("click", () => {
       if (inputRef.current) inputRef.current.classList.toggle(css.moveSliderBoxNews);
     });
-  });
+  }, [])
 
   useEffect(() => {
     var timer: any;
-    const removeTransition = () => {
-      $(`[class*='sliderBoxNews']`).css("transition", "none")
-      const addTransition = () => $(`[class*='sliderBoxNews']`).css("transition", "all 1.5s")
+    const removeTransition: () => void = () => {
+      let el = (document.querySelector("[class='sliderBoxNews']") as HTMLElement)
+      if (el !== null ) el.style.transition = "none"
+      const addTransition = () => (document.querySelector("[class='sliderBoxNews']") as HTMLElement).style.transition = "all 1.5s"
       clearTimeout(timer);
       timer = setTimeout(addTransition, 100);
     }
