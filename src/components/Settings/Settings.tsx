@@ -36,12 +36,11 @@ function Settings() {
   const [ overflowListener, setOverflowListener ] = useState<any>()
 
   useEffect(() => {
-    // console.log("TT", (document.querySelector(`[class*="AboutMeCSS_background"]`) as HTMLElement).offsetWidth)
     let el = Array.from(document.querySelectorAll(`[class*="CSS_background"]`))
-    let qq = el.filter((x:any) => x.offsetWidth !== 0)[0] as HTMLElement
-    if (qq !== null) {
-      setOverflowListener(qq.offsetWidth - qq.scrollWidth)
-      window.addEventListener('resize', function() { setOverflowListener(qq.offsetWidth - qq.scrollWidth) })
+    let target = el.filter((x:any) => x.offsetWidth !== 0)[0] as HTMLElement
+    if (target !== null) {
+      setOverflowListener(target.offsetWidth - target.scrollWidth)
+      window.addEventListener('resize', function() { setOverflowListener(target.offsetWidth - target.scrollWidth) })
     }
   }, [])
 

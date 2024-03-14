@@ -7,11 +7,12 @@ import { arrayNewsI } from '../../interfaces/interfaces';
 
 function News() {
 
-  const english = useSelector((state: {english:boolean}) => state.english)
+  const english = useSelector((state: { english:boolean }) => state.english)
 
   const [ show, setShow ] = useState<boolean>(false)
 
   const preArray = [
+    { id: 12, date: '24-03-13', text: english ? ' Removed all JQuery code from Portfolio App  ' : ' Se removió todo el codigo JQuery de Portfolio App  ' },
     { id: 11, date: '23-12-07', text: english ? ' Start using powerful Web Audio API  ' : ' Se empezó a utilizar la poderosa Web Audio API  ' },
     { id: 10, date: '23-11-24', text: english ? ' Start developing new project: TicTacToe  ' : ' Se empezó a desarrollar un nuevo proyecto: TicTacToe  ' },
     { id: 9, date: '23-10-31', text: english ? ' Start using .yml files for GitHub actions/workflow  ' : ' Se empezó a utilizar archivos .yml para las actions/workflow de GitHub  ' },

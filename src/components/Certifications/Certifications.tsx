@@ -53,12 +53,7 @@ function Certifications() {
 
   const certificationsBGHandler: () => void = () => {
     let el = (document.querySelector(`[class*="CertificationsCSS_mainBox"]`) as HTMLElement)
-    if (el !== null) {
-      console.log("A cli", el.clientWidth)
-      console.log("B off", el.offsetWidth)
-      //console.log("C scr", el.scrollWidth)
-      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
-    }
+    if (el !== null) document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
   }
 
   useEffect(() => {
@@ -67,9 +62,7 @@ function Certifications() {
     return () => window.removeEventListener('resize', certificationsBGHandler);
   },[])
 
-  window.addEventListener('load', function() {
-    certificationsBGHandler()
-  })
+  window.addEventListener('load', () => certificationsBGHandler())
 
   return (
     <div className={css.background}>

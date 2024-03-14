@@ -6,7 +6,7 @@ import css from './NavBarCSS.module.css';
 
 function NavBar() {
 
-  const english = useSelector((state: {english:boolean}) => state.english)
+  const english = useSelector((state: { english:boolean }) => state.english)
 
   function useHorizontalScroll() {
     const elRef = useRef<HTMLInputElement>(null);

@@ -14,7 +14,7 @@ import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 
 function Projects() {
 
-  const english = useSelector((state: {english:boolean}) => state.english)
+  const english = useSelector((state: { english:boolean }) => state.english)
   const [scrollSpeed, setScrollSpeed] = useState<any>(30)
 
   const [ heightDev, setHeightDev ] = useState<number>(window.innerHeight)
@@ -233,12 +233,7 @@ function Projects() {
 
   const projectsBGHandler: () => void = () => {
     let el = (document.querySelector(`[class*="ProjectsCSS_background"]`) as HTMLElement)
-    if (el !== null) {
-      //console.log("A cli", el.clientWidth)
-      //console.log("B off", el.offsetWidth)
-      //console.log("C scr", el.scrollWidth)
-      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
-    }
+    if (el !== null) document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
   }
 
   useEffect(() => {
@@ -247,9 +242,7 @@ function Projects() {
     return () => window.removeEventListener('resize', projectsBGHandler);
   },[])
 
-  window.addEventListener('load', function() {
-    projectsBGHandler()
-  })
+  window.addEventListener('load', () => projectsBGHandler())
 
   return (
     <div

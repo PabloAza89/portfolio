@@ -7,7 +7,7 @@ import { CSSRuleExtended, arraySkillsI } from '../../interfaces/interfaces';
 
 function Skills() {
 
-  const english = useSelector((state: {english:boolean}) => state.english)
+  const english = useSelector((state: { english:boolean }) => state.english)
 
   const array: arraySkillsI[] = [
     { id: 0, title: 'HTML & CSS', percentage: 70 },
@@ -62,6 +62,7 @@ function Skills() {
       findTargetStyleSheet()
       .then(() => barInner.forEach(e => e.style.visibility = "visible"))
     }
+  // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
@@ -112,6 +113,7 @@ function Skills() {
       setWidthDev(innerWidth);
     }
     window.addEventListener('resize', autoHideOnResize);
+  // eslint-disable-next-line
   },[])
 
   const [ heightDev, setHeightDev ] = useState<number>(window.innerHeight)
@@ -228,13 +230,7 @@ function Skills() {
 
   const skillsBGHandler: () => void = () => {
     let el = (document.querySelector(`[class*="SkillsCSS_background"]`) as HTMLElement)
-    if (el !== null) {
-      //console.log("A cli", el.clientWidth)
-      //console.log("B off", el.offsetWidth)
-      //console.log("C scr", el.scrollWidth)
-      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
-      //document.documentElement.style.setProperty("--diff", el.offsetHeight < 261 ? `6` : `0`);
-    }
+    if (el !== null) document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
   }
 
   useEffect(() => {
@@ -243,9 +239,7 @@ function Skills() {
     return () => window.removeEventListener('resize', skillsBGHandler);
   },[])
 
-  window.addEventListener('load', function() {
-    skillsBGHandler()
-  })
+  window.addEventListener('load', () => skillsBGHandler())
 
   return (
     <div

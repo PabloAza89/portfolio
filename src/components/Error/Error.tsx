@@ -17,12 +17,7 @@ function Error() {
 
   const errorBGHandler: () => void = () => {
     let el = (document.querySelector(`[class*="ErrorCSS_background"]`) as HTMLElement)
-    if (el !== null) {
-      console.log("A cli", el.clientWidth)
-      console.log("B off", el.offsetWidth)
-      //console.log("C scr", el.scrollWidth)
-      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
-    }
+    if (el !== null) document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
   }
 
   useEffect(() => {
@@ -31,9 +26,7 @@ function Error() {
     return () => window.removeEventListener('resize', errorBGHandler);
   },[])
 
-  window.addEventListener('load', function() {
-    errorBGHandler()
-  })
+  window.addEventListener('load', () => errorBGHandler())
 
   return (
     <div className={css.background}>

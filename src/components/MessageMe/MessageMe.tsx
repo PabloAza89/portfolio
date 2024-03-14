@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 
 function MessageMe() {
 
-  const english = useSelector((state: {english:boolean}) => state.english)
+  const english = useSelector((state: { english:boolean }) => state.english)
   const [name, setName] = useState<string>("")
   const [message, setMessage] = useState<string>("")
   const [sentButtonDisabled, setSentButtonDisabled] = useState<boolean>(false)
@@ -176,8 +176,8 @@ function MessageMe() {
     if (lastMessageLS !== null && (Date.now() - parseInt(lastMessageLS, 10)) < 60000) return MustWait()
 
     function fetchData() {
-      //fetch(`http://localhost:3001/`, {
-      fetch(`https://oval-transparent-ornament.glitch.me/`, {
+      //fetch(`http://localhost:3001/`, { // DEV
+      fetch(`https://oval-transparent-ornament.glitch.me/`, { // PROD
         method: "POST",
         body: JSON.stringify({ name: name, message: message }),
         headers: { "Content-Type": "application/json" }
@@ -199,13 +199,7 @@ function MessageMe() {
 
   const messageBGHandler: () => void = () => {
     let el = (document.querySelector(`[class*="MessageMeCSS_background"]`) as HTMLElement)
-    if (el !== null) {
-      //console.log("A cli", el.clientWidth)
-      //console.log("B off", el.offsetWidth)
-      //console.log("C scr", el.scrollWidth)
-      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
-      //document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.scrollWidth}`);
-    }
+    if (el !== null) document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
   }
 
   useEffect(() => {
@@ -214,9 +208,7 @@ function MessageMe() {
     return () => window.removeEventListener('resize', messageBGHandler);
   },[])
 
-  window.addEventListener('load', function() {
-    messageBGHandler()
-  })
+  window.addEventListener('load', () => messageBGHandler())
 
   return (
     <div className={css.background}>

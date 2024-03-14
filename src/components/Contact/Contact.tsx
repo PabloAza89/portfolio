@@ -64,12 +64,7 @@ function Contact() {
 
   const contactBGHandler: () => void = () => {
     let el = (document.querySelector(`[class*="ContactCSS_mainContainer"]`) as HTMLElement)
-    if (el !== null) {
-      //console.log("A cli", el.clientWidth)
-      //console.log("B off", el.offsetWidth)
-      //console.log("C scr", el.scrollWidth)
-      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
-    }
+    if (el !== null) document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
   }
 
   useEffect(() => {
@@ -78,9 +73,7 @@ function Contact() {
     return () => window.removeEventListener('resize', contactBGHandler);
   },[])
 
-  window.addEventListener('load', function() {
-    contactBGHandler()
-  })
+  window.addEventListener('load', () => contactBGHandler())
 
   return (
       <div className={css.background}>

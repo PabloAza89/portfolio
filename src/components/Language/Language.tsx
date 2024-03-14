@@ -9,7 +9,7 @@ import lanEs from '../../images/lanEs.png';
 function Language() {
 
   const dispatch = useDispatch()
-  const english = useSelector((state: {english:boolean}) => state.english)
+  const english = useSelector((state: { english:boolean }) => state.english)
 
   useEffect(() => {
     let el =  document.getElementById('buttonLanguage')

@@ -9,13 +9,7 @@ function AboutMe() {
 
   const aboutBGHandler: () => void = () => {
     let el = (document.querySelector(`[class*="AboutMeCSS_background"]`) as HTMLElement)
-    if (el !== null) {
-      //console.log("A cli", el.clientWidth)
-      //console.log("B off", el.offsetWidth)
-      //console.log("C scr", el.scrollWidth)
-      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
-      //document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.scrollWidth}`);
-    }
+    if (el !== null) document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
   }
 
   useEffect(() => {
@@ -24,9 +18,7 @@ function AboutMe() {
     return () => window.removeEventListener('resize', aboutBGHandler);
   },[])
 
-  window.addEventListener('load', function() {
-    aboutBGHandler()
-  })
+  window.addEventListener('load', () => aboutBGHandler())
 
   return (
     <div className={css.background}>

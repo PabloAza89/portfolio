@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { Button, SvgIcon } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import css from './HomeCSS.module.css';
 
 function Home() {
 
-  const english = useSelector((state: {english:boolean}) => state.english)
+  const english = useSelector((state: { english:boolean }) => state.english)
 
   useEffect(() => {
     let el = document.getElementById("homeBackground")
@@ -28,8 +28,6 @@ function Home() {
     }
   })
 
-  //const [ difference, setDifference ] = useState<number>(0)
-
   const homeBGHandler: () => void = () => {
     let el = (document.querySelector(`[class*="HomeCSS_background"]`) as HTMLElement)
     if (el !== null) {
@@ -37,7 +35,6 @@ function Home() {
       //console.log("B off", el.offsetWidth)
       //console.log("C scr", el.scrollWidth)
       document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
-      //document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.scrollWidth}`);
     }
   }
 
@@ -47,12 +44,10 @@ function Home() {
     return () => window.removeEventListener('resize', homeBGHandler);
   },[])
 
-  window.addEventListener('load', function() {
-    homeBGHandler()
-  })
+  window.addEventListener('load', () => homeBGHandler())
 
   return (
-    <div id={`homeBackground`} /* onLoad={() => homeBGHandler()} */ className={css.background}>
+    <div id={`homeBackground`} className={css.background}>
       <div className={css.leftContainer}>
         <div className={css.textContainer}>
           <div className={css.textOne}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</div>
