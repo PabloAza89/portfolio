@@ -197,6 +197,27 @@ function MessageMe() {
     else emptyMessage()
   };
 
+  const messageBGHandler: () => void = () => {
+    let el = (document.querySelector(`[class*="MessageMeCSS_background"]`) as HTMLElement)
+    if (el !== null) {
+      //console.log("A cli", el.clientWidth)
+      //console.log("B off", el.offsetWidth)
+      //console.log("C scr", el.scrollWidth)
+      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
+      //document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.scrollWidth}`);
+    }
+  }
+
+  useEffect(() => {
+    messageBGHandler()
+    window.addEventListener('resize', messageBGHandler);
+    return () => window.removeEventListener('resize', messageBGHandler);
+  },[])
+
+  window.addEventListener('load', function() {
+    messageBGHandler()
+  })
+
   return (
     <div className={css.background}>
       <div className={css.formContainer}>

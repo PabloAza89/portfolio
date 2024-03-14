@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, SvgIcon } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
@@ -28,8 +28,31 @@ function Home() {
     }
   })
 
+  //const [ difference, setDifference ] = useState<number>(0)
+
+  const homeBGHandler: () => void = () => {
+    let el = (document.querySelector(`[class*="HomeCSS_background"]`) as HTMLElement)
+    if (el !== null) {
+      //console.log("A cli", el.clientWidth)
+      //console.log("B off", el.offsetWidth)
+      //console.log("C scr", el.scrollWidth)
+      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
+      //document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.scrollWidth}`);
+    }
+  }
+
+  useEffect(() => {
+    homeBGHandler()
+    window.addEventListener('resize', homeBGHandler);
+    return () => window.removeEventListener('resize', homeBGHandler);
+  },[])
+
+  window.addEventListener('load', function() {
+    homeBGHandler()
+  })
+
   return (
-    <div id={`homeBackground`} className={css.background}>
+    <div id={`homeBackground`} /* onLoad={() => homeBGHandler()} */ className={css.background}>
       <div className={css.leftContainer}>
         <div className={css.textContainer}>
           <div className={css.textOne}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</div>

@@ -6,7 +6,7 @@
   --buttonMessageHome: #d6d6d6;
 }
 
-.background  {
+.background {
   display: flex;
   position: relative;
   height: calc(100% - 12px);
@@ -20,21 +20,22 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  width: 100%;
 }
 
 .background::-webkit-scrollbar {
   width: 6px;
-  background-color: #F5F5F5
+  background-color: #F5F5F5;
 }
 
 .background::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  background-color: #F5F5F5
+  background-color: #F5F5F5;
 }
 
 .background::-webkit-scrollbar-thumb {
   background-color: #000000;
-  border: 5px solid #555555
+  border: 5px solid #555555;
 }
 
 .leftContainer {
@@ -46,8 +47,13 @@
   justify-content: space-evenly;
   align-content: space-evenly;
   max-width: 800px;
-  width: 100%;
   min-height: 546px;
+  width: 100%;
+}
+
+.textContainer {
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .rightContainer {
@@ -78,11 +84,6 @@
   width: 44vw;
   min-height: 300px;
   height: 300px;
-}
-
-.textContainer {
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .technologiesContainer {

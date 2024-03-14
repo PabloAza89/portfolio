@@ -49,6 +49,17 @@
   justify-content: flex-start;
 }
 
+.testAAA {
+  background: yellowgreen;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-self: center;
+  /* width: calc(100vw - 12px); */
+  width: 100%;
+  height: calc(100vh - 12px);
+}
+
 .grey {
   display: flex;
   position: absolute;

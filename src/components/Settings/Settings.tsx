@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, CSSProperties, useState, useRef } from 'react';
 import { Button } from '@mui/material';
 import DarkMode from '../DarkMode/DarkMode';
 import Language from '../Language/Language';
@@ -33,8 +33,20 @@ function Settings() {
     timeoutSettings.current = (setTimeout(autoHideSettings, 2700))
   }
 
+  const [ overflowListener, setOverflowListener ] = useState<any>()
+
+  useEffect(() => {
+    // console.log("TT", (document.querySelector(`[class*="AboutMeCSS_background"]`) as HTMLElement).offsetWidth)
+    let el = Array.from(document.querySelectorAll(`[class*="CSS_background"]`))
+    let qq = el.filter((x:any) => x.offsetWidth !== 0)[0] as HTMLElement
+    if (qq !== null) {
+      setOverflowListener(qq.offsetWidth - qq.scrollWidth)
+      window.addEventListener('resize', function() { setOverflowListener(qq.offsetWidth - qq.scrollWidth) })
+    }
+  }, [])
+
   return (
-    <div className={css.background}>
+    <div style={{ "--scrollwidth": overflowListener } as CSSProperties} className={css.background}>
       <Button
         onClick={() => {
           clearTimeout(timeoutSettings.current);

@@ -231,6 +231,26 @@ function Projects() {
     }
   }
 
+  const projectsBGHandler: () => void = () => {
+    let el = (document.querySelector(`[class*="ProjectsCSS_background"]`) as HTMLElement)
+    if (el !== null) {
+      //console.log("A cli", el.clientWidth)
+      //console.log("B off", el.offsetWidth)
+      //console.log("C scr", el.scrollWidth)
+      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
+    }
+  }
+
+  useEffect(() => {
+    projectsBGHandler()
+    window.addEventListener('resize', projectsBGHandler);
+    return () => window.removeEventListener('resize', projectsBGHandler);
+  },[])
+
+  window.addEventListener('load', function() {
+    projectsBGHandler()
+  })
+
   return (
     <div
       className={css.background}

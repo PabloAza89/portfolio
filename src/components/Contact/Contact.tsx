@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
 import Swal from 'sweetalert2';
@@ -60,6 +61,26 @@ function Contact() {
       navigator.clipboard.writeText('+5491124688005')
     })
   }
+
+  const contactBGHandler: () => void = () => {
+    let el = (document.querySelector(`[class*="ContactCSS_mainContainer"]`) as HTMLElement)
+    if (el !== null) {
+      //console.log("A cli", el.clientWidth)
+      //console.log("B off", el.offsetWidth)
+      //console.log("C scr", el.scrollWidth)
+      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
+    }
+  }
+
+  useEffect(() => {
+    contactBGHandler()
+    window.addEventListener('resize', contactBGHandler);
+    return () => window.removeEventListener('resize', contactBGHandler);
+  },[])
+
+  window.addEventListener('load', function() {
+    contactBGHandler()
+  })
 
   return (
       <div className={css.background}>

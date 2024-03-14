@@ -76,7 +76,9 @@ function News() {
     const removeTransition: () => void = () => {
       let el = (document.querySelector("[class='sliderBoxNews']") as HTMLElement)
       if (el !== null ) el.style.transition = "none"
-      const addTransition = () => (document.querySelector("[class='sliderBoxNews']") as HTMLElement).style.transition = "all 1.5s"
+      const addTransition = () => {
+        if (el !== null ) el.style.transition = "all 1.5s"
+      }
       clearTimeout(timer);
       timer = setTimeout(addTransition, 100);
     }

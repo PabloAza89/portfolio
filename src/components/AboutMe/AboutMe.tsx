@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import profile from '../../images/profile.png';
 import css from './AboutMeCSS.module.css';
@@ -5,6 +6,27 @@ import css from './AboutMeCSS.module.css';
 function AboutMe() {
 
   const english = useSelector((state: {english:boolean}) => state.english)
+
+  const aboutBGHandler: () => void = () => {
+    let el = (document.querySelector(`[class*="AboutMeCSS_background"]`) as HTMLElement)
+    if (el !== null) {
+      //console.log("A cli", el.clientWidth)
+      //console.log("B off", el.offsetWidth)
+      //console.log("C scr", el.scrollWidth)
+      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
+      //document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.scrollWidth}`);
+    }
+  }
+
+  useEffect(() => {
+    aboutBGHandler()
+    window.addEventListener('resize', aboutBGHandler);
+    return () => window.removeEventListener('resize', aboutBGHandler);
+  },[])
+
+  window.addEventListener('load', function() {
+    aboutBGHandler()
+  })
 
   return (
     <div className={css.background}>

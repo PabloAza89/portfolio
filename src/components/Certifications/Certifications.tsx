@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import efSet from '../../images/efSet.png';
 import fccCertJS from '../../images/fccCertJS.png';
@@ -49,6 +50,26 @@ function Certifications() {
     let animationPH = document.getElementById(`animationPH${id}`)
     if (animationPH !== null) animationPH.style.display = "none"
   }
+
+  const certificationsBGHandler: () => void = () => {
+    let el = (document.querySelector(`[class*="CertificationsCSS_mainBox"]`) as HTMLElement)
+    if (el !== null) {
+      console.log("A cli", el.clientWidth)
+      console.log("B off", el.offsetWidth)
+      //console.log("C scr", el.scrollWidth)
+      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
+    }
+  }
+
+  useEffect(() => {
+    certificationsBGHandler()
+    window.addEventListener('resize', certificationsBGHandler);
+    return () => window.removeEventListener('resize', certificationsBGHandler);
+  },[])
+
+  window.addEventListener('load', function() {
+    certificationsBGHandler()
+  })
 
   return (
     <div className={css.background}>

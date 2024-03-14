@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import css from './BubblesCSS.module.css';
 
 function Bubbles() {
@@ -10,7 +11,7 @@ function Bubbles() {
           22, 25, 18, 21, 15, 13, 26, 17, 13, 22.5 , 24.5, 12.5, // 12
         ].map((e, i) => {
           return (
-            <div style={{ "--i": e } as React.CSSProperties} key={i} className={css.eachCircle}></div>
+            <div style={{ "--i": e } as CSSProperties} key={i} className={css.eachCircle}></div>
           )
         })
       }

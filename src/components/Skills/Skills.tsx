@@ -1,5 +1,5 @@
 import { SvgIcon } from '@mui/material';
-import { useState, useEffect, useRef, useMemo, MutableRefObject } from 'react';
+import { useState, useEffect, useRef, useMemo, CSSProperties, MutableRefObject } from 'react';
 import css from './SkillsCSS.module.css';
 import { useSelector } from 'react-redux';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
@@ -226,6 +226,27 @@ function Skills() {
     }
   }, [heightDev, widthDev])
 
+  const skillsBGHandler: () => void = () => {
+    let el = (document.querySelector(`[class*="SkillsCSS_background"]`) as HTMLElement)
+    if (el !== null) {
+      //console.log("A cli", el.clientWidth)
+      //console.log("B off", el.offsetWidth)
+      //console.log("C scr", el.scrollWidth)
+      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
+      //document.documentElement.style.setProperty("--diff", el.offsetHeight < 261 ? `6` : `0`);
+    }
+  }
+
+  useEffect(() => {
+    skillsBGHandler()
+    window.addEventListener('resize', skillsBGHandler);
+    return () => window.removeEventListener('resize', skillsBGHandler);
+  },[])
+
+  window.addEventListener('load', function() {
+    skillsBGHandler()
+  })
+
   return (
     <div
       className={css.background}
@@ -233,7 +254,7 @@ function Skills() {
     >
       <div
         className={css.mainContainer}
-        style={{ "--titlesBoxLength": array.length } as React.CSSProperties}
+        style={{ "--titlesBoxLength": array.length } as CSSProperties}
       >
         <div className={css.skills}>{ english ? `My skills` : `Mis habilidades` }</div>
         <div
@@ -242,7 +263,7 @@ function Skills() {
         >
         <div
           className={css.chartContainer}
-          style={{ "--titlesBoxLength": array.length } as React.CSSProperties}
+          style={{ "--titlesBoxLength": array.length } as CSSProperties}
         >
             <div className={css.upperChartContainer}>
               <div className={css.chartRow}>
@@ -250,19 +271,19 @@ function Skills() {
                   return (
                     <div className={css.borderLeftSeparator} key={index}>
                       <div
-                        style={{ "--percentage": e.percentage } as React.CSSProperties}
+                        style={{ "--percentage": e.percentage } as CSSProperties}
                         className={css.columnBar}
                       >
                         <div className={css.leftSide}></div>
                         <div
-                          style={{ "--percentage": e.percentage } as React.CSSProperties}
+                          style={{ "--percentage": e.percentage } as CSSProperties}
                           className={css.centerSide}
                           id={`center${index}`}
                         />
                         <div className={css.rightSide}></div>
                       </div>
                       <div
-                        style={{ "--percentage": e.percentage } as React.CSSProperties}
+                        style={{ "--percentage": e.percentage } as CSSProperties}
                         className={css.titlesVerticalContainer}
                       >
                         <div className={css.titlesVertical}>
@@ -301,7 +322,7 @@ function Skills() {
             >
               <div
                 ref={el => inputRef.current[e.id] = el}
-                style={{ "--colorBar": e.color } as React.CSSProperties}
+                style={{ "--colorBar": e.color } as CSSProperties}
                 className={css.barInner}
                 id={`barInner${index}`}
               >
@@ -322,7 +343,7 @@ function Skills() {
               <button
                 tabIndex={-1}
                 id={`buttonColorFixed${e.id}`}
-                style={{ "--colorBar": e.color, "--delay": e.id } as React.CSSProperties}
+                style={{ "--colorBar": e.color, "--delay": e.id } as CSSProperties}
                 className={css.colorFixed}
                 onClick={() => {
                   handleAnimation(e.id)

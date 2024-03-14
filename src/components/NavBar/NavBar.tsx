@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ function NavBar() {
   const english = useSelector((state: {english:boolean}) => state.english)
 
   function useHorizontalScroll() {
-    const elRef = React.useRef<HTMLInputElement>(null);
+    const elRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
       const el:any = elRef.current;
       if (el) {

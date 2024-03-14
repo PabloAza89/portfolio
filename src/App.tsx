@@ -11,7 +11,6 @@ import BackButton from './components/BackButton/BackButton';
 import MessageMe from './components/MessageMe/MessageMe';
 import News from './components/News/News';
 import css from './AppCSS.module.css';
-import React from 'react';
 import { Route, Routes } from "react-router-dom";
 
 function App() {

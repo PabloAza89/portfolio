@@ -26,6 +26,7 @@
   --skillsTitleSkills: #b86b5a;
   --skillsTitleColorSkills: white;
   --titlesVerticalColorSkills: #e8e8e8;
+  /* --diff: 10px; */
 }
 
 [data-theme="dark"] {
@@ -43,6 +44,10 @@
   --titlesVerticalColorSkills: #b9b9b9;
 }
 
+/* [class*="SettingsCSS_background"] {
+  right: 20px !important;
+} */
+
 .background {
   /* background: darkred; */ /* DEV */
   display: flex;
@@ -59,6 +64,7 @@
   user-select: none;
   flex-wrap: nowrap;
   overflow: hidden !important;
+  /* --diff: 10px; */
 }
 
 .background::-webkit-scrollbar {
@@ -517,5 +523,15 @@ and (max-height: 273px) {
     top: 0px !important;
     flex-wrap: wrap !important;
   }
+  /* [class*="SettingsCSS_background"] {
+    right: 26px !important;
+  } */
 }
+
+/* @media screen
+and (height > 273px) {
+  [class*="SettingsCSS_background"] {
+    right: 36px !important;
+  }
+} */
 

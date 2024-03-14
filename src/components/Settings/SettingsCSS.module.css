@@ -1,13 +1,13 @@
 .background {
-  display: flex !important;
+  display: flex;
   position: fixed;
-  /* z-index: 2001 !important; */
-  z-index: 2002 !important;
-  width: 35px !important;
-  height: 35px !important;
-  right: 20px !important;
-  bottom: 20px !important;
-  /* background: yellow !important; */
+  z-index: 2002;
+  height: 35px;
+  /* right: 20px !important; */
+  right: calc(20px + calc(var(--diff) * 1px)) !important;
+  /* right: calc(20px + calc(var(--diff) * 1px)); */
+  bottom: 20px;
+  /* right: 6px; */
   border-radius: 4px;
 }
 
@@ -27,7 +27,6 @@
   display: flex;
   position: absolute;
   bottom: 0px;
-  /* right: 0px; */
   width: 35px;
   height: 35px;
   border-radius: 4px;
@@ -39,7 +38,6 @@
   /* background: red; */ /* DEV */
   display: flex;
   position: absolute;
-  /* bottom: 0px; */
   right: 0px;
   width: 35px;
   height: 35px;

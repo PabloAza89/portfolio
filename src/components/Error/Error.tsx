@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import error from '../../images/error.gif';
 import css from './ErrorCSS.module.css';
@@ -13,6 +14,26 @@ function Error() {
     let errorGIF = document.getElementById(`errorGif`)
     if (errorGIF !== null) errorGIF.style.visibility = "visible"
   }
+
+  const errorBGHandler: () => void = () => {
+    let el = (document.querySelector(`[class*="ErrorCSS_background"]`) as HTMLElement)
+    if (el !== null) {
+      console.log("A cli", el.clientWidth)
+      console.log("B off", el.offsetWidth)
+      //console.log("C scr", el.scrollWidth)
+      document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
+    }
+  }
+
+  useEffect(() => {
+    errorBGHandler()
+    window.addEventListener('resize', errorBGHandler);
+    return () => window.removeEventListener('resize', errorBGHandler);
+  },[])
+
+  window.addEventListener('load', function() {
+    errorBGHandler()
+  })
 
   return (
     <div className={css.background}>
