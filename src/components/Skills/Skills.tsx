@@ -10,7 +10,7 @@ function Skills() {
   const english = useSelector((state: { english:boolean }) => state.english)
 
   const array: arraySkillsI[] = [
-    { id: 0, title: 'HTML & CSS', percentage: 70 },
+    { id: 0, title: 'HTML & CSS', percentage: 70 }, 
     { id: 1, title: 'Sequelize', percentage: 60 },
     { id: 2, title: 'Javascript', percentage: 90 },
     { id: 3, title: 'Typescript', percentage: 75 },
