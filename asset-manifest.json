@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.e105396d.css",
+    "main.css": "/portfolio/static/css/main.3f55f6f0.css",
     "main.js": "/portfolio/static/js/main.40efb0bb.js",
     "static/media/error.gif": "/portfolio/static/media/error.c8a987390be23c2376be.gif",
     "static/media/food2.png": "/portfolio/static/media/food2.33251b4f71ace22ad726.png",
@@ -25,11 +25,11 @@
     "static/media/node.png": "/portfolio/static/media/node.07d152a8a036951b8d14.png",
     "static/media/darth-vader.svg": "/portfolio/static/media/darth-vader.ab4aa42386ccc66a7de06c02e64d572c.svg",
     "index.html": "/portfolio/index.html",
-    "main.e105396d.css.map": "/portfolio/static/css/main.e105396d.css.map",
+    "main.3f55f6f0.css.map": "/portfolio/static/css/main.3f55f6f0.css.map",
     "main.40efb0bb.js.map": "/portfolio/static/js/main.40efb0bb.js.map"
   },
   "entrypoints": [
-    "static/css/main.e105396d.css",
+    "static/css/main.3f55f6f0.css",
     "static/js/main.40efb0bb.js"
   ]
 }
