@@ -1,8 +1,8 @@
-@property --leftSkills {
+/* @property --leftSkills {
   syntax: '<color>';
   initial-value: silver;
   inherits: false;
-}
+} */
 
 @property --centerSkills {
   syntax: '<color>';
@@ -16,22 +16,47 @@
   inherits: false;
 }
 
-@property --percentageGradient {
+/* @property --percentageGradient {
   syntax: '<percentage>';
   inherits: false;
   initial-value: 100%;
-}
+} */
 
 :root {
   --skillsTitleSkills: #b86b5a;
   --skillsTitleColorSkills: white;
   --titlesVerticalColorSkills: #e8e8e8;
+  
+  /* 0% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 0%), linear-gradient(45deg, #0000 7px, silver 0px) } */
+  /* background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 0%), linear-gradient(45deg, #0000 7px, silver 0px) */
+  /* --percentageGradient: 0%; */
+  /* --percentageGradient: 100%; */
+  /* --percentageGradient: 100%; */
+  /* --percentageGradient: 100%; */
+  /* --percentageGradient: ; */
 }
 
 [data-theme="dark"] {
   .leftSide {
+    /* animation: translateE 1.2s linear; */
+
+  }
+  .leftSide::before {
+    /* animation: translateE 1.2s linear; */
+    /* animation: gradient 1.2s linear; */
+    /* width: 10px; */
+    /* height: calc((var(--percentage) + 5) * 2px); */
+    /* z-index: 10000000; */
+    /* --percentageGradient: 100%; */
+    opacity: 1;
+    /* animation: gradient 1.2s linear; */
+    /* animation: translateE 1.2s linear; */
+    /* animation: translateE 1.2s linear; */
+    /* animation: gradient 1.2s linear !important; */
+  }
+  /* .leftSide {
     --leftSkills: #141414
-  };
+  }; */
   .centerSide {
     --centerSkills: #595959
   };
@@ -200,6 +225,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   height: 361px;
+  overflow: hidden;
 }
 
 .scroll {
@@ -254,16 +280,51 @@
   justify-content: center;
   width: 90px;
   animation: translate 1.2s linear;
+  /* animation: translate 1.2s linear; */
+  /* animation: translate 1.2s linear, translateE 1.2s linear; */
 }
 
 @keyframes translate {
-  from { bottom: calc(((var(--percentage) + 5) * -2px) + 10px) }
-  to { bottom: 0px }
+  from { 
+    bottom: calc(((var(--percentage) + 5) * -2px) + 10px);
+    /* --percentageGradient: 0%; */
+    /* .leftSide {
+      --percentageGradient: 0%;
+    } */
+  }
+  to { 
+    bottom: 0px;
+    /* --percentageGradient: 100%; */
+    /* .leftSide {
+      --percentageGradient: 100%;
+    } */
+  }
+}
+
+@keyframes translateE {
+  from {
+    --percentageGradient: 100%;
+    /* .leftSide {
+      --percentageGradient: 0%;
+    } */
+  }
+  to {
+    --percentageGradient: 100%;
+    /* .leftSide {
+      --percentageGradient: 100%;
+    } */
+  }
 }
 
 @keyframes translate-retrigger {
-  from { bottom: calc(((var(--percentage) + 5) * -2px) + 10px) }
-  to { bottom: 0px }
+  from { 
+    bottom: calc(((var(--percentage) + 5) * -2px) + 10px);
+    
+  }
+  to {
+    bottom: 0px;
+    
+  }
 }
 
 @keyframes growAnimation {
@@ -284,23 +345,123 @@
 }
 
 .leftSide {
+  --percentageGradient: 100%;
+  display: flex;
+  position: relative;
   width: 10px;
-  background:
+  /* height: 200px; */
+  height: calc((var(--percentage) + 5) * 2px);
+  /* background:
     linear-gradient(225deg, gray 7px, var(--leftSkills) 7px, transparent var(--percentageGradient)),
+    linear-gradient(45deg, #0000 7px, silver 0px); */
+  background:
+    linear-gradient(225deg, gray 7px, silver 7px, transparent 0%),
     linear-gradient(45deg, #0000 7px, silver 0px);
-  transition: --leftSkills 1.2s;
-  animation: gradient 1.2s linear;
+  /* animation: translateE 1.2s linear; */
+  /* animation: gradient 1.2s linear; */
+  /* animation: translateE 1.2s linear; */
+  /* transition: --leftSkills 1.2s; */
+  /* animation: gradient 1.2s linear !important; */
+  /* animation: translateE 1.2s linear; */
+  /* animation: gradient 1.2s linear; */
 }
+
+.leftSide::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  /* z-index: 10000000; */
+  background:
+    linear-gradient(225deg, gray 7px, #141414 7px, transparent 100%),
+    linear-gradient(45deg, #0000 7px, silver 0px);
+  opacity: 0;
+  transition: opacity 1s;
+  animation: gradient 1.2s linear !important;
+  /* animation: translateE 1.2s linear; */
+  /* animation: translateE 1.2s linear; */
+  /* animation: translateE 1.2s linear; */
+  /* animation: gradient 1.2s linear; */
+  /* animation: gradient 1.2s linear !important; */
+  --varPER: 0%;
+  --varVAR: linear-gradient(225deg, gray 7px, red 7px, transparent var(--varPER)), linear-gradient(45deg, #0000 7px, silver 0px);
+  /* --varVAR: linear-gradient(225deg, gray 7px, #141414 7px, transparent var(--varPER)), linear-gradient(45deg, #0000 7px, silver 0px); */
+}
+
 
 @keyframes gradient {
-  from { --percentageGradient: 0% }
-  to { --percentageGradient: 100% }
+  0% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 0%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  2% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 2%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  4% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 4%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  6% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 6%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  8% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 8%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  10% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 10%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  12% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 12%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  14% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 14%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  16% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 16%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  18% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 18%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  20% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 20%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  22% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 22%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  24% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 24%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  26% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 26%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  28% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 28%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  30% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 30%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  32% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 32%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  34% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 34%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  36% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 36%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  38% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 38%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  40% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 40%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  42% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 42%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  44% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 44%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  46% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 46%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  48% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 48%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  50% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 50%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  52% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 52%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  54% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 54%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  56% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 56%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  58% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 58%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  60% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 60%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  62% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 62%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  64% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 64%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  66% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 66%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  68% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 68%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  70% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 70%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  72% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 72%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  74% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 74%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  76% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 76%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  78% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 78%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  80% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 80%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  82% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 82%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  84% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 84%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  86% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 86%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  88% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 88%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  90% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 90%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  92% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 92%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  94% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 94%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  96% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 96%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  98% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 98%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  100% { background: linear-gradient(225deg, gray 7px, #141414 7px, transparent 100%), linear-gradient(45deg, #0000 7px, silver 0px) }
+  
 }
 
-@keyframes gradient-retrigger {
+
+/* @keyframes gradient {
+  from { 
+    .leftSide {
+      --percentageGradient: 100%
+    }
+    
+  }
+  to {
+    .leftSide {
+      --percentageGradient: 100%
+    }
+  }
+} */
+
+/* @keyframes gradient-retrigger {
   from { --percentageGradient: 0% }
   to { --percentageGradient: 100% }
-}
+} */
 
 .centerSide {
   display: flex;
@@ -331,6 +492,7 @@
   flex-direction: column;
   width: 37px;
   height: calc(((var(--percentage) + 5) * 2px) - 30px);
+  /* animation: growAnimation 1.2s linear; */
   animation: growAnimation 1.2s linear;
   text-wrap: nowrap;
   bottom: 0px;
@@ -483,12 +645,12 @@ and (max-height: 407px) {
   .chartContainer, .scroll {
     height: 261px !important;
   }
-  .columnBar {
+  /* .columnBar {
     animation: translate-retrigger 1.2s linear;
-  }
-  .leftSide {
+  } */
+  /* .leftSide {
     animation: gradient-retrigger 1.2s linear;
-  }
+  } */
 }
 
 @media screen
