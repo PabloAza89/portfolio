@@ -70,6 +70,7 @@
   margin-right: 10px;
   padding-bottom: 6px;
   overflow: visible;
+  backface-visibility: hidden
 }
 
 .lessThan {
@@ -118,12 +119,11 @@
   font-family: Roboto;
   font-weight: 600;
   mix-blend-mode: difference;
-  backface-visibility: hidden;
-  transform: scale(1) translate3d(0, 0, 0) perspective(1px);
-  transition: transform .2s;
+  transform: scale(1) perspective(1000px) translateZ(0px);
+  transition: transform .2s linear;
   will-change: transform;
 }
 
 .text:hover {
-  transform: scale(1.05) translate3d(0, 0, 0) perspective(1px);
+  transform: scale(1.05) perspective(1000px) translateZ(20px);
 }

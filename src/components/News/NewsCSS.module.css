@@ -241,8 +241,9 @@
   width: 420px;
   overflow-y: hidden;
   overflow-x: hidden;
-  text-wrap: nowrap;
   font-size: 16px;
+  text-wrap: nowrap;
+  white-space: nowrap;
 }
 
 button {
