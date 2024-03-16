@@ -45,6 +45,7 @@
 
 .background {
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   align-items: center;
   /* background: darkred; */ /* DEV */
@@ -60,9 +61,12 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollThumb) var(--scrollTrack);
+  transition: scrollbar-color 1s;
 }
 
-.background::-webkit-scrollbar {
+/* .background::-webkit-scrollbar {
   width: 6px;
   background-color: #F5F5F5
 }
@@ -75,7 +79,7 @@
 .background::-webkit-scrollbar-thumb {
   background-color: #000000;
   border: 5px solid #555555
-}
+} */
 
 .formContainer {
   display: flex;

@@ -1,5 +1,7 @@
 :root {
   --borderApp: #bdbdbd;
+  --scrollThumb: #494949;
+  --scrollTrack: #838383;
 }
 
 [data-theme="dark"] {
@@ -7,6 +9,8 @@
     opacity: 1;
   }
   --borderApp: #424242;
+  --scrollThumb: #858585;
+  --scrollTrack: #000000;
 }
 
 .background {
