@@ -81,14 +81,16 @@ function Skills() {
   const findTargetStyleSheet = async () => {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
-      if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
+      if (sheets[ssI].href !== null && sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
           let cssRules = sheets[ssI].cssRules
+          console.log("LLEGO ACA 1")
           for (const cssrI in cssRules) {
             if (
               cssRules[cssrI].cssText !== undefined &&
               cssRules[cssrI].cssText.includes('.SkillsCSS') &&
               (cssRules[cssrI] as CSSRuleExtended).media !== undefined
             ) {
+              console.log("LLEGO ACA 2")
               let t = (cssRules[cssrI] as CSSRuleExtended).media // target
 
               if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
