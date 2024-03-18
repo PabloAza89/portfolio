@@ -394,7 +394,7 @@
   height: calc((var(--percentage) + 5) * 2px);
   text-wrap: nowrap;
   /* background: blue; */ /* DEV */
-  background: lightgreen !important; /* DEV */
+  background: blue !important; /* DEV */
   background: linear-gradient(to bottom, gray 10px, darkgrey 10px);
 }
 

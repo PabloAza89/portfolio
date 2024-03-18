@@ -93,9 +93,18 @@ function Skills() {
               console.log("LLEGO ACA 2")
               let t = (cssRules[cssrI] as CSSRuleExtended).media // target
 
-              if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
-              if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
-              if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
+              if (t.mediaText === 'screen and (width > 1px)') {
+                t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
+                console.log("TRUE 1")
+              }
+              if (t.mediaText === 'screen and (width < 2px)') {
+                t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
+                console.log("TRUE 2")
+              }
+              if (t.mediaText === 'screen and (width < 3px)') {
+                t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
+                console.log("TRUE 3")
+              }
 
             }
           }
