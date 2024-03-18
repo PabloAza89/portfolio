@@ -92,6 +92,7 @@ function Skills() {
             ) {
               console.log("LLEGO ACA 2")
               let t = (cssRules[cssrI] as CSSRuleExtended).media // target
+              console.log("t.mediaText", t.mediaText)
 
               if (t.mediaText === 'screen and (width > 1px)') {
                 t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
