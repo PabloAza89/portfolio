@@ -394,7 +394,7 @@
   height: calc((var(--percentage) + 5) * 2px);
   text-wrap: nowrap;
   /* background: blue; */ /* DEV */
-  background: red !important; /* DEV */
+  background: orange !important; /* DEV */
   background: linear-gradient(to bottom, gray 10px, darkgrey 10px);
 }
 
@@ -517,8 +517,16 @@
   color: black !important;
 }
 
-/* Nº1 849 - DYNAMIC MEDIA QUERY */
+/* TEST */
 /* @media screen
+and (width > 1px) {
+  .centerSide {
+    background: blue !important
+  }
+} */
+
+/* Nº1 849 - DYNAMIC MEDIA QUERY */
+@media screen
 and (width > 1px) {
   .barInner {
     transition: none !important;
@@ -526,7 +534,7 @@ and (width > 1px) {
   .colorFixed {
     animation: none !important;
   }
-} */
+}
 
 /* Nº2 856 - DYNAMIC MEDIA QUERY */
 /* @media screen

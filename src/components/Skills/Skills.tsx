@@ -31,27 +31,6 @@ function Skills() {
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `244, 75, 0` }
   ], [english]);
 
-/*   const findTargetStyleSheet = async () => {
-    let sheets = document.styleSheets
-    for (const ssI in sheets) {
-      if (sheets[ssI].href === null) {
-        let cssRules = sheets[ssI].cssRules
-        for (const cssrI in cssRules) {
-          if (
-            cssRules[cssrI].cssText !== undefined &&
-            cssRules[cssrI].cssText.includes('.SkillsCSS') &&
-            (cssRules[cssrI] as CSSRuleExtended).media !== undefined
-          ) {
-            let t = (cssRules[cssrI] as CSSRuleExtended).media // target
-            if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
-            if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
-            if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
-          }
-        }
-      }
-    }
-  } */
-
   const findTargetStyleSheet = async () => {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
@@ -64,66 +43,125 @@ function Skills() {
             (cssRules[cssrI] as CSSRuleExtended).media !== undefined
           ) {
             let t = (cssRules[cssrI] as CSSRuleExtended).media // target
-
-            let first = document.querySelector('style')
-            
-            if (first !== null) first.textContent += `@media screen and (width > ${targetWidth - 1}px) { // Nº1 849
-              .barInner {
-                transition: none !important;
-              }
-              .colorFixed {
-                animation: none !important;
-              }
-            }`
-
-            if (first !== null) first.textContent += `@media screen and (width < ${targetWidth + 6}px) { // Nº2 856
-              .background {
-                justify-content: flex-start;
-              }
-              .mainContainer {
-                left: 0px !important;
-              }
-              .barsMapContainer {
-                position: relative !important;
-                right: 200px !important;
-                bottom: 32px !important;
-              }
-            }`
-
-            if (first !== null) first.textContent += `@media screen and (width < ${targetWidth}px) { // Nº3 850
-              .background {
-                width: 100%;
-              }
-              .mainContainer {
-                left: 0px !important;
-              }
-              .barsMapContainer {
-                position: absolute !important;
-                right: -200px !important;
-                margin-bottom: 64px;
-                bottom: unset !important;
-              }
-              .colorFixed {
-                right: 200px !important;
-                pointer-events: auto !important;
-              }
-              .barInner {
-                background: rgba(var(--colorBar), 0.4);
-                right: 0px;
-              }
-              .scroll {
-                width: calc(100vw - 12px);
-              }
-            }`
-
+            if (t.mediaText === 'screen and (width > 1px)') console.log("A VER", "FOUND")
             //if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
-            //if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
-            //if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
+            // if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
+            // if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
           }
         }
       }
     }
   }
+
+  // const findTargetStyleSheet = async () => {
+  //   let sheets = document.styleSheets
+  //   for (const ssI in sheets) {
+  //     if (sheets[ssI].href === null) {
+  //       let cssRules = sheets[ssI].cssRules
+  //       for (const cssrI in cssRules) {
+  //         if (
+  //           cssRules[cssrI].cssText !== undefined &&
+  //           cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+  //           (cssRules[cssrI] as CSSRuleExtended).media !== undefined
+  //         ) {
+  //           let t = (cssRules[cssrI] as CSSRuleExtended).media // target
+
+            
+
+  //           //if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
+  //           //if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
+  //           //if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  useEffect(() => {
+    // let first = document.querySelector('style')
+    // console.log("FIRST", first)
+    //         // TEST
+    //         if (first !== null) {
+    //           first.textContent += `@media screen and (width > 1px) { .centerSide { background: blue !important } }`
+              
+    //         }
+
+  },[])
+  
+            
+  //const findTargetStyleSheet = async () => {
+    //let first = document.querySelector('[class*="background_image_styles"]')
+
+    // //const log = document.getElementById("log");
+    // let el = (document.querySelector(`[class*="SkillsCSS_centerSide"]`) as HTMLElement)
+    // const myRules = document.styleSheets[18].cssRules;
+    // const mediaList = myRules; // a CSSMediaRule representing the media query.
+    // if (myRules !== null) {
+    //   //console.log("TEST", myRules)
+    //   (myRules[40] as CSSRuleExtended).media.mediaText = ` @media screen and (width > 1px) { .centerSide { background: blue !important } }`
+    //   //console.log("TEST", (mediaList as CSSRuleExtended).media.mediaText)
+    //   ////log.textContent += ` ${(mediaList as CSSRuleExtended).media.mediaText}`;
+    //   //el.textContent += ` @media screen and (width > 1px) { .centerSide { background: blue !important } }`;
+    //   //log.textContent += ` @media screen and (width > 1px) { .centerSide { background: blue !important } }`;
+    // }
+    
+
+    //if (first !== null) {
+      //console.dir(first)
+      //first.innerHTML = '@media screen and (width > 1px) { .centerSide { background: blue !important } }'
+      //first.textContent = '@media screen and (width > 1px) { .centerSide { background: blue !important } }'
+    //}
+
+
+    //let mql = window.matchMedia("(width > 1px)");
+    //console.log("TEST", mql.matches)
+    /* if (mql.matches) {
+      css.centerSide = 'background: blue !important'
+    } */
+    //console.log("TEST", css)
+    /* if (first !== null) console.log("FIRST", first[17]) */
+    // if (first !== null && first[17].textContent !== null) {
+
+    //   //first[17].textContent += '@media screen and (width > 1px) { .centerSide { background: blue !important } }';
+    //   //console.log("FIRST", first[17].textContent.split("/*#"))
+    //   //let all = first[17].textContent.split("/*#")
+    //   //all[0]
+    //   //first[17].innerText = all[0].concat('@media screen and (width > 1px) { .centerSide { background: blue !important } }').concat("\n\n/*#" + all[1])
+    //   //.join("/*#")
+    // }
+
+    //if (first !== null) console.log("FIRST", first[17].textContent)
+
+    //if (first !== null && first.textContent !== null) console.log("FIRST", first.textContent)
+    //if (first !== null && first.textContent !== null) first.innerText += `@media screen and (width>1px){.centerSide{background:blue!important}}`
+    //if (first !== null) first.innerText += `@media screen and (width > 1px) { .centerSide { background: blue !important } }`
+            // let first = document.querySelector('style')
+
+            // // TEST
+            // if (first !== null) first.textContent += `@media screen and (width > 1px) { .centerSide { background: blue !important } }`
+
+          // Nº1 849
+            // if (first !== null) first.textContent += `@media screen and (width > ${targetWidth - 1}px) {
+            //   .barInner { transition: none !important; }
+            //   .colorFixed { animation: none !important; }
+            // }`
+
+            // Nº2 856
+            // if (first !== null) first.textContent += `@media screen and (width < ${targetWidth + 6}px) {
+            //   .background { justify-content: flex-start; }
+            //   .mainContainer { left: 0px !important; }
+            //   .barsMapContainer { position: relative !important; right: 200px !important; bottom: 32px !important; }
+            // }`
+            // Nº3 850
+            // if (first !== null) first.textContent += `@media screen and (width < ${targetWidth}px) {
+            //   .background { width: 100%; }
+            //   .mainContainer { left: 0px !important; }
+            //   .barsMapContainer { position: absolute !important; right: -200px !important; margin-bottom: 64px; bottom: unset !important; }
+            //   .colorFixed { right: 200px !important; pointer-events: auto !important; }
+            //   .barInner { background: rgba(var(--colorBar), 0.4); right: 0px; }
+            //   .scroll { width: calc(100vw - 12px); }
+            // }`
+  //}
 
 /*   const findTargetStyleSheet = async () => {
     for (const ssI in document.styleSheets) {
@@ -155,10 +193,14 @@ function Skills() {
   useEffect(() => {
     let barInner = document.querySelectorAll("[class*='barInner']") as NodeListOf<HTMLElement>
     window.onload = () => {
+      // let first = document.querySelector('style')
+      // console.log("FIRST 1", first)
       findTargetStyleSheet()
       .then(() => barInner.forEach(e => e.style.visibility = "visible"))
     }
     if (document.readyState === "complete") {
+    //  let first = document.querySelector('style')
+    // console.log("FIRST 2", first)
       findTargetStyleSheet()
       .then(() => barInner.forEach(e => e.style.visibility = "visible"))
     }
@@ -267,6 +309,7 @@ function Skills() {
   }, [heightDev, widthDev])
 
   useEffect(() => { // MOUSE GRAB & DRAG EFFECT ON MOUSE DEVICES
+    
     const el = document.getElementById('sliderBoxX');
     if (el !== null) {
       const mouseEnterOnScore = () => {
@@ -346,6 +389,7 @@ function Skills() {
       className={css.background}
       id={`sliderBoxY`}
     >
+      {/* <style className="background_image_styles"></style> */}
       <div
         className={css.mainContainer}
         style={{ "--titlesBoxLength": array.length } as CSSProperties}
