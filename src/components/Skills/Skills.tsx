@@ -31,7 +31,7 @@ function Skills() {
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `244, 75, 0` }
   ], [english]);
 
-  const findTargetStyleSheet = async () => {
+/*   const findTargetStyleSheet = async () => {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
       if (sheets[ssI].href === null) {
@@ -46,6 +46,33 @@ function Skills() {
             if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
             if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
             if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
+          }
+        }
+      }
+    }
+  } */
+
+  const findTargetStyleSheet = async () => {
+    for (const ssI in document.styleSheets) {
+      if (document.styleSheets[ssI].href === null) {
+        for (const cssrI in document.styleSheets[ssI].cssRules) {
+          if (
+            document.styleSheets[ssI].cssRules[cssrI].cssText !== undefined &&
+            document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+            (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined
+          ) {
+            if (
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width < 1px)'
+            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth}px)`// Nº1 850
+            if (
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width >= 2px)'
+            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width >= ${targetWidth}px)` // Nº2 850
+            if (
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width < 3px)'
+            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº3 856
+            if (
+              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (max-width: 4px)'
+            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${targetWidth + 91}px)` // Nº4 759px 
           }
         }
       }

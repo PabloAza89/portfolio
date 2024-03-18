@@ -92,15 +92,21 @@
 }
 
 .card:hover .title {
-  transform: scale(1.05) translate(0px, -3px);
+  transform: scale(1.05) perspective(1000px) translateX(0px) translateY(-3px) translateZ(-3px);
+  transition: transform .2s linear;
+  will-change: transform;
 }
 
 .card:hover .boxMediaWrapper {
-  transform: scale(1.05) translate(0px, 0px);
+  transform: scale(1.05) perspective(1000px) translateX(0px) translateY(0px) translateZ(0px);
+  transition: transform .2s linear;
+  will-change: transform;
 }
 
 .card:hover .url {
-  transform: scale(1.05) translate(0px, 3px);
+  transform: scale(1.05) perspective(1000px) translateX(0px) translateY(3px) translateZ(3px);
+  transition: transform .2s linear;
+  will-change: transform;
 }
 
 .boxMedia {

@@ -15,9 +15,6 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  
-  /* z-index: 4; */
-  /* mix-blend-mode: difference; */
 }
 
 .eachTechRow {
@@ -27,8 +24,6 @@
   /* background: orange; */ /* DEV */
   flex-grow: 1;
   justify-content: space-around;
-
-  /* mix-blend-mode: difference; */
 }
 
 .linkContainer {
@@ -41,40 +36,29 @@
   width: 80px;
   height: 80px;
   align-items: center;
-
-  /* mix-blend-mode: difference; */
-
-  /* transform: scale(1) perspective(1000px) translateX(0px) translateY(0px) translateZ(0px);
-  transition: transform .2s linear;
-  will-change: transform; */
-  /* transition: all .2s linear; */
-
-  /* transform: scale(1) perspective(0px) translateX(0px) translateY(0px) translateZ(0px); */
-  /* transition: transform .2s linear; */
-  /* transition: transform .2s ease-in-out; */
 }
 
 .linkContainer:hover .iconMedia {
   transform: scale(1.2) perspective(1000px) translateX(0px) translateY(-3px) translateZ(-3px);
-  transition: transform .2s ease-in-out;
+  transition: transform .2s linear;
   will-change: transform;
 }
 
 .linkContainer:hover .title {
   transform: scale(1.2) perspective(1000px) translateX(0px) translateY(3px) translateZ(3px);
-  transition: transform .2s ease-in-out;
+  transition: transform .2s linear;
   will-change: transform;
 }
 
 .linkContainer:not(:hover) .iconMedia {
   transform: scale(1) perspective(1000px) translateX(0px) translateY(0px) translateZ(0px);
-  transition: transform .2s ease-in-out;
+  transition: transform .2s linear;
   will-change: transform;
 }
 
-.linkContainer:not(:hover) .title { 
+.linkContainer:not(:hover) .title {
   transform: scale(1) perspective(1000px) translateX(0px) translateY(0px) translateZ(0px);
-  transition: transform .2s ease-in-out;
+  transition: transform .2s linear;
   will-change: transform;
 }
 
@@ -84,22 +68,6 @@
   position: relative;
   width: 60px !important;
   height: 60px !important;
-
-  isolation: isolate;
-  /* z-index: 10; */
-  /* isolation: isolate;
-  transform: scale(1) translate(0px, 0px);
-  transition: transform .2s ease-in-out; */
-  /* mix-blend-mode: difference; */
-  
-}
-
-.testA {
-  isolation: isolate;
-}
-
-.testB {
-  isolation: auto;
 }
 
 .title {
@@ -110,11 +78,5 @@
   color: #FFFFFF;
   font-weight: 600;
   width: fit-content;
-
-  /* isolation: auto; */
   mix-blend-mode: difference;
-
-  /* transform: scale(1) translate(0px, 0px);
-  will-change: transform;
-  transition: transform .2s ease-in-out; */
 }

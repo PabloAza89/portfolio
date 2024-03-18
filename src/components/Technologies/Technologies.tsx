@@ -54,17 +54,13 @@ function Technologies() {
                 rel="noreferrer"
                 draggable="false"
               >
-                <div className={css.testA}>
-                  <img
-                    draggable="false"
-                    src={e.icon}
-                    className={css.iconMedia}
-                    alt=""
-                  />
-                </div >
-                <div className={css.testB}>
-                  <div className={css.title}>{e.title}</div>
-                </div>
+                <img
+                  draggable="false"
+                  src={e.icon}
+                  className={css.iconMedia}
+                  alt=""
+                />
+                <div className={css.title}>{e.title}</div>
               </a>
             )
           })
