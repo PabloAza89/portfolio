@@ -53,6 +53,79 @@ function Skills() {
   } */
 
   const findTargetStyleSheet = async () => {
+    let sheets = document.styleSheets
+    for (const ssI in sheets) {
+      if (sheets[ssI].href === null) {
+        let cssRules = sheets[ssI].cssRules
+        for (const cssrI in cssRules) {
+          if (
+            cssRules[cssrI].cssText !== undefined &&
+            cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+            (cssRules[cssrI] as CSSRuleExtended).media !== undefined
+          ) {
+            let t = (cssRules[cssrI] as CSSRuleExtended).media // target
+
+            let first = document.querySelector('style')
+            
+            if (first !== null) first.textContent += `@media screen and (width > ${targetWidth - 1}px) { // Nº1 849
+              .barInner {
+                transition: none !important;
+              }
+              .colorFixed {
+                animation: none !important;
+              }
+            }`
+
+            if (first !== null) first.textContent += `@media screen and (width < ${targetWidth + 6}px) { // Nº2 856
+              .background {
+                justify-content: flex-start;
+              }
+              .mainContainer {
+                left: 0px !important;
+              }
+              .barsMapContainer {
+                position: relative !important;
+                right: 200px !important;
+                bottom: 32px !important;
+              }
+            }`
+
+            if (first !== null) first.textContent += `@media screen and (width < ${targetWidth}px) { // Nº3 850
+              .background {
+                width: 100%;
+              }
+              .mainContainer {
+                left: 0px !important;
+              }
+              .barsMapContainer {
+                position: absolute !important;
+                right: -200px !important;
+                margin-bottom: 64px;
+                bottom: unset !important;
+              }
+              .colorFixed {
+                right: 200px !important;
+                pointer-events: auto !important;
+              }
+              .barInner {
+                background: rgba(var(--colorBar), 0.4);
+                right: 0px;
+              }
+              .scroll {
+                width: calc(100vw - 12px);
+              }
+            }`
+
+            //if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
+            //if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
+            //if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
+          }
+        }
+      }
+    }
+  }
+
+/*   const findTargetStyleSheet = async () => {
     for (const ssI in document.styleSheets) {
       if (document.styleSheets[ssI].href === null) {
         for (const cssrI in document.styleSheets[ssI].cssRules) {
@@ -77,7 +150,7 @@ function Skills() {
         }
       }
     }
-  }
+  } */
 
   useEffect(() => {
     let barInner = document.querySelectorAll("[class*='barInner']") as NodeListOf<HTMLElement>
