@@ -31,31 +31,31 @@ function Skills() {
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `244, 75, 0` }
   ], [english]);
 
-  const findTargetStyleSheet = async () => {
-    let sheets = document.styleSheets
-    for (const ssI in sheets) {
-      console.log("sheets[ssI]", sheets[ssI])
-      if (sheets[ssI].href === null) {
-        let cssRules = sheets[ssI].cssRules
-        //console.log("cssRules", cssRules)
-        for (const cssrI in cssRules) {
-          if (
-            cssRules[cssrI].cssText !== undefined &&
-            cssRules[cssrI].cssText.includes('.SkillsCSS') &&
-            (cssRules[cssrI] as CSSRuleExtended).media !== undefined
-          ) {
-            let t = (cssRules[cssrI] as CSSRuleExtended).media // target
-            if (t.mediaText === 'screen and (width > 1px)') console.log("A VER", "FOUND")
-            //if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
-            // if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
-            // if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
-          }
-        }
-      }
-    }
-  }
-
   // const findTargetStyleSheet = async () => {
+  //   let sheets = document.styleSheets
+  //   for (const ssI in sheets) {
+  //     console.log("sheets[ssI]", sheets[ssI])
+  //     if (sheets[ssI].href === null) { // aca // qq.includes("pabloaza89.github.io")
+  //       let cssRules = sheets[ssI].cssRules
+  //       //console.log("cssRules", cssRules)
+  //       for (const cssrI in cssRules) {
+  //         if (
+  //           cssRules[cssrI].cssText !== undefined &&
+  //           cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+  //           (cssRules[cssrI] as CSSRuleExtended).media !== undefined
+  //         ) {
+  //           let t = (cssRules[cssrI] as CSSRuleExtended).media // target
+  //           if (t.mediaText === 'screen and (width > 1px)') console.log("A VER", "FOUND")
+  //           //if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
+  //           // if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
+  //           // if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  // const findTargetStyleSheet = async () => { // dev
   //   let sheets = document.styleSheets
   //   for (const ssI in sheets) {
   //     if (sheets[ssI].href === null) {
@@ -68,27 +68,40 @@ function Skills() {
   //         ) {
   //           let t = (cssRules[cssrI] as CSSRuleExtended).media // target
 
-            
+  //           if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
+  //           if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
+  //           if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
 
-  //           //if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
-  //           //if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
-  //           //if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
   //         }
   //       }
   //     }
   //   }
   // }
 
-  useEffect(() => {
-    // let first = document.querySelector('style')
-    // console.log("FIRST", first)
-    //         // TEST
-    //         if (first !== null) {
-    //           first.textContent += `@media screen and (width > 1px) { .centerSide { background: blue !important } }`
-              
-    //         }
+  const findTargetStyleSheet = async () => {
+    let sheets = document.styleSheets
+    for (const ssI in sheets) {
+      if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
+          let cssRules = sheets[ssI].cssRules
+          for (const cssrI in cssRules) {
+            if (
+              cssRules[cssrI].cssText !== undefined &&
+              cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+              (cssRules[cssrI] as CSSRuleExtended).media !== undefined
+            ) {
+              let t = (cssRules[cssrI] as CSSRuleExtended).media // target
 
-  },[])
+              if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
+              if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
+              if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
+
+            }
+          }
+        
+      }
+    }
+  }
+
   
             
   //const findTargetStyleSheet = async () => {
