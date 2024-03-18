@@ -34,8 +34,10 @@ function Skills() {
   const findTargetStyleSheet = async () => {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
+      console.log("ssI", ssI)
       if (sheets[ssI].href === null) {
         let cssRules = sheets[ssI].cssRules
+        console.log("cssRules", cssRules)
         for (const cssrI in cssRules) {
           if (
             cssRules[cssrI].cssText !== undefined &&
