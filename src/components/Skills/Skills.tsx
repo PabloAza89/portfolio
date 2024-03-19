@@ -78,9 +78,12 @@ function Skills() {
   //   }
   // }
 
+  // EQUIVALENCES
+
   // width > 1px GH-Pages translates to (min-width: 2px)
   // width > 2px GH-Pages translates to (min-width: 3px)
   // width > 3px GH-Pages translates to (min-width: 4px)
+  // width > 4px GH-Pages translates to (min-width: 5px)
 
   // width < 1px GH-Pages translates to (max-width: 0px)
   // width < 2px GH-Pages translates to (max-width: 1px)
@@ -93,8 +96,8 @@ function Skills() {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
       //if (sheets[ssI].href !== null && sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
-      if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // PROD
-      //if (sheets[ssI].href === null) { // DEV
+      //if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // PROD
+      if (sheets[ssI].href === null) { // DEV
           let cssRules = sheets[ssI].cssRules
           console.log("LLEGO ACA 1")
           for (const cssrI in cssRules) {
@@ -236,14 +239,10 @@ function Skills() {
   useEffect(() => {
     let barInner = document.querySelectorAll("[class*='barInner']") as NodeListOf<HTMLElement>
     window.onload = () => {
-      // let first = document.querySelector('style')
-      // console.log("FIRST 1", first)
       findTargetStyleSheet()
       .then(() => barInner.forEach(e => e.style.visibility = "visible"))
     }
     if (document.readyState === "complete") {
-    //  let first = document.querySelector('style')
-    // console.log("FIRST 2", first)
       findTargetStyleSheet()
       .then(() => barInner.forEach(e => e.style.visibility = "visible"))
     }
@@ -432,7 +431,6 @@ function Skills() {
       className={css.background}
       id={`sliderBoxY`}
     >
-      {/* <style className="background_image_styles"></style> */}
       <div
         className={css.mainContainer}
         style={{ "--titlesBoxLength": array.length } as CSSProperties}
@@ -440,10 +438,11 @@ function Skills() {
         <div className={css.skills}>{ english ? `My skills` : `Mis habilidades` }</div>
         <div
           className={css.scroll}
-          id={`sliderBoxX`}
+          /* id={`sliderBoxX`} */
         >
         <div
           className={css.chartContainer}
+          id={`sliderBoxX`}
           style={{ "--titlesBoxLength": array.length } as CSSProperties}
         >
             <div className={css.upperChartContainer}>
