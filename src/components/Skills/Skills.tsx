@@ -81,6 +81,11 @@ function Skills() {
   // width > 1px GH-Pages translates to (min-width: 2px)
   // width > 2px GH-Pages translates to (min-width: 3px)
   // width > 3px GH-Pages translates to (min-width: 4px)
+
+  // width < 1px GH-Pages translates to (max-width: 0px)
+  // width < 2px GH-Pages translates to (max-width: 1px)
+  // width < 3px GH-Pages translates to (max-width: 2px)
+  // width < 4px GH-Pages translates to (max-width: 3px)
   
 
 
@@ -88,7 +93,7 @@ function Skills() {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
       //if (sheets[ssI].href !== null && sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
-      if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
+      if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // PROD
       //if (sheets[ssI].href === null) { // DEV
           let cssRules = sheets[ssI].cssRules
           console.log("LLEGO ACA 1")
@@ -102,16 +107,19 @@ function Skills() {
               let t = (cssRules[cssrI] as CSSRuleExtended).media // target
               console.log("t.mediaText", t.mediaText)
 
-              if (t.mediaText === 'screen and (width < 1px)') {
-                t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
+              if (t.mediaText === 'screen and (max-width: 1px)') {
+                //t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
+                t.mediaText = `screen and (min-width: ${targetWidth}px)` // Nº1 849
                 console.log("TRUE 1")
               }
-              if (t.mediaText === 'screen and (width < 2px)') {
-                t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
+              if (t.mediaText === 'screen and (max-width: 2px)') {
+                //t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
+                t.mediaText = `screen and (max-width: ${targetWidth + 5}px)` // Nº2 855
                 console.log("TRUE 2")
               }
-              if (t.mediaText === 'screen and (width < 3px)') {
-                t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
+              if (t.mediaText === 'screen and (max-width: 3px)') {
+                //t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
+                t.mediaText = `screen and (max-width: ${targetWidth - 1}px)`     // Nº3 849
                 console.log("TRUE 3")
               }
 
