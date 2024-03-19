@@ -81,7 +81,9 @@ function Skills() {
   const findTargetStyleSheet = async () => {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
-      if (sheets[ssI].href !== null && sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
+      //if (sheets[ssI].href !== null && sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
+      //if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
+      if (sheets[ssI].href === null) { // qq.includes("pabloaza89.github.io")
           let cssRules = sheets[ssI].cssRules
           console.log("LLEGO ACA 1")
           for (const cssrI in cssRules) {
@@ -98,11 +100,11 @@ function Skills() {
                 t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
                 console.log("TRUE 1")
               }
-              if (t.mediaText === 'screen and (width < 2px)') {
+              if (t.mediaText === 'screen and (width > 2px)') {
                 t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
                 console.log("TRUE 2")
               }
-              if (t.mediaText === 'screen and (width < 3px)') {
+              if (t.mediaText === 'screen and (width > 3px)') {
                 t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
                 console.log("TRUE 3")
               }

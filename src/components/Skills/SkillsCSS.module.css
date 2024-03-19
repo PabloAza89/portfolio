@@ -394,7 +394,7 @@
   height: calc((var(--percentage) + 5) * 2px);
   text-wrap: nowrap;
   /* background: blue; */ /* DEV */
-  background: green !important; /* DEV */
+  background: lightcoral !important; /* DEV */
   background: linear-gradient(to bottom, gray 10px, darkgrey 10px);
 }
 
@@ -526,6 +526,7 @@ and (width > 1px) {
 } */
 
 /* Nº1 849 - DYNAMIC MEDIA QUERY */
+/* max-width */
 @media screen
 and (width > 1px) {
   .barInner {
@@ -537,8 +538,9 @@ and (width > 1px) {
 }
 
 /* Nº2 856 - DYNAMIC MEDIA QUERY */
+/* and (width < 2px) { */
 @media screen
-and (width < 2px) {
+and (width > 2px) {
   .background {
     justify-content: flex-start;
   }
@@ -553,8 +555,9 @@ and (width < 2px) {
 }
 
 /* Nº3 850 - DYNAMIC MEDIA QUERY */
+/* and (width < 3px) { */
 @media screen
-and (width < 3px) {
+and (width > 3px) {
   .background {
     width: 100%;
   }
