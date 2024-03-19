@@ -82,8 +82,8 @@ function Skills() {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
       //if (sheets[ssI].href !== null && sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
-      //if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
-      if (sheets[ssI].href === null) { // qq.includes("pabloaza89.github.io")
+      if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // qq.includes("pabloaza89.github.io")
+      //if (sheets[ssI].href === null) { // DEV
           let cssRules = sheets[ssI].cssRules
           console.log("LLEGO ACA 1")
           for (const cssrI in cssRules) {
