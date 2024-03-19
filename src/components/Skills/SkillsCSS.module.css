@@ -121,7 +121,7 @@
 
 .barInner {
   display: flex;
-  background: red; /* DEV */
+  /* background: red; */ /* DEV */
   background: none;
   position: absolute;
   right: 0px;
@@ -206,7 +206,6 @@
   flex-direction: row;
   /* background: darkgreen; */ /* DEV */
   height: 261px;
-  /* overflow: hidden; */ /* DEV */
 }
 
 .chartRow {
@@ -247,12 +246,14 @@
   /* background: #66bacc; */ /* DEV */
   border-left: 2px solid black;
   border-image: linear-gradient(to top, black 0px, black 20px, transparent 20px) 1;
-  clip-path: polygon(
-    0% 0%,
-    100% 0%,
-    100% 100%,
-    33px 100%,
-    0% calc(100% - 32px));
+  clip-path:
+    polygon(
+      0% 0%,
+      100% 0%,
+      100% 100%,
+      33px 100%,
+      0% calc(100% - 32px)
+    );
 }
 
 .leftSide {
@@ -393,8 +394,7 @@
   width: 30px;
   height: calc((var(--percentage) + 5) * 2px);
   text-wrap: nowrap;
-  /* background: blue; */ /* DEV */
-  background: yellow !important; /* DEV */
+  /* background: yellow !important; */ /* DEV */
   background: linear-gradient(to bottom, gray 10px, darkgrey 10px);
 }
 
@@ -517,15 +517,7 @@
   color: black !important;
 }
 
-/* TEST */
-/* @media screen
-and (width > 1px) {
-  .centerSide {
-    background: blue !important
-  }
-} */
-
-/* Nº1 849 - DYNAMIC MEDIA QUERY */
+/* DYNAMIC MEDIA QUERY Nº1 */
 @media screen
 and (max-width: 1px) {
   .barInner {
@@ -536,7 +528,7 @@ and (max-width: 1px) {
   }
 }
 
-/* Nº2 856 - DYNAMIC MEDIA QUERY */
+/* DYNAMIC MEDIA QUERY Nº2 */
 @media screen
 and (max-width: 2px) {
   .background {
@@ -552,7 +544,7 @@ and (max-width: 2px) {
   }
 }
 
-/* Nº3 850 - DYNAMIC MEDIA QUERY */
+/* DYNAMIC MEDIA QUERY Nº3 */
 @media screen
 and (max-width: 3px) {
   .background {

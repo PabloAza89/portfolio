@@ -10,7 +10,7 @@ function Skills() {
   const english = useSelector((state: { english:boolean }) => state.english)
 
   const array: arraySkillsI[] = [
-    { id: 0, title: 'HTML & CSS', percentage: 70 }, 
+    { id: 0, title: 'HTML & CSS', percentage: 70 },
     { id: 1, title: 'Sequelize', percentage: 60 },
     { id: 2, title: 'Javascript', percentage: 90 },
     { id: 3, title: 'Typescript', percentage: 75 },
@@ -31,53 +31,6 @@ function Skills() {
     { id: 4, firstB: bold(`Hmm..`), second: english ? `Next question ?` : `Siguiente pregunta ?`, color: `244, 75, 0` }
   ], [english]);
 
-  // const findTargetStyleSheet = async () => {
-  //   let sheets = document.styleSheets
-  //   for (const ssI in sheets) {
-  //     console.log("sheets[ssI]", sheets[ssI])
-  //     if (sheets[ssI].href === null) { // aca // qq.includes("pabloaza89.github.io")
-  //       let cssRules = sheets[ssI].cssRules
-  //       //console.log("cssRules", cssRules)
-  //       for (const cssrI in cssRules) {
-  //         if (
-  //           cssRules[cssrI].cssText !== undefined &&
-  //           cssRules[cssrI].cssText.includes('.SkillsCSS') &&
-  //           (cssRules[cssrI] as CSSRuleExtended).media !== undefined
-  //         ) {
-  //           let t = (cssRules[cssrI] as CSSRuleExtended).media // target
-  //           if (t.mediaText === 'screen and (width > 1px)') console.log("A VER", "FOUND")
-  //           //if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
-  //           // if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
-  //           // if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
-  // const findTargetStyleSheet = async () => { // dev
-  //   let sheets = document.styleSheets
-  //   for (const ssI in sheets) {
-  //     if (sheets[ssI].href === null) {
-  //       let cssRules = sheets[ssI].cssRules
-  //       for (const cssrI in cssRules) {
-  //         if (
-  //           cssRules[cssrI].cssText !== undefined &&
-  //           cssRules[cssrI].cssText.includes('.SkillsCSS') &&
-  //           (cssRules[cssrI] as CSSRuleExtended).media !== undefined
-  //         ) {
-  //           let t = (cssRules[cssrI] as CSSRuleExtended).media // target
-
-  //           if (t.mediaText === 'screen and (width > 1px)') t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
-  //           if (t.mediaText === 'screen and (width < 2px)') t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
-  //           if (t.mediaText === 'screen and (width < 3px)') t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
-
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
   // EQUIVALENCES
 
   // width > 1px GH-Pages translates to (min-width: 2px)
@@ -89,151 +42,28 @@ function Skills() {
   // width < 2px GH-Pages translates to (max-width: 1px)
   // width < 3px GH-Pages translates to (max-width: 2px)
   // width < 4px GH-Pages translates to (max-width: 3px)
-  
-
 
   const findTargetStyleSheet = async () => {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
-      if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // PROD
-      //if (sheets[ssI].href === null) { // DEV
-          let cssRules = sheets[ssI].cssRules
-          console.log("LLEGO ACA 1")
-          for (const cssrI in cssRules) {
-            if (
-              cssRules[cssrI].cssText !== undefined &&
-              cssRules[cssrI].cssText.includes('.SkillsCSS') &&
-              (cssRules[cssrI] as CSSRuleExtended).media !== undefined
-            ) {
-              console.log("LLEGO ACA 2")
-              let t = (cssRules[cssrI] as CSSRuleExtended).media // target
-              console.log("t.mediaText", t.mediaText)
-
-              if (t.mediaText === 'screen and (max-width: 1px)') {
-                //t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
-                t.mediaText = `screen and (min-width: ${targetWidth}px)` // Nº1 849
-                console.log("TRUE 1")
-              }
-              if (t.mediaText === 'screen and (max-width: 2px)') {
-                //t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
-                t.mediaText = `screen and (max-width: ${targetWidth + 5}px)` // Nº2 855
-                console.log("TRUE 2")
-              }
-              if (t.mediaText === 'screen and (max-width: 3px)') {
-                //t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
-                t.mediaText = `screen and (max-width: ${targetWidth - 1}px)`     // Nº3 849
-                console.log("TRUE 3")
-              }
-
-            }
-          }
-        
-      }
-    }
-  }
-
-  
-            
-  //const findTargetStyleSheet = async () => {
-    //let first = document.querySelector('[class*="background_image_styles"]')
-
-    // //const log = document.getElementById("log");
-    // let el = (document.querySelector(`[class*="SkillsCSS_centerSide"]`) as HTMLElement)
-    // const myRules = document.styleSheets[18].cssRules;
-    // const mediaList = myRules; // a CSSMediaRule representing the media query.
-    // if (myRules !== null) {
-    //   //console.log("TEST", myRules)
-    //   (myRules[40] as CSSRuleExtended).media.mediaText = ` @media screen and (width > 1px) { .centerSide { background: blue !important } }`
-    //   //console.log("TEST", (mediaList as CSSRuleExtended).media.mediaText)
-    //   ////log.textContent += ` ${(mediaList as CSSRuleExtended).media.mediaText}`;
-    //   //el.textContent += ` @media screen and (width > 1px) { .centerSide { background: blue !important } }`;
-    //   //log.textContent += ` @media screen and (width > 1px) { .centerSide { background: blue !important } }`;
-    // }
-    
-
-    //if (first !== null) {
-      //console.dir(first)
-      //first.innerHTML = '@media screen and (width > 1px) { .centerSide { background: blue !important } }'
-      //first.textContent = '@media screen and (width > 1px) { .centerSide { background: blue !important } }'
-    //}
-
-
-    //let mql = window.matchMedia("(width > 1px)");
-    //console.log("TEST", mql.matches)
-    /* if (mql.matches) {
-      css.centerSide = 'background: blue !important'
-    } */
-    //console.log("TEST", css)
-    /* if (first !== null) console.log("FIRST", first[17]) */
-    // if (first !== null && first[17].textContent !== null) {
-
-    //   //first[17].textContent += '@media screen and (width > 1px) { .centerSide { background: blue !important } }';
-    //   //console.log("FIRST", first[17].textContent.split("/*#"))
-    //   //let all = first[17].textContent.split("/*#")
-    //   //all[0]
-    //   //first[17].innerText = all[0].concat('@media screen and (width > 1px) { .centerSide { background: blue !important } }').concat("\n\n/*#" + all[1])
-    //   //.join("/*#")
-    // }
-
-    //if (first !== null) console.log("FIRST", first[17].textContent)
-
-    //if (first !== null && first.textContent !== null) console.log("FIRST", first.textContent)
-    //if (first !== null && first.textContent !== null) first.innerText += `@media screen and (width>1px){.centerSide{background:blue!important}}`
-    //if (first !== null) first.innerText += `@media screen and (width > 1px) { .centerSide { background: blue !important } }`
-            // let first = document.querySelector('style')
-
-            // // TEST
-            // if (first !== null) first.textContent += `@media screen and (width > 1px) { .centerSide { background: blue !important } }`
-
-          // Nº1 849
-            // if (first !== null) first.textContent += `@media screen and (width > ${targetWidth - 1}px) {
-            //   .barInner { transition: none !important; }
-            //   .colorFixed { animation: none !important; }
-            // }`
-
-            // Nº2 856
-            // if (first !== null) first.textContent += `@media screen and (width < ${targetWidth + 6}px) {
-            //   .background { justify-content: flex-start; }
-            //   .mainContainer { left: 0px !important; }
-            //   .barsMapContainer { position: relative !important; right: 200px !important; bottom: 32px !important; }
-            // }`
-            // Nº3 850
-            // if (first !== null) first.textContent += `@media screen and (width < ${targetWidth}px) {
-            //   .background { width: 100%; }
-            //   .mainContainer { left: 0px !important; }
-            //   .barsMapContainer { position: absolute !important; right: -200px !important; margin-bottom: 64px; bottom: unset !important; }
-            //   .colorFixed { right: 200px !important; pointer-events: auto !important; }
-            //   .barInner { background: rgba(var(--colorBar), 0.4); right: 0px; }
-            //   .scroll { width: calc(100vw - 12px); }
-            // }`
-  //}
-
-/*   const findTargetStyleSheet = async () => {
-    for (const ssI in document.styleSheets) {
-      if (document.styleSheets[ssI].href === null) {
-        for (const cssrI in document.styleSheets[ssI].cssRules) {
+      //if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // PROD
+      if (sheets[ssI].href === null) { // DEV
+        let cssRules = sheets[ssI].cssRules
+        for (const cssrI in cssRules) {
           if (
-            document.styleSheets[ssI].cssRules[cssrI].cssText !== undefined &&
-            document.styleSheets[ssI].cssRules[cssrI].cssText.includes('.SkillsCSS') &&
-            (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media !== undefined
+            cssRules[cssrI].cssText !== undefined &&
+            cssRules[cssrI].cssText.includes('.SkillsCSS') &&
+            (cssRules[cssrI] as CSSRuleExtended).media !== undefined
           ) {
-            if (
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width < 1px)'
-            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth}px)`// Nº1 850
-            if (
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width >= 2px)'
-            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width >= ${targetWidth}px)` // Nº2 850
-            if (
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (width < 3px)'
-            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº3 856
-            if (
-              (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText === 'screen and (max-width: 4px)'
-            ) (document.styleSheets[ssI].cssRules[cssrI] as CSSRuleExtended).media.mediaText = `screen and (max-width: ${targetWidth + 91}px)` // Nº4 759px 
+            let t = (cssRules[cssrI] as CSSRuleExtended).media
+            if (t.mediaText === 'screen and (max-width: 1px)') t.mediaText = `screen and (min-width: ${targetWidth}px)`     // 850
+            if (t.mediaText === 'screen and (max-width: 2px)') t.mediaText = `screen and (max-width: ${targetWidth + 5}px)` // 855
+            if (t.mediaText === 'screen and (max-width: 3px)') t.mediaText = `screen and (max-width: ${targetWidth - 1}px)` // 849
           }
         }
       }
     }
-  } */
+  }
 
   useEffect(() => {
     let barInner = document.querySelectorAll("[class*='barInner']") as NodeListOf<HTMLElement>
@@ -350,10 +180,9 @@ function Skills() {
   }, [heightDev, widthDev])
 
   useEffect(() => { // MOUSE GRAB & DRAG EFFECT ON MOUSE DEVICES
-    
     const el = document.getElementById('sliderBoxX');
     if (el !== null) {
-      const mouseEnterOnScore = () => {
+      const mouseEnterOnScoreX = () => {
         if (
           heightDev < 273 ||
           (heightDev < 408 && widthDev < 656) ||
@@ -361,7 +190,7 @@ function Skills() {
         ) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
         let pos = { top: 0, left: 0, x: 0, y: 0 };
 
-        const mouseDownHandler = function (e: any) {
+        const mouseDownHandlerX = function (e: any) {
           el.style.cursor = 'grabbing';
           el.style.userSelect = 'none';
           pos = {
@@ -375,40 +204,39 @@ function Skills() {
             (heightDev < 408 && widthDev < 656) ||
             (heightDev > 407 && widthDev < 758)
           ) {
-            el.addEventListener('mousemove', mouseMoveHandler)
-            el.addEventListener('mouseup', mouseUpHandler)
+            el.addEventListener('mousemove', mouseMoveHandlerX)
+            el.addEventListener('mouseup', mouseUpHandlerX)
           } else {
-            el.removeEventListener('mousemove', mouseMoveHandler);
-            el.removeEventListener('mouseup', mouseUpHandler);
+            el.removeEventListener('mousemove', mouseMoveHandlerX);
+            el.removeEventListener('mouseup', mouseUpHandlerX);
             el.style.cursor = 'default';
           }
         }
 
-        const mouseMoveHandler = function (e: any) { // HOW MUCH MOUSE HAS MOVED
+        const mouseMoveHandlerX = function (e: any) { // HOW MUCH MOUSE HAS MOVED
           const dx = e.clientX - pos.x;
           const dy = e.clientY - pos.y;
           el.scrollTop = pos.top - dy;
           el.scrollLeft = pos.left - dx;
         }
 
-        const mouseUpHandler = function () {
+        const mouseUpHandlerX = function () {
           el.style.cursor = 'grab'
           el.style.removeProperty('user-select')
-          el.removeEventListener('mousemove', mouseMoveHandler)
-          el.removeEventListener('mouseup', mouseUpHandler)
+          el.removeEventListener('mousemove', mouseMoveHandlerX)
+          el.removeEventListener('mouseup', mouseUpHandlerX)
         }
 
-        el.addEventListener('mousedown', mouseDownHandler);
+        el.addEventListener('mousedown', mouseDownHandlerX);
         el.addEventListener('mouseleave', function() {
-          el.removeEventListener('mouseup', mouseUpHandler);
-          el.removeEventListener('mousedown', mouseDownHandler)
-          el.removeEventListener('mousemove', mouseMoveHandler);
+          el.removeEventListener('mouseup', mouseUpHandlerX);
+          el.removeEventListener('mousedown', mouseDownHandlerX)
+          el.removeEventListener('mousemove', mouseMoveHandlerX);
           el.style.cursor = 'default'
         })
       }
-      el.addEventListener("mouseenter", mouseEnterOnScore)
-
-      return () => el.removeEventListener("mouseenter", mouseEnterOnScore)
+      el.addEventListener("mouseover", mouseEnterOnScoreX)
+      return () => el.removeEventListener("mouseover", mouseEnterOnScoreX)
     }
   }, [heightDev, widthDev])
 
@@ -435,60 +263,57 @@ function Skills() {
         style={{ "--titlesBoxLength": array.length } as CSSProperties}
       >
         <div className={css.skills}>{ english ? `My skills` : `Mis habilidades` }</div>
-        <div
-          className={css.scroll}
-          /* id={`sliderBoxX`} */
-        >
-        <div
-          className={css.chartContainer}
-          id={`sliderBoxX`}
-          style={{ "--titlesBoxLength": array.length } as CSSProperties}
-        >
-            <div className={css.upperChartContainer}>
-              <div className={css.chartRow}>
-                {array.map((e, index) => {
-                  return (
-                    <div className={css.borderLeftSeparator} key={index}>
-                      <div
-                        style={{ "--percentage": e.percentage } as CSSProperties}
-                        className={css.columnBar}
-                      >
-                        <div className={css.leftSide}></div>
+        <div className={css.scroll}>
+          <div
+            className={css.chartContainer}
+            id={`sliderBoxX`}
+            style={{ "--titlesBoxLength": array.length } as CSSProperties}
+          >
+              <div className={css.upperChartContainer}>
+                <div className={css.chartRow}>
+                  {array.map((e, index) => {
+                    return (
+                      <div className={css.borderLeftSeparator} key={index}>
                         <div
                           style={{ "--percentage": e.percentage } as CSSProperties}
-                          className={css.centerSide}
-                          id={`center${index}`}
-                        />
-                        <div className={css.rightSide}></div>
-                      </div>
-                      <div
-                        style={{ "--percentage": e.percentage } as CSSProperties}
-                        className={css.titlesVerticalContainer}
-                      >
-                        <div className={css.titlesVertical}>
-                          {e.title}
+                          className={css.columnBar}
+                        >
+                          <div className={css.leftSide}></div>
+                          <div
+                            style={{ "--percentage": e.percentage } as CSSProperties}
+                            className={css.centerSide}
+                            id={`center${index}`}
+                          />
+                          <div className={css.rightSide}></div>
+                        </div>
+                        <div
+                          style={{ "--percentage": e.percentage } as CSSProperties}
+                          className={css.titlesVerticalContainer}
+                        >
+                          <div className={css.titlesVertical}>
+                            {e.title}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )
-                })}
+                    )
+                  })}
+                </div>
               </div>
-            </div>
-            <div className={css.titlesBox}>
-              {
-                array.map((e) => {
-                  return (
-                    <div
-                      key={array.indexOf(e)}
-                      className={css.titles}
-                    >
-                      {e.title}
-                    </div>
-                  )
-                })
-              }
-            </div>
-        </div>
+              <div className={css.titlesBox}>
+                {
+                  array.map((e) => {
+                    return (
+                      <div
+                        key={array.indexOf(e)}
+                        className={css.titles}
+                      >
+                        {e.title}
+                      </div>
+                    )
+                  })
+                }
+              </div>
+          </div>
         </div>
         <div className={css.titlesNext} />
       </div>
