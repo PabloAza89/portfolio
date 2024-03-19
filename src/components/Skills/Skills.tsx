@@ -78,6 +78,12 @@ function Skills() {
   //   }
   // }
 
+  // width > 1px GH-Pages translates to (min-width: 2px)
+  // width > 2px GH-Pages translates to (min-width: 3px)
+  // width > 3px GH-Pages translates to (min-width: 4px)
+  
+
+
   const findTargetStyleSheet = async () => {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
@@ -96,15 +102,15 @@ function Skills() {
               let t = (cssRules[cssrI] as CSSRuleExtended).media // target
               console.log("t.mediaText", t.mediaText)
 
-              if (t.mediaText === 'screen and (width > 1px)') {
+              if (t.mediaText === 'screen and (width < 1px)') {
                 t.mediaText = `screen and (width > ${targetWidth - 1}px)` // Nº1 849
                 console.log("TRUE 1")
               }
-              if (t.mediaText === 'screen and (width > 2px)') {
+              if (t.mediaText === 'screen and (width < 2px)') {
                 t.mediaText = `screen and (width < ${targetWidth + 6}px)` // Nº2 856
                 console.log("TRUE 2")
               }
-              if (t.mediaText === 'screen and (width > 3px)') {
+              if (t.mediaText === 'screen and (width < 3px)') {
                 t.mediaText = `screen and (width < ${targetWidth}px)`     // Nº3 850
                 console.log("TRUE 3")
               }
