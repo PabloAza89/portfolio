@@ -45,7 +45,7 @@ function AboutMe() {
           datos con React, NodeJS, Express y Sequelize. Previamente tengo 10 años de
           experiencia como encargado y vendedor en Ribera S.A. como así también 3 años
           de experiencia en profesorado de piano. Me considero autodidacta y abocado
-          en todo lo que abordo`
+          en todo lo que abordo.`
         }
       </div>
     </div>
