@@ -122,10 +122,12 @@ function News() {
         }
         <div className={css.buttonsContainer} >
           <button
+            className={css.newsNextPrev}
             onClick={() => leftHandler()}
             disabled={endIndex >= preArray.length}
           >{`<`}</button>
           <button
+            className={css.newsNextPrev}
             onClick={() => rightHandler()}
             disabled={startIndex === 0}
           >{`>`}</button>

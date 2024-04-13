@@ -31,8 +31,21 @@ function AboutMe() {
         />
         {
           english ?
-          `Hi ! Im Pablo ! I worked almost 10 years on a paint selling shop. I was working as store manager and also as sales consultant in almost 5 years. In february of 2022 I wanted to give a turn on my life introducing in the world of programming, and I studied proudly on Henry ! On this academy I studied Fullstack Developer career, learning Javascript as my first language, including Node JS, React, Redux and Sequelize technologiecss. Other of my passions is the music, particullary play the piano, I consider myself as a melomaniac person !` :
-          `Hola ! Soy Pablo ! Trabajé 10 años en una pinturería. Me desempeñé como encargado de la misma, atendiendo al público, desde hace 5 años. Desde febrero de 2022 quise darle un cambio de rumbo a mi vida incursionando en el mundo de la programación, por lo cual estudié orgullosamente en Henry ! En la misma academia estudié para ser Fullstack Developer, aprendiendo Javascript como lenguaje principal junto con tecnologías como Node JS, React, Redux y Sequelize. Otra de mis pasiones es la música, particularmente tocar el piano, me considero una persona melómana !`
+          `Hi, I'm Pablo ! I'm Full Stack Developer with 2 years of experience.
+          I have knowdledge in Javascript, Typescript, agile methodologies, GIT,
+          data structures, algorithms, frameworks, CSS, Word, Excel and Photoshop.
+          I have experience in Front End development, Back End and data architecture
+          with React, NodeJS, Express and Sequelize. Previously I have 10 year experience
+          as store manager and seller at Ribera S.A. as well as 3 years as a piano
+          professor. I consider myself self-taught and dedicated in all I do.`:
+          `Hola, soy Pablo ! Soy Full Stack Developer con 2 años de experiencia.
+          Tengo conocimientos en Javascript, Typescript, metodologías ágiles, GIT,
+          estructura de datos, algoritmos, frameworks, CSS, Word, Excel y Photoshop.
+          Tengo experiencia en desarrollo de Front End, Back End y arquitectura de
+          datos con React, NodeJS, Express y Sequelize. Previamente tengo 10 años de
+          experiencia como encargado y vendedor en Ribera S.A. como así también 3 años
+          de experiencia en profesorado de piano. Me considero autodidacta y abocado
+          en todo lo que abordo`
         }
       </div>
     </div>

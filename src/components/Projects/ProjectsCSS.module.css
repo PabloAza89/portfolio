@@ -60,10 +60,10 @@
   width: 100%;
   flex-direction: column;
   /* background: yellow; */ /* DEV */
-  text-align: -webkit-center;
   overflow: auto;
-  display: ruby-text;
   overflow: hidden;
+  text-align: -moz-center;
+  text-align: -webkit-center;
 }
 
 .mainContainer::-webkit-scrollbar {

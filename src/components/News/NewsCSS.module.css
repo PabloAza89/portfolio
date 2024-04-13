@@ -1,15 +1,3 @@
-/* @property --coralNews {
-  syntax: '<color>';
-  initial-value: lightcoral;
-  inherits: true;
-}
-
-@property --greenNews {
-  syntax: '<color>';
-  initial-value: lightgreen;
-  inherits: true;
-} */
-
 :root {
   --buttonNews: lightblue;
   --coralNews: lightcoral;
@@ -17,9 +5,6 @@
 }
 
 [data-theme="dark"] {
-  /* .sliderBoxNews::before,
-  .eachDescription::before,
-  .eachDescription:hover::before { */
   .sliderBoxNews::before,
   .eachDescription::before {
     opacity: 1;
@@ -27,30 +12,6 @@
   .eachDescription:hover::before  {
     opacity: 0;
   }
-  /* .eachDescription:hover::before {
-    background:
-      linear-gradient(
-        to right,
-        lightcoral 0px, lightcoral 80px,
-        lightgreen 80px, lightgreen 500px
-      );
-  } */
- /*  .eachDescription:hover::before {
-    background:
-      linear-gradient(
-        to right,
-        lightcoral 0px, lightcoral 80px,
-        lightgreen 80px, lightgreen 500px
-      );
-  }; */
-  /* .eachDescription, .sliderBoxNews {
-    --coralNews: #bd7979;
-    --greenNews: #76b376;
-  }; */
-  /* .eachDescription:hover {
-    --coralNews: lightcoral;
-    --greenNews: lightgreen;
-  }; */
   --buttonNews: #708f99;
 }
 
@@ -91,13 +52,6 @@
   bottom: 49px;
   max-width: 500px;
   height: 168px;
-  /* background:
-    linear-gradient(
-      to right,
-      var(--coralNews) 0px, var(--coralNews) 80px,
-      var(--greenNews) 80px, var(--greenNews) 500px
-    );
-  transition: --coralNews 1s, --greenNews 1s, left 1.5s; */
   background:
     linear-gradient(
       to right,
@@ -105,14 +59,12 @@
       lightgreen 80px, lightgreen 500px
     );
   transition: left 1.5s;
-  /* transition: --coralNews 1s, --greenNews 1s, left 1.5s; */
 }
 
 .sliderBoxNews::before {
   position: absolute;
   content: "";
   inset: 0;
-  /* background: linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%); */
   background:
     linear-gradient(
       to right,
@@ -166,26 +118,18 @@
   position: relative;
   height: 24px;
   min-height: 24px;
-  /* background:
-    linear-gradient(
-      to right,
-      var(--coralNews) 0px, var(--coralNews) 80px,
-      var(--greenNews) 80px, var(--greenNews) 500px
-    ); */
   background:
     linear-gradient(
       to right,
       lightcoral 0px, lightcoral 80px,
       lightgreen 80px, lightgreen 500px
     );
-  /* transition: --coralNews 1s, --greenNews 1s; */
 }
 
 .eachDescription::before {
   position: absolute;
   content: "";
   inset: 0;
-  /* background: linear-gradient(to bottom right, #2b2b2b 49.9%, #696868 50.1%); */
   background:
     linear-gradient(
       to right,
@@ -199,32 +143,6 @@
 .eachDescription:hover::before  {
   opacity: 1;
 }
-
-
-/* .eachDescription:hover {
-  background:
-    linear-gradient(
-      to right,
-      #bd7979 0px, #bd7979 80px,
-      #76b376 80px, #76b376 500px
-    );
-}
-
-.eachDescription:hover::before {
-  background:
-    linear-gradient(
-      to right,
-      lightcoral 0px, lightcoral 80px,
-      lightgreen 80px, lightgreen 500px
-    );
-  opacity: 0;
-  transition: opacity 1s;
-} */
-
-/* .eachDescription:hover {
-  --coralNews: #bd7979;
-  --greenNews: #76b376;
-} */
 
 .date {
   display: flex;
@@ -246,7 +164,7 @@
   white-space: nowrap;
 }
 
-button {
+.newsNextPrev {
   border-radius: 2px;
   font-size: 14px;
   line-height: 14px;

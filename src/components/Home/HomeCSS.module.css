@@ -1,13 +1,9 @@
 :root {
   --buttonMessageHome: #1976d2;
-  /* --scrollThumb: #494949;
-  --scrollTrack: #838383; */
 }
 
 [data-theme="dark"] {
   --buttonMessageHome: #d6d6d6;
-  /* --scrollThumb: #858585;
-  --scrollTrack: #000000; */
 }
 
 .background {
@@ -121,17 +117,17 @@
 .buttonMessage  {
   background: none;
   padding: 0px !important;
-  width: min(50vw, 370px);
+  width: min(50vw, 370px) !important;
   font-size: min(4vw, 28px) !important;
   color: var(--buttonMessageHome) !important;
   border-color: var(--buttonMessageHome) !important;
-  transform: scale(1) !important;
-  transition: transform .2s, color 1s, border-color 1s !important;
+  transition: transform .2s linear, color 1s, border-color 1s !important;
   will-change: transform;
 }
 
-.buttonContainer:hover .buttonMessage {
-  transform: scale(1.05) !important;
+.buttonMessage:hover {
+  transform: scale(1.025) perspective(1200px) translateX(0px) translateY(0px) translateZ(50px);
+  will-change: transform;
 }
 
 @media screen

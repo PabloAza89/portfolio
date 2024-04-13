@@ -22,8 +22,11 @@
   position: relative;
   flex-direction: row;
   /* background: orange; */ /* DEV */
+  /* box-shadow: 0 0 0 2px blue inset; */ /* DEV */
   flex-grow: 1;
   justify-content: space-around;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .linkContainer {

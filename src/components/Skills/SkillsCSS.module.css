@@ -171,7 +171,9 @@
   justify-content: flex-start;
   align-items: flex-start;
   height: 361px;
+  /* background: yellow; */ /* DEV */
   overflow: hidden;
+  justify-content: flex-end;
 }
 
 .scroll {
@@ -193,6 +195,7 @@
     transparent 261px, transparent
   );
   overflow: auto;
+  
 }
 
 .scroll::-webkit-scrollbar {
@@ -254,6 +257,7 @@
       33px 100%,
       0% calc(100% - 32px)
     );
+  overflow: hidden;
 }
 
 .leftSide {

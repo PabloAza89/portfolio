@@ -6,7 +6,7 @@
   --mixBlendModeScrollEffectNavBar: exclusion;
 }
 
-.background  {
+.background {
   flex-direction: column;
   display: flex;
   width: 100%;
@@ -125,5 +125,5 @@
 }
 
 .text:hover {
-  transform: scale(1.05) perspective(1000px) translateZ(20px);
+  transform: scale(1.075) perspective(1000px) translateZ(20px);
 }

@@ -50,9 +50,9 @@ function Home() {
     <div id={`homeBackground`} className={css.background}>
       <div className={css.leftContainer}>
         <div className={css.textContainer}>
-          <div className={css.textOne}>{ english ? `Hi ! I'm` : `Hola ! Soy `}</div>
-          <div className={css.textTwo}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo`}</div>
-          <div className={css.textThree}>{ english ? `and I'm a Fullstack Developer.` : `un Desarrollador Fullstack.`}</div>
+          <div className={css.textOne}>{ english ? `Hi ! I'm` : `Hola ! Soy ` }</div>
+          <div className={css.textTwo}>{ english ? `Pablo Azambuyo` : `Pablo Azambuyo` }</div>
+          <div className={css.textThree}>{ english ? `and I'm a Fullstack Developer.` : `un Desarrollador Fullstack.` }</div>
         </div>
         <Technologies />
         <Link className={css.buttonContainer} to="/MessageMe">
