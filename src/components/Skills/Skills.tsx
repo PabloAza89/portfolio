@@ -4,6 +4,7 @@ import css from './SkillsCSS.module.css';
 import { useSelector } from 'react-redux';
 import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
 import { CSSRuleExtended, arraySkillsI } from '../../interfaces/interfaces';
+import { config } from '../../constants/constants';
 
 function Skills() {
 
@@ -43,11 +44,21 @@ function Skills() {
   // width < 3px GH-Pages translates to (max-width: 2px)
   // width < 4px GH-Pages translates to (max-width: 3px)
 
+  //let qq = sheets[ssI].href?.includes(`pabloaza89.github.io`) // PROD
+  //let qqq = sheets[ssI].href === null // DEV
+
+  //let test1 = includes(`pabloaza89.github.io`)
+
+  console.log("config.TARGET_STYLESHEET", config.TARGET_STYLESHEET)
+
   const findTargetStyleSheet = async () => {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
-      if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // PROD
-      //if (sheets[ssI].href === null) { // DEV
+
+      //console.log("AA", `${sheets[ssI].href}`.includes(`null`))
+      console.log("AA", `${sheets[ssI].href}`.includes(config.TARGET_STYLESHEET))
+
+      if (sheets[ssI].href?.includes(`pabloaza89.github.io`)) { // DEV
         let cssRules = sheets[ssI].cssRules
         for (const cssrI in cssRules) {
           if (
