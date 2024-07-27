@@ -3,7 +3,8 @@ import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import css from './MessageMeCSS.module.css';
 import TextField from '@mui/material/TextField';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { config } from '../../constants/constants';
 
 function MessageMe() {
 
@@ -176,8 +177,7 @@ function MessageMe() {
     if (lastMessageLS !== null && (Date.now() - parseInt(lastMessageLS, 10)) < 60000) return MustWait()
 
     function fetchData() {
-      //fetch(`http://localhost:3001/`, { // DEV
-      fetch(`https://oval-transparent-ornament.glitch.me/`, { // PROD
+      fetch(config.TARGET_STYLESHEET, {
         method: "POST",
         body: JSON.stringify({ name: name, message: message }),
         headers: { "Content-Type": "application/json" }

@@ -46,8 +46,6 @@ function Home() {
 
   window.addEventListener('load', () => homeBGHandler())
 
-  //console.log("TEST", process.env.NODE_ENV, "TEST typeof", typeof process.env.NODE_ENV, "TEST length", process.env.NODE_ENV.length)
-
   return (
     <div id={`homeBackground`} className={css.background}>
       <div className={css.leftContainer}>
