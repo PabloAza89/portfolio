@@ -13,8 +13,8 @@ function Skills() {
   const array: arraySkillsI[] = [
     { id: 0, title: 'HTML & CSS', percentage: 70 },
     { id: 1, title: 'Sequelize', percentage: 60 },
-    { id: 2, title: 'Javascript', percentage: 90 },
-    { id: 3, title: 'Typescript', percentage: 75 },
+    { id: 2, title: 'Typescript', percentage: 90 },
+    { id: 3, title: 'React Native', percentage: 75 },
     { id: 4, title: 'React & Redux', percentage: 90 },
     { id: 5, title: english ? 'BBQ' : 'Asado', percentage: 100 },
     { id: 6, title: english ? 'UX & UI Design' : 'Diseño UX & UI', percentage: 80 }

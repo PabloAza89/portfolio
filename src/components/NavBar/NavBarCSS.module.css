@@ -44,13 +44,15 @@
 }
 
 .mainLeft {
+  /* background: red; */ /* DEV */
+  padding: 0px 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 500px;
-  min-width: 500px;
+  /* width: 500px; */
+  /* min-width: 500px; */
   max-width: 500px;
   color: #FFFFFF;
   align-self: center;
