@@ -82,4 +82,5 @@
   font-weight: 600;
   width: fit-content;
   mix-blend-mode: difference;
+  white-space: nowrap;
 }

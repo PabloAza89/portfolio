@@ -39,15 +39,13 @@ function NavBar() {
           <div className={css.blink}>{`I`}</div>
           <div className={css.greaterThan}>{`/>`}</div>
         </div>
-        <ScrollContainer className={css.mainRight}
-          innerRef={useHorizontalScroll()}
-        >
+        <div className={css.mainRight}>
           <Link className={css.text} to="/AboutMe">{english ? `About Me` : `Acerca` }</Link>
           <Link className={css.text} to="/Skills">{ english ? `Skills` : `Habilidades` }</Link>
           <Link className={css.text} to="/Projects">{ english ? `Projects` : `Proyectos` }</Link>
           <Link className={css.text} to="/Certifications">{ english ? `Certifications` : `Certificados` }</Link>
           <Link className={css.text} to="/Contact">{ english ? `Contact` : `Contacto` }</Link>
-        </ScrollContainer>
+        </div>
       </div>
       <div id={`backgroundScrollEffect`} className={css.backgroundScrollEffect}></div>
     </div>
