@@ -26,7 +26,6 @@ import sequelize from './sequelize.png';
 import { ReactComponent as HomeSvg } from './home.svg';
 import { ReactComponent as DarthSvg } from './darth-vader.svg';
 
-
 export {
   food1, food2, food3, weatherify1, weatherify2, calculator1,
   calculator2, calculator3, calculator4, tictac1, tictac2,
