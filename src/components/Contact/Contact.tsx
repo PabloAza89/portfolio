@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import profile from '../../images/profile.png';
+import { profile } from '../../images/images';
 import Swal from 'sweetalert2';
 import css from './ContactCSS.module.css';
 

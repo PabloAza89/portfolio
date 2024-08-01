@@ -1,10 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import efSet from '../../images/efSet.png';
-import fccCertJS from '../../images/fccCertJS.png';
-import henry from '../../images/henry.png';
-import attention from '../../images/attentionToDetail.png';
-import loadingImage from '../../images/loadingImage.png';
+import { efSet, fccCertJS, henry, attention, loadingImage } from '../../images/images';
 import css from './CertificationsCSS.module.css';
 import Bubbles from '../Bubbles/Bubbles';
 import { arrayCertificationsI } from '../../interfaces/interfaces';

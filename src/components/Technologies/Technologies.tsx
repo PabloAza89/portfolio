@@ -1,9 +1,5 @@
 import { useSelector } from 'react-redux';
-import typescript from '../../images/typescript.png';
-import node from '../../images/node.png';
-import react from '../../images/react.png';
-import redux from '../../images/redux.png';
-import sequelize from '../../images/sequelize.png';
+import { typescript, node, react, redux, sequelize } from '../../images/images';
 import css from './TechnologiesCSS.module.css';
 import { arrayTechnologiesI } from '../../interfaces/interfaces';
 
@@ -16,7 +12,7 @@ function Technologies() {
     { id: 1, icon: redux, title: `Redux`, url: english ? `https://redux.js.org/` : `https://es.redux.js.org/` },
     { id: 2, icon: react, title: `React Native`, url: english ? `https://reactnative.dev/` : `https://translate.google.com/translate?sl=en&tl=es&hl=es&u=https://reactnative.dev/` },
     { id: 3, icon: node, title: `Node.js`, url: english ? `https://nodejs.org/en` : `https://nodejs.org/es ` },
-    { id: 4, icon: typescript, title: `Typescript`, url: english ? `https://mui.com/ ` : `https://translate.google.com/translate?sl=en&tl=es&hl=es&u=https://mui.com/` },
+    { id: 4, icon: typescript, title: `Typescript`, url: english ? `https://www.typescriptlang.org/ ` : `https://www.typescriptlang.org/es/` },
     { id: 5, icon: sequelize, title: `Sequelize`, url: english ? `https://sequelize.org/ ` : `https://translate.google.com/translate?sl=en&tl=es&hl=es&u=https://sequelize.org/` },
   ]
 

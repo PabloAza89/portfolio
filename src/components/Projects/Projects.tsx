@@ -1,14 +1,10 @@
 import { FormControl, MenuItem, Select } from '@mui/material/';
 import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import food1 from '../../images/food1.png';
-import food2 from '../../images/food2.png';
-import food3 from '../../images/food3.png';
-import weatherify1 from '../../images/weatherify1.png';
-import weatherify2 from '../../images/weatherify2.png';
-import tictac1 from '../../images/tictac1.png';
-import tictac2 from '../../images/tictac2.png';
-import loadingImage from '../../images/loadingImage.png';
+import {
+  food1, food2, food3, weatherify1, weatherify2, calculator1, calculator2,
+  calculator3, calculator4, tictac1, tictac2, loadingImage
+} from '../../images/images';
 import css from './ProjectsCSS.module.css';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 
@@ -111,6 +107,12 @@ function Projects() {
   let [ projectChosen, setProjectChosen ] = useState(`All Projects`)
 
   let preArray = [
+    {
+      title: `Android Calculator`,
+      media: [ calculator1, calculator2, calculator3, calculator4 ],
+      href: `https://github.com/PabloAza89/react-native-calculator`,
+      type: `Android App`
+    },
     {
       title: `Weatherify`,
       media: [ weatherify1, weatherify2 ],
@@ -256,6 +258,7 @@ function Projects() {
         onChange={(e: any) => handleSelectChange(e.target.value)}
       >
         <MenuItem value={"All Projects"}>All Projects</MenuItem>
+        <MenuItem value={"Android App"}>Android App</MenuItem>
         <MenuItem value={"API Handle"}>API Handle</MenuItem>
         <MenuItem value={"Server Handle"}>Server Handle</MenuItem>
         <MenuItem value={"Games"}>Games</MenuItem>

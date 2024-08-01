@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Button, SvgIcon } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
-import { ReactComponent as MySvg } from '../../images/home.svg';
+import { HomeSvg } from '../../images/images';
 import Technologies from '../Technologies/Technologies';
 import css from './HomeCSS.module.css';
 
@@ -67,7 +67,7 @@ function Home() {
           className={css.imageSVG}
           preserveAspectRatio="none"
         >
-          <MySvg/>
+          <HomeSvg/>
         </SvgIcon>
       </div>
     </div>

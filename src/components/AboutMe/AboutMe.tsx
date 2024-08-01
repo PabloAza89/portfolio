@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import profile from '../../images/profile.png';
+import { profile } from '../../images/images';
 import css from './AboutMeCSS.module.css';
 
 function AboutMe() {

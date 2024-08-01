@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { languageChanger } from '../../actions';
 import { Button } from '@mui/material';
 import css from './LanguageCSS.module.css';
-import lanEn from '../../images/lanEn.png';
-import lanEs from '../../images/lanEs.png';
+import { lanEn, lanEs } from '../../images/images';
 
 function Language() {
 

@@ -2,7 +2,7 @@ import { SvgIcon } from '@mui/material';
 import { useState, useEffect, useRef, useMemo, CSSProperties, MutableRefObject } from 'react';
 import css from './SkillsCSS.module.css';
 import { useSelector } from 'react-redux';
-import { ReactComponent as MySvg } from '../../images/darth-vader.svg';
+import { DarthSvg } from '../../images/images';
 import { CSSRuleExtended, arraySkillsI } from '../../interfaces/interfaces';
 import { config } from '../../constants/constants';
 
@@ -25,7 +25,7 @@ function Skills() {
   }
 
   const levels = useMemo(() =>  [
-    { id: 0, firstA: english ? `I'm the `: `Soy el `, firstB: english ?  bold(`master`) : bold(`maestro`), second: english ? `of the universe.` : `del universo.`, color: `0, 0, 0`, svg: <MySvg/> },
+    { id: 0, firstA: english ? `I'm the `: `Soy el `, firstB: english ?  bold(`master`) : bold(`maestro`), second: english ? `of the universe.` : `del universo.`, color: `0, 0, 0`, svg: <DarthSvg/> },
     { id: 1, firstB: english ? bold(`High,`) : bold(`Alto,`), second: english ? `I'm pretty good.` : `Soy bastante bueno.`, color: `142, 189, 123` },
     { id: 2, firstA: english ? bold(`Medium, `) : bold(`Medio, `), firstB: english ? `I'm trying` : `tratando`, second: english ? `to improve.` : `de mejorar.`, color: `190, 202, 125` },
     { id: 3, firstA: english ? bold(`Basic, `) : bold(`Básico, `), firstB: english ? `you can't` : `no puedes`, second: english ? `always win..` : `ganar siempre.`, color: `244, 184, 0` },

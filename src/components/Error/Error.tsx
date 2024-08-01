@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import error from '../../images/error.gif';
+import { error, loadingImage } from '../../images/images';
 import css from './ErrorCSS.module.css';
-import loadingImage from '../../images/loadingImage.png';
 
 function Error() {
 
