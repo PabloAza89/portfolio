@@ -8,21 +8,61 @@
   /* overflow: auto; */ /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  z-index: 20000;
+  z-index: 20000; /* MORE THAN APP GRAY STRIPS */
 }
 
 .modalContent {
   background-color: #fefefe;
   /* margin: 15% auto; */ /* 15% from the top and centered */
-  padding: 20px;
+  /* padding: 20px; */
   margin-left: 10vw;
   margin-top: 10vh;
   border: 1px solid #888;
   width: 80vw; /* Could be more or less, depending on screen size */
   height: 80vh;
-  z-index: 20001;
+  z-index: 20001; 
+  /* overflow: hidden; */
+  overflow: scroll;
+  /* transform: scaleX(1); */
+  
 }
 
 .image {
   max-width:100%;
+  /* transform: scale(1); */
+  /* transform: scale(2); */
+}
+
+.button {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background: red !important; */ /* DEV */
+  padding: 0vw !important;
+  min-width: 0vh !important;
+  width: 35px !important;
+  height: 35px !important;
+}
+
+.iconLeft {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  transform: rotate(180deg);
+  min-width: 0vh;
+  width: 23px !important;
+  height: 23px !important;
+}
+
+.iconRight {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  transform: rotate(180deg);
+  min-width: 0vh;
+  width: 23px !important;
+  height: 23px !important;
+  transform: scaleX(1);
 }

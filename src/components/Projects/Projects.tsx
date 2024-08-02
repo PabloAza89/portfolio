@@ -253,12 +253,7 @@ function Projects() {
   const [ imageIndex, setImageIndex ] = useState(0)
 
   window.onclick = function(e) {
-    // if (event.target !== null) {
-    //   console.log("event.target", event.target.id)
-    // }
-    
-    //console.log("event.target", event.target)
-    //console.dir("event.target", event.target)
+
 
     let modalDiv = document.getElementById("modalBackground");
 
@@ -269,10 +264,6 @@ function Projects() {
     }
   }
 
-  
-  // console.log(
-  //   "IMAGES", array.map(e => e.media).flat()
-  // )
 
   return (
     <div
