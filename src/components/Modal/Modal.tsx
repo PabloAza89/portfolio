@@ -37,13 +37,10 @@ function Modal({ images, imageIndex, setShowModal }: any) {
   //console.log('✌️currentIndex --->', currentIndex);
 
   const [ currentZoom, setCurrentZoom ] = useState(1) // DEFAULT ZOOM
-  //let currentZoom = useRef(1) // DEFAULT ZOOM
 
   let imageModalEl = document.getElementById('imageModal')
 
-  //console.log(currentZoom.current)
-
-  console.log(currentZoom)
+  //console.log(currentZoom)
 
   const zoomIn = () => {
     setCurrentZoom((curr: any) => curr + 0.5)
@@ -56,6 +53,67 @@ function Modal({ images, imageIndex, setShowModal }: any) {
   const zoomOut = () => {
     if (currentZoom !== 1) setCurrentZoom((curr: any) => curr - 0.5)
   }
+
+  useEffect(() => { // MOUSE GRAB & DRAG EFFECT ON MOUSE DEVICES
+    const el = document.getElementById('modalContent');
+    if (el !== null) {
+      const mouseEnterOnScore = () => {
+        console.log("MOUSE ENTERRRRRRR")
+        //if (heightDev <= 550) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
+        //el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
+        if (el !== null) el.style.cursor = 'grab';
+        let pos = { top: 0, left: 0, x: 0, y: 0 };
+
+        const mouseDownHandler = function (e: any) {
+          el.style.cursor = 'grabbing';
+          el.style.userSelect = 'none';
+          pos = {
+            left: el.scrollLeft,
+            top: el.scrollTop,
+            x: e.clientX,
+            y: e.clientY,
+          }
+          //if (heightDev <= 550) {
+          if (true) {
+            el.addEventListener('mousemove', mouseMoveHandler)
+            el.addEventListener('mouseup', mouseUpHandler)
+          } 
+          // else {
+          //   el.removeEventListener('mousemove', mouseMoveHandler);
+          //   el.removeEventListener('mouseup', mouseUpHandler);
+          //   el.style.cursor = 'default';
+          // }
+        }
+
+        const mouseMoveHandler = function (e: any) { // HOW MUCH MOUSE HAS MOVED
+          const dx = e.clientX - pos.x;
+          const dy = e.clientY - pos.y;
+          el.scrollTop = pos.top - dy;
+          el.scrollLeft = pos.left - dx;
+        }
+
+        const mouseUpHandler = function () {
+          console.log("MOUSE LEAVEE")
+          el.style.cursor = 'grab'
+          el.style.removeProperty('user-select')
+          el.removeEventListener('mousemove', mouseMoveHandler)
+          el.removeEventListener('mouseup', mouseUpHandler)
+        }
+
+        el.addEventListener('mousedown', mouseDownHandler);
+        el.addEventListener('mouseleave', function() {
+          console.log("MOUSE LEAVEE")
+          el.removeEventListener('mouseup', mouseUpHandler);
+          el.removeEventListener('mousedown', mouseDownHandler)
+          el.removeEventListener('mousemove', mouseMoveHandler);
+          el.style.cursor = 'default'
+        })
+      }
+      el.addEventListener("mouseenter", mouseEnterOnScore)
+
+      return () => el.removeEventListener("mouseenter", mouseEnterOnScore)
+    }
+  })
   
   return (
     <div
@@ -63,88 +121,85 @@ function Modal({ images, imageIndex, setShowModal }: any) {
       className={css.background}
       //onClick={() => console.log("BBBBBBB")}
     >
-      <div className={css.modalContent}>
-        {/* <span class="close">&times;</span> */}
-        {/* <p>Some text in the Modal..</p> */}
-        <img 
-          id={`imageModal`}
-          src={images[currentIndex]}
-          alt=""
-          className={css.image}
-        />
+      <div className={css.modalContainer}>
+        <div
+          className={css.modalContent}
+          id={`modalContent`}
+        >
 
-      <Button
-        variant="contained"
-        className={css.button}
-        onClick={() => {
-          //console.log("GO BACK")
-          //imageIndex -= 1
+          <img 
+            id={`imageModal`}
+            src={images[currentIndex]}
+            alt=""
+            className={css.image}
+          />
 
-          if (currentIndex === 0) {
-            setCurrentIndex(images.length - 1)
-            setCurrentZoom(1)
-          } else {
-            setCurrentIndex((curr: any) => curr - 1)
-            setCurrentZoom(1)
-          }
-
+        
 
           
-        }}
-      >
-        <ForwardIcon className={css.iconLeft}/>
-      </Button>
 
-      <Button
-        variant="contained"
-        className={css.button}
-        onClick={() => {
-          if (currentIndex === images.length - 1) {
-            setCurrentIndex(0)
-            setCurrentZoom(1)
-          } else {
-            setCurrentIndex((curr: any) => curr + 1)
-            setCurrentZoom(1)
-          }
-        }}
-      >
-        <ForwardIcon className={css.iconRight}/>
-      </Button>
+        </div>
 
-      <Button
-        variant="contained"
-        className={css.button}
-        onClick={() => {
-          zoomOut()
-        }}
-      >
-        <RemoveIcon className={css.iconRight}/>
-      </Button>
+        <div className={css.buttonsContainer}>
+            <Button
+              variant="contained"
+              className={css.button}
+              onClick={() => {
+                if (currentIndex === 0) {
+                  setCurrentIndex(images.length - 1)
+                  setCurrentZoom(1)
+                } else {
+                  setCurrentIndex((curr: any) => curr - 1)
+                  setCurrentZoom(1)
+                }
+              }}
+            >
+              <ForwardIcon className={css.iconLeft}/>
+            </Button>
 
-      <Button
-        variant="contained"
-        className={css.button}
-        onClick={() => {
-          zoomIn()
-        }}
-      >
-        <AddIcon className={css.iconRight}/>
-      </Button>
+            <Button
+              variant="contained"
+              className={css.button}
+              onClick={() => {
+                if (currentIndex === images.length - 1) {
+                  setCurrentIndex(0)
+                  setCurrentZoom(1)
+                } else {
+                  setCurrentIndex((curr: any) => curr + 1)
+                  setCurrentZoom(1)
+                }
+              }}
+            >
+              <ForwardIcon className={css.iconRight}/>
+            </Button>
 
-      <Button
-        variant="contained"
-        className={css.button}
-        onClick={() => {
-          //zoomIn()
-          setShowModal(false)
-        }}
-      >
-        <CloseIcon className={css.iconRight}/>
-      </Button>
+            <Button
+              variant="contained"
+              className={css.button}
+              onClick={() => { zoomOut() }}
+            >
+              <RemoveIcon className={css.iconRight}/>
+            </Button>
 
-      
+            <Button
+              variant="contained"
+              className={css.button}
+              onClick={() => { zoomIn() }}
+            >
+              <AddIcon className={css.iconRight}/>
+            </Button>
 
+            <Button
+              variant="contained"
+              className={css.button}
+              onClick={() => { setShowModal(false) }}
+            >
+              <CloseIcon className={css.iconRight}/>
+            </Button>
+
+        </div>
       </div>
+      
 
       
     

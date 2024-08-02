@@ -255,7 +255,7 @@ function Projects() {
   window.onclick = function(e) {
 
 
-    let modalDiv = document.getElementById("modalBackground");
+    let modalDiv = document.getElementById('modalBackground');
 
     if (e.target === modalDiv) {
       //modal.style.display = "none";
