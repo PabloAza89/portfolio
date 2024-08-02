@@ -127,7 +127,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           id={`modalContent`}
         >
 
-          <img 
+          <img
             id={`imageModal`}
             src={images[currentIndex]}
             alt=""
@@ -197,7 +197,9 @@ function Modal({ images, imageIndex, setShowModal }: any) {
               <CloseIcon className={css.iconRight}/>
             </Button>
 
-        </div>
+          </div>
+
+        
       </div>
       
 
