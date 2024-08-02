@@ -250,6 +250,7 @@ function Projects() {
   
 
   const [ showModal, setShowModal ] = useState(false)
+  const [ imageIndex, setImageIndex ] = useState(0)
 
   window.onclick = function(e) {
     // if (event.target !== null) {
@@ -267,6 +268,11 @@ function Projects() {
       setShowModal(false)
     }
   }
+
+  
+  // console.log(
+  //   "IMAGES", array.map(e => e.media).flat()
+  // )
 
   return (
     <div
@@ -338,7 +344,11 @@ function Projects() {
                                     //onClick={() => console.log("CLIEKEDC")}
                                     onClick={(e) => {
                                       e.preventDefault();
-                                      setShowModal(true)
+                                      setShowModal(true);
+                                      //console.log(e.target)
+                                      //console.dir(e)
+                                      //console.log(array.map(e => e.media).flat().indexOf(m))
+                                      setImageIndex(array.map(e => e.media).flat().indexOf(m))
                                     }}
                                   />
                                 </a>
@@ -410,7 +420,7 @@ function Projects() {
         </div>
       </div>
 
-      { showModal && <Modal /> }
+      { showModal && <Modal images={array.map(e => e.media).flat()} imageIndex={imageIndex} /> }
 
     </div>
   )

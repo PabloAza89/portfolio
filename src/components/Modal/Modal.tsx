@@ -6,7 +6,8 @@ import { HomeSvg } from '../../images/images';
 import Technologies from '../Technologies/Technologies';
 import css from './ModalCSS.module.css';
 
-function Modal() {
+function Modal({ images, imageIndex }: any) {
+//function Modal({ images }: any) {
 
   // var modal = document.getElementById("modalBackground");
 
@@ -23,6 +24,8 @@ function Modal() {
   //     console.log("ACAAA")
   //   }
   // }
+
+  console.log("IMAGE INDEX", imageIndex)
   
   return (
     <div
@@ -32,7 +35,12 @@ function Modal() {
     >
       <div className={css.modalContent}>
         {/* <span class="close">&times;</span> */}
-        <p>Some text in the Modal..</p>
+        {/* <p>Some text in the Modal..</p> */}
+        <img 
+          src={images[imageIndex]}
+          alt=""
+          className={css.image}
+        />
       </div>
     
     </div>
