@@ -7,6 +7,7 @@ import {
 } from '../../images/images';
 import css from './ProjectsCSS.module.css';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
+import Modal from '../Modal/Modal';
 
 function Projects() {
 
@@ -246,6 +247,27 @@ function Projects() {
 
   window.addEventListener('load', () => projectsBGHandler())
 
+  
+
+  const [ showModal, setShowModal ] = useState(false)
+
+  window.onclick = function(e) {
+    // if (event.target !== null) {
+    //   console.log("event.target", event.target.id)
+    // }
+    
+    //console.log("event.target", event.target)
+    //console.dir("event.target", event.target)
+
+    let modalDiv = document.getElementById("modalBackground");
+
+    if (e.target === modalDiv) {
+      //modal.style.display = "none";
+      //console.log("ACAAA")
+      setShowModal(false)
+    }
+  }
+
   return (
     <div
       className={css.background}
@@ -307,11 +329,17 @@ function Projects() {
                                   onDragStart={() => linkBlocked.current = true}
                                 >
                                   <img
-                                    onDragStart={(e) => e.preventDefault() }
+                                    onDragStart={(e) => e.preventDefault()}
                                     className={css.cardMedia}
                                     onLoad={() => loadedUpdater(array.map(e => e.media).flat().indexOf(m))}
                                     alt=""
                                     src={m}
+                                    //onClick={() => setShowModal(true)}
+                                    //onClick={() => console.log("CLIEKEDC")}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      setShowModal(true)
+                                    }}
                                   />
                                 </a>
                                 <img
@@ -381,6 +409,9 @@ function Projects() {
           </div>
         </div>
       </div>
+
+      { showModal && <Modal /> }
+
     </div>
   )
 }
