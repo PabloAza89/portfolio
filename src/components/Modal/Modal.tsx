@@ -9,9 +9,10 @@ import css from './ModalCSS.module.css';
 import ForwardIcon from '@mui/icons-material/Forward';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
 
-function Modal({ images, imageIndex }: any) {
+function Modal({ images, imageIndex, setShowModal }: any) {
 //function Modal({ images }: any) {
 
   // var modal = document.getElementById("modalBackground");
@@ -81,8 +82,10 @@ function Modal({ images, imageIndex }: any) {
 
           if (currentIndex === 0) {
             setCurrentIndex(images.length - 1)
+            setCurrentZoom(1)
           } else {
             setCurrentIndex((curr: any) => curr - 1)
+            setCurrentZoom(1)
           }
 
 
@@ -98,8 +101,10 @@ function Modal({ images, imageIndex }: any) {
         onClick={() => {
           if (currentIndex === images.length - 1) {
             setCurrentIndex(0)
+            setCurrentZoom(1)
           } else {
             setCurrentIndex((curr: any) => curr + 1)
+            setCurrentZoom(1)
           }
         }}
       >
@@ -124,6 +129,17 @@ function Modal({ images, imageIndex }: any) {
         }}
       >
         <AddIcon className={css.iconRight}/>
+      </Button>
+
+      <Button
+        variant="contained"
+        className={css.button}
+        onClick={() => {
+          //zoomIn()
+          setShowModal(false)
+        }}
+      >
+        <CloseIcon className={css.iconRight}/>
       </Button>
 
       

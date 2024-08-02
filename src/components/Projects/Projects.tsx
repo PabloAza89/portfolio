@@ -411,7 +411,7 @@ function Projects() {
         </div>
       </div>
 
-      { showModal && <Modal images={array.map(e => e.media).flat()} imageIndex={imageIndex} /> }
+      { showModal && <Modal images={array.map(e => e.media).flat()} imageIndex={imageIndex} setShowModal={setShowModal} /> }
 
     </div>
   )
