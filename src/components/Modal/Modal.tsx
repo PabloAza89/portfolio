@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {/*  Button, */ SvgIcon } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
@@ -21,54 +21,165 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   //console.log(currentZoom)
 
-  const zoomIn = () => setCurrentZoom((curr: any) => curr + 0.5)
+  const zoomIn = () => {
+    
+    
+    setCurrentZoom((curr: any) => curr + 0.5)
+
+    
+  }
   const zoomOut = () => { if (currentZoom !== 1) setCurrentZoom((curr: any) => curr - 0.5) }
 
   let imageInContainerEl = document.getElementById('imageInContainer')
   let imageSCROLL = document.getElementById('imageContainer')
 
-  // useEffect(() => {
-  //   if (imageSCROLL !== null) {
-  //     imageSCROLL.addEventListener("scroll", (event: any) => {
-  //       console.dir(event.target)
-  //       console.log("AMOUNT", event.target.scrollLeft)
-  //     });
+  // let totalScroll = useRef(0)
+  // let amountScroll = useRef(0)
+  // let percentageScrolled = useRef(0)
+  const [ totalScroll, setTotalScroll ]  = useState(0)
+  const [ amountScroll, setAmountScroll ]  = useState(0)
+  const [ percentageScrolled, setPercentageScrolled ]  = useState(0)
 
-      
-  //   }
-    
-  // }, [imageSCROLL])
+  // console.log("AMOUNT SCROLL", amountScroll)
+  // console.log("TOTAL SCROLL", totalScroll)
+  
+  //let scrollToX = useRef(0)
+  //let scrollToX = useRef(0)
 
   useEffect(() => {
-    if (imageInContainerEl !== null) {
-      imageInContainerEl.style.transform = `scale(${currentZoom})`;
-      //imageInContainerEl.style.transform = `translate(50%, 50%);`
-    }
-
     if (imageSCROLL !== null) {
-      imageSCROLL.addEventListener("scroll", (event: any) => {
-        //console.dir(event.target)
-        console.log("TOTAL", event.target.scrollWidth - event.target.clientWidth)
-        console.log("AMOUNT", event.target.scrollLeft)
-      });
 
+
+      imageSCROLL.addEventListener("scrollend", function(e: Event) {
+          //console.dir(event.target)
+        //console.log("TOTAL", e.target.scrollWidth - e.target.clientWidth)
+        //console.log("AMOUNT", e.target.scrollLeft)
+        //console.log("PERCENTAGE", (e.target.scrollLeft * 100) / (e.target.scrollWidth - e.target.clientWidth))
+
+        // totalScroll.current = e.target.scrollWidth - e.target.clientWidth
+        // amountScroll.current = e.target.scrollLeft
+        // percentageScrolled.current = (amountScroll.current * 100) / totalScroll.current
+
+        
+
+        if (e.target !== null) {
+          let target = e.target as HTMLInputElement
+          setTotalScroll(target.scrollWidth - target.clientWidth)
+          setAmountScroll(target.scrollLeft)
+          console.log("EVENT FIRED !")
+        }
+        
+        ///setPercentageScrolled((amountScroll * 100) / totalScroll)
+
+        
+
+        //scrollToX.current = (totalScroll.current / 100) * percentageScrolled.current
+        //console.log("A VER", (totalScroll.current / 100) * percentageScrolled.current)
+        //console.log("PERCENTAGE", percentageScrolled.current)
+
+        // console.log("AMOUNT SCROLL", amountScroll.current)
+        // console.log("TOTAL SCROLL", totalScroll.current)
+
+        // imageSCROLL.scrollTo(scrollToX, 0)
+        //imageSCROLL.scrollTo(0, 0)
+
+      })
+
+      //return () => imageSCROLL.remove()
       
     }
-    // if (imageSCROLL !== null) {
-    //   //console.log("IMAGE SCROLL", imageSCROLL )
-    //   console.dir(imageSCROLL )
-      
-    //   //console.log("clientWidth", imageSCROLL.clientWidth )
-    //   //imageTEST.scrollBy({ top: ( $( window ).height() / -2 ), left: 0, behavior: 'smooth' });
+    
+    
+  //}, [amountScroll, imageSCROLL, totalScroll])
+  }, [imageSCROLL])
 
-    //   // imageTEST.scrollIntoView({
-    //   //   behavior: 'auto',
-    //   //   block: 'center',
-    //   //   inline: 'center'
-    //   // });
+  //console.log("CURRENT ZOOM", currentZoom)
+
+  // console.log("AMOUNT SCROLL", amountScroll)
+  // console.log("TOTAL SCROLL", totalScroll)
+
+
+
+  useEffect(() => {
+
+    // if (imageSCROLL !== null) {
+    //   //totalScroll.current = imageSCROLL.scrollWidth - imageSCROLL.clientWidth
+    //   //amountScroll.current = imageSCROLL.scrollLeft
+    //   setTotalScroll(imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+    //   setAmountScroll(imageSCROLL.scrollLeft)
+    //   //percentageScrolled.current = (amountScroll.current * 100) / totalScroll.current
+
+    //   // console.log("AAA AMOUNT SCROLL", amountScroll.current)
+    //   // console.log("AAA TOTAL SCROLL", totalScroll.current)
+    //   // console.log("AAA A VER", (totalScroll.current / 100) * percentageScrolled.current)
+    //   //console.log("AAA 2 A VER", percentageScrolled.current)
+      
+    //   //imageSCROLL.scrollTo((totalScroll.current / 100) * percentageScrolled.current, 0)
+    //   //imageSCROLL.scrollTo((totalScroll / 100) * percentageScrolled, 0)
+  
+
+    // }
+    
+      if (imageInContainerEl !== null) {
+        imageInContainerEl.style.transform = `scale(${currentZoom})`;
+        //imageInContainerEl.style.transform = `translate(50%, 50%);`
+      }
+
+      // if (imageSCROLL !== null) {
+      //   //totalScroll.current = imageSCROLL.scrollWidth - imageSCROLL.clientWidth
+      //   //amountScroll.current = imageSCROLL.scrollLeft
+      //   //setTotalScroll(imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+      //   //setAmountScroll(imageSCROLL.scrollLeft)
+      //   //setPercentageScrolled((amountScroll * 100) / totalScroll)
+      //   imageSCROLL.scrollTo((amountScroll * 100) / totalScroll, 0)
+      //   //percentageScrolled.current = (amountScroll.current * 100) / totalScroll.current
+  
+      //   // console.log("AAA AMOUNT SCROLL", amountScroll.current)
+      //   // console.log("AAA TOTAL SCROLL", totalScroll.current)
+      //   // console.log("AAA A VER", (totalScroll.current / 100) * percentageScrolled.current)
+      //   //console.log("AAA 2 A VER", percentageScrolled.current)
+        
+      //   //imageSCROLL.scrollTo((totalScroll.current / 100) * percentageScrolled.current, 0)
+      //   //imageSCROLL.scrollTo((totalScroll / 100) * percentageScrolled, 0)
+    
+  
+      // }
+
+      
+      
+    
+    
+
+   
+
+    // if (imageSCROLL !== null) {
+    //   setTotalScroll(imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
     // }
 
-  }, [imageSCROLL, imageInContainerEl, currentZoom])
+    // if (imageSCROLL !== null) {
+    //     //totalScroll.current = imageSCROLL.scrollWidth - imageSCROLL.clientWidth
+    //     //amountScroll.current = imageSCROLL.scrollLeft
+    //     setTotalScroll(imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+    //     setAmountScroll(imageSCROLL.scrollLeft)
+    //     //percentageScrolled.current = (amountScroll.current * 100) / totalScroll.current
+
+    //     // console.log("AAA AMOUNT SCROLL", amountScroll.current)
+    //     // console.log("AAA TOTAL SCROLL", totalScroll.current)
+    //     // console.log("AAA A VER", (totalScroll.current / 100) * percentageScrolled.current)
+    //     //console.log("AAA 2 A VER", percentageScrolled.current)
+        
+    //     //imageSCROLL.scrollTo((totalScroll.current / 100) * percentageScrolled.current, 0)
+    //     imageSCROLL.scrollTo((totalScroll / 100) * percentageScrolled, 0)
+    
+
+    // }
+
+    
+    
+
+
+  //}, [currentZoom, imageInContainerEl, imageSCROLL, percentageScrolled, totalScroll])
+  }, [amountScroll, currentZoom, imageInContainerEl, imageSCROLL, totalScroll])
 
   // useEffect(() => { // MOUSE GRAB & DRAG EFFECT ON MOUSE DEVICES
   //   const el = document.getElementById('imageContainer');
