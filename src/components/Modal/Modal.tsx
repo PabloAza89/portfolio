@@ -103,11 +103,14 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         }
       }, 0)
 
-      // setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
-      //   if (imageInContainerEl !== null && imageSCROLL !== null) {
-      //     imageInContainerEl.style.transition = `transform 1s`;
-      //    }
-      // }, 0)
+      setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
+        if (imageInContainerEl !== null) {
+          //imageInContainerEl.style.transition = `transform 1s`;
+          /* imageInContainerEl.style.transition = `transform 1s`; */
+          //imageInContainerEl.style.transition = `transform 1s`;
+          imageInContainerEl.style.transition = `all 1s`;
+         }
+      }, 0)
 
       // setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
       //   if (imageSCROLL !== null) {
