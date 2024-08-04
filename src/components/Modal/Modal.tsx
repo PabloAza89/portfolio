@@ -133,9 +133,9 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   
     let imageInContainerEl = document.getElementById('imageInContainer')
-    
+    let imageSCROLL = document.getElementById('imageContainer')
 
-  let imageSCROLL = document.getElementById('imageContainer')
+  
 
   useEffect(() => {
 
@@ -247,7 +247,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
       
     // }
     // aa()
-
+    
     
       setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
         if (imageInContainerEl !== null) {
@@ -259,9 +259,19 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         //   console.log("refDiv.current", (refDiv.current as HTMLElement).scrollWidth)
         // }
 
-        if (imageSCROLL !== null) {
-          console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
-        }
+        setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
+          if (imageSCROLL !== null) {
+            //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+            imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.current, 0)
+          }
+        }, 0)
+
+        // setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
+        //   if (imageSCROLL !== null) {
+        //     console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+        //   }
+        // }, 0)
+      
     
     
     
@@ -354,7 +364,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
   //}, [currentZoom, imageInContainerEl, imageSCROLL, percentageScrolled, totalScroll])
   //}, [currentZoom, imageInContainerEl, imageSCROLL, percentageScrolled])
   //}, [currentZoom, percentageScrolled])
-  }, [currentZoom])
+  }, [currentZoom, imageInContainerEl, imageSCROLL])
   //})
 
   // useEffect(() => { // MOUSE GRAB & DRAG EFFECT ON MOUSE DEVICES
