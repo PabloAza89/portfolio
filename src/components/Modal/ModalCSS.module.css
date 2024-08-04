@@ -66,6 +66,13 @@
   width: 80vw !important;
   height: 70vh !important;
 
+  /* max-width: fit-content;
+  max-height: fit-content; */
+  /* max-width: 80vw !important;
+  max-height: 70vh !important; */
+
+ 
+
   /* max-width: 80vw !important;
   max-height: 70vh !important; */
 
@@ -94,20 +101,41 @@
   
   /* max-width:100%; */
 
+  /* max-width: 80vw !important;
+  max-height: 70vh !important; */
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  /* transform-origin: 0 0; */
+  /* transform-origin: top left; */
+  /* scale: 1; */
+  /* transition: scale 1s; */
+  /* transition: transform-origin 1s; */
+  /* transform-origin: 0% 0% 0px; */
+  /* max-width: 100%;
+  max-height: 100%; */
+
   /* max-width: 80vw !important */
   /* max-width: 80vw !important;
   max-height: 70vh !important; */
 
   /* display: flex;
   position: relative; */
-  object-fit: contain;
+  /* object-fit: contain; */
+  /* object-fit:scale-down; */
+  /* object-fit: contain; */
+  /* width: 100%;
+  height: 100%; */
   /* object-fit: scale-down; */
   
   /*  width: 80%;
-  height: 70%; */
+  height: 70%;
+  transform-origin: 0% 0% 0px; */
   
-  width: 100%;
-  height: 100%;
+  /* max-width: 100%; */
+  /* width: 80vw !important; */
+  /* width: 100%;
+  height: 100%; */
   /* transform-origin:unset; */
   /* transform-origin: 0% 0% 0px; */
   
@@ -125,7 +153,14 @@
   
   /* transform: scale(1); */
   /* transform: scale(2); */
-  transform-origin: 0% 0% 0px;
+  /* transform-origin: 0% 0% 0px; */
+  /* transform-origin: center; */
+
+  /* transition: color 1s; */
+  /* transition: transform 1s, transform-origin 1s; */
+  /* transform: scale(1); */
+  /* transition: transform 1s; */
+  /* transition: all 1s; */
   /* transform-origin: center; */
   /* transform-origin: 0%; */
   

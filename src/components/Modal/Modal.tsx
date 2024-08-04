@@ -11,13 +11,21 @@ function Modal({ images, imageIndex, setShowModal }: any) {
   const [ currentIndex, setCurrentIndex ] = useState(imageIndex)
 
 
-  const [ currentZoom, setCurrentZoom ] = useState(1) // DEFAULT ZOOM
+  //const [ currentZoom, setCurrentZoom ] = useState(1) // DEFAULT ZOOM
+  const [ currentZoom, setCurrentZoom ] = useState(100) // DEFAULT ZOOM
   //let currentZoom = useRef(1) // DEFAULT ZOOM
 
 
 
-  const zoomIn = () => setCurrentZoom((curr: any) => curr + 0.5)
-  const zoomOut = () => setCurrentZoom((curr: any) => curr - 0.5)
+  const zoomIn = () => {
+    //setCurrentZoom((curr: any) => curr + 0.5)
+    setCurrentZoom((curr: any) => curr + 50)
+    updateZoomIn()
+  }
+  const zoomOut = () => {
+    setCurrentZoom((curr: any) => curr - 0.5)
+    updateZoomOut()
+  }
     
    
 
@@ -79,73 +87,84 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
 
 
-  
-    
-
-  
-
-  useEffect(() => {
-
+  let updateZoomIn = () => {
     let imageInContainerEl = document.getElementById('imageInContainer')
     let imageSCROLL = document.getElementById('imageContainer')
-    // console.log(percentageXScrolled.current)
-    // console.log(percentageYScrolled.current)
-    // console.log(percentageXScrolled)
-    // console.log(percentageYScrolled)
     console.log(percentageScrolled.x, percentageScrolled.y)
     //console.log(Number.isNaN(percentageYScrolled))
-    
-
-    
       setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
-        if (imageInContainerEl !== null) {
-         imageInContainerEl.style.transform = `scale(${currentZoom})`;
-        }
-      }, 0)
-      
-        // if (refDiv.current !== null) {
-        //   console.log("refDiv.current", (refDiv.current as HTMLElement).scrollWidth)
-        // }
-
-      //if (percentageXScrolled.current === 0 && percentageYScrolled.current === 0) {
-      //if ((percentageXScrolled === 0 && percentageYScrolled === 0) || Number.isNaN(percentageXScrolled) || Number.isNaN(percentageYScrolled)) {
-
-      setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
-        if (imageSCROLL !== null) {
-          //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
-          //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled.current), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled.current))
-          //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled))
-          imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
-          
+        if (imageInContainerEl !== null && imageSCROLL !== null) {
+         //imageInContainerEl.style.transform = `scale(${currentZoom + 0.5})`;
+         //imageInContainerEl.style.scale = `${currentZoom + 0.5}`;
+         imageInContainerEl.style.width = `${currentZoom + 50}%`;
+         imageInContainerEl.style.height = `${currentZoom + 50}%`;
+         //imageInContainerEl.style.transition = `transform 1s`;
+         imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
         }
       }, 0)
 
+      // setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
+      //   if (imageInContainerEl !== null && imageSCROLL !== null) {
+      //     imageInContainerEl.style.transition = `transform 1s`;
+      //    }
+      // }, 0)
 
-      // if (percentageXScrolled === 0 && percentageYScrolled === 0) {
-      //   console.log("ENTRO ACAAAAAAAAAA")
-      //   setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
-      //     if (imageSCROLL !== null) {
-      //       //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
-      //       //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * 50), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * 50))
-      //       imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * 50, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * 50)
-      //     }
-      //   }, 0)
+      // setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
+      //   if (imageSCROLL !== null) {
+      //     //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+      //     //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled.current), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled.current))
+      //     //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled))
+      //     imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+      //   }
+      // }, 0)
+  }
+
+  let updateZoomOut = () => {
+    let imageInContainerEl = document.getElementById('imageInContainer')
+    let imageSCROLL = document.getElementById('imageContainer')
+    console.log(percentageScrolled.x, percentageScrolled.y)
+    //console.log(Number.isNaN(percentageYScrolled))
+      setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
+        if (imageInContainerEl !== null && imageSCROLL !== null) {
+         //imageInContainerEl.style.transform = `scale(${currentZoom - 0.5})`;
+         imageInContainerEl.style.scale = `${currentZoom - 0.5}`;
+         imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+        }
+      }, 0)
+
+      // setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
+      //   if (imageSCROLL !== null) {
+      //     //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+      //     //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled.current), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled.current))
+      //     //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled))
+      //     imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+      //   }
+      // }, 0)
+  }
 
 
-      // } else {
-      //   setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
-      //     if (imageSCROLL !== null) {
-      //       //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
-      //       //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled.current), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled.current))
-      //       //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled))
-      //       imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled)
-            
-      //     }
-      //   }, 0)
-      // }
-        
 
-  }, [currentZoom, percentageScrolled])
+  // useEffect(() => {
+  //   let imageInContainerEl = document.getElementById('imageInContainer')
+  //   let imageSCROLL = document.getElementById('imageContainer')
+  //   console.log(percentageScrolled.x, percentageScrolled.y)
+  //   //console.log(Number.isNaN(percentageYScrolled))
+  //     setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
+  //       if (imageInContainerEl !== null) {
+  //        imageInContainerEl.style.transform = `scale(${currentZoom})`;
+  //       }
+  //     }, 0)
+
+  //     setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
+  //       if (imageSCROLL !== null) {
+  //         //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+  //         //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled.current), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled.current))
+  //         //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled))
+  //         imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+  //       }
+  //     }, 0)
+
+  // }, [currentZoom, percentageScrolled])
 
 
   
@@ -224,7 +243,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           variant="contained"
           className={css.button}
           onClick={() => { zoomOut() }}
-          disabled={ currentZoom === 1 ? true : false }
+          disabled={ currentZoom === 100 ? true : false }
         >
           <RemoveIcon className={css.iconRight}/>
         </Button>
@@ -233,7 +252,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           variant="contained"
           className={css.button}
           onClick={() => { zoomIn() }}
-          disabled={ currentZoom === 8.0 ? true : false }
+          disabled={ currentZoom === 800 ? true : false }
         >
           <AddIcon className={css.iconRight}/>
         </Button>
