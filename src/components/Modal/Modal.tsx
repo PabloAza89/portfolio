@@ -22,7 +22,12 @@ function Modal({ images, imageIndex, setShowModal }: any) {
    
 
   //const [ percentageScrolled, setPercentageScrolled ]  = useState(0)
-  let percentageScrolled = useRef(0)
+  // const [ percentageXScrolled, setPercentageXScrolled ]  = useState(50)
+  // const [ percentageYScrolled, setPercentageYScrolled ]  = useState(50)
+  const [ percentageScrolled, setPercentageScrolled ]  = useState({ x: 50, y: 50 })
+  //const [ percentageYScrolled, setPercentageYScrolled ]  = useState(50)
+  // let percentageXScrolled = useRef(0)
+  // let percentageYScrolled = useRef(0)
 
    //console.log("AMOUNT SCROLL", amountScroll)
    //console.log("TOTAL SCROLL", totalScroll)
@@ -34,8 +39,34 @@ function Modal({ images, imageIndex, setShowModal }: any) {
       imageSCROLL.addEventListener("scroll", function(e: Event) {
         if (e.target !== null) {
           let target = e.target as HTMLInputElement
-          //console.log("SCROLLED AMOUT:", target.scrollLeft)
-          percentageScrolled.current = (target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth)
+          console.log("SCROLLED AMOUT:", target.scrollLeft)
+          // percentageXScrolled.current = (target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth)
+          // percentageYScrolled.current = (target.scrollTop * 100) / (target.scrollHeight - target.clientHeight)
+          // setPercentageXScrolled((target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth))
+          // setPercentageYScrolled((target.scrollTop * 100) / (target.scrollHeight - target.clientHeight))
+
+          // console.log("A VER 1", target.scrollLeft)
+          // console.log("A VER 2", target.scrollWidth) // NOT 0
+          // console.log("A VER 3", target.clientWidth) // NOT 0
+          // console.log("A VER", (target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth))
+          if (target.scrollWidth !== target.clientWidth) { // AVOID 'NUMBER DIVIDED BY ZERO'
+            // setPercentageXScrolled(Math.ceil((target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth)))
+            // setPercentageYScrolled(Math.ceil((target.scrollTop * 100) / (target.scrollHeight - target.clientHeight)))
+            // setPercentageXScrolled((target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth))
+            // setPercentageYScrolled((target.scrollTop * 100) / (target.scrollHeight - target.clientHeight))
+            setPercentageScrolled({
+              x: (target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth),
+              y: (target.scrollTop * 100) / (target.scrollHeight - target.clientHeight)
+              // x: Math.ceil((target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth)),
+              // y: Math.ceil((target.scrollTop * 100) / (target.scrollHeight - target.clientHeight))
+            })
+          } else {
+            // setPercentageXScrolled(50)
+            // setPercentageYScrolled(50)
+            setPercentageScrolled({ x: 50, y: 50 })
+            
+          }
+          
         }
       })
     }
@@ -49,12 +80,21 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
 
   
-    let imageInContainerEl = document.getElementById('imageInContainer')
-    let imageSCROLL = document.getElementById('imageContainer')
+    
 
   
 
   useEffect(() => {
+
+    let imageInContainerEl = document.getElementById('imageInContainer')
+    let imageSCROLL = document.getElementById('imageContainer')
+    // console.log(percentageXScrolled.current)
+    // console.log(percentageYScrolled.current)
+    // console.log(percentageXScrolled)
+    // console.log(percentageYScrolled)
+    console.log(percentageScrolled.x, percentageScrolled.y)
+    //console.log(Number.isNaN(percentageYScrolled))
+    
 
     
       setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
@@ -67,22 +107,45 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         //   console.log("refDiv.current", (refDiv.current as HTMLElement).scrollWidth)
         // }
 
-        setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
-          if (imageSCROLL !== null) {
-            //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
-            imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.current, 0)
-          }
-        }, 0)
+      //if (percentageXScrolled.current === 0 && percentageYScrolled.current === 0) {
+      //if ((percentageXScrolled === 0 && percentageYScrolled === 0) || Number.isNaN(percentageXScrolled) || Number.isNaN(percentageYScrolled)) {
 
-        // if (imageSCROLL !== null) {
-        //   //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
-        //   imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.current, 0)
-        // }
+      setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
+        if (imageSCROLL !== null) {
+          //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+          //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled.current), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled.current))
+          //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled))
+          imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+          
+        }
+      }, 0)
 
 
+      // if (percentageXScrolled === 0 && percentageYScrolled === 0) {
+      //   console.log("ENTRO ACAAAAAAAAAA")
+      //   setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
+      //     if (imageSCROLL !== null) {
+      //       //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+      //       //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * 50), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * 50))
+      //       imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * 50, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * 50)
+      //     }
+      //   }, 0)
 
 
-  }, [currentZoom, imageInContainerEl, imageSCROLL])
+      // } else {
+      //   setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
+      //     if (imageSCROLL !== null) {
+      //       //console.log("TOTAL TO SCROLL", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+      //       //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled.current), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled.current))
+      //       //imageSCROLL.scrollTo(Math.floor(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled), Math.floor(((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled))
+      //       imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageXScrolled, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageYScrolled)
+            
+      //     }
+      //   }, 0)
+      // }
+        
+
+  }, [currentZoom, percentageScrolled])
 
 
   
