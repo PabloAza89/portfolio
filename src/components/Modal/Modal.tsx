@@ -39,7 +39,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
 
     let imageSCROLL = document.getElementById('imageContainer')
-    console.log(percentageScrolled.x, percentageScrolled.y)
+    console.log("X", percentageScrolled.x, "Y", percentageScrolled.y)
     //console.log(Number.isNaN(percentageYScrolled))
       setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
         if (imageInContainerEl !== null && imageSCROLL !== null) {
@@ -51,8 +51,8 @@ function Modal({ images, imageIndex, setShowModal }: any) {
          imageInContainerEl.style.height = `${target}%`;
 
          let target2 = target / 50
-         imageInContainerEl.style.scale = `calc((100% / 3) * 2)`; // 150% --> RETURN TO ORIGINAL 100%
-         //imageInContainerEl.style.scale = `calc((100% / ${target2}) * ${target2 - 1})`; // 150% --> RETURN TO ORIGINAL 100%
+         //imageInContainerEl.style.scale = `calc((100% / 3) * 2)`; // 150% --> RETURN TO ORIGINAL 100%
+         imageInContainerEl.style.scale = `calc((100% / ${target2}) * ${target2 - 1})`; // 150% --> RETURN TO ORIGINAL 100%
 
          /* imageSCROLL.scrollWidth = 7000 */
          /* imageInContainerEl.style.transform = `translateX(-12%) translateY(-12%)`; */
@@ -61,8 +61,17 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           /* scale: calc(100%); */
           /* scale: calc(100%); */
 
+          //console.log("TEST percentageScrolled.x", percentageScrolled.x)
+
+          //imageInContainerEl.style.transformOrigin = `left bottom`;
+          //imageInContainerEl.style.transformOrigin = `${percentageScrolled.x} ${percentageScrolled.y}`;
+          imageInContainerEl.style.transformOrigin = `${percentageScrolled.x}% ${percentageScrolled.y}%`;
           imageInContainerEl.style.scale = `100%`;
-          //imageInContainerEl.style.transition = `scale 2s`;
+          //imageInContainerEl.style.transformOrigin = `left bottom`;
+          //transform-origin: left top;
+          //imageInContainerEl.style.transition = `scale .5s`;
+          //imageInContainerEl.style.transition = `scale 50ms`;
+          imageInContainerEl.style.transition = `scale 100ms`;
           /* imageInContainerEl.style.transition = `unset` */
 
           //imageInContainerEl.style.transition = `none`;
@@ -108,7 +117,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
       imageSCROLL.addEventListener("scroll", function(e: Event) {
         if (e.target !== null) {
           let target = e.target as HTMLInputElement
-          console.log("SCROLLED AMOUT:", target.scrollLeft)
+          //console.log("SCROLLED AMOUT:", target.scrollLeft)
           // percentageXScrolled.current = (target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth)
           // percentageYScrolled.current = (target.scrollTop * 100) / (target.scrollHeight - target.clientHeight)
           // setPercentageXScrolled((target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth))
