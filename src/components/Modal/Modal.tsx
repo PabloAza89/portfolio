@@ -20,7 +20,68 @@ function Modal({ images, imageIndex, setShowModal }: any) {
   const zoomIn = () => {
     //setCurrentZoom((curr: any) => curr + 0.5)
     setCurrentZoom((curr: any) => curr + 50)
-    updateZoomIn()
+    //updateZoomIn()
+
+
+    let imageInContainerEl = document.getElementById('imageInContainer')
+
+    if (imageInContainerEl !== null) {
+      imageInContainerEl.addEventListener("transitionend", (el) => {
+        console.log("Transition ended");
+        //imageInContainerEl.style.transition = `none`;
+        if (imageInContainerEl !== null) {
+          imageInContainerEl.style.transition = `none`;
+        }
+        
+      });
+    }
+    
+
+
+    let imageSCROLL = document.getElementById('imageContainer')
+    console.log(percentageScrolled.x, percentageScrolled.y)
+    //console.log(Number.isNaN(percentageYScrolled))
+      setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
+        if (imageInContainerEl !== null && imageSCROLL !== null) {
+         //imageInContainerEl.style.transform = `scale(${currentZoom + 0.5})`;
+         //imageInContainerEl.style.scale = `${currentZoom + 0.5}`;
+         //console.log("currentZoom + 50", currentZoom + 50)
+         let target = currentZoom + 50
+         imageInContainerEl.style.width = `${target}%`;
+         imageInContainerEl.style.height = `${target}%`;
+
+         let target2 = target / 50
+         imageInContainerEl.style.scale = `calc((100% / 3) * 2)`; // 150% --> RETURN TO ORIGINAL 100%
+         //imageInContainerEl.style.scale = `calc((100% / ${target2}) * ${target2 - 1})`; // 150% --> RETURN TO ORIGINAL 100%
+
+         /* imageSCROLL.scrollWidth = 7000 */
+         /* imageInContainerEl.style.transform = `translateX(-12%) translateY(-12%)`; */
+          imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+
+          /* scale: calc(100%); */
+          /* scale: calc(100%); */
+
+          imageInContainerEl.style.scale = `100%`;
+          //imageInContainerEl.style.transition = `scale 2s`;
+          /* imageInContainerEl.style.transition = `unset` */
+
+          //imageInContainerEl.style.transition = `none`;
+
+         //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x + 444, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y + 444)
+         //imageInContainerEl.style.transition = `transform 1s`;
+         //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+         //imageSCROLL.scrollIntoView({ block: 'center', inline: 'center' });
+        }
+      }, 0)
+
+      // setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
+      //   if (imageInContainerEl !== null && imageSCROLL !== null) {
+      //     //imageInContainerEl.style.transition = `unset`;
+      //     imageInContainerEl.style.transition = `scale 0s`;
+
+      //   }
+      // }, 600)
+
   }
   const zoomOut = () => {
     setCurrentZoom((curr: any) => curr - 0.5)
@@ -96,21 +157,27 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         if (imageInContainerEl !== null && imageSCROLL !== null) {
          //imageInContainerEl.style.transform = `scale(${currentZoom + 0.5})`;
          //imageInContainerEl.style.scale = `${currentZoom + 0.5}`;
+         
          imageInContainerEl.style.width = `${currentZoom + 50}%`;
          imageInContainerEl.style.height = `${currentZoom + 50}%`;
-         //imageInContainerEl.style.transition = `transform 1s`;
+         
          imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+         //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x + 444, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y + 444)
+         //imageInContainerEl.style.transition = `transform 1s`;
+         //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+         //imageSCROLL.scrollIntoView({ block: 'center', inline: 'center' });
         }
       }, 0)
 
-      setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
-        if (imageInContainerEl !== null) {
-          //imageInContainerEl.style.transition = `transform 1s`;
-          /* imageInContainerEl.style.transition = `transform 1s`; */
-          //imageInContainerEl.style.transition = `transform 1s`;
-          imageInContainerEl.style.transition = `all 1s`;
-         }
-      }, 0)
+      // setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
+      //   if (imageSCROLL !== null) {
+      //     //imageInContainerEl.style.transition = `transform 1s`;
+      //     /* imageInContainerEl.style.transition = `transform 1s`; */
+      //     //imageInContainerEl.style.transition = `transform 1s`;
+      //     //imageInContainerEl.style.transition = `all 1s`;
+      //     //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+      //    }
+      // }, 200)
 
       // setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !!!
       //   if (imageSCROLL !== null) {
@@ -132,6 +199,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
          //imageInContainerEl.style.transform = `scale(${currentZoom - 0.5})`;
          imageInContainerEl.style.scale = `${currentZoom - 0.5}`;
          imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+         
         }
       }, 0)
 
@@ -188,6 +256,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
           <img
             id={`imageInContainer`}
+            //id={css.imageInContainer}
             src={images[currentIndex]}
             alt=""
             className={css.imageInContainer}
