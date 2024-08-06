@@ -12,6 +12,9 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   const [ currentZoom, setCurrentZoom ] = useState(100) // DEFAULT ZOOM
 
+   //const [ percentageScrolled, setPercentageScrolled ]  = useState({ x: 50, y: 50 })
+   let percentageScrolled = useRef({ x: 50, y: 50 })
+
   const zoomIn = () => {
     setCurrentZoom((curr: any) => curr + 50)
     let imageInContainerEl = document.getElementById('imageInContainer')
@@ -23,21 +26,47 @@ function Modal({ images, imageIndex, setShowModal }: any) {
       });
     }
 
-    setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
+    // ZOOM-IN
+    setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER ! // ZOOM-IN
       if (imageInContainerEl !== null && imageSCROLL !== null) {
+
+        //percentageScrolled.current = { x: 50, y: 50 }
 
         let target = currentZoom + 50
         imageInContainerEl.style.width = `${target}%`;
         imageInContainerEl.style.height = `${target}%`;
 
+        //console.log("EVENT FIRED !! currentZoom", currentZoom)
+
+        if (currentZoom === 100) {
+          percentageScrolled.current = { x: 50, y: 50 }
+        }
+
         let target2 = target / 50
         imageInContainerEl.style.scale = `calc((100% / ${target2}) * ${target2 - 1})`; // 150% --> RETURN TO ORIGINAL SCALE (100%) // e.g.: calc((100% / 3) * 2)
 
-        imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+        //console.log("PERCENTAGE SCROLLED X", percentageScrolled.x)
+        //console.log("PERCENTAGE SCROLLED Y", percentageScrolled.y)
+        console.log("PERCENTAGE SCROLLED X", percentageScrolled.current.x)
+        console.log("PERCENTAGE SCROLLED Y", percentageScrolled.current.y)
 
-        imageInContainerEl.style.transformOrigin = `${percentageScrolled.x}% ${percentageScrolled.y}%`;
+        console.log("TOTAL WIDTH", imageSCROLL.scrollWidth - imageSCROLL.clientWidth)
+        console.log("TOTAL HEIGHT", imageSCROLL.scrollHeight - imageSCROLL.clientHeight)
+        // console.log("XXX ", ((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x)
+        // console.log("YYY ", ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+        console.log("XXX ", ((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.current.x)
+        console.log("YYY ", ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.current.y)
+        //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+        imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.current.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.current.y)
+        //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * 50, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * 50)
+        //imageSCROLL.scrollTo(50, 50)
+
+        //imageInContainerEl.style.transformOrigin = `${percentageScrolled.x}% ${percentageScrolled.y}%`;
+        imageInContainerEl.style.transformOrigin = `50% 50%`;
         imageInContainerEl.style.scale = `100%`;
         imageInContainerEl.style.transition = `scale 400ms linear`;
+
+        
 
       }
     }, 0)
@@ -53,8 +82,8 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         if (imageInContainerEl !== null) imageInContainerEl.style.transition = `none`
       });
     }
-
-    setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
+    // ZOOM-OUT
+    setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER ! // ZOOM-OUT
       if (imageInContainerEl !== null && imageSCROLL !== null) {
 
         let target = currentZoom - 50
@@ -76,29 +105,60 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
         //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
 
-        console.log("percentageScrolled.x", percentageScrolled.x, "percentageScrolled.y", percentageScrolled.y)
+        
 
         //imageInContainerEl.style.transformOrigin = `${percentageScrolled.x}% ${percentageScrolled.y}%`;
         //imageInContainerEl.style.transformOrigin = `${percentageScrolled.x / 2}% ${percentageScrolled.y / 2}%`;
-        imageInContainerEl.style.transformOrigin = `0% 0%`;
+        //imageInContainerEl.style.transformOrigin = `0% 0%`;
 
-        imageInContainerEl.style.transition = `scale 400ms linear`;
-        imageInContainerEl.style.scale = `100%`;
-
+        //imageInContainerEl.style.transition = `scale 400ms linear`;
         
 
-        imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+       
+
+        //imageInContainerEl.style.transformOrigin = `${percentageScrolled.x/3}% ${percentageScrolled.y/3}%`;
+        //imageInContainerEl.style.transformOrigin = `${(percentageScrolled.x/3)*2}% ${(percentageScrolled.y/3)*2}%`;
+        //console.log("percentageScrolled.x", percentageScrolled.x, "percentageScrolled.y", percentageScrolled.y)
+        //imageInContainerEl.style.transformOrigin = `0% 0%`; // ON CENTER
+        //imageInContainerEl.style.transformOrigin = `0% 0%`; // BOTTOM LEFT // 25% 0%
+
+        //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+        imageSCROLL.scrollTo(0, 0)
+
+        //imageInContainerEl.style.transformOrigin = `0% 0%`; //
+        //imageInContainerEl.style.transformOrigin = `50% 50%`; //
+        //imageInContainerEl.style.transformOrigin = `100% 100%`; //
+        //imageInContainerEl.style.transition = `width 5000ms linear, height 5000ms linear`;
+        imageInContainerEl.style.transformOrigin = `50% 50%`; //
+        imageInContainerEl.style.scale = `100%`;
+        imageInContainerEl.style.transition = `scale 400ms linear`;
+        
+        
+        
+        //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
         //imageInContainerEl.style.transformOrigin = `66% 66%`;
         //imageInContainerEl.style.transformOrigin = `150% 150%`;
         //imageInContainerEl.style.transformOrigin = `0% 0%`;
+
+        //imageInContainerEl.style.transformOrigin = `25% 50%`; //
         
+        //imageInContainerEl.style.transition = `scale 500ms linear`;
+        
+
         //imageInContainerEl.style.transformOrigin = `50% 50%`;
-        //imageInContainerEl.style.transition = `scale 100ms linear`;
         //imageInContainerEl.style.transition = `all 100ms linear`;
         //imageInContainerEl.style.transformOrigin = `${percentageScrolled.x}% ${percentageScrolled.y}%`;
 
+        //percentageScrolled.current = { x: 50, y: 50 }
+
       }
     }, 0)
+
+    // setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
+    //   //setPercentageScrolled({ x: 50, y: 50 })
+    //   percentageScrolled.current = { x: 50, y: 50 }
+
+    // }, 0)
 
     // setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
     //   if (imageInContainerEl !== null && imageSCROLL !== null) {
@@ -127,39 +187,54 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
     //   }
     // }, 0)
-
-
   }
 
-  const [ percentageScrolled, setPercentageScrolled ]  = useState({ x: 50, y: 50 })
-
+  let imageSCROLL = document.getElementById('imageContainer')
 
   useEffect(() => {
-    let imageSCROLL = document.getElementById('imageContainer')
+    
     if (imageSCROLL !== null) {
       imageSCROLL.addEventListener("scroll", function(e: Event) {
+        //console.log("EVENT FIRED !!")
         if (e.target !== null) {
           let target = e.target as HTMLInputElement // AVOID 'NUMBER DIVIDED BY ZERO'
-          if (target.scrollWidth !== target.clientWidth) setPercentageScrolled({
-            x: (target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth),
-            y: (target.scrollTop * 100) / (target.scrollHeight - target.clientHeight)
-          })
-          else setPercentageScrolled({ x: 50, y: 50 })
+          
+          // if (target.scrollWidth !== target.clientWidth) setPercentageScrolled({
+          //   x: (target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth),
+          //   y: (target.scrollTop * 100) / (target.scrollHeight - target.clientHeight)
+          // })
+          // else setPercentageScrolled({ x: 50, y: 50 })
+          //console.log("EVENT FIRED !! target.scrollWidth", target.scrollWidth)
+          //console.log("EVENT FIRED !! target.clientWidth", target.clientWidth)
+          if (target.scrollWidth !== target.clientWidth) {
+            //console.log("EVENT FIRED !!, SET TO X AMOUNT")
+            percentageScrolled.current = {
+              x: (target.scrollLeft * 100) / (target.scrollWidth - target.clientWidth),
+              y: (target.scrollTop * 100) / (target.scrollHeight - target.clientHeight)
+            }
+          }
+          else {
+            //console.log("EVENT FIRED !!, SET TO 0")
+            percentageScrolled.current = { x: 50, y: 50 }
+          }
         }
       })
     }
-  }, [])
+  }, [imageSCROLL])
 
   let updateZoomOut = () => {
     let imageInContainerEl = document.getElementById('imageInContainer')
     let imageSCROLL = document.getElementById('imageContainer')
-    console.log(percentageScrolled.x, percentageScrolled.y)
+    //console.log(percentageScrolled.x, percentageScrolled.y)
+    console.log(percentageScrolled.current.x, percentageScrolled.current.y)
     //console.log(Number.isNaN(percentageYScrolled))
       setTimeout(() => { // SETTIMEOUT HELP TO EXECUTE FUNCTIONS IN ORDER !
         if (imageInContainerEl !== null && imageSCROLL !== null) {
          //imageInContainerEl.style.transform = `scale(${currentZoom - 0.5})`;
          imageInContainerEl.style.scale = `${currentZoom - 0.5}`;
-         imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+         //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
+         imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.current.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.current.y)
+         
          
         }
       }, 0)
