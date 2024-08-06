@@ -62,9 +62,10 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         //imageSCROLL.scrollTo(50, 50)
 
         //imageInContainerEl.style.transformOrigin = `${percentageScrolled.x}% ${percentageScrolled.y}%`;
-        imageInContainerEl.style.transformOrigin = `50% 50%`;
+        imageInContainerEl.style.transformOrigin = `${percentageScrolled.current.x}% ${percentageScrolled.current.y}%`;
+        //imageInContainerEl.style.transformOrigin = `50% 50%`;
         imageInContainerEl.style.scale = `100%`;
-        imageInContainerEl.style.transition = `scale 400ms linear`;
+        imageInContainerEl.style.transition = `scale 2000ms linear`;
 
         
 
@@ -121,17 +122,30 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         //console.log("percentageScrolled.x", percentageScrolled.x, "percentageScrolled.y", percentageScrolled.y)
         //imageInContainerEl.style.transformOrigin = `0% 0%`; // ON CENTER
         //imageInContainerEl.style.transformOrigin = `0% 0%`; // BOTTOM LEFT // 25% 0%
-
+        //console.log("CURRENT ZOOOOOOm", currentZoom)
+        if (currentZoom === 150) imageSCROLL.scrollTo(0, 0)
+        else imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.current.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.current.y)
         //imageSCROLL.scrollTo(((imageSCROLL.scrollWidth - imageSCROLL.clientWidth) / 100) * percentageScrolled.x, ((imageSCROLL.scrollHeight - imageSCROLL.clientHeight) / 100) * percentageScrolled.y)
-        imageSCROLL.scrollTo(0, 0)
+        
+        //imageSCROLL.scrollTo(0, 0)
 
         //imageInContainerEl.style.transformOrigin = `0% 0%`; //
         //imageInContainerEl.style.transformOrigin = `50% 50%`; //
         //imageInContainerEl.style.transformOrigin = `100% 100%`; //
         //imageInContainerEl.style.transition = `width 5000ms linear, height 5000ms linear`;
-        imageInContainerEl.style.transformOrigin = `50% 50%`; //
+        //imageInContainerEl.style.transformOrigin = `33% 0%`; // FROM LEFT-TOP (X-Y) OK !
+        //imageInContainerEl.style.transformOrigin = `33% 50%`; // FROM LEFT-CENTER (X-Y) OK !
+        //imageInContainerEl.style.transformOrigin = `33% 100%`; // FROM LEFT-BOTTOM (X-Y) OK !
+
+        //imageInContainerEl.style.transformOrigin = `50% 0%`; // FROM CENTER-TOP (X-Y) OK !
+        imageInContainerEl.style.transformOrigin = `50% 50%`; // FROM CENTER-CENTER (X-Y) OK !
+        //imageInContainerEl.style.transformOrigin = `50% 100%`; // FROM CENTER-BOTTOM (X-Y) OK !
+        
+        //imageInContainerEl.style.transformOrigin = `66% 0%`; // FROM RIGHT-TOP (X-Y) OK !
+        //imageInContainerEl.style.transformOrigin = `66% 50%`; // FROM RIGHT-CENTER (X-Y) OK !
+        //imageInContainerEl.style.transformOrigin = `66% 100%`; // FROM RIGHT-BOTTOM (X-Y) OK !
         imageInContainerEl.style.scale = `100%`;
-        imageInContainerEl.style.transition = `scale 400ms linear`;
+        imageInContainerEl.style.transition = `scale 2000ms linear`;
         
         
         
