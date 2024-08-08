@@ -1,5 +1,5 @@
 import { FormControl, MenuItem, Select } from '@mui/material/';
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import {
   food1, food2, food3, weatherify1, weatherify2, calculator1, calculator2,
@@ -265,71 +265,6 @@ function Projects() {
   }
 
 
-  //images={array.map(e => e.media).flat()} imageIndex={imageIndex}
-  // let image = new Image()
-  // image.src = array.map(e => e.media).flat()[imageIndex]
-  //let image = useRef(new Image())
-  //
-  //let image = 
-
-  //let image = useRef(new Image())
-
-  // let updateImage = useCallback(() => {
-  //   let imageee = new Image()
-  //   imageee.src = array.map(e => e.media).flat()[imageIndex]
-  //   return imageee
-  // },[array, imageIndex])
-  // let imageee = new Image()
-  // imageee.src = array.map(e => e.media).flat()[imageIndex]
-
-  // const [ image, setImage ] = useState<any>(() => {
-  //   let imageee = new Image()
-  //   imageee.src = array.map(e => e.media).flat()[imageIndex]
-  //   return imageee
-  // })
-
-  // let image = new Image()
-  // image.src = array.map(e => e.media).flat()[imageIndex]
-
-  //let imageee
-
-  // useEffect(() => {
-  //   console.log("IMAGE CHANGED")
-  // }, [array, imageIndex])
-
-  // useEffect(() => {
-  //   //image.current.src = array.map(e => e.media).flat()[imageIndex]
-    
-  //   // let image = new Image()
-  //   // image.src = array.map(e => e.media).flat()[imageIndex]
-  //   // setImage(image)
-
-  //   //setImage(updateImage())
-  //   setImage(() => {
-  //     let imageee = new Image()
-  //     imageee.src = array.map(e => e.media).flat()[imageIndex]
-  //     return imageee
-  //   })
-    
-
-  // }, [array, imageIndex])
-  //let image = <img src={array.map(e => e.media).flat()[imageIndex]} alt=""/>
-
-  // let imageee = new Image()
-  // imageee.src = array.map(e => e.media).flat()[imageIndex]
-
-  // const [ image, setImage ] = useState(imageee)
-
-  // useEffect(() => {
-  //   // image = new Image()
-  //   //imageee = new Image()
-  //   //imageee.src = array.map(e => e.media).flat()[imageIndex]
-  //   //setImage(imageee)
-  // }, [array, imageIndex, imageee])
-
-  //console.log("IMAGE REF", imageRef.current)
-  //console.log(imageRef.current)
-
   return (
     <div
       className={css.background}
@@ -398,7 +333,6 @@ function Projects() {
                                     src={m}
                                     //onClick={() => setShowModal(true)}
                                     //onClick={() => console.log("CLIEKEDC")}
-                                    //ref={imageRef}
                                     onClick={(e) => {
                                       e.preventDefault();
                                       setShowModal(true);
