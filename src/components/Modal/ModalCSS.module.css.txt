@@ -13,7 +13,7 @@
 }
 
 .innerModal {
-  background: gray; /* DEV */
+  background: red; /* DEV */
   /* background-color: #bebaba; */
   /* background-color: #5c5c5c; */
   display: flex;
@@ -35,8 +35,8 @@
 
 }
 
-.canvasImage {
-  background: red; /* DEV */
+.imageContainer {
+  background: green; /* DEV */
 
   /* display: flex;
   position: relative;
