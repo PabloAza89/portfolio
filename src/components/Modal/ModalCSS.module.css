@@ -38,6 +38,9 @@
 .canvasImage {
   /* background: red; */ /* DEV */
 
+  object-fit: contain;
+  max-width: 80vw !important;
+  max-height: 70vh !important;
   /* display: flex;
   position: relative;
  */
