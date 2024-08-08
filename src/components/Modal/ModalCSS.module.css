@@ -36,17 +36,22 @@
 }
 
 .canvasImage {
-  background: red; /* DEV */
+  /* background: red; */ /* DEV */
 
   /* display: flex;
   position: relative;
  */
   /* height: 70vh; */
-  display: flex;
-  position: relative;
+  /* display: flex; */
+  /* position: relative; */
+  /* width="1920" height="1040" */
+ /*  width: 1920px;
+  height: 1040px; */
+  /* object-fit: contain; */
   /* align-items: center;
   justify-content: center; */
-  
+  /* width: 60%;
+  height: 70vh; */
 
   /* width: 80vw !important;
   height: 70vh !important; */
@@ -61,10 +66,10 @@
   /* background-color: #fefefe; */
 
   /* border: 1px solid #888; */
-  overflow: scroll;
+  /* overflow: scroll;
 
   width: 80vw !important;
-  height: 70vh !important;
+  height: 70vh !important; */
  /*  width: 80vw;
   height: 70vh; */
 

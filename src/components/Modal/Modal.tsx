@@ -24,17 +24,68 @@ function Modal({ images, imageIndex, setShowModal }: any) {
   let refCanvas = useRef<HTMLCanvasElement>(null)
 
   //const canvas = document.getElementById("canvasImage") as HTMLCanvasElement;
-  if (refCanvas.current !== null) {
-    const ctx = refCanvas.current.getContext("2d");
 
-    console.log("CANVAS", refCanvas.current.width)
-    if (ctx !== null) {
-      ctx.fillStyle = "green";
-      ctx.fillRect(20, 0, 100, 100);
-    }
+  
 
+  //let image = useRef<any>(null)
+  //let image = new Image();// = useRef<HTMLImageElement>(null)
+
+  // useEffect(() => {
+  //   // image.current = new Image();
+  //   image.src = images[currentIndex]
     
-  }
+  //   image.src = images[currentIndex]
+  // }, [currentIndex, image, images])
+
+  useEffect(() => {
+    if (refCanvas.current !== null) {
+      let ref = refCanvas.current
+      const ctx = ref.getContext("2d");
+
+      let image = new Image()
+      image.src = images[currentIndex]
+      // ref.width = image.naturalWidth
+      // ref.height = image.naturalHeight
+      ref.width = 1920
+      ref.height = 1040
+  
+      //console.log("CANVAS", refCanvas.current.width)
+      if (ctx !== null) {
+        //context.drawImage(base_image, 100, 100);
+        
+        
+        
+        //console.log("IMAGE", image)
+        //console.dir(image)
+        
+        
+        
+        
+        image.onload = () => {
+          //ctx.drawImage(image, 0, 0, ref.width, ref.height);
+          //ctx.drawImage(image, 0, 0, 1920, 1040);
+          ctx.drawImage(image, 0, 0, 1920, 1040,     // source rectangle
+                             0, 0, ref.width, ref.height); // destination rectangle
+          ctx.imageSmoothingEnabled = false;
+          
+          //ctx.imageSmoothingEnabled = true;
+          //ctx.setTransform(1, 0, 0, 1, 0, 0);
+          //ctx.scale(1, 1);
+          //ctx.scale(2, 2);
+          //console.dir(image)
+        };
+        
+        
+        //ctx.fillStyle = "green";
+        //ctx.fillRect(0, 0, ref.width, ref.height);
+        // ref.style.width = '300px'
+        // ref.style.height = '300px'
+        //ctx.drawImage(image, ref.width, ref.height);
+      }
+  
+      
+    }
+  }, [currentIndex, images])
   
 
   const zoomIn = () => {
@@ -53,10 +104,23 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           <canvas
             id={`canvasImage`}
             ref={refCanvas}
+            //width="1920" height="1040"
+            // width={image.current.naturalWidth}
+            // height={image.current.naturalHeight}
+            // width={image.current.naturalWidth}
+            // height={image.current.naturalHeight}
+            width={1920}
+            height={1040}
             //src={images[currentIndex]}
             //alt=""
             //className={css.canvasImage}
-          />
+          >
+            {/* <img
+              src={images[currentIndex]}
+              alt=""
+            ></img> */}
+          </canvas>
+          
       </div>
       <div className={css.buttonsContainer}>
         <Button
