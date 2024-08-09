@@ -17,8 +17,25 @@ function Modal({ images, imageIndex, setShowModal }: any) {
     
   const [ amount, setAmount ] = useState(0)
 
+  
+  let allowMove = useRef(false)
+  let pos = useRef(0)
+  //let initPos = useRef(0)
+  let clickArbPos = useRef(0)
+  //const [ initPos, setInitPos ] = useState(0)
+  let targetPos = useRef(0)
+  //let scrolled = useRef(0)
+  const [ scrolled, setScrolled ] = useState(0)
+  //let currentPos = useRef(-480)
+  let initialImagePosition = useRef(-480)
+  const [ imagePosition, setImagePosition ] = useState(-480)
+console.log('imagePosition --->', imagePosition);
+//console.log('scrolled --->', scrolled.current);
+//console.log('targetPos --->', targetPos.current);
+
+
   useEffect(() => {
-    console.log("currentZoom", currentZoom)
+    //console.log("currentZoom", currentZoom)
     //console.log("LAUNCHED")
     let image = new Image()
     image.src = images[currentIndex]
@@ -26,8 +43,8 @@ function Modal({ images, imageIndex, setShowModal }: any) {
       if (refCanvas.current !== null) {
         let ref = refCanvas.current
         const ctx = ref.getContext("2d");
-        console.log("image.naturalWidth", image.naturalWidth)
-        console.log("image.naturalHeight", image.naturalHeight)
+        //console.log("image.naturalWidth", image.naturalWidth)
+        //console.log("image.naturalHeight", image.naturalHeight)
   
         //ref.width = image.naturalWidth * currentZoom
         //ref.width = (image.naturalWidth * currentZoom) * 1.5
@@ -42,7 +59,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           ctx.imageSmoothingEnabled = false;
           //ctx.drawImage(image, 0, 0, ref.width, ref.height);
           
-          console.log("currentZoom", currentZoom)
+          //console.log("currentZoom", currentZoom)
 
           //drawImage(image,
           //  sx, sy, sWidth, sHeight,
@@ -51,8 +68,10 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           //   0, 0, ref.width, ref.height,
           //   0, 0, ref.width * currentZoom, ref.height * currentZoom
           // );
-          // width  1920 // 960 // 480
-          // height 1040 // 520 // 260
+          // width  1920 // 960 // 480 ---> X
+          // height 1040 // 520 // 260 ---> Y
+          //console.log('AAAAAAAA scrolled.current --->', scrolled.current);
+          //console.log('AAAAAAAA scrolled.current --->', scrolled);
           if (currentZoom === 1) {
             ctx.drawImage(image,
               0, 0, ref.width, ref.height,
@@ -61,9 +80,9 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           } else {
             ctx.drawImage(image,
               0, 0, ref.width, ref.height,
-              -960, -260, ref.width * currentZoom, ref.height * currentZoom
-              // LEFT CEN RIG
-              // -0 -480 -960
+              imagePosition, -260, ref.width * currentZoom, ref.height * currentZoom
+              // LEFT  CEN   RIG
+              // -0   -480   -960
               // 0, 0, ref.width, ref.height,
               // amount *1, 0, ref.width * currentZoom, ref.height * currentZoom
             );
@@ -76,31 +95,62 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         }
       }
     }
-  }, [images, currentIndex, currentZoom, amount])
+  }, [images, currentIndex, currentZoom, imagePosition])
 
-  
+
+
+  //console.log("pos current", pos.current)
 
   let mouseDown = (e:any) => {
     //console.log("MOUSE DOWN")
     //console.log("MOUSE DOWN", e.clientX)
-    console.log("MOUSE DOWN", e.clientX)
-    setAmount(e.clientX)
+    //console.log("MOUSE DOWN", e.clientX)
+    //setAmount(e.clientX)
+    //console.log("MOUSE DOWN clientX", e.clientX)
+    //pos.current = e.clientX
+    clickArbPos.current = e.clientX
+    //setInitPos(e.clientX)
+    allowMove.current = true
   }
 
   let mouseUp = (e:any) => {
     //console.log("MOUSE UP")
-    console.log("MOUSE UP", e.clientX)
+    //console.log("MOUSE UP", e.clientX)
     //setAmount()
-    setAmount((curr: any) => e.clientX - curr)
+    //setAmount((curr: any) => e.clientX - curr)
+    allowMove.current = false
   }
 
   let mouseMove = (e:any) => {
     //console.log("MOUSE UP")
-    console.log("MOUSE MOVE", e.clientX)
-    setAmount(e.clientX)
+    //if (allowMove.current && currentZoom > 1) {
+    if (allowMove.current) {
+      //console.log("MOUSE MOVE clientX", e.clientX)
+      //console.log("MOUSE MOVE", e)
+      //console.log("MOUSE MOVE", e.target.value)
+      //setAmount(e.clientX)
+      //pos.current = e.clientX - pos.current
+      //targetPos.current = e.clientX - pos.current
+      // scrolled.current = e.clientX - initPos.current
+      // console.log('scrolled.current --->', scrolled.current);
+      //setScrolled(e.clientX - initPos)
+      //setScrolled(e.clientX - initPos.current)
+      //currentPos.current = e.clientX - initPos.current
+      console.log("ASDASD", e.clientX - clickArbPos.current ) // resta OK o suma OK
+      //console.log("BBBBBBBBBB", (e.clientX - initPos.current) - initPos.current)
+      setImagePosition(initialImagePosition.current + (e.clientX - clickArbPos.current))
+      //setImagePosition(initialImagePosition.current - (e.clientX - clickArbPos.current))
+      //setImagePosition((clickArbPos.current- e.clientX) + initialImagePosition.current)
+      //setImagePosition(initialImagePosition.current + (clickArbPos.current- e.clientX))
+      //setCurrentPos((curr: any) => curr - (e.clientX - initPos.current))
+      //setCurrentPos(initPos.current - (e.clientX - initPos.current))
+      //console.log('scrolled.current --->', scrolled.current);
+      //pos.current = e.clientX
+    }
+    
   }
 
-  console.log("AMOUNTTTT", amount)
+  //console.log("AMOUNTTTT", amount)
 
   // useEffect(() => {
   //   console.log("currentZoom", currentZoom)
@@ -149,8 +199,8 @@ function Modal({ images, imageIndex, setShowModal }: any) {
             ref={refCanvas}
             //onClick={(e) => test(e)}
             className={css.canvasImage}
-            //onMouseDown={(e) => mouseDown(e)}
-            //onMouseUp={(e) => mouseUp(e)}
+            onMouseDown={(e) => mouseDown(e)}
+            onMouseUp={(e) => mouseUp(e)}
             onMouseMove={(e) => mouseMove(e)}
           />
       </div>
