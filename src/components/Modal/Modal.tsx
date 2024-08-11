@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect, useRef, RefObject } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import css from './ModalCSS.module.css';
 import ForwardIcon from '@mui/icons-material/Forward';
 import AddIcon from '@mui/icons-material/Add';
@@ -12,43 +12,13 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   const [ currentZoom, setCurrentZoom ] = useState(1) // DEFAULT ZOOM
 
-
   let refCanvas = useRef<HTMLCanvasElement>(null)
-  // let ref: any
-  // if (refCanvas.current !== null) {
-  //   ref = refCanvas.current
-  // }
-
   let image = useRef(new Image())
-  // let ref: any
-  // let ctx: any
-  // if (refCanvas.current !== null) {
-  //   ref = refCanvas.current
-  //   ctx = ref.getContext("2d");
-  // }
-    
-  const [ amount, setAmount ] = useState(0)
 
-  
   let allowMove = useRef(false)
   let pos = useRef(0)
-console.log('pos --->', pos);
-  //let initPos = useRef(0)
   let clickArbPos = useRef(0)
-  //const [ initPos, setInitPos ] = useState(0)
-  let targetPos = useRef(0)
-  //let scrolled = useRef(0)
-  const [ scrolled, setScrolled ] = useState(0)
-  //let currentPos = useRef(-480)
   let initialImagePosition = useRef(-480)
-  const [ imagePosition, setImagePosition ] = useState(-480)
-console.log('imagePosition --->', imagePosition);
-//console.log('scrolled --->', scrolled.current);
-//console.log('targetPos --->', targetPos.current);
-
-  //let image = new Image()
-  
-
 
   useEffect(() => { // LOAD NEW IMAGE
     console.log("AA LOADED NEW IMAGE")
@@ -100,83 +70,26 @@ console.log('imagePosition --->', imagePosition);
 
   }, [currentZoom])
 
-  // useEffect(() => { // CHANGE POSITION
-
-  //   if (refCanvas.current !== null) {
-  //     let ref = refCanvas.current
-  //     let ctx = ref.getContext("2d");
-
-  //       if (ctx !== null) {
-  //         //console.log('currentZoom --->', currentZoom);
-  //           //console.log("ENTRO EN OTRO")
-  //           ctx.drawImage(ctx.canvas, pos.current, 0 ////, ref.width, ref.height,
-  //             //-480, -260, ref.width * currentZoom, ref.height * currentZoom
-  //             // LEFT  CEN   RIG
-  //             // -0   -480   -960
-  //             // 0, 0, ref.width, ref.height,
-  //             // amount *1, 0, ref.width * currentZoom, ref.height * currentZoom
-  //           );
-          
-  //       }
-  //   } 
-
-  // }, [])
-
 
   //console.log("pos current", pos.current)
 
   let mouseDown = (e:any) => {
-    //console.log("MOUSE DOWN")
-    //console.log("MOUSE DOWN", e.clientX)
-    //console.log("MOUSE DOWN", e.clientX)
-    //setAmount(e.clientX)
-    //console.log("MOUSE DOWN clientX", e.clientX)
     pos.current = e.clientX
     clickArbPos.current = e.clientX
-    //setInitPos(e.clientX)
     allowMove.current = true
   }
 
   let mouseUp = (e:any) => {
-    //console.log("MOUSE UP")
-    console.log("MOUSE UP", e.clientX)
-    //setAmount()
-    //setAmount((curr: any) => e.clientX - curr)
     allowMove.current = false
-    //initialImagePosition.current = initialImagePosition.current + (e.clientX - clickArbPos.current)
-    //setImagePosition(initialImagePosition.current + (e.clientX - clickArbPos.current))
   }
 
   let mouseMove = (e:any) => {
-    //console.log("MOUSE UP")
-    //if (allowMove.current && currentZoom > 1) {
     if (allowMove.current) {
-
-    
-      //console.log("MOUSE MOVE clientX", e.clientX)
-      //console.log("MOUSE MOVE", e)
-      //console.log("MOUSE MOVE", e.target.value)
-      //setAmount(e.clientX)
-      //pos.current = e.clientX - pos.current
-      //targetPos.current = e.clientX - pos.current
-      // scrolled.current = e.clientX - initPos.current
-      // console.log('scrolled.current --->', scrolled.current);
-      //setScrolled(e.clientX - initPos)
-      //setScrolled(e.clientX - initPos.current)
-      //currentPos.current = e.clientX - initPos.current
-      //console.log("ASDASD", e.clientX - clickArbPos.current ) // RESTA EN BASE DE X PUNTO, EN TOTAL
-      //console.log("ASDASD", initialImagePosition.current - e.clientX) // RESTA EN BASE DE X PUNTO, EN TOTAL
-      //console.log("ASDASDSAD", pos.current - e.clientX)
-      //console.log("ASDASDSAD", e.clientX - pos.current)
 
       if (refCanvas.current !== null) {
         let ref = refCanvas.current
-        let ctx = ref.getContext("2d");
-  
+        let ctx = ref.getContext("2d");  
           if (ctx !== null) {
-            //console.log('currentZoom --->', currentZoom);
-              //console.log("ENTRO EN OTRO")
-              //console.log("RRRRRRRRRRRRRRR", pos.current)
               console.log("AMOUNT SCROLLED", e.clientX - pos.current)
               
               let qq = initialImagePosition.current + (e.clientX - pos.current)
@@ -193,67 +106,19 @@ console.log('imagePosition --->', imagePosition);
                 // -0   -480   -960
                 // 0, 0, ref.width, ref.height,
                 // amount *1, 0, ref.width * currentZoom, ref.height * currentZoom
-              
-            
           }
-      } 
-
-
-
+      }
       pos.current = e.clientX
-
-    
-
-      //console.log("BBBBBBBBBB", (e.clientX - initPos.current) - initPos.current)
-      //setImagePosition(initialImagePosition.current + (e.clientX - clickArbPos.current))
-      //setImagePosition(initialImagePosition.current - (e.clientX - clickArbPos.current))
-      //setImagePosition((clickArbPos.current- e.clientX) + initialImagePosition.current)
-      //setImagePosition(initialImagePosition.current + (clickArbPos.current- e.clientX))
-      //setCurrentPos((curr: any) => curr - (e.clientX - initPos.current))
-      //setCurrentPos(initPos.current - (e.clientX - initPos.current))
-      //console.log('scrolled.current --->', scrolled.current);
-      
     }
-    
   }
 
-  //console.log("AMOUNTTTT", amount)
-
-  // useEffect(() => {
-  //   console.log("currentZoom", currentZoom)
-  //   let image = new Image()
-  //   image.src = images[currentIndex]
-  //   image.onload = function() {
-  //     if (refCanvas.current !== null) {
-  //       let ref = refCanvas.current
-  //       const ctx = ref.getContext("2d");
-
-  //       if (ctx !== null) {
-  //         ctx.drawImage(image, 0, 0, ref.width, ref.height);
-  //         //ctx.scale(currentZoom, currentZoom);
-  //         ctx.scale(currentZoom, currentZoom);
-
-  //       }
-    
-        
-  //     }
-  //   }
-  // }, [currentIndex, currentZoom, images, refCanvas])
-  
-
   const zoomIn = () => {
-    //setCurrentZoom((curr: any) => curr + 50)
     setCurrentZoom((curr: any) => curr + 0.5)
-      
   }
 
   const zoomOut = () => {
-    //setCurrentZoom((curr: any) => curr + 50)
     setCurrentZoom((curr: any) => curr - 0.5)
-      
   }
-
- 
 
   return (
     <div
@@ -330,7 +195,6 @@ console.log('imagePosition --->', imagePosition);
           <CloseIcon className={css.iconRight}/>
         </Button>
         <div>
-          {/* {(currentZoom / 100).toFixed(1)} x */}
           {currentZoom.toFixed(1)} x
         </div>
 
