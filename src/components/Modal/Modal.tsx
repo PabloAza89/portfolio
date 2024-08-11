@@ -14,12 +14,25 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
 
   let refCanvas = useRef<HTMLCanvasElement>(null)
+  // let ref: any
+  // if (refCanvas.current !== null) {
+  //   ref = refCanvas.current
+  // }
+
+  let image = useRef(new Image())
+  // let ref: any
+  // let ctx: any
+  // if (refCanvas.current !== null) {
+  //   ref = refCanvas.current
+  //   ctx = ref.getContext("2d");
+  // }
     
   const [ amount, setAmount ] = useState(0)
 
   
   let allowMove = useRef(false)
   let pos = useRef(0)
+console.log('pos --->', pos);
   //let initPos = useRef(0)
   let clickArbPos = useRef(0)
   //const [ initPos, setInitPos ] = useState(0)
@@ -33,70 +46,81 @@ console.log('imagePosition --->', imagePosition);
 //console.log('scrolled --->', scrolled.current);
 //console.log('targetPos --->', targetPos.current);
 
+  //let image = new Image()
+  
 
-  useEffect(() => {
-    //console.log("currentZoom", currentZoom)
-    //console.log("LAUNCHED")
-    let image = new Image()
-    image.src = images[currentIndex]
-    image.onload = function() {
-      if (refCanvas.current !== null) {
+
+  useEffect(() => { // LOAD NEW IMAGE
+    console.log("AA LOADED NEW IMAGE")
+    //let image = new Image()
+    image.current.src = images[currentIndex]
+    image.current.onload = function() {
+      if (refCanvas.current !== null) { //
         let ref = refCanvas.current
-        const ctx = ref.getContext("2d");
-        //console.log("image.naturalWidth", image.naturalWidth)
-        //console.log("image.naturalHeight", image.naturalHeight)
-  
-        //ref.width = image.naturalWidth * currentZoom
-        //ref.width = (image.naturalWidth * currentZoom) * 1.5
-        //ref.height = image.naturalHeight * currentZoom * 1.5
-        //ref.width = 2000
-        //ref.height = image.naturalHeight * currentZoom
-        ref.width = image.naturalWidth
-        ref.height = image.naturalHeight
-  
+        let ctx = ref.getContext("2d");
+        ref.width = image.current.naturalWidth
+        ref.height = image.current.naturalHeight
+        if (ctx !== null) ctx.drawImage(image.current, 0, 0, ref.width, ref.height) // DRAW FIRST IMAGE
+      }
+    }
+  }, [currentIndex, images])
+
+  useEffect(() => { // AA ZOOM CHANGED
+    console.log("AA ZOOM CHANGED")
+    if (refCanvas.current !== null) {
+      let ref = refCanvas.current
+      let ctx = ref.getContext("2d");
+
         if (ctx !== null) {
+          console.log('currentZoom --->', currentZoom);
+          // ctx.drawImage(image.current, // OKK
+          //              0, 0, ref.width, ref.height,
+          //              0, 0, ref.width * currentZoom, ref.height * currentZoom
+          // )
 
-          ctx.imageSmoothingEnabled = false;
-          //ctx.drawImage(image, 0, 0, ref.width, ref.height);
-          
-          //console.log("currentZoom", currentZoom)
-
-          //drawImage(image,
-          //  sx, sy, sWidth, sHeight,
-          //  dx, dy, dWidth, dHeight)
-          // ctx.drawImage(image,
-          //   0, 0, ref.width, ref.height,
-          //   0, 0, ref.width * currentZoom, ref.height * currentZoom
-          // );
-          // width  1920 // 960 // 480 ---> X
-          // height 1040 // 520 // 260 ---> Y
-          //console.log('AAAAAAAA scrolled.current --->', scrolled.current);
-          //console.log('AAAAAAAA scrolled.current --->', scrolled);
           if (currentZoom === 1) {
-            ctx.drawImage(image,
+            //console.log("ENTRO EN ESTE")
+            ctx.drawImage(image.current,
               0, 0, ref.width, ref.height,
               0, 0, ref.width * currentZoom, ref.height * currentZoom
             );
           } else {
-            ctx.drawImage(image,
+            //console.log("ENTRO EN OTRO")
+            ctx.drawImage(image.current,
               0, 0, ref.width, ref.height,
-              imagePosition, -260, ref.width * currentZoom, ref.height * currentZoom
+              -480, -260, ref.width * currentZoom, ref.height * currentZoom
               // LEFT  CEN   RIG
               // -0   -480   -960
               // 0, 0, ref.width, ref.height,
               // amount *1, 0, ref.width * currentZoom, ref.height * currentZoom
             );
           }
-          
-          //ctx.translate(100, 100); 
-          //ctx.drawImage(image, 0, 0, 1920, 1040);
-          
-          //ctx.scale(currentZoom, currentZoom);
         }
-      }
-    }
-  }, [images, currentIndex, currentZoom, imagePosition])
+    } 
 
+  }, [currentZoom])
+
+  // useEffect(() => { // CHANGE POSITION
+
+  //   if (refCanvas.current !== null) {
+  //     let ref = refCanvas.current
+  //     let ctx = ref.getContext("2d");
+
+  //       if (ctx !== null) {
+  //         //console.log('currentZoom --->', currentZoom);
+  //           //console.log("ENTRO EN OTRO")
+  //           ctx.drawImage(ctx.canvas, pos.current, 0 ////, ref.width, ref.height,
+  //             //-480, -260, ref.width * currentZoom, ref.height * currentZoom
+  //             // LEFT  CEN   RIG
+  //             // -0   -480   -960
+  //             // 0, 0, ref.width, ref.height,
+  //             // amount *1, 0, ref.width * currentZoom, ref.height * currentZoom
+  //           );
+          
+  //       }
+  //   } 
+
+  // }, [])
 
 
   //console.log("pos current", pos.current)
@@ -107,7 +131,7 @@ console.log('imagePosition --->', imagePosition);
     //console.log("MOUSE DOWN", e.clientX)
     //setAmount(e.clientX)
     //console.log("MOUSE DOWN clientX", e.clientX)
-    //pos.current = e.clientX
+    pos.current = e.clientX
     clickArbPos.current = e.clientX
     //setInitPos(e.clientX)
     allowMove.current = true
@@ -115,16 +139,20 @@ console.log('imagePosition --->', imagePosition);
 
   let mouseUp = (e:any) => {
     //console.log("MOUSE UP")
-    //console.log("MOUSE UP", e.clientX)
+    console.log("MOUSE UP", e.clientX)
     //setAmount()
     //setAmount((curr: any) => e.clientX - curr)
     allowMove.current = false
+    //initialImagePosition.current = initialImagePosition.current + (e.clientX - clickArbPos.current)
+    //setImagePosition(initialImagePosition.current + (e.clientX - clickArbPos.current))
   }
 
   let mouseMove = (e:any) => {
     //console.log("MOUSE UP")
     //if (allowMove.current && currentZoom > 1) {
     if (allowMove.current) {
+
+    
       //console.log("MOUSE MOVE clientX", e.clientX)
       //console.log("MOUSE MOVE", e)
       //console.log("MOUSE MOVE", e.target.value)
@@ -136,16 +164,55 @@ console.log('imagePosition --->', imagePosition);
       //setScrolled(e.clientX - initPos)
       //setScrolled(e.clientX - initPos.current)
       //currentPos.current = e.clientX - initPos.current
-      console.log("ASDASD", e.clientX - clickArbPos.current ) // resta OK o suma OK
+      //console.log("ASDASD", e.clientX - clickArbPos.current ) // RESTA EN BASE DE X PUNTO, EN TOTAL
+      //console.log("ASDASD", initialImagePosition.current - e.clientX) // RESTA EN BASE DE X PUNTO, EN TOTAL
+      //console.log("ASDASDSAD", pos.current - e.clientX)
+      //console.log("ASDASDSAD", e.clientX - pos.current)
+
+      if (refCanvas.current !== null) {
+        let ref = refCanvas.current
+        let ctx = ref.getContext("2d");
+  
+          if (ctx !== null) {
+            //console.log('currentZoom --->', currentZoom);
+              //console.log("ENTRO EN OTRO")
+              //console.log("RRRRRRRRRRRRRRR", pos.current)
+              console.log("AMOUNT SCROLLED", e.clientX - pos.current)
+              
+              let qq = initialImagePosition.current + (e.clientX - pos.current)
+              console.log("TESTTTTTTTTTT", qq)
+              ctx.drawImage(image.current,
+                //-480, -260, ref.width *1.5, ref.height * 1.5,
+                qq, -260, ref.width *1.5, ref.height * 1.5,
+                //0, 0, ref.width, ref.height,
+                //-480 + (e.clientX - pos.current), -260//, ref.width, ref.height
+              );
+              initialImagePosition.current = qq
+                //-480, -260, ref.width * currentZoom, ref.height * currentZoom
+                // LEFT  CEN   RIG
+                // -0   -480   -960
+                // 0, 0, ref.width, ref.height,
+                // amount *1, 0, ref.width * currentZoom, ref.height * currentZoom
+              
+            
+          }
+      } 
+
+
+
+      pos.current = e.clientX
+
+    
+
       //console.log("BBBBBBBBBB", (e.clientX - initPos.current) - initPos.current)
-      setImagePosition(initialImagePosition.current + (e.clientX - clickArbPos.current))
+      //setImagePosition(initialImagePosition.current + (e.clientX - clickArbPos.current))
       //setImagePosition(initialImagePosition.current - (e.clientX - clickArbPos.current))
       //setImagePosition((clickArbPos.current- e.clientX) + initialImagePosition.current)
       //setImagePosition(initialImagePosition.current + (clickArbPos.current- e.clientX))
       //setCurrentPos((curr: any) => curr - (e.clientX - initPos.current))
       //setCurrentPos(initPos.current - (e.clientX - initPos.current))
       //console.log('scrolled.current --->', scrolled.current);
-      //pos.current = e.clientX
+      
     }
     
   }
