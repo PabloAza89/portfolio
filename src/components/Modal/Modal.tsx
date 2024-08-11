@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import css from './ModalCSS.module.css';
 import ForwardIcon from '@mui/icons-material/Forward';
 import AddIcon from '@mui/icons-material/Add';
@@ -27,10 +27,12 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   // 1920 / -4 = -480
   // 1040 / -4 = -260
-  let initialImagePosition = useRef({ x: 0, y: 0 })
+  let initImgPos = useRef({ x: 0, y: 0 }) // INITIAL IMAGE POSITION
+
 
   // SAME AS ABOVE
-  let imagePosition = useRef({ x: 0, y: 0 })
+  let imgPo = useRef({ x: 0, y: 0 }) // IMAGE POSITION
+
 
   useEffect(() => { // AA LOAD NEW IMAGE
     console.log("AA LOADED NEW IMAGE")
@@ -42,11 +44,15 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         ref.width = image.current.naturalWidth
         ref.height = image.current.naturalHeight
 
-        initialImagePosition.current = { x: ref.width / -4, y: ref.height / -4 }
+        //                                     480               260
+        initImgPos.current = { x: ref.width / -4, y: ref.height / -4 }
 
-        imagePosition.current = { x: initialImagePosition.current.x, y: initialImagePosition.current.y }
+        imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y }
 
-        if (ctx !== null) ctx.drawImage(image.current, 0, 0, ref.width, ref.height) // FIRST IMAGE DRAW
+        if (ctx !== null) {
+          //ctx.imageSmoothingEnabled = false;
+          ctx.drawImage(image.current, 0, 0, ref.width, ref.height) // FIRST IMAGE DRAW
+        }
       }
     }
   }, [currentIndex, images])
@@ -58,18 +64,25 @@ function Modal({ images, imageIndex, setShowModal }: any) {
       let ctx = ref.getContext("2d");
 
       if (ctx !== null) {
-        console.log('currentZoom --->', currentZoom);
-        if (currentZoom === 1) {
-          ctx.drawImage(image.current,
-            0, 0, ref.width, ref.height,
-            0, 0, ref.width * currentZoom, ref.height * currentZoom
-          );
-        } else {
-          ctx.drawImage(image.current,
-            0, 0, ref.width, ref.height,
-            initialImagePosition.current.x, initialImagePosition.current.y, ref.width * currentZoom, ref.height * currentZoom
-          );
-        }
+        //console.log('currentZoom --->', currentZoom);
+        console.log('imgPo --->', imgPo.current);
+
+        if (currentZoom === 1) imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // RESET POS TO CENTER
+        
+
+        let factor = currentZoom + (currentZoom - 2)
+
+        ctx.drawImage(image.current,
+          0, 0, ref.width, ref.height,
+          imgPo.current.x * factor, imgPo.current.y * factor, ref.width * currentZoom, ref.height * currentZoom
+        );
+        // 1.0 = 0 // + -1.0 --> 1.0 - 2 --> -1 === currentZoom + -1      === 1 - 1 === 0
+        // 1.5 = 1 // + -0.5 --> 1.5 - 2 --> -0.5 === currentZoom + -0.5
+        // 2.0 = 2 // + 0
+        // 2.5 = 3 // + 0.5 --> 2.5 - 2 --> 0.5 === currentZoom + 0.5
+        // 3.0 = 4 // + 1
+        // 3.5 = 5 // + 1.5 --> 3.5 - 2 --> 1.5 === currentZoom + 1.5
+        // 4.0 = 6 // + 2.0
       }
     }
   }, [currentZoom])
@@ -84,24 +97,27 @@ function Modal({ images, imageIndex, setShowModal }: any) {
   }
 
   let mouseMove = (e:any) => {
-    if (allowMove.current) {
-
+    if (allowMove.current && currentZoom !== 1) {
+      //console.log('arbPos.current --->', arbPos.current);
+      //console.log('initImgPos --->', initImgPos.current);
+      console.log('imgPo --->', imgPo.current); // reset to normal // 480 260
       if (refCanvas.current !== null) {
         let ref = refCanvas.current
         let ctx = ref.getContext("2d");
         if (ctx !== null) {
-          let targetXPosition = imagePosition.current.x + (e.clientX - arbPos.current.x)
-          let targetYPosition = imagePosition.current.y + (e.clientY - arbPos.current.y)
+          let targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x)
+          let targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y)
           if (
-            (targetXPosition < 0 && targetXPosition > initialImagePosition.current.x * 2) &&
-            (targetYPosition < 0 && targetYPosition > initialImagePosition.current.y * 2)
+            (targetXPosition < 0 && targetXPosition > initImgPos.current.x * 2) &&
+            (targetYPosition < 0 && targetYPosition > initImgPos.current.y * 2)
           ) {
             ctx.drawImage(image.current, targetXPosition, targetYPosition, ref.width * currentZoom, ref.height * currentZoom);
-            imagePosition.current = { x: targetXPosition, y: targetYPosition }
+            imgPo.current = { x: targetXPosition, y: targetYPosition }
           }
         }
       }
       arbPos.current = { x: e.clientX, y: e.clientY }
+
     }
   }
 
@@ -184,7 +200,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           <CloseIcon className={css.iconRight}/>
         </Button>
         <div>
-          {currentZoom.toFixed(1)} x
+          {currentZoom.toFixed(1)}x
         </div>
 
       </div>
