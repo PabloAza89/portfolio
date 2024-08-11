@@ -16,7 +16,8 @@ function Modal({ images, imageIndex, setShowModal }: any) {
   let image = useRef(new Image())
 
   let allowMove = useRef(false)
-  let arbPos = useRef({ x: 0, y: 0 }) // ARBITRARY POSITION
+  let posX = useRef(0)
+  let posY = useRef(0)
 
                             // LEFT  CEN   RIG  --> X
                             // -0   -480   -960 --> X (1920)
@@ -25,12 +26,11 @@ function Modal({ images, imageIndex, setShowModal }: any) {
                             // -260  --> Y
                             // 0     --> Y
 
-  // 1920 / -4 = -480
-  // 1040 / -4 = -260
-  let initialImagePosition = useRef({ x: 0, y: 0 })
+  let initialImagePositionX = useRef(0) // 1920 / -4 = -480
+  let initialImagePositionY = useRef(0) // 1040 / -4 = -260
 
-  // SAME AS ABOVE
-  let imagePosition = useRef({ x: 0, y: 0 })
+  let imagePositionX = useRef(0) // 1920 / -4 = -480
+  let imagePositionY = useRef(0) // 1040 / -4 = -260
 
   useEffect(() => { // AA LOAD NEW IMAGE
     console.log("AA LOADED NEW IMAGE")
@@ -42,9 +42,11 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         ref.width = image.current.naturalWidth
         ref.height = image.current.naturalHeight
 
-        initialImagePosition.current = { x: ref.width / -4, y: ref.height / -4 }
+        initialImagePositionX.current = ref.width / -4 // 1920 / -4 = -480
+        initialImagePositionY.current = ref.height / -4 // 1040 / -4 = -260
 
-        imagePosition.current = { x: initialImagePosition.current.x, y: initialImagePosition.current.y }
+        imagePositionX.current = initialImagePositionX.current
+        imagePositionY.current = initialImagePositionY.current
 
         if (ctx !== null) ctx.drawImage(image.current, 0, 0, ref.width, ref.height) // FIRST IMAGE DRAW
       }
@@ -59,7 +61,13 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
       if (ctx !== null) {
         console.log('currentZoom --->', currentZoom);
+        // ctx.drawImage(image.current, // OKK
+        //              0, 0, ref.width, ref.height,
+        //              0, 0, ref.width * currentZoom, ref.height * currentZoom
+        // )
+
         if (currentZoom === 1) {
+          //console.log("ENTRO EN ESTE")
           ctx.drawImage(image.current,
             0, 0, ref.width, ref.height,
             0, 0, ref.width * currentZoom, ref.height * currentZoom
@@ -67,15 +75,21 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         } else {
           ctx.drawImage(image.current,
             0, 0, ref.width, ref.height,
-            initialImagePosition.current.x, initialImagePosition.current.y, ref.width * currentZoom, ref.height * currentZoom
+            initialImagePositionX.current, initialImagePositionY.current, ref.width * currentZoom, ref.height * currentZoom
+            //ref.width / -4, ref.height / -4, ref.width * currentZoom, ref.height * currentZoom
+            //-480, -260, ref.width * currentZoom, ref.height * currentZoom
           );
         }
       }
     }
   }, [currentZoom])
 
+
+  //console.log("pos current", posX.current)
+
   let mouseDown = (e:any) => {
-    arbPos.current = { x: e.clientX, y: e.clientY }
+    posX.current = e.clientX
+    posY.current = e.clientY
     allowMove.current = true
   }
 
@@ -90,18 +104,25 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         let ref = refCanvas.current
         let ctx = ref.getContext("2d");
         if (ctx !== null) {
-          let targetXPosition = imagePosition.current.x + (e.clientX - arbPos.current.x)
-          let targetYPosition = imagePosition.current.y + (e.clientY - arbPos.current.y)
-          if (
-            (targetXPosition < 0 && targetXPosition > initialImagePosition.current.x * 2) &&
-            (targetYPosition < 0 && targetYPosition > initialImagePosition.current.y * 2)
-          ) {
-            ctx.drawImage(image.current, targetXPosition, targetYPosition, ref.width * currentZoom, ref.height * currentZoom);
-            imagePosition.current = { x: targetXPosition, y: targetYPosition }
+          let targetXPosition = imagePositionX.current + (e.clientX - posX.current)
+          let targetYPosition = imagePositionY.current + (e.clientY - posY.current)
+          //console.log("QQ", qq > -960)
+          //if (qq < 0 && qq > initialImagePositionX.current) {
+          if (targetXPosition < 0 && targetXPosition > initialImagePositionX.current * 2) {
+
+            //console.log("AAAAAAAAAAAAAAAAA", ref.width / -4)
+
+            ctx.drawImage(image.current, targetXPosition, -260, ref.width * currentZoom, ref.height * currentZoom);
+            imagePositionX.current = targetXPosition
           }
+          //-480, -260, ref.width * currentZoom, ref.height * currentZoom
+          // LEFT  CEN   RIG
+          // -0   -480   -960
+          // 0, 0, ref.width, ref.height,
+          // amount *1, 0, ref.width * currentZoom, ref.height * currentZoom
         }
       }
-      arbPos.current = { x: e.clientX, y: e.clientY }
+      posX.current = e.clientX
     }
   }
 
