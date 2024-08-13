@@ -10,7 +10,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   const [ currentIndex, setCurrentIndex ] = useState(imageIndex)
 
-  const [ currentZoom, setCurrentZoom ] = useState(1) // DEFAULT ZOOM
+  const [ currentZoom, setCurrentZoom ] = useState(1) // DEFAULT ZOOM // (cZ)
 
   let refCanvas = useRef<HTMLCanvasElement>(null)
   let image = useRef(new Image())
@@ -65,24 +65,90 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
       if (ctx !== null) {
         //console.log('currentZoom --->', currentZoom);
-        console.log('imgPo --->', imgPo.current);
-
-        if (currentZoom === 1) imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // RESET POS TO CENTER
         
+
+        if (currentZoom === 1) imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER
+        else if (currentZoom === 1.5) imgPo.current = { x: initImgPos.current.x * 1, y: initImgPos.current.y * 1 } // RESET POS TO CENTER
+        else if (currentZoom === 2) imgPo.current = { x: initImgPos.current.x * 2, y: initImgPos.current.y * 2 } // RESET POS TO CENTER
+        else if (currentZoom === 2.5) imgPo.current = { x: initImgPos.current.x * 3, y: initImgPos.current.y * 3 } // RESET POS TO CENTER
+        else if (currentZoom === 3) imgPo.current = { x: initImgPos.current.x * 4, y: initImgPos.current.y * 4 } // RESET POS TO CENTER
 
         let factor = currentZoom + (currentZoom - 2)
 
+        // if (currentZoom === 1) imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER
+        // else if (currentZoom === 1.5) imgPo.current = { x: imgPo.current.x * 1, y: imgPo.current.y * 1 } // RESET POS TO CENTER
+        // else if (currentZoom === 2) imgPo.current = { x: imgPo.current.x * 2, y: imgPo.current.y * 2 } // RESET POS TO CENTER
+        // else if (currentZoom === 2.5) imgPo.current = { x: imgPo.current.x * 1.5, y: imgPo.current.y * 1.5 } // RESET POS TO CENTER
+        // else if (currentZoom === 3) imgPo.current = { x: imgPo.current.x * 1.25, y: imgPo.current.y * 1.25 } // RESET POS TO CENTER
+
+        //imgPo.current = { x: initImgPos.current.x * factor, y: initImgPos.current.y * factor }
+
+        console.log('imgPo --->', imgPo.current);
+
+        
+
         ctx.drawImage(image.current,
           0, 0, ref.width, ref.height,
-          imgPo.current.x * factor, imgPo.current.y * factor, ref.width * currentZoom, ref.height * currentZoom
+          //imgPo.current.x * factor, imgPo.current.y * factor, ref.width * currentZoom, ref.height * currentZoom
+          imgPo.current.x, imgPo.current.y, ref.width * currentZoom, ref.height * currentZoom
         );
-        // 1.0 = 0 // + -1.0 --> 1.0 - 2 --> -1 === currentZoom + -1      === 1 - 1 === 0
-        // 1.5 = 1 // + -0.5 --> 1.5 - 2 --> -0.5 === currentZoom + -0.5
-        // 2.0 = 2 // + 0
-        // 2.5 = 3 // + 0.5 --> 2.5 - 2 --> 0.5 === currentZoom + 0.5
-        // 3.0 = 4 // + 1
-        // 3.5 = 5 // + 1.5 --> 3.5 - 2 --> 1.5 === currentZoom + 1.5
-        // 4.0 = 6 // + 2.0
+
+        // if (currentZoom === 1) {
+        //   ctx.drawImage(image.current,
+        //     0, 0, ref.width, ref.height,
+        //     imgPo.current.x * 0, imgPo.current.y * 0, ref.width * currentZoom, ref.height * currentZoom
+        //     // 0 0
+        //   );
+        // }
+        
+        // else if (currentZoom === 1.5) {
+        //   ctx.drawImage(image.current,
+        //     0, 0, ref.width, ref.height,
+        //     imgPo.current.x * 1, imgPo.current.y * 1, ref.width * currentZoom, ref.height * currentZoom
+        //     // 480 260
+        //   );
+        // }
+
+        // else if (currentZoom === 2) {
+        //   ctx.drawImage(image.current,
+        //     0, 0, ref.width, ref.height,
+        //     imgPo.current.x * 2, imgPo.current.y * 2, ref.width * currentZoom, ref.height * currentZoom
+        //   );
+        // }
+
+        // else if (currentZoom === 2.5) {
+        //   ctx.drawImage(image.current,
+        //     0, 0, ref.width, ref.height,
+        //     imgPo.current.x * 3, imgPo.current.y * 3, ref.width * currentZoom, ref.height * currentZoom
+        //   );
+        // }
+
+        // if (currentZoom === 1) {
+        //   ctx.drawImage(image.current,
+        //     0, 0, ref.width, ref.height,
+        //     0, 0, ref.width * currentZoom, ref.height * currentZoom
+        //   );
+        // }
+        // else if (currentZoom === 1.5) {
+        //   ctx.drawImage(image.current,
+        //     0, 0, ref.width, ref.height,
+        //     -480 * 1, -260 * 1, ref.width * currentZoom, ref.height * currentZoom
+        //   );
+        // } 
+        // else if (currentZoom === 2.0) {
+        //   ctx.drawImage(image.current,
+        //     0, 0, ref.width, ref.height,
+        //     -960 , -520, ref.width * currentZoom, ref.height * currentZoom
+        //   );
+        // } 
+        // cZ     cZ         factor
+        // 1.0 + (1.0 - 2) === 0
+        // 1.5 + (1.5 - 2) === 1
+        // 2.0 + (2.0 - 2) === 2
+        // 2.5 + (2.5 - 2) === 3
+        // 3.0 + (3.0 - 2) === 4
+        // 3.5 + (3.5 - 2) === 5
+        // 4.0 + (4.0 - 2) === 6
       }
     }
   }, [currentZoom])
@@ -107,9 +173,15 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         if (ctx !== null) {
           let targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x)
           let targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y)
+          let factor = ((currentZoom * 2) - 2) * 2
+          //   cZ                factor
+          // ((1.5 * 2) - 2) * 2 = 2
+          // ((2.0 * 2) - 2) * 2 = 4
+          // ((2.5 * 2) - 2) * 2 = 6
+          // ((3.0 * 2) - 2) * 2 = 8
           if (
-            (targetXPosition < 0 && targetXPosition > initImgPos.current.x * 2) &&
-            (targetYPosition < 0 && targetYPosition > initImgPos.current.y * 2)
+            (targetXPosition < 0 && targetXPosition > initImgPos.current.x * factor) &&
+            (targetYPosition < 0 && targetYPosition > initImgPos.current.y * factor)
           ) {
             ctx.drawImage(image.current, targetXPosition, targetYPosition, ref.width * currentZoom, ref.height * currentZoom);
             imgPo.current = { x: targetXPosition, y: targetYPosition }
@@ -117,7 +189,6 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         }
       }
       arbPos.current = { x: e.clientX, y: e.clientY }
-
     }
   }
 
@@ -131,6 +202,10 @@ function Modal({ images, imageIndex, setShowModal }: any) {
       className={css.modalBackground}
     >
       <div className={css.innerModal}>
+          {/* <svg width='100%' height='100%' viewBox='0 0 100 100' preserveAspectRatio='none'>
+            <line x1="0" y1="0" x2="100" y2="100" vectorEffect="non-scaling-stroke" stroke="red" />
+          </svg> */}
+
           <canvas
             id={`canvasImage`}
             ref={refCanvas}
@@ -140,6 +215,16 @@ function Modal({ images, imageIndex, setShowModal }: any) {
             onMouseUp={(e) => mouseUp(e)}
             onMouseMove={(e) => mouseMove(e)}
           />
+
+          <div style={{outline: "1px solid", height: "100%", width: '100%', zIndex: '20000', pointerEvents: 'none', position: 'absolute' }}>
+            <svg width='100%' height='100%' viewBox='0 0 100 100' preserveAspectRatio='none'>
+              <line x1="0" y1="0" x2="100" y2="100" vectorEffect="non-scaling-stroke" stroke="red" />
+              <line x1="0" y1="100" x2="100" y2="0" vectorEffect="non-scaling-stroke" stroke="red" />
+            </svg>
+          </div>
+
+
+          
       </div>
       <div className={css.buttonsContainer}>
         <Button
