@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/portfolio/static/css/main.86b24c7d.css",
-    "main.js": "/portfolio/static/js/main.e5b8c48c.js",
+    "main.js": "/portfolio/static/js/main.1e41318a.js",
     "static/media/error.gif": "/portfolio/static/media/error.c8a987390be23c2376be.gif",
     "static/media/food2.png": "/portfolio/static/media/food2.33251b4f71ace22ad726.png",
     "static/media/food3.png": "/portfolio/static/media/food3.0884ec17b8c03ed71400.png",
@@ -11,7 +11,7 @@
     "static/media/calculator3.png": "/portfolio/static/media/calculator3.ad180aa2832e071037fb.png",
     "static/media/calculator2.png": "/portfolio/static/media/calculator2.b7949766849476107c42.png",
     "static/media/calculator4.png": "/portfolio/static/media/calculator4.c375346f4ad88722592f.png",
-    "static/media/calculator1.png": "/portfolio/static/media/calculator1.f613f50d49dbe9ff36e7.png",
+    "static/media/calculator1.png": "/portfolio/static/media/calculator1.eb165ab4df12c7669597.png",
     "static/media/profile.png": "/portfolio/static/media/profile.998bbc92b2abe9331e0b.png",
     "static/media/react.png": "/portfolio/static/media/react.2f2532db663fd5ec5f95.png",
     "static/media/efSet.png": "/portfolio/static/media/efSet.70a4ba20ab286e8227ff.png",
@@ -29,10 +29,10 @@
     "static/media/darth-vader.svg": "/portfolio/static/media/darth-vader.ab4aa42386ccc66a7de06c02e64d572c.svg",
     "index.html": "/portfolio/index.html",
     "main.86b24c7d.css.map": "/portfolio/static/css/main.86b24c7d.css.map",
-    "main.e5b8c48c.js.map": "/portfolio/static/js/main.e5b8c48c.js.map"
+    "main.1e41318a.js.map": "/portfolio/static/js/main.1e41318a.js.map"
   },
   "entrypoints": [
     "static/css/main.86b24c7d.css",
-    "static/js/main.e5b8c48c.js"
+    "static/js/main.1e41318a.js"
   ]
 }
