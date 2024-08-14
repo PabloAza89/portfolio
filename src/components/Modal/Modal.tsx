@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import css from './ModalCSS.module.css';
-import ForwardIcon from '@mui/icons-material/Forward';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import CloseIcon from '@mui/icons-material/Close';
+//import ForwardIcon from '@mui/icons-material/Forward';
+import { Forward, Add, Remove, Close } from '@mui/icons-material/';
+//import AddIcon from '@mui/icons-material/Add';
+//import RemoveIcon from '@mui/icons-material/Remove';
+//import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
 
 function Modal({ images, imageIndex, setShowModal }: any) {
@@ -159,7 +160,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           className={css.button}
           onClick={() => goLeftHandler()}
         >
-          <ForwardIcon className={css.iconLeft}/>
+          <Forward className={css.iconLeft}/>
         </Button>
 
         <Button
@@ -167,7 +168,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           className={css.button}
           onClick={() => goRightHandler()}
         >
-          <ForwardIcon className={css.iconRight}/>
+          <Forward className={css.iconRight}/>
         </Button>
 
         <Button
@@ -176,7 +177,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           onClick={() => zoomOut()}
           disabled={ currentZoom.val === 1 ? true : false }
         >
-          <RemoveIcon className={css.iconRight}/>
+          <Remove className={css.iconRight}/>
         </Button>
 
         <Button
@@ -185,7 +186,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           onClick={() => zoomIn()}
           disabled={ currentZoom.val === 8 ? true : false }
         >
-          <AddIcon className={css.iconRight}/>
+          <Add className={css.iconRight}/>
         </Button>
 
         <Button
@@ -193,7 +194,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           className={css.button}
           onClick={() => setShowModal(false)}
         >
-          <CloseIcon className={css.iconRight}/>
+          <Close className={css.iconRight}/>
         </Button>
         <div>
           {currentZoom.val.toFixed(1)}x

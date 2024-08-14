@@ -249,86 +249,16 @@ function Projects() {
 
   
 
-  const [ showModal, setShowModal ] = useState(false)
+  
+
   const [ imageIndex, setImageIndex ] = useState(0)
 
+  const [ showModal, setShowModal ] = useState(false)
+
   window.onclick = function(e) {
-
-
     let modalDiv = document.getElementById('modalBackground');
-
-    if (e.target === modalDiv) {
-      //modal.style.display = "none";
-      //console.log("ACAAA")
-      setShowModal(false)
-    }
+    if (e.target === modalDiv) setShowModal(false)
   }
-
-
-  //images={array.map(e => e.media).flat()} imageIndex={imageIndex}
-  // let image = new Image()
-  // image.src = array.map(e => e.media).flat()[imageIndex]
-  //let image = useRef(new Image())
-  //
-  //let image = 
-
-  //let image = useRef(new Image())
-
-  // let updateImage = useCallback(() => {
-  //   let imageee = new Image()
-  //   imageee.src = array.map(e => e.media).flat()[imageIndex]
-  //   return imageee
-  // },[array, imageIndex])
-  // let imageee = new Image()
-  // imageee.src = array.map(e => e.media).flat()[imageIndex]
-
-  // const [ image, setImage ] = useState<any>(() => {
-  //   let imageee = new Image()
-  //   imageee.src = array.map(e => e.media).flat()[imageIndex]
-  //   return imageee
-  // })
-
-  // let image = new Image()
-  // image.src = array.map(e => e.media).flat()[imageIndex]
-
-  //let imageee
-
-  // useEffect(() => {
-  //   console.log("IMAGE CHANGED")
-  // }, [array, imageIndex])
-
-  // useEffect(() => {
-  //   //image.current.src = array.map(e => e.media).flat()[imageIndex]
-    
-  //   // let image = new Image()
-  //   // image.src = array.map(e => e.media).flat()[imageIndex]
-  //   // setImage(image)
-
-  //   //setImage(updateImage())
-  //   setImage(() => {
-  //     let imageee = new Image()
-  //     imageee.src = array.map(e => e.media).flat()[imageIndex]
-  //     return imageee
-  //   })
-    
-
-  // }, [array, imageIndex])
-  //let image = <img src={array.map(e => e.media).flat()[imageIndex]} alt=""/>
-
-  // let imageee = new Image()
-  // imageee.src = array.map(e => e.media).flat()[imageIndex]
-
-  // const [ image, setImage ] = useState(imageee)
-
-  // useEffect(() => {
-  //   // image = new Image()
-  //   //imageee = new Image()
-  //   //imageee.src = array.map(e => e.media).flat()[imageIndex]
-  //   //setImage(imageee)
-  // }, [array, imageIndex, imageee])
-
-  //console.log("IMAGE REF", imageRef.current)
-  //console.log(imageRef.current)
 
   return (
     <div
@@ -396,15 +326,9 @@ function Projects() {
                                     onLoad={() => loadedUpdater(array.map(e => e.media).flat().indexOf(m))}
                                     alt=""
                                     src={m}
-                                    //onClick={() => setShowModal(true)}
-                                    //onClick={() => console.log("CLIEKEDC")}
-                                    //ref={imageRef}
                                     onClick={(e) => {
                                       e.preventDefault();
                                       setShowModal(true);
-                                      //console.log(e.target)
-                                      //console.dir(e)
-                                      //console.log(array.map(e => e.media).flat().indexOf(m))
                                       setImageIndex(array.map(e => e.media).flat().indexOf(m))
                                     }}
                                   />
