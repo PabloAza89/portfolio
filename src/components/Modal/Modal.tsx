@@ -10,36 +10,19 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   const [ currentIndex, setCurrentIndex ] = useState(imageIndex)
 
-  //const [ currentZoom, setCurrentZoom ] = useState(1) // DEFAULT ZOOM // (cZ)
   const [ currentZoom, setCurrentZoom ] = useState({
     val: 1,
     op: 'x'
-  }) // DEFAULT ZOOM // (cZ)
+  }) // (cZ)
 
   let refCanvas = useRef<HTMLCanvasElement>(null)
   let image = useRef(new Image())
-
   let allowMove = useRef(false)
   let arbPos = useRef({ x: 0, y: 0 }) // ARBITRARY POSITION
-
-                            // LEFT  CEN   RIG  --> X
-                            // -0   -480   -960 --> X (1920)
-
-                            // -520  --> Y (1040)
-                            // -260  --> Y
-                            // 0     --> Y
-
-  // 1920 / -4 = -480
-  // 1040 / -4 = -260
   let initImgPos = useRef({ x: 0, y: 0 }) // INITIAL IMAGE POSITION
-
-
-  // SAME AS ABOVE
   let imgPo = useRef({ x: 0, y: 0 }) // IMAGE POSITION
 
-
-  useEffect(() => { // AA LOAD NEW IMAGE
-    console.log("AA LOADED NEW IMAGE")
+  useEffect(() => { // LOAD NEW IMAGE
     image.current.src = images[currentIndex]
     image.current.onload = function() {
       if (refCanvas.current !== null) { //
@@ -48,22 +31,20 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         ref.width = image.current.naturalWidth
         ref.height = image.current.naturalHeight
 
-        //                                     480               260
+        // e.g.:               x: 480             y: 260               // (1920 x 1040)
         initImgPos.current = { x: ref.width / -4, y: ref.height / -4 }
 
         imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y }
 
         if (ctx !== null) {
-          //ctx.imageSmoothingEnabled = false;
+          ctx.imageSmoothingEnabled = false;
           ctx.drawImage(image.current, 0, 0, ref.width, ref.height) // FIRST IMAGE DRAW
         }
       }
     }
   }, [currentIndex, images])
 
-  useEffect(() => { // AA ZOOM CHANGED
-    console.log("AA ZOOM CHANGED")
-
+  useEffect(() => { // ZOOM CHANGED
     let operation:any = {
       'x': function(a: any, b: any){ return a*b},
       '/': function(a: any, b: any){ return a/b}
@@ -74,120 +55,31 @@ function Modal({ images, imageIndex, setShowModal }: any) {
       let ctx = ref.getContext("2d");
 
       if (ctx !== null) {
-        //console.log('currentZoom --->', currentZoom);
-        
+        let targetZoom = currentZoom.op === 'x' ? currentZoom.val - 0.5 : currentZoom.val
+        let divider = targetZoom + (targetZoom - 2) // dvdr
+        let factor = divider === 0 ? 1 : 1 + (1 / divider)
 
-        //if (currentZoom === 1) imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER
-        //if (currentZoom === 1) imgPo.current = { x: -480, y: -260 } // RESET POS TO CENTER
-        // else if (currentZoom === 1.5) imgPo.current = { x: initImgPos.current.x * 1, y: initImgPos.current.y * 1 } // RESET POS TO CENTER
-        // else if (currentZoom === 2) imgPo.current = { x: initImgPos.current.x * 2, y: initImgPos.current.y * 2 } // RESET POS TO CENTER
-        // else if (currentZoom === 2.5) imgPo.current = { x: initImgPos.current.x * 3, y: initImgPos.current.y * 3 } // RESET POS TO CENTER
-        // else if (currentZoom === 3) imgPo.current = { x: initImgPos.current.x * 4, y: initImgPos.current.y * 4 } // RESET POS TO CENTER
-
-        let preZoom = currentZoom.op === 'x' ? currentZoom.val - 0.5 : currentZoom.val
-        let factorFactor = preZoom + (preZoom - 2)
-        
-        let targetFactor = factorFactor === 0 ? 1 : 1 + (1 / factorFactor)
-console.log('targetFactor --->', targetFactor);
-        //let targetFactor = 1 + ( 1 / factorFactor)
-
-        //let parsedFactorFactor = factorFactor === 0 ?
-
-        //let factor = currentZoom.val + (currentZoom.val - 2)
-
-
-        //let factor2 = currentZoom.val === 1 ? 0 : 1 + (1 / factor) // TO AVOID DIV BY ZERO // TO DIVISION
-        //console.log('factor --->', factor);
-        //console.log('factor2 --->', factor2);
-        //console.log('imgPo --->', imgPo.current);
-        //console.log('imgPo.current.x * factor2 --->', imgPo.current.x * factor2);
-
-        //if (currentZoom.val === 1 && currentZoom.op === 'x') imgPo.current = { x: -480, y: -260 } // RESET POS TO CENTER // ok 1 --> 1.5
-        //else if (currentZoom.val === 1 && currentZoom.op === '/') imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER // ok 1 --> 1.5
-        if (currentZoom.val === 1 && currentZoom.op === '/') imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER // ok 1 --> 1.5
-        else if (currentZoom.val === 1.5 && currentZoom.op === 'x') imgPo.current = { x: -480, y: -260 } // RESET POS TO CENTER // ok 1 --> 1.5
-        else imgPo.current = { x: operation[currentZoom.op](imgPo.current.x, targetFactor), y: operation[currentZoom.op](imgPo.current.y, targetFactor) }
-
-        //imgPo.current = { x: operation[currentZoom.op](imgPo.current.x, targetFactor), y: operation[currentZoom.op](imgPo.current.y, targetFactor) }
-        //else imgPo.current = { x: imgPo.current.x * targetFactor, y: imgPo.current.y * targetFactor }
-
-        console.log('imgPo.current --->', imgPo.current);
-
-        // if (currentZoom === 1) imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER
-        // else if (currentZoom === 1.5) imgPo.current = { x: imgPo.current.x * 1, y: imgPo.current.y * 1 } // RESET POS TO CENTER
-        // else if (currentZoom === 2) imgPo.current = { x: imgPo.current.x * 2, y: imgPo.current.y * 2 } // RESET POS TO CENTER
-        // else if (currentZoom === 2.5) imgPo.current = { x: imgPo.current.x * 1.5, y: imgPo.current.y * 1.5 } // RESET POS TO CENTER
-        // else if (currentZoom === 3) imgPo.current = { x: imgPo.current.x * 1.25, y: imgPo.current.y * 1.25 } // RESET POS TO CENTER
-
-        //imgPo.current = { x: initImgPos.current.x * factor, y: initImgPos.current.y * factor }
-
-        
-        //let qq = *
-        
+        if (currentZoom.val === 1) imgPo.current = { x: 0, y: 0 } // WHEN 1.0 SET POSITION TO 0, 0
+        else if (currentZoom.val === 1.5 && currentZoom.op === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 to 1.5 SET POSITION TO CENTER OF IMAGE
+        else {
+          console.log("ENTRO ACAA", imgPo.current.x, factor)
+          imgPo.current = { x: operation[currentZoom.op](imgPo.current.x, factor), y: operation[currentZoom.op](imgPo.current.y, factor) } // ELSE DO TARGET CALC
+        }
 
         ctx.drawImage(image.current,
           0, 0, ref.width, ref.height,
-          //imgPo.current.x * factor, imgPo.current.y * factor, ref.width * currentZoom, ref.height * currentZoom
-          //imgPo.current.x, imgPo.current.y, ref.width * currentZoom, ref.height * currentZoom
           imgPo.current.x, imgPo.current.y, ref.width * currentZoom.val, ref.height * currentZoom.val
         );
 
-        // if (currentZoom === 1) {
-        //   ctx.drawImage(image.current,
-        //     0, 0, ref.width, ref.height,
-        //     imgPo.current.x * 0, imgPo.current.y * 0, ref.width * currentZoom, ref.height * currentZoom
-        //     // 0 0
-        //   );
-        // }
-        
-        // else if (currentZoom === 1.5) {
-        //   ctx.drawImage(image.current,
-        //     0, 0, ref.width, ref.height,
-        //     imgPo.current.x * 1, imgPo.current.y * 1, ref.width * currentZoom, ref.height * currentZoom
-        //     // 480 260
-        //   );
-        // }
-
-        // else if (currentZoom === 2) {
-        //   ctx.drawImage(image.current,
-        //     0, 0, ref.width, ref.height,
-        //     imgPo.current.x * 2, imgPo.current.y * 2, ref.width * currentZoom, ref.height * currentZoom
-        //   );
-        // }
-
-        // else if (currentZoom === 2.5) {
-        //   ctx.drawImage(image.current,
-        //     0, 0, ref.width, ref.height,
-        //     imgPo.current.x * 3, imgPo.current.y * 3, ref.width * currentZoom, ref.height * currentZoom
-        //   );
-        // }
-
-        // if (currentZoom === 1) {
-        //   ctx.drawImage(image.current,
-        //     0, 0, ref.width, ref.height,
-        //     0, 0, ref.width * currentZoom, ref.height * currentZoom
-        //   );
-        // }
-        // else if (currentZoom === 1.5) {
-        //   ctx.drawImage(image.current,
-        //     0, 0, ref.width, ref.height,
-        //     -480 * 1, -260 * 1, ref.width * currentZoom, ref.height * currentZoom
-        //   );
-        // } 
-        // else if (currentZoom === 2.0) {
-        //   ctx.drawImage(image.current,
-        //     0, 0, ref.width, ref.height,
-        //     -960 , -520, ref.width * currentZoom, ref.height * currentZoom
-        //   );
-        // } 
-        // cZ     cZ         factor
-        // 1.0 + (1.0 - 2) === 0
-        // 1.5 + (1.5 - 2) === 1
-        // 2.0 + (2.0 - 2) === 2
-        // 2.5 + (2.5 - 2) === 3
-        // 3.0 + (3.0 - 2) === 4
-        // 3.5 + (3.5 - 2) === 5
-        // 4.0 + (4.0 - 2) === 6
+        // **  // --> //            LESS --> MORE            /or/            MORE --> LESS            //
+        // cZ  // --> // tZ     tZ    === dvdr // 1+(1/dvdr) /or/ tZ     tZ    === dvdr // 1+(1/dvdr) //
+        // 1.0 // --> //   **** manually set to 0, 0 ****    /or/   **** manually set to 0, 0 ****    //
+        // 1.5 // --> // 1.0 + (1.0 - 2) === 0 // 1.0 (man.) /or/ 1.5 + (1.5 - 2) === 1 // 2.0        //
+        // 2.0 // --> // 1.5 + (1.5 - 2) === 1 // 2.0        /or/ 2.0 + (2.0 - 2) === 2 // 1.5        //
+        // 2.5 // --> // 2.0 + (2.0 - 2) === 2 // 1.5        /or/ 2.5 + (2.5 - 2) === 3 // 1.33       //
+        // 3.0 // --> // 2.5 + (2.5 - 2) === 3 // 1.33       /or/ 3.0 + (3.0 - 2) === 4 // 1.25       //
+        // 3.5 // --> // 3.0 + (3.0 - 2) === 4 // 1.25       /or/ 3.5 + (3.5 - 2) === 5 // 1.2        //
+        // 4.0 // --> // 3.5 + (3.5 - 2) === 5 // 1.2        /or/ 4.0 + (4.0 - 2) === 6 // 1.166      //
       }
     }
   }, [currentZoom])
@@ -203,8 +95,6 @@ console.log('targetFactor --->', targetFactor);
 
   let mouseMove = (e:any) => {
     if (allowMove.current && currentZoom.val !== 1) {
-      //console.log('arbPos.current --->', arbPos.current);
-      //console.log('initImgPos --->', initImgPos.current);
       console.log('imgPo --->', imgPo.current); // reset to normal // 480 260
       if (refCanvas.current !== null) {
         let ref = refCanvas.current
@@ -231,21 +121,9 @@ console.log('targetFactor --->', targetFactor);
     }
   }
 
-  //const zoomIn = () => setCurrentZoom((curr: any) => curr + 0.5)
+  const zoomIn = () => setCurrentZoom((curr: any) => ({ val: curr.val + 0.5, op: 'x' }))
 
-  //const zoomOut = () => setCurrentZoom((curr: any) => curr - 0.5)
-
-  const zoomIn = () => {
-    //setCurrentZoom((curr: any) => { curr.val + 0.5 } )
-    //setCurrentZoom((curr: any) => console.log("CURR", curr) )
-    //setCurrentZoom({ ...currentZoom, val: })
-    setCurrentZoom( (curr: any) => ({ val: curr.val + 0.5, op: 'x' }) )
-  }
-
-  const zoomOut = () => {
-    //setCurrentZoom((curr: any) => curr - 0.5)
-    setCurrentZoom( (curr: any) => ({ val: curr.val - 0.5, op: '/' }) )
-  }
+  const zoomOut = () => setCurrentZoom((curr: any) => ({ val: curr.val - 0.5, op: '/' }))
 
   return (
     <div
@@ -253,10 +131,6 @@ console.log('targetFactor --->', targetFactor);
       className={css.modalBackground}
     >
       <div className={css.innerModal}>
-          {/* <svg width='100%' height='100%' viewBox='0 0 100 100' preserveAspectRatio='none'>
-            <line x1="0" y1="0" x2="100" y2="100" vectorEffect="non-scaling-stroke" stroke="red" />
-          </svg> */}
-
           <canvas
             id={`canvasImage`}
             ref={refCanvas}
@@ -274,8 +148,6 @@ console.log('targetFactor --->', targetFactor);
             </svg>
           </div>
 
-
-          
       </div>
       <div className={css.buttonsContainer}>
         <Button
@@ -301,10 +173,8 @@ console.log('targetFactor --->', targetFactor);
             if (currentIndex === images.length - 1) {
               setCurrentIndex(0)
               //setCurrentZoom(1)
-              //setCurrentZoom(1)
             } else {
               setCurrentIndex((curr: any) => curr + 1)
-              //setCurrentZoom(1)
               //setCurrentZoom(1)
             }
           }}
