@@ -67,13 +67,33 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         //console.log('currentZoom --->', currentZoom);
         
 
-        if (currentZoom === 1) imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER
-        else if (currentZoom === 1.5) imgPo.current = { x: initImgPos.current.x * 1, y: initImgPos.current.y * 1 } // RESET POS TO CENTER
-        else if (currentZoom === 2) imgPo.current = { x: initImgPos.current.x * 2, y: initImgPos.current.y * 2 } // RESET POS TO CENTER
-        else if (currentZoom === 2.5) imgPo.current = { x: initImgPos.current.x * 3, y: initImgPos.current.y * 3 } // RESET POS TO CENTER
-        else if (currentZoom === 3) imgPo.current = { x: initImgPos.current.x * 4, y: initImgPos.current.y * 4 } // RESET POS TO CENTER
+        //if (currentZoom === 1) imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER
+        //if (currentZoom === 1) imgPo.current = { x: -480, y: -260 } // RESET POS TO CENTER
+        // else if (currentZoom === 1.5) imgPo.current = { x: initImgPos.current.x * 1, y: initImgPos.current.y * 1 } // RESET POS TO CENTER
+        // else if (currentZoom === 2) imgPo.current = { x: initImgPos.current.x * 2, y: initImgPos.current.y * 2 } // RESET POS TO CENTER
+        // else if (currentZoom === 2.5) imgPo.current = { x: initImgPos.current.x * 3, y: initImgPos.current.y * 3 } // RESET POS TO CENTER
+        // else if (currentZoom === 3) imgPo.current = { x: initImgPos.current.x * 4, y: initImgPos.current.y * 4 } // RESET POS TO CENTER
+
+        let preZoom = currentZoom - 0.5
+        let factorFactor = preZoom + (preZoom - 2)
+        
+        let targetFactor = factorFactor === 0 ? 1 : 1 + (1 / factorFactor)
+console.log('targetFactor --->', targetFactor);
+        //let targetFactor = 1 + ( 1 / factorFactor)
+
+        //let parsedFactorFactor = factorFactor === 0 ?
 
         let factor = currentZoom + (currentZoom - 2)
+
+
+        let factor2 = currentZoom === 1 ? 0 : 1 + (1 / factor)
+        console.log('factor --->', factor);
+        console.log('factor2 --->', factor2);
+        console.log('imgPo --->', imgPo.current);
+        console.log('imgPo.current.x * factor2 --->', imgPo.current.x * factor2);
+
+        if (currentZoom === 1) imgPo.current = { x: -480, y: -260 } // RESET POS TO CENTER
+        else imgPo.current = { x: imgPo.current.x * targetFactor, y: imgPo.current.y * targetFactor }
 
         // if (currentZoom === 1) imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER
         // else if (currentZoom === 1.5) imgPo.current = { x: imgPo.current.x * 1, y: imgPo.current.y * 1 } // RESET POS TO CENTER
@@ -83,13 +103,14 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
         //imgPo.current = { x: initImgPos.current.x * factor, y: initImgPos.current.y * factor }
 
-        console.log('imgPo --->', imgPo.current);
+        
 
         
 
         ctx.drawImage(image.current,
           0, 0, ref.width, ref.height,
           //imgPo.current.x * factor, imgPo.current.y * factor, ref.width * currentZoom, ref.height * currentZoom
+          //imgPo.current.x, imgPo.current.y, ref.width * currentZoom, ref.height * currentZoom
           imgPo.current.x, imgPo.current.y, ref.width * currentZoom, ref.height * currentZoom
         );
 
