@@ -10,7 +10,11 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   const [ currentIndex, setCurrentIndex ] = useState(imageIndex)
 
-  const [ currentZoom, setCurrentZoom ] = useState(1) // DEFAULT ZOOM // (cZ)
+  //const [ currentZoom, setCurrentZoom ] = useState(1) // DEFAULT ZOOM // (cZ)
+  const [ currentZoom, setCurrentZoom ] = useState({
+    val: 1,
+    op: 'x'
+  }) // DEFAULT ZOOM // (cZ)
 
   let refCanvas = useRef<HTMLCanvasElement>(null)
   let image = useRef(new Image())
@@ -59,6 +63,12 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   useEffect(() => { // AA ZOOM CHANGED
     console.log("AA ZOOM CHANGED")
+
+    let operation:any = {
+      'x': function(a: any, b: any){ return a*b},
+      '/': function(a: any, b: any){ return a/b}
+    }
+
     if (refCanvas.current !== null) {
       let ref = refCanvas.current
       let ctx = ref.getContext("2d");
@@ -74,7 +84,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         // else if (currentZoom === 2.5) imgPo.current = { x: initImgPos.current.x * 3, y: initImgPos.current.y * 3 } // RESET POS TO CENTER
         // else if (currentZoom === 3) imgPo.current = { x: initImgPos.current.x * 4, y: initImgPos.current.y * 4 } // RESET POS TO CENTER
 
-        let preZoom = currentZoom - 0.5
+        let preZoom = currentZoom.op === 'x' ? currentZoom.val - 0.5 : currentZoom.val
         let factorFactor = preZoom + (preZoom - 2)
         
         let targetFactor = factorFactor === 0 ? 1 : 1 + (1 / factorFactor)
@@ -83,17 +93,25 @@ console.log('targetFactor --->', targetFactor);
 
         //let parsedFactorFactor = factorFactor === 0 ?
 
-        let factor = currentZoom + (currentZoom - 2)
+        //let factor = currentZoom.val + (currentZoom.val - 2)
 
 
-        let factor2 = currentZoom === 1 ? 0 : 1 + (1 / factor)
-        console.log('factor --->', factor);
-        console.log('factor2 --->', factor2);
-        console.log('imgPo --->', imgPo.current);
-        console.log('imgPo.current.x * factor2 --->', imgPo.current.x * factor2);
+        //let factor2 = currentZoom.val === 1 ? 0 : 1 + (1 / factor) // TO AVOID DIV BY ZERO // TO DIVISION
+        //console.log('factor --->', factor);
+        //console.log('factor2 --->', factor2);
+        //console.log('imgPo --->', imgPo.current);
+        //console.log('imgPo.current.x * factor2 --->', imgPo.current.x * factor2);
 
-        if (currentZoom === 1) imgPo.current = { x: -480, y: -260 } // RESET POS TO CENTER
-        else imgPo.current = { x: imgPo.current.x * targetFactor, y: imgPo.current.y * targetFactor }
+        //if (currentZoom.val === 1 && currentZoom.op === 'x') imgPo.current = { x: -480, y: -260 } // RESET POS TO CENTER // ok 1 --> 1.5
+        //else if (currentZoom.val === 1 && currentZoom.op === '/') imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER // ok 1 --> 1.5
+        if (currentZoom.val === 1 && currentZoom.op === '/') imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER // ok 1 --> 1.5
+        else if (currentZoom.val === 1.5 && currentZoom.op === 'x') imgPo.current = { x: -480, y: -260 } // RESET POS TO CENTER // ok 1 --> 1.5
+        else imgPo.current = { x: operation[currentZoom.op](imgPo.current.x, targetFactor), y: operation[currentZoom.op](imgPo.current.y, targetFactor) }
+
+        //imgPo.current = { x: operation[currentZoom.op](imgPo.current.x, targetFactor), y: operation[currentZoom.op](imgPo.current.y, targetFactor) }
+        //else imgPo.current = { x: imgPo.current.x * targetFactor, y: imgPo.current.y * targetFactor }
+
+        console.log('imgPo.current --->', imgPo.current);
 
         // if (currentZoom === 1) imgPo.current = { x: 0, y: 0 } // RESET POS TO CENTER
         // else if (currentZoom === 1.5) imgPo.current = { x: imgPo.current.x * 1, y: imgPo.current.y * 1 } // RESET POS TO CENTER
@@ -104,14 +122,14 @@ console.log('targetFactor --->', targetFactor);
         //imgPo.current = { x: initImgPos.current.x * factor, y: initImgPos.current.y * factor }
 
         
-
+        //let qq = *
         
 
         ctx.drawImage(image.current,
           0, 0, ref.width, ref.height,
           //imgPo.current.x * factor, imgPo.current.y * factor, ref.width * currentZoom, ref.height * currentZoom
           //imgPo.current.x, imgPo.current.y, ref.width * currentZoom, ref.height * currentZoom
-          imgPo.current.x, imgPo.current.y, ref.width * currentZoom, ref.height * currentZoom
+          imgPo.current.x, imgPo.current.y, ref.width * currentZoom.val, ref.height * currentZoom.val
         );
 
         // if (currentZoom === 1) {
@@ -184,7 +202,7 @@ console.log('targetFactor --->', targetFactor);
   }
 
   let mouseMove = (e:any) => {
-    if (allowMove.current && currentZoom !== 1) {
+    if (allowMove.current && currentZoom.val !== 1) {
       //console.log('arbPos.current --->', arbPos.current);
       //console.log('initImgPos --->', initImgPos.current);
       console.log('imgPo --->', imgPo.current); // reset to normal // 480 260
@@ -194,7 +212,7 @@ console.log('targetFactor --->', targetFactor);
         if (ctx !== null) {
           let targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x)
           let targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y)
-          let factor = ((currentZoom * 2) - 2) * 2
+          let factor = ((currentZoom.val * 2) - 2) * 2
           //   cZ                factor
           // ((1.5 * 2) - 2) * 2 = 2
           // ((2.0 * 2) - 2) * 2 = 4
@@ -204,7 +222,7 @@ console.log('targetFactor --->', targetFactor);
             (targetXPosition < 0 && targetXPosition > initImgPos.current.x * factor) &&
             (targetYPosition < 0 && targetYPosition > initImgPos.current.y * factor)
           ) {
-            ctx.drawImage(image.current, targetXPosition, targetYPosition, ref.width * currentZoom, ref.height * currentZoom);
+            ctx.drawImage(image.current, targetXPosition, targetYPosition, ref.width * currentZoom.val, ref.height * currentZoom.val);
             imgPo.current = { x: targetXPosition, y: targetYPosition }
           }
         }
@@ -213,9 +231,21 @@ console.log('targetFactor --->', targetFactor);
     }
   }
 
-  const zoomIn = () => setCurrentZoom((curr: any) => curr + 0.5)
+  //const zoomIn = () => setCurrentZoom((curr: any) => curr + 0.5)
 
-  const zoomOut = () => setCurrentZoom((curr: any) => curr - 0.5)
+  //const zoomOut = () => setCurrentZoom((curr: any) => curr - 0.5)
+
+  const zoomIn = () => {
+    //setCurrentZoom((curr: any) => { curr.val + 0.5 } )
+    //setCurrentZoom((curr: any) => console.log("CURR", curr) )
+    //setCurrentZoom({ ...currentZoom, val: })
+    setCurrentZoom( (curr: any) => ({ val: curr.val + 0.5, op: 'x' }) )
+  }
+
+  const zoomOut = () => {
+    //setCurrentZoom((curr: any) => curr - 0.5)
+    setCurrentZoom( (curr: any) => ({ val: curr.val - 0.5, op: '/' }) )
+  }
 
   return (
     <div
@@ -254,10 +284,10 @@ console.log('targetFactor --->', targetFactor);
           onClick={() => {
             if (currentIndex === 0) {
               setCurrentIndex(images.length - 1)
-              setCurrentZoom(1)
+              //setCurrentZoom(1)
             } else {
               setCurrentIndex((curr: any) => curr - 1)
-              setCurrentZoom(1)
+              //setCurrentZoom(1)
             }
           }}
         >
@@ -270,10 +300,12 @@ console.log('targetFactor --->', targetFactor);
           onClick={() => {
             if (currentIndex === images.length - 1) {
               setCurrentIndex(0)
-              setCurrentZoom(1)
+              //setCurrentZoom(1)
+              //setCurrentZoom(1)
             } else {
               setCurrentIndex((curr: any) => curr + 1)
-              setCurrentZoom(1)
+              //setCurrentZoom(1)
+              //setCurrentZoom(1)
             }
           }}
         >
@@ -284,7 +316,7 @@ console.log('targetFactor --->', targetFactor);
           variant="contained"
           className={css.button}
           onClick={() => { zoomOut() }}
-          disabled={ currentZoom === 1 ? true : false }
+          disabled={ currentZoom.val === 1 ? true : false }
         >
           <RemoveIcon className={css.iconRight}/>
         </Button>
@@ -293,7 +325,7 @@ console.log('targetFactor --->', targetFactor);
           variant="contained"
           className={css.button}
           onClick={() => { zoomIn() }}
-          disabled={ currentZoom === 8 ? true : false }
+          disabled={ currentZoom.val === 8 ? true : false }
         >
           <AddIcon className={css.iconRight}/>
         </Button>
@@ -306,7 +338,7 @@ console.log('targetFactor --->', targetFactor);
           <CloseIcon className={css.iconRight}/>
         </Button>
         <div>
-          {currentZoom.toFixed(1)}x
+          {currentZoom.val.toFixed(1)}x
         </div>
 
       </div>
