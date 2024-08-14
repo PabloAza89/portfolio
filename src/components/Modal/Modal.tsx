@@ -10,10 +10,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   const [ currentIndex, setCurrentIndex ] = useState(imageIndex)
 
-  const [ currentZoom, setCurrentZoom ] = useState({
-    val: 1,
-    op: 'x'
-  }) // (cZ)
+  const [ currentZoom, setCurrentZoom ] = useState({ val: 1, op: 'x' }) // (cZ)
 
   let refCanvas = useRef<HTMLCanvasElement>(null)
   let image = useRef(new Image())
@@ -61,10 +58,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
         if (currentZoom.val === 1) imgPo.current = { x: 0, y: 0 } // WHEN 1.0 SET POSITION TO 0, 0
         else if (currentZoom.val === 1.5 && currentZoom.op === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 to 1.5 SET POSITION TO CENTER OF IMAGE
-        else {
-          console.log("ENTRO ACAA", imgPo.current.x, factor)
-          imgPo.current = { x: operation[currentZoom.op](imgPo.current.x, factor), y: operation[currentZoom.op](imgPo.current.y, factor) } // ELSE DO TARGET CALC
-        }
+        else imgPo.current = { x: operation[currentZoom.op](imgPo.current.x, factor), y: operation[currentZoom.op](imgPo.current.y, factor) } // ELSE DO TARGET CALC
 
         ctx.drawImage(image.current,
           0, 0, ref.width, ref.height,
@@ -95,7 +89,6 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   let mouseMove = (e:any) => {
     if (allowMove.current && currentZoom.val !== 1) {
-      console.log('imgPo --->', imgPo.current); // reset to normal // 480 260
       if (refCanvas.current !== null) {
         let ref = refCanvas.current
         let ctx = ref.getContext("2d");
@@ -125,6 +118,18 @@ function Modal({ images, imageIndex, setShowModal }: any) {
 
   const zoomOut = () => setCurrentZoom((curr: any) => ({ val: curr.val - 0.5, op: '/' }))
 
+  const goLeftHandler = () => {
+    if (currentIndex === 0) setCurrentIndex(images.length - 1)
+    else setCurrentIndex((curr: any) => curr - 1)
+    setCurrentZoom({ val: 1, op: 'x' })
+  }
+
+  const goRightHandler = () => {
+    if (currentIndex === images.length - 1) setCurrentIndex(0)
+    else setCurrentIndex((curr: any) => curr + 1)
+    setCurrentZoom({ val: 1, op: 'x' })
+  }
+
   return (
     <div
       id={`modalBackground`}
@@ -134,7 +139,6 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           <canvas
             id={`canvasImage`}
             ref={refCanvas}
-            //onClick={(e) => test(e)}
             className={css.canvasImage}
             onMouseDown={(e) => mouseDown(e)}
             onMouseUp={(e) => mouseUp(e)}
@@ -153,15 +157,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         <Button
           variant="contained"
           className={css.button}
-          onClick={() => {
-            if (currentIndex === 0) {
-              setCurrentIndex(images.length - 1)
-              //setCurrentZoom(1)
-            } else {
-              setCurrentIndex((curr: any) => curr - 1)
-              //setCurrentZoom(1)
-            }
-          }}
+          onClick={() => goLeftHandler()}
         >
           <ForwardIcon className={css.iconLeft}/>
         </Button>
@@ -169,15 +165,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         <Button
           variant="contained"
           className={css.button}
-          onClick={() => {
-            if (currentIndex === images.length - 1) {
-              setCurrentIndex(0)
-              //setCurrentZoom(1)
-            } else {
-              setCurrentIndex((curr: any) => curr + 1)
-              //setCurrentZoom(1)
-            }
-          }}
+          onClick={() => goRightHandler()}
         >
           <ForwardIcon className={css.iconRight}/>
         </Button>
@@ -185,7 +173,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         <Button
           variant="contained"
           className={css.button}
-          onClick={() => { zoomOut() }}
+          onClick={() => zoomOut()}
           disabled={ currentZoom.val === 1 ? true : false }
         >
           <RemoveIcon className={css.iconRight}/>
@@ -194,7 +182,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         <Button
           variant="contained"
           className={css.button}
-          onClick={() => { zoomIn() }}
+          onClick={() => zoomIn()}
           disabled={ currentZoom.val === 8 ? true : false }
         >
           <AddIcon className={css.iconRight}/>
@@ -203,7 +191,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
         <Button
           variant="contained"
           className={css.button}
-          onClick={() => { setShowModal(false) }}
+          onClick={() => setShowModal(false)}
         >
           <CloseIcon className={css.iconRight}/>
         </Button>
