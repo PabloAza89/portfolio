@@ -50,57 +50,68 @@ function Projects() {
   }
 
   useEffect(() => { // MOUSE GRAB & DRAG HORIZONTAL
-    const el = document.getElementById('sliderRollProjects');
+    const scrollTarget = document.getElementById('scrollTarget');
+    const elX = document.getElementById('sliderRollProjects');
+    const elY = document.getElementById('sliderBoxYProjects');
     const children = document.querySelector('[class*="ProjectsCSS_scroll"]')
     const parent = document.querySelector('[class*="ProjectsCSS_background"]')
 
-    if (el !== null && children !== null && parent !== null) {
-      const mouseEnterOnScore = () => {
-        if (children.clientWidth > parent.clientWidth) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
-        let pos = { left: 0, x: 0 };
+    if (
+      scrollTarget !== null && elX !== null && elY !== null
+      && children !== null && parent !== null
+    ) {
+      const mouseEnterOnX = () => {
+        console.log("ENTERRRRRRRR")
+        if (children.clientWidth > parent.clientWidth || parent.clientHeight < 360) elX.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
+        //let pos = { left: 0, x: 0 };
+        let pos = { left: 0, x: 0, top: 0, y: 0 };
 
         const mouseDownHandler = function (e: any) {
-          el.style.cursor = 'grabbing';
-          el.style.userSelect = 'none';
+          elX.style.cursor = 'grabbing';
+          elX.style.userSelect = 'none';
           pos = {
-            left: el.scrollLeft,
+            left: elX.scrollLeft,
             x: e.clientX,
+            top: elY.scrollTop,
+            y: e.clientY,
           }
-          if (children.clientWidth > parent.clientWidth) {
-            el.addEventListener('mousemove', mouseMoveHandler)
-            el.addEventListener('mouseup', mouseUpHandler)
+          if (children.clientWidth > parent.clientWidth || parent.clientHeight < 360) {
+            elX.addEventListener('mousemove', mouseMoveHandler)
+            elX.addEventListener('mouseup', mouseUpHandler)
           } else {
-            el.removeEventListener('mousemove', mouseMoveHandler);
-            el.removeEventListener('mouseup', mouseUpHandler);
-            el.style.cursor = 'default';
+            elX.removeEventListener('mousemove', mouseMoveHandler);
+            elX.removeEventListener('mouseup', mouseUpHandler);
+            elX.style.cursor = 'default';
           }
         }
 
         const mouseMoveHandler = function (e: any) { // HOW MUCH MOUSE HAS MOVED
           const dx = e.clientX - pos.x;
-          el.scrollLeft = pos.left - dx;
+          elX.scrollLeft = pos.left - dx;
+          const dy = e.clientY - pos.y;
+          elY.scrollTop = pos.top - dy;
         }
 
         const mouseUpHandler = function () {
-          el.style.cursor = 'grab'
-          el.style.removeProperty('user-select')
-          el.removeEventListener('mousemove', mouseMoveHandler)
-          el.removeEventListener('mouseup', mouseUpHandler)
+          elX.style.cursor = 'grab'
+          elX.style.removeProperty('user-select')
+          elX.removeEventListener('mousemove', mouseMoveHandler)
+          elX.removeEventListener('mouseup', mouseUpHandler)
         }
 
-        el.addEventListener('mousedown', mouseDownHandler);
-        el.addEventListener('mouseleave', function() {
-          el.removeEventListener('mouseup', mouseUpHandler);
-          el.removeEventListener('mousedown', mouseDownHandler)
-          el.removeEventListener('mousemove', mouseMoveHandler);
-          el.style.cursor = 'default'
+        elX.addEventListener('mousedown', mouseDownHandler);
+        scrollTarget.addEventListener('mouseleave', function() {
+          elX.removeEventListener('mouseup', mouseUpHandler);
+          elX.removeEventListener('mousedown', mouseDownHandler)
+          elX.removeEventListener('mousemove', mouseMoveHandler);
+          elX.style.cursor = 'default'
         })
       }
-      el.addEventListener("mouseenter", mouseEnterOnScore)
-
-      return () => el.removeEventListener("mouseenter", mouseEnterOnScore)
+      scrollTarget.addEventListener("mouseenter", mouseEnterOnX)
+      return () => scrollTarget.removeEventListener("mouseenter", mouseEnterOnX)
     }
-  //}, [heightDev])
+
+    
   }, [])
 
   let [ projectChosen, setProjectChosen ] = useState(`All Projects`)
@@ -148,72 +159,55 @@ function Projects() {
 
 
 
-  useEffect(() => { // MOUSE GRAB & DRAG VERTICAL
-    const el = document.getElementById('sliderBoxYProjects');
-    const parent = document.querySelector('[class*="ProjectsCSS_background"]')
+  // useEffect(() => { // MOUSE GRAB & DRAG VERTICAL
+  //   const elY = document.getElementById('sliderBoxYProjects');
+  //   const parent = document.querySelector('[class*="ProjectsCSS_background"]')
 
+  //   if (elY !== null) {
+  //     const mouseEnterOnY = () => {
+  //       console.log("ENTER VERTICAL")
+  //       let pos = { top: 0, y: 0 };
 
-    if (el !== null) {
-      const mouseEnterOnScoreY = () => {
-        let pos = { top: 0, y: 0 };
+  //       const mouseDownHandlerY = function (e: any) {
+  //         pos = {
+  //           top: elY.scrollTop,
+  //           y: e.clientY,
+  //         }
 
-        if (parent !== null) {
-          console.log("parent.clientWidth", parent.clientHeight) // UPDATED VALUE // > 360
-        }
+  //         if (parent !== null) {
+  //           if (parent.clientHeight < 360) { // > 372 START OVERFLOW === 372 - 12 = 360
+  //             console.log("ENTRO ACAAAAAAAAAAAAAAA")
+  //             elY.addEventListener('mousemove', mouseMoveHandlerY)
+  //             elY.addEventListener('mouseup', mouseUpHandlerY)
+  //           } else {
+  //             elY.removeEventListener('mousemove', mouseMoveHandlerY);
+  //             elY.removeEventListener('mouseup', mouseUpHandlerY);
+  //           }
+  //         }
+  //       }
 
-        const mouseDownHandlerY = function (e: any) {
-          pos = {
-            top: el.scrollTop,
-            y: e.clientY,
-          }
+  //       const mouseMoveHandlerY = function (e: any) { // HOW MUCH MOUSE HAS MOVED
+  //         const dy = e.clientY - pos.y;
+  //         elY.scrollTop = pos.top - dy;
+  //       }
 
-          if (parent !== null) {
-            if (parent.clientHeight < 360) { // > 372 START OVERFLOW === 372 - 12 = 360
-              console.log("ENTRO ACAAAAAAAAAAAAAAA")
-              el.addEventListener('mousemove', mouseMoveHandlerY)
-              el.addEventListener('mouseup', mouseUpHandlerY)
-              el.style.cursor = 'grab'
-            } else {
-              el.removeEventListener('mousemove', mouseMoveHandlerY);
-              el.removeEventListener('mouseup', mouseUpHandlerY);
-              el.style.cursor = 'default';
-            }
+  //       const mouseUpHandlerY = function () {
+  //         elY.style.removeProperty('user-select')
+  //         elY.removeEventListener('mousemove', mouseMoveHandlerY)
+  //         elY.removeEventListener('mouseup', mouseUpHandlerY)
+  //       }
 
-            //  el.addEventListener('mousemove', mouseMoveHandlerY)
-            //  el.addEventListener('mouseup', mouseUpHandlerY)
-            //  //el.style.cursor = 'grab';
-
-          }
-
-              
-
-        }
-
-        const mouseMoveHandlerY = function (e: any) { // HOW MUCH MOUSE HAS MOVED
-          const dy = e.clientY - pos.y;
-          el.scrollTop = pos.top - dy;
-          el.style.cursor = 'grabbing';
-        }
-
-        const mouseUpHandlerY = function () {
-          el.style.removeProperty('user-select')
-          el.removeEventListener('mousemove', mouseMoveHandlerY)
-          el.removeEventListener('mouseup', mouseUpHandlerY)
-        }
-
-        el.addEventListener('mousedown', mouseDownHandlerY);
-        el.addEventListener('mouseleave', function() {
-          el.removeEventListener('mouseup', mouseUpHandlerY);
-          el.removeEventListener('mousedown', mouseDownHandlerY)
-          el.removeEventListener('mousemove', mouseMoveHandlerY);
-        })
-      }
-      el.addEventListener("mouseenter", mouseEnterOnScoreY)
-
-      return () => el.removeEventListener("mouseenter", mouseEnterOnScoreY)
-    }
-  //}, [heightDev, widthDev])
-  }, [])
+  //       elY.addEventListener('mousedown', mouseDownHandlerY);
+  //       elY.addEventListener('mouseleave', function() {
+  //         elY.removeEventListener('mouseup', mouseUpHandlerY);
+  //         elY.removeEventListener('mousedown', mouseDownHandlerY)
+  //         elY.removeEventListener('mousemove', mouseMoveHandlerY);
+  //       })
+  //     }
+  //     elY.addEventListener("mouseenter", mouseEnterOnY)
+  //     return () => elY.removeEventListener("mouseenter", mouseEnterOnY)
+  //   }
+  // }, [])
 
   const timeoutProjects = useRef<ReturnType<typeof setTimeout>>();
   const autoHideProjects = () => {
@@ -283,7 +277,10 @@ function Projects() {
           id={`sliderRollProjects`}
           className={css.mainContainer}
         >
-          <div className={css.scroll}>
+          <div
+            id={`scrollTarget`}
+            className={css.scroll}
+          >
             <div className={css.solid} />
             <div className={css.intercalated} />
             <div className={css.solid} />
@@ -401,12 +398,12 @@ function Projects() {
       </div>
 
       {
-        showModal &&
+        /* showModal &&
         <Modal
           images={array.map(e => e.media).flat()}
           index={index}
           setShowModal={setShowModal}
-        />
+        /> */
       }
 
     </div>
