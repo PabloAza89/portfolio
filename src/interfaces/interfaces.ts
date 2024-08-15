@@ -1,3 +1,5 @@
+import { SetStateAction, Dispatch } from 'react';
+
 export interface CSSRuleExtended extends CSSRule {
   media?: any,
   initialValue?: any
@@ -32,4 +34,11 @@ export interface arraySkillsI {
   id: number,
   title: string,
   percentage: number
+}
+
+export interface ModalI {
+  images?: string[],
+  index?: number,
+  setShowModal?: Dispatch<SetStateAction<boolean>>,
+  controlsOutside?: boolean,
 }

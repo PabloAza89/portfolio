@@ -1,49 +1,92 @@
-import { useEffect, useState, useRef } from 'react';
+import { ReactElement, useEffect, useState, useRef, ReactNode, useMemo, useLayoutEffect } from 'react';
 import css from './ModalCSS.module.css';
 import { Forward, Add, Remove, Close } from '@mui/icons-material/';
 import { Button } from '@mui/material';
+import { ModalI } from '../../interfaces/interfaces';
 
-function Modal({ images, imageIndex, setShowModal }: any) {
+function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactElement {
+
+  // useMemo(() => {
+  //   //filterTodos(todos, tab)
+  //   console.log(images, index)
+  // },[images, index]);
+
+  const myValue = useMemo(() => {
+    return index;
+   },[index]);
+
+   console.log('myValue --->', myValue);
+
+  // useLayoutEffect(() => {
+  //   console.log("imagesimagesimages", images)
+  //   console.log("indexindexindex", index)
+
+  // }, [images, index])
+
+  // let qq = images
+  // let ww = index
+
+  // console.log("imagesimagesimages", qq)
+  // console.log("indexindexindex", ww)
+
+  // useMemo(() => {
+  //   //filterTodos(todos, tab)
+  //   console.log(images, index)
+  // },[images, index, setShowModal, controlsOutside]);
 
   window.onclick = function(e) {
-    let modalDiv = document.getElementById('modalBackground');
-    if (e.target === modalDiv) setShowModal(false)
+    if (setShowModal !== undefined) {
+      let modalDiv = document.getElementById('modalBackground');
+      if (e.target === modalDiv) setShowModal(false)
+    }
   }
 
-  const [ currentIndex, setCurrentIndex ] = useState(imageIndex)
+  const [ currentIndex, setCurrentIndex ] = useState(index)
 
   const [ currentZoom, setCurrentZoom ] = useState({ val: 1, op: 'x' }) // (cZ)
 
   let refCanvas = useRef<HTMLCanvasElement>(null)
   let image = useRef(new Image())
+  //let image = useRef()
   let allowMove = useRef(false)
   let arbPos = useRef({ x: 0, y: 0 }) // ARBITRARY POSITION
   let initImgPos = useRef({ x: 0, y: 0 }) // INITIAL IMAGE POSITION
   let imgPo = useRef({ x: 0, y: 0 }) // IMAGE POSITION
 
   useEffect(() => { // LOAD NEW IMAGE
-    image.current.src = images[currentIndex]
-    image.current.onload = function() {
-      if (refCanvas.current !== null) { //
-        let ref = refCanvas.current
-        let ctx = ref.getContext("2d");
-        ref.width = image.current.naturalWidth
-        ref.height = image.current.naturalHeight
+    console.log("AAAAAAAAAAAAAAA")
 
-        // e.g.:               x: 480             y: 260               // (1920 x 1040)
-        initImgPos.current = { x: ref.width / -4, y: ref.height / -4 }
+    
 
-        imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y }
+    if (images !== undefined && currentIndex !== undefined) {
+      //console.log("inner AAAAAAAAAAAAAAA")
 
-        if (ctx !== null) {
-          ctx.imageSmoothingEnabled = false;
-          ctx.drawImage(image.current, 0, 0, ref.width, ref.height) // FIRST IMAGE DRAW
+      //image.current = new Image()
+
+      image.current.src = images[currentIndex]
+      image.current.onload = function() {
+        if (refCanvas.current !== null) { //
+          let ref = refCanvas.current
+          let ctx = ref.getContext("2d");
+          ref.width = image.current.naturalWidth
+          ref.height = image.current.naturalHeight
+
+          // e.g.:               x: 480             y: 260               // (1920 x 1040)
+          initImgPos.current = { x: ref.width / -4, y: ref.height / -4 }
+
+          imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y }
+
+          if (ctx !== null) {
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(image.current, 0, 0, ref.width, ref.height) // FIRST IMAGE DRAW
+          }
         }
       }
     }
   }, [currentIndex, images])
 
   useEffect(() => { // ZOOM CHANGED
+    console.log("BBBBBBBBBBBBBBB")
     let operation:any = {
       'x': function(a: any, b: any){ return a*b},
       '/': function(a: any, b: any){ return a/b}
@@ -90,6 +133,7 @@ function Modal({ images, imageIndex, setShowModal }: any) {
   }
 
   let mouseMove = (e:any) => {
+    //console.log("CCCCCCCCCCCCCCCCCCCCCC")
     if (allowMove.current && currentZoom.val !== 1) {
       if (refCanvas.current !== null) {
         let ref = refCanvas.current
@@ -121,23 +165,86 @@ function Modal({ images, imageIndex, setShowModal }: any) {
   const zoomOut = () => setCurrentZoom((curr: any) => ({ val: curr.val - 0.5, op: '/' }))
 
   const goLeftHandler = () => {
-    if (currentIndex === 0) setCurrentIndex(images.length - 1)
-    else setCurrentIndex((curr: any) => curr - 1)
-    setCurrentZoom({ val: 1, op: 'x' })
+    if (images !== undefined) {
+      if (currentIndex === 0) setCurrentIndex(images.length - 1)
+      else setCurrentIndex((curr: any) => curr - 1)
+      setCurrentZoom({ val: 1, op: 'x' })
+    }
   }
 
   const goRightHandler = () => {
-    if (currentIndex === images.length - 1) setCurrentIndex(0)
-    else setCurrentIndex((curr: any) => curr + 1)
-    setCurrentZoom({ val: 1, op: 'x' })
+    if (images !== undefined) {
+      if (currentIndex === images.length - 1) setCurrentIndex(0)
+      else setCurrentIndex((curr: any) => curr + 1)
+      setCurrentZoom({ val: 1, op: 'x' })
+    }
   }
+
+  const controls: ReactNode =
+    <div
+      id={`bottomBar`}
+      className={css.bottomBar}
+    >
+      <div className={css.buttonsContainer}>
+        <div className={css.imageCounter}>
+          { currentIndex !== undefined && images !== undefined ? currentIndex + 1 : 0 }/{ currentIndex !== undefined && images !== undefined ? images.length : 0 }
+        </div>
+        <Button
+          variant="contained"
+          className={css.button}
+          onClick={() => goLeftHandler()}
+        >
+          <Forward className={css.iconLeft}/>
+        </Button>
+
+        <Button
+          variant="contained"
+          className={css.button}
+          onClick={() => goRightHandler()}
+        >
+          <Forward className={css.iconRight}/>
+        </Button>
+
+        <Button
+          variant="contained"
+          className={css.button}
+          onClick={() => zoomOut()}
+          disabled={ currentZoom.val === 1 ? true : false }
+        >
+          <Remove className={css.iconRight}/>
+        </Button>
+
+        <Button
+          variant="contained"
+          className={css.button}
+          onClick={() => zoomIn()}
+          disabled={ currentZoom.val === 8 ? true : false }
+        >
+          <Add className={css.iconRight}/>
+        </Button>
+
+        <Button
+          variant="contained"
+          className={css.button}
+          onClick={() => { if (setShowModal !== undefined) setShowModal(false)} }
+        >
+          <Close className={css.iconRight}/>
+        </Button>
+        <div className={css.zoomContainer}>
+          { currentZoom.val.toFixed(1) }x
+        </div>
+      </div>
+    </div>
 
   return (
     <div
       id={`modalBackground`}
       className={css.modalBackground}
     >
-      <div className={css.innerModal}>
+      <div
+        id={`innerModal`}
+        className={css.innerModal}
+      >
           <canvas
             id={`canvasImage`}
             ref={refCanvas}
@@ -146,67 +253,9 @@ function Modal({ images, imageIndex, setShowModal }: any) {
             onMouseUp={(e) => mouseUp(e)}
             onMouseMove={(e) => mouseMove(e)}
           />
-
-          <div style={{outline: "1px solid", height: "100%", width: '100%', zIndex: '20000', pointerEvents: 'none', position: 'absolute' }}>
-            <svg width='100%' height='100%' viewBox='0 0 100 100' preserveAspectRatio='none'>
-              <line x1="0" y1="0" x2="100" y2="100" vectorEffect="non-scaling-stroke" stroke="red" />
-              <line x1="0" y1="100" x2="100" y2="0" vectorEffect="non-scaling-stroke" stroke="red" />
-            </svg>
-          </div>
-
+          { !controlsOutside && controls }
       </div>
-      <div className={css.bottomBar}>
-        <div className={css.buttonsContainer}>
-          <div className={css.imageCounter}>
-            { currentIndex + 1 }/{ images.length }
-          </div>
-          <Button
-            variant="contained"
-            className={css.button}
-            onClick={() => goLeftHandler()}
-          >
-            <Forward className={css.iconLeft}/>
-          </Button>
-
-          <Button
-            variant="contained"
-            className={css.button}
-            onClick={() => goRightHandler()}
-          >
-            <Forward className={css.iconRight}/>
-          </Button>
-
-          <Button
-            variant="contained"
-            className={css.button}
-            onClick={() => zoomOut()}
-            disabled={ currentZoom.val === 1 ? true : false }
-          >
-            <Remove className={css.iconRight}/>
-          </Button>
-
-          <Button
-            variant="contained"
-            className={css.button}
-            onClick={() => zoomIn()}
-            disabled={ currentZoom.val === 8 ? true : false }
-          >
-            <Add className={css.iconRight}/>
-          </Button>
-
-          <Button
-            variant="contained"
-            className={css.button}
-            onClick={() => setShowModal(false)}
-          >
-            <Close className={css.iconRight}/>
-          </Button>
-          <div className={css.zoomContainer}>
-            { currentZoom.val.toFixed(1) }x
-          </div>
-        </div>
-        
-      </div>
+      { controlsOutside && controls }
     </div>
   )
 }

@@ -44,6 +44,23 @@ function Settings() {
     }
   }, [])
 
+  // EDITING //
+
+  const projectsBGHandler: () => void = () => {
+    let el = (document.querySelector(`[class*="ProjectsCSS_background"]`) as HTMLElement)
+    if (el !== null) document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
+  }
+
+  useEffect(() => {
+    projectsBGHandler()
+    window.addEventListener('resize', projectsBGHandler);
+    return () => window.removeEventListener('resize', projectsBGHandler);
+  },[])
+
+  window.addEventListener('load', () => projectsBGHandler())
+
+  // EDITING //
+
   return (
     <div style={{ "--scrollwidth": overflowListener } as CSSProperties} className={css.background}>
       <Button

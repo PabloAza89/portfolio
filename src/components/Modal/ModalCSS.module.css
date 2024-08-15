@@ -26,8 +26,8 @@
 .canvasImage {
   /* background: red; */ /* DEV */
   object-fit: contain;
-  max-width: 80vw !important;
-  max-height: 70vh !important;
+  max-width: 80vw;
+  max-height: 70vh;
 }
 
 .bottomBar {
@@ -61,12 +61,12 @@
 
 .imageCounter {
   background: blue; /* DEV */
-  width: 50px;
+  width: 70px;
   align-items: center;
   display: flex;
   /* position: relative; */
   position: absolute;
-  left: -55px;
+  left: -75px;
   /* margin-left: 5px; */
   color: #fff;
   height: 49px;

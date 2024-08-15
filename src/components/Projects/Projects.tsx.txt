@@ -18,16 +18,19 @@ function Projects() {
   const [ widthDev, setWidthDev ] = useState<number>(window.innerWidth)
 
   useEffect(() => {
-    const autoHideOnResize = () => {
+    const autoHideOnResize: any = () => {
       let { innerHeight, innerWidth } = window
       setHeightDev(innerHeight);
       setWidthDev(innerWidth);
     }
     window.addEventListener('resize', autoHideOnResize);
+    //return () => window.removeEventListener('resize', autoHideOnResize);
   },[])
 
+  console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+
   function useHorizontalScroll() {
-    const elRef = useRef<HTMLInputElement>(null);
+    const elRef = useRef<HTMLElement>(null);
     useEffect(() => {
       const el:any = elRef.current;
       if (el) {
@@ -54,8 +57,8 @@ function Projects() {
     if (el !== null && children !== null && parent !== null) {
       const mouseEnterOnScore = () => {
         if (
-          children.clientWidth > parent.clientWidth ||
-          heightDev < 456
+          children.clientWidth > parent.clientWidth /* ||
+          heightDev < 456 */
         ) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
         let pos = { left: 0, x: 0 };
 
@@ -67,8 +70,8 @@ function Projects() {
             x: e.clientX,
           }
           if (
-            children.clientWidth > parent.clientWidth ||
-            heightDev < 456
+            children.clientWidth > parent.clientWidth /* ||
+            heightDev < 456 */
           ) {
             el.addEventListener('mousemove', mouseMoveHandler)
             el.addEventListener('mouseup', mouseUpHandler)
@@ -103,7 +106,8 @@ function Projects() {
 
       return () => el.removeEventListener("mouseenter", mouseEnterOnScore)
     }
-  }, [heightDev])
+  //}, [heightDev])
+  }, [])
 
   let [ projectChosen, setProjectChosen ] = useState(`All Projects`)
 
@@ -199,14 +203,14 @@ function Projects() {
     clearTimeout(timeoutProjects.current)
   }
 
-  useEffect(() => {
-    let el = document.getElementById(`boxLower`)
-    if (heightDev > 523) {
-      if (el !== null && el.classList.length === 2) {
-        (document.getElementById(`buttonFlap`) as HTMLElement).click()
-      }
-    }
-  }, [heightDev])
+  // useEffect(() => {
+  //   let el = document.getElementById(`boxLower`)
+  //   if (heightDev > 523) {
+  //     if (el !== null && el.classList.length === 2) {
+  //       (document.getElementById(`buttonFlap`) as HTMLElement).click()
+  //     }
+  //   }
+  // }, [heightDev])
 
   const handleClickFlap = () => {
     clearTimeout(timeoutProjects.current)
@@ -234,36 +238,8 @@ function Projects() {
     }
   }
 
-  const projectsBGHandler: () => void = () => {
-    let el = (document.querySelector(`[class*="ProjectsCSS_background"]`) as HTMLElement)
-    if (el !== null) document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
-  }
-
-  useEffect(() => {
-    projectsBGHandler()
-    window.addEventListener('resize', projectsBGHandler);
-    return () => window.removeEventListener('resize', projectsBGHandler);
-  },[])
-
-  window.addEventListener('load', () => projectsBGHandler())
-
-  
-
+  const [ index, setIndex ] = useState(0)
   const [ showModal, setShowModal ] = useState(false)
-  const [ imageIndex, setImageIndex ] = useState(0)
-
-  window.onclick = function(e) {
-
-
-    let modalDiv = document.getElementById('modalBackground');
-
-    if (e.target === modalDiv) {
-      //modal.style.display = "none";
-      //console.log("ACAAA")
-      setShowModal(false)
-    }
-  }
-
 
   return (
     <div
@@ -331,15 +307,10 @@ function Projects() {
                                     onLoad={() => loadedUpdater(array.map(e => e.media).flat().indexOf(m))}
                                     alt=""
                                     src={m}
-                                    //onClick={() => setShowModal(true)}
-                                    //onClick={() => console.log("CLIEKEDC")}
                                     onClick={(e) => {
                                       e.preventDefault();
                                       setShowModal(true);
-                                      //console.log(e.target)
-                                      //console.dir(e)
-                                      //console.log(array.map(e => e.media).flat().indexOf(m))
-                                      setImageIndex(array.map(e => e.media).flat().indexOf(m))
+                                      setIndex(array.map(e => e.media).flat().indexOf(m))
                                     }}
                                   />
                                 </a>
@@ -411,7 +382,14 @@ function Projects() {
         </div>
       </div>
 
-      { showModal && <Modal images={array.map(e => e.media).flat()} imageIndex={imageIndex} setShowModal={setShowModal} /> }
+      {
+        showModal &&
+        <Modal
+          images={array.map(e => e.media).flat()}
+          index={index}
+          setShowModal={setShowModal}
+        />
+      }
 
     </div>
   )

@@ -1,5 +1,5 @@
 import { FormControl, MenuItem, Select } from '@mui/material/';
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import {
   food1, food2, food3, weatherify1, weatherify2, calculator1, calculator2,
@@ -17,17 +17,20 @@ function Projects() {
   const [ heightDev, setHeightDev ] = useState<number>(window.innerHeight)
   const [ widthDev, setWidthDev ] = useState<number>(window.innerWidth)
 
-  useEffect(() => {
-    const autoHideOnResize = () => {
-      let { innerHeight, innerWidth } = window
-      setHeightDev(innerHeight);
-      setWidthDev(innerWidth);
-    }
-    window.addEventListener('resize', autoHideOnResize);
-  },[])
+  // useEffect(() => {
+  //   const autoHideOnResize: any = () => {
+  //     let { innerHeight, innerWidth } = window
+  //     setHeightDev(innerHeight);
+  //     setWidthDev(innerWidth);
+  //   }
+  //   window.addEventListener('resize', autoHideOnResize);
+  //   //return () => window.removeEventListener('resize', autoHideOnResize);
+  // },[])
+
+  console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHHH")
 
   function useHorizontalScroll() {
-    const elRef = useRef<HTMLInputElement>(null);
+    const elRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
       const el:any = elRef.current;
       if (el) {
@@ -46,17 +49,14 @@ function Projects() {
     return elRef;
   }
 
-  useEffect(() => { // MOUSE GRAB & DRAG EFFECT ON MOUSE DEVICES
+  useEffect(() => { // MOUSE GRAB & DRAG HORIZONTAL
     const el = document.getElementById('sliderRollProjects');
     const children = document.querySelector('[class*="ProjectsCSS_scroll"]')
     const parent = document.querySelector('[class*="ProjectsCSS_background"]')
 
     if (el !== null && children !== null && parent !== null) {
       const mouseEnterOnScore = () => {
-        if (
-          children.clientWidth > parent.clientWidth ||
-          heightDev < 456
-        ) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
+        if (children.clientWidth > parent.clientWidth) el.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
         let pos = { left: 0, x: 0 };
 
         const mouseDownHandler = function (e: any) {
@@ -66,10 +66,7 @@ function Projects() {
             left: el.scrollLeft,
             x: e.clientX,
           }
-          if (
-            children.clientWidth > parent.clientWidth ||
-            heightDev < 456
-          ) {
+          if (children.clientWidth > parent.clientWidth) {
             el.addEventListener('mousemove', mouseMoveHandler)
             el.addEventListener('mouseup', mouseUpHandler)
           } else {
@@ -103,7 +100,8 @@ function Projects() {
 
       return () => el.removeEventListener("mouseenter", mouseEnterOnScore)
     }
-  }, [heightDev])
+  //}, [heightDev])
+  }, [])
 
   let [ projectChosen, setProjectChosen ] = useState(`All Projects`)
 
@@ -148,30 +146,53 @@ function Projects() {
 
   let linkBlocked = useRef(false)
 
-  useEffect(() => { // MOUSE GRAB & DRAG EFFECT ON MOUSE DEVICES
+
+
+  useEffect(() => { // MOUSE GRAB & DRAG VERTICAL
     const el = document.getElementById('sliderBoxYProjects');
+    const parent = document.querySelector('[class*="ProjectsCSS_background"]')
+
+
     if (el !== null) {
       const mouseEnterOnScoreY = () => {
         let pos = { top: 0, y: 0 };
+
+        if (parent !== null) {
+          console.log("parent.clientWidth", parent.clientHeight) // UPDATED VALUE // > 360
+        }
 
         const mouseDownHandlerY = function (e: any) {
           pos = {
             top: el.scrollTop,
             y: e.clientY,
           }
-          if (heightDev < 456) {
-            el.addEventListener('mousemove', mouseMoveHandlerY)
-            el.addEventListener('mouseup', mouseUpHandlerY)
-          } else {
-            el.removeEventListener('mousemove', mouseMoveHandlerY);
-            el.removeEventListener('mouseup', mouseUpHandlerY);
-            el.style.cursor = 'default';
+
+          if (parent !== null) {
+            if (parent.clientHeight < 360) { // > 372 START OVERFLOW === 372 - 12 = 360
+              console.log("ENTRO ACAAAAAAAAAAAAAAA")
+              el.addEventListener('mousemove', mouseMoveHandlerY)
+              el.addEventListener('mouseup', mouseUpHandlerY)
+              el.style.cursor = 'grab'
+            } else {
+              el.removeEventListener('mousemove', mouseMoveHandlerY);
+              el.removeEventListener('mouseup', mouseUpHandlerY);
+              el.style.cursor = 'default';
+            }
+
+            //  el.addEventListener('mousemove', mouseMoveHandlerY)
+            //  el.addEventListener('mouseup', mouseUpHandlerY)
+            //  //el.style.cursor = 'grab';
+
           }
+
+              
+
         }
 
         const mouseMoveHandlerY = function (e: any) { // HOW MUCH MOUSE HAS MOVED
           const dy = e.clientY - pos.y;
           el.scrollTop = pos.top - dy;
+          el.style.cursor = 'grabbing';
         }
 
         const mouseUpHandlerY = function () {
@@ -191,7 +212,8 @@ function Projects() {
 
       return () => el.removeEventListener("mouseenter", mouseEnterOnScoreY)
     }
-  }, [heightDev, widthDev])
+  //}, [heightDev, widthDev])
+  }, [])
 
   const timeoutProjects = useRef<ReturnType<typeof setTimeout>>();
   const autoHideProjects = () => {
@@ -199,14 +221,14 @@ function Projects() {
     clearTimeout(timeoutProjects.current)
   }
 
-  useEffect(() => {
-    let el = document.getElementById(`boxLower`)
-    if (heightDev > 523) {
-      if (el !== null && el.classList.length === 2) {
-        (document.getElementById(`buttonFlap`) as HTMLElement).click()
-      }
-    }
-  }, [heightDev])
+  // useEffect(() => {
+  //   let el = document.getElementById(`boxLower`)
+  //   if (heightDev > 523) {
+  //     if (el !== null && el.classList.length === 2) {
+  //       (document.getElementById(`buttonFlap`) as HTMLElement).click()
+  //     }
+  //   }
+  // }, [heightDev])
 
   const handleClickFlap = () => {
     clearTimeout(timeoutProjects.current)
@@ -234,25 +256,7 @@ function Projects() {
     }
   }
 
-  const projectsBGHandler: () => void = () => {
-    let el = (document.querySelector(`[class*="ProjectsCSS_background"]`) as HTMLElement)
-    if (el !== null) document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
-  }
-
-  useEffect(() => {
-    projectsBGHandler()
-    window.addEventListener('resize', projectsBGHandler);
-    return () => window.removeEventListener('resize', projectsBGHandler);
-  },[])
-
-  window.addEventListener('load', () => projectsBGHandler())
-
-  
-
-  
-
-  const [ imageIndex, setImageIndex ] = useState(0)
-
+  const [ index, setIndex ] = useState(0)
   const [ showModal, setShowModal ] = useState(false)
 
   return (
@@ -324,7 +328,7 @@ function Projects() {
                                     onClick={(e) => {
                                       e.preventDefault();
                                       setShowModal(true);
-                                      setImageIndex(array.map(e => e.media).flat().indexOf(m))
+                                      setIndex(array.map(e => e.media).flat().indexOf(m))
                                     }}
                                   />
                                 </a>
@@ -396,7 +400,14 @@ function Projects() {
         </div>
       </div>
 
-      { showModal && <Modal images={array.map(e => e.media).flat()} imageIndex={imageIndex} setShowModal={setShowModal} /> }
+      {
+        showModal &&
+        <Modal
+          images={array.map(e => e.media).flat()}
+          index={index}
+          setShowModal={setShowModal}
+        />
+      }
 
     </div>
   )

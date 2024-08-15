@@ -3,7 +3,7 @@
   position: fixed;
   z-index: 2002;
   height: 35px;
-  right: calc(20px + calc(var(--diff) * 1px)) !important;
+  right: calc(20px + calc(var(--diff) * 1px)) !important; /* MOVES WITH SCROLLBAR */
   bottom: 20px;
   border-radius: 4px;
 }
