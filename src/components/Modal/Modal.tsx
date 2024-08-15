@@ -1,13 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
 import css from './ModalCSS.module.css';
-//import ForwardIcon from '@mui/icons-material/Forward';
 import { Forward, Add, Remove, Close } from '@mui/icons-material/';
-//import AddIcon from '@mui/icons-material/Add';
-//import RemoveIcon from '@mui/icons-material/Remove';
-//import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
 
 function Modal({ images, imageIndex, setShowModal }: any) {
+
+  window.onclick = function(e) {
+    let modalDiv = document.getElementById('modalBackground');
+    if (e.target === modalDiv) setShowModal(false)
+  }
 
   const [ currentIndex, setCurrentIndex ] = useState(imageIndex)
 
@@ -154,52 +155,57 @@ function Modal({ images, imageIndex, setShowModal }: any) {
           </div>
 
       </div>
-      <div className={css.buttonsContainer}>
-        <Button
-          variant="contained"
-          className={css.button}
-          onClick={() => goLeftHandler()}
-        >
-          <Forward className={css.iconLeft}/>
-        </Button>
+      <div className={css.bottomBar}>
+        <div className={css.buttonsContainer}>
+          <div className={css.imageCounter}>
+            { currentIndex + 1 }/{ images.length }
+          </div>
+          <Button
+            variant="contained"
+            className={css.button}
+            onClick={() => goLeftHandler()}
+          >
+            <Forward className={css.iconLeft}/>
+          </Button>
 
-        <Button
-          variant="contained"
-          className={css.button}
-          onClick={() => goRightHandler()}
-        >
-          <Forward className={css.iconRight}/>
-        </Button>
+          <Button
+            variant="contained"
+            className={css.button}
+            onClick={() => goRightHandler()}
+          >
+            <Forward className={css.iconRight}/>
+          </Button>
 
-        <Button
-          variant="contained"
-          className={css.button}
-          onClick={() => zoomOut()}
-          disabled={ currentZoom.val === 1 ? true : false }
-        >
-          <Remove className={css.iconRight}/>
-        </Button>
+          <Button
+            variant="contained"
+            className={css.button}
+            onClick={() => zoomOut()}
+            disabled={ currentZoom.val === 1 ? true : false }
+          >
+            <Remove className={css.iconRight}/>
+          </Button>
 
-        <Button
-          variant="contained"
-          className={css.button}
-          onClick={() => zoomIn()}
-          disabled={ currentZoom.val === 8 ? true : false }
-        >
-          <Add className={css.iconRight}/>
-        </Button>
+          <Button
+            variant="contained"
+            className={css.button}
+            onClick={() => zoomIn()}
+            disabled={ currentZoom.val === 8 ? true : false }
+          >
+            <Add className={css.iconRight}/>
+          </Button>
 
-        <Button
-          variant="contained"
-          className={css.button}
-          onClick={() => setShowModal(false)}
-        >
-          <Close className={css.iconRight}/>
-        </Button>
-        <div>
-          {currentZoom.val.toFixed(1)}x
+          <Button
+            variant="contained"
+            className={css.button}
+            onClick={() => setShowModal(false)}
+          >
+            <Close className={css.iconRight}/>
+          </Button>
+          <div className={css.zoomContainer}>
+            { currentZoom.val.toFixed(1) }x
+          </div>
         </div>
-
+        
       </div>
     </div>
   )

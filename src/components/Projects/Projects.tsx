@@ -255,11 +255,6 @@ function Projects() {
 
   const [ showModal, setShowModal ] = useState(false)
 
-  window.onclick = function(e) {
-    let modalDiv = document.getElementById('modalBackground');
-    if (e.target === modalDiv) setShowModal(false)
-  }
-
   return (
     <div
       className={css.background}
