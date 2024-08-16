@@ -78,15 +78,105 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
         let divider = targetZoom + (targetZoom - 2) // dvdr
         let factor = divider === 0 ? 1 : 1 + (1 / divider)
 
+      //   console.log("OLD POSITION",
+      //     currentZoom.val === 1.5 && currentZoom.op === 'x' ? { x: 0, y: 0 } :
+      //     imgPo.current
+      // )
+
+        let oPos = currentZoom.val === 1.5 && currentZoom.op === 'x' ? { x: 0, y: 0 } : imgPo.current // oldPosition
+        console.log('oldPosition --->', oPos);
+
+        let oWid = ref.width // oldWidth
+        let oHei = ref.height // oldHeight
+
         if (currentZoom.val === 1) imgPo.current = { x: 0, y: 0 } // WHEN 1.0 SET POSITION TO 0, 0
         else if (currentZoom.val === 1.5 && currentZoom.op === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 to 1.5 SET POSITION TO CENTER OF IMAGE
         else imgPo.current = { x: operation[currentZoom.op](imgPo.current.x, factor), y: operation[currentZoom.op](imgPo.current.y, factor) } // ELSE DO TARGET CALC
 
-        ctx.drawImage(
-          image.current,
-          imgPo.current.x, imgPo.current.y,
-          ref.width * currentZoom.val, ref.height * currentZoom.val
-        );
+        //console.log("NEW POSITION", imgPo.current)
+
+        let nPos = imgPo.current // newPosition
+        console.log('newPosition --->', nPos);
+
+        let nWid = ref.width * currentZoom.val  // newWidth
+        let nHei = ref.height * currentZoom.val // newHeight
+
+        //let qqq: any
+        let offset = 100
+        let perX = nPos.x / offset
+        let perY = nPos.y / offset
+        
+        let perW = nWid / offset // percentageWidht
+        let perH = nHei / offset // percentageWidht
+
+        let currX = oPos.x // currentXPosition
+        let currY = oPos.y // currentYPosition
+
+        let currW = oWid // currenWidth
+        let currH = oHei // currentHeight
+
+        let render = () => {
+
+          
+
+          if (ctx !== null && currentZoom.val !== 1) {
+
+            ctx.drawImage(
+              image.current,
+              currX, currY,
+              currW, currH
+            );
+
+            currX = currX + perX
+            currY = currY + perY
+
+            currW = currW + perW
+            currH = currH + perH
+
+          }
+            
+          console.log('currX --->', currX);
+
+          //if(!paused.current) requestAnimationFrame(render);
+          if(currX >= nPos.x && currentZoom.val !== 1) {
+            //qqq = requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
+            requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
+          }
+          // else {
+          //   cancelAnimationFrame(qqq)
+          // }
+          // else {
+          //   ctx.drawImage(
+          //     image.current,
+          //     nP.x, nP.y,
+          //     ref.width * currentZoom.val, ref.height * currentZoom.val
+          //   );
+          // }
+
+          //myReq = requestAnimationFrame(step);
+          // the cancellation uses the last requestId
+          //cancelAnimationFrame(myReq);
+
+        
+        }
+
+        console.log("ANIMATION START")
+
+        render()
+
+        console.log("ANIMATION STOPS")
+
+        // ctx.drawImage(
+        //   image.current,
+        //   nP.x, nP.y,
+        //   ref.width * currentZoom.val, ref.height * currentZoom.val
+        // );
+
+        // ctx.drawImage(
+        //   image.current,
+        //   imgPo.current.x, imgPo.current.y,
+        //   ref.width * currentZoom.val, ref.height * currentZoom.val
+        // );
 
         // **  // --> //            LESS --> MORE            /or/            MORE --> LESS            //
         // cZ  // --> // tZ     tZ    === dvdr // 1+(1/dvdr) /or/ tZ     tZ    === dvdr // 1+(1/dvdr) //
