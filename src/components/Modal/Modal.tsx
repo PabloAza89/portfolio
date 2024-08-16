@@ -64,6 +64,7 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
   }, [currentIndex, images])
 
   useEffect(() => { // ZOOM CHANGED
+    console.log("ENTRO ACA 1")
     let operation: operationI = {
       'x': function(a: number, b: number) { return a * b },
       '/': function(a: number, b: number) { return a / b }
@@ -83,11 +84,14 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
       //     imgPo.current
       // )
 
+        //let oPos = currentZoom.val === 1.5 && currentZoom.op === 'x' ? { x: 0, y: 0 } : imgPo.current // oldPosition
         let oPos = currentZoom.val === 1.5 && currentZoom.op === 'x' ? { x: 0, y: 0 } : imgPo.current // oldPosition
         console.log('oldPosition --->', oPos);
 
-        let oWid = ref.width // oldWidth
-        let oHei = ref.height // oldHeight
+        let oWid = currentZoom.val === 1.5 && currentZoom.op === 'x' ? 1920 : ref.width // oldWidth
+        //let oWid = ref.width // oldWidth
+        //console.log('oWid --->', oWid);
+        let oHei = currentZoom.val === 1.5 && currentZoom.op === 'x' ? 1040 : ref.height // oldHeight
 
         if (currentZoom.val === 1) imgPo.current = { x: 0, y: 0 } // WHEN 1.0 SET POSITION TO 0, 0
         else if (currentZoom.val === 1.5 && currentZoom.op === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 to 1.5 SET POSITION TO CENTER OF IMAGE
@@ -96,10 +100,12 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
         //console.log("NEW POSITION", imgPo.current)
 
         let nPos = imgPo.current // newPosition
-        console.log('newPosition --->', nPos);
+        //console.log('newPosition --->', nPos);
 
-        let nWid = ref.width * currentZoom.val  // newWidth
-        let nHei = ref.height * currentZoom.val // newHeight
+        // let nWid = ref.width * currentZoom.val  // newWidth
+        // let nHei = ref.height * currentZoom.val // newHeight
+        let nWid = 960 // newWidth
+        let nHei = 520 // newHeight
 
         //let qqq: any
         let offset = 100
@@ -107,11 +113,15 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
         let perY = nPos.y / offset
         
         let perW = nWid / offset // percentageWidht
-        let perH = nHei / offset // percentageWidht
+        let perH = nHei / offset // percentageHeight
 
-        let currX = oPos.x // currentXPosition
-        let currY = oPos.y // currentYPosition
+        // let currX = oPos.x // currentXPosition
+        // let currY = oPos.y // currentYPosition
+        let currX = 0 // currentXPosition
+        let currY = 0 // currentYPosition
 
+        // let currW = oWid // currenWidth
+        // let currH = oHei // currentHeight
         let currW = oWid // currenWidth
         let currH = oHei // currentHeight
 
@@ -121,10 +131,19 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
 
           if (ctx !== null && currentZoom.val !== 1) {
 
+            console.log('currX --->', currX);
+            console.log('currW --->', currW);
+
             ctx.drawImage(
               image.current,
-              currX, currY,
+              //ctx.canvas,
+              //0, 0, ref.width, ref.height,
+              //currX, currY, // imgPo
+              operation[currentZoom.op](currX, factor), operation[currentZoom.op](currY, factor),
               currW, currH
+              // nPos.x, nPos.y,
+              // nWid, nHei
+              //ref.width * currentZoom.val, ref.height * currentZoom.val
             );
 
             currX = currX + perX
@@ -135,11 +154,12 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
 
           }
             
-          console.log('currX --->', currX);
+          
 
           //if(!paused.current) requestAnimationFrame(render);
           if(currX >= nPos.x && currentZoom.val !== 1) {
-            //qqq = requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
+            //qqq = requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS+
+            console.log("REDERED")
             requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
           }
           // else {
@@ -172,10 +192,13 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
         //   ref.width * currentZoom.val, ref.height * currentZoom.val
         // );
 
-        // ctx.drawImage(
+        console.log("ENTRO ACA 2")
+
+        // ctx.drawImage( // WORKING
         //   image.current,
         //   imgPo.current.x, imgPo.current.y,
         //   ref.width * currentZoom.val, ref.height * currentZoom.val
+        //   //1920, 1040
         // );
 
         // **  // --> //            LESS --> MORE            /or/            MORE --> LESS            //
@@ -224,6 +247,7 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
               ref.width * currentZoom.val, ref.height * currentZoom.val
             );
             imgPo.current = { x: targetXPosition, y: targetYPosition }
+console.log('imgPo.current --->', imgPo.current);
           }
         }
       }
