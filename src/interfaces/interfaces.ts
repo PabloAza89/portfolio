@@ -42,3 +42,7 @@ export interface ModalI {
   setShowModal?: Dispatch<SetStateAction<boolean>>,
   controlsOutside?: boolean,
 }
+
+export interface operationI {
+  [key: string] : (a: number, b: number) => number,
+}

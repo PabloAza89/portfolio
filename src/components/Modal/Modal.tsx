@@ -2,7 +2,7 @@ import { ReactElement, useEffect, useState, useRef, ReactNode } from 'react';
 import css from './ModalCSS.module.css';
 import { Forward, Add, Remove, Close } from '@mui/icons-material/';
 import { Button } from '@mui/material';
-import { ModalI } from '../../interfaces/interfaces';
+import { ModalI, operationI } from '../../interfaces/interfaces';
 
 function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactElement {
 
@@ -12,20 +12,16 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
   })
 
   window.onmousedown = function(e) {
-    if (setShowModal !== undefined) {
-      let modalDiv = document.getElementById('modalBackground');
-      if (e.target === modalDiv) qq.current.start =  true
-      else qq.current.start =  false
-    }
+    let modalDiv = document.getElementById('modalBackground');
+    if (e.target === modalDiv) qq.current.start =  true
+    else qq.current.start =  false
   }
 
   window.onmouseup = function(e) {
-    if (setShowModal !== undefined) {
-      let modalDiv = document.getElementById('modalBackground');
-      if (e.target === modalDiv) qq.current.end =  true
-      else qq.current.end =  false
-      if (qq.current.start && qq.current.end) setShowModal(false)
-    }
+    let modalDiv = document.getElementById('modalBackground');
+    if (e.target === modalDiv) qq.current.end =  true
+    else qq.current.end =  false
+    if (setShowModal !== undefined && qq.current.start && qq.current.end) setShowModal(false)
   }
 
   const [ currentIndex, setCurrentIndex ] = useState(index)
@@ -56,7 +52,11 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
 
           if (ctx !== null) {
             ctx.imageSmoothingEnabled = false;
-            ctx.drawImage(image.current, 0, 0, ref.width, ref.height) // FIRST IMAGE DRAW
+            ctx.drawImage(
+              image.current,
+              0, 0,
+              ref.width, ref.height
+            ); // FIRST IMAGE DRAW
           }
         }
       }
@@ -64,9 +64,9 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
   }, [currentIndex, images])
 
   useEffect(() => { // ZOOM CHANGED
-    let operation:any = {
-      'x': function(a: any, b: any){ return a*b},
-      '/': function(a: any, b: any){ return a/b}
+    let operation: operationI = {
+      'x': function(a: number, b: number) { return a * b },
+      '/': function(a: number, b: number) { return a / b }
     }
 
     if (refCanvas.current !== null) {
@@ -82,9 +82,10 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
         else if (currentZoom.val === 1.5 && currentZoom.op === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 to 1.5 SET POSITION TO CENTER OF IMAGE
         else imgPo.current = { x: operation[currentZoom.op](imgPo.current.x, factor), y: operation[currentZoom.op](imgPo.current.y, factor) } // ELSE DO TARGET CALC
 
-        ctx.drawImage(image.current,
-          0, 0, ref.width, ref.height,
-          imgPo.current.x, imgPo.current.y, ref.width * currentZoom.val, ref.height * currentZoom.val
+        ctx.drawImage(
+          image.current,
+          imgPo.current.x, imgPo.current.y,
+          ref.width * currentZoom.val, ref.height * currentZoom.val
         );
 
         // **  // --> //            LESS --> MORE            /or/            MORE --> LESS            //
@@ -127,7 +128,11 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
             (targetXPosition < 0 && targetXPosition > initImgPos.current.x * factor) &&
             (targetYPosition < 0 && targetYPosition > initImgPos.current.y * factor)
           ) {
-            ctx.drawImage(image.current, targetXPosition, targetYPosition, ref.width * currentZoom.val, ref.height * currentZoom.val);
+            ctx.drawImage(
+              image.current,
+              targetXPosition, targetYPosition,
+              ref.width * currentZoom.val, ref.height * currentZoom.val
+            );
             imgPo.current = { x: targetXPosition, y: targetYPosition }
           }
         }

@@ -44,7 +44,7 @@ function Settings() {
     }
   }, [])
 
-  // EDITING //
+  // TO AVOID RE-RENDER ON PROJECTS.TSX //
 
   const projectsBGHandler: () => void = () => {
     let el = (document.querySelector(`[class*="ProjectsCSS_background"]`) as HTMLElement)
@@ -59,7 +59,7 @@ function Settings() {
 
   window.addEventListener('load', () => projectsBGHandler())
 
-  // EDITING //
+  // TO AVOID RE-RENDER ON PROJECTS.TSX //
 
   return (
     <div style={{ "--scrollwidth": overflowListener } as CSSProperties} className={css.background}>

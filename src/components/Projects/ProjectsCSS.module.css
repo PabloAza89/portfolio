@@ -251,7 +251,7 @@
 }
 
 .boxLowerContainer {
-  background: darkred; /* DEV */
+  /* background: darkred; */ /* DEV */
   width: calv(100vw - 12px);
   display: flex;
   position: relative;

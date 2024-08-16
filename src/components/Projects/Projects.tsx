@@ -42,7 +42,6 @@ function Projects() {
 
     if (scrollTarget !== null && elX !== null && elY !== null && bg !== null) {
       const mouseEnter = () => {
-        console.log("ENTERRRRRRRR")
         if (scrollTarget.clientWidth > bg.clientWidth || bg.clientHeight < 360) elX.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
         let pos = {
           left: 0, x: 0, // X
