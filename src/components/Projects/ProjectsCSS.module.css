@@ -247,7 +247,6 @@
 }
 
 .boxLowerToggle {
-  /* transform: translateY(-100%) !important */
   transform: translateY(calc(-100% + 4px)) !important
 }
 
@@ -257,7 +256,6 @@
   display: flex;
   position: relative;
   justify-content: center;
-  /* padding-top: 4px; */
   margin-top: 4px;
 }
 
@@ -364,7 +362,6 @@ and (height < 524px) {
     width: calc(100vw - 12px);
     bottom: 10px;
     transform: translateY(calc(100% + 4px));
-    /* transform: translateY(100%); */
   }
   .boxLower {
     width: min-content;

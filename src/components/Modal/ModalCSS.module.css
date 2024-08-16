@@ -1,21 +1,20 @@
 .modalBackground {
-  background: green; /* DEV */
+  /* background: green; */ /* DEV */
   position: fixed;
   left: 0;
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,0.4);
-  z-index: 20000; /* MORE THAN APP GRAY STRIPS */
+  background: rgba(0,0,0,0.4); /* AROUND IMAGE */
+  z-index: 1000000; /* MORE THAN APP GRAY STRIPS */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .innerModal {
-  background: gray; /* DEV */
-  /* background-color: #bebaba; */
-  /* background-color: #5c5c5c; */
+  /* background: orange; */ /* DEV */
+  background: gray;
   display: flex;
   position: relative;
   width: 80vw !important;
@@ -31,28 +30,27 @@
 }
 
 .bottomBar {
+  /* background: green; */ /* DEV */
   display: flex;
   position: absolute;
-  background: green; /* DEV */
   left: 0px;
   bottom: 0px;
   width: 100% !important;
-  /* background: rgba(0, 0, 0, 0.4); */
+  background: rgba(0, 0, 0, 0.4);
   justify-content: center;
 }
 
 .buttonsContainer {
   display: flex;
   position: relative;
-  background: red; /* DEV */
+  /* background: red; */ /* DEV */
 }
 
 .zoomContainer {
-  background: blue; /* DEV */
+  /* background: blue; */ /* DEV */
   width: 50px;
   align-items: center;
   display: flex;
-  /* position: relative; */
   position: absolute;
   right: -55px;
   color: #fff;
@@ -60,26 +58,24 @@
 }
 
 .imageCounter {
-  background: blue; /* DEV */
+  /* background: blue; */ /* DEV */
   width: 70px;
   align-items: center;
   display: flex;
-  /* position: relative; */
   position: absolute;
   left: -75px;
-  /* margin-left: 5px; */
   color: #fff;
   height: 49px;
   justify-content: flex-end;
 }
 
 .button {
+  /* background: red !important; */ /* DEV */
   display: flex;
   position: fixed;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background: red !important; */ /* DEV */
   padding: 0vw !important;
   min-width: 0vh !important;
   width: 35px !important;
@@ -87,7 +83,7 @@
   margin: 7px 3.5px !important;
 }
 
-.iconLeft {
+.icon {
   display: flex;
   position: absolute;
   flex-direction: column;
@@ -97,14 +93,7 @@
   height: 23px !important;
 }
 
-.iconRight {
-  display: flex;
-  position: absolute;
-  flex-direction: column;
-  transform: rotate(180deg);
-  min-width: 0vh;
-  width: 23px !important;
-  height: 23px !important;
+.right {
   transform: scaleX(1);
 }
 

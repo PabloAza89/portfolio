@@ -14,8 +14,6 @@ function Projects() {
   const english = useSelector((state: { english:boolean }) => state.english)
   const [scrollSpeed, setScrollSpeed] = useState<any>(30)
 
-  console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-
   function useHorizontalScroll() {
     const elRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -40,16 +38,12 @@ function Projects() {
     const scrollTarget = document.getElementById('scrollTarget');
     const elX = document.getElementById('sliderRollProjects');
     const elY = document.getElementById('sliderBoxYProjects');
-    const children = document.querySelector('[class*="ProjectsCSS_scroll"]')
-    const parent = document.querySelector('[class*="ProjectsCSS_background"]')
+    const bg = document.querySelector('[class*="ProjectsCSS_background"]')
 
-    if (
-      scrollTarget !== null && elX !== null && elY !== null
-      && children !== null && parent !== null
-    ) {
+    if (scrollTarget !== null && elX !== null && elY !== null && bg !== null) {
       const mouseEnter = () => {
         console.log("ENTERRRRRRRR")
-        if (children.clientWidth > parent.clientWidth || parent.clientHeight < 360) elX.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
+        if (scrollTarget.clientWidth > bg.clientWidth || bg.clientHeight < 360) elX.style.cursor = 'grab'; // GRAB WHEN ENTER (MOUSEENTER)
         let pos = {
           left: 0, x: 0, // X
           top: 0, y: 0 // Y
@@ -64,7 +58,7 @@ function Projects() {
             top: elY.scrollTop,   // Y
             y: e.clientY,         // Y
           }
-          if (children.clientWidth > parent.clientWidth || parent.clientHeight < 360) {
+          if (scrollTarget.clientWidth > bg.clientWidth || bg.clientHeight < 360) {
             elX.addEventListener('mousemove', mouseMoveHandler)
             elX.addEventListener('mouseup', mouseUpHandler)
           } else {

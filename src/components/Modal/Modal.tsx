@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState, useRef, ReactNode, useMemo, useLayoutEffect } from 'react';
+import { ReactElement, useEffect, useState, useRef, ReactNode } from 'react';
 import css from './ModalCSS.module.css';
 import { Forward, Add, Remove, Close } from '@mui/icons-material/';
 import { Button } from '@mui/material';
@@ -6,38 +6,25 @@ import { ModalI } from '../../interfaces/interfaces';
 
 function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactElement {
 
-  // useMemo(() => {
-  //   //filterTodos(todos, tab)
-  //   console.log(images, index)
-  // },[images, index]);
+  let qq = useRef({
+    start: false, // CLICK BEGINS ON BG MODAL
+    end: false    // CLICK ENDS ON BG MODAL
+  })
 
-  const myValue = useMemo(() => {
-    return index;
-   },[index]);
-
-   console.log('myValue --->', myValue);
-
-  // useLayoutEffect(() => {
-  //   console.log("imagesimagesimages", images)
-  //   console.log("indexindexindex", index)
-
-  // }, [images, index])
-
-  // let qq = images
-  // let ww = index
-
-  // console.log("imagesimagesimages", qq)
-  // console.log("indexindexindex", ww)
-
-  // useMemo(() => {
-  //   //filterTodos(todos, tab)
-  //   console.log(images, index)
-  // },[images, index, setShowModal, controlsOutside]);
-
-  window.onclick = function(e) {
+  window.onmousedown = function(e) {
     if (setShowModal !== undefined) {
       let modalDiv = document.getElementById('modalBackground');
-      if (e.target === modalDiv) setShowModal(false)
+      if (e.target === modalDiv) qq.current.start =  true
+      else qq.current.start =  false
+    }
+  }
+
+  window.onmouseup = function(e) {
+    if (setShowModal !== undefined) {
+      let modalDiv = document.getElementById('modalBackground');
+      if (e.target === modalDiv) qq.current.end =  true
+      else qq.current.end =  false
+      if (qq.current.start && qq.current.end) setShowModal(false)
     }
   }
 
@@ -47,22 +34,13 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
 
   let refCanvas = useRef<HTMLCanvasElement>(null)
   let image = useRef(new Image())
-  //let image = useRef()
   let allowMove = useRef(false)
   let arbPos = useRef({ x: 0, y: 0 }) // ARBITRARY POSITION
   let initImgPos = useRef({ x: 0, y: 0 }) // INITIAL IMAGE POSITION
   let imgPo = useRef({ x: 0, y: 0 }) // IMAGE POSITION
 
   useEffect(() => { // LOAD NEW IMAGE
-    console.log("AAAAAAAAAAAAAAA")
-
-    
-
     if (images !== undefined && currentIndex !== undefined) {
-      //console.log("inner AAAAAAAAAAAAAAA")
-
-      //image.current = new Image()
-
       image.current.src = images[currentIndex]
       image.current.onload = function() {
         if (refCanvas.current !== null) { //
@@ -86,7 +64,6 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
   }, [currentIndex, images])
 
   useEffect(() => { // ZOOM CHANGED
-    console.log("BBBBBBBBBBBBBBB")
     let operation:any = {
       'x': function(a: any, b: any){ return a*b},
       '/': function(a: any, b: any){ return a/b}
@@ -133,7 +110,6 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
   }
 
   let mouseMove = (e:any) => {
-    //console.log("CCCCCCCCCCCCCCCCCCCCCC")
     if (allowMove.current && currentZoom.val !== 1) {
       if (refCanvas.current !== null) {
         let ref = refCanvas.current
@@ -194,7 +170,7 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
           className={css.button}
           onClick={() => goLeftHandler()}
         >
-          <Forward className={css.iconLeft}/>
+          <Forward className={css.icon}/>
         </Button>
 
         <Button
@@ -202,7 +178,7 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
           className={css.button}
           onClick={() => goRightHandler()}
         >
-          <Forward className={css.iconRight}/>
+          <Forward className={`${css.icon} ${css.right}`}/>
         </Button>
 
         <Button
@@ -211,7 +187,7 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
           onClick={() => zoomOut()}
           disabled={ currentZoom.val === 1 ? true : false }
         >
-          <Remove className={css.iconRight}/>
+          <Remove className={`${css.icon} ${css.right}`}/>
         </Button>
 
         <Button
@@ -220,7 +196,7 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
           onClick={() => zoomIn()}
           disabled={ currentZoom.val === 8 ? true : false }
         >
-          <Add className={css.iconRight}/>
+          <Add className={`${css.icon} ${css.right}`}/>
         </Button>
 
         <Button
@@ -228,7 +204,7 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
           className={css.button}
           onClick={() => { if (setShowModal !== undefined) setShowModal(false)} }
         >
-          <Close className={css.iconRight}/>
+          <Close className={`${css.icon} ${css.right}`}/>
         </Button>
         <div className={css.zoomContainer}>
           { currentZoom.val.toFixed(1) }x
@@ -245,15 +221,15 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
         id={`innerModal`}
         className={css.innerModal}
       >
-          <canvas
-            id={`canvasImage`}
-            ref={refCanvas}
-            className={css.canvasImage}
-            onMouseDown={(e) => mouseDown(e)}
-            onMouseUp={(e) => mouseUp(e)}
-            onMouseMove={(e) => mouseMove(e)}
-          />
-          { !controlsOutside && controls }
+        <canvas
+          id={`canvasImage`}
+          ref={refCanvas}
+          className={css.canvasImage}
+          onMouseDown={(e) => mouseDown(e)}
+          onMouseUp={(e) => mouseUp(e)}
+          onMouseMove={(e) => mouseMove(e)}
+        />
+        { !controlsOutside && controls }
       </div>
       { controlsOutside && controls }
     </div>
