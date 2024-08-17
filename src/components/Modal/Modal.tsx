@@ -89,6 +89,7 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
         let oldPos =
           currentZoom.val === 1.5 && currentZoom.op === 'x' ? { x: 0, y: 0 } :
           currentZoom.val === 2 && currentZoom.op === 'x' ? { x: 0, y: 0 } :
+          currentZoom.val === 2.5 && currentZoom.op === 'x' ? { x: 0, y: 0 } :
           { x: -480, y: -260 } // oldPosition
         console.log('oldPosition --->', oldPos);
 
@@ -110,10 +111,12 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
         let newWidth = 
           currentZoom.val === 1.5 ? 960 : // OK!
           currentZoom.val === 2 ? 1920 : // 1440 maso // 1280 peor // 1920 OK PERO MUCHO ZOOM
+          currentZoom.val === 2.5 ? 2880 : // 1440 maso // 1280 peor // 1920 OK PERO MUCHO ZOOM
           1440
         let newHeight =
           currentZoom.val === 1.5 ? 520 : // OK!
           currentZoom.val === 2 ? 1040 : // 780 maso // 953.33 peor // 1040 OK PERO MUCHO ZOOM
+          currentZoom.val === 2.5 ? 1560 : // 1440 maso // 1280 peor // 1920 OK PERO MUCHO ZOOM
           780 // newHeight
         //  let newWidth = 960 // newWidth
         //  let newHeight = 520 // newHeight
@@ -143,28 +146,32 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
         let eachFrameWidth =
           currentZoom.val === 1.5 ? 960 / offset : // eachFrameWidthidht
           currentZoom.val === 2 ? 960 / offset :
-          newWidth / offset
+          960 / offset
         let eachFrameHeight =
           currentZoom.val === 1.5 ? 520 / offset : // eachFrameHeighteight
           currentZoom.val === 2 ? 520 / offset : // eachFrameHeighteight
-          newHeight / offset
+          520 / offset
 
         let currPosX =
           currentZoom.val === 1.5 ? 0 :
           currentZoom.val === 2 ? -480 : // -480no // -240maso // 0no // 120+a la der
+          currentZoom.val === 2.5 ? -960 : // -480no // -240maso // 0no // 120+a la der
            -480 // currentXPosition
         let currPosY =
           currentZoom.val === 1.5 ? 0 :
           currentZoom.val === 2 ? -260 : // -260no // -130maso // 0no // 65+a la der
+          currentZoom.val === 2.5 ? -520 : // -480no // -240maso // 0no // 120+a la der
            -260 // currentYPosition
 
         let currentWidth =
           currentZoom.val === 1.5 ? 1920 :
           currentZoom.val === 2 ? 2880 :
+          currentZoom.val === 2.5 ? 3840 :
           2880 // currenewWidthth
         let currentHeight =
           currentZoom.val === 1.5 ? 1040 :
           currentZoom.val === 2 ? 1560 :
+          currentZoom.val === 2.5 ? 2080 :
           1560 // currentHeighteight
 
         let render = () => {
@@ -199,6 +206,10 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
             requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
           }
           else if(currPosX >= -960 && currentZoom.val === 2) {
+            //console.log("RENDERED")
+            requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
+          }
+          else if(currPosX >= -1440 && currentZoom.val === 2.5) {
             //console.log("RENDERED")
             requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
           }
