@@ -77,47 +77,52 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
       if (ctx !== null) {
         let targetZoom = currentZoom.op === 'x' ? currentZoom.val - 0.5 : currentZoom.val
         let divider = targetZoom + (targetZoom - 2) // dvdr
-console.log('divider --->', divider);
+//console.log('divider --->', divider);
         let factor = divider === 0 ? 1 : 1 + (1 / divider)
-//console.log('factor --->', factor);
+console.log('factor --->', factor);
 
-        // let oldPosX = -480 * divider
-        // let oldPosY = -260 * divider
+        // let basePosX = -480 * divider
+        // let basePosY = -260 * divider
 
         let refX = imgPo.current.x
         let refY = imgPo.current.y
         
-        let oldPosX = currentZoom.val === 1.5 ? 0 : imgPo.current.x
-        let oldPosY = currentZoom.val === 1.5 ? 0 : imgPo.current.y
+        let basePosX = currentZoom.val === 1.5 ? 0 : imgPo.current.x // <-- RETRIEVES BASE POSITION
+        let basePosY = currentZoom.val === 1.5 ? 0 : imgPo.current.y // <-- RETRIEVES BASE POSITION
 
-        console.log("imgPo.current", imgPo.current)
+        //console.log("imgPo.current", imgPo.current)
 
-        let oldWidth = (ref.width / 2) * (divider + 2) // oldWidth
-        let oldHeight = (ref.height / 2) * (divider + 2) // oldHeight
+        let baseWidth = (ref.width / 2) * (divider + 2) // baseWidth
+        let baseHeight = (ref.height / 2) * (divider + 2) // baseHeight
 
         if (currentZoom.val === 1) imgPo.current = { x: 0, y: 0 } // WHEN 1.0 SET POSITION TO 0, 0
         else if (currentZoom.val === 1.5 && currentZoom.op === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 to 1.5 SET POSITION TO CENTER OF IMAGE
         else imgPo.current = { x: operation[currentZoom.op](imgPo.current.x, factor), y: operation[currentZoom.op](imgPo.current.y, factor) } // ELSE DO TARGET CALC
 
-        
+        let targetPositionX = imgPo.current.x // <-- RETRIEVES TARGET POSITION (UPDATED VALUE)
+        let targetPositionY = imgPo.current.y // <-- RETRIEVES TARGET POSITION (UPDATED VALUE)
 
-        let offset = 100
-        let eachFramePosX = -480 / offset
-        let eachFramePosY = -260 / offset
+        console.log("imgPo.current.x", imgPo.current.x)
 
-        let eachFrameWidth =  960 / offset
-        let eachFrameHeight = 520 / offset
+        let offset = 1000
+        // let eachFramePosX = -480 / offset // FINAL DESTINATION
+        // let eachFramePosY = -260 / offset // FINAL DESTINATION
+        let eachFramePosX = (targetPositionX - basePosX) / offset // FINAL DESTINATION
+        let eachFramePosY = (targetPositionY - basePosY) / offset // FINAL DESTINATION
 
-        let currPosX = oldPosX
-        let currPosY = oldPosY
+        let eachFrameWidth = 960 / offset // INCREASE IN 960 IMAGE WIDTH EACH TIME
+        let eachFrameHeight = 520 / offset // INCREASE IN 520 IMAGE HEIGHT EACH TIME
 
-        let currentWidth = oldWidth
-        let currentHeight = oldHeight
+        let currPosX = basePosX
+        let currPosY = basePosY
+
+        let currentWidth = baseWidth
+        let currentHeight = baseHeight
         let render = () => {
           if (ctx !== null && currentZoom.val !== 1) {
             console.log('currPosX --->', currPosX);
             // console.log('currPosY --->', currPosY);
-            // console.log('currentWidth --->', currentWidth);
+            console.log('currentWidth --->', currentWidth);
 
             ctx.drawImage(
               image.current,
@@ -125,8 +130,14 @@ console.log('divider --->', divider);
               currentWidth, currentHeight
             );
 
-            currPosX = currPosX + eachFramePosX // UPDATE VALUES
-            currPosY = currPosY + eachFramePosY // UPDATE VALUES
+            currPosX =
+              currentZoom.val === 1.5 ? currPosX + eachFramePosX : // UPDATE VALUES
+              currentZoom.val === 2 ? currPosX + eachFramePosX :
+              currPosX + eachFramePosX
+            currPosY =
+              currentZoom.val === 1.5 ? currPosY + eachFramePosY : // UPDATE VALUES
+              currentZoom.val === 2 ? currPosY + eachFramePosY :
+              currPosY + eachFramePosY
 
             currentWidth = currentWidth + eachFrameWidth // UPDATE VALUES
             currentHeight = currentHeight + eachFrameHeight // UPDATE VALUES
@@ -134,7 +145,11 @@ console.log('divider --->', divider);
 
           //          x1   x2  x3
           // center -480 -960 1440
-          if (currPosX >= -480 * (divider + 1) && currentZoom.val !== 1) requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
+          // CONTINUE HERE
+          if (currentWidth <= (1920 * currentZoom.val) && currentZoom.val !== 1) requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
+          // if (currentWidth <= 2880 && currentZoom.val === 1.5) requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
+          // else if (currentWidth <= 3840 && currentZoom.val === 2) requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
+          // else if (currentWidth <= 4800 && currentZoom.val === 2.5) requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
         }
 
         //console.log("ANIMATION START")
