@@ -2,31 +2,34 @@ import { ReactElement, useEffect, useState, useRef, ReactNode } from 'react';
 import css from './ModalCSS.module.css';
 import { Forward, Add, Remove, Close } from '@mui/icons-material/';
 import { Button } from '@mui/material';
-import { ModalI, operationI } from '../../interfaces/interfaces';
+import { ModalI, operationI, comparisonI } from '../../interfaces/interfaces';
 
 function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactElement {
 
-  let qq = useRef({
+  let clickOnBG = useRef({ // CLICK ON BACKGROUND MODAL
     start: false, // CLICK BEGINS ON BG MODAL
     end: false    // CLICK ENDS ON BG MODAL
   })
 
   window.onmousedown = function(e) {
     let modalDiv = document.getElementById('modalBackground');
-    if (e.target === modalDiv) qq.current.start =  true
-    else qq.current.start =  false
+    if (e.target === modalDiv) clickOnBG.current.start =  true
+    else clickOnBG.current.start =  false
   }
 
   window.onmouseup = function(e) {
     let modalDiv = document.getElementById('modalBackground');
-    if (e.target === modalDiv) qq.current.end =  true
-    else qq.current.end =  false
-    if (setShowModal !== undefined && qq.current.start && qq.current.end) setShowModal(false)
+    if (e.target === modalDiv) clickOnBG.current.end =  true
+    else clickOnBG.current.end =  false
+    if (setShowModal !== undefined && clickOnBG.current.start && clickOnBG.current.end) setShowModal(false)
   }
 
   const [ currentIndex, setCurrentIndex ] = useState(index)
 
-  const [ currentZoom, setCurrentZoom ] = useState({ val: 1, op: 'x' }) // (cZ)
+  // (cZ) // mORd = multiplication or divition // aORs = addition OR substraction // less OR more // baseWidth
+  const [ currentZoom, setCurrentZoom ] = useState({
+    val: 1, mORd: 'x', aORs: '+', lORm: '<=', bW: 2
+  })
 
   let refCanvas = useRef<HTMLCanvasElement>(null)
   let image = useRef(new Image())
@@ -48,7 +51,8 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
           // e.g.:               x: 480             y: 260               // (1920 x 1040)
           initImgPos.current = { x: ref.width / -4, y: ref.height / -4 }
 
-          imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y }
+          //imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y }
+          imgPo.current = { x: 0, y: 0 }
 
           if (ctx !== null) {
             ctx.imageSmoothingEnabled = false;
@@ -64,10 +68,16 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
   }, [currentIndex, images])
 
   useEffect(() => { // ZOOM CHANGED
-    //console.log("ENTRO ACA 1")
-    let operation: operationI = {
+    const operation: operationI = {
       'x': function(a: number, b: number) { return a * b },
-      '/': function(a: number, b: number) { return a / b }
+      '/': function(a: number, b: number) { return a / b },
+      '+': function(a: number, b: number) { return a + b },
+      '-': function(a: number, b: number) { return a - b }
+    }
+
+    const comparison: comparisonI = {
+      '<=': function(a: number, b: number) { return a <= b },
+      '>=': function(a: number, b: number) { return a >= b }
     }
 
     if (refCanvas.current !== null) {
@@ -75,97 +85,69 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
       let ctx = ref.getContext("2d");
 
       if (ctx !== null) {
-        let targetZoom = currentZoom.op === 'x' ? currentZoom.val - 0.5 : currentZoom.val
+        let targetZoom = currentZoom.mORd === 'x' ? currentZoom.val - 0.5 : currentZoom.val
         let divider = targetZoom + (targetZoom - 2) // dvdr
-        let factor = divider === 0 ? 1 : 1 + (1 / divider)
-        console.log('factor --->', factor);
+        let factor =
+          divider === 0 ? 1 :
+          1 + (1 / divider)
 
-        // let basePosX = -480 * divider
-        // let basePosY = -260 * divider
+        //console.log("divider", divider)
+        console.log("factor", factor)
 
-        //let basePosX = currentZoom.val === 1.5 ? 0 : imgPo.current.x // <-- RETRIEVES BASE POSITION
-        //let basePosY = currentZoom.val === 1.5 ? 0 : imgPo.current.y // <-- RETRIEVES BASE POSITION
-        let basePosX =
-          currentZoom.op === 'x' && currentZoom.val === 1.5 ? 0 :
-          imgPo.current.x // <-- RETRIEVES BASE POSITION
-        let basePosY =
-          currentZoom.op === 'x' && currentZoom.val === 1.5 ? 0 :
-          imgPo.current.y // <-- RETRIEVES BASE POSITION
+        let basePosX = imgPo.current.x
+        let basePosY = imgPo.current.y
 
+        let halfWidth = ref.width / 2
+        let halfHeight = ref.height / 2
 
-        let baseWidth =
-          currentZoom.op === 'x' ? (ref.width / 2) * (divider + 2) : // baseWidth
-          (ref.width / 2) * (divider + 3)
+        let baseWidth = halfWidth * (divider + currentZoom.bW) //'x' ? halfWidth * (divider + 2) : halfWidth * (divider + 3) // baseWidth
           //                            (1920 / 2) * (0 + 2) // EN 1.5 === 1920
           //                            (1920 / 2) * (1 + 2) // EN 2.0 === 2880
           //                            (1920 / 2) * (2 + 2) // EN 2.5 === 3840
           //   (1920 / 2) * (0 + 3) // EN 1.5 === 2880
           //   (1920 / 2) * (1 + 3) // EN 2.0 === 3840
           //   (1920 / 2) * (2 + 3) // EN 2.5 === 4800
-        console.log('baseWidth --->', baseWidth);
+
         let baseHeight =
-          currentZoom.op === 'x' ? (ref.height / 2) * (divider + 2) : // baseHeight
-          (ref.height / 2) * (divider + 3)
-        
+          currentZoom.mORd === 'x' ? halfHeight * (divider + 2) : // baseHeight
+          halfHeight * (divider + 3)
+
         if (currentZoom.val === 1) imgPo.current = { x: 0, y: 0 } // WHEN 1.0 SET POSITION TO 0, 0
-        else if (currentZoom.val === 1.5 && currentZoom.op === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 to 1.5 SET POSITION TO CENTER OF IMAGE
-        else imgPo.current = { x: operation[currentZoom.op](imgPo.current.x, factor), y: operation[currentZoom.op](imgPo.current.y, factor) } // ELSE DO TARGET CALC
+        else if (currentZoom.val === 1.5 && currentZoom.mORd === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 to 1.5 SET POSITION TO CENTER OF IMAGE
+        else imgPo.current = { x: operation[currentZoom.mORd](imgPo.current.x, factor), y: operation[currentZoom.mORd](imgPo.current.y, factor) } // ELSE DO TARGET CALC
 
-        let targetPositionX = imgPo.current.x // <-- RETRIEVES TARGET POSITION (UPDATED VALUE)
-        let targetPositionY = imgPo.current.y // <-- RETRIEVES TARGET POSITION (UPDATED VALUE)
+        let targetPositionX = imgPo.current.x // TARGET (UPDATED ↑↑↑) POSITION
+        let targetPositionY = imgPo.current.y // TARGET (UPDATED ↑↑↑) POSITION
 
-        let offset = 100
-        let eachFramePosX = (targetPositionX - basePosX) / offset // FINAL DESTINATION
-        let eachFramePosY = (targetPositionY - basePosY) / offset // FINAL DESTINATION
-
-        let eachFrameWidth = 960 / offset // INCREASE IN 960 IMAGE WIDTH EACH TIME
-        let eachFrameHeight = 520 / offset // INCREASE IN 520 IMAGE HEIGHT EACH TIME
+        let offset = 10 // ANIMATION FRAMES BETWEEN X.0 --> X.5
+        let eachFramePosX = (targetPositionX - basePosX) / offset // EACH FRAME POS TO INCREASE/DECREASE
+        let eachFramePosY = (targetPositionY - basePosY) / offset // EACH FRAME POS TO INCREASE/DECREASE
+        let eachFrameWidth = halfWidth / offset // EACH FRAME WIDTH TO INCREASE/DECREASE // (1920 / 2) / offset
+        let eachFrameHeight = halfHeight / offset // EACH FRAME TO INCREASE/DECREASE
 
         let currPosX = basePosX
         let currPosY = basePosY
-
         let currentWidth = baseWidth
         let currentHeight = baseHeight
 
-        let targetWidth = 1920 * currentZoom.val
+        let targetWidth = ref.width * currentZoom.val
 
         let render = () => {
-          if (ctx !== null && ((currentZoom.val !== 1 && currentZoom.op === 'x') || currentZoom.op === '/')) {
-            console.log("ENTRO ACA")
-            //console.log('currPosX --->', currPosX);
-            // console.log('currPosY --->', currPosY);
-            //console.log('currentWidth --->', currentWidth);
-
+          if (ctx !== null) {
             ctx.drawImage(
               image.current,
               currPosX, currPosY, // imgPo
               currentWidth, currentHeight
             );
-
-            currPosX =
-              currentZoom.op === 'x' ? currPosX + eachFramePosX : // UPDATE VALUES
-              currPosX + eachFramePosX
-            currPosY =
-              currentZoom.op === 'x' ? currPosY + eachFramePosY : // UPDATE VALUES
-              currPosY + eachFramePosY
-
-            currentWidth =
-              currentZoom.op === 'x' ? currentWidth + eachFrameWidth : // UPDATE VALUES
-              currentWidth - eachFrameWidth
-            currentHeight =
-              currentZoom.op === 'x' ? currentHeight + eachFrameHeight : // UPDATE VALUES
-              currentHeight - eachFrameHeight
+            currPosX = currPosX + eachFramePosX
+            currPosY = currPosY + eachFramePosY
+            currentWidth = operation[currentZoom.aORs](currentWidth, eachFrameWidth)
+            currentHeight = operation[currentZoom.aORs](currentHeight, eachFrameHeight)
           }
-
-          if (currentZoom.op === 'x' && currentZoom.val !== 1) {
-            if (currentWidth <= targetWidth) requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
-          }
-          else if (currentZoom.op === '/') {
-            if (currentWidth >= targetWidth) requestAnimationFrame(render); // CONTINUE ANIMATION, ELSE STOPS
-          }
+          if (comparison[currentZoom.lORm](currentWidth, targetWidth)) requestAnimationFrame(render);
         }
 
-        render()
+      if (((currentZoom.val !== 1 && currentZoom.mORd === 'x') || currentZoom.mORd === '/')) render()
 
         // ctx.drawImage( // WORKING
         //   image.current,
@@ -228,15 +210,15 @@ console.log('imgPo.current --->', imgPo.current);
     }
   }
 
-  const zoomIn = () => setCurrentZoom((curr: any) => ({ val: curr.val + 0.5, op: 'x' }))
+  const zoomIn = () => setCurrentZoom((curr: any) => ({ val: curr.val + 0.5, mORd: 'x', aORs: '+', lORm: '<=', bW: 2 }))
 
-  const zoomOut = () => setCurrentZoom((curr: any) => ({ val: curr.val - 0.5, op: '/' }))
+  const zoomOut = () => setCurrentZoom((curr: any) => ({ val: curr.val - 0.5, mORd: '/', aORs: '-', lORm: '>=', bW: 3 }))
 
   const goLeftHandler = () => {
     if (images !== undefined) {
       if (currentIndex === 0) setCurrentIndex(images.length - 1)
       else setCurrentIndex((curr: any) => curr - 1)
-      setCurrentZoom({ val: 1, op: 'x' })
+      setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', bW: 2 })
     }
   }
 
@@ -244,7 +226,7 @@ console.log('imgPo.current --->', imgPo.current);
     if (images !== undefined) {
       if (currentIndex === images.length - 1) setCurrentIndex(0)
       else setCurrentIndex((curr: any) => curr + 1)
-      setCurrentZoom({ val: 1, op: 'x' })
+      setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', bW: 2 })
     }
   }
 

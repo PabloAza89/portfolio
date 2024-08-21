@@ -46,3 +46,7 @@ export interface ModalI {
 export interface operationI {
   [key: string] : (a: number, b: number) => number,
 }
+
+export interface comparisonI {
+  [key: string] : (a: number, b: number) => boolean,
+}
