@@ -7,7 +7,7 @@ import {
 } from '../../images/images';
 import css from './ProjectsCSS.module.css';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
-import Modal from '../Modal/Modal';
+import ImageViewer from '../ImageViewer/ImageViewer';
 
 function Projects() {
 
@@ -178,7 +178,7 @@ function Projects() {
   }
 
   const [ index, setIndex ] = useState(0)
-  const [ showModal, setShowModal ] = useState(false)
+  const [ showImageViewer, setShowImageViewer ] = useState(false)
 
   return (
     <div
@@ -251,7 +251,7 @@ function Projects() {
                                     src={m}
                                     onClick={(e) => {
                                       e.preventDefault();
-                                      setShowModal(true);
+                                      setShowImageViewer(true);
                                       setIndex(array.map(e => e.media).flat().indexOf(m))
                                     }}
                                   />
@@ -325,11 +325,11 @@ function Projects() {
       </div>
 
       {
-        showModal &&
-        <Modal
+        showImageViewer &&
+        <ImageViewer
           images={array.map(e => e.media).flat()}
           index={index}
-          setShowModal={setShowModal}
+          setShowImageViewer={setShowImageViewer}
         />
       }
 

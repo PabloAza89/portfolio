@@ -1,10 +1,12 @@
-import { ReactElement, useEffect, useState, useRef, ReactNode } from 'react';
-import css from './ModalCSS.module.css';
+import { ReactElement, useEffect, useState, useRef, ReactNode, MouseEvent } from 'react';
+import css from './ImageViewerCSS.module.css';
 import { Forward, Add, Remove, Close } from '@mui/icons-material/';
 import { Button } from '@mui/material';
-import { ModalI, operationI, comparisonI } from '../../interfaces/interfaces';
+import {
+  ImageViewerI, operationI, comparisonI, currentZoomI
+} from '../../interfaces/interfaces';
 
-function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactElement {
+function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: ImageViewerI): ReactElement {
 
   let clickOnBG = useRef({ // CLICK ON BACKGROUND MODAL
     start: false, // CLICK BEGINS ON BG MODAL
@@ -21,13 +23,16 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
     let modalDiv = document.getElementById('modalBackground');
     if (e.target === modalDiv) clickOnBG.current.end =  true
     else clickOnBG.current.end =  false
-    if (setShowModal !== undefined && clickOnBG.current.start && clickOnBG.current.end) setShowModal(false)
+    if (setShowImageViewer !== undefined && clickOnBG.current.start && clickOnBG.current.end) setShowImageViewer(false)
   }
 
-  const [ currentIndex, setCurrentIndex ] = useState(index)
+  const [ currentIndex, setCurrentIndex ] = useState<number>(index !== undefined ? index : 0)
 
-  // (cZ) // mORd = multiplication or divition // aORs = addition OR substraction // less OR more // baseWidth
-  const [ currentZoom, setCurrentZoom ] = useState({
+  // mORd = multiplication OR division
+  // aORs = addition OR subtraction
+  // lORm = less OR more
+  // bW = baseWidth
+  const [ currentZoom, setCurrentZoom ] = useState<currentZoomI>({ // (cZ)
     val: 1, mORd: 'x', aORs: '+', lORm: '<=', bW: 2
   })
 
@@ -48,10 +53,10 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
           ref.width = image.current.naturalWidth
           ref.height = image.current.naturalHeight
 
-          // e.g.:               x: 480             y: 260               // (1920 x 1040)
+          // e.g.:               x: -480            y: -260               // (1920 x 1040)
+          // WHEN 1.0 TO 1.5, SET POSITION TO CENTER OF IMAGE
           initImgPos.current = { x: ref.width / -4, y: ref.height / -4 }
 
-          //imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y }
           imgPo.current = { x: 0, y: 0 }
 
           if (ctx !== null) {
@@ -94,41 +99,29 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
         //console.log("divider", divider)
         console.log("factor", factor)
 
-        let basePosX = imgPo.current.x
-        let basePosY = imgPo.current.y
-
-        let halfWidth = ref.width / 2
-        let halfHeight = ref.height / 2
-
-        let baseWidth = halfWidth * (divider + currentZoom.bW) //'x' ? halfWidth * (divider + 2) : halfWidth * (divider + 3) // baseWidth
-          //                            (1920 / 2) * (0 + 2) // EN 1.5 === 1920
-          //                            (1920 / 2) * (1 + 2) // EN 2.0 === 2880
-          //                            (1920 / 2) * (2 + 2) // EN 2.5 === 3840
-          //   (1920 / 2) * (0 + 3) // EN 1.5 === 2880
-          //   (1920 / 2) * (1 + 3) // EN 2.0 === 3840
-          //   (1920 / 2) * (2 + 3) // EN 2.5 === 4800
-
-        let baseHeight =
-          currentZoom.mORd === 'x' ? halfHeight * (divider + 2) : // baseHeight
-          halfHeight * (divider + 3)
+        let halfDim = { w: ref.width / 2, h: ref.height / 2 }
+        let basePos = { x: imgPo.current.x, y: imgPo.current.y }
+        let baseDim = { w: halfDim.w * (divider + currentZoom.bW), h: halfDim.h * (divider + currentZoom.bW) }
+        // 'x' ? halfWidth * (divider + 2) : halfWidth * (divider + 3)
+        //                            (1920 / 2) * (0 + 2) // EN 1.5 === 1920
+        //                            (1920 / 2) * (1 + 2) // EN 2.0 === 2880
+        //                            (1920 / 2) * (2 + 2) // EN 2.5 === 3840
+        //   (1920 / 2) * (0 + 3) // EN 1.5 === 2880
+        //   (1920 / 2) * (1 + 3) // EN 2.0 === 3840
+        //   (1920 / 2) * (2 + 3) // EN 2.5 === 4800
 
         if (currentZoom.val === 1) imgPo.current = { x: 0, y: 0 } // WHEN 1.0 SET POSITION TO 0, 0
-        else if (currentZoom.val === 1.5 && currentZoom.mORd === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 to 1.5 SET POSITION TO CENTER OF IMAGE
+        else if (currentZoom.val === 1.5 && currentZoom.mORd === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 TO 1.5, SET POSITION TO CENTER OF IMAGE
         else imgPo.current = { x: operation[currentZoom.mORd](imgPo.current.x, factor), y: operation[currentZoom.mORd](imgPo.current.y, factor) } // ELSE DO TARGET CALC
 
-        let targetPositionX = imgPo.current.x // TARGET (UPDATED ↑↑↑) POSITION
-        let targetPositionY = imgPo.current.y // TARGET (UPDATED ↑↑↑) POSITION
+        let targetPosition = { x: imgPo.current.x, y: imgPo.current.y } // TARGET (UPDATED ↑↑↑) POSITION
 
         let offset = 10 // ANIMATION FRAMES BETWEEN X.0 --> X.5
-        let eachFramePosX = (targetPositionX - basePosX) / offset // EACH FRAME POS TO INCREASE/DECREASE
-        let eachFramePosY = (targetPositionY - basePosY) / offset // EACH FRAME POS TO INCREASE/DECREASE
-        let eachFrameWidth = halfWidth / offset // EACH FRAME WIDTH TO INCREASE/DECREASE // (1920 / 2) / offset
-        let eachFrameHeight = halfHeight / offset // EACH FRAME TO INCREASE/DECREASE
+        let eachFramePos = { x: (targetPosition.x - basePos.x) / offset, y: (targetPosition.y - basePos.y) / offset } // EACH FRAME POS TO INCREASE/DECREASE
+        let eachFrameDim = { w: halfDim.w / offset, h: halfDim.h / offset } // EACH FRAME WIDTH TO INCREASE/DECREASE // (1920 / 2) / offset
 
-        let currPosX = basePosX
-        let currPosY = basePosY
-        let currentWidth = baseWidth
-        let currentHeight = baseHeight
+        let currPos = { x: basePos.x, y: basePos.y }
+        let currentDim = { w: baseDim.w, h: baseDim.h }
 
         let targetWidth = ref.width * currentZoom.val
 
@@ -136,15 +129,14 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
           if (ctx !== null) {
             ctx.drawImage(
               image.current,
-              currPosX, currPosY, // imgPo
-              currentWidth, currentHeight
+              currPos.x, currPos.y,
+              currentDim.w, currentDim.h
             );
-            currPosX = currPosX + eachFramePosX
-            currPosY = currPosY + eachFramePosY
-            currentWidth = operation[currentZoom.aORs](currentWidth, eachFrameWidth)
-            currentHeight = operation[currentZoom.aORs](currentHeight, eachFrameHeight)
+            currPos = { x: currPos.x + eachFramePos.x, y: currPos.y + eachFramePos.y }
+            currentDim.w = operation[currentZoom.aORs](currentDim.w, eachFrameDim.w)
+            currentDim.h = operation[currentZoom.aORs](currentDim.h, eachFrameDim.h)
           }
-          if (comparison[currentZoom.lORm](currentWidth, targetWidth)) requestAnimationFrame(render);
+          if (comparison[currentZoom.lORm](currentDim.w, targetWidth)) requestAnimationFrame(render);
         }
 
       if (((currentZoom.val !== 1 && currentZoom.mORd === 'x') || currentZoom.mORd === '/')) render()
@@ -153,7 +145,6 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
         //   image.current,
         //   imgPo.current.x, imgPo.current.y,
         //   ref.width * currentZoom.val, ref.height * currentZoom.val
-        //   //1920, 1040
         // );
 
         // **  // --> //            LESS --> MORE            /or/            MORE --> LESS            //
@@ -169,16 +160,16 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
     }
   }, [currentZoom])
 
-  let mouseDown = (e:any) => {
+  let mouseDown = (e: MouseEvent) => {
     arbPos.current = { x: e.clientX, y: e.clientY }
     allowMove.current = true
   }
 
-  let mouseUp = (e:any) => {
+  let mouseUp = (e: MouseEvent) => {
     allowMove.current = false
   }
 
-  let mouseMove = (e:any) => {
+  let mouseMove = (e: MouseEvent) => {
     if (allowMove.current && currentZoom.val !== 1) {
       if (refCanvas.current !== null) {
         let ref = refCanvas.current
@@ -202,7 +193,6 @@ function Modal({ images, index, setShowModal, controlsOutside }: ModalI): ReactE
               ref.width * currentZoom.val, ref.height * currentZoom.val
             );
             imgPo.current = { x: targetXPosition, y: targetYPosition }
-console.log('imgPo.current --->', imgPo.current);
           }
         }
       }
@@ -210,14 +200,14 @@ console.log('imgPo.current --->', imgPo.current);
     }
   }
 
-  const zoomIn = () => setCurrentZoom((curr: any) => ({ val: curr.val + 0.5, mORd: 'x', aORs: '+', lORm: '<=', bW: 2 }))
+  const zoomIn = () => setCurrentZoom((curr: currentZoomI) => ({ val: curr.val + 0.5, mORd: 'x', aORs: '+', lORm: '<=', bW: 2 }))
 
-  const zoomOut = () => setCurrentZoom((curr: any) => ({ val: curr.val - 0.5, mORd: '/', aORs: '-', lORm: '>=', bW: 3 }))
+  const zoomOut = () => setCurrentZoom((curr: currentZoomI) => ({ val: curr.val - 0.5, mORd: '/', aORs: '-', lORm: '>=', bW: 3 }))
 
   const goLeftHandler = () => {
     if (images !== undefined) {
       if (currentIndex === 0) setCurrentIndex(images.length - 1)
-      else setCurrentIndex((curr: any) => curr - 1)
+      else setCurrentIndex((curr: number) => curr - 1)
       setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', bW: 2 })
     }
   }
@@ -225,7 +215,7 @@ console.log('imgPo.current --->', imgPo.current);
   const goRightHandler = () => {
     if (images !== undefined) {
       if (currentIndex === images.length - 1) setCurrentIndex(0)
-      else setCurrentIndex((curr: any) => curr + 1)
+      else setCurrentIndex((curr: number) => curr + 1)
       setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', bW: 2 })
     }
   }
@@ -276,7 +266,7 @@ console.log('imgPo.current --->', imgPo.current);
         <Button
           variant="contained"
           className={css.button}
-          onClick={() => { if (setShowModal !== undefined) setShowModal(false)} }
+          onClick={() => { if (setShowImageViewer !== undefined) setShowImageViewer(false)} }
         >
           <Close className={`${css.icon} ${css.right}`}/>
         </Button>
@@ -310,4 +300,4 @@ console.log('imgPo.current --->', imgPo.current);
   )
 }
 
-export default Modal;
+export default ImageViewer;

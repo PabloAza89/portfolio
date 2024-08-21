@@ -36,10 +36,10 @@ export interface arraySkillsI {
   percentage: number
 }
 
-export interface ModalI {
+export interface ImageViewerI {
   images?: string[],
   index?: number,
-  setShowModal?: Dispatch<SetStateAction<boolean>>,
+  setShowImageViewer?: Dispatch<SetStateAction<boolean>>,
   controlsOutside?: boolean,
 }
 
@@ -49,4 +49,12 @@ export interface operationI {
 
 export interface comparisonI {
   [key: string] : (a: number, b: number) => boolean,
+}
+
+export interface currentZoomI {
+  val: number,
+  mORd: string,
+  aORs: string,
+  lORm: string,
+  bW: number
 }
