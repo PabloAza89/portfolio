@@ -1,4 +1,6 @@
-import { ReactElement, useEffect, useState, useRef, ReactNode, MouseEvent } from 'react';
+import {
+  ReactElement, useEffect, useState, useRef, ReactNode, MouseEvent
+} from 'react';
 import css from './ImageViewerCSS.module.css';
 import { Forward, Add, Remove, Close } from '@mui/icons-material/';
 import { Button } from '@mui/material';

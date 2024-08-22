@@ -1,5 +1,5 @@
+import { useEffect, useState, useRef, MouseEvent } from 'react';
 import { FormControl, MenuItem, Select } from '@mui/material/';
-import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import {
   food1, food2, food3, weatherify1, weatherify2, calculator1, calculator2,
@@ -10,6 +10,28 @@ import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 import ImageViewer from '../ImageViewer/ImageViewer';
 
 function Projects() {
+
+  let scrollEl = useRef({ // SCROLL ELEMENT
+    static: true, // ELEMENT IS NOT SCROLLING
+    allow: true   // ALLOWED TO DISPLAY ImageViewer
+  })
+
+  const scrollStartHandler = () => {
+    scrollEl.current = { static: false, allow: false }
+  }
+
+  const scrollEndHandler = () => {
+    if (!scrollEl.current.static) scrollEl.current = { static: true, allow: false }
+    else scrollEl.current = { static: true, allow: true }
+  }
+
+  const imageClickHandler = (e: MouseEvent, m: string) => {
+    e.preventDefault();
+    if (scrollEl.current.allow) {
+      setShowImageViewer(true);
+      setIndex(array.map(e => e.media).flat().indexOf(m))
+    }
+  }
 
   const english = useSelector((state: { english:boolean }) => state.english)
   const [scrollSpeed, setScrollSpeed] = useState<any>(30)
@@ -203,6 +225,8 @@ function Projects() {
           ref={useHorizontalScroll()}
           id={`sliderRollProjects`}
           className={css.mainContainer}
+          onDragStart={() => scrollStartHandler()}
+          onMouseUp={() => scrollEndHandler()}
         >
           <div
             id={`scrollTarget`}
@@ -249,11 +273,7 @@ function Projects() {
                                     onLoad={() => loadedUpdater(array.map(e => e.media).flat().indexOf(m))}
                                     alt=""
                                     src={m}
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      setShowImageViewer(true);
-                                      setIndex(array.map(e => e.media).flat().indexOf(m))
-                                    }}
+                                    onClick={(e) => imageClickHandler(e, m)}
                                   />
                                 </a>
                                 <img
@@ -324,14 +344,14 @@ function Projects() {
         </div>
       </div>
 
-      {/* {
+      {
         showImageViewer &&
         <ImageViewer
           images={array.map(e => e.media).flat()}
           index={index}
           setShowImageViewer={setShowImageViewer}
         />
-      } */}
+      }
 
     </div>
   )
