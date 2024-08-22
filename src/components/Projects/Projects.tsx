@@ -324,14 +324,14 @@ function Projects() {
         </div>
       </div>
 
-      {
+      {/* {
         showImageViewer &&
         <ImageViewer
           images={array.map(e => e.media).flat()}
           index={index}
           setShowImageViewer={setShowImageViewer}
         />
-      }
+      } */}
 
     </div>
   )

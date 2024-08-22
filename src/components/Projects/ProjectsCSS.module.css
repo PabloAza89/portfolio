@@ -64,6 +64,8 @@
   overflow: hidden;
   text-align: -moz-center;
   text-align: -webkit-center;
+  overflow: scroll;
+  scrollbar-width: none;
 }
 
 .mainContainer::-webkit-scrollbar {
@@ -78,6 +80,7 @@
   opacity: 0.8;
   flex-direction: column;
   width: fit-content;
+  /* overflow: scroll !important; */
 }
 
 .selectType {
