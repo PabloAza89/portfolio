@@ -102,13 +102,8 @@ function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: Ima
         let halfDim = { w: ref.width / 2, h: ref.height / 2 }
         let basePos = { x: imgPo.current.x, y: imgPo.current.y }
         let baseDim = { w: halfDim.w * (divider + currentZoom.bW), h: halfDim.h * (divider + currentZoom.bW) }
-        // 'x' ? halfWidth * (divider + 2) : halfWidth * (divider + 3)
-        //                            (1920 / 2) * (0 + 2) // EN 1.5 === 1920
-        //                            (1920 / 2) * (1 + 2) // EN 2.0 === 2880
-        //                            (1920 / 2) * (2 + 2) // EN 2.5 === 3840
-        //   (1920 / 2) * (0 + 3) // EN 1.5 === 2880
-        //   (1920 / 2) * (1 + 3) // EN 2.0 === 3840
-        //   (1920 / 2) * (2 + 3) // EN 2.5 === 4800
+        //         'x' --> halfDim.w * (divider + 2)
+        //         '/' --> halfDim.w * (divider + 3)
 
         if (currentZoom.val === 1) imgPo.current = { x: 0, y: 0 } // WHEN 1.0 SET POSITION TO 0, 0
         else if (currentZoom.val === 1.5 && currentZoom.mORd === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 TO 1.5, SET POSITION TO CENTER OF IMAGE

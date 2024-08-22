@@ -42,7 +42,6 @@
   -ms-user-select: none;
   user-select: none;
   flex-wrap: nowrap;
-  overflow: hidden !important;
   scrollbar-width: thin;
   scrollbar-color: var(--scrollThumb) var(--scrollTrack);
   transition: scrollbar-color 1s;
@@ -172,8 +171,9 @@
   align-items: flex-start;
   height: 361px;
   /* background: yellow; */ /* DEV */
-  overflow: hidden;
   justify-content: flex-end;
+  overflow-x: scroll;
+  scrollbar-width: none;
 }
 
 .scroll {
@@ -194,8 +194,6 @@
     rgba(128, 128, 128, 0.400) 250px, rgba(128, 128, 128, 0.400) 261px,
     transparent 261px, transparent
   );
-  overflow: auto;
-  
 }
 
 .scroll::-webkit-scrollbar {
