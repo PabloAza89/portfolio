@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.aa3c90d6.css",
-    "main.js": "/portfolio/static/js/main.ef323285.js",
+    "main.css": "/portfolio/static/css/main.a5ebd3dc.css",
+    "main.js": "/portfolio/static/js/main.9c5c0a15.js",
     "static/media/error.gif": "/portfolio/static/media/error.c8a987390be23c2376be.gif",
     "static/media/food2.png": "/portfolio/static/media/food2.33251b4f71ace22ad726.png",
     "static/media/food3.png": "/portfolio/static/media/food3.0884ec17b8c03ed71400.png",
@@ -12,27 +12,26 @@
     "static/media/calculator2.png": "/portfolio/static/media/calculator2.b7949766849476107c42.png",
     "static/media/calculator1.png": "/portfolio/static/media/calculator1.ead863701f53ae5e1e6f.png",
     "static/media/calculator4.png": "/portfolio/static/media/calculator4.c375346f4ad88722592f.png",
-    "static/media/profile.png": "/portfolio/static/media/profile.998bbc92b2abe9331e0b.png",
-    "static/media/react.png": "/portfolio/static/media/react.2f2532db663fd5ec5f95.png",
     "static/media/efSet.png": "/portfolio/static/media/efSet.70a4ba20ab286e8227ff.png",
-    "static/media/node.png": "/portfolio/static/media/node.83e37a9a07ebf287d051.png",
+    "static/media/profile.png": "/portfolio/static/media/profile.52eaec6c76daecaf3892.png",
     "static/media/tictac2.png": "/portfolio/static/media/tictac2.e303a3f640091233379f.png",
     "static/media/henry.png": "/portfolio/static/media/henry.bc6cc8847bd83df6cc48.png",
     "static/media/attentionToDetail.png": "/portfolio/static/media/attentionToDetail.fa0c9a140b5d16e1d10a.png",
     "static/media/fccCertJS.png": "/portfolio/static/media/fccCertJS.2398854b79d8175858c1.png",
-    "static/media/redux.png": "/portfolio/static/media/redux.974e6b8b1c7d5d4e3c15.png",
     "static/media/home.svg": "/portfolio/static/media/home.eb8e1991134358223a6ee700ae5e4fc9.svg",
-    "static/media/sequelize.png": "/portfolio/static/media/sequelize.844fb9182c0fbf41931d.png",
-    "static/media/typescript.png": "/portfolio/static/media/typescript.4c2038d4315e98000c2a.png",
     "static/media/tictac1.png": "/portfolio/static/media/tictac1.d7cfda4175c8a8a57586.png",
+    "static/media/sequelize.png": "/portfolio/static/media/sequelize.d53f2f97e5ae0070f490.png",
     "static/media/loadingImage.png": "/portfolio/static/media/loadingImage.8af190ff0d46a12567d2.png",
+    "static/media/redux.png": "/portfolio/static/media/redux.425e4ba90847ef1f1425.png",
+    "static/media/react.png": "/portfolio/static/media/react.9b3f26f54436d301694c.png",
+    "static/media/node.png": "/portfolio/static/media/node.c4f95e7073b21b333739.png",
     "static/media/darth-vader.svg": "/portfolio/static/media/darth-vader.ab4aa42386ccc66a7de06c02e64d572c.svg",
     "index.html": "/portfolio/index.html",
-    "main.aa3c90d6.css.map": "/portfolio/static/css/main.aa3c90d6.css.map",
-    "main.ef323285.js.map": "/portfolio/static/js/main.ef323285.js.map"
+    "main.a5ebd3dc.css.map": "/portfolio/static/css/main.a5ebd3dc.css.map",
+    "main.9c5c0a15.js.map": "/portfolio/static/js/main.9c5c0a15.js.map"
   },
   "entrypoints": [
-    "static/css/main.aa3c90d6.css",
-    "static/js/main.ef323285.js"
+    "static/css/main.a5ebd3dc.css",
+    "static/js/main.9c5c0a15.js"
   ]
 }
