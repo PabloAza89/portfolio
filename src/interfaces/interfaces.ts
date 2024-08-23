@@ -56,5 +56,5 @@ export interface currentZoomI {
   mORd: string,
   aORs: string,
   lORm: string,
-  bW: number
+  dF: number
 }

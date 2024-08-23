@@ -33,9 +33,9 @@ function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: Ima
   // mORd = multiplication OR division
   // aORs = addition OR subtraction
   // lORm = less OR more
-  // bW = baseWidth
+  // dF = dimensionFactor
   const [ currentZoom, setCurrentZoom ] = useState<currentZoomI>({ // (cZ)
-    val: 1, mORd: 'x', aORs: '+', lORm: '<=', bW: 2
+    val: 1, mORd: 'x', aORs: '+', lORm: '<=', dF: 2
   })
 
   let refCanvas = useRef<HTMLCanvasElement>(null)
@@ -93,23 +93,28 @@ function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: Ima
 
       if (ctx !== null) {
         let targetZoom = currentZoom.mORd === 'x' ? currentZoom.val - 0.5 : currentZoom.val
-        let divider = targetZoom + (targetZoom - 2) // dvdr
-        let factor =
+        let divider = targetZoom + (targetZoom - 2) // dvdr //   0,   1,   2,   3,   4..
+        let factor =                                // fctr // 1/2, 1/3, 1/4, 1/5, 1/6..
           divider === 0 ? 1 :
           1 + (1 / divider)
 
-        //console.log("divider", divider)
-        console.log("factor", factor)
+        // *** // LESS -> MORE // MORE -> LESS //
+        // cZ  // dvdr // fctr // dvdr // fctr //
+        // 1.0 // -1   // 0    // 0    // 1    //
+        // 1.5 //  0   // 1    // 1    // 2    //
+        // 2.0 //  1   // 2    // 2    // 1.5  //
+        // 2.5 //  2   // 1.5  // 3    // 1.33 //
+        // 3.0 //  3   // 1.33 // 4    // 1.25 //
 
         let halfDim = { w: ref.width / 2, h: ref.height / 2 }
         let basePos = { x: imgPo.current.x, y: imgPo.current.y }
-        let baseDim = { w: halfDim.w * (divider + currentZoom.bW), h: halfDim.h * (divider + currentZoom.bW) }
+        let baseDim = { w: halfDim.w * (divider + currentZoom.dF), h: halfDim.h * (divider + currentZoom.dF) };
         //         'x' --> halfDim.w * (divider + 2)
         //         '/' --> halfDim.w * (divider + 3)
 
-        if (currentZoom.val === 1) imgPo.current = { x: 0, y: 0 } // WHEN 1.0 SET POSITION TO 0, 0
-        else if (currentZoom.val === 1.5 && currentZoom.mORd === 'x') imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } // WHEN 1.0 TO 1.5, SET POSITION TO CENTER OF IMAGE
-        else imgPo.current = { x: operation[currentZoom.mORd](imgPo.current.x, factor), y: operation[currentZoom.mORd](imgPo.current.y, factor) } // ELSE DO TARGET CALC
+        currentZoom.val === 1 ? imgPo.current = { x: 0, y: 0 } : // WHEN 1.0 SET POSITION TO 0, 0
+        currentZoom.val === 1.5 && currentZoom.mORd === 'x' ? imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } : // WHEN 1.0 TO 1.5, SET POSITION TO CENTER OF IMAGE
+        imgPo.current = { x: operation[currentZoom.mORd](imgPo.current.x, factor), y: operation[currentZoom.mORd](imgPo.current.y, factor) } // ELSE DO TARGET CALC
 
         let targetPosition = { x: imgPo.current.x, y: imgPo.current.y } // TARGET (UPDATED ↑↑↑) POSITION
 
@@ -135,24 +140,7 @@ function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: Ima
           }
           if (comparison[currentZoom.lORm](currentDim.w, targetWidth)) requestAnimationFrame(render);
         }
-
-      if (((currentZoom.val !== 1 && currentZoom.mORd === 'x') || currentZoom.mORd === '/')) render()
-
-        // ctx.drawImage( // WORKING
-        //   image.current,
-        //   imgPo.current.x, imgPo.current.y,
-        //   ref.width * currentZoom.val, ref.height * currentZoom.val
-        // );
-
-        // **  // --> //            LESS --> MORE            /or/            MORE --> LESS            //
-        // cZ  // --> // tZ     tZ    === dvdr // 1+(1/dvdr) /or/ tZ     tZ    === dvdr // 1+(1/dvdr) //
-        // 1.0 // --> //   **** manually set to 0, 0 ****    /or/   **** manually set to 0, 0 ****    //
-        // 1.5 // --> // 1.0 + (1.0 - 2) === 0 // 1.0 (man.) /or/ 1.5 + (1.5 - 2) === 1 // 2.0        //
-        // 2.0 // --> // 1.5 + (1.5 - 2) === 1 // 2.0        /or/ 2.0 + (2.0 - 2) === 2 // 1.5        //
-        // 2.5 // --> // 2.0 + (2.0 - 2) === 2 // 1.5        /or/ 2.5 + (2.5 - 2) === 3 // 1.33       //
-        // 3.0 // --> // 2.5 + (2.5 - 2) === 3 // 1.33       /or/ 3.0 + (3.0 - 2) === 4 // 1.25       //
-        // 3.5 // --> // 3.0 + (3.0 - 2) === 4 // 1.25       /or/ 3.5 + (3.5 - 2) === 5 // 1.2        //
-        // 4.0 // --> // 3.5 + (3.5 - 2) === 5 // 1.2        /or/ 4.0 + (4.0 - 2) === 6 // 1.166      //
+        if (((currentZoom.val !== 1 && currentZoom.mORd === 'x') || currentZoom.mORd === '/')) render()
       }
     }
   }, [currentZoom])
@@ -197,15 +185,15 @@ function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: Ima
     }
   }
 
-  const zoomIn = () => setCurrentZoom((curr: currentZoomI) => ({ val: curr.val + 0.5, mORd: 'x', aORs: '+', lORm: '<=', bW: 2 }))
+  const zoomIn = () => setCurrentZoom((curr: currentZoomI) => ({ val: curr.val + 0.5, mORd: 'x', aORs: '+', lORm: '<=', dF: 2 }))
 
-  const zoomOut = () => setCurrentZoom((curr: currentZoomI) => ({ val: curr.val - 0.5, mORd: '/', aORs: '-', lORm: '>=', bW: 3 }))
+  const zoomOut = () => setCurrentZoom((curr: currentZoomI) => ({ val: curr.val - 0.5, mORd: '/', aORs: '-', lORm: '>=', dF: 3 }))
 
   const goLeftHandler = () => {
     if (images !== undefined) {
       if (currentIndex === 0) setCurrentIndex(images.length - 1)
       else setCurrentIndex((curr: number) => curr - 1)
-      setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', bW: 2 })
+      setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', dF: 2 })
     }
   }
 
@@ -213,7 +201,7 @@ function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: Ima
     if (images !== undefined) {
       if (currentIndex === images.length - 1) setCurrentIndex(0)
       else setCurrentIndex((curr: number) => curr + 1)
-      setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', bW: 2 })
+      setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', dF: 2 })
     }
   }
 

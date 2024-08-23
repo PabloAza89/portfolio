@@ -177,7 +177,7 @@ function MessageMe() {
     if (lastMessageLS !== null && (Date.now() - parseInt(lastMessageLS, 10)) < 60000) return MustWait()
 
     function fetchData() {
-      fetch(config.TARGET_STYLESHEET, {
+      fetch(config.FETCH, {
         method: "POST",
         body: JSON.stringify({ name: name, message: message }),
         headers: { "Content-Type": "application/json" }
