@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/portfolio/static/css/main.aa3c90d6.css",
-    "main.js": "/portfolio/static/js/main.5812feeb.js",
+    "main.js": "/portfolio/static/js/main.2a49d464.js",
     "static/media/error.gif": "/portfolio/static/media/error.c8a987390be23c2376be.gif",
     "static/media/food2.png": "/portfolio/static/media/food2.33251b4f71ace22ad726.png",
     "static/media/food3.png": "/portfolio/static/media/food3.0884ec17b8c03ed71400.png",
@@ -29,10 +29,10 @@
     "static/media/darth-vader.svg": "/portfolio/static/media/darth-vader.ab4aa42386ccc66a7de06c02e64d572c.svg",
     "index.html": "/portfolio/index.html",
     "main.aa3c90d6.css.map": "/portfolio/static/css/main.aa3c90d6.css.map",
-    "main.5812feeb.js.map": "/portfolio/static/js/main.5812feeb.js.map"
+    "main.2a49d464.js.map": "/portfolio/static/js/main.2a49d464.js.map"
   },
   "entrypoints": [
     "static/css/main.aa3c90d6.css",
-    "static/js/main.5812feeb.js"
+    "static/js/main.2a49d464.js"
   ]
 }
