@@ -1,5 +1,5 @@
 import {
-  ReactElement, useEffect, useState, useRef, ReactNode, MouseEvent
+  ReactElement, useEffect, useState, useRef, ReactNode, MouseEvent, TouchEvent
 } from 'react';
 import css from './ImageViewerCSS.module.css';
 import { Forward, Add, Remove, Close } from '@mui/icons-material/';
@@ -14,6 +14,11 @@ function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: Ima
     start: false, // CLICK BEGINS ON BG MODAL
     end: false    // CLICK ENDS ON BG MODAL
   })
+
+  useEffect(() => { // DISABLES MOUSE (DESKTOP) EVENT WHEN MOUSE DRAG LEAVE CANVAS
+    let canvas = document.getElementById('canvasImage')
+    if (canvas !== null) canvas.onmouseout = function() { allowMove.current = false }
+  }, [])
 
   window.onmousedown = function(e) {
     let modalDiv = document.getElementById('modalBackground');
@@ -145,29 +150,44 @@ function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: Ima
     }
   }, [currentZoom])
 
-  let mouseDown = (e: MouseEvent) => {
-    arbPos.current = { x: e.clientX, y: e.clientY }
-    allowMove.current = true
+  let mouseDown = (e: TouchEvent | MouseEvent) => {
+    if ('touches' in e) { // TOUCH EVENT
+      arbPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+      allowMove.current = true
+    } else { // MOUSE EVENT
+      arbPos.current = { x: e.clientX, y: e.clientY }
+      allowMove.current = true
+    }
   }
 
-  let mouseUp = (e: MouseEvent) => {
+  let mouseUp = (e: TouchEvent | MouseEvent) => {
     allowMove.current = false
   }
 
-  let mouseMove = (e: MouseEvent) => {
+  let mouseMove = (e: TouchEvent | MouseEvent) => {
     if (allowMove.current && currentZoom.val !== 1) {
       if (refCanvas.current !== null) {
         let ref = refCanvas.current
         let ctx = ref.getContext("2d");
         if (ctx !== null) {
-          let targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x)
-          let targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y)
+          let targetXPosition;
+          let targetYPosition;
+
+          if ('touches' in e) { // TOUCH EVENT
+            targetXPosition = imgPo.current.x + (e.touches[0].clientX - arbPos.current.x) * 3 // '* 3' = INCREASE SPEED HERE FOR MOBILE
+            targetYPosition = imgPo.current.y + (e.touches[0].clientY - arbPos.current.y) * 3 // '* 3' = INCREASE SPEED HERE FOR MOBILE
+          } else { // MOUSE EVENT
+            targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+            targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+          }
+
           let factor = ((currentZoom.val * 2) - 2) * 2
           //   cZ                factor
           // ((1.5 * 2) - 2) * 2 = 2
           // ((2.0 * 2) - 2) * 2 = 4
           // ((2.5 * 2) - 2) * 2 = 6
           // ((3.0 * 2) - 2) * 2 = 8
+
           if (
             (targetXPosition < 0 && targetXPosition > initImgPos.current.x * factor) &&
             (targetYPosition < 0 && targetYPosition > initImgPos.current.y * factor)
@@ -181,7 +201,8 @@ function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: Ima
           }
         }
       }
-      arbPos.current = { x: e.clientX, y: e.clientY }
+      if ('touches' in e) arbPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+      else arbPos.current = { x: e.clientX, y: e.clientY }
     }
   }
 
@@ -274,9 +295,12 @@ function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: Ima
           id={`canvasImage`}
           ref={refCanvas}
           className={css.canvasImage}
-          onMouseDown={(e) => mouseDown(e)}
-          onMouseUp={(e) => mouseUp(e)}
-          onMouseMove={(e) => mouseMove(e)}
+          onTouchStart={(e) => mouseDown(e)} // TOUCH START
+          onMouseDown={(e) => mouseDown(e)} // MOUSE START
+          onTouchEnd={(e) => mouseUp(e)} // TOUCH END
+          onMouseUp={(e) => mouseUp(e)} // MOUSE END
+          onTouchMove={(e) => mouseMove(e)} // TOUCH MOVE
+          onMouseMove={(e) => mouseMove(e)} // MOUSE MOVE
         />
         { !controlsOutside && controls }
       </div>
