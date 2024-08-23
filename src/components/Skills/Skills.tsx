@@ -44,6 +44,8 @@ function Skills() {
   // width < 3px GH-Pages translates to (max-width: 2px)
   // width < 4px GH-Pages translates to (max-width: 3px)
 
+  let targetWidth = (array.length * 92) + 206
+
   const findTargetStyleSheet = async () => {
     let sheets = document.styleSheets
     for (const ssI in sheets) {
@@ -109,8 +111,6 @@ function Skills() {
     }
     timeoutRef.current[id] = (setTimeout(autoHideLanguage, 3000))
   }
-
-  let targetWidth = (array.length * 92) + 206
 
   useEffect(() => {
     const autoHideOnResize = () => {
@@ -349,9 +349,7 @@ function Skills() {
                 id={`buttonColorFixed${e.id}`}
                 style={{ "--colorBar": e.color, "--delay": e.id } as CSSProperties}
                 className={css.colorFixed}
-                onClick={() => {
-                  handleAnimation(e.id)
-                }}
+                onClick={() => handleAnimation(e.id)}
               />
             </div>
           )

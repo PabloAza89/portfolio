@@ -7,7 +7,7 @@
 [data-theme="dark"] {
   .blackWhite::before {
     opacity: 1;
-  }
+  };
   --borderApp: #424242;
   --scrollThumb: #858585;
   --scrollTrack: #000000;
@@ -30,7 +30,6 @@
   width: calc(100vw - 12px);
   height: calc(100vh - 12px);
   background: linear-gradient(to bottom right, black 49.9%, white 50.1%);
-  overflow: hidden;
   justify-content: flex-start;
 }
 
@@ -68,4 +67,7 @@
 
 .left { left: 0px }
 
-.right { right: 0px }
+.right {
+  right: 0px;
+  pointer-events: none /* IGNORE CLICK */
+}
