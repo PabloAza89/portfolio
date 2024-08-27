@@ -8,7 +8,529 @@ import {
   ImageViewerI, operationI, comparisonI, currentZoomI
 } from '../../interfaces/interfaces';
 
+// declare global {
+//   interface Window { // ⚠️ notice that "Window" is capitalized here
+//     warnStatements: any;
+//   }
+// }
+
+declare global {
+  interface Window { warnStatements: any[]; }
+}
+
+window.warnStatements = window.warnStatements || {};
+
+//interface Errorr extends Error {
+type Error = {
+  /* prepareStackTrace(thisArg: any, func: any): void */
+  prepareStackTrace: () => void
+}
+
 function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: ImageViewerI): ReactElement {
+
+  // if (setShowImageViewer === undefined) console.log("setShowImageViewer IS EMPTY !")
+  if (setShowImageViewer === undefined) {
+    //console.trace({})
+    //console.trace = () => null
+    //console.trace = () => null
+    //console.warn('setShowImageViewer IS EMPTY !')
+    //console.error("asdasd")
+    //console.error("asdasd")
+    //console.warn(`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`)
+    //console.warn()
+    //console.warn()
+    //console.log.apply(console, args)
+    //console.log.apply(console, "asdasd")
+    //console.info('⚠️ Warning from\n%s\n%s', stack, '🟨');
+    //console.info('⚠️ Warning from\n%s\n%s');
+
+    //console.info('Warning from\n%s\n%s');
+
+    // let foo = () => {
+    //   //interWarn("foo warning, %s", "okay?");
+    //   //interWarn("foo warning, %s");
+    //   //let args = argumentss;
+    //     // save arguments;
+    //     let err = new Error( "trace");
+    //     var stack = err.stack;
+    //     if( !stack) try {
+    //         throw err;
+    //     }
+    //     catch( err:any) {
+    //         stack = err.stack;
+    //     }
+    //     if( stack) {
+    //         stack = stack.split('\n').slice(1,3).join('\n');
+    //         //console.info('⚠️ Warning from\n%s\n%s', stack, '🟨');
+    //         console.info('Warning from\n%s\n%s', stack, '🟨');
+    //     }
+    //     else console.trace();
+    //     console.log.apply(console);
+    // }
+    // foo();
+
+    //console.log('%c Oh my heavens!\nasd ', 'background: red; color: #bada55, width: 100%');
+    //console.warn('%c Oh my heavens!\nasd ', 'background: red; color: #bada55, width: 100%');
+    //console.log('\x1b[32m', {a:1,b:2,c:3}, '\x1b[0m');
+
+    //window.warnStatements = [];
+
+    // console.warn = function (message) {
+    //   //window.warnStatements = [];
+    //   //var oldWarn = console.warn;
+    //   //oldWarn.apply(console, arguments);
+    //   //console.warn.apply(console, arguments);
+    //   console.warn.apply(console);
+    //   //oldWarn.apply(args);
+    //   //oldWarn.apply(...args);
+    //   window.warnStatements.push({
+    //   type: 'console.warn',
+    //   data: "AAAAAAAA",
+    //   });  
+    //  };
+
+    //  console.warn = function () {
+
+    //  };
+
+
+    //  console.warn('Hello World');
+
+    //console.log.apply(console, [arguments]);
+
+  //   window.trace = function stackTrace() {
+  //     var err = new Error();
+  //     return err.stack;
+  // }
+  
+  // window.my_log = function (x) {
+  //     // var line = trace();
+  //     var lines = line.split("\n");
+  //     console.log(x + "%c " + lines[2].substring(lines[2].indexOf("("), lines[2].lastIndexOf(")") + 1), 'background: rgba(255, 255, 0, 0.5); color: #bada55, width: 100%')
+  // }
+
+  //   window.trace = function stackTrace() {
+  //     var err = new Error();
+  //     return err.stack;
+  // }
+
+  //var line = trace();
+  // var line = "(AAAAAAAAA)\n(AAAAAAAAA)\n(AAAAAAAAA)\n";
+  // var lines = line.split("\n");
+  // console.log("%c BBBBB" + lines[2].substring(lines[2].indexOf("("), lines[2].lastIndexOf(")") + 1), 'background: rgba(255, 255, 0, 0.2); color: #bada55, width: 100%')
+  //console.log("%c aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n \n", 'background: rgba(255, 255, 0, 0.2); color: #bada55, width: 100%')
+  //console.log("%c \nAAAAAAAAAAAAAAAAAAA\n", 'background: rgba(255, 255, 0, 0.5); color: #bada55, width: 100%')
+  // let style = `
+  //   background: rgba(255, 255, 0, 0.5);
+  //   color: white;
+  //   /* display: flex!important; */
+  //   /* position: relative!important; */
+  //   /* top: 0px!important; */
+  //   /* left: 100px!important; */
+  //   /* flex-direction: column; */
+  //   /* max-width: 0px; */
+  //   /* width: 600px; */
+  //   /* display: block; */
+  //   /* margin-top: 0%; */
+  //   /* margin-right: 50%; */
+  //   /* margin-bottom: 0%; */
+  //   /* margin-left: 0%; */
+  //   /* height: 500px; */
+  //   /* background-color: red; */
+  //   /* width: 100vw; */
+  //   /* padding-top: 0%; */
+  //   /* padding-right: 5%; */
+  //   padding-right: 55%;
+  //   width: 200%;
+  //   min-width: 200%;
+  //   max-width: 200%;
+  //   /* padding-bottom: 0%; */
+  //   /* padding-left: 0% */
+  // `
+
+  /* padding-bottom: 100%; */
+  // let style = `
+  //   background: linear-gradient(#D33106, #571402);
+  //   border: 1px solid #3E0E02;
+  //   color: white;
+  //   display: block;
+  //   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  //   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 5px 3px -5px rgba(0, 0, 0, 0.5), 0 -13px 5px -10px rgba(255, 255, 255, 0.4) inset;
+  //   line-height: 40px;
+  //   text-align: center;
+  //   font-weight: bold;
+    
+  // `
+  //console.log("\n%c \nAAAAAAAAAAAAAAAAAAA\n", style)
+  //console.log('\x1b[45m%s\x1b[0m', 'I am cyan'); 
+  //console.log('\x1b[36msometext\x1b[0m');
+
+
+  //   const betterLogColors = {
+  //     bright: '\x1b[1m',
+  //     dim: '\x1b[2m',
+  //     underscore: '\x1b[4m',
+  //     blink: '\x1b[5m',
+  //     reverse: '\x1b[7m',
+  //     hidden: '\x1b[8m',
+
+  //     black: '\x1b[30m',
+  //     red: '\x1b[31m',
+  //     green: '\x1b[32m',
+  //     yellow: '\x1b[33m',
+  //     blue: '\x1b[34m',
+  //     magenta: '\x1b[35m',
+  //     cyan: '\x1b[36m',
+  //     white: '\x1b[37m',
+  //     gray: '\x1b[90m',
+
+  //     bgBlack: '\x1b[40m',
+  //     bgRed: '\x1b[41m',
+  //     bgGreen: '\x1b[42m',
+  //     bgYellow: '\x1b[43m',
+  //     bgBlue: '\x1b[44m',
+  //     bgMagenta: '\x1b[45m',
+  //     bgCyan: '\x1b[46m',
+  //     bgWhite: '\x1b[47m',
+  //     bgGray: '\x1b[100m',
+  // }
+
+  // type ArgSet = [...[keyof typeof betterLogColors, ...any]];
+
+  // let ColorLog = (...argSets: [string[]] | ArgSet[]) => {
+  //     if (!Array.isArray(argSets[0])) return console.log(betterLogColors.bgGreen + '>>' + betterLogColors.bgBlack + argSets[0] + '\x1b[0m')
+
+  //     console.log(...argSets.map(([color, ...oput]) => betterLogColors[color as keyof typeof betterLogColors] +
+  //         oput.map(t => {
+  //             if (!t || ['bigint', 'boolean', 'number', 'string'].includes(typeof t)) {
+  //                 return t;
+  //             } else {
+  //                 return JSON.stringify(t, undefined, 1)
+  //             }
+  //         })
+  //         + '\x1b[0m'))
+  // }
+
+  //ColorLog(['red', 'this is'], ['green', 'a test'], ['bgRed', ['with', 'an', 'array']])
+  //ColorLog(['bgRed', ['with', 'an', 'array']])
+
+  //console.log("%c ", "font-size: 1px; padding: 240px 123.5px; background-size: 247px 480px; background: no-repeat url(https://cdn.pixabay.com/photo/2017/01/31/22/47/tree-2027899_1280.png);");
+
+  //console.log("%c ", "font-size: 1px; padding: 166.5px 250px; background: no-repeat url(https://www.shutterstock.com/image-illustration/treejpg-eps-vector-version-id-260nw-122687560.jpg);");
+
+  //console.log('%c a colorful message\n ', 'display: flex; background: green; color: white; display: block; text-align: center;');
+
+  //console.log('%cProperties supported include padding and background-color; even gradients like this 🦄', 'padding: 0.3rem 1.5rem; font-family: Roboto; font-size: 1.2em; line-height: 1.4em; color: white; background-color: #4158D0; background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);');
+
+  let style = `
+    font-family: Roboto;
+    font-size: 1.2em;
+    line-height: 1.4em;
+    /* color: white; */
+    /* color: rgba(255, 255, 0, 0.9); */
+    /* color: rgb(245, 242, 164); */ /* BASTANTE BIEN */
+    /* color: rgb(252, 240, 151); */ /* EXCELENTE */
+    /* color: rgb(252, 240, 151); */
+    color: inherit;
+    /* color: #bada55; */
+    /* background: rgba(255, 255, 0, 0.15); */
+    /* background: rgba(194, 201, 79, 0.15); */
+    /* background: rgba(240, 236, 211, 1); */
+    margin-left: -24px;
+    padding-left: 24px;
+    border-radius: 4px;
+    /* padding-right: 100%; */
+    /* margin-right: 100px; */
+    /* padding-right: calc(100% + 22px); */
+    /* padding-right: calc(100%); */
+    /* box-sizing: border-box; */
+    /* width: 100%; */
+  `
+
+  Error.stackTraceLimit = 2;
+   //Error.captureStackTrace = ""
+  //Error.prepareStackTrace = () => {return "A"}
+  //Error.captureStackTrace = () => {}
+  //Error.prepareStackTrace = () => {}
+  //console.dir(Error)
+
+   let ww = <div>AAAA</div>
+  //console.log('%cAAAAAAAAAAAAAAAAAAAAAAAAAAA\xa0\nBBBBBBBBBBBBBBBBB', style);
+  //let asd = "                                                                                                                                                                                                                                   "
+  let asd = " ".repeat(2000) // 450 = 1 MONITOR
+  //console.log('%cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'.concat(asd), style);
+  //console.log(`%cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`, style);
+  //console.log(`%cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA${asd}`, style);
+  //console.warn(`%cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`, style)
+  console.warn(`%cBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB`) // DONT DISPLAY STACK !!!
+  console.warn(`AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`)
+
+  //console.log(process.env.LIGHT_MODE_DIMMED_WARNING_COLOR)
+
+  
+  //console.log('%cAAAAAAAAAAAAAAAAAAAA', style);
+  //console.log('%c                      ', style);
+  //console.log('%caaaaaaaaaaaaaaaaaaaa', style);
+  /* console.log('%ciiiiiiiiiiiiiiiiiiii', style); */
+  //console.log("%cold text\u001b[2K\u001b[0Enew text")
+  //process.stdout.columns
+  //console.log(NodeJS.Process)
+  //console.log('%cAAAAAAAAAAAAAAAAAAAAAAAAAAA\x1bBBBBBBBBBBBBBBBBB', style);
+  //console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAA\xa0\nBBBBBBBBBBBBBBBBB');
+  //console.warn("AAAAAAAAAAAAAAAAAAA")
+  // console.trace = function(){}
+  // //console.warn = function(){}
+  // console.warn("AAAAAAAAAAAAAAAAAA")
+
+  const colors = {
+    Reset: "\x1b[0m",
+    Bright: "\x1b[1m",
+    Dim: "\x1b[2m",
+    Underscore: "\x1b[4m",
+    Blink: "\x1b[5m",
+    Reverse: "\x1b[7m",
+    Hidden: "\x1b[8m",
+    fg: {
+     Black: "\x1b[30m",
+     Red: "\x1b[31m",
+     Green: "\x1b[32m",
+     Yellow: "\x1b[33m",
+     Blue: "\x1b[34m",
+     Magenta: "\x1b[35m",
+     Cyan: "\x1b[36m",
+     White: "\x1b[37m",
+     Crimson: "\x1b[38m"
+    },
+    bg: {
+     Black: "\x1b[40m",
+     Red: "\x1b[41m",
+     Green: "\x1b[42m",
+     Yellow: "\x1b[43m",
+     Blue: "\x1b[44m",
+     Magenta: "\x1b[45m",
+     Cyan: "\x1b[46m",
+     White: "\x1b[47m",
+     Crimson: "\x1b[48m"
+    }
+   };
+   
+   //console.log(`\x1b[44m, \x1b[37m, "%c Created by %c www.google.com",                                                                                                                                              \x1b[0m`);
+
+  // console.trace = function(){}
+
+  //const error = new Error("Your message");
+  //const error = new Warning("Your message")
+    //error.stack = ""
+    //console.warn.
+    //throw error
+
+    //let error = new Error("Your message");
+    //error.stack = ""
+    //console.warn("AAAAAAAAAAAAAAAAAA")
+    //console.warn("AAAAAAAAAAAAAAAAAA")
+    //console.warn = function overrideMethod() {}
+    //console.warn = 
+    //console.dir(console.warn)
+    //console.log((console.error).toString())
+    //console.log(new Error().stack = "AAA");
+    //Error.captureStackTrace = () => {}
+    //Error.captureStackTrace = ""
+    //Error.prepareStackTrace = () => {return "A"}
+    // Property 'getFunction' does not exist on type '(err: Error, stackTraces: CallSite[]) => any'.
+    //Error.prepareStackTrace.getFunction()
+    //Error.prepareStackTrace = (err: Error, stackTraces: []) => {}
+
+    //Error.stackTraceLimit = 0;
+    
+    // qq.stack = "AAA\nBBB\nCCC"
+
+    // if (Error.prepareStackTrace !== undefined) Error.prepareStackTrace(qq, [])
+    
+    //   console.trace = () => {}
+      //console.warn(qq)
+      
+      //Error.captureStackTrace(qq, []);
+      // Error.captureStackTrace = (err, stack) => {
+      //   return null
+      // }
+
+      // Error.prepareStackTrace = (err, stack) => {
+      //   return null
+      // }
+
+      //Error.prepareStackTrace = (err, stack) => { return err}
+      //let x = { stack: "" }
+      Error.stackTraceLimit = 0;
+      let qq: any = (new Error("AAAAAAAAAAAAAAAAAAAAA\x1bBBBBBBBBBBBBBBBBBBBBBBB") as any).prepareStackTrace = (x:any) => { return "AAAAAAAAAAAAAAAAAAAA" }
+
+
+      // qq.captureStackTrace = (x:any) => { return null }
+      //qq.prepareStackTrace = (x:any) => { return "AAAAAAAAAAAAAAAAAAAA" }
+
+      //console.log(qq)
+      //console.warn(qq)
+      // console.warn(new Error("...").stack)
+
+      //console.table([{" ":"AAAAAAAAAAAAAAA"}])
+      //console.log(console)
+      //console.warn(JSON.stringify("AAAAAAAAAAAAAAA"))
+
+      // "Yellow" )      colorString='\033[1;93m';;
+      // "Magenta" )     colorString="${colorString}\033[105m";;
+
+      // Reset colors to defaults
+      // \x1b === \033
+      //local resetColor="\033[0m"
+      //local resetColor="\x1b[0m"
+
+      //OK console.log("\x1b[1;93m\x1b[105m")
+      //printf "${colorString}%s${resetColor}" "${str}"
+      //console.warn("\x1b[1;93m\x1b[105m%s\x1b[0m", "AAAAAAAAAAAA")
+      
+
+      // 21 void clearLine(void) {
+      // 22 	printf("\x1b[%dK", CLEAR_ALL);
+      // 23 }
+        
+
+      //console.log("\x1b[31m\x1b[44mHello, World")
+      //console.log("\x1b[32;1mSome bright green text")
+
+      
+      //console.warn("AAAAAAAAAAAAAAAAAAAAA\nBBBBBBBBBBBBBBBBBBBBBBB")
+      
+
+    //console.log((Error.prepareStackTrace))
+    //Error.captureStackTrace = null
+    //Error.prepareStackTrace = null
+    //Error.prepareStackTrace = ""
+    
+    //qq.stackTraceLimit = 1;
+    //Error.stackTraceLimit = Infinity;
+    //qq = new Error()
+    
+    //qq = () => { new Error().stack = "AAA" }
+
+    //console.error(qq);
+    
+    //console.warn(console.log("AAAAAAAAAAAAAAAAAAA"))
+    
+  //console.error(error.message);
+  //console.log(console);
+
+  //console.assert(true, "ASDASDSAD")
+  //console.debug("ASDASDSAD")
+  //console.info("ASDASDSAD", style)
+
+  //console.log('default \x1B[43m color \n color \x1B[49m default')
+
+  //console.log("%c aaaaaaaaBBBBBBBBBBBBBB", style)
+  //console.log("%c aaaaaaaaBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC", style)
+  // console.log('\x1b[43mHighlighted');
+  //console.log('\033[91m\033[107mThis is red text on a white background\033[0m')
+  //console.log('\x1b[91m\x1b[107mThis is red text on a white background\x1b[0m')
+  //console.log('BBBBBBBBBBBBBBBBBBB\x1b[106m')
+
+  // "Magenta" )     colorString="${colorString}\033[105m";;
+
+  // local colorString=$(Color ${forecolor} ${backcolor})
+  // printf "${colorString}%s${resetColor}" "${str}"
+  // local colorString='\033['
+  // local resetColor='\033[0m'
+
+  //console.log('\033[\033[105m%s\033[0m" "BBBBBBBBBBBBBBBBBBBBB');
+
+  //printf 
+  //console.log("\033[105m%s\033[0m", "BBBBBBBBBBBBBBBBBBBBB")
+  //console.log("\x1b[105m%s\x1b[0m\n", "BBBBBBBBBBBBBBBBBBBBB")
+
+  //console.log("\x1b[103m%s\x1b[0m\n", "BBBBBBBBBBBBBBBBBBBBB")
+
+  //console.log("\x1b[\x1b[95mAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+  //console.log('${red}${bold}Hello World!${reset}')
+
+  // let red="\x1b[0;91m"
+  // let blue="\x1b[0;94m"
+  // let expand_bg="\x1b[K"
+  // let blue_bg=`\x1b[0;104m${expand_bg}`
+  // let red_bg=`\x1b[0;101m${expand_bg}`
+  // let green_bg=`\x1b[0;102m${expand_bg}`
+  // let green="\x1b[0;92m"
+  // let white="\x1b[0;97m"
+  // let bold="\x1b[1m"
+  // let uline="\x1b[4m"
+  // let reset="\x1b[0m"
+
+
+  //console.log(`${red}${bold}Hello World!${reset}`)
+  //console.log(`${blue_bg}${reset}`)
+  //console.log('%c a colorful message', 'background: green; color: white; display: block;');
+
+  //console.log('\x1b[\x1b[105m%s\x1b[0m BBBBBBBBBBBBBBBBBBBBB');
+
+  //colorString="${colorString}\033[106m";;
+  // console.log('\x1b[36m sometext \x1b[0m');
+  //console.log("%c \nAAAAAAAAAAAAAAAAAAA\n", `<marquee behavior="alternate" 100% scrollamount="2" bgcolor="#dfeded"><b>Aire Acondicionado LG Art Cool 3000 frigorías Inverter frío/calor<div style="display:none">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#0095AB">VER COMPLETO</span></div></b></marquee>`)
+
+
+  
+
+  //console.log('%c a colorful message', 'background: green; color: white; display: block;');
+  //console.log("%c What light through yonder window breaks?", 'background: rgba(255, 255, 0, 0.5); color: #bada55, width: 100%')
+  
+  //window.my_log("What light through yonder window breaks?")
+  
+
+     //console.warn.apply(console);
+     //console.log(window)
+
+     //console.warn("AAAAAAAAAA")
+    //console.error("asd", 'background: red; color: #bada55')
+    //console.log("asd", 'background: red; color: #bada55')
+    //console.error({message:  "asdad"})
+    //console.log(console)
+    //console.warn(console.warn)
+    //const error = new Error("Your message").stack = ""
+    //console.warn({a:"asdasdasd"})
+    //console.trace({a:"asdasdasd"})
+    //console.trace(null)
+    //error.stack = ""
+    //console.trace = () => {}
+    //console.error(error.stack)
+    //throw "Oh no! 'n' is too small!"
+    // var err = new Error();
+    // //return err.stack;
+    // console.warn(err.stack)
+    //console.warn("asd")
+    // try {
+    //     // Code throwing an exception
+    //     throw new Error();
+    // } catch(e:any) {
+    //     console.warn(e.stack);
+    // }
+    //throw error
+    // try {
+    //     // Code throwing an exception
+    //     throw new Error();
+    // } catch(e:any) {
+    //     //console.log(e.stack);
+    //     console.warn("asdasd");
+    // }
+    //const error = new Error("asdasd")
+    //error.stack = ""
+    //throw error
+    //console.warn(Error.message)
+    //console.groupCollapsed('name to show to identify trace');
+    
+    //console.trace.message = 'sadasd' 
+    //window.console.trace=null;
+    //console.log("ASD", console.trace)
+  }
+  // if (setShowImageViewer === undefined) console.error('setShowImageViewer IS EMPTY !')
+  //if (setShowImageViewer === undefined) throw new Error('setShowImageViewer IS EMPTY !');
+  //if (setShowImageViewer === undefined) throw new Warning("setShowImageViewer IS EMPTY !");
+
+
 
   let clickOnBG = useRef({ // CLICK ON BACKGROUND MODAL
     start: false, // CLICK BEGINS ON BG MODAL

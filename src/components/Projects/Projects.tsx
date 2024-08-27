@@ -8,6 +8,7 @@ import {
 import css from './ProjectsCSS.module.css';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
 import ImageViewer from '../ImageViewer/ImageViewer';
+//import ImageViewer from 'pabloazambuyo-image-viewer-react';
 
 function Projects() {
 
@@ -349,7 +350,8 @@ function Projects() {
         <ImageViewer
           images={array.map(e => e.media).flat()}
           index={index}
-          setShowImageViewer={setShowImageViewer}
+          //setShowImageViewer={setShowImageViewer}
+          controlsOutside={true}
         />
       }
 
