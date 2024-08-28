@@ -2,7 +2,7 @@ import {
   ReactElement, useEffect, useState, useRef, ReactNode, MouseEvent, TouchEvent
 } from 'react';
 import css from './ImageViewerCSS.module.css';
-import { Forward, Add, Remove, Close } from '@mui/icons-material/';
+import { Forward, Add, Remove, Close, Style } from '@mui/icons-material/';
 import { Button } from '@mui/material';
 import {
   ImageViewerI, operationI, comparisonI, currentZoomI
@@ -19,6 +19,11 @@ declare global {
 }
 
 window.warnStatements = window.warnStatements || {};
+
+window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+  // Log the error here -- perhaps using an AJAX call
+  console.log(errorMsg, url, lineNumber)
+}
 
 //interface Errorr extends Error {
 type Error = {
@@ -222,48 +227,156 @@ function ImageViewer({ images, index, setShowImageViewer, controlsOutside }: Ima
 
   //console.log('%cProperties supported include padding and background-color; even gradients like this 🦄', 'padding: 0.3rem 1.5rem; font-family: Roboto; font-size: 1.2em; line-height: 1.4em; color: white; background-color: #4158D0; background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);');
 
-  let style = `
-    font-family: Roboto;
-    font-size: 1.2em;
-    line-height: 1.4em;
-    /* color: white; */
-    /* color: rgba(255, 255, 0, 0.9); */
-    /* color: rgb(245, 242, 164); */ /* BASTANTE BIEN */
-    /* color: rgb(252, 240, 151); */ /* EXCELENTE */
-    /* color: rgb(252, 240, 151); */
-    color: inherit;
-    /* color: #bada55; */
-    /* background: rgba(255, 255, 0, 0.15); */
-    /* background: rgba(194, 201, 79, 0.15); */
-    /* background: rgba(240, 236, 211, 1); */
-    margin-left: -24px;
-    padding-left: 24px;
-    border-radius: 4px;
-    /* padding-right: 100%; */
-    /* margin-right: 100px; */
-    /* padding-right: calc(100% + 22px); */
-    /* padding-right: calc(100%); */
-    /* box-sizing: border-box; */
-    /* width: 100%; */
-  `
+  
 
-  Error.stackTraceLimit = 2;
+  //Error.stackTraceLimit = 2;
    //Error.captureStackTrace = ""
   //Error.prepareStackTrace = () => {return "A"}
   //Error.captureStackTrace = () => {}
   //Error.prepareStackTrace = () => {}
   //console.dir(Error)
 
-   let ww = <div>AAAA</div>
-  //console.log('%cAAAAAAAAAAAAAAAAAAAAAAAAAAA\xa0\nBBBBBBBBBBBBBBBBB', style);
-  //let asd = "                                                                                                                                                                                                                                   "
-  let asd = " ".repeat(2000) // 450 = 1 MONITOR
-  //console.log('%cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'.concat(asd), style);
-  //console.log(`%cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`, style);
-  //console.log(`%cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA${asd}`, style);
-  //console.warn(`%cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`, style)
-  console.warn(`%cBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB`) // DONT DISPLAY STACK !!!
-  console.warn(`AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`)
+  //console.warn('%c\nBBBBBBBBBBBBBBBBBBB\nBBBBBBBBBBBBBBBBBBBBBBBB') // DONT DISPLAY STACK !!!
+  //let sss = console.warn('%c\nBBBBBBBBBBBBBBBBBBB\nBBBBBBBBBBBBBBBBBBBBBBBB') // DONT DISPLAY STACK !!!
+ 
+    //console.warn('%c')
+    //console.warn('%c\nBBBBBBBBBBBBBBBBBBB\nBBBBBBBBBBBBBBBBBBBBBBBB') // DONT DISPLAY STACK !!!
+    //let qqqq = '%c\nBBBBBBBBBBBBBBBBBBB\nBBBBBBBBBBBBBBBBBBBBBBBB'
+    //let qqqq = '                                                                      %c\nBBBBBBBBBBBBBBBBBBB\nBBBBBBBBBBBBBBBBBBBBBBBB'
+
+    
+
+    
+    
+
+    // // First time:
+    // let backupconsolelog = console.warn.bind(console);
+    // console.warn = function() {
+    //     backupconsolelog.apply(this, [arguments]);
+    //     /* Do other stuff */
+    // }
+    // // console.log is now redirected correctly
+    
+    // // Second time:
+    // backupconsolelog = console.warn;
+    // // Congratulations, you now have infinite recursion
+    // //.then((res) => ccc(res))
+
+    //console.warn(console.warn(qqqq), "asd")
+    //console.warn(qqqq.slice(2))
+    //let qqqq1 = '%c'
+    //let qqqq2 = '%cAAAAAAAAAAAAAAAAAAA\nBBBBBBBBBBBBBBBBBBBBBBBB'
+    //console.warn(qqqq)
+    //console.log(JSON.stringify(result))
+    //console.warn(qqqq1 + qqqq2)
+    //console.warn(JSON.stringify(qqqq1 + qqqq2))
+    //console.warn(qqqq1 + qqqq2)
+    //console.warn('%cAAAAAAAAAAAAAAAAAAA\nBBBBBBBBBBBBBBBBBBBBBBBB', 'display: flex')
+    //console.warn('%cAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB', 'display: flex')
+    //let kk = new Error()
+    //kk.type = "warning"
+    //kk.type = "warn"
+    //kk.message = "ASDASDAD"
+    //console.warn(`%cAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB`,)
+    //console.warn(`%c${kk}`)
+    //console.warn(`%c\nAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB`)
+    //console.warn(`                                                            %c\nAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB`)
+    //console.warn(`                                                            %c\nAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB`)
+    //console.warn(`                        %c\nAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB`) // APARECE A VECES
+    //console.warn(`                           %c\nAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB`) // APARECE A VECES
+    //console.warn(`                                                                           %c\nAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB`) // APARECE A VECES
+
+
+    //let qq1 = () => { return console.warn(`                        %c\nAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB`) } // APARECE A VECES
+    //let qq1 = () => { return console.warn(`                %c\nAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB`.concat(' ')) } // APARECE A VECES
+    //let qq1 = () => { return console.warn('\nAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB%c') } // APARECE A VECES
+    //let qq1 = () => { return console.warn('\nAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB           %c') } // APARECE A VECES
+    //let qq1 = () => { return console.warn('\nAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB                                           %c') } // APARECE A VECES
+    //console.warn('%c\x1B[41;93;4mHello\x1B[m')
+    //console.warn('%c%cAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB')
+    //console.warn('%c' + 'AAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB')
+    //console.warn()
+    //console.warn('%cAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBB')
+    //console.log(console)
+    //console.log("AAAAAAAAAAAAAAAA")
+    //console.clear()
+    //console.info("%cAAAAAAAAAAAAAAAA", "background: red;")
+
+    let style = `
+      line-height: 18px;
+      /* rgb() */
+      /* background: rgb(65, 60, 38); */ /* EXACT CHROME BG DARK */
+      background: light-dark(rgb(254 246 213), rgb(253 243 170));
+      /* color: rgb(253, 243, 170); */ /* EXACT CHROME TEST DARK */
+      color: light-dark(rgb(62, 47, 0), rgb(253, 243, 170)); /* EXACT CHROME TEST DARK */
+      border-radius: 4px;
+      margin-left: -24px;
+      padding-left: 24px;
+      padding-right: calc(100% + 22px);
+      text-wrap: nowrap;
+      background-repeat: no-repeat;
+      background-position-x: 5px;
+      background-position-y: 1px;
+      background-size: 16px;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAANkSURBVHhe7ZpPaxNBGIenBnuoNT00ReshUAhqD9qCF0E9eKp3j6L9EOJdvYofQsHvYLwK3gT/HKogQnOwolGolhwsonnjzMGJk3Z2fu/Mu/V9IHQ3LW33ycw+O9lMXb548pdRIByyXxUAKhOIygSiMoGoTCAqE4jKBKIygahMICoTSG1krrZmzZV2y+7JpDYyb51bMteXF83xmWn7jDxqIXP99B+J9Fhrz9tn5SFeJgm8sXzC7pnRttTRKV4mTW8fmu4SES2TokMPHwqRxBiJlvmvUemQGCOxMl10QkiMkUiZfnRCSIuRSJmTprePpBiJkxmKTghJMRInM2ZUOqTESJTMvaITQkqMxMjcb3RCSIiRGJlVprdP6RiJkBkbnRClYyRCJmJUOkrGqPhnjSg6oXPli/6OefX5m937m7MLzeBofrjxwTx4s2X38lFUJo2gR2tn7N44k6RMehGIa93X5uPgh93LQ9FpjpzePiViVEwmKjohSsSomEzOUenIHaMiMquudGKhv5FzZZRdJh1gykonlpwro+wyc0xvn1wxyiqTOzohcsUoq8wSo9KRI0bZZOaKTogcMcoiM3d0QnDHKIvMktPbhzNG7DJLRScEZ4zYZUoalQ6uGLHKLB2dEFwxYpMpJTohOGLEJlPi9PZBx4jlzWEKzv1Lp+yebO493zSPe327lwbLyKzDqHQgYwSXKTU6IZAxgsrkig7dC6J7Ojefvh1NSfS9HVSMGkvt+dt2O5k75zvwUUkCu72vZmf350jis61t8357YFYWmmb2cMP+VDpHphuj350CbGRyrHRoRNLtXh967skmJhoOxMoIJpMjOi/73+3WOJO+V5XUGEFklogOxz1xOoaUGCXLpH+Aa6Wz0jpqt8bhem8yJUbJMjmvKUMHxvkCElVXRkk1p+CsMx4UcbVzzEwNv9JjtdU0FxbnzN3hVQMnnbkZ82mwa94NrxpiSFpO0ueEqk4J6dA5mS7LYs7Nlad53VY6sdCxxZ6XK8nkPmdJITZGlWTW6Y2MVGJiFC2TY6UjmZiVUbTM/2lUOva7MoqqOY3ISRfSB5lu78ueZS/+mfaDROVLI2UclQlEZQJRmUBUJhCVCURlAlGZQFQmEJUJRGUCUZlAVCYQlQlEZQJRmUBUJhCVCcOY3xKYvIc3R4ZkAAAAAElFTkSuQmCC)
+    `
+
+    //console.log("%cAAAAAAAAAAAAAAAA                                                                                                                  ", style)
+    //console.log("%c⚠️AAAAAAAAAAAAAAAA                                                                                                                           ", style)
+    console.log("%c  AAAAAAAAAAAAAAAA                                                                                                                           ", style)
+    //console.log("%cAAAAAAAAAAAAAAAA                                                                                                                  ", style)
+    console.warn("%cAAAAAAAAAAAAAAAA")
+   
+
+    //console.log('My Console!!!')
+    //console.log('\x1B[41;93;4mHello\x1B[m');
+    //qq1()
+    //qq1()
+    //console.log(qq1())
+    //console.log(qq1)
+    //console.warn(kk)
+    //console.log(console)
+  //   let ttt = () => {
+  //     var oldLog = console.log;
+  //     console.log = function (message) {
+  //         // DO MESSAGE HERE.
+  //         console.log("BBBBB", message)
+  //         oldLog.apply(console, [arguments]);
+  //     };
+  // }
+  //ttt()
+  //console.log("AAAAAAAA")
+  //   try {
+  //     //alert(foo);
+      
+  //     //console.log(console.log(qqqq))
+  //     throw new Error()
+  //     //console.log("ERROR")
+      
+  // } catch(e) {
+  //    //console.log("ERROR", e)
+  //    console.warn(qqqq)
+  //     //alert('The code got the following error: '+e.message);
+  // }
+
+    
+    
+    //console.warn(qqqq)
+    // setTimeout(() => {
+    //   console.warn() // DONT DISPLAY STACK !!!
+    // },0)
+    
+  
+  // .then(() => {
+  //   console.warn()
+  // })
+  // console.warn()
+  //   console.warn('%c\nBBBBBBBBBBBBBBBBBBB\nBBBBBBBBBBBBBBBBBBBBBBBB') // DONT DISPLAY STACK !!!
+
+  // const console = { log: () => void 0 };
+  // console.log();
+
+  //console.warn(`AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`)
 
   //console.log(process.env.LIGHT_MODE_DIMMED_WARNING_COLOR)
 
