@@ -41,6 +41,9 @@ export interface ImageViewerI {
   index?: number,
   setShowImageViewer?: Dispatch<SetStateAction<boolean>>,
   controlsOutside?: boolean,
+  disableAnimation?: boolean,
+  timing?: number,
+  mode?: string
 }
 
 export interface operationI {

@@ -1,15 +1,19 @@
 .modalBackground {
   /* background: green; */ /* DEV */
   position: fixed;
-  left: 0;
-  top: 0;
+  /* left: 0;
+  top: 0; */
   width: 100vw;
   height: 100vh;
+  /* width: 95vh;
+  height: 95vw; */
   background: rgba(0,0,0,0.4); /* AROUND IMAGE */
   z-index: 1000000; /* MORE THAN APP GRAY STRIPS */
   display: flex;
   justify-content: center;
   align-items: center;
+  /* transform: rotate(270deg); */
+  /* transform: rotate(-90deg); */
 }
 
 .innerModal {
@@ -17,9 +21,32 @@
   background: gray;
   display: flex;
   position: relative;
-  width: 80vw !important;
-  height: 70vh !important;
   justify-content: center;
+  /* width: 80vw !important; */
+  /* height: 70vh !important; */
+  /* height: 70vh; */
+  height: 70%;
+  /* width: 80%; */
+  /* width: 80vw !important; */
+  /* iC   mrg   btn mtg  btn mrg  btn mrg btn  mrg  btn  mrg   zC */
+  /* 70 + 3.5 + 35 + 7 + 35 + 7 + 35 + 7 + 35 + 7 + 35 + 3.5 + 70 */
+  min-width: 350px;
+  /* padding-top: 0px; */
+  /* max-width:min-content; */
+  /* min-height: 330px; */
+  /* height: 70vh !important; */
+  /* width: 70vw !important; */
+
+  /* transform: rotate(270deg); */
+  /* width: 80vw;
+  height: 70vh; */
+
+  /* padding: 0 20px 0 20px; */
+  /* padding: 0 20px; */
+
+  /* transform: rotate(270deg); */
+
+  
 }
 
 .canvasImage {
@@ -27,34 +54,44 @@
   object-fit: contain;
   max-width: 80vw;
   max-height: 70vh;
+  /* width: 70%;
+  height: 80%; */
+  /* max-width: 80%;
+  max-height: 70%; */
+  /* transform: rotate(270deg); */
+  /* max-width: 70vh;
+  max-height: 80vw; */
 }
 
 .bottomBar {
   /* background: green; */ /* DEV */
+  background: rgba(0, 128, 0, .5); /* DEV */
   display: flex;
   position: absolute;
+  flex-direction: row;
   left: 0px;
   bottom: 0px;
-  width: 100% !important;
-  background: rgba(0, 0, 0, 0.4);
+  /* flex-direction: column; */
+  width: 100%;
+ /*  height: 100%;
+  left: 0px;
+  top: 0px;
+   */
+   /* transform: rotate(90deg); */
+  /* background: rgba(0, 0, 0, 0.4); */
+  /* transform: rotate(270deg); */
+  /* transform: rotate(90deg); */
   justify-content: center;
+  /* transform-style: preserve-3d; */
+  /* align-items: center; */
 }
 
 .buttonsContainer {
   display: flex;
   position: relative;
+  /* flex-direction: row; */
+  /* flex-direction: column; */
   /* background: red; */ /* DEV */
-}
-
-.zoomContainer {
-  /* background: blue; */ /* DEV */
-  width: 50px;
-  align-items: center;
-  display: flex;
-  position: absolute;
-  right: -55px;
-  color: #fff;
-  height: 49px;
 }
 
 .imageCounter {
@@ -67,6 +104,19 @@
   color: #fff;
   height: 49px;
   justify-content: flex-end;
+}
+
+.zoomContainer {
+  /* background: blue; */ /* DEV */
+  /* width: 50px; */
+  width: 70px;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  /* right: -55px; */
+  right: -75px;
+  color: #fff;
+  height: 49px;
 }
 
 .button {
@@ -88,7 +138,7 @@
   position: absolute;
   flex-direction: column;
   transform: rotate(180deg);
-  min-width: 0vh;
+  min-width: 0%;
   width: 23px !important;
   height: 23px !important;
 }
@@ -97,3 +147,16 @@
   transform: scaleX(1);
 }
 
+
+
+/* @media screen
+and (orientation: portrait) {
+  .innerModal {
+    width: 95vw;
+    height: 40vh;
+  }
+  .canvasImage {
+    max-width: 95vw;
+    max-height: 40vh;
+  }
+} */

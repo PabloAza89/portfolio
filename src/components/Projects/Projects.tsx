@@ -7,8 +7,7 @@ import {
 } from '../../images/images';
 import css from './ProjectsCSS.module.css';
 import GoToLinkButton from '../GoToLinkButton/GoToLinkButton';
-import ImageViewer from '../ImageViewer/ImageViewer';
-//import ImageViewer from 'pabloazambuyo-image-viewer-react';
+import { ImageViewer } from '../ImageViewer/ImageViewer';
 
 function Projects() {
 
@@ -348,10 +347,13 @@ function Projects() {
       {
         showImageViewer &&
         <ImageViewer
-          images={array.map(e => e.media).flat()}
-          index={index}
-          //setShowImageViewer={setShowImageViewer}
-          controlsOutside={true}
+          images={array.map(e => e.media).flat()} // OK
+          index={index} // DEFAULT 0
+          setShowImageViewer={setShowImageViewer} // OK
+          //controlsOutside={true} // DEFAULT FALSE
+          //disableAnimation={true} // DEFAULT FALSE
+          //timing={10} // DEFAULT 10
+          //mode={"vertical"} // vertical | horizontal | auto // DEFAULT AUTO
         />
       }
 

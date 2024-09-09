@@ -26,8 +26,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     if (refCanvas.current !== null) {
       let ref = refCanvas.current
       initImgPos.current =
-      rotationAngle === -90 || rotationAngle === -270 || rotationAngle === -180 ?
-      { y: ref.width / -4, x: ref.height / -4 } :
       { x: ref.width / -4, y: ref.height / -4 }
     }
 
@@ -46,25 +44,127 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     // (360 / 90) % 2
     //let qq =  (rotationAngle / 90) % 2
 
-    let bG = document.getElementById('modalBackground');
-    let canvas = document.getElementById('canvasImage');
-    if (bG !== null && canvas !== null) {
+    if (refCanvas.current !== null) {
       // bG.style.width = '95vh';
       // bG.style.height = '95vw';
       // bG.style.transform = 'rotate(-90deg)';
 
-      if ((rotationAngle / 90) % 2 === 0) {
-        canvas.style.maxWidth = '80vw';
-        canvas.style.maxHeight = '70vh';
-      } else {
-        canvas.style.maxWidth = '70vh';
-        canvas.style.maxHeight = '80vw';
-      }
+      let ref = refCanvas.current
+      let ctx = ref.getContext("2d");
+
+
+      // if ((rotationAngle / 90) % 2 === 0) {
+      //   canvas.style.maxWidth = '80vw';
+      //   canvas.style.maxHeight = '70vh';
+      // } else {
+      //   canvas.style.maxWidth = '70vh';
+      //   canvas.style.maxHeight = '80vw';
+      // }
       
+      //if (ctx !== null && rotationAngle === -90) {
+      if (ctx !== null && rotationAngle !== 0) {
+        // ctx.drawImage(
+        //   image.current,
+        //   currPos.x, currPos.y,
+        //   currentDim.w, currentDim.h
+        // );
+
+        var x = ref.width / 2;
+        var y = ref.height / 2;
+        var width = ref.width;
+        var height = ref.height;
+
+
+        let targetPosition =
+          { x: imgPo.current.x, y: imgPo.current.y } // TARGET (UPDATED ↑↑↑) POSITION
+
+        let targetWidth //= ref.width * currentZoom.val
+        let targetHeight //= ref.height * currentZoom.val
+
+        if (rotationAngle === -90) {
+          targetWidth = ref.width * currentZoom.val
+          targetHeight = ref.height * currentZoom.val
+        } else if (rotationAngle === -180) {
+          targetWidth = ref.width * currentZoom.val
+          targetHeight = ref.height * currentZoom.val
+        }
+
+        // ctx.translate(x, y);
+        // ctx.rotate(90);
+        // ctx.drawImage(
+        //   image.current, // NORMAL
+        //   targetPosition.x, targetPosition.y, // NORMAL
+        //   targetWidth, targetHeight // NORMAL
+        // );
+        // ctx.rotate(-90);
+        // ctx.translate(-x, -y);
+        // 1920 x 1040
+        // 960 x 520
+        // 480 x 260
+
+        // ref.width = image.current.naturalWidth
+        // ref.height = image.current.naturalHeight
+        // ref.width = image.current.naturalHeight
+        // ref.height = image.current.naturalWidth
+
+        if (rotationAngle === -180) {
+          ref.width = image.current.naturalWidth
+          ref.height = image.current.naturalHeight
+        }
+        else if (rotationAngle === -90) {
+          ref.width = image.current.naturalHeight
+          ref.height = image.current.naturalWidth
+        }
+
+        //ctx.save();
+        //ctx.translate(x,y);
+        //ctx.translate(1040, 0 ); // 90
+        //ctx.translate(0, 1920); // -90
+        // 3840
+        rotationAngle === -180 ?
+        //ctx.translate(-1000, -1000) : // -90
+        //ctx.translate(0, -1000) : // -90
+        //ctx.translate(-1000, 0) : // -90
+        //ctx.translate(1040, 1920) : // -90
+        ctx.translate(1920, 1040) : // -90
+        rotationAngle === -90 ?
+        ctx.translate(0, 1920) : // -90
+        rotationAngle === 90 ?
+        ctx.translate(1040, 0) : // 90
+        ctx.translate(1040, 0)
+
+
+        //ctx.translate(960, 520);
+        //ctx.translate(520, 960);
+        //ctx.translate(480, 260);
+        //ctx.translate(260, 480);
+        
+        //ctx.rotate(-90 * Math.PI / 180);
+        ctx.rotate(rotationAngle * Math.PI / 180);
+        //ctx.rotate(45);
+        //ctx.translate(-x,-y);
+        if (rotationAngle === -90) {
+          ctx.drawImage(
+            image.current,
+            targetPosition.x, targetPosition.y, // NORMAL
+            targetWidth, targetHeight // NORMAL
+          );
+        } else if (rotationAngle === -180) {
+          ctx.drawImage(
+            image.current,
+            targetPosition.x, targetPosition.y, // NORMAL
+             targetHeight,targetWidth, // NORMAL
+          );
+        }
+
+        //ctx.save();
+        
+        //ctx.restore();
+      }
 
       
       //canvas.style.transform = `rotate(${rotationValue[rotationAngle]}deg)`;
-      canvas.style.transform = `rotate(${rotationAngle}deg)`;
+      //canvas.style.transform = `rotate(${rotationAngle}deg)`;
       //canvas.style.transform = 'rotate(270deg)';
     }
   
@@ -247,8 +347,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         let halfDim = { w: ref.width / 2, h: ref.height / 2 }
         //let basePos = { x: imgPo.current.x, y: imgPo.current.y }
         let basePos =
-          rotationAngle === -90 ?
-          { y: imgPo.current.x, x: imgPo.current.y } :
           { x: imgPo.current.x, y: imgPo.current.y }
         //let basePos = { y: imgPo.current.x, x: imgPo.current.y }
         let baseDim = { w: halfDim.w * (divider + currentZoom.dF), h: halfDim.h * (divider + currentZoom.dF) };
@@ -263,8 +361,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
         //let targetPosition = { x: imgPo.current.x, y: imgPo.current.y } // TARGET (UPDATED ↑↑↑) POSITION
         let targetPosition =
-          rotationAngle === -90 ?
-          { y: imgPo.current.x, x: imgPo.current.y } : // TARGET (UPDATED ↑↑↑) POSITION
           { x: imgPo.current.x, y: imgPo.current.y } // TARGET (UPDATED ↑↑↑) POSITION
 
         let offset = timing !== undefined && typeof timing === 'number' ? timing : 10 // ANIMATION FRAMES BETWEEN X.0 --> X.5
@@ -337,21 +433,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             // targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
             // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
             targetXPosition = // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-              rotationAngle === -90 ?
-              imgPo.current.x + (e.clientX - arbPos.current.x) * 1.5 :
-              rotationAngle === -180 ?
-              imgPo.current.x - (e.clientX - arbPos.current.x) * 1.5 :
-              rotationAngle === -270 ? //
-              imgPo.current.x - (e.clientX - arbPos.current.x) * 1.5 :
               imgPo.current.x + (e.clientX - arbPos.current.x) * 1.5
-console.log('targetXPosition --->', targetXPosition);
+
             targetYPosition = // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-              rotationAngle === -90 ?
-              imgPo.current.y - (e.clientY - arbPos.current.y) * 1.5 :
-              rotationAngle === -180 ?
-              imgPo.current.y - (e.clientY - arbPos.current.y) * 1.5 :
-              rotationAngle === -270 ? //
-              imgPo.current.y + (e.clientY - arbPos.current.y) * 1.5 :
+
               imgPo.current.y + (e.clientY - arbPos.current.y) * 1.5
 
             //console.log("A VER ESTE", rotationAngle)
@@ -373,12 +458,6 @@ console.log('targetXPosition --->', targetXPosition);
             (targetXPosition < 0 && targetXPosition > initImgPos.current.x * factor) &&
             (targetYPosition < 0 && targetYPosition > initImgPos.current.y * factor)
           ) {
-            rotationAngle === -90 || rotationAngle === -270 ?
-            ctx.drawImage(
-              image.current,
-              targetYPosition,targetXPosition,
-              ref.width * currentZoom.val,ref.height * currentZoom.val
-            ) :
             ctx.drawImage(
               image.current,
               targetXPosition, targetYPosition,
