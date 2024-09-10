@@ -2,7 +2,7 @@ import {
   ReactElement, useEffect, useLayoutEffect, useState, useRef, ReactNode, MouseEvent, TouchEvent
 } from 'react';
 import css from './ImageViewerCSS.module.css';
-import { Forward, Add, Remove, Close, RotateLeft, RotateRight, Flip, RestartAlt } from '@mui/icons-material/';
+import { Forward, Add, Remove, Close, RotateLeft, RotateRight, Flip, RestartAlt, Cached } from '@mui/icons-material/';
 import { Button } from '@mui/material';
 import {
   ImageViewerI, operationI, comparisonI, currentZoomI
@@ -11,89 +11,7 @@ import {
 
 export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside, disableAnimation, timing, mode }: ImageViewerI): ReactElement => {
 
-  
-  
-  //let rotationAngle = 0
-  const [ rotationAngle, setRotationAngle ] = useState(0)
 
-  console.log('rotationAngle --->', rotationAngle);
-
-  // useLayoutEffect(() => {
-
-  //   // TO RIGHT
-    
-
-  //   if (refCanvas.current !== null) {
-  //     let ref = refCanvas.current
-  //     initImgPos.current =
-  //     rotationAngle === -90 || rotationAngle === -270 || rotationAngle === -180 ?
-  //     { y: ref.width / -4, x: ref.height / -4 } :
-  //     { x: ref.width / -4, y: ref.height / -4 }
-  //   }
-
-    
-   
-
-  //   //   console.log("VERTICAL MODE")
-  //   //console.log("ENTRO EN ROTATION")
-
-  //   // TO RIGHT
-
-  //   // (360 / 90) % 2
-  //   // E   O   E   O   E   // Even // Odd
-  //   // 0   90  180 270 360
-
-  //   // (360 / 90) % 2
-  //   //let qq =  (rotationAngle / 90) % 2
-
-  //   let bG = document.getElementById('modalBackground');
-  //   let canvas = document.getElementById('canvasImage');
-  //   if (bG !== null && canvas !== null) {
-  //     // bG.style.width = '95vh';
-  //     // bG.style.height = '95vw';
-  //     // bG.style.transform = 'rotate(-90deg)';
-
-  //     if ((rotationAngle / 90) % 2 === 0) {
-  //       canvas.style.maxWidth = '80vw';
-  //       canvas.style.maxHeight = '70vh';
-  //     } else {
-  //       canvas.style.maxWidth = '70vh';
-  //       canvas.style.maxHeight = '80vw';
-  //     }
-      
-
-      
-  //     //canvas.style.transform = `rotate(${rotationValue[rotationAngle]}deg)`;
-  //     canvas.style.transform = `rotate(${rotationAngle}deg)`;
-  //     //canvas.style.transform = 'rotate(270deg)';
-  //   }
-  
-  //   //}
-
-  // }, [rotationAngle])
-  // //}, [mode])
-
-  // useEffect(() => {
-
-  //   let iVF = document.getElementById('imageViewerForeground');
-  //   //window.getComputedStyle(iVF)
-  //   if (iVF !== null) {
-  //     //iVF.style.
-  //     //console.dir(iVF)
-  //     //setCurrentZoom((curr) => (curr + 0.1))
-  //     //currentZoom.current = currentZoom.current + 0.1
-  //     //console.log("currentZoom", (currentZoom.current).toFixed(1))
-  //     iVF.style.transform = `rotate(${rotationAngle}deg)`
-  //     //console.log(window)
-  //     //window.getComputedStyle(iVF)//.width
-  //     //console.log(window.getComputedStyle(iVF).transform)
-
-  //   }
-
-
-  // }, [rotationAngle])
-
- 
 
   let clickOnBG = useRef({ // CLICK ON BACKGROUND MODAL
     start: false, // CLICK BEGINS ON BG MODAL
@@ -122,14 +40,20 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   const [ currentIndex, setCurrentIndex ] = useState<number>(index !== undefined ? index : 0)
 
-  // mORd = multiplication OR division
-  // aORs = addition OR subtraction
-  // lORm = less OR more
-  // dF = dimensionFactor
-  const [ currentZoom, setCurrentZoom ] = useState({
-    x: 1.0,
-    y: 1.0
+  
+
+  
+
+  //const [ rotationAngle, setRotationAngle ] = useState(0)
+
+  const [ imageProps, setImageProps ] = useState({
+    zoomX: 1.0,
+    zoomY: 1.0,
+    angle: 0,
   })
+
+  //console.log('rotationAngle --->', rotationAngle);
+  
   //let currentZoom = useRef(1.0)//, setCurrentZoom ] = useState(1.0)
   // const [ currentZoom, setCurrentZoom ] = useState<currentZoomI>({ // (cZ)
   //   val: 1, mORd: 'x', aORs: '+', lORm: '<=', dF: 2
@@ -143,148 +67,14 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   let imgPo = useRef({ x: 0, y: 0 }) // IMAGE POSITION
 
 
-  // test //
-
-
-
-  // test //
 
   useEffect(() => { // LOAD NEW IMAGE
     if (images !== undefined && currentIndex !== undefined) {
       imageRef.current.src = images[currentIndex]
-      // image.current.onload = function() {
-      //   if (refCanvas.current !== null) { //
-      //     let ref = refCanvas.current
-      //     let ctx = ref.getContext("2d");
-      //     ref.width = image.current.naturalWidth
-      //     ref.height = image.current.naturalHeight
 
-      //     /* ref.width = image.current.naturalHeight
-      //     ref.height = image.current.naturalWidth */
-
-      //     // e.g.:               x: -480            y: -260               // (1920 x 1040)
-      //     // WHEN 1.0 TO 1.5, SET POSITION TO CENTER OF IMAGE
-      //     //initImgPos.current = { x: ref.width / -4, y: ref.height / -4 }
-      //     console.log("LOADED NEW IMAGE")
-      //     initImgPos.current =
-      //       // rotationAngle === -90 /* || rotationAngle === 90 */ ?
-      //       // { y: ref.width / -4, x: ref.height / -4 } :
-      //       { x: ref.width / -4, y: ref.height / -4 }
-      //     //initImgPos.current = { y: ref.width / -4, x: ref.height / -4 }
-
-      //     imgPo.current = { x: 0, y: 0 }
-
-      //     if (ctx !== null) {
-      //       ctx.imageSmoothingEnabled = false;
-      //       //ctx.rotate(90);
-      //       //ctx.rotate(Math.PI)
-      //       ctx.drawImage(
-      //         image.current,
-      //         0, 0,
-      //         ref.width, ref.height
-      //       ); // FIRST IMAGE DRAW
-      //     }
-      //   }
-      // }
     }
-  }, [currentIndex, images/* , rotationAngle */])
+  }, [currentIndex, images])
 
-  useEffect(() => { // ZOOM CHANGED
-    const operation: operationI = {
-      'x': function(a: number, b: number) { return a * b },
-      '/': function(a: number, b: number) { return a / b },
-      '+': function(a: number, b: number) { return a + b },
-      '-': function(a: number, b: number) { return a - b }
-    }
-
-    const comparison: comparisonI = {
-      '<=': function(a: number, b: number) { return a <= b },
-      '>=': function(a: number, b: number) { return a >= b }
-    }
-
-    // if (refCanvas.current !== null) {
-    //   let ref = refCanvas.current
-    //   let ctx = ref.getContext("2d");
-
-    //   console.log("ENTRO ACA ZOOM")
-
-    //   if (ctx !== null) {
-    //     let targetZoom = currentZoom.mORd === 'x' ? currentZoom.val - 0.5 : currentZoom.val
-    //     let divider = targetZoom + (targetZoom - 2) // dvdr //   0,   1,   2,   3,   4..
-    //     let factor =                                // fctr // 1/2, 1/3, 1/4, 1/5, 1/6..
-    //       divider === 0 ? 1 :
-    //       1 + (1 / divider)
-
-    //     // *** // LESS -> MORE // MORE -> LESS //
-    //     // cZ  // dvdr // fctr // dvdr // fctr //
-    //     // 1.0 // -1   // 0    // 0    // 1    //
-    //     // 1.5 //  0   // 1    // 1    // 2    //
-    //     // 2.0 //  1   // 2    // 2    // 1.5  //
-    //     // 2.5 //  2   // 1.5  // 3    // 1.33 //
-    //     // 3.0 //  3   // 1.33 // 4    // 1.25 //
-
-    //     let halfDim = { w: ref.width / 2, h: ref.height / 2 }
-    //     //let basePos = { x: imgPo.current.x, y: imgPo.current.y }
-    //     let basePos =
-    //       rotationAngle === -90 ?
-    //       { y: imgPo.current.x, x: imgPo.current.y } :
-    //       { x: imgPo.current.x, y: imgPo.current.y }
-    //     //let basePos = { y: imgPo.current.x, x: imgPo.current.y }
-    //     let baseDim = { w: halfDim.w * (divider + currentZoom.dF), h: halfDim.h * (divider + currentZoom.dF) };
-        
-    //     console.log('AAAAAA rotationAngle --->', rotationAngle);
-    //     //         'x' --> halfDim.w * (divider + 2)
-    //     //         '/' --> halfDim.w * (divider + 3)
-
-    //     currentZoom.val === 1 ? imgPo.current = { x: 0, y: 0 } : // WHEN 1.0 SET POSITION TO 0, 0
-    //     currentZoom.val === 1.5 && currentZoom.mORd === 'x' ? imgPo.current = { x: initImgPos.current.x, y: initImgPos.current.y } : // WHEN 1.0 TO 1.5, SET POSITION TO CENTER OF IMAGE
-    //     imgPo.current = { x: operation[currentZoom.mORd](imgPo.current.x, factor), y: operation[currentZoom.mORd](imgPo.current.y, factor) } // ELSE DO TARGET CALC
-
-    //     //let targetPosition = { x: imgPo.current.x, y: imgPo.current.y } // TARGET (UPDATED ↑↑↑) POSITION
-    //     let targetPosition =
-    //       rotationAngle === -90 ?
-    //       { y: imgPo.current.x, x: imgPo.current.y } : // TARGET (UPDATED ↑↑↑) POSITION
-    //       { x: imgPo.current.x, y: imgPo.current.y } // TARGET (UPDATED ↑↑↑) POSITION
-
-    //     let offset = timing !== undefined && typeof timing === 'number' ? timing : 10 // ANIMATION FRAMES BETWEEN X.0 --> X.5
-    //     let eachFramePos = { x: (targetPosition.x - basePos.x) / offset, y: (targetPosition.y - basePos.y) / offset } // EACH FRAME POS TO INCREASE/DECREASE
-    //     let eachFrameDim = { w: halfDim.w / offset, h: halfDim.h / offset } // EACH FRAME WIDTH TO INCREASE/DECREASE // (1920 / 2) / offset
-
-    //     let currPos = { x: basePos.x, y: basePos.y }
-    //     let currentDim = { w: baseDim.w, h: baseDim.h }
-
-    //     let targetWidth = ref.width * currentZoom.val
-    //     let targetHeight = ref.height * currentZoom.val
-
-    //     let render = () => {
-    //       if (ctx !== null) {
-    //         // ctx.drawImage(
-    //         //   image.current,
-    //         //   currPos.x, currPos.y,
-    //         //   currentDim.w, currentDim.h
-    //         // );
-
-    //         currPos = { x: currPos.x + eachFramePos.x, y: currPos.y + eachFramePos.y }
-    //         currentDim.w = operation[currentZoom.aORs](currentDim.w, eachFrameDim.w)
-    //         currentDim.h = operation[currentZoom.aORs](currentDim.h, eachFrameDim.h)
-    //       }
-    //       if (comparison[currentZoom.lORm](currentDim.w, targetWidth)) requestAnimationFrame(render);
-    //     }
-    //     if (((currentZoom.val !== 1 && currentZoom.mORd === 'x') || currentZoom.mORd === '/')) {
-    //       if (disableAnimation) { // ZOOM WITHOUT ANIMATION
-    //         // ctx.drawImage(
-    //         //   image.current, // NORMAL
-    //         //   targetPosition.x, targetPosition.y, // NORMAL
-    //         //   targetWidth, targetHeight // NORMAL
-    //         //   // image.current, // VERTICAL
-    //         //   // targetPosition.y, targetPosition.x, // VERTICAL
-    //         //   // targetWidth, targetHeight // VERTICAL
-    //         // );
-    //       } else render() // RECURSIVE FUNCTION, ZOOM WITH ANIMATION
-    //     }
-    //   }
-    // }
-  }, [currentZoom, disableAnimation,/*  rotationAngle, */ timing])
 
   let mouseDown = (e: TouchEvent | MouseEvent) => {
     if ('touches' in e) { // TOUCH EVENT
@@ -383,7 +173,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       //setCurrentZoom((curr) => (curr + 0.1))
       //currentZoom.current = currentZoom.current + 0.1
       //console.log("currentZoom", (currentZoom.current).toFixed(1))
-      iVF.style.transform = `scale(${currentZoom.x}, ${currentZoom.y}) rotate(${rotationAngle}deg)`
+      iVF.style.transform = `scale(${imageProps.zoomX}, ${imageProps.zoomY}) rotate(${imageProps.angle}deg)`
       //iVF.style.transform = `rotate(${rotationAngle}deg)`
       //console.log(window)
       //window.getComputedStyle(iVF)//.width
@@ -392,15 +182,18 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     }
 
 
-  }, [currentZoom, rotationAngle])
+  //}, [currentZoom, rotationAngle])
+  }, [imageProps])
 
   const zoomIn = () => {
     //setCurrentZoom((curr) => (curr + 0.1))
-    setCurrentZoom((curr) => ({ x: curr.x + 0.1, y: curr.y + 0.1 }))
+    //setCurrentZoom((curr) => ({ x: curr.x + 0.1, y: curr.y + 0.1 }))
+    setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX + 0.1, zoomY: curr.zoomY + 0.1 }))
   }
 
   const zoomOut = () => {
-    setCurrentZoom((curr) => ({ x: curr.x - 0.1, y: curr.y - 0.1 }))
+    //setCurrentZoom((curr) => ({ x: curr.x - 0.1, y: curr.y - 0.1 }))
+    setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX - 0.1, zoomY: curr.zoomY - 0.1 }))
   }
 
   const goLeftHandler = () => {
@@ -444,6 +237,28 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           <Forward className={`${css.icon} ${css.flipIcon}`}/>
         </Button>
 
+
+        <Button
+          variant="contained"
+          className={css.button}
+          //onClick={() => zoomIn()}
+          onClick={() => {
+            //setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX * -1 }))
+            setImageProps({
+              zoomX: 1.0,
+              zoomY: 1.0,
+              angle: 0,
+            })
+          }}
+          //disabled={ currentZoom.val === 8 ? true : false }
+        >
+          <Cached className={`${css.icon}`}/>
+        </Button>
+
+
+
+
+
         <Button
           variant="contained"
           className={css.button}
@@ -474,7 +289,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           //onClick={() => zoomIn()}
           onClick={() => {
             //setRotationAngle(curr => curr - 90)
-            setCurrentZoom((curr) => ({ ...curr, x: curr.x * -1 }))
+            //setCurrentZoom((curr) => ({ ...curr, x: curr.x * -1 }))
+            setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX * -1 }))
           }}
           //disabled={ currentZoom.val === 8 ? true : false }
         >
@@ -488,7 +304,11 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           //onClick={() => zoomIn()}
           onClick={() => {
             //setRotationAngle(curr => curr - 90)
-            setCurrentZoom((curr) => ({ ...curr, y: curr.y * -1 }))
+            //setCurrentZoom((curr) => ({ ...curr, y: curr.y * -1 }))
+
+            setImageProps((curr) => ({ ...curr, zoomY: curr.zoomY * -1 }))
+
+
           }}
           //disabled={ currentZoom.val === 8 ? true : false }
         >
@@ -507,7 +327,11 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           className={css.button}
           //onClick={() => zoomIn()}
           onClick={() => {
-            setRotationAngle(curr => curr - 90)
+            //setRotationAngle(curr => curr - 90)
+
+            setImageProps((curr) => ({ ...curr, angle: curr.angle - 90 }))
+
+
           }}
           //disabled={ currentZoom.val === 8 ? true : false }
         >
@@ -519,7 +343,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           className={css.button}
           //onClick={() => zoomIn()}
           onClick={() => {
-            setRotationAngle(curr => curr + 90)
+            //setRotationAngle(curr => curr + 90)
+            setImageProps((curr) => ({ ...curr, angle: curr.angle + 90 }))
           }}
           // setCurrentZoom((curr: currentZoomI) => ({ val: curr.val + 0.5 }))
         >
@@ -537,7 +362,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           <Close className={`${css.icon} ${css.flipIcon}`}/>
         </Button>
         <div className={css.zoomContainer}>
-          { currentZoom.x.toFixed(1) }x
+          { imageProps.zoomX.toFixed(1) }x
         </div>
       </div>
     </div>
@@ -551,6 +376,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         id={`imageViewerForeground`}
         ref={imageRef}
         className={css.imageViewerForeground}
+        onDragStart={(e) => e.preventDefault()}
         src={
           images !== undefined ?
           images[currentIndex] :
