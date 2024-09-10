@@ -158,10 +158,13 @@
   height: 23px !important;
 }
 
-.right {
+.flipIcon {
   transform: scaleX(1);
 }
 
+.flipIconTest {
+  transform: rotate(90deg);
+}
 
 
 /* @media screen

@@ -2,7 +2,7 @@ import {
   ReactElement, useEffect, useLayoutEffect, useState, useRef, ReactNode, MouseEvent, TouchEvent
 } from 'react';
 import css from './ImageViewerCSS.module.css';
-import { Forward, Add, Remove, Close, RotateLeft, RotateRight } from '@mui/icons-material/';
+import { Forward, Add, Remove, Close, RotateLeft, RotateRight, Flip, RestartAlt } from '@mui/icons-material/';
 import { Button } from '@mui/material';
 import {
   ImageViewerI, operationI, comparisonI, currentZoomI
@@ -126,7 +126,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   // aORs = addition OR subtraction
   // lORm = less OR more
   // dF = dimensionFactor
-  const [ currentZoom, setCurrentZoom ] = useState(1.0)
+  const [ currentZoom, setCurrentZoom ] = useState({
+    x: 1.0,
+    y: 1.0
+  })
   //let currentZoom = useRef(1.0)//, setCurrentZoom ] = useState(1.0)
   // const [ currentZoom, setCurrentZoom ] = useState<currentZoomI>({ // (cZ)
   //   val: 1, mORd: 'x', aORs: '+', lORm: '<=', dF: 2
@@ -380,7 +383,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       //setCurrentZoom((curr) => (curr + 0.1))
       //currentZoom.current = currentZoom.current + 0.1
       //console.log("currentZoom", (currentZoom.current).toFixed(1))
-      iVF.style.transform = `scale(${currentZoom}) rotate(${rotationAngle}deg)`
+      iVF.style.transform = `scale(${currentZoom.x}, ${currentZoom.y}) rotate(${rotationAngle}deg)`
       //iVF.style.transform = `rotate(${rotationAngle}deg)`
       //console.log(window)
       //window.getComputedStyle(iVF)//.width
@@ -392,29 +395,12 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   }, [currentZoom, rotationAngle])
 
   const zoomIn = () => {
-    //setCurrentZoom((curr: currentZoomI) => ({ val: curr.val + 0.5, mORd: 'x', aORs: '+', lORm: '<=', dF: 2 }))
-    //transform: scale(1);
-    let iVF = document.getElementById('imageViewerForeground');
-    //window.getComputedStyle(iVF)
-    if (iVF !== null) {
-      //iVF.style.
-      //console.dir(iVF)
-      //setCurrentZoom((curr) => (curr + 0.1))
-      //currentZoom.current = currentZoom.current + 0.1
-      //console.log("currentZoom", (currentZoom.current).toFixed(1))
-      //iVF.style.transform = 'scale(1.1)'
-      //console.log(window)
-      //window.getComputedStyle(iVF)//.width
-      //console.log(window.getComputedStyle(iVF).transform)
-
-    }
-    setCurrentZoom((curr) => (curr + 0.1))
+    //setCurrentZoom((curr) => (curr + 0.1))
+    setCurrentZoom((curr) => ({ x: curr.x + 0.1, y: curr.y + 0.1 }))
   }
 
   const zoomOut = () => {
-    //setCurrentZoom((curr: currentZoomI) => ({ val: curr.val - 0.5, mORd: '/', aORs: '-', lORm: '>=', dF: 3 }))
-    //transform: scale(1);
-    setCurrentZoom((curr) => (curr - 0.1))
+    setCurrentZoom((curr) => ({ x: curr.x - 0.1, y: curr.y - 0.1 }))
   }
 
   const goLeftHandler = () => {
@@ -455,7 +441,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           className={css.button}
           onClick={() => goRightHandler()}
         >
-          <Forward className={`${css.icon} ${css.right}`}/>
+          <Forward className={`${css.icon} ${css.flipIcon}`}/>
         </Button>
 
         <Button
@@ -464,7 +450,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           onClick={() => zoomOut()}
           //disabled={ currentZoom === 1 ? true : false }
         >
-          <Remove className={`${css.icon} ${css.right}`}/>
+          <Remove className={`${css.icon} ${css.flipIcon}`}/>
         </Button>
 
         <Button
@@ -473,8 +459,46 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           onClick={() => zoomIn()}
           //disabled={ currentZoom === 2.0 ? true : false }
         >
-          <Add className={`${css.icon} ${css.right}`}/>
+          <Add className={`${css.icon} ${css.flipIcon}`}/>
         </Button>
+
+
+
+
+
+
+
+        <Button
+          variant="contained"
+          className={css.button}
+          //onClick={() => zoomIn()}
+          onClick={() => {
+            //setRotationAngle(curr => curr - 90)
+            setCurrentZoom((curr) => ({ ...curr, x: curr.x * -1 }))
+          }}
+          //disabled={ currentZoom.val === 8 ? true : false }
+        >
+          <Flip className={`${css.icon} ${css.flipIcon}`}/>
+        </Button>
+
+
+        <Button
+          variant="contained"
+          className={css.button}
+          //onClick={() => zoomIn()}
+          onClick={() => {
+            //setRotationAngle(curr => curr - 90)
+            setCurrentZoom((curr) => ({ ...curr, y: curr.y * -1 }))
+          }}
+          //disabled={ currentZoom.val === 8 ? true : false }
+        >
+          <Flip className={`${css.icon} ${css.flipIconTest}`}/>
+        </Button>
+
+
+
+
+
 
   
 
@@ -501,6 +525,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         >
           <RotateRight className={css.icon}/>
         </Button>
+        
 
 
 
@@ -509,10 +534,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           className={css.button}
           onClick={() => { if (setShowImageViewer !== undefined) setShowImageViewer(false) }}
         >
-          <Close className={`${css.icon} ${css.right}`}/>
+          <Close className={`${css.icon} ${css.flipIcon}`}/>
         </Button>
         <div className={css.zoomContainer}>
-          { currentZoom.toFixed(1) }x
+          { currentZoom.x.toFixed(1) }x
         </div>
       </div>
     </div>
