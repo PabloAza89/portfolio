@@ -46,6 +46,11 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   //const [ rotationAngle, setRotationAngle ] = useState(0)
 
+  const [ imagePos, setImagePos ] = useState({
+    x: 0,
+    y: 0,
+  })
+
   const [ imageProps, setImageProps ] = useState({
     zoomX: 1.0,
     zoomY: 1.0,
@@ -173,7 +178,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       //setCurrentZoom((curr) => (curr + 0.1))
       //currentZoom.current = currentZoom.current + 0.1
       //console.log("currentZoom", (currentZoom.current).toFixed(1))
+      
+      
       iVF.style.transform = `scale(${imageProps.zoomX}, ${imageProps.zoomY}) rotate(${imageProps.angle}deg)`
+console.log('imageProps --->', imageProps);
+
+      //translate(${imagePos.x}, ${imagePos.y})
+
       //iVF.style.transform = `rotate(${rotationAngle}deg)`
       //console.log(window)
       //window.getComputedStyle(iVF)//.width
@@ -183,17 +194,30 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
   //}, [currentZoom, rotationAngle])
-  }, [imageProps])
+  }, [imageProps/* , imagePos */])
 
   const zoomIn = () => {
-    //setCurrentZoom((curr) => (curr + 0.1))
-    //setCurrentZoom((curr) => ({ x: curr.x + 0.1, y: curr.y + 0.1 }))
-    setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX + 0.1, zoomY: curr.zoomY + 0.1 }))
+    
+    //setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX + 0.1, zoomY: curr.zoomY + 0.1 }))
+
+    setImageProps((curr) => ({
+      //...curr, zoomX: curr.zoomX + 0.1, zoomY: curr.zoomY + 0.1
+      ...curr,
+      zoomX: curr.zoomX < 0 ? curr.zoomX - 0.1 : curr.zoomX + 0.1,
+      zoomY: curr.zoomY < 0 ? curr.zoomY - 0.1 : curr.zoomY + 0.1,
+    }))
   }
 
   const zoomOut = () => {
-    //setCurrentZoom((curr) => ({ x: curr.x - 0.1, y: curr.y - 0.1 }))
-    setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX - 0.1, zoomY: curr.zoomY - 0.1 }))
+    
+    //setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX - 0.1, zoomY: curr.zoomY - 0.1 }))
+
+    setImageProps((curr) => ({
+      ...curr,
+      zoomX: curr.zoomX < 0 ? curr.zoomX + 0.1 : curr.zoomX - 0.1,
+      zoomY: curr.zoomY < 0 ? curr.zoomY + 0.1 : curr.zoomY - 0.1,
+    }))
+
   }
 
   const goLeftHandler = () => {

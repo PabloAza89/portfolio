@@ -106,6 +106,7 @@
   /* zoom: 1; */
   transform: scale(1);
   transition: transform .2s;
+  transform-style: flat;
   /* transition: all .2s; */
 }
 
