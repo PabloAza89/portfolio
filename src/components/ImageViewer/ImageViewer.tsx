@@ -407,6 +407,20 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               zoomY: 1.0,
               angle: 0,
             })
+            let iVF = document.getElementById('imageViewerForeground');
+            if (iVF !== null) {
+              iVF.style.transition = `transform 2s, left 2s, top 2s`;
+              iVF.style.left = `0px`;
+              iVF.style.top = `0px`;
+              iVF.ontransitionend = () => {
+                console.log("TRANSITION END")
+                if (iVF !== null) {
+                  iVF.style.transition = `transform 2s`;
+                  //iVF.ontransitionend = () => {}
+                }
+              }
+            }
+            currentPos.current = {x:0,y:0}
           }}
           //disabled={ currentZoom.val === 8 ? true : false }
         >
