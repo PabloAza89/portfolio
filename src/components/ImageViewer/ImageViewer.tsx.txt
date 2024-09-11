@@ -72,56 +72,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   let imgPo = useRef({ x: 0, y: 0 }) // IMAGE POSITION
 
 
-  // const [ currentPos, setCurrentPos ] = useState({
-  //   x: 0,
-  //   y: 0
-  // })
-
-  let currentPos = useRef({
-      x: 0,
-      y: 0
+  const [ currentPos, setCurrentPos ] = useState({
+    x: 0,
+    y: 0
   })
-
-  // const [ left, setLeft ] = useState(0)
-  // const [ top, setTop ] = useState(0)
-
-  // let left = 0;
-  // let top = 0;
-
-  // useEffect(() => {
-
-  //   console.log("currentPos", currentPos.x)
-
-  //   let iVF = document.getElementById('imageViewerForeground');
-  //   //window.getComputedStyle(iVF)
-  //   if (iVF !== null) {
-  //     //iVF.style.
-  //     //console.dir(iVF)
-  //     //setCurrentZoom((curr) => (curr + 0.1))
-  //     //currentZoom.current = currentZoom.current + 0.1
-  //     //console.log("currentZoom", (currentZoom.current).toFixed(1))
-      
-      
-  //     //iVF.style.transform = `scale(${imageProps.zoomX}, ${imageProps.zoomY}) rotate(${imageProps.angle}deg)`
-  //     iVF.style.translate = `${currentPos.x}px ${currentPos.y}px`
-  //     // iVF.style.left = `${currentPos.x}px`
-  //     // iVF.style.top = `${currentPos.y}px`
-  //     // translate(-100px, 0px)
-      
-  //     //console.log('imageProps --->', imageProps);
-
-  //     //translate(${imagePos.x}, ${imagePos.y})
-
-  //     //iVF.style.transform = `rotate(${rotationAngle}deg)`
-  //     //console.log(window)
-  //     //window.getComputedStyle(iVF)//.width
-  //     //console.log(window.getComputedStyle(iVF).transform)
-
-  //   }
-
-
-
-  // }, [currentPos])
 
   let allowMove = useRef(false)
   let arbPos = useRef({ x: 0, y: 0 }) // ARBITRARY POSITION
@@ -162,67 +116,16 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       } else { // MOUSE EVENT
         // targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
         // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-        // targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-        // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+        targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+        targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
 
-        // arbPos.current = { x: e.clientX - arbPos.current.x, y: e.clientY - arbPos.current.y }
 
-        
-
-        // setCurrentPos((curr) => ({
-        //   x: curr.x + -1,
-        //   y: curr.y + -1,
-        // }))
-
-        let qq = e.clientX - arbPos.current.x
-        let ww = e.clientY - arbPos.current.y
-
-        // setCurrentPos((curr) => ({
-        //   x: curr.x + e.clientX - arbPos.current.x,
-        //   y: curr.y + e.clientY - arbPos.current.y
-        // }))
-
-        currentPos.current = {
-          x: currentPos.current.x + (e.clientX - arbPos.current.x),
-          y: currentPos.current.y + (e.clientY - arbPos.current.y),
-        }
-
-        let iVF = document.getElementById('imageViewerForeground');
-        if (iVF !== null) {
-          iVF.style.left = `${currentPos.current.x}px`
-          iVF.style.top = `${currentPos.current.y}px`
-        }
-
-        // setLeft(curr => curr + qq)
-        // setTop(curr => curr + ww)
-
-        // left = left + qq
-        // top = top + ww
-
-        // setCurrentPos((curr) => ({
-        //   x: curr.x + (e.clientX - arbPos.current.x),
-        //   y: curr.y + (e.clientY - arbPos.current.y),
-        // }))
-
-        //console.log("A VER", arbPos.current.x)
-        console.log("A VER", e.clientX - arbPos.current.x) // CONTINUE HERE
-        
-
-        arbPos.current = {
-          x: e.clientX,
-          y: e.clientY
-        }
-
-        //console.log("currentPos", currentPos)
-
+        console.log("targetXPosition", e.clientX - arbPos.current.x)
         //console.log("arbPos.current.x", arbPos.current.x)
         //console.log("e.clientX", e.clientX)
 
       }
     }
-
-//       if ('touches' in e) arbPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
-//       else arbPos.current = { x: e.clientX, y: e.clientY }
 
 //     if (allowMove.current && currentZoom.val !== 1) {
 //       if (refCanvas.current !== null) {
@@ -534,7 +437,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       onMouseUp={(e) => mouseUp(e)} // MOUSE END
     >
       <img
-       // style={{ left, top }}
         id={`imageViewerForeground`}
         ref={imageRef}
         className={css.imageViewerForeground}
