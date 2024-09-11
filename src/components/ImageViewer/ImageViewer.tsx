@@ -2,7 +2,10 @@ import {
   ReactElement, useEffect, useLayoutEffect, useState, useRef, ReactNode, MouseEvent, TouchEvent
 } from 'react';
 import css from './ImageViewerCSS.module.css';
-import { Forward, Add, Remove, Close, RotateLeft, RotateRight, Flip, RestartAlt, Cached } from '@mui/icons-material/';
+import { 
+  Forward, Add, Remove, Close, RotateLeft, RotateRight,
+  Flip, RestartAlt, Cached, LockOpen, Settings
+} from '@mui/icons-material/';
 import { Button } from '@mui/material';
 import {
   ImageViewerI, operationI, comparisonI, currentZoomI
@@ -72,7 +75,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
   let mouseDown = (e: TouchEvent | MouseEvent) => {
-    console.log("MOUSE DOWN")
+    //console.log("MOUSE DOWN")
     if ('touches' in e) { // TOUCH EVENT
       arbPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
       allowMove.current = true
@@ -80,7 +83,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       // arbPos.current = { x: e.clientX, y: e.clientY }
       // allowMove.current = true
       arbPos.current = { x: e.clientX, y: e.clientY }
-      console.log("START POSITION", e.clientX)
+      //console.log("START POSITION", e.clientX)
       allowMove.current = true
     }
   }
@@ -142,7 +145,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         // }))
 
         //console.log("A VER", arbPos.current.x)
-        console.log("A VER", e.clientX - arbPos.current.x) // CONTINUE HERE
+        //console.log("A VER", e.clientX - arbPos.current.x) // CONTINUE HERE
         
 
         arbPos.current = {
@@ -262,6 +265,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     setImageProps((curr) => ({ ...curr, angle: curr.angle + 90 }))
   }
 
+  const lockSettings = () => {
+    setImageProps((curr) => ({ ...curr, angle: curr.angle + 90 }))
+  }
+
   const MuiButton = ({ classButton, onClick, Icon, classIcon }:any) => {
     return (
       <Button
@@ -319,31 +326,54 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           classIcon={[css.icon, css.flipIcon]}
         />
 
-        <MuiButton
-          classButton={css.button}
-          onClick={flipX}
-          Icon={Flip}
-          classIcon={[css.icon, css.flipIcon]}
-        />
+        
+          <MuiButton
+            classButton={css.button}
+            onClick={flipX}
+            Icon={Flip}
+            classIcon={[css.icon, css.flipIcon]}
+          />
+
+          <MuiButton
+            classButton={css.button}
+            onClick={flipY}
+            Icon={Flip}
+            classIcon={[css.icon, css.flipIconTest]}
+          />
+
+          <MuiButton
+            classButton={css.button}
+            onClick={rotateLeft}
+            Icon={RotateLeft}
+            classIcon={css.icon}
+          />
+
+          <MuiButton
+            classButton={css.button}
+            onClick={rotateRight}
+            Icon={RotateRight}
+            classIcon={css.icon}
+          />
+
+        
+
+        <div className={css.testDiv}>
+          <div className={css.innerTestDiv}/>
+          <MuiButton
+            classButton={css.button}
+            onClick={lockSettings}
+            Icon={LockOpen}
+            classIcon={[css.icon, css.flipIcon]}
+          >
+            
+          </MuiButton>
+        </div>
+        
 
         <MuiButton
           classButton={css.button}
-          onClick={flipY}
-          Icon={Flip}
-          classIcon={[css.icon, css.flipIconTest]}
-        />
-
-        <MuiButton
-          classButton={css.button}
-          onClick={rotateLeft}
-          Icon={RotateLeft}
-          classIcon={css.icon}
-        />
-
-        <MuiButton
-          classButton={css.button}
-          onClick={rotateRight}
-          Icon={RotateRight}
+          onClick={lockSettings}
+          Icon={Settings}
           classIcon={css.icon}
         />
 
@@ -356,7 +386,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           <Close className={`${css.icon} ${css.flipIcon}`}/>
         </Button>
         <div className={css.zoomContainer}>
-          { imageProps.zoomX.toFixed(1) }x
+          { (Math.abs(imageProps.zoomX)).toFixed(1) }x
         </div>
       </div>
     </div>

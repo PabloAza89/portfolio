@@ -7,7 +7,9 @@
   height: 100vh;
   /* width: 95vh;
   height: 95vw; */
-  background: rgba(0,0,0,0.4); /* AROUND IMAGE */
+  /* background: rgba(0,0,0,0.4); */ /* AROUND IMAGE */
+  background: rgba(0,0,0,0.8);
+  /* background: black; */
   z-index: 1000000; /* MORE THAN APP GRAY STRIPS */
   display: flex;
   justify-content: center;
@@ -66,6 +68,7 @@
 .bottomBar {
   /* background: green; */ /* DEV */
   background: rgba(0, 128, 0, .5); /* DEV */
+  z-index: 1000001;
   display: flex;
   position: absolute;
   flex-direction: row;
@@ -89,6 +92,8 @@
 .buttonsContainer {
   display: flex;
   position: relative;
+  flex-direction: row;
+  /* width: 600px; */
   /* flex-direction: row; */
   /* flex-direction: column; */
   /* background: red; */ /* DEV */
@@ -148,6 +153,7 @@
   width: 35px !important;
   height: 35px !important;
   margin: 7px 3.5px !important;
+  z-index: 1000002;
 }
 
 .icon {
@@ -168,6 +174,46 @@
   transform: rotate(90deg);
 }
 
+.testDiv {
+  /* background: lightcoral !important; */
+  display: flex;
+  position: relative;
+  /* position: absolute !important;
+  width: 100px !important;
+  height: 100px !important;
+  left: 0px !important;
+  top: 0px !important; */
+  /* border-left: 10px solid red; */
+  /* box-shadow: -10px 0px 10px 1px #aaaaaa; */
+}
+
+.innerTestDiv {
+  background: red !important;
+  position: absolute;
+  right: 0px;
+  width: 50px;
+  height: 10px;
+  /* z-index: -0; */
+  /* position: absolute !important;
+  width: 100px !important;
+  height: 100px !important;
+  left: 0px !important;
+  top: 0px !important; */
+  /* border-left: 10px solid red; */
+  /* box-shadow: -10px 0px 10px 1px #aaaaaa; */
+}
+
+.testTest {
+  position: absolute !important;
+  /* right: 90px; */
+  /* transform: translateX(100%); */
+  left: 43% !important;
+  width: 15px !important;
+  height: 15px !important;
+  /* transform: translateX(0%); */
+  top: 0px !important;
+  color: white !important;
+}
 
 /* @media screen
 and (orientation: portrait) {

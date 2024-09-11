@@ -345,7 +345,7 @@ function Projects() {
       </div>
 
       {
-        showImageViewer &&
+        /* showImageViewer && */
         <ImageViewer
           images={array.map(e => e.media).flat()} // OK
           index={index} // DEFAULT 0
