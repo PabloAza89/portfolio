@@ -4,9 +4,9 @@ import {
 import css from './ImageViewerCSS.module.css';
 import { 
   Forward, Add, Remove, Close, RotateLeft, RotateRight,
-  Flip, RestartAlt, Cached, LockOpen, Settings
+  Flip, RestartAlt, Cached, LockOpen, LockOutlined, Settings
 } from '@mui/icons-material/';
-import { Button } from '@mui/material';
+import { Button, Switch } from '@mui/material';
 import {
   ImageViewerI, operationI, comparisonI, currentZoomI
 } from '../../interfaces/interfaces';
@@ -265,13 +265,45 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     setImageProps((curr) => ({ ...curr, angle: curr.angle + 90 }))
   }
 
+  const [ locked, setLocked ] = useState(false)
+
   const lockSettings = () => {
-    setImageProps((curr) => ({ ...curr, angle: curr.angle + 90 }))
+    setLocked(!locked)
   }
 
-  const MuiButton = ({ classButton, onClick, Icon, classIcon }:any) => {
+ 
+  const [ showSettings, setShowSettings ] = useState(false)
+
+  const [ enableLookZoom, setEnableLookZoom ] = useState(true)
+  const [ enableLookFlip, setEnableLookFlip ] = useState(true)
+
+  const handleSetEnableLookZoom = () => {
+    setEnableLookZoom(!enableLookZoom)
+  }
+
+  const handleSetEnableLookFlip = () => {
+    setEnableLookFlip(!enableLookFlip)
+  }
+
+  const handleShowSettings = () => {
+    setShowSettings(!showSettings)
+  }
+
+  useEffect(() => {
+    let lS = document.getElementById('lockSettings');
+    if (lS !== null) {
+      showSettings ?
+      lS.style.bottom = `49px` :
+      lS.style.bottom = `-200px`;
+    }
+
+  }, [showSettings])
+
+
+  const MuiButton = ({ style, classButton, onClick, Icon, classIcon }: any) => {
     return (
       <Button
+        style={style}
         variant="contained"
         className={`${classButton}`}
         onClick={() => onClick()}
@@ -281,115 +313,22 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     )
   }
 
-  const controls: ReactNode =
-    <div
-      id={`bottomBar`}
-      className={css.bottomBar}
-    >
-      <div className={css.buttonsContainer}>
-        <div className={css.imageCounter}>
-          { currentIndex !== undefined && images !== undefined ? currentIndex + 1 : 0 }/{ currentIndex !== undefined && images !== undefined ? images.length : 0 }
-        </div>
-
-        <MuiButton
-          classButton={css.button}
-          onClick={goLeftHandler}
-          Icon={Forward}
-          classIcon={css.icon}
-        />
-
-        <MuiButton
-          classButton={css.button}
-          onClick={goRightHandler}
-          Icon={Forward}
-          classIcon={[css.icon, css.flipIcon]}
-        />
-
-        <MuiButton
-          classButton={css.button}
-          onClick={restoreHandler}
-          Icon={Cached}
-          classIcon={css.icon}
-        />
-
-        <MuiButton
-          classButton={css.button}
-          onClick={zoomOut}
-          Icon={Remove}
-          classIcon={[css.icon, css.flipIcon]}
-        />
-
-        <MuiButton
-          classButton={css.button}
-          onClick={zoomIn}
-          Icon={Add}
-          classIcon={[css.icon, css.flipIcon]}
-        />
-
-        
-          <MuiButton
-            classButton={css.button}
-            onClick={flipX}
-            Icon={Flip}
-            classIcon={[css.icon, css.flipIcon]}
-          />
-
-          <MuiButton
-            classButton={css.button}
-            onClick={flipY}
-            Icon={Flip}
-            classIcon={[css.icon, css.flipIconTest]}
-          />
-
-          <MuiButton
-            classButton={css.button}
-            onClick={rotateLeft}
-            Icon={RotateLeft}
-            classIcon={css.icon}
-          />
-
-          <MuiButton
-            classButton={css.button}
-            onClick={rotateRight}
-            Icon={RotateRight}
-            classIcon={css.icon}
-          />
-
-        
-
-        <div className={css.testDiv}>
-          <div className={css.innerTestDiv}/>
-          <MuiButton
-            classButton={css.button}
-            onClick={lockSettings}
-            Icon={LockOpen}
-            classIcon={[css.icon, css.flipIcon]}
-          >
-            
-          </MuiButton>
-        </div>
-        
-
-        <MuiButton
-          classButton={css.button}
-          onClick={lockSettings}
-          Icon={Settings}
-          classIcon={css.icon}
-        />
-
-
-        <Button
-          variant="contained"
-          className={css.button}
-          onClick={() => { if (setShowImageViewer !== undefined) setShowImageViewer(false) }}
-        >
-          <Close className={`${css.icon} ${css.flipIcon}`}/>
-        </Button>
-        <div className={css.zoomContainer}>
-          { (Math.abs(imageProps.zoomX)).toFixed(1) }x
-        </div>
-      </div>
-    </div>
+  const MuiSwitch = ({ onClick, checked }: any) => {
+    return (
+      <Switch
+        onClick={onClick}
+        checked={checked}
+        className={css.switch}
+        classes={{
+          track: checked ? `${css.track} ${css.trackEnabled}` : `${css.track} ${css.trackDisabled}`,
+          thumb: css.thumb,
+          switchBase:  css.switchBase,
+          checked: css.checked,
+          colorPrimary: css.colorPrimary
+        }}
+      />
+    )
+  }
 
   return (
     <div
@@ -414,7 +353,158 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         alt=""
       >
       </img>
-      { controls }
+      
+
+      <div
+        id={`bottomBar`}
+        className={css.bottomBar}
+      >
+        <div className={css.buttonsContainer}>
+          <div className={css.imageCounter}>
+            { currentIndex !== undefined && images !== undefined ? currentIndex + 1 : 0 }/{ currentIndex !== undefined && images !== undefined ? images.length : 0 }
+          </div>
+
+          <MuiButton // GO LEFT
+            style={{ order: 0 }}
+            classButton={css.button}
+            onClick={goLeftHandler}
+            Icon={Forward}
+            classIcon={css.icon}
+          />
+
+          <MuiButton // GO RIGHT
+            style={{ order: 10 }}
+            classButton={css.button}
+            onClick={goRightHandler}
+            Icon={Forward}
+            classIcon={[css.icon, css.flipIcon]}
+          />
+
+          <MuiButton // RESET ALL
+            style={{ order: 20 }}
+            classButton={css.button}
+            onClick={restoreHandler}
+            Icon={Cached}
+            classIcon={css.icon}
+          />
+
+          <MuiButton // ZOOM OUT
+            style={{ order: enableLookZoom ? 81 : 30 }}
+            classButton={css.button}
+            onClick={zoomOut}
+            Icon={Remove}
+            classIcon={[css.icon, css.flipIcon]}
+          />
+
+          <MuiButton // ZOOM INT
+            style={{ order: enableLookZoom ? 82 : 40 }}
+            classButton={css.button}
+            onClick={zoomIn}
+            Icon={Add}
+            classIcon={[css.icon, css.flipIcon]}
+          />
+
+          
+          <MuiButton // FLIP X
+            style={{ order: 50 }}
+            classButton={css.button}
+            onClick={flipX}
+            Icon={Flip}
+            classIcon={[css.icon, css.flipIcon]}
+          />
+
+          <MuiButton // FLIP Y
+            style={{ order: 60 }}
+            classButton={css.button}
+            onClick={flipY}
+            Icon={Flip}
+            classIcon={[css.icon, css.flipIconTest]}
+          />
+
+          <MuiButton // ROTATE LEFT
+            style={{ order: 70 }}
+            classButton={css.button}
+            onClick={rotateLeft}
+            Icon={RotateLeft}
+            classIcon={css.icon}
+          />
+
+          <MuiButton // ROTATE RIGHT
+            style={{ order: 80 }}
+            classButton={css.button}
+            onClick={rotateRight}
+            Icon={RotateRight}
+            classIcon={css.icon}
+          />
+
+          
+
+          <div // LOCK
+            style={{ order: 90 }}
+            className={css.lockContainer}
+          >
+            <div
+              //style={{ width: '42px' }}
+              style={{ width: enableLookZoom ? '126px' : '42px' }}
+              className={css.lockContainerBackground}
+            />
+            <MuiButton
+              classButton={css.button}
+              onClick={lockSettings}
+              Icon={ locked ? LockOutlined : LockOpen }
+              classIcon={[css.icon, css.flipIcon]}
+            >
+              
+            </MuiButton>
+          </div>
+          
+
+          <MuiButton  // SETTINGS
+            style={{ order: 100 }}
+            classButton={css.button}
+            onClick={handleShowSettings}
+            Icon={Settings}
+            classIcon={css.icon}
+          />
+
+
+          <Button // CLOSE
+            style={{ order: 110 }}
+            variant="contained"
+            className={css.button}
+            onClick={() => { if (setShowImageViewer !== undefined) setShowImageViewer(false) }}
+          >
+            <Close className={`${css.icon} ${css.flipIcon}`}/>
+          </Button>
+          <div className={css.zoomContainer}>
+            { (Math.abs(imageProps.zoomX)).toFixed(1) }x
+          </div>
+        </div>
+      </div>
+
+      <div
+        id={`lockSettings`}
+        className={css.lockSettings}
+      >
+        Enable look over:
+        <div>
+          <MuiSwitch
+            onClick={handleSetEnableLookZoom}
+            checked={ enableLookZoom ? true : false }
+          />
+          Zoom
+        </div>
+
+        <div>
+          <MuiSwitch
+            onClick={handleSetEnableLookFlip}
+            checked={ enableLookFlip ? true : false }
+          />
+          Flip
+        </div>
+
+      </div>
+
     </div>
   )
 }
