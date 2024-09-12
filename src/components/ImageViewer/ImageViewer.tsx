@@ -411,7 +411,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           </div>
 
           <MuiButton // GO LEFT
-            style={{ order: 0 }}
+            //style={{ order: 0 }}
             classButton={css.button}
             onClick={handleGoLeft}
             Icon={Forward}
@@ -420,7 +420,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           />
 
           <MuiButton // GO RIGHT
-            style={{ order: 10 }}
+            //style={{ order: 10 }}
             classButton={css.button}
             onClick={handleGoRight}
             Icon={Forward}
@@ -428,7 +428,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           />
 
           <MuiButton // RESET ALL
-            style={{ order: 20 }}
+            //style={{ order: 20 }}
             classButton={css.button}
             onClick={restoreHandler}
             Icon={Cached}
@@ -436,7 +436,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           />
 
           <MuiButton // ZOOM OUT
-            style={{ order: enableLockZoom ? 81 : 30 }}
+            //style={{ order: enableLockZoom ? 81 : 30 }}
             classButton={css.button}
             onClick={zoomOut}
             Icon={Remove}
@@ -444,7 +444,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           />
 
           <MuiButton // ZOOM IN
-            style={{ order: enableLockZoom ? 82 : 40 }}
+            //style={{ order: enableLockZoom ? 82 : 40 }}
             classButton={css.button}
             onClick={zoomIn}
             Icon={Add}
@@ -452,7 +452,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           />
 
           <MuiButton // FLIP X
-            style={{ order: enableLockFlip ? 83 : 50 }}
+           // style={{ order: enableLockFlip ? 83 : 50 }}
             classButton={css.button}
             onClick={flipX}
             Icon={Flip}
@@ -460,7 +460,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           />
 
           <MuiButton // FLIP Y
-            style={{ order: enableLockFlip ? 84 : 60 }}
+            //style={{ order: enableLockFlip ? 84 : 60 }}
             classButton={css.button}
             onClick={flipY}
             Icon={Flip}
@@ -468,7 +468,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           />
 
           <MuiButton // ROTATE LEFT
-            style={{ order: enableLockRotate ? 85 : 70 }}
+            //style={{ order: enableLockRotate ? 85 : 70 }}
             classButton={css.button}
             onClick={rotateLeft}
             Icon={RotateLeft}
@@ -476,7 +476,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           />
 
           <MuiButton // ROTATE RIGHT
-            style={{ order: enableLockRotate ? 86 : 80 }}
+            //style={{ order: enableLockRotate ? 86 : 80 }}
             classButton={css.button}
             onClick={rotateRight}
             Icon={RotateRight}
@@ -486,14 +486,15 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
           <div // LOCK
-            style={{ order: 90 }}
+            //style={{ order: 90 }}
             className={css.lockContainer}
           >
             <div
               style={{
                 width:
                 arrayLockLength === 3 ?
-                '294px' :
+                '420px' :
+                /* '294px' : */
                 arrayLockLength === 2 ?
                 '210px' :
                 arrayLockLength === 1 ?
@@ -514,7 +515,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
           <MuiButton  // SETTINGS
-            style={{ order: 100 }}
+            //style={{ order: 100 }}
             classButton={css.button}
             onClick={handleShowSettings}
             Icon={Settings}
@@ -523,7 +524,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
           <Button // CLOSE
-            style={{ order: 110 }}
+            //style={{ order: 110 }}
             variant="contained"
             className={css.button}
             onClick={() => { if (setShowImageViewer !== undefined) setShowImageViewer(false) }}
