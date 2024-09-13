@@ -4,7 +4,8 @@ import {
 import css from './ImageViewerCSS.module.css';
 import {
   Forward, Add, Remove, Close, RotateLeft, RotateRight,
-  Flip, RestartAlt, Cached, LockOpen, LockOutlined, Settings
+  Flip, RestartAlt, Cached, LockOpen, LockOutlined, Settings,
+  PlayCircleOutline, PlayArrow
 } from '@mui/icons-material/';
 import { Button, Switch } from '@mui/material';
 import {
@@ -248,7 +249,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         zoomY: 1.0,
         angle: 0,
       })
-      
+
       currentPos.current = { x: 0, y: 0 }
       //setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', dF: 2 })
     }
@@ -272,7 +273,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         zoomY: 1.0,
         angle: 0,
       })
-      
+
       currentPos.current = { x: 0, y: 0 }
 
       //setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', dF: 2 })
@@ -311,7 +312,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       zoomY: 1.0,
       angle: 0,
     })
-    
+
     currentPos.current = { x: 0, y: 0 }
   }
 
@@ -322,17 +323,82 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   const [ locked, setLocked ] = useState(false)
   const [ showSettings, setShowSettings ] = useState(false)
+  const [ enableLockPosition, setEnableLockPosition ] = useState(true)
   const [ enableLockZoom, setEnableLockZoom ] = useState(true)
   const [ enableLockFlip, setEnableLockFlip ] = useState(true)
   const [ enableLockRotate, setEnableLockRotate ] = useState(true)
 
   const lockSettings = () => setLocked(!locked)
+  const handleSetEnableLockPosition = () => setEnableLockPosition(!enableLockPosition)
   const handleSetEnableLockZoom = () => setEnableLockZoom(!enableLockZoom)
   const handleSetEnableLockFlip = () => setEnableLockFlip(!enableLockFlip)
   const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
   const handleShowSettings = () => setShowSettings(!showSettings)
 
-  let arrayLockLength = [ enableLockZoom, enableLockFlip, enableLockRotate ].filter(e => e === true).length
+  let arrayLockLength = [ enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate ].filter(e => e === true).length
+
+  // useEffect(() => {
+  //   console.log("CAMBIO LA MEDIDA")
+  // }, [arrayLockLength])
+
+  useLayoutEffect(() => {
+    // console.log("CAMBIO LA MEDIDA")
+
+    // if (!enableLockPosition && !enableLockZoom && !enableLockFlip && !enableLockRotate) {
+      
+    // }
+    //console.log("AASDASD")
+
+    if (locked) document.documentElement.style.setProperty("--IVLock", `rgb(255, 0, 0)`) // LOCK RED
+    else document.documentElement.style.setProperty("--IVLock", `rgb(119, 82, 77)`) // LOCK LIGHT RED
+
+    // if (enableLockRotate) {
+    //   //document.documentElement.style.setProperty("--IVRotate", `rgb(255, 0, 0)`) // ROTATION RED
+    //   document.documentElement.style.setProperty("--IVRotate", `rgb(119, 82, 77)`) // ROTATION LIGHT RED
+    // } else {
+    //   document.documentElement.style.setProperty("--IVRotate", `transparent`) // ROTATION TRANSPARENT
+    // }
+
+    let doc = document.documentElement.style
+
+    if (enableLockRotate) {
+      if (locked) {
+        doc.setProperty("--IVRotate", `rgb(255, 0, 0)`) // ROTATION ACTIVE
+        doc.setProperty("--IVRotateBorder", `rgb(255, 0, 0)`) // ROTATION ACTIVE
+      } else {
+        doc.setProperty("--IVRotate", `rgb(119, 82, 77)`) // ROTATION IDLE
+        doc.setProperty("--IVRotateBorder", `rgb(119, 82, 77)`) // ROTATION ACTIVE
+      }
+
+    } else {
+      doc.setProperty("--IVRotate", `transparent`) // ROTATION TRANSPARENT
+      doc.setProperty("--IVRotateBorder", `transparent`) // ROTATION ACTIVE
+    }
+
+    // if (locked && enableLockRotate) {
+    //   document.documentElement.style.setProperty("--IVRotate", `rgb(255, 0, 0)`) // ROTATION RED
+    // }
+    // else if (!locked && enableLockRotate) {
+    //   document.documentElement.style.setProperty("--IVRotate", `rgb(119, 82, 77)`) // ROTATION LIGHT RED
+    // }
+    // else {
+    //   document.documentElement.style.setProperty("--IVRotate", `transparent`) // ROTATION TRANSPARENT
+    // }
+
+  }, [locked, /* enableLockPosition, enableLockZoom, enableLockFlip, */ enableLockRotate])
+
+  // document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
+
+  // useEffect(() => {
+  //   //console.log("CAMBIO LA MEDIDA")
+  //   if (locked) {
+  //     document.documentElement.style.setProperty("--IVLock", `rgb(255, 0, 0)`)
+  //     document.documentElement.style.setProperty("--IVRotate", `rgb(255, 0, 0)`)
+  //   } else {
+  //     document.documentElement.style.setProperty("--IVLock", `rgb(119, 82, 77)`)
+  //   }
+
+  // }, [locked])
 
   useEffect(() => {
     let lS = document.getElementById('lockSettings');
@@ -349,6 +415,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     let parsedClassIcon = Array.isArray(classIcon) ? classIcon.join(" ") : classIcon
     return (
       <Button
+        disableElevation={true}
         style={style}
         variant="contained"
         className={`${classButton}`}
@@ -435,6 +502,14 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             classIcon={css.icon}
           />
 
+          <MuiButton // RESET ALL
+            //style={{ order: 20 }}
+            classButton={css.button}
+            onClick={restoreHandler}
+            Icon={PlayCircleOutline}
+            classIcon={css.icon}
+          />
+
           <MuiButton // ZOOM OUT
             //style={{ order: enableLockZoom ? 81 : 30 }}
             classButton={css.button}
@@ -469,6 +544,17 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
           <MuiButton // ROTATE LEFT
             //style={{ order: enableLockRotate ? 85 : 70 }}
+            /* style={{ boxShadow: '0px 0px 0px 3.5px red' }} */
+            // style={{
+            //   boxShadow:
+            //   locked && enableLockRotate ?
+            //   '0px 0px 0px 3.5px rgb(255, 0, 0)' :
+            //   !locked && enableLockRotate ?
+            //   '0px 0px 0px 3.5px rgb(119, 82, 77)' :
+            //   'transparent'
+            //   // '0px 0px 0px 3.5px rgb(255, 0, 0)' :
+            //   // '0px 0px 0px 3.5px rgb(119, 82, 77)'
+            // }}
             classButton={css.button}
             onClick={rotateLeft}
             Icon={RotateLeft}
@@ -477,6 +563,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
           <MuiButton // ROTATE RIGHT
             //style={{ order: enableLockRotate ? 86 : 80 }}
+            /* style={{ boxShadow: '0px 0px 0px 3.5px red' }} */
             classButton={css.button}
             onClick={rotateRight}
             Icon={RotateRight}
@@ -490,20 +577,26 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             className={css.lockContainer}
           >
             <div
-              style={{
-                width:
-                arrayLockLength === 3 ?
-                '420px' :
-                /* '294px' : */
-                arrayLockLength === 2 ?
-                '210px' :
-                arrayLockLength === 1 ?
-                '126px' :
-                '42px'
-              }}
+              // style={{
+              //   width:
+              //   arrayLockLength === 3 ?
+              //   '462px' :
+              //   /* '294px' : */
+              //   arrayLockLength === 2 ?
+              //   '210px' :
+              //   arrayLockLength === 1 ?
+              //   '126px' :
+              //   '42px'
+              // }}
               className={css.lockContainerBackground}
             />
             <MuiButton
+              style={{
+                boxShadow:
+                locked ?
+                '0px 0px 0px 3.5px rgb(255, 0, 0)' :
+                '0px 0px 0px 3.5px rgb(119, 82, 77)'
+              }}
               classButton={css.button}
               onClick={lockSettings}
               Icon={ locked ? LockOutlined : LockOpen }
@@ -544,8 +637,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         Enable lock over:
         <div>
           <MuiSwitch
-            onClick={handleSetEnableLockZoom}
-            checked={ enableLockZoom ? true : false }
+            onClick={handleSetEnableLockPosition}
+            checked={ enableLockPosition ? true : false }
           />
           Position
         </div>
@@ -573,7 +666,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           Rotate
         </div>
 
-        <div>          
+        <div>
           Dont forget to 'lock' the padlock to changes take effect.
         </div>
 

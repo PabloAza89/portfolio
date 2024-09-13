@@ -1,3 +1,10 @@
+:root {
+  --IVLock: rgb(119, 82, 77);
+  --IVRotate: rgb(119, 82, 77);
+  --IVRotateBorder: rgb(119, 82, 77);
+}
+
+
 .modalBackground {
   /* background: green; */ /* DEV */
   position: fixed;
@@ -110,10 +117,24 @@
   height: 35px !important;
   margin: 7px 3.5px !important;
   z-index: 1000002;
+  transition-duration: 0.25s, 0.25s, 0.25s !important;
+  transition-property: background-color, border-color, color !important;
+  /* transition: box-shadow 10s !important; */
   /* background: red !important; */
   /* box-shadow: -10px 0px 10px 1px red !important; */
   /* box-shadow: 0px 2px 0px 2px rgba(0, 128, 0, .5) !important; */
   /* box-shadow: 0px 0px 0px 2px green !important; */
+  /* box-shadow: 0px 0px 0px 3.5px rgb(255, 0, 0) !important; */
+}
+
+/* div.buttonsContainer:nth-child(4) {
+  box-shadow: 0px 0px 0px 3.5px rgb(255, 0, 0) !important;
+} */
+
+/* ROTATE */
+[class*="ImageViewerCSS_buttonsContainer_"] > [class*="ImageViewerCSS_button_"]:nth-child(10), [class*="ImageViewerCSS_button_"]:nth-child(11) {
+  box-shadow: 0px 0px 0px 3.5px var(--IVRotateBorder) !important;
+  /* box-shadow: 0px 0px 0px 3.5px var(--IVRotateBorder) !important; */
 }
 
 /* .button:hover {
@@ -159,30 +180,48 @@
   /* box-shadow: -10px 0px 10px 1px #aaaaaa; */
 }
 
+
+
 .lockContainerBackground {
   position: absolute;
   right: 0px;
   top: 3.5px;
-  width: 42px; /* SELF BUTTON WIDTH */
+  width: 462px; /* SELF BUTTON WIDTH */
   height: 42px;
 
-  border-radius: 4px;
+  /* border-radius: 8px; */
+  /* border-radius: 4px; */
+  border-radius: calc(3.5px + 4px);
   /* background: red !important; */
+
   background:
-    linear-gradient(
+    no-repeat
+    linear-gradient( /* 1st BLOCK */
       to left,
-      red 0%, red 100%,
-      transparent 43%, transparent 57%,
-      white 57%, white 100%
-    ),
-    linear-gradient(
-      to right,
-      white 0px, white 3px,
-      transparent 3px, transparent calc(100% - 3px),
-      white calc(100% - 3px), white 100%
-    );
-  background-repeat: no-repeat;
-  background-size: 100% 1.5px, 100% 6px;
+      var(--IVLock) 0px, var(--IVLock) 21px,
+      var(--IVRotate) 21px, var(--IVRotate) 63px,
+      var(--IVRotate) 63px, var(--IVRotate) 105px,
+      transparent 105px
+    ) 0px 0px / 100% 1.75px,
+    no-repeat
+    linear-gradient( /* 2nd BLOCK */
+      to left,
+      var(--IVLock) 0px, var(--IVLock) 21px,
+      var(--IVRotate) 21px, var(--IVRotate) 63px,
+      var(--IVRotate) 63px, var(--IVRotate) 105px,
+      transparent 105px
+    ) 0px 0px / 100% 42px,
+    no-repeat
+    linear-gradient( /* 3rd BLOCK */
+      to left,
+      var(--IVLock) 0px, var(--IVLock) 21px,
+      var(--IVRotate) 21px, var(--IVRotate) 63px,
+      var(--IVRotate) 63px, var(--IVRotate) 105px,
+      transparent 105px
+    ) 0px 40.25px / 100% 1.75px;
+
+  /* background-repeat: no-repeat; */
+
 
   /* z-index: -0; */
   /* position: absolute !important;
