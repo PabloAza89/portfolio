@@ -359,21 +359,54 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     //   document.documentElement.style.setProperty("--IVRotate", `transparent`) // ROTATION TRANSPARENT
     // }
 
-    let doc = document.documentElement.style
+    let root = document.documentElement.style
 
-    if (enableLockRotate) {
+    if (enableLockPosition)
       if (locked) {
-        doc.setProperty("--IVRotate", `rgb(255, 0, 0)`) // ROTATION ACTIVE
-        doc.setProperty("--IVRotateBorder", `rgb(255, 0, 0)`) // ROTATION ACTIVE
+        root.setProperty("--IVPosition", `rgb(255, 0, 0)`) // POSITION ACTIVE
+        root.setProperty("--IVLine", `441px`) // 1st BLOCK TO POSITION
+        //root.setProperty("--IVRotateFlipTopBottom", `rgb(255, 0, 0)`) // FLIP ACTIVE
       } else {
-        doc.setProperty("--IVRotate", `rgb(119, 82, 77)`) // ROTATION IDLE
-        doc.setProperty("--IVRotateBorder", `rgb(119, 82, 77)`) // ROTATION ACTIVE
+        root.setProperty("--IVPosition", `rgb(119, 82, 77)`) // POSITION IDLE
+        root.setProperty("--IVLine", `441px`) // 1st BLOCK TO POSITION
+        //root.setProperty("--IVRotateFlipTopBottom", `rgb(119, 82, 77)`) // FLIP ACTIVE
       }
-
-    } else {
-      doc.setProperty("--IVRotate", `transparent`) // ROTATION TRANSPARENT
-      doc.setProperty("--IVRotateBorder", `transparent`) // ROTATION ACTIVE
+    else {
+      root.setProperty("--IVPosition", `transparent`) // POSITION TRANSPARENT
+      root.setProperty("--IVLine", `21px`) // 1st BLOCK TO POSITION
+      //root.setProperty("--IVRotateFlipTopBottom", `transparent`) // FLIP ACTIVE
     }
+
+    if (enableLockZoom)
+      if (locked) {
+        root.setProperty("--IVZoom", `rgb(255, 0, 0)`) // POSITION ACTIVE
+        //root.setProperty("--IVRotateFlipTopBottom", `rgb(255, 0, 0)`) // FLIP ACTIVE
+      } else {
+        root.setProperty("--IVZoom", `rgb(119, 82, 77)`) // POSITION IDLE
+        //root.setProperty("--IVRotateFlipTopBottom", `rgb(119, 82, 77)`) // FLIP ACTIVE
+      }
+    else {
+      root.setProperty("--IVZoom", `transparent`) // POSITION TRANSPARENT
+      //root.setProperty("--IVRotateFlipTopBottom", `transparent`) // FLIP ACTIVE
+    }
+
+    if (enableLockFlip)
+      if (locked) {
+        root.setProperty("--IVFlip", `rgb(255, 0, 0)`) // FLIP ACTIVE
+        //root.setProperty("--IVRotateFlipTopBottom", `rgb(255, 0, 0)`) // FLIP ACTIVE
+      } else {
+        root.setProperty("--IVFlip", `rgb(119, 82, 77)`) // FLIP IDLE
+        //root.setProperty("--IVRotateFlipTopBottom", `rgb(119, 82, 77)`) // FLIP ACTIVE
+      }
+    else {
+      root.setProperty("--IVFlip", `transparent`) // FLIP TRANSPARENT
+      //root.setProperty("--IVRotateFlipTopBottom", `transparent`) // FLIP ACTIVE
+    }
+
+    if (enableLockRotate)
+      if (locked) root.setProperty("--IVRotate", `rgb(255, 0, 0)`) // ROTATION ACTIVE
+      else root.setProperty("--IVRotate", `rgb(119, 82, 77)`) // ROTATION IDLE
+    else root.setProperty("--IVRotate", `transparent`) // ROTATION TRANSPARENT
 
     // if (locked && enableLockRotate) {
     //   document.documentElement.style.setProperty("--IVRotate", `rgb(255, 0, 0)`) // ROTATION RED
@@ -385,7 +418,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     //   document.documentElement.style.setProperty("--IVRotate", `transparent`) // ROTATION TRANSPARENT
     // }
 
-  }, [locked, /* enableLockPosition, enableLockZoom, enableLockFlip, */ enableLockRotate])
+  }, [locked, enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate])
 
   // document.documentElement.style.setProperty("--diff", `${el.offsetWidth - el.clientWidth}`);
 
@@ -477,6 +510,11 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             { currentIndex !== undefined && images !== undefined ? currentIndex + 1 : 0 }/{ currentIndex !== undefined && images !== undefined ? images.length : 0 }
           </div>
 
+          {/* <div className={`${css.back} ${css.position}`} /> */}
+          <div className={`${css.back} ${css.zoom}`} />
+          <div className={`${css.back} ${css.flip}`} />
+          <div className={`${css.back} ${css.rotate}`} />
+
           <MuiButton // GO LEFT
             //style={{ order: 0 }}
             classButton={css.button}
@@ -543,18 +581,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           />
 
           <MuiButton // ROTATE LEFT
-            //style={{ order: enableLockRotate ? 85 : 70 }}
-            /* style={{ boxShadow: '0px 0px 0px 3.5px red' }} */
-            // style={{
-            //   boxShadow:
-            //   locked && enableLockRotate ?
-            //   '0px 0px 0px 3.5px rgb(255, 0, 0)' :
-            //   !locked && enableLockRotate ?
-            //   '0px 0px 0px 3.5px rgb(119, 82, 77)' :
-            //   'transparent'
-            //   // '0px 0px 0px 3.5px rgb(255, 0, 0)' :
-            //   // '0px 0px 0px 3.5px rgb(119, 82, 77)'
-            // }}
             classButton={css.button}
             onClick={rotateLeft}
             Icon={RotateLeft}
@@ -591,12 +617,12 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               className={css.lockContainerBackground}
             />
             <MuiButton
-              style={{
-                boxShadow:
-                locked ?
-                '0px 0px 0px 3.5px rgb(255, 0, 0)' :
-                '0px 0px 0px 3.5px rgb(119, 82, 77)'
-              }}
+              // style={{
+              //   boxShadow:
+              //   locked ?
+              //   '0px 0px 0px 3.5px rgb(255, 0, 0)' :
+              //   '0px 0px 0px 3.5px rgb(119, 82, 77)'
+              // }}
               classButton={css.button}
               onClick={lockSettings}
               Icon={ locked ? LockOutlined : LockOpen }

@@ -1,7 +1,12 @@
 :root {
   --IVLock: rgb(119, 82, 77);
   --IVRotate: rgb(119, 82, 77);
-  --IVRotateBorder: rgb(119, 82, 77);
+  --IVRotateFlipTopBottom: rgb(119, 82, 77);
+  --IVBetweenRotateAndFlip: rgb(119, 82, 77);
+  --IVFlip: rgb(119, 82, 77);
+  --IVZoom: rgb(119, 82, 77);
+  --IVPosition: rgb(119, 82, 77);
+  --IVFirstBlock: 21px;
 }
 
 
@@ -131,11 +136,7 @@
   box-shadow: 0px 0px 0px 3.5px rgb(255, 0, 0) !important;
 } */
 
-/* ROTATE */
-[class*="ImageViewerCSS_buttonsContainer_"] > [class*="ImageViewerCSS_button_"]:nth-child(10), [class*="ImageViewerCSS_button_"]:nth-child(11) {
-  box-shadow: 0px 0px 0px 3.5px var(--IVRotateBorder) !important;
-  /* box-shadow: 0px 0px 0px 3.5px var(--IVRotateBorder) !important; */
-}
+
 
 /* .button:hover {
   clip-path: circle(90%) !important;
@@ -180,6 +181,48 @@
   /* box-shadow: -10px 0px 10px 1px #aaaaaa; */
 }
 
+/* POSITION BUTTONS */
+[class*="ImageViewerCSS_buttonsContainer_"] > [class*="ImageViewerCSS_button_"]:nth-child(2), [class*="ImageViewerCSS_button_"]:nth-child(3) {
+  /* box-shadow: 0px 0px 0px 3.5px var(--IVPosition) !important; */
+  /* border-radius: 0px !important; */
+  /* outline: 3.5px solid !important; */
+  /* outline-color: linear-gradient(lo left,orange 0px,yellow 50px) !important; */
+  /* outline-color: linear-gradient(to left,orange 0px,orange 50px, red 50px) !important; */
+  /* clip-path: circle(100%) !important; */
+  /* border: 6px solid red !important; */
+  /* margin: 0px !important; */
+  /* border-style: inset !important; */
+}
+
+.back {
+  display: flex;
+  position: absolute;
+  width: 84px;
+  height: 42px;
+  border-radius: calc(3.5px + 4px);
+  margin-top: 3.5px;
+}
+
+.position {
+  background: var(--IVPosition);
+  /* left: 100px; */
+  left: 0px;
+}
+
+.zoom {
+  background: var(--IVZoom);
+  left: 168px;
+}
+
+.flip {
+  background: var(--IVFlip);
+  left: 252px;
+}
+
+.rotate {
+  background: var(--IVRotate);
+  left: 336px;
+}
 
 
 .lockContainerBackground {
@@ -195,29 +238,19 @@
   /* background: red !important; */
 
   background:
-    no-repeat
-    linear-gradient( /* 1st BLOCK */
+    no-repeat /* 1st BLOCK */
+    linear-gradient(
       to left,
-      var(--IVLock) 0px, var(--IVLock) 21px,
-      var(--IVRotate) 21px, var(--IVRotate) 63px,
-      var(--IVRotate) 63px, var(--IVRotate) 105px,
-      transparent 105px
+      var(--IVLock) 0px, var(--IVLock) 21px, /* 0 to 1/2 LOCK */
+      var(--IVLock) 21px, var(--IVLock) var(--IVLine), /* 1/2 LOCK to xxx */
+      transparent var(--IVLine)
     ) 0px 0px / 100% 1.75px,
-    no-repeat
-    linear-gradient( /* 2nd BLOCK */
+    no-repeat /* 2nd BLOCK */
+    linear-gradient(
       to left,
-      var(--IVLock) 0px, var(--IVLock) 21px,
-      var(--IVRotate) 21px, var(--IVRotate) 63px,
-      var(--IVRotate) 63px, var(--IVRotate) 105px,
-      transparent 105px
-    ) 0px 0px / 100% 42px,
-    no-repeat
-    linear-gradient( /* 3rd BLOCK */
-      to left,
-      var(--IVLock) 0px, var(--IVLock) 21px,
-      var(--IVRotate) 21px, var(--IVRotate) 63px,
-      var(--IVRotate) 63px, var(--IVRotate) 105px,
-      transparent 105px
+      var(--IVLock) 0px, var(--IVLock) 21px, /* 0 to 1/2 LOCK */
+      var(--IVLock) 21px, var(--IVLock) var(--IVLine), /* 1/2 LOCK to xxx */
+      transparent var(--IVLine)
     ) 0px 40.25px / 100% 1.75px;
 
   /* background-repeat: no-repeat; */
