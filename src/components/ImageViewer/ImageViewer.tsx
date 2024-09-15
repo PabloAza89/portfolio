@@ -28,13 +28,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   // }, [])
 
   // window.onmousedown = function(e) {
-  //   let modalDiv = document.getElementById('modalBackground');
+  //   let modalDiv = document.getElementById('IVBackground');
   //   if (e.target === modalDiv) clickOnBG.current.start =  true
   //   else clickOnBG.current.start =  false
   // }
 
   // window.onmouseup = function(e) {
-  //   let modalDiv = document.getElementById('modalBackground');
+  //   let modalDiv = document.getElementById('IVBackground');
   //   if (e.target === modalDiv) clickOnBG.current.end =  true
   //   else clickOnBG.current.end =  false
   //   if (setShowImageViewer !== undefined && clickOnBG.current.start && clickOnBG.current.end) {
@@ -343,45 +343,115 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   useEffect(() => {
 
+
+    const activeColor = `rgb(255, 255, 255)`;
+    const inactiveColor = `rgb(158, 158, 158)`;
+    const clearColor = `transparent`;
+    const roundBorder = `7.5px`;
+    const rectBorder = `0px`;
+
+    // // LOCK
+    // if (locked) root.setProperty("--IVLock", activeColor) // LOCK ACTIVE
+    // else root.setProperty("--IVLock", inactiveColor) // LOCK INACTIVE
+
+    // // LINE
+    // if (enableLockPosition) root.setProperty("--IVLine", `420px`) // TILL POSITION
+    // else if (enableLockZoom) root.setProperty("--IVLine", `252px`) // TILL ZOOM
+    // else if (enableLockFlip) root.setProperty("--IVLine", `168px`) // TILL FLIP
+    // else if (enableLockRotate) root.setProperty("--IVLine", `84px`) // TILL ROTATE
+    // else root.setProperty("--IVLine", `0px`) // NO LINE
+
+    
+
     let root = document.documentElement.style
+    
+    //let root = document.documentElement.style
 
-    // LOCK
-    if (locked) root.setProperty("--IVLock", `rgb(255, 0, 0)`) // LOCK RED
-    else root.setProperty("--IVLock", `rgb(119, 82, 77)`) // LOCK LIGHT RED
-
-    // LINE
-    if (enableLockPosition) root.setProperty("--IVLine", `441px`) // TILL POSITION
-    else if (enableLockZoom) root.setProperty("--IVLine", `273px`) // TILL ZOOM
-    else if (enableLockFlip) root.setProperty("--IVLine", `189px`) // TILL FLIP
-    else if (enableLockRotate) root.setProperty("--IVLine", `105px`) // TILL ROTATE
-    else root.setProperty("--IVLine", `21px`) // NO LINE
+    const varSetter = (array: any, num?: any) => {
+      array.forEach((obj: any) => {
+        let key = Object.keys(obj)[0]
+        root.setProperty(key, obj[key])
+      })
+    }
 
 
-    // BACKGROUND
+    // const varSetter = (array: any, num?: any) => {
+    //   array.forEach((e) => {
+    //     let key = Object.keys(obj)[0]
+    //     root.setProperty(key, obj[key])
+    //   })
+    // }
+
+    
+
+    const varSetter2 = (e: any, num?: any) => {
+      //console.log(Array.isArray(obj.active))
+      console.log("obj.active", e.active)
+
+      if (e.active)
+        if (Array.isArray(e.active)) e.active.forEach((x: any) => { root.setProperty(x, activeColor) })
+        else root.setProperty(e.active, activeColor)
+      if (e.inactive)
+        if (Array.isArray(e.inactive)) e.inactive.forEach((x: any) => { root.setProperty(x, inactiveColor) })
+        else root.setProperty(e.inactive, inactiveColor)
+      if (e.clear)
+        if (Array.isArray(e.clear)) e.clear.forEach((x: any) => { root.setProperty(x, clearColor) })
+        else root.setProperty(e.clear, clearColor)
+      if (e.round)
+        if (Array.isArray(e.round)) console.log("INACTIVE IS AN ARRAY")
+        else root.setProperty(e.round, roundBorder)
+      if (e.rect)
+        if (Array.isArray(e.rect)) console.log("INACTIVE IS AN ARRAY")
+        else root.setProperty(e.rect, rectBorder)
+
+
+      // array.forEach((obj: any) => {
+      //   let key = Object.keys(obj)[0]
+      //   root.setProperty(key, obj[key])
+      // })
+    }
+
+    // // LINE COLOR
+    // if (enableLockPosition) varSetter(qq, 0)
+    // else if (enableLockZoom) varSetter(qq,1) // TILL ZOOM
+    // else if (enableLockFlip) varSetter(qq,2) // TILL FLIP
+    // else if (enableLockRotate) varSetter(qq, 3) // TILL ROTATE
+    // else root.setProperty("--IVLine", `0px`) // NO LINE
+
+    let lines = [
+      '--IVPositionLine',
+      '--IVZoomLine',
+      '--IVFlipLine',
+      '--IVRotateLine',
+    ]
+
+    // BUTTON BACKGROUND COLOR
     if (enableLockPosition)
-      if (locked) root.setProperty("--IVPosition", `rgb(255, 0, 0)`) // POSITION ACTIVE
-      else root.setProperty("--IVPosition", `rgb(119, 82, 77)`) // POSITION IDLE
-    else root.setProperty("--IVPosition", `transparent`) // POSITION TRANSPARENT
+      if (locked) varSetter2({ active: ['--IVPosition', ...lines.slice(0)] }) // POSITION ACTIVE
+      else varSetter2({ inactive: ['--IVPosition', ...lines.slice(0)] }) // POSITION INACTIVE
+    else varSetter2({ clear: ['--IVPosition', ...lines.slice(0)] }) // POSITION CLEAR
     if (enableLockZoom)
-      if (locked) root.setProperty("--IVZoom", `rgb(255, 0, 0)`) // ZOMM ACTIVE
-      else root.setProperty("--IVZoom", `rgb(119, 82, 77)`) // ZOOM IDLE
-    else root.setProperty("--IVZoom", `transparent`) // ZOOM TRANSPARENT
+      if (locked) varSetter2({ active: ['--IVZoom', ...lines.slice(1)] }) // ZOOM ACTIVE
+      else varSetter2({ inactive: ['--IVZoom', ...lines.slice(1)] }) // ZOOM INACTIVE
+    else varSetter2({ clear: '--IVZoom' }) // ZOOM TRANSPARENT
     if (enableLockFlip)
-      if (locked) root.setProperty("--IVFlip", `rgb(255, 0, 0)`) // FLIP ACTIVE
-      else root.setProperty("--IVFlip", `rgb(119, 82, 77)`) // FLIP IDLE
-    else root.setProperty("--IVFlip", `transparent`) // FLIP TRANSPARENT
+      if (locked) varSetter2({ active: ['--IVFlip', ...lines.slice(2)] }) // FLIP ACTIVE
+      else varSetter2({ inactive: ['--IVFlip', ...lines.slice(2)] }) // FLIP INACTIVE
+    else varSetter2({ clear: '--IVFlip' }) // FLIP TRANSPARENT
     if (enableLockRotate)
-      if (locked) root.setProperty("--IVRotate", `rgb(255, 0, 0)`) // ROTATION ACTIVE
-      else root.setProperty("--IVRotate", `rgb(119, 82, 77)`) // ROTATION IDLE
-    else root.setProperty("--IVRotate", `transparent`) // ROTATION TRANSPARENT
+      if (locked) varSetter2({ active: ['--IVRotate', ...lines.slice(3)] }) // ROTATION ACTIVE
+      else varSetter2({ inactive: ['--IVRotate', ...lines.slice(3)] }) // ROTATION INACTIVE
+    else varSetter2({ clear: '--IVRotate' }) // ROTATION TRANSPARENT
+    if (locked) varSetter2({ active: '--IVLock' }) // LOCK ACTIVE
+    else varSetter2({ clear: '--IVLock' }) // LOCK INACTIVE
 
-    // BORDER
-    if (enableLockZoom && enableLockFlip) root.setProperty("--IVZoomFlip", `0px`)
-    else root.setProperty("--IVZoomFlip", `7.5px`)
-    if (enableLockFlip && enableLockRotate) root.setProperty("--IVFlipRotate", `0px`)
-    else root.setProperty("--IVFlipRotate", `7.5px`)
-    if (enableLockRotate) root.setProperty("--IVRotateLock", `0px`)
-    else root.setProperty("--IVRotateLock", `7.5px`)
+    // BUTTON BACKGROUND BORDER-RADIUS
+    if (enableLockZoom && enableLockFlip) varSetter2({ rect: '--IVZoomFlip' })
+    else varSetter2({ round: '--IVZoomFlip' })
+    if (enableLockFlip && enableLockRotate) varSetter2({ rect: '--IVFlipRotate' })
+    else varSetter2({ round: '--IVFlipRotate' })
+    if (enableLockRotate) varSetter2({ rect: '--IVRotateLock' })
+    else varSetter2({ round: '--IVRotateLock' })
 
 
   }, [locked, enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate])
@@ -433,8 +503,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   return (
     <div
-      id={`modalBackground`}
-      className={css.modalBackground}
+      id={`IVBackground`}
+      className={css.IVBackground}
       onMouseDown={(e) => mouseDown(e)} // MOUSE START
       onMouseMove={(e) => mouseMove(e)} // MOUSE MOVE
       onMouseUp={(e) => mouseUp(e)} // MOUSE END
@@ -558,31 +628,15 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             //style={{ order: 90 }}
             className={css.lockContainer}
           >
-            <div
-              // style={{
-              //   width:
-              //   arrayLockLength === 3 ?
-              //   '462px' :
-              //   /* '294px' : */
-              //   arrayLockLength === 2 ?
-              //   '210px' :
-              //   arrayLockLength === 1 ?
-              //   '126px' :
-              //   '42px'
-              // }}
-              className={css.lockContainerBackground}
-            />
+            {/* <div className={css.IVLine} /> */}
+            <div className={`${css.IVLine} ${css.IVUpperLine}`} />
+            <div className={`${css.IVLine} ${css.IVLowerLine}`} />
+
             <MuiButton
-              // style={{
-              //   boxShadow:
-              //   locked ?
-              //   '0px 0px 0px 3.5px rgb(255, 0, 0)' :
-              //   '0px 0px 0px 3.5px rgb(119, 82, 77)'
-              // }}
               classButton={css.button}
               onClick={lockSettings}
               Icon={ locked ? LockOutlined : LockOpen }
-              classIcon={css.icon}
+              classIcon={[ css.icon, css.iconLock ]}
             >
 
             </MuiButton>
