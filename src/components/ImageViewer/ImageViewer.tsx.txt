@@ -2,8 +2,12 @@ import {
   ReactElement, useEffect, useLayoutEffect, useState, useRef, ReactNode, MouseEvent, TouchEvent
 } from 'react';
 import css from './ImageViewerCSS.module.css';
-import { Forward, Add, Remove, Close, RotateLeft, RotateRight, Flip, RestartAlt, Cached, VolunteerActivismOutlined } from '@mui/icons-material/';
-import { Button } from '@mui/material';
+import {
+  Forward, Add, Remove, Close, RotateLeft, RotateRight,
+  Flip, RestartAlt, Cached, LockOpen, LockOutlined, Settings,
+  PlayCircleOutline, PlayArrow
+} from '@mui/icons-material/';
+import { Button, Switch } from '@mui/material';
 import {
   ImageViewerI, operationI, comparisonI, currentZoomI
 } from '../../interfaces/interfaces';
@@ -24,13 +28,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   // }, [])
 
   // window.onmousedown = function(e) {
-  //   let modalDiv = document.getElementById('modalBackground');
+  //   let modalDiv = document.getElementById('IVBackground');
   //   if (e.target === modalDiv) clickOnBG.current.start =  true
   //   else clickOnBG.current.start =  false
   // }
 
   // window.onmouseup = function(e) {
-  //   let modalDiv = document.getElementById('modalBackground');
+  //   let modalDiv = document.getElementById('IVBackground');
   //   if (e.target === modalDiv) clickOnBG.current.end =  true
   //   else clickOnBG.current.end =  false
   //   if (setShowImageViewer !== undefined && clickOnBG.current.start && clickOnBG.current.end) {
@@ -40,56 +44,71 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   const [ currentIndex, setCurrentIndex ] = useState<number>(index !== undefined ? index : 0)
 
-  
-
-  
-
-  //const [ rotationAngle, setRotationAngle ] = useState(0)
-
-  const [ imagePos, setImagePos ] = useState({
-    x: 0,
-    y: 0,
-  })
-
   const [ imageProps, setImageProps ] = useState({
     zoomX: 1.0,
     zoomY: 1.0,
     angle: 0,
   })
 
-  //console.log('rotationAngle --->', rotationAngle);
-  
-  //let currentZoom = useRef(1.0)//, setCurrentZoom ] = useState(1.0)
-  // const [ currentZoom, setCurrentZoom ] = useState<currentZoomI>({ // (cZ)
-  //   val: 1, mORd: 'x', aORs: '+', lORm: '<=', dF: 2
-  // })
-
-  //let refCanvas = useRef<HTMLCanvasElement>(null)
   let imageRef = useRef(new Image())
-  
-  
+
+
   //let initImgPos = useRef({ x: 0, y: 0 }) // INITIAL IMAGE POSITION
   let imgPo = useRef({ x: 0, y: 0 }) // IMAGE POSITION
 
 
-  const [ currentPos, setCurrentPos ] = useState({
-    x: 0,
-    y: 0
+  let currentPos = useRef({
+      x: 0,
+      y: 0
   })
+
+
 
   let allowMove = useRef(false)
   let arbPos = useRef({ x: 0, y: 0 }) // ARBITRARY POSITION
 
   useEffect(() => { // LOAD NEW IMAGE
+    console.log("ENTRO ACA")
+
+    // if (locked) {
+
+    // } else {
+    //   handleRestoreWithoutAnimation()
+    // }
+
     if (images !== undefined && currentIndex !== undefined) {
       imageRef.current.src = images[currentIndex]
 
+      // let iVF = document.getElementById('imageViewerForeground');
+      // if (iVF !== null) {
+      //   iVF.style.transition = `transform .2s, left .2s, top .2s`;
+      // }
+
     }
+
+
+    // let qq = async () => {
+    //   if (images !== undefined && currentIndex !== undefined) {
+    //     imageRef.current.src = images[currentIndex]
+  
+    //     // let iVF = document.getElementById('imageViewerForeground');
+    //     // if (iVF !== null) {
+    //     //   iVF.style.transition = `transform .2s, left .2s, top .2s`;
+    //     // }
+  
+    //   }
+    // }
+
+    // qq().then(() => {
+    //   restoreHandler()
+    // })
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex, images])
 
 
   let mouseDown = (e: TouchEvent | MouseEvent) => {
-    console.log("MOUSE DOWN")
+    //console.log("MOUSE DOWN")
     if ('touches' in e) { // TOUCH EVENT
       arbPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
       allowMove.current = true
@@ -97,7 +116,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       // arbPos.current = { x: e.clientX, y: e.clientY }
       // allowMove.current = true
       arbPos.current = { x: e.clientX, y: e.clientY }
-      console.log("START POSITION", e.clientX)
+      //console.log("START POSITION", e.clientX)
       allowMove.current = true
     }
   }
@@ -116,125 +135,80 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       } else { // MOUSE EVENT
         // targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
         // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-        targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-        targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+        // targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+        // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+
+        // arbPos.current = { x: e.clientX - arbPos.current.x, y: e.clientY - arbPos.current.y }
 
 
-        console.log("targetXPosition", e.clientX - arbPos.current.x)
-        //console.log("arbPos.current.x", arbPos.current.x)
-        //console.log("e.clientX", e.clientX)
+
+        // setCurrentPos((curr) => ({
+        //   x: curr.x + -1,
+        //   y: curr.y + -1,
+        // }))
+
+        let qq = e.clientX - arbPos.current.x
+        let ww = e.clientY - arbPos.current.y
+
+        // setCurrentPos((curr) => ({
+        //   x: curr.x + e.clientX - arbPos.current.x,
+        //   y: curr.y + e.clientY - arbPos.current.y
+        // }))
+
+        currentPos.current = {
+          x: currentPos.current.x + (e.clientX - arbPos.current.x),
+          y: currentPos.current.y + (e.clientY - arbPos.current.y),
+        }
+
+        let iVF = document.getElementById('imageViewerForeground');
+        if (iVF !== null) {
+          iVF.style.left = `${currentPos.current.x}px`
+          iVF.style.top = `${currentPos.current.y}px`
+        }
+
+        // setLeft(curr => curr + qq)
+        // setTop(curr => curr + ww)
+
+        // left = left + qq
+        // top = top + ww
+
+        // setCurrentPos((curr) => ({
+        //   x: curr.x + (e.clientX - arbPos.current.x),
+        //   y: curr.y + (e.clientY - arbPos.current.y),
+        // }))
+
+        //console.log("A VER", arbPos.current.x)
+        //console.log("A VER", e.clientX - arbPos.current.x) // CONTINUE HERE
+
+
+        arbPos.current = {
+          x: e.clientX,
+          y: e.clientY
+        }
+
 
       }
     }
 
-//     if (allowMove.current && currentZoom.val !== 1) {
-//       if (refCanvas.current !== null) {
-//         let ref = refCanvas.current
-//         let ctx = ref.getContext("2d");
-//         if (ctx !== null) {
-//           let targetXPosition;
-//           let targetYPosition;
 
-//           if ('touches' in e) { // TOUCH EVENT
-//             targetXPosition = imgPo.current.x + (e.touches[0].clientX - arbPos.current.x) * 3 // '* 3' = INCREASE SPEED HERE FOR MOBILE
-//             targetYPosition = imgPo.current.y + (e.touches[0].clientY - arbPos.current.y) * 3 // '* 3' = INCREASE SPEED HERE FOR MOBILE
-//           } else { // MOUSE EVENT
-//             // targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-//             // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-//             targetXPosition = // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-//               rotationAngle === -90 ?
-//               imgPo.current.x + (e.clientX - arbPos.current.x) * 1.5 :
-//               rotationAngle === -180 ?
-//               imgPo.current.x - (e.clientX - arbPos.current.x) * 1.5 :
-//               rotationAngle === -270 ? //
-//               imgPo.current.x - (e.clientX - arbPos.current.x) * 1.5 :
-//               imgPo.current.x + (e.clientX - arbPos.current.x) * 1.5
-// console.log('targetXPosition --->', targetXPosition);
-//             targetYPosition = // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-//               rotationAngle === -90 ?
-//               imgPo.current.y - (e.clientY - arbPos.current.y) * 1.5 :
-//               rotationAngle === -180 ?
-//               imgPo.current.y - (e.clientY - arbPos.current.y) * 1.5 :
-//               rotationAngle === -270 ? //
-//               imgPo.current.y + (e.clientY - arbPos.current.y) * 1.5 :
-//               imgPo.current.y + (e.clientY - arbPos.current.y) * 1.5
-
-//             //console.log("A VER ESTE", rotationAngle)
-// //console.log('targetYPosition --->', targetYPosition);
-//           }
-
-//           let factor = ((currentZoom.val * 2) - 2) * 2
-//           //   cZ                factor
-//           // ((1.5 * 2) - 2) * 2 = 2
-//           // ((2.0 * 2) - 2) * 2 = 4
-//           // ((2.5 * 2) - 2) * 2 = 6
-//           // ((3.0 * 2) - 2) * 2 = 8
-
-//           // let savedX = targetXPosition
-//             // targetXPosition = targetYPosition
-//             // targetYPosition = savedX
-
-//           if (
-//             (targetXPosition < 0 && targetXPosition > initImgPos.current.x * factor) &&
-//             (targetYPosition < 0 && targetYPosition > initImgPos.current.y * factor)
-//           ) {
-//             //rotationAngle === -90 || rotationAngle === -270 ?
-//             // ctx.drawImage(
-//             //   image.current,
-//             //   targetYPosition,targetXPosition,
-//             //   ref.width * currentZoom.val,ref.height * currentZoom.val
-//             // ) :
-//             // ctx.drawImage(
-//             //   image.current,
-//             //   targetXPosition, targetYPosition,
-//             //   ref.width * currentZoom.val, ref.height * currentZoom.val
-//             // ) // CONTINUE HERE
-//             //imgPo.current = { x: targetXPosition, y: targetYPosition }
-//             imgPo.current = { x: targetXPosition, y: targetYPosition }
-//           }
-//         }
-//       }
-//       if ('touches' in e) arbPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
-//       else arbPos.current = { x: e.clientX, y: e.clientY }
-//       //else arbPos.current = { x: e.clientX, y: e.clientY }
-//     }
   }
-  
+
   useEffect(() => {
     let iVF = document.getElementById('imageViewerForeground');
-    //window.getComputedStyle(iVF)
     if (iVF !== null) {
-      //iVF.style.
-      //console.dir(iVF)
-      //setCurrentZoom((curr) => (curr + 0.1))
-      //currentZoom.current = currentZoom.current + 0.1
-      //console.log("currentZoom", (currentZoom.current).toFixed(1))
-      
-      
+
       //iVF.style.transform = `scale(${imageProps.zoomX}, ${imageProps.zoomY}) rotate(${imageProps.angle}deg)`
       iVF.style.transform = `
         scale(${imageProps.zoomX}, ${imageProps.zoomY})
         rotate(${imageProps.angle}deg)
       `
-      // translate(-100px, 0px)
-      
-      //console.log('imageProps --->', imageProps);
-
-      //translate(${imagePos.x}, ${imagePos.y})
-
-      //iVF.style.transform = `rotate(${rotationAngle}deg)`
-      //console.log(window)
-      //window.getComputedStyle(iVF)//.width
-      //console.log(window.getComputedStyle(iVF).transform)
 
     }
 
-
-  //}, [currentZoom, rotationAngle])
-  }, [imageProps/* , imagePos */])
+  }, [imageProps])
 
   const zoomIn = () => {
-    
+
     //setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX + 0.1, zoomY: curr.zoomY + 0.1 }))
 
     setImageProps((curr) => ({
@@ -246,7 +220,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   }
 
   const zoomOut = () => {
-    
+
     //setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX - 0.1, zoomY: curr.zoomY - 0.1 }))
 
     setImageProps((curr) => ({
@@ -257,186 +231,305 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   }
 
-  const goLeftHandler = () => {
+  const handleGoLeft = () => {
     if (images !== undefined) {
       if (currentIndex === 0) setCurrentIndex(images.length - 1)
       else setCurrentIndex((curr: number) => curr - 1)
+
+      let iVF = document.getElementById('imageViewerForeground');
+      if (iVF !== null) {
+        iVF.style.transition = `transform .2s, left .2s, top .2s`;
+        iVF.style.left = `0px`;
+        iVF.style.top = `0px`;
+        iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+      }
+
+      setImageProps({
+        zoomX: 1.0,
+        zoomY: 1.0,
+        angle: 0,
+      })
+
+      currentPos.current = { x: 0, y: 0 }
       //setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', dF: 2 })
     }
   }
 
-  const goRightHandler = () => {
+  const handleGoRight = () => {
     if (images !== undefined) {
       if (currentIndex === images.length - 1) setCurrentIndex(0)
       else setCurrentIndex((curr: number) => curr + 1)
+
+      let iVF = document.getElementById('imageViewerForeground');
+      if (iVF !== null) {
+        iVF.style.transition = `transform .2s, left .2s, top .2s`;
+        iVF.style.left = `0px`;
+        iVF.style.top = `0px`;
+        iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+      }
+
+      setImageProps({
+        zoomX: 1.0,
+        zoomY: 1.0,
+        angle: 0,
+      })
+
+      currentPos.current = { x: 0, y: 0 }
+
       //setCurrentZoom({ val: 1, mORd: 'x', aORs: '+', lORm: '<=', dF: 2 })
     }
   }
 
-  const controls: ReactNode =
-    <div
-      id={`bottomBar`}
-      className={css.bottomBar}
-    >
-      <div className={css.buttonsContainer}>
-        <div className={css.imageCounter}>
-          { currentIndex !== undefined && images !== undefined ? currentIndex + 1 : 0 }/{ currentIndex !== undefined && images !== undefined ? images.length : 0 }
-        </div>
-        <Button
-          variant="contained"
-          className={css.button}
-          onClick={() => goLeftHandler()}
-        >
-          <Forward className={css.icon}/>
-        </Button>
+  const restoreHandler = () => {
+    setImageProps({
+      zoomX: 1.0,
+      zoomY: 1.0,
+      angle: 0,
+    })
+    let iVF = document.getElementById('imageViewerForeground');
+    if (iVF !== null) {
+      iVF.style.transition = `transform .2s, left .2s, top .2s`;
+      iVF.style.left = `0px`;
+      iVF.style.top = `0px`;
+      iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+    }
+    currentPos.current = { x: 0, y: 0 }
+  }
 
-        <Button
-          variant="contained"
-          className={css.button}
-          onClick={() => goRightHandler()}
-        >
-          <Forward className={`${css.icon} ${css.flipIcon}`}/>
-        </Button>
+  const handleRestoreWithoutAnimation = () => {
 
+    let iVF = document.getElementById('imageViewerForeground');
+    if (iVF !== null) {
+      //iVF.style.transition = `transform .2s, left .2s, top .2s`;
+      iVF.style.transition = `none`;
+      iVF.style.left = `0px`;
+      iVF.style.top = `0px`;
+      //iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+    }
 
-        <Button
-          variant="contained"
-          className={css.button}
-          //onClick={() => zoomIn()}
-          onClick={() => {
-            //setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX * -1 }))
-            setImageProps({
-              zoomX: 1.0,
-              zoomY: 1.0,
-              angle: 0,
-            })
-          }}
-          //disabled={ currentZoom.val === 8 ? true : false }
-        >
-          <Cached className={`${css.icon}`}/>
-        </Button>
+    setImageProps({
+      zoomX: 1.0,
+      zoomY: 1.0,
+      angle: 0,
+    })
 
+    currentPos.current = { x: 0, y: 0 }
+  }
 
+  const flipX = () => setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX * -1 }))
+  const flipY = () => setImageProps((curr) => ({ ...curr, zoomY: curr.zoomY * -1 }))
+  const rotateLeft = () => setImageProps((curr) => ({ ...curr, angle: curr.angle - 90 }))
+  const rotateRight = () => setImageProps((curr) => ({ ...curr, angle: curr.angle + 90 }))
 
+  const [ locked, setLocked ] = useState(false)
+  const [ showSettings, setShowSettings ] = useState(false)
+  const [ enableLockPosition, setEnableLockPosition ] = useState(true)
+  const [ enableLockZoom, setEnableLockZoom ] = useState(true)
+  const [ enableLockFlip, setEnableLockFlip ] = useState(true)
+  const [ enableLockRotate, setEnableLockRotate ] = useState(true)
 
+  const lockSettings = () => setLocked(!locked)
+  const handleSetEnableLockPosition = () => setEnableLockPosition(!enableLockPosition)
+  const handleSetEnableLockZoom = () => setEnableLockZoom(!enableLockZoom)
+  const handleSetEnableLockFlip = () => setEnableLockFlip(!enableLockFlip)
+  const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
+  const handleShowSettings = () => setShowSettings(!showSettings)
 
-        <Button
-          variant="contained"
-          className={css.button}
-          onClick={() => zoomOut()}
-          //disabled={ currentZoom === 1 ? true : false }
-        >
-          <Remove className={`${css.icon} ${css.flipIcon}`}/>
-        </Button>
+  let arrayLockLength = [ enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate ].filter(e => e === true).length
 
-        <Button
-          variant="contained"
-          className={css.button}
-          onClick={() => zoomIn()}
-          //disabled={ currentZoom === 2.0 ? true : false }
-        >
-          <Add className={`${css.icon} ${css.flipIcon}`}/>
-        </Button>
+  // useEffect(() => {
+  //   console.log("CAMBIO LA MEDIDA")
+  // }, [arrayLockLength])
+
+  useEffect(() => {
 
 
+    const activeColor = `rgb(255, 255, 255)`; // WHITE
+    const inactiveColor = `rgb(158, 158, 158)`; // GRAY
+    const bgColor = `rgb(77, 77, 77)`; // SAME AS BG BAR COLOR
+    const clearColor = `transparent`; // TRANSPARENT
+    const roundBorder = `7.5px`;
+    const rectBorder = `0px`;
+
+    // // LOCK
+    // if (locked) root.setProperty("--IVLock", activeColor) // LOCK ACTIVE
+    // else root.setProperty("--IVLock", inactiveColor) // LOCK INACTIVE
+
+    // // LINE
+    // if (enableLockPosition) root.setProperty("--IVLine", `420px`) // TILL POSITION
+    // else if (enableLockZoom) root.setProperty("--IVLine", `252px`) // TILL ZOOM
+    // else if (enableLockFlip) root.setProperty("--IVLine", `168px`) // TILL FLIP
+    // else if (enableLockRotate) root.setProperty("--IVLine", `84px`) // TILL ROTATE
+    // else root.setProperty("--IVLine", `0px`) // NO LINE
+
+    
+
+    let root = document.documentElement.style
+    
+    //let root = document.documentElement.style
+
+    const varSetter = (array: any, num?: any) => {
+      array.forEach((obj: any) => {
+        let key = Object.keys(obj)[0]
+        root.setProperty(key, obj[key])
+      })
+    }
+
+
+    // const varSetter = (array: any, num?: any) => {
+    //   array.forEach((e) => {
+    //     let key = Object.keys(obj)[0]
+    //     root.setProperty(key, obj[key])
+    //   })
+    // }
+
+    
+
+    const varSetter2 = (e: any) => {
+      //console.log(Array.isArray(obj.active))
+      console.log("obj.active", e.active)
+
+      if (e.active)
+        if (Array.isArray(e.active)) e.active.forEach((x: any) => { root.setProperty(x, activeColor) })
+        else root.setProperty(e.active, activeColor)
+      if (e.inactive)
+        if (Array.isArray(e.inactive)) e.inactive.forEach((x: any) => { root.setProperty(x, inactiveColor) })
+        else root.setProperty(e.inactive, inactiveColor)
+      if (e.clear)
+        if (Array.isArray(e.bgColor)) e.bgColor.forEach((x: any) => { root.setProperty(x, bgColor) })
+        else root.setProperty(e.bgColor, bgColor)
+      // if (e.round)
+      //   if (Array.isArray(e.round)) console.log("INACTIVE IS AN ARRAY")
+      //   else root.setProperty(e.round, roundBorder)
+      // if (e.rect)
+      //   if (Array.isArray(e.rect)) console.log("INACTIVE IS AN ARRAY")
+      //   else root.setProperty(e.rect, rectBorder)
+
+      // if (e.clearLine)
+      //   if (Array.isArray(e.clearLine)) e.clearLine.forEach((x: any) => { root.setProperty(x, clearLineColor) })
+      //   else root.setProperty(e.clearLine, clearLineColor)
+
+
+      // array.forEach((obj: any) => {
+      //   let key = Object.keys(obj)[0]
+      //   root.setProperty(key, obj[key])
+      // })
+    }
+
+    // // LINE COLOR
+    // if (enableLockPosition) varSetter(qq, 0)
+    // else if (enableLockZoom) varSetter(qq,1) // TILL ZOOM
+    // else if (enableLockFlip) varSetter(qq,2) // TILL FLIP
+    // else if (enableLockRotate) varSetter(qq, 3) // TILL ROTATE
+    // else root.setProperty("--IVLine", `0px`) // NO LINE
+
+    let lines = [
+      '--IVPositionLine',
+      '--IVZoomLine',
+      '--IVFlipLine',
+      '--IVRotateLine',
+    ]
+
+    // BUTTON BACKGROUND & LINES COLOR
+    if (enableLockPosition)
+      if (locked) varSetter2({ active: ['--IVPosition', ...lines.slice(0)] }) // POSITION ACTIVE
+      else varSetter2({ inactive: ['--IVPosition', ...lines.slice(0)] }) // POSITION INACTIVE
+    else varSetter2({ bgColor: ['--IVPosition', ...lines.slice(0)] }) // POSITION CLEAR
+    if (enableLockZoom)
+      if (locked) varSetter2({ active: ['--IVZoom', ...lines.slice(1)] }) // ZOOM ACTIVE
+      else varSetter2({ inactive: ['--IVZoom', ...lines.slice(1)] }) // ZOOM INACTIVE
+    else varSetter2({ bgColor: '--IVZoom' }) // ZOOM TRANSPARENT
+    if (enableLockFlip)
+      if (locked) varSetter2({ active: ['--IVFlip', ...lines.slice(2)] }) // FLIP ACTIVE
+      else varSetter2({ inactive: ['--IVFlip', ...lines.slice(2)] }) // FLIP INACTIVE
+    else varSetter2({ bgColor: '--IVFlip' }) // FLIP TRANSPARENT
+    if (enableLockRotate)
+      if (locked) varSetter2({ active: ['--IVRotate', ...lines.slice(3)] }) // ROTATION ACTIVE
+      else varSetter2({ inactive: ['--IVRotate', ...lines.slice(3)] }) // ROTATION INACTIVE
+    else varSetter2({ bgColor: '--IVRotate' }) // ROTATION TRANSPARENT
+    if (locked) varSetter2({ active: '--IVLock' }) // LOCK ACTIVE
+    else varSetter2({ inactive: '--IVLock' }) // LOCK INACTIVE
+
+    // BUTTON BACKGROUND SIMULATED BORDER-RADIUS
+    if (enableLockZoom && enableLockFlip)
+      if (locked) varSetter2({ active: '--IVZoomFlip' })
+      else varSetter2({ inactive: '--IVZoomFlip' })
+    else varSetter2({ bgColor: '--IVZoomFlip' })
+    if (enableLockFlip && enableLockRotate)
+      if (locked) varSetter2({ active: '--IVFlipRotate' })
+      else varSetter2({ inactive: '--IVFlipRotate' })
+    else varSetter2({ bgColor: '--IVFlipRotate' })
+    if (enableLockRotate)
+      if (locked) varSetter2({ active: '--IVRotateLock' })
+      else varSetter2({ inactive: '--IVRotateLock' })
+    else varSetter2({ bgColor: '--IVRotateLock' })
+
+    // // BUTTON BACKGROUND BORDER-RADIUS
+    // if (enableLockZoom && enableLockFlip) varSetter2({ rect: '--IVZoomFlip' })
+    // else varSetter2({ round: '--IVZoomFlip' })
+    // if (enableLockFlip && enableLockRotate) varSetter2({ rect: '--IVFlipRotate' })
+    // else varSetter2({ round: '--IVFlipRotate' })
+    // if (enableLockRotate) varSetter2({ rect: '--IVRotateLock' })
+    // else varSetter2({ round: '--IVRotateLock' })
+
+
+  }, [locked, enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate])
 
 
 
+  useEffect(() => {
+    let lS = document.getElementById('lockSettings');
+    if (lS !== null) {
+      showSettings ?
+      lS.style.bottom = `49px` :
+      lS.style.bottom = `-200px`;
+    }
+
+  }, [showSettings])
 
 
-        <Button
-          variant="contained"
-          className={css.button}
-          //onClick={() => zoomIn()}
-          onClick={() => {
-            //setRotationAngle(curr => curr - 90)
-            //setCurrentZoom((curr) => ({ ...curr, x: curr.x * -1 }))
-            setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX * -1 }))
-          }}
-          //disabled={ currentZoom.val === 8 ? true : false }
-        >
-          <Flip className={`${css.icon} ${css.flipIcon}`}/>
-        </Button>
+  const MuiButton = ({ style, classButton, onClick, Icon, classIcon }: any) => {
+    let parsedClassIcon = Array.isArray(classIcon) ? classIcon.join(" ") : classIcon
+    return (
+      <Button
+        disableElevation={true}
+        style={style}
+        variant="contained"
+        className={`${classButton}`}
+        onClick={() => onClick()}
+      >
+        <Icon className={`${parsedClassIcon}`} />
+      </Button>
+    )
+  }
 
-
-        <Button
-          variant="contained"
-          className={css.button}
-          //onClick={() => zoomIn()}
-          onClick={() => {
-            //setRotationAngle(curr => curr - 90)
-            //setCurrentZoom((curr) => ({ ...curr, y: curr.y * -1 }))
-
-            setImageProps((curr) => ({ ...curr, zoomY: curr.zoomY * -1 }))
-
-
-          }}
-          //disabled={ currentZoom.val === 8 ? true : false }
-        >
-          <Flip className={`${css.icon} ${css.flipIconTest}`}/>
-        </Button>
-
-
-
-
-
-
-  
-
-        <Button
-          variant="contained"
-          className={css.button}
-          //onClick={() => zoomIn()}
-          onClick={() => {
-            //setRotationAngle(curr => curr - 90)
-
-            setImageProps((curr) => ({ ...curr, angle: curr.angle - 90 }))
-
-
-          }}
-          //disabled={ currentZoom.val === 8 ? true : false }
-        >
-          <RotateLeft className={css.icon}/>
-        </Button>
-
-        <Button
-          variant="contained"
-          className={css.button}
-          //onClick={() => zoomIn()}
-          onClick={() => {
-            //setRotationAngle(curr => curr + 90)
-            setImageProps((curr) => ({ ...curr, angle: curr.angle + 90 }))
-          }}
-          // setCurrentZoom((curr: currentZoomI) => ({ val: curr.val + 0.5 }))
-        >
-          <RotateRight className={css.icon}/>
-        </Button>
-        
-
-
-
-        <Button
-          variant="contained"
-          className={css.button}
-          onClick={() => { if (setShowImageViewer !== undefined) setShowImageViewer(false) }}
-        >
-          <Close className={`${css.icon} ${css.flipIcon}`}/>
-        </Button>
-        <div className={css.zoomContainer}>
-          { imageProps.zoomX.toFixed(1) }x
-        </div>
-      </div>
-    </div>
+  const MuiSwitch = ({ onClick, checked }: any) => {
+    return (
+      <Switch
+        onClick={onClick}
+        checked={checked}
+        className={css.switch}
+        classes={{
+          track: checked ? `${css.track} ${css.trackEnabled}` : `${css.track} ${css.trackDisabled}`,
+          thumb: css.thumb,
+          switchBase:  css.switchBase,
+          checked: css.checked,
+          colorPrimary: css.colorPrimary
+        }}
+      />
+    )
+  }
 
   return (
     <div
-      id={`modalBackground`}
-      className={css.modalBackground}
+      id={`IVBackground`}
+      className={css.IVBackground}
       onMouseDown={(e) => mouseDown(e)} // MOUSE START
       onMouseMove={(e) => mouseMove(e)} // MOUSE MOVE
       onMouseUp={(e) => mouseUp(e)} // MOUSE END
     >
       <img
+       // style={{ left, top }}
         id={`imageViewerForeground`}
         ref={imageRef}
         className={css.imageViewerForeground}
@@ -450,7 +543,190 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         alt=""
       >
       </img>
-      { controls }
+
+
+      <div
+        id={`bottomBar`}
+        className={css.bottomBar}
+      >
+        <div className={css.buttonsContainer}>
+          <div className={css.imageCounter}>
+            { currentIndex !== undefined && images !== undefined ? currentIndex + 1 : 0 }/{ currentIndex !== undefined && images !== undefined ? images.length : 0 }
+          </div>
+
+          <div className={`${css.buttonBG} ${css.position}`} />
+          <div className={`${css.buttonBG} ${css.zoom}`} />
+          <div className={`${css.buttonBG} ${css.flip}`} />
+          <div className={`${css.buttonBG} ${css.rotate}`} />
+          <div className={`${css.buttonBG} ${css.lock}`} />
+
+          <MuiButton // GO LEFT
+            //style={{ order: 0 }}
+            classButton={css.button}
+            onClick={handleGoLeft}
+            Icon={Forward}
+            classIcon={[ css.icon, css.rotateX ]}
+            //classIcon={[ css.icon ]}
+          />
+
+          <MuiButton // GO RIGHT
+            //style={{ order: 10 }}
+            classButton={css.button}
+            onClick={handleGoRight}
+            Icon={Forward}
+            classIcon={css.icon}
+          />
+
+          <MuiButton // RESET ALL
+            //style={{ order: 20 }}
+            classButton={css.button}
+            onClick={restoreHandler}
+            Icon={Cached}
+            classIcon={css.icon}
+          />
+
+          <MuiButton // RESET ALL
+            //style={{ order: 20 }}
+            classButton={css.button}
+            onClick={restoreHandler}
+            Icon={PlayCircleOutline}
+            classIcon={css.icon}
+          />
+
+          <MuiButton // ZOOM OUT
+            //style={{ order: enableLockZoom ? 81 : 30 }}
+            classButton={css.button}
+            onClick={zoomOut}
+            Icon={Remove}
+            classIcon={css.icon}
+          />
+
+          <MuiButton // ZOOM IN
+            //style={{ order: enableLockZoom ? 82 : 40 }}
+            classButton={css.button}
+            onClick={zoomIn}
+            Icon={Add}
+            classIcon={css.icon}
+          />
+
+          <MuiButton // FLIP X
+           // style={{ order: enableLockFlip ? 83 : 50 }}
+            classButton={css.button}
+            onClick={flipX}
+            Icon={Flip}
+            classIcon={[ css.icon, css.rotateX ]}
+          />
+
+          <MuiButton // FLIP Y
+            //style={{ order: enableLockFlip ? 84 : 60 }}
+            classButton={css.button}
+            onClick={flipY}
+            Icon={Flip}
+            classIcon={[ css.icon, css.rotateY ]}
+          />
+
+          <MuiButton // ROTATE LEFT
+            classButton={css.button}
+            onClick={rotateLeft}
+            Icon={RotateLeft}
+            classIcon={[ css.icon, css.rotateX ]}
+          />
+
+          <MuiButton // ROTATE RIGHT
+            //style={{ order: enableLockRotate ? 86 : 80 }}
+            /* style={{ boxShadow: '0px 0px 0px 3.5px red' }} */
+            classButton={css.button}
+            onClick={rotateRight}
+            Icon={RotateRight}
+            classIcon={[ css.icon, css.rotateX ]}
+          />
+
+
+
+          <div // LOCK
+            //style={{ order: 90 }}
+            className={css.lockContainer}
+          >
+            {/* <div className={css.IVLine} /> */}
+            <div className={`${css.IVLine} ${css.IVUpperLine}`} />
+            <div className={`${css.IVLine} ${css.IVLowerLine}`} />
+
+            <MuiButton
+              classButton={css.button}
+              onClick={lockSettings}
+              Icon={ locked ? LockOutlined : LockOpen }
+              classIcon={[ css.icon, css.iconLock ]}
+            >
+
+            </MuiButton>
+          </div>
+
+
+          <MuiButton  // SETTINGS
+            //style={{ order: 100 }}
+            classButton={css.button}
+            onClick={handleShowSettings}
+            Icon={Settings}
+            classIcon={css.icon}
+          />
+
+
+          <Button // CLOSE
+            //style={{ order: 110 }}
+            variant="contained"
+            className={css.button}
+            onClick={() => { if (setShowImageViewer !== undefined) setShowImageViewer(false) }}
+          >
+            <Close className={css.icon} />
+          </Button>
+          <div className={css.zoomContainer}>
+            { (Math.abs(imageProps.zoomX)).toFixed(1) }x
+          </div>
+        </div>
+      </div>
+
+      <div
+        id={`lockSettings`}
+        className={css.lockSettings}
+      >
+        Enable lock over:
+        <div>
+          <MuiSwitch
+            onClick={handleSetEnableLockPosition}
+            checked={ enableLockPosition ? true : false }
+          />
+          Position
+        </div>
+        <div>
+          <MuiSwitch
+            onClick={handleSetEnableLockZoom}
+            checked={ enableLockZoom ? true : false }
+          />
+          Zoom
+        </div>
+
+        <div>
+          <MuiSwitch
+            onClick={handleSetEnableLockFlip}
+            checked={ enableLockFlip ? true : false }
+          />
+          Flip
+        </div>
+
+        <div>
+          <MuiSwitch
+            onClick={handleSetEnableLockRotate}
+            checked={ enableLockRotate ? true : false }
+          />
+          Rotate
+        </div>
+
+        <div>
+          Dont forget to 'lock' the padlock to changes take effect.
+        </div>
+
+      </div>
+
     </div>
   )
 }

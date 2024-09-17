@@ -322,7 +322,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const rotateRight = () => setImageProps((curr) => ({ ...curr, angle: curr.angle + 90 }))
 
   const [ locked, setLocked ] = useState(false)
-  const [ showSettings, setShowSettings ] = useState(false)
+  //const [ showSettings, setShowSettings ] = useState(false)
+  const [ showSettings, setShowSettings ] = useState(true)
   const [ enableLockPosition, setEnableLockPosition ] = useState(true)
   const [ enableLockZoom, setEnableLockZoom ] = useState(true)
   const [ enableLockFlip, setEnableLockFlip ] = useState(true)
@@ -344,9 +345,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   useEffect(() => {
 
 
-    const activeColor = `rgb(255, 255, 255)`;
-    const inactiveColor = `rgb(158, 158, 158)`;
-    const clearColor = `transparent`;
+    const activeColor = `rgb(255, 255, 255)`; // WHITE
+    const inactiveColor = `rgb(158, 158, 158)`; // GRAY
+    const sameAsBGColor = `rgb(77, 77, 77)`; // SAME AS BG BAR COLOR
+    const clearColor = `transparent`; // TRANSPARENT
     const roundBorder = `7.5px`;
     const rectBorder = `0px`;
 
@@ -384,7 +386,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
     
 
-    const varSetter2 = (e: any, num?: any) => {
+    const varSetter2 = (e: any) => {
       //console.log(Array.isArray(obj.active))
       console.log("obj.active", e.active)
 
@@ -394,15 +396,22 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       if (e.inactive)
         if (Array.isArray(e.inactive)) e.inactive.forEach((x: any) => { root.setProperty(x, inactiveColor) })
         else root.setProperty(e.inactive, inactiveColor)
-      if (e.clear)
-        if (Array.isArray(e.clear)) e.clear.forEach((x: any) => { root.setProperty(x, clearColor) })
-        else root.setProperty(e.clear, clearColor)
-      if (e.round)
-        if (Array.isArray(e.round)) console.log("INACTIVE IS AN ARRAY")
-        else root.setProperty(e.round, roundBorder)
-      if (e.rect)
-        if (Array.isArray(e.rect)) console.log("INACTIVE IS AN ARRAY")
-        else root.setProperty(e.rect, rectBorder)
+      if (e.sameAsBGColor)
+        if (Array.isArray(e.sameAsBGColor)) e.sameAsBGColor.forEach((x: any) => { root.setProperty(x, sameAsBGColor) })
+        else root.setProperty(e.sameAsBGColor, sameAsBGColor)
+      if (e.clearColor)
+        if (Array.isArray(e.clearColor)) e.clearColor.forEach((x: any) => { root.setProperty(x, clearColor) })
+        else root.setProperty(e.clearColor, clearColor)
+      // if (e.round)
+      //   if (Array.isArray(e.round)) console.log("INACTIVE IS AN ARRAY")
+      //   else root.setProperty(e.round, roundBorder)
+      // if (e.rect)
+      //   if (Array.isArray(e.rect)) console.log("INACTIVE IS AN ARRAY")
+      //   else root.setProperty(e.rect, rectBorder)
+
+      // if (e.clearLine)
+      //   if (Array.isArray(e.clearLine)) e.clearLine.forEach((x: any) => { root.setProperty(x, clearLineColor) })
+      //   else root.setProperty(e.clearLine, clearLineColor)
 
 
       // array.forEach((obj: any) => {
@@ -422,36 +431,60 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       '--IVPositionLine',
       '--IVZoomLine',
       '--IVFlipLine',
-      '--IVRotateLine',
+      '--IVRotateLine'
     ]
 
-    // BUTTON BACKGROUND COLOR
+    // BUTTON BACKGROUND & LINES COLOR
     if (enableLockPosition)
       if (locked) varSetter2({ active: ['--IVPosition', ...lines.slice(0)] }) // POSITION ACTIVE
       else varSetter2({ inactive: ['--IVPosition', ...lines.slice(0)] }) // POSITION INACTIVE
-    else varSetter2({ clear: ['--IVPosition', ...lines.slice(0)] }) // POSITION CLEAR
+    else varSetter2({ sameAsBGColor: ['--IVPosition', ...lines.slice(0)] }) // POSITION CLEAR
     if (enableLockZoom)
       if (locked) varSetter2({ active: ['--IVZoom', ...lines.slice(1)] }) // ZOOM ACTIVE
       else varSetter2({ inactive: ['--IVZoom', ...lines.slice(1)] }) // ZOOM INACTIVE
-    else varSetter2({ clear: '--IVZoom' }) // ZOOM TRANSPARENT
+    else { // ONLY FOR LINE
+      varSetter2({ sameAsBGColor: '--IVZoom' }) // ZOOM TRANSPARENT // aca
+    }
     if (enableLockFlip)
       if (locked) varSetter2({ active: ['--IVFlip', ...lines.slice(2)] }) // FLIP ACTIVE
       else varSetter2({ inactive: ['--IVFlip', ...lines.slice(2)] }) // FLIP INACTIVE
-    else varSetter2({ clear: '--IVFlip' }) // FLIP TRANSPARENT
+    else varSetter2({ sameAsBGColor: '--IVFlip' }) // FLIP TRANSPARENT
     if (enableLockRotate)
       if (locked) varSetter2({ active: ['--IVRotate', ...lines.slice(3)] }) // ROTATION ACTIVE
       else varSetter2({ inactive: ['--IVRotate', ...lines.slice(3)] }) // ROTATION INACTIVE
-    else varSetter2({ clear: '--IVRotate' }) // ROTATION TRANSPARENT
+    else varSetter2({ sameAsBGColor: '--IVRotate' }) // ROTATION TRANSPARENT
     if (locked) varSetter2({ active: '--IVLock' }) // LOCK ACTIVE
-    else varSetter2({ clear: '--IVLock' }) // LOCK INACTIVE
+    else varSetter2({ inactive: '--IVLock' }) // LOCK INACTIVE
 
-    // BUTTON BACKGROUND BORDER-RADIUS
-    if (enableLockZoom && enableLockFlip) varSetter2({ rect: '--IVZoomFlip' })
-    else varSetter2({ round: '--IVZoomFlip' })
-    if (enableLockFlip && enableLockRotate) varSetter2({ rect: '--IVFlipRotate' })
-    else varSetter2({ round: '--IVFlipRotate' })
-    if (enableLockRotate) varSetter2({ rect: '--IVRotateLock' })
-    else varSetter2({ round: '--IVRotateLock' })
+    // BUTTON BACKGROUND SIMULATED BORDER-RADIUS
+    if (enableLockZoom && enableLockFlip)
+      if (locked) varSetter2({ active: '--IVZoomFlip' })
+      else varSetter2({ inactive: '--IVZoomFlip' })
+    else varSetter2({ sameAsBGColor: '--IVZoomFlip' })
+    if (enableLockFlip && enableLockRotate)
+      if (locked) varSetter2({ active: '--IVFlipRotate' })
+      else varSetter2({ inactive: '--IVFlipRotate' })
+    else varSetter2({ sameAsBGColor: '--IVFlipRotate' })
+    if (enableLockRotate)
+      if (locked) varSetter2({ active: '--IVRotateLock' })
+      else varSetter2({ inactive: '--IVRotateLock' })
+    else varSetter2({ sameAsBGColor: '--IVRotateLock' })
+
+    // // BUTTON BACKGROUND SIMULATED BORDER-RADIUS
+    // if (enableLockZoom && enableLockFlip)
+    //   if (locked) varSetter2({ active: '--IVZoomFlip' })
+    //   else varSetter2({ inactive: '--IVZoomFlip' })
+    // else varSetter2({ sameAsBGColor: '--IVZoomFlip' })
+    // if (enableLockFlip && enableLockRotate)
+    //   if (locked) varSetter2({ active: '--IVFlipRotate' })
+    //   else varSetter2({ inactive: '--IVFlipRotate' })
+    // else varSetter2({ sameAsBGColor: '--IVFlipRotate' })
+    // if (enableLockRotate)
+    //   if (locked) varSetter2({ active: '--IVRotateLock',  })
+    //   else varSetter2({ inactive: '--IVRotateLock' })
+    // else varSetter2({ sameAsBGColor: '--IVRotateLock' })
+
+
 
 
   }, [locked, enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate])
