@@ -1,14 +1,8 @@
 :root {
-  /* --IVZoomFlip: 7.5px; */
-  /* --IVFlipRotate: 7.5px; */
-  /* --IVRotateLock: 7.5px; */
   --IVBackgroundOpacity: rgba(0, 0, 0, 1.0);
   --IVBottomBarOpacity: rgb(77, 77, 77);
   --IVColor: red;
   --IVPosition: rgb(77, 77, 77);
-  /* --IVZoom: rgb(77, 77, 77); */
-  /* --IVFlip: rgb(77, 77, 77); */
-  /* --IVRotate: rgb(77, 77, 77); */
   --IVFade: 2s;
 }
 
@@ -92,12 +86,8 @@
 .IVBackground {
   /* background: green; */ /* DEV */
   position: fixed;
-  /* left: 0;
-  top: 0; */
   width: 100vw;
   height: 100vh;
-  /* width: 95vh;
-  height: 95vw; */
   /* background: rgba(0,0,0,0.4); */ /* AROUND IMAGE */
   /* background: rgba(0, 0, 0, 1.0); */
   background: var(--IVBackgroundOpacity);
@@ -107,8 +97,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* transform: rotate(270deg); */
-  /* transform: rotate(-90deg); */
 }
 
 
@@ -122,47 +110,27 @@
   flex-direction: row;
   left: 0px;
   bottom: 0px;
-  /* flex-direction: column; */
   width: 100%;
   height: 49px;
- /*  height: 100%;
-  left: 0px;
-  top: 0px;
-   */
-   /* transform: rotate(90deg); */
-  /* background: rgba(0, 0, 0, 0.4); */
-  /* transform: rotate(270deg); */
-  /* transform: rotate(90deg); */
   justify-content: center;
-  /* transform-style: preserve-3d; */
-  /* align-items: center; */
 }
 
 .buttonsContainer {
+  /* background: red; */ /* DEV */
   display: flex;
   position: relative;
   flex-direction: row;
-  /* width: 600px; */
-  /* flex-direction: row; */
-  /* flex-direction: column; */
-  /* background: red; */ /* DEV */
 }
 
 .imageViewerForeground {
-  /* width: 80vw;
-  height: 70vh; */
   display: flex;
   position: relative;
   max-width: 80vw;
   max-height: 80vh;
   left: 0px;
   top: 0px;
-  /* zoom: 1; */
   transform: scale(1);
-  /* transition: transform .2s, left .2s, top .2s; */
   transition: transform .2s;
-  transform-style: flat;
-  /* transition: all .2s; */
 }
 
 .imageCounter {
@@ -179,12 +147,10 @@
 
 .zoomContainer {
   /* background: blue; */ /* DEV */
-  /* width: 50px; */
   width: 70px;
   align-items: center;
   display: flex;
   position: absolute;
-  /* right: -55px; */
   right: -75px;
   color: #fff;
   height: 49px;
@@ -205,29 +171,14 @@
   z-index: 1000002;
   transition-duration: 0.25s, 0.25s, 0.25s !important;
   transition-property: background-color, border-color, color !important;
-  /* transition: box-shadow 10s !important; */
-  /* background: red !important; */
-  /* box-shadow: -10px 0px 10px 1px red !important; */
-  /* box-shadow: 0px 2px 0px 2px rgba(0, 128, 0, .5) !important; */
-  /* box-shadow: 0px 0px 0px 2px green !important; */
-  /* box-shadow: 0px 0px 0px 3.5px rgb(255, 0, 0) !important; */
 }
 
-/* div.buttonsContainer:nth-child(4) {
-  box-shadow: 0px 0px 0px 3.5px rgb(255, 0, 0) !important;
-} */
 
-
-
-/* .button:hover {
-  clip-path: circle(90%) !important;
-} */
 
 .icon {
   display: flex;
   position: absolute;
   flex-direction: column;
-  /* transform: rotate(180deg); */
   min-width: 0%;
   width: 23px !important;
   height: 23px !important;
@@ -257,6 +208,9 @@
 .lockContainer {
   display: flex;
   position: relative;
+  /* background: red; */
+  /* height: 42px; */
+  /* margin-top: 3.5px; */
 }
 
 
@@ -271,49 +225,37 @@
   transition: background var(--IVFade); /* LOCK TRANSITION */
 }
 
+.buttonBGTest {
+  display: flex;
+  position: absolute;
+  width: 84px;
+  height: 42px;
+  /* border-radius: 7.5px; */
+  margin-top: 3.5px;
+  /* transition: background var(--IVFade); */
+  left: 252px;
+  background: red;
+}
+
 .position {
   background: var(--IVPosition);
   left: 0px;
 }
 
-/* .position::after {
-  position: absolute;
-  content: "";
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(
-      to left,
-      var(--IVZoomFlip) 0%, var(--IVZoomFlip) 50%,
-      transparent 50%
-    );
-  transition: --IVZoomFlip var(--IVFade);
-} */
-
 .zoom {
-  /* background: var(--IVZoom); */
-  /* background: red; */
   background:
     no-repeat
     linear-gradient(
-      to left,
-      var(--IVZoomLine) 0%, var(--IVZoomLine) 100%
-    ) 0px 0px / 100% 1.25px,
-    no-repeat
-    linear-gradient(
-      to left,
-      var(--IVZoom) 0%, var(--IVZoom) 100%
-    ) 0px 1.25px / 100% 39.5px,
-    no-repeat
-    linear-gradient(
-      to left,
-      var(--IVZoomLine) 0%, var(--IVZoomLine) 100%
-    ) 0px 40.75px / 100% 1.25px;
+      to bottom,
+      var(--IVZoomLine) 0px, var(--IVZoomLine) 1.5px,
+      var(--IVZoom) 1.5px, var(--IVZoom) 40.5px,
+      var(--IVZoomLine) 40.5px, var(--IVZoomLine) 42px
+    );
   transition: --IVZoom var(--IVFade), --IVZoomLine var(--IVFade);
 
 
   left: 168px;
-  
+  will-change: background;
 }
 
 .zoom::after {
@@ -321,37 +263,24 @@
   content: "";
   inset: 0;
   z-index: -1;
-  /* background: red; */
   border-top-left-radius: 7.5px;
   border-bottom-left-radius: 7.5px;
-  background:
-    linear-gradient(
-      to left,
-      var(--IVZoomFlip) 0%, var(--IVZoomFlip) 50%,
-      var(--IVZoomFlip) 50%
-    );
+  background: var(--IVZoomFlip);
   transition: --IVZoomFlip var(--IVFade);
 }
 
 .flip {
-  /* background: var(--IVFlip); */
   background:
     no-repeat
     linear-gradient(
-      to left,
-      var(--IVFlipLine) 0%, var(--IVFlipLine) 100%
-    ) 0px 0px / 100% 1.25px,
-    no-repeat
-    linear-gradient(
-      to left,
-      var(--IVFlip) 0%, var(--IVFlip) 100%
-    ) 0px 1.25px / 100% 39.5px,
-    no-repeat
-    linear-gradient(
-      to left,
-      var(--IVFlipLine) 0%, var(--IVFlipLine) 100%
-    ) 0px 40.75px / 100% 1.25px;
+      to bottom,
+      var(--IVFlipLine) 0px, var(--IVFlipLine) 1.5px,
+      var(--IVFlip) 1.5px, var(--IVFlip) 40.5px,
+      var(--IVFlipLine) 40.5px, var(--IVFlipLine) 42px
+    );
+
   transition: --IVFlip var(--IVFade), --IVFlipLine var(--IVFade);
+
   left: 252px;
 }
 
@@ -370,73 +299,19 @@
 }
 
 .rotate {
-  /* background: var(--IVRotate); */
-
   background:
     no-repeat
     linear-gradient(
-      to left,
-      var(--IVRotateLine) 0%, var(--IVRotateLine) 100%
-    ) 0px 0px / 100% 1.25px,
-    no-repeat
-    linear-gradient(
-      to left,
-      var(--IVRotate) 0%, var(--IVRotate) 100%
-    ) 0px 1.25px / 100% 39.5px,
-    no-repeat
-    linear-gradient(
-      to left,
-      var(--IVRotateLine) 0%, var(--IVRotateLine) 100%
-    ) 0px 40.75px / 100% 1.25px;
+      to bottom,
+      var(--IVRotateLine) 0px, var(--IVRotateLine) 1.5px,
+      var(--IVRotate) 1.5px, var(--IVRotate) 40.5px,
+      var(--IVRotateLine) 40.5px, var(--IVRotateLine) 42px
+    );
   transition: --IVRotate var(--IVFade), --IVRotateLine var(--IVFade);
 
   left: 336px;
 }
 
-/* L-G WELL CALCULATED */
-/* .rotate {
-  background:
-    no-repeat
-    linear-gradient(
-      to left,
-      var(--IVLineRotate) 0%, var(--IVLineRotate) 100%
-    ) 0px 0px / 100% 1.5px,
-    no-repeat
-    linear-gradient(
-      to left,
-      var(--IVRotate) 0%, var(--IVRotate) 100%
-    ) 0px 1.5px / 100% 39px,
-    no-repeat
-    linear-gradient(
-      to left,
-      red 0%, red 100%
-    ) 0px 40.5px / 100% 1.5px;
-  transition: --IVRotate var(--IVFade), --IVLineRotate var(--IVFade);
-  left: 336px;
-} */
-
-/* no-repeat
-linear-gradient(
-  to left,
-  var(--IVRotateLine) 0px, var(--IVRotateLine) 84px,
-  var(--IVFlipLine) 84px, var(--IVFlipLine) 168px,
-  var(--IVZoomLine) 168px, var(--IVZoomLine) 252px,
-  var(--IVPositionLine) 252px, var(--IVPositionLine) 420px
-) 0px 0px / 100% 1.25px; */
-
-/* .rotate::after {
-  position: absolute;
-  content: "";
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(
-      to left,
-      var(--IVRotateLock) 0%, var(--IVRotateLock) 50%,
-      var(--IVFlipRotate) 50%
-    );
-  transition: --IVRotateLock var(--IVFade), --IVFlipRotate var(--IVFade);
-} */
 
 .rotate::after {
   position: absolute;
@@ -457,10 +332,7 @@ linear-gradient(
 .lock {
   width: 42px;
   background: var(--IVLock);
-  /* background: red; */
   left: 420px;
-  /* border-top-left-radius: var(--IVRotateLock);
-  border-bottom-left-radius: var(--IVRotateLock); */
 }
 
 .lock::after {
@@ -473,20 +345,18 @@ linear-gradient(
     linear-gradient(
       to left,
       transparent 0%, transparent 50%,
-      var(--IVLock) 50%
+      var(--IVRotate) 50%
     );
-  transition: --IVLock var(--IVFade);
+  transition: --IVRotate var(--IVFade);
 }
 
 .IVLine {
   position: absolute;
   right: 21px;
-  /* top: 3.5px; */
   width: 420px;
-  /* height: 42px; */
-  height: 4.75px;
-  /* border-radius: 7.5px; */
-  z-index: -1; /* CONTINUAR ACA */
+  height: 2px;
+  z-index: -1;
+  /* z-index: 1000003; */
   background:
     no-repeat /* 1st BLOCK */
     linear-gradient(
@@ -495,18 +365,18 @@ linear-gradient(
       var(--IVFlipLine) 84px, var(--IVFlipLine) 168px, /* FLIP SECTION */
       var(--IVZoomLine) 168px, var(--IVZoomLine) 252px, /* ZOOM SECTION */
       var(--IVPositionLine) 252px, var(--IVPositionLine) 420px /* ZOOM SECTION */
-    ) 0px 0px / 100% 1.25px;
+    );
   transition:
     --IVPositionLine var(--IVFade), --IVZoomLine var(--IVFade),
     --IVFlipLine var(--IVFade), --IVRotateLine var(--IVFade);
 }
 
 .IVUpperLine {
-  top: 3.5px;
+  top: 2px;
 }
 
 .IVLowerLine {
-  bottom: 0px;
+  bottom: 2px;
 }
 
 
