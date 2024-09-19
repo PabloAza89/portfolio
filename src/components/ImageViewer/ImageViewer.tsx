@@ -334,11 +334,21 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
   const handleShowSettings = () => setShowSettings(!showSettings)
 
-  useEffect(() => {
+  //let color = 'yellow';
+  //let color = useRef('yellow');
 
-    const activeColor = `rgb(255, 255, 255)`; // WHITE
-    const inactiveColor = `rgb(158, 158, 158)`; // GRAY
-    const disableColor = `rgb(77, 77, 77)`; // SAME AS BG BAR COLOR
+  
+
+  const activeColor = `rgb(255, 255, 255)`; // WHITE
+  const inactiveColor = `rgb(158, 158, 158)`; // GRAY
+  //const disabledColor = `transparent`; // SAME AS BG BAR COLOR
+  const disabledColor = `rgb(77, 77, 77)`; // SAME AS BG BAR COLOR
+
+  const [ colorForeground, setColorForeground ] = useState(disabledColor)
+  const [ colorBackground, setColorBackground ] = useState(disabledColor)
+  const [ colorLine, setColorLine ] = useState(inactiveColor)
+
+  useEffect(() => {
 
     let root = document.documentElement.style
 
@@ -352,9 +362,9 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       if (e.inactive)
         if (Array.isArray(e.inactive)) e.inactive.forEach((x: any) => { root.setProperty(x, inactiveColor) })
         else root.setProperty(e.inactive, inactiveColor)
-      if (e.disableColor)
-        if (Array.isArray(e.disableColor)) e.disableColor.forEach((x: any) => { root.setProperty(x, disableColor) })
-        else root.setProperty(e.disableColor, disableColor)
+      if (e.disabledColor)
+        if (Array.isArray(e.disabledColor)) e.disabledColor.forEach((x: any) => { root.setProperty(x, disabledColor) })
+        else root.setProperty(e.disabledColor, disabledColor)
 
 
     }
@@ -368,19 +378,41 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     if (enableLockPosition)
       if (locked) varSetter({ active: ['--IVPosition', ...lines.slice(0)] }) // POSITION ACTIVE
       else varSetter({ inactive: ['--IVPosition', ...lines.slice(0)] }) // POSITION INACTIVE
-    else varSetter({ disableColor: ['--IVPosition', ...lines.slice(0)] }) // POSITION CLEAR
+    else varSetter({ disabledColor: ['--IVPosition', ...lines.slice(0)] }) // POSITION CLEAR
     if (enableLockZoom)
       if (locked) varSetter({ active: ['--IVZoom', ...lines.slice(1)] }) // ZOOM ACTIVE
       else varSetter({ inactive: ['--IVZoom', ...lines.slice(1)] }) // ZOOM INACTIVE
-    else varSetter({ disableColor: '--IVZoom' }) // ZOOM TRANSPARENT
+    else varSetter({ disabledColor: '--IVZoom' }) // ZOOM TRANSPARENT
     if (enableLockFlip)
-      if (locked) varSetter({ active: ['--IVFlip', ...lines.slice(2)] }) // FLIP ACTIVE
-      else varSetter({ inactive: ['--IVFlip', ...lines.slice(2)] }) // FLIP INACTIVE
-    else varSetter({ disableColor: '--IVFlip' }) // FLIP TRANSPARENT
-    if (enableLockRotate)
-      if (locked) varSetter({ active: ['--IVRotate', ...lines.slice(3)] }) // ROTATION ACTIVE
-      else varSetter({ inactive: ['--IVRotate', ...lines.slice(3)] }) // ROTATION INACTIVE
-    else varSetter({ disableColor: '--IVRotate' }) // ROTATION TRANSPARENT
+      if (locked) {
+        varSetter({ active: ['--IVFlip', ...lines.slice(2)] }) // FLIP ACTIVE
+        setColorBackground(activeColor)
+        setColorForeground(activeColor)
+      }
+      else {
+        varSetter({ inactive: ['--IVFlip', ...lines.slice(2)] }) // FLIP INACTIVE
+        setColorForeground(inactiveColor)
+        setColorBackground(inactiveColor)
+      }
+    else {
+      varSetter({ disabledColor: '--IVFlip' }) // FLIP TRANSPARENT
+      setColorForeground(disabledColor)
+      setColorBackground(disabledColor)
+    }
+    if (enableLockRotate) {
+      if (locked) {
+        //setColorBackground(activeColor)
+        varSetter({ active: ['--IVRotate', ...lines.slice(3)] }) // ROTATION ACTIVE
+      }
+      else {
+        //setColorBackground(inactiveColor)
+        varSetter({ inactive: ['--IVRotate', ...lines.slice(3)] }) // ROTATION INACTIVE
+      }
+    }
+    else {
+      //setColorBackground(disabledColor)
+      varSetter({ disabledColor: '--IVRotate' }) // ROTATION TRANSPARENT
+    }
     if (locked) varSetter({ active: '--IVLock' }) // LOCK ACTIVE
     else varSetter({ inactive: '--IVLock' }) // LOCK INACTIVE
 
@@ -388,33 +420,34 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     if (enableLockZoom && enableLockFlip)
       if (locked) varSetter({ active: '--IVZoomFlip' })
       else varSetter({ inactive: '--IVZoomFlip' })
-    else varSetter({ disableColor: '--IVZoomFlip' })
+    else varSetter({ disabledColor: '--IVZoomFlip' })
     if (enableLockFlip && enableLockRotate)
       if (locked) varSetter({ active: '--IVFlipRotate' })
       else varSetter({ inactive: '--IVFlipRotate' })
-    else varSetter({ disableColor: '--IVFlipRotate' })
+    else varSetter({ disabledColor: '--IVFlipRotate' })
     if (enableLockRotate)
       if (locked) varSetter({ active: '--IVRotateLock' })
       else varSetter({ inactive: '--IVRotateLock' })
-    else varSetter({ disableColor: '--IVRotateLock' })
+    else varSetter({ disabledColor: '--IVRotateLock' })
 
     // // BUTTON BACKGROUND SIMULATED BORDER-RADIUS
     // if (enableLockZoom && enableLockFlip)
     //   if (locked) varSetter({ active: '--IVZoomFlip' })
     //   else varSetter({ inactive: '--IVZoomFlip' })
-    // else varSetter({ disableColor: '--IVZoomFlip' })
+    // else varSetter({ disabledColor: '--IVZoomFlip' })
     // if (enableLockFlip && enableLockRotate)
     //   if (locked) varSetter({ active: '--IVFlipRotate' })
     //   else varSetter({ inactive: '--IVFlipRotate' })
-    // else varSetter({ disableColor: '--IVFlipRotate' })
+    // else varSetter({ disabledColor: '--IVFlipRotate' })
     // if (enableLockRotate)
     //   if (locked) varSetter({ active: '--IVRotateLock',  })
     //   else varSetter({ inactive: '--IVRotateLock' })
-    // else varSetter({ disableColor: '--IVRotateLock' })
+    // else varSetter({ disabledColor: '--IVRotateLock' })
 
 
 
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locked, enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate])
 
 
@@ -462,6 +495,60 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     )
   }
 
+  
+
+
+
+  const abc = (color: any) => {
+    //return "url(#gradient)"
+
+    return (
+      <svg width="84" height="42" xmlns="http://www.w3.org/2000/svg">
+
+        <defs>
+          <linearGradient id="background" x1="100%" x2="0%">
+            <stop className={css.fade} offset="50%" stopColor={colorBackground} />
+            <stop className={css.fade} offset="50%" stopColor={colorBackground} />
+          </linearGradient>
+          <linearGradient id="line" x1="100%" x2="0%">
+            <stop offset="50%" stopColor={colorLine} />
+            <stop offset="50%" stopColor={colorLine} />
+          </linearGradient>
+          <linearGradient id="aaa" /* x1="100%" x2="0%" */ /* gradientUnits="userSpaceOnUse" */ gradientTransform="rotate(0)">
+            <stop offset={'50px'} stopColor="red" />
+            <stop offset={'50px'} stopColor={colorForeground} />
+            {/* <stop offset={40.5} stopColor={colorForeground} />
+            <stop offset={40.5} stopColor="red" /> */}
+          </linearGradient>
+          <clipPath id="upperSide" clipPathUnits="userSpaceOnUse">
+            <rect width="84" height="1.5" />
+          </clipPath>
+          <clipPath id="centerSide" clipPathUnits="userSpaceOnUse">
+            <rect width="84" height="39" y="1.5" />
+          </clipPath>
+          <clipPath id="LowerSide" clipPathUnits="userSpaceOnUse">
+            <rect width="84" height="1.5" y="40.5" />
+          </clipPath>
+          
+        </defs>
+
+        <rect className={css.fade} width="84" height="42" fill="url(#background)"/>
+
+        <rect width="84px" height={1.5} fill="url(#line)" />
+        <rect width="84px" height={1.5} y={40.5} fill="url(#line)" />
+        
+
+        <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill="red" clipPath="url(#upperSide)" />
+        <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill={colorForeground} clipPath="url(#centerSide)" />
+        <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill="green" clipPath="url(#LowerSide)" />
+
+        
+
+      </svg>
+    )
+  }
+
+
   return (
     <div
       id={`IVBackground`}
@@ -503,13 +590,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           <div className={`${css.buttonBG} ${css.lock}`} /> */}
 
           <div className={`${css.buttonBGTest}`}>
-          <svg width="84" height="42" xmlns="http://www.w3.org/2000/svg">
-            {/* <rect width="84" height="42" rx="7.5" ry="7.5" style={{fill:"rgb(0,0,255)",strokeWidth:1,stroke:"red"}} /> */}
-            <rect width="84" height="1.5" style={{ fill:"yellow" }} />
-            <rect width="84" height="42" rx="7.5" ry="7.5" style={{ fill:"rgb(0,0,255)" }} />
-          </svg>
+            { abc(colorForeground) }
           </div>
-          
 
           <MuiButton // GO LEFT
             //style={{ order: 0 }}
