@@ -339,58 +339,59 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   
 
-  const activeColor = `rgb(255, 255, 255)`; // WHITE
-  const inactiveColor = `rgb(158, 158, 158)`; // GRAY
-  //const disabledColor = `transparent`; // SAME AS BG BAR COLOR
-  const disabledColor = `rgb(77, 77, 77)`; // SAME AS BG BAR COLOR
+  // const active = `rgb(255, 255, 255)`; // WHITE
+  // const inactive = `rgb(158, 158, 158)`; // GRAY
+  // const disabled = `rgb(77, 77, 77)`; // SAME AS BG BAR COLOR
 
-  const [ colorForeground, setColorForeground ] = useState(disabledColor)
-  const [ colorBackground, setColorBackground ] = useState(disabledColor)
-  const [ colorLine, setColorLine ] = useState(inactiveColor)
+  const color: any = {
+    active: 'rgb(255, 255, 255)', // WHITE
+    inactive: 'rgb(158, 158, 158)', // GRAY
+    disabled: 'rgb(77, 77, 77)' // SAME AS BG BAR COLOR
+  }
 
   const [ styles, setStyles ] = useState({
     pos: {
       id: 'pos',
       width: 84,
       left: 0, //                           ↓ UNUSED ↓
-      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
-      body: { left: disabledColor, center: disabledColor, right: disabledColor },
+      line: { left: color.disabled, center: color.disabled, right: color.disabled },
+      body: { left: color.disabled, center: color.disabled, right: color.disabled }
     },
     afterPos: {
       id: 'afterPos',
       width: 84,
       left: 84,
-      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
-      body: { left: disabledColor, center: disabledColor, right: disabledColor },
+      line: { left: color.disabled, center: color.disabled, right: color.disabled },
+      body: { left: color.disabled, center: color.disabled, right: color.disabled }
     },
     zoom: {
       id: 'zoom',
       width: 84,
       left: 168,
-      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
-      body: { left: disabledColor, center: disabledColor, right: disabledColor },
+      line: { left: color.disabled, center: color.disabled, right: color.disabled },
+      body: { left: color.disabled, center: color.disabled, right: color.disabled }
     },
     flip: {
       id: 'flip',
       width: 84,
       left: 252,
-      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
-      body: { left: disabledColor, center: disabledColor, right: disabledColor },
+      line: { left: color.disabled, center: color.disabled, right: color.disabled },
+      body: { left: color.disabled, center: color.disabled, right: color.disabled }
     },
     rotate: {
       id: 'rotate',
       width: 84,
       left: 336,
-      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
-      body: { left: disabledColor, center: disabledColor, right: disabledColor },
+      line: { left: color.disabled, center: color.disabled, right: color.disabled },
+      body: { left: color.disabled, center: color.disabled, right: color.disabled }
     },
     lock: {
       id: 'lock',
       width: 42,
       left: 420,
-      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
-      body: { left: disabledColor, center: disabledColor, right: disabledColor },
-    },
+      line: { left: color.disabled, center: color.disabled, right: color.disabled },
+      body: { left: color.disabled, center: color.disabled, right: color.disabled }
+    }
   })
 
   useEffect(() => {
@@ -398,39 +399,17 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     let copyStyles: any = {...styles} // COPY STATE
 
     const updater = (e: any) => {
+      let target = Object.keys(e)[0]
 
-      //console.log("obj.active", e.active)
-      
-      if (e.active) {
-        e.active.forEach((x: any) => {
-          let obj: any = copyStyles
-          let dir = x.split('.')
-          while (dir.length > 1) obj = obj[dir.shift()]
-          obj[dir.shift()] = activeColor;
-        })
-
-      }
-      if (e.inactive) {
-        e.inactive.forEach((x: any) => {
-          let obj: any = copyStyles
-          let dir = x.split('.')
-          while (dir.length > 1) obj = obj[dir.shift()]
-          obj[dir.shift()] = inactiveColor;
-        })
-      }
-      if (e.disabled) {
-        e.disabled.forEach((x: any) => {
-          let obj: any = copyStyles
-          let dir = x.split('.')
-          while (dir.length > 1) obj = obj[dir.shift()]
-          obj[dir.shift()] = disabledColor;
-        })
-      }
-
-
+      e[target].forEach((x: any) => {
+        let obj: any = copyStyles
+        let dir = x.split('.')
+        while (dir.length > 1) obj = obj[dir.shift()]
+        obj[dir.shift()] = color[target];
+      })
     }
 
-    let lines = [ 
+    let lines = [
       'pos.line.center',  'pos.line.right','afterPos.line.left', 'afterPos.line.center', 'afterPos.line.right', 'zoom.line.left', // 0 - 5
       'zoom.line.center', 'zoom.line.right', 'flip.line.left', // 6 - 8
       'flip.line.center', 'flip.line.right', 'rotate.line.left', // 9 - 11
@@ -440,9 +419,9 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     // BUTTON BACKGROUND & LINES COLOR
 
     if (enableLockPosition)
-      if (locked) updater({ active: [ 'pos.body.center', ...lines.slice(0) ] })
-      else updater({ inactive: [ 'pos.body.center', ...lines.slice(0) ] })
-    else updater({ disabled: [ 'pos.body.center', ...lines.slice(0) ] })
+      if (locked) updater({ active: [ 'pos.body.center', ...lines ] })
+      else updater({ inactive: [ 'pos.body.center', ...lines ] })
+    else updater({ disabled: [ 'pos.body.center', ...lines ] })
     if (enableLockZoom)
       if (locked) updater({ active: [ 'zoom.body.center', ...lines.slice(6) ] })
       else updater({ inactive: [ 'zoom.body.center', ...lines.slice(6) ] })
@@ -455,12 +434,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       if (locked) updater({ active: [ 'rotate.body.center', ...lines.slice(12) ] })
       else updater({ inactive: [ 'rotate.body.center', ...lines.slice(12) ] })
     else updater({ disabled: [ 'rotate.body.center' ] })
-    if (locked) {
-      updater({ active: [ 'lock.body.center', 'lock.line.center' ] })
-    }
-    else {
-      updater({ inactive: [ 'lock.body.center', 'lock.line.center' ] })
-    }
+    if (locked) updater({ active: [ 'lock.body.center', 'lock.line.center' ] })
+    else updater({ inactive: [ 'lock.body.center', 'lock.line.center' ] })
 
     // BUTTON BACKGROUND SIMULATED BORDER-RADIUS
     if (enableLockZoom && enableLockFlip)
@@ -477,11 +452,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     else updater({ disabled: [ 'rotate.body.right', 'lock.body.left' ] })
 
     setStyles(copyStyles) // UPDATE STATE
-
-
-
-
-
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locked, enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate])
@@ -538,7 +508,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const abc = (el:any) => {
     //return "url(#gradient)"
 
-    console.log("EL", el.id)
+    //console.log("EL", el.id)
     //console.dir(el)
 
     return (
