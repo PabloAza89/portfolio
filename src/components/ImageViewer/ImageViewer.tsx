@@ -350,154 +350,135 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   const [ styles, setStyles ] = useState({
     pos: {
-      left: 0,
-      line: {
-        right: disabledColor,
-        left: disabledColor, // DISABLED
-      },
-      fg: { // foreground
-        line: activeColor,
-        body: activeColor,
-      },
-      bg: { // background
-        right: disabledColor,
-        left: disabledColor, // DISABLED
-      },
+      id: 'pos',
+      width: 84,
+      left: 0, //                           ↓ UNUSED ↓
+      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
+      body: { left: disabledColor, center: disabledColor, right: disabledColor },
+    },
+    afterPos: {
+      id: 'afterPos',
+      width: 84,
+      left: 84,
+      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
+      body: { left: disabledColor, center: disabledColor, right: disabledColor },
     },
     zoom: {
+      id: 'zoom',
+      width: 84,
       left: 168,
-      line: {
-        right: activeColor,
-        left: activeColor,
-      },
-      fg: { // foreground
-        line: activeColor,
-        body: activeColor,
-      },
-      bg: { // background
-        right: activeColor,
-        left: activeColor,
-      },
+      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
+      body: { left: disabledColor, center: disabledColor, right: disabledColor },
     },
     flip: {
+      id: 'flip',
+      width: 84,
       left: 252,
-      line: {
-        right: activeColor,
-        left: activeColor,
-      },
-      fg: { // foreground
-        line: activeColor,
-        body: activeColor,
-      },
-      bg: { // background
-        right: activeColor,
-        left: activeColor,
-      },
+      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
+      body: { left: disabledColor, center: disabledColor, right: disabledColor },
+    },
+    rotate: {
+      id: 'rotate',
+      width: 84,
+      left: 336,
+      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
+      body: { left: disabledColor, center: disabledColor, right: disabledColor },
+    },
+    lock: {
+      id: 'lock',
+      width: 42,
+      left: 420,
+      line: { left: disabledColor, center: disabledColor, right: disabledColor,  },
+      body: { left: disabledColor, center: disabledColor, right: disabledColor },
     },
   })
 
   useEffect(() => {
 
-    let root = document.documentElement.style
+    let copyStyles: any = {...styles} // COPY STATE
 
-    const varSetter = (e: any) => {
+    const updater = (e: any) => {
 
-      console.log("obj.active", e.active)
+      //console.log("obj.active", e.active)
+      
+      if (e.active) {
+        e.active.forEach((x: any) => {
+          let obj: any = copyStyles
+          let dir = x.split('.')
+          while (dir.length > 1) obj = obj[dir.shift()]
+          obj[dir.shift()] = activeColor;
+        })
 
-      if (e.active)
-        if (Array.isArray(e.active)) e.active.forEach((x: any) => { root.setProperty(x, activeColor) })
-        else root.setProperty(e.active, activeColor)
-      if (e.inactive)
-        if (Array.isArray(e.inactive)) e.inactive.forEach((x: any) => { root.setProperty(x, inactiveColor) })
-        else root.setProperty(e.inactive, inactiveColor)
-      if (e.disabledColor)
-        if (Array.isArray(e.disabledColor)) e.disabledColor.forEach((x: any) => { root.setProperty(x, disabledColor) })
-        else root.setProperty(e.disabledColor, disabledColor)
+      }
+      if (e.inactive) {
+        e.inactive.forEach((x: any) => {
+          let obj: any = copyStyles
+          let dir = x.split('.')
+          while (dir.length > 1) obj = obj[dir.shift()]
+          obj[dir.shift()] = inactiveColor;
+        })
+      }
+      if (e.disabled) {
+        e.disabled.forEach((x: any) => {
+          let obj: any = copyStyles
+          let dir = x.split('.')
+          while (dir.length > 1) obj = obj[dir.shift()]
+          obj[dir.shift()] = disabledColor;
+        })
+      }
 
 
     }
 
-    const lines: string[] = [
-      '--IVPositionLine', '--IVZoomLine',
-      '--IVFlipLine', '--IVRotateLine'
+    let lines = [ 
+      'pos.line.center',  'pos.line.right','afterPos.line.left', 'afterPos.line.center', 'afterPos.line.right', 'zoom.line.left', // 0 - 5
+      'zoom.line.center', 'zoom.line.right', 'flip.line.left', // 6 - 8
+      'flip.line.center', 'flip.line.right', 'rotate.line.left', // 9 - 11
+      'rotate.line.center', 'rotate.line.right', 'lock.line.left' // 12 - 14
     ]
 
     // BUTTON BACKGROUND & LINES COLOR
 
-    let copyStyles = {...styles} // COPY USESTATE
-
     if (enableLockPosition)
-      if (locked) { copyStyles.pos.fg = { line: activeColor, body: activeColor}; copyStyles.pos.line.right = activeColor }
-      else { copyStyles.pos.fg = { line: inactiveColor, body: inactiveColor}; copyStyles.pos.line.right = inactiveColor }
-    else { copyStyles.pos.fg = { line: disabledColor, body: disabledColor}; copyStyles.pos.line.right = disabledColor }
+      if (locked) updater({ active: [ 'pos.body.center', ...lines.slice(0) ] })
+      else updater({ inactive: [ 'pos.body.center', ...lines.slice(0) ] })
+    else updater({ disabled: [ 'pos.body.center', ...lines.slice(0) ] })
     if (enableLockZoom)
-      if (locked) varSetter({ active: ['--IVZoom', ...lines.slice(1)] }) // ZOOM ACTIVE
-      else varSetter({ inactive: ['--IVZoom', ...lines.slice(1)] }) // ZOOM INACTIVE
-    else varSetter({ disabledColor: '--IVZoom' }) // ZOOM TRANSPARENT
+      if (locked) updater({ active: [ 'zoom.body.center', ...lines.slice(6) ] })
+      else updater({ inactive: [ 'zoom.body.center', ...lines.slice(6) ] })
+    else updater({ disabled: [ 'zoom.body.center' ] })
     if (enableLockFlip)
-      if (locked) {
-        //varSetter({ active: ['--IVFlip', ...lines.slice(2)] }) // FLIP ACTIVE
-        //setColorBackground(activeColor)
-        //setColorForeground(activeColor)
-        setStyles((curr) => ({ ...curr, foreground: activeColor }))
-        //setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX * -1 }))
-      }
-      else {
-        //varSetter({ inactive: ['--IVFlip', ...lines.slice(2)] }) // FLIP INACTIVE
-        //setColorForeground(inactiveColor)
-        //setColorBackground(inactiveColor)
-      }
-    else {
-      //varSetter({ disabledColor: '--IVFlip' }) // FLIP TRANSPARENT
-      //setColorForeground(disabledColor)
-      //setColorBackground(disabledColor)
-    }
-    if (enableLockRotate) {
-      if (locked) {
-        //setColorBackground(activeColor)
-        varSetter({ active: ['--IVRotate', ...lines.slice(3)] }) // ROTATION ACTIVE
-      }
-      else {
-        //setColorBackground(inactiveColor)
-        varSetter({ inactive: ['--IVRotate', ...lines.slice(3)] }) // ROTATION INACTIVE
-      }
+      if (locked) updater({ active: [ 'flip.body.center', ...lines.slice(9) ] })
+      else updater({ inactive: [ 'flip.body.center', ...lines.slice(9) ] })
+    else updater({ disabled: [ 'flip.body.center' ] })
+    if (enableLockRotate)
+      if (locked) updater({ active: [ 'rotate.body.center', ...lines.slice(12) ] })
+      else updater({ inactive: [ 'rotate.body.center', ...lines.slice(12) ] })
+    else updater({ disabled: [ 'rotate.body.center' ] })
+    if (locked) {
+      updater({ active: [ 'lock.body.center', 'lock.line.center' ] })
     }
     else {
-      //setColorBackground(disabledColor)
-      varSetter({ disabledColor: '--IVRotate' }) // ROTATION TRANSPARENT
+      updater({ inactive: [ 'lock.body.center', 'lock.line.center' ] })
     }
-    if (locked) varSetter({ active: '--IVLock' }) // LOCK ACTIVE
-    else varSetter({ inactive: '--IVLock' }) // LOCK INACTIVE
 
     // BUTTON BACKGROUND SIMULATED BORDER-RADIUS
     if (enableLockZoom && enableLockFlip)
-      if (locked) varSetter({ active: '--IVZoomFlip' })
-      else varSetter({ inactive: '--IVZoomFlip' })
-    else varSetter({ disabledColor: '--IVZoomFlip' })
+      if (locked) updater({ active: [ 'zoom.body.right', 'flip.body.left' ] })
+      else updater({ inactive: [ 'zoom.body.right', 'flip.body.left' ] })
+    else updater({ disabled: [ 'zoom.body.right', 'flip.body.left' ] })
     if (enableLockFlip && enableLockRotate)
-      if (locked) varSetter({ active: '--IVFlipRotate' })
-      else varSetter({ inactive: '--IVFlipRotate' })
-    else varSetter({ disabledColor: '--IVFlipRotate' })
+      if (locked) updater({ active: [ 'flip.body.right', 'rotate.body.left' ] })
+      else updater({ inactive: [ 'flip.body.right', 'rotate.body.left' ] })
+    else updater({ disabled: [ 'flip.body.right', 'rotate.body.left' ] })
     if (enableLockRotate)
-      if (locked) varSetter({ active: '--IVRotateLock' })
-      else varSetter({ inactive: '--IVRotateLock' })
-    else varSetter({ disabledColor: '--IVRotateLock' })
+      if (locked) updater({ active: [ 'rotate.body.right', 'lock.body.left' ] })
+      else updater({ inactive: [ 'rotate.body.right', 'lock.body.left' ] })
+    else updater({ disabled: [ 'rotate.body.right', 'lock.body.left' ] })
 
-    setStyles(copyStyles) // UPDATE USESTATE
+    setStyles(copyStyles) // UPDATE STATE
 
-    // // BUTTON BACKGROUND SIMULATED BORDER-RADIUS
-    // if (enableLockZoom && enableLockFlip)
-    //   if (locked) varSetter({ active: '--IVZoomFlip' })
-    //   else varSetter({ inactive: '--IVZoomFlip' })
-    // else varSetter({ disabledColor: '--IVZoomFlip' })
-    // if (enableLockFlip && enableLockRotate)
-    //   if (locked) varSetter({ active: '--IVFlipRotate' })
-    //   else varSetter({ inactive: '--IVFlipRotate' })
-    // else varSetter({ disabledColor: '--IVFlipRotate' })
-    // if (enableLockRotate)
-    //   if (locked) varSetter({ active: '--IVRotateLock',  })
-    //   else varSetter({ inactive: '--IVRotateLock' })
-    // else varSetter({ disabledColor: '--IVRotateLock' })
+
 
 
 
@@ -557,38 +538,44 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const abc = (el:any) => {
     //return "url(#gradient)"
 
+    console.log("EL", el.id)
+    //console.dir(el)
+
     return (
-      <div className={`${css.buttonBGTest}`} style={{ left: el.left }}>
-        <svg width="84" height="42" xmlns="http://www.w3.org/2000/svg">
+      <div className={`${css.buttonBGTest}`} style={{ left: el.left, width: el.width }}>
+        <svg width={el.width} height="42" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="background" x1="100%" x2="0%"> {/* SIMULATED BORDER-RADIUS */}
-              <stop className={css.fade} offset="50%" stopColor={el.bg.right} />
-              <stop className={css.fade} offset="50%" stopColor={el.bg.left} />
+            <linearGradient id={`background${el.id}`} x1="100%" x2="0%"> {/* SIMULATED BORDER-RADIUS */}
+              <stop className={css.fade} offset="50%" stopColor={el.body.right} />
+              <stop className={css.fade} offset="50%" stopColor={el.body.left} />
             </linearGradient>
-            <linearGradient id="line" x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
+            <linearGradient id={`line${el.id}`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
               <stop className={css.fade} offset="50%" stopColor={el.line.right} />
               <stop className={css.fade} offset="50%" stopColor={el.line.left} />
+              {/* <stop className={css.fade} offset="50%" stopColor="red" />
+              <stop className={css.fade} offset="50%" stopColor="red" /> */}
             </linearGradient>
             <clipPath id="upperSide" clipPathUnits="userSpaceOnUse"> {/* FG TOP LINE */}
-              <rect width="84" height="1.5" />
+              <rect width={el.width} height="1.5" />
             </clipPath>
             <clipPath id="centerSide" clipPathUnits="userSpaceOnUse"> {/* FG CENTER */}
-              <rect width="84" height="39" y="1.5" />
+              <rect width={el.width} height="39" y="1.5" />
+              {/* <rect width="84" height="39.2" y="1.4" /> */}
+              {/* <rect width="84" height="42" y="0" /> */}
             </clipPath>
             <clipPath id="LowerSide" clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
-              <rect width="84" height="1.5" y="40.5" />
+              <rect width={el.width} height="1.5" y="40.5" />
             </clipPath>
           </defs>
 
-          <rect className={css.fade} width="84" height="42" fill="url(#background)"/> {/* SIMULATED BORDER-RADIUS */}
+          <rect className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
 
-          <rect className={css.fade} width="84" height="1.5" fill="url(#line)" /> {/* BG TOP LINE */}
-          <rect className={css.fade} width="84" height="1.5" y="40.5" fill="url(#line)" /> {/* BG BOTTOM LINE */}
-          
+          <rect className={css.fade} width={el.width} height="1.5" fill={`url(#line${el.id})`} /> {/* BG TOP LINE */}
+          <rect className={css.fade} width={el.width} height="1.5" y="40.5" fill={`url(#line${el.id})`} /> {/* BG BOTTOM LINE */}
 
-          <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill={el.fg.line} clipPath="url(#upperSide)" /> {/* FG TOP LINE */}
-          <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill={el.fg.body} /* clipPath="url(#centerSide)" */ /> {/* FG CENTER */}
-          <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill={el.fg.line} clipPath="url(#LowerSide)" /> {/* FG BOTTOM LINE */}
+          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath="url(#centerSide)" /> {/* FG CENTER */}
+          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#upperSide)" /> {/* FG TOP LINE */}
+          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#LowerSide)" /> {/* FG BOTTOM LINE */}
 
           
 
@@ -640,8 +627,11 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
           
             { abc(styles.pos) }
+            { abc(styles.afterPos) }
             { abc(styles.zoom) }
             { abc(styles.flip) }
+            { abc(styles.rotate) }
+            { abc(styles.lock) }
           
 
           <MuiButton // GO LEFT
@@ -806,7 +796,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         </div>
 
         <div>
-          Dont forget to 'lock' the padlock to changes take effect.
+          Dont forget to 'lock the padlock' to changes take effect.
         </div>
 
       </div>

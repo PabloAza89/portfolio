@@ -228,7 +228,7 @@
 .buttonBGTest {
   display: flex;
   position: absolute;
-  width: 84px;
+  /* width: 84px; */
   height: 42px;
   /* border-radius: 7.5px; */
   margin-top: 3.5px;
