@@ -348,6 +348,54 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const [ colorBackground, setColorBackground ] = useState(disabledColor)
   const [ colorLine, setColorLine ] = useState(inactiveColor)
 
+  const [ styles, setStyles ] = useState({
+    pos: {
+      left: 0,
+      line: {
+        right: disabledColor,
+        left: disabledColor, // DISABLED
+      },
+      fg: { // foreground
+        line: activeColor,
+        body: activeColor,
+      },
+      bg: { // background
+        right: disabledColor,
+        left: disabledColor, // DISABLED
+      },
+    },
+    zoom: {
+      left: 168,
+      line: {
+        right: activeColor,
+        left: activeColor,
+      },
+      fg: { // foreground
+        line: activeColor,
+        body: activeColor,
+      },
+      bg: { // background
+        right: activeColor,
+        left: activeColor,
+      },
+    },
+    flip: {
+      left: 252,
+      line: {
+        right: activeColor,
+        left: activeColor,
+      },
+      fg: { // foreground
+        line: activeColor,
+        body: activeColor,
+      },
+      bg: { // background
+        right: activeColor,
+        left: activeColor,
+      },
+    },
+  })
+
   useEffect(() => {
 
     let root = document.documentElement.style
@@ -375,29 +423,34 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     ]
 
     // BUTTON BACKGROUND & LINES COLOR
+
+    let copyStyles = {...styles} // COPY USESTATE
+
     if (enableLockPosition)
-      if (locked) varSetter({ active: ['--IVPosition', ...lines.slice(0)] }) // POSITION ACTIVE
-      else varSetter({ inactive: ['--IVPosition', ...lines.slice(0)] }) // POSITION INACTIVE
-    else varSetter({ disabledColor: ['--IVPosition', ...lines.slice(0)] }) // POSITION CLEAR
+      if (locked) { copyStyles.pos.fg = { line: activeColor, body: activeColor}; copyStyles.pos.line.right = activeColor }
+      else { copyStyles.pos.fg = { line: inactiveColor, body: inactiveColor}; copyStyles.pos.line.right = inactiveColor }
+    else { copyStyles.pos.fg = { line: disabledColor, body: disabledColor}; copyStyles.pos.line.right = disabledColor }
     if (enableLockZoom)
       if (locked) varSetter({ active: ['--IVZoom', ...lines.slice(1)] }) // ZOOM ACTIVE
       else varSetter({ inactive: ['--IVZoom', ...lines.slice(1)] }) // ZOOM INACTIVE
     else varSetter({ disabledColor: '--IVZoom' }) // ZOOM TRANSPARENT
     if (enableLockFlip)
       if (locked) {
-        varSetter({ active: ['--IVFlip', ...lines.slice(2)] }) // FLIP ACTIVE
-        setColorBackground(activeColor)
-        setColorForeground(activeColor)
+        //varSetter({ active: ['--IVFlip', ...lines.slice(2)] }) // FLIP ACTIVE
+        //setColorBackground(activeColor)
+        //setColorForeground(activeColor)
+        setStyles((curr) => ({ ...curr, foreground: activeColor }))
+        //setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX * -1 }))
       }
       else {
-        varSetter({ inactive: ['--IVFlip', ...lines.slice(2)] }) // FLIP INACTIVE
-        setColorForeground(inactiveColor)
-        setColorBackground(inactiveColor)
+        //varSetter({ inactive: ['--IVFlip', ...lines.slice(2)] }) // FLIP INACTIVE
+        //setColorForeground(inactiveColor)
+        //setColorBackground(inactiveColor)
       }
     else {
-      varSetter({ disabledColor: '--IVFlip' }) // FLIP TRANSPARENT
-      setColorForeground(disabledColor)
-      setColorBackground(disabledColor)
+      //varSetter({ disabledColor: '--IVFlip' }) // FLIP TRANSPARENT
+      //setColorForeground(disabledColor)
+      //setColorBackground(disabledColor)
     }
     if (enableLockRotate) {
       if (locked) {
@@ -429,6 +482,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       if (locked) varSetter({ active: '--IVRotateLock' })
       else varSetter({ inactive: '--IVRotateLock' })
     else varSetter({ disabledColor: '--IVRotateLock' })
+
+    setStyles(copyStyles) // UPDATE USESTATE
 
     // // BUTTON BACKGROUND SIMULATED BORDER-RADIUS
     // if (enableLockZoom && enableLockFlip)
@@ -499,52 +554,46 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
 
-  const abc = (color: any) => {
+  const abc = (el:any) => {
     //return "url(#gradient)"
 
     return (
-      <svg width="84" height="42" xmlns="http://www.w3.org/2000/svg">
+      <div className={`${css.buttonBGTest}`} style={{ left: el.left }}>
+        <svg width="84" height="42" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="background" x1="100%" x2="0%"> {/* SIMULATED BORDER-RADIUS */}
+              <stop className={css.fade} offset="50%" stopColor={el.bg.right} />
+              <stop className={css.fade} offset="50%" stopColor={el.bg.left} />
+            </linearGradient>
+            <linearGradient id="line" x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
+              <stop className={css.fade} offset="50%" stopColor={el.line.right} />
+              <stop className={css.fade} offset="50%" stopColor={el.line.left} />
+            </linearGradient>
+            <clipPath id="upperSide" clipPathUnits="userSpaceOnUse"> {/* FG TOP LINE */}
+              <rect width="84" height="1.5" />
+            </clipPath>
+            <clipPath id="centerSide" clipPathUnits="userSpaceOnUse"> {/* FG CENTER */}
+              <rect width="84" height="39" y="1.5" />
+            </clipPath>
+            <clipPath id="LowerSide" clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
+              <rect width="84" height="1.5" y="40.5" />
+            </clipPath>
+          </defs>
 
-        <defs>
-          <linearGradient id="background" x1="100%" x2="0%">
-            <stop className={css.fade} offset="50%" stopColor={colorBackground} />
-            <stop className={css.fade} offset="50%" stopColor={colorBackground} />
-          </linearGradient>
-          <linearGradient id="line" x1="100%" x2="0%">
-            <stop offset="50%" stopColor={colorLine} />
-            <stop offset="50%" stopColor={colorLine} />
-          </linearGradient>
-          <linearGradient id="aaa" /* x1="100%" x2="0%" */ /* gradientUnits="userSpaceOnUse" */ gradientTransform="rotate(0)">
-            <stop offset={'50px'} stopColor="red" />
-            <stop offset={'50px'} stopColor={colorForeground} />
-            {/* <stop offset={40.5} stopColor={colorForeground} />
-            <stop offset={40.5} stopColor="red" /> */}
-          </linearGradient>
-          <clipPath id="upperSide" clipPathUnits="userSpaceOnUse">
-            <rect width="84" height="1.5" />
-          </clipPath>
-          <clipPath id="centerSide" clipPathUnits="userSpaceOnUse">
-            <rect width="84" height="39" y="1.5" />
-          </clipPath>
-          <clipPath id="LowerSide" clipPathUnits="userSpaceOnUse">
-            <rect width="84" height="1.5" y="40.5" />
-          </clipPath>
+          <rect className={css.fade} width="84" height="42" fill="url(#background)"/> {/* SIMULATED BORDER-RADIUS */}
+
+          <rect className={css.fade} width="84" height="1.5" fill="url(#line)" /> {/* BG TOP LINE */}
+          <rect className={css.fade} width="84" height="1.5" y="40.5" fill="url(#line)" /> {/* BG BOTTOM LINE */}
           
-        </defs>
 
-        <rect className={css.fade} width="84" height="42" fill="url(#background)"/>
+          <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill={el.fg.line} clipPath="url(#upperSide)" /> {/* FG TOP LINE */}
+          <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill={el.fg.body} /* clipPath="url(#centerSide)" */ /> {/* FG CENTER */}
+          <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill={el.fg.line} clipPath="url(#LowerSide)" /> {/* FG BOTTOM LINE */}
 
-        <rect width="84px" height={1.5} fill="url(#line)" />
-        <rect width="84px" height={1.5} y={40.5} fill="url(#line)" />
-        
+          
 
-        <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill="red" clipPath="url(#upperSide)" />
-        <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill={colorForeground} clipPath="url(#centerSide)" />
-        <rect className={css.fade} width="84" height="42" rx="7.5" ry="7.5" fill="green" clipPath="url(#LowerSide)" />
-
-        
-
-      </svg>
+        </svg>
+      </div>
     )
   }
 
@@ -589,9 +638,11 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           <div className={`${css.buttonBG} ${css.rotate}`} />
           <div className={`${css.buttonBG} ${css.lock}`} /> */}
 
-          <div className={`${css.buttonBGTest}`}>
-            { abc(colorForeground) }
-          </div>
+          
+            { abc(styles.pos) }
+            { abc(styles.zoom) }
+            { abc(styles.flip) }
+          
 
           <MuiButton // GO LEFT
             //style={{ order: 0 }}

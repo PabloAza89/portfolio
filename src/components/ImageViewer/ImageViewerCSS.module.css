@@ -234,20 +234,9 @@
   margin-top: 3.5px;
   /* transition: background var(--IVFade); */
   left: 252px;
-  /* background: red; */
-  /* background:
-    linear-gradient(
-      to left,
-      lime 0px, lime 42px,
-      orange 42px
-    ); */
 }
 
-rect.fade {
-  width:84;
-  height:42;
-  rx:7.5;
-  ry:7.5;
+.fade {
   transition: fill var(--IVFade), stop-color var(--IVFade);
 }
 
