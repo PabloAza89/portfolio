@@ -350,7 +350,6 @@ function Projects() {
           images={array.map(e => e.media).flat()} // OK
           index={index} // DEFAULT 0
           setShowImageViewer={setShowImageViewer} // OK
-          //controlsOutside={true} // DEFAULT FALSE
           //disableAnimation={true} // DEFAULT FALSE
           //timing={10} // DEFAULT 10
           //mode={"vertical"} // vertical | horizontal | auto // DEFAULT AUTO

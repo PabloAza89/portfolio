@@ -1,7 +1,7 @@
 :root {
   --IVBackgroundOpacity: rgba(0, 0, 0, 1.0);
   --IVBottomBarOpacity: rgb(77, 77, 77);
-  --IVFade: 2s;
+  --IVFade: 0.4s;
   /* --IVOpacity: 0; */
   /* --IVLock: rgb(77, 77, 77); */
 }

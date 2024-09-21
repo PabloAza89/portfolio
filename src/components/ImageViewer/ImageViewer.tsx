@@ -464,16 +464,15 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   }, [showSettings])
 
   const MuiButton = ({ style, classButton, onClick, Icon, classIcon, styleIcon }: any) => {
-    let parsedClassIcon = Array.isArray(classIcon) ? classIcon.join(" ") : classIcon
     return (
       <Button
         disableElevation={true}
         style={style}
         variant="contained"
         className={`${classButton}`}
-        onClick={() => onClick()}
+        onClick={() => onClick ? onClick() : null}
       >
-        <Icon className={`${parsedClassIcon}`} />
+        { Array.isArray(Icon) ? Icon.map((I: any, i: any) => { return <I key={i} className={`${classIcon[i]}`} /> }) : <Icon className={`${classIcon}`} /> }
       </Button>
     )
   }
@@ -581,122 +580,139 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             { Object.keys(styles).map((e: any) => { return abc(styles[e]) }) }
           
 
-          <MuiButton // GO LEFT
-            //style={{ order: 0 }}
-            classButton={css.button}
-            onClick={handleGoLeft}
-            Icon={Forward}
-            classIcon={[ css.icon, css.rotateX ]}
-            //classIcon={[ css.icon ]}
-          />
+          {
+            MuiButton({ // GO LEFT
+              classButton: css.button,
+              onClick: handleGoLeft,
+              Icon: Forward,
+              classIcon: `${css.icon} ${css.rotateX}`
+            })
+          }
 
-          <MuiButton // GO RIGHT
-            //style={{ order: 10 }}
-            classButton={css.button}
-            onClick={handleGoRight}
-            Icon={Forward}
-            classIcon={css.icon}
-          />
 
-          <MuiButton // RESET ALL
-            //style={{ order: 20 }}
-            classButton={css.button}
-            onClick={restoreHandler}
-            Icon={Cached}
-            classIcon={css.icon}
-          />
+          {
+            MuiButton({ // GO RIGHT
+              classButton: css.button,
+              onClick: handleGoRight,
+              Icon: Forward,
+              classIcon: css.icon
+            })
+          }
 
-          <MuiButton // RESET ALL
-            //style={{ order: 20 }}
-            classButton={css.button}
-            onClick={restoreHandler}
-            Icon={PlayCircleOutline}
-            classIcon={css.icon}
-          />
 
-          <MuiButton // ZOOM OUT
-            //style={{ order: enableLockZoom ? 81 : 30 }}
-            classButton={css.button}
-            onClick={zoomOut}
-            Icon={Remove}
-            classIcon={css.icon}
-          />
+          {
+            MuiButton({ // PLAY
+              classButton: css.button,
+              onClick: restoreHandler,
+              Icon: Cached,
+              classIcon: css.icon
+            })
+          }
 
-          <MuiButton // ZOOM IN
-            //style={{ order: enableLockZoom ? 82 : 40 }}
-            classButton={css.button}
-            onClick={zoomIn}
-            Icon={Add}
-            classIcon={css.icon}
-          />
 
-          <MuiButton // FLIP X
-           // style={{ order: enableLockFlip ? 83 : 50 }}
-            classButton={css.button}
-            onClick={flipX}
-            Icon={Flip}
-            classIcon={[ css.icon, css.rotateX ]}
-          />
+          {
+            MuiButton({ // PLAY
+              classButton: css.button,
+              onClick: restoreHandler,
+              Icon: PlayCircleOutline,
+              classIcon: css.icon
+            })
+          }
 
-          <MuiButton // FLIP Y
-            //style={{ order: enableLockFlip ? 84 : 60 }}
-            classButton={css.button}
-            onClick={flipY}
-            Icon={Flip}
-            classIcon={[ css.icon, css.rotateY ]}
-          />
 
-          <MuiButton // ROTATE LEFT
-            classButton={css.button}
-            onClick={rotateLeft}
-            Icon={RotateLeft}
-            classIcon={[ css.icon, css.rotateX ]}
-          />
 
-          <MuiButton // ROTATE RIGHT
-            //style={{ order: enableLockRotate ? 86 : 80 }}
-            /* style={{ boxShadow: '0px 0px 0px 3.5px red' }} */
-            classButton={css.button}
-            onClick={rotateRight}
-            Icon={RotateRight}
-            classIcon={[ css.icon, css.rotateX ]}
-          />
+          {
+            MuiButton({ // ZOOM OUT
+              classButton: css.button,
+              onClick: zoomOut,
+              Icon: Remove,
+              classIcon: css.icon
+            })
+          }
+
+
+
+          {
+            MuiButton({ // ZOOM IN
+              classButton: css.button,
+              onClick: zoomIn,
+              Icon: Add,
+              classIcon: css.icon
+            })
+          }
+
+
+
+          {
+            MuiButton({ // FLIP X
+              classButton: css.button,
+              onClick: flipX,
+              Icon: Flip,
+              classIcon: `${css.icon} ${css.rotateX}`
+            })
+          }
+
+          {
+            MuiButton({ // FLIP Y
+              classButton: css.button,
+              onClick: flipY,
+              Icon: Flip,
+              classIcon: `${css.icon} ${css.rotateY}`
+            })
+          }
+
+
+          {
+            MuiButton({ // ROTATE LEFT
+              classButton: css.button,
+              onClick: rotateLeft,
+              Icon: RotateLeft,
+              classIcon: `${css.icon} ${css.rotateX}`
+            })
+          }
+
+          {
+            MuiButton({ // ROTATE RIGHT
+              classButton: css.button,
+              onClick: rotateRight,
+              Icon: RotateRight,
+              classIcon: `${css.icon} ${css.rotateX}`
+            })
+          }
 
 
 
           <div className={css.lockContainer}>
-          <Button // LOCK
-            //style={{ order: 110 }}
-            disableElevation={true}
-            variant="contained"
-            className={`${css.button} ${css.iconLock}`}
-            onClick={() => lockSettings()}
-          >
-            <LockOpenOutlined className={css.icon} />
-            <LockOutlined className={`${css.icon} ${css.opacity}`} />
-          </Button>
-
+            {
+              MuiButton({ // LOCK
+                classButton: `${css.button} ${css.iconLock}`,
+                onClick: lockSettings,
+                Icon: [ LockOpenOutlined, LockOutlined ],
+                classIcon: [ css.icon, `${css.icon} ${css.opacity}` ]
+              })
+            }
           </div>
 
+          {
+            MuiButton({ // SETTINGS
+              classButton: css.button,
+              onClick: handleShowSettings,
+              Icon: Settings,
+              classIcon: css.icon
+            })
+          }
 
-          <MuiButton  // SETTINGS
-            //style={{ order: 100 }}
-            classButton={css.button}
-            onClick={handleShowSettings}
-            Icon={Settings}
-            classIcon={css.icon}
-          >
-          </MuiButton>
+          {
+            MuiButton({ // CLOSE
+              classButton: css.button,
+              onClick: setShowImageViewer,
+              Icon: Close,
+              classIcon: css.icon
+            })
+          }
 
 
-          <Button // CLOSE
-            //style={{ order: 110 }}
-            variant="contained"
-            className={css.button}
-            onClick={() => { if (setShowImageViewer !== undefined) setShowImageViewer(false) }}
-          >
-            <Close className={css.icon} />
-          </Button>
+
           <div className={css.zoomContainer}>
             { (Math.abs(imageProps.zoomX)).toFixed(1) }x
           </div>
