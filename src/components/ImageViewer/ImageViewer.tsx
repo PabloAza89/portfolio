@@ -460,13 +460,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   useEffect(() => {
     let lS = document.getElementById('lockSettings');
-    if (lS !== null) {
-      showSettings ?
-      lS.style.bottom = `49px` :
-      lS.style.bottom = `-200px`;
-    }
+    if (lS !== null) showSettings ? lS.style.bottom = `49px` : lS.style.bottom = `-200px`
   }, [showSettings])
-
 
   const MuiButton = ({ style, classButton, onClick, Icon, classIcon, styleIcon }: any) => {
     let parsedClassIcon = Array.isArray(classIcon) ? classIcon.join(" ") : classIcon
@@ -483,7 +478,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     )
   }
 
-  const MuiSwitch = ({ onClick, checked }: any) => {
+  const MuiSwitch = ({onClick, checked}:any) => {
     return (
       <Switch
         onClick={onClick}
@@ -533,11 +528,9 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             </clipPath>
           </defs>
 
-          <rect order={8} className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
-
+          <rect className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
           <rect className={css.fade} width={el.width} height="1.5" fill={`url(#line${el.id})`} /> {/* BG TOP LINE */}
           <rect className={css.fade} width={el.width} height="1.5" y="40.5" fill={`url(#line${el.id})`} /> {/* BG BOTTOM LINE */}
-
           <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath="url(#centerSide)" /> {/* BODY CENTER */}
           <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#upperSide)" /> {/* LINE CENTER TOP */}
           <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#LowerSide)" /> {/* LINE CENTER BOTTOM */}
@@ -716,42 +709,25 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       >
         Enable lock over:
         <div>
-          <MuiSwitch
-            onClick={handleSetEnableLockPosition}
-            checked={ enableLockPosition ? true : false }
-          />
+          { MuiSwitch({ onClick: handleSetEnableLockPosition, checked: enableLockPosition ? true : false }) }
           Position
         </div>
         <div>
-          <MuiSwitch
-            onClick={handleSetEnableLockZoom}
-            checked={ enableLockZoom ? true : false }
-          />
+          { MuiSwitch({ onClick: handleSetEnableLockZoom, checked: enableLockZoom ? true : false }) }
           Zoom
         </div>
-
         <div>
-          <MuiSwitch
-            onClick={handleSetEnableLockFlip}
-            checked={ enableLockFlip ? true : false }
-          />
+          { MuiSwitch({ onClick: handleSetEnableLockFlip, checked: enableLockFlip ? true : false }) }
           Flip
         </div>
-
         <div>
-          <MuiSwitch
-            onClick={handleSetEnableLockRotate}
-            checked={ enableLockRotate ? true : false }
-          />
+          { MuiSwitch({ onClick: handleSetEnableLockRotate, checked: enableLockRotate ? true : false }) }
           Rotate
         </div>
-
         <div>
           Dont forget to 'lock the padlock' to changes take effect.
         </div>
-
       </div>
-
     </div>
   )
 }
