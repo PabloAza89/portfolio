@@ -5,7 +5,7 @@ import css from './ImageViewerCSS.module.css';
 import {
   Forward, Add, Remove, Close, RotateLeft, RotateRight,
   Flip, Cached, LockOpen, LockOutlined, Settings,
-  PlayCircleOutline
+  PlayCircleOutline, LockOpenOutlined, HttpsOutlined, LockOpenSharp
 } from '@mui/icons-material/';
 import { Button, Switch } from '@mui/material';
 import {
@@ -349,7 +349,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     disabled: 'rgb(77, 77, 77)' // SAME AS BG BAR COLOR
   }
 
-  const [ styles, setStyles ] = useState({
+  const [ styles, setStyles ] = useState<any>({
     pos: {
       id: 'pos',
       width: 84,
@@ -416,6 +416,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       'rotate.line.center', 'rotate.line.right', 'lock.line.left' // 12 - 14
     ]
 
+    let root = document.documentElement.style
+
     // BUTTON BACKGROUND & LINES COLOR
 
     if (enableLockPosition)
@@ -434,8 +436,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       if (locked) updater({ active: [ 'rotate.body.center', ...lines.slice(12) ] })
       else updater({ inactive: [ 'rotate.body.center', ...lines.slice(12) ] })
     else updater({ disabled: [ 'rotate.body.center' ] })
-    if (locked) updater({ active: [ 'lock.body.center', 'lock.line.center' ] })
-    else updater({ inactive: [ 'lock.body.center', 'lock.line.center' ] })
+    if (locked) { updater({ active: [ 'lock.body.center', 'lock.line.center' ] }); root.setProperty('--IVLock', color.active); root.setProperty('--IVOpacity', '1') }
+    else { updater({ inactive: [ 'lock.body.center', 'lock.line.center' ] }); root.setProperty('--IVLock', color.inactive); root.setProperty('--IVOpacity', '0') }
 
     // BUTTON BACKGROUND SIMULATED BORDER-RADIUS
     if (enableLockZoom && enableLockFlip)
@@ -456,8 +458,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locked, enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate])
 
-
-
   useEffect(() => {
     let lS = document.getElementById('lockSettings');
     if (lS !== null) {
@@ -465,11 +465,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       lS.style.bottom = `49px` :
       lS.style.bottom = `-200px`;
     }
-
   }, [showSettings])
 
 
-  const MuiButton = ({ style, classButton, onClick, Icon, classIcon }: any) => {
+  const MuiButton = ({ style, classButton, onClick, Icon, classIcon, styleIcon }: any) => {
     let parsedClassIcon = Array.isArray(classIcon) ? classIcon.join(" ") : classIcon
     return (
       <Button
@@ -512,7 +511,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     //console.dir(el)
 
     return (
-      <div className={`${css.buttonBGTest}`} style={{ left: el.left, width: el.width }}>
+      <div key={el.id} className={css.buttonOutline} style={{ left: el.left, width: el.width }}>
         <svg width={el.width} height="42" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id={`background${el.id}`} x1="100%" x2="0%"> {/* SIMULATED BORDER-RADIUS */}
@@ -522,32 +521,26 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             <linearGradient id={`line${el.id}`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
               <stop className={css.fade} offset="50%" stopColor={el.line.right} />
               <stop className={css.fade} offset="50%" stopColor={el.line.left} />
-              {/* <stop className={css.fade} offset="50%" stopColor="red" />
-              <stop className={css.fade} offset="50%" stopColor="red" /> */}
             </linearGradient>
             <clipPath id="upperSide" clipPathUnits="userSpaceOnUse"> {/* FG TOP LINE */}
               <rect width={el.width} height="1.5" />
             </clipPath>
             <clipPath id="centerSide" clipPathUnits="userSpaceOnUse"> {/* FG CENTER */}
-              <rect width={el.width} height="39" y="1.5" />
-              {/* <rect width="84" height="39.2" y="1.4" /> */}
-              {/* <rect width="84" height="42" y="0" /> */}
+              <rect width={el.width} height="39.2" y="1.4" /> {/* OVERLAPPING NEEDED TO HIDE GLITCHES */}
             </clipPath>
             <clipPath id="LowerSide" clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
               <rect width={el.width} height="1.5" y="40.5" />
             </clipPath>
           </defs>
 
-          <rect className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
+          <rect order={8} className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
 
           <rect className={css.fade} width={el.width} height="1.5" fill={`url(#line${el.id})`} /> {/* BG TOP LINE */}
           <rect className={css.fade} width={el.width} height="1.5" y="40.5" fill={`url(#line${el.id})`} /> {/* BG BOTTOM LINE */}
 
-          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath="url(#centerSide)" /> {/* FG CENTER */}
-          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#upperSide)" /> {/* FG TOP LINE */}
-          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#LowerSide)" /> {/* FG BOTTOM LINE */}
-
-          
+          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath="url(#centerSide)" /> {/* BODY CENTER */}
+          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#upperSide)" /> {/* LINE CENTER TOP */}
+          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#LowerSide)" /> {/* LINE CENTER BOTTOM */}
 
         </svg>
       </div>
@@ -589,19 +582,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             { currentIndex !== undefined && images !== undefined ? currentIndex + 1 : 0 }/{ currentIndex !== undefined && images !== undefined ? images.length : 0 }
           </div>
 
-          {/* <div className={`${css.buttonBG} ${css.position}`} />
-          <div className={`${css.buttonBG} ${css.zoom}`} />
-          <div className={`${css.buttonBG} ${css.flip}`} />
-          <div className={`${css.buttonBG} ${css.rotate}`} />
-          <div className={`${css.buttonBG} ${css.lock}`} /> */}
+   
 
-          
-            { abc(styles.pos) }
-            { abc(styles.afterPos) }
-            { abc(styles.zoom) }
-            { abc(styles.flip) }
-            { abc(styles.rotate) }
-            { abc(styles.lock) }
+
+            { Object.keys(styles).map((e: any) => { return abc(styles[e]) }) }
           
 
           <MuiButton // GO LEFT
@@ -687,22 +671,18 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
 
-          <div // LOCK
-            //style={{ order: 90 }}
-            className={css.lockContainer}
+          <div className={css.lockContainer}>
+          <Button // LOCK
+            //style={{ order: 110 }}
+            disableElevation={true}
+            variant="contained"
+            className={`${css.button} ${css.iconLock}`}
+            onClick={() => lockSettings()}
           >
-            {/* <div className={css.IVLine} /> */}
-            {/* <div className={`${css.IVLine} ${css.IVUpperLine}`} />
-            <div className={`${css.IVLine} ${css.IVLowerLine}`} /> */}
+            <LockOpenOutlined className={css.icon} />
+            <LockOutlined className={`${css.icon} ${css.opacity}`} />
+          </Button>
 
-            <MuiButton
-              classButton={css.button}
-              onClick={lockSettings}
-              Icon={ locked ? LockOutlined : LockOpen }
-              classIcon={[ css.icon, css.iconLock ]}
-            >
-
-            </MuiButton>
           </div>
 
 
@@ -712,7 +692,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             onClick={handleShowSettings}
             Icon={Settings}
             classIcon={css.icon}
-          />
+          >
+          </MuiButton>
 
 
           <Button // CLOSE

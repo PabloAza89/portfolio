@@ -1,85 +1,20 @@
 :root {
   --IVBackgroundOpacity: rgba(0, 0, 0, 1.0);
   --IVBottomBarOpacity: rgb(77, 77, 77);
-  --IVColor: red;
-  --IVPosition: rgb(77, 77, 77);
   --IVFade: 2s;
-}
-
-@property --IVZoom {
-  syntax: '<color>';
-  initial-value: rgb(77, 77, 77);
-  inherits: true;
-}
-
-@property --IVFlip {
-  syntax: '<color>';
-  initial-value: rgb(77, 77, 77);
-  inherits: true;
-}
-
-@property --IVLineRotate {
-  syntax: '<color>';
-  initial-value: transparent;
-  inherits: true;
-}
-
-
-@property --IVRotate {
-  syntax: '<color>';
-  initial-value: rgb(77, 77, 77);
-  inherits: true;
-}
-
-/* SIMULATED BORDER VARS */
-
-@property --IVZoomFlip {
-  syntax: '<color>';
-  initial-value: rgb(77, 77, 77);
-  inherits: true;
-}
-
-@property --IVFlipRotate {
-  syntax: '<color>';
-  initial-value: rgb(77, 77, 77);
-  inherits: true;
-}
-
-@property --IVRotateLock {
-  syntax: '<color>';
-  initial-value: rgb(77, 77, 77);
-  inherits: true;
-}
-
-/* SIMULATED BORDER VARS */
-
-@property --IVPositionLine {
-  syntax: '<color>';
-  initial-value: rgb(77, 77, 77);
-  inherits: true;
-}
-
-@property --IVZoomLine {
-  syntax: '<color>';
-  initial-value: rgb(77, 77, 77);
-  inherits: true;
-}
-
-@property --IVFlipLine {
-  syntax: '<color>';
-  initial-value: rgb(77, 77, 77);
-  inherits: true;
-}
-
-@property --IVRotateLine {
-  syntax: '<color>';
-  initial-value: rgb(77, 77, 77);
-  inherits: true;
+  /* --IVOpacity: 0; */
+  /* --IVLock: rgb(77, 77, 77); */
 }
 
 @property --IVLock {
   syntax: '<color>';
-  initial-value: rgb(119, 82, 77);
+  initial-value: rgb(77, 77, 77);
+  inherits: true;
+}
+
+@property --IVOpacity {
+  syntax: '<number>';
+  initial-value: 0;
   inherits: true;
 }
 
@@ -169,11 +104,12 @@
   height: 35px !important;
   margin: 7px 3.5px !important;
   z-index: 1000002;
-  transition-duration: 0.25s, 0.25s, 0.25s !important;
-  transition-property: background-color, border-color, color !important;
 }
 
-
+.iconLock {
+  color: var(--IVLock) !important;
+  transition: --IVLock var(--IVFade) !important;
+}
 
 .icon {
   display: flex;
@@ -184,10 +120,11 @@
   height: 23px !important;
 }
 
-.iconLock {
-  color: var(--IVLock) !important;
-  transition: color var(--IVFade) !important; /* LOCK TRANSITION */
+.opacity {
+  opacity: var(--IVOpacity) !important;
+  transition: opacity var(--IVFade) !important;
 }
+
 
 .rotateX {
   transform: rotate(180deg);
@@ -208,180 +145,24 @@
 .lockContainer {
   display: flex;
   position: relative;
+  /* background: green !important;
+  color: red !important; */
   /* background: red; */
   /* height: 42px; */
   /* margin-top: 3.5px; */
 }
 
-
-
-.buttonBG {
+.buttonOutline {
   display: flex;
   position: absolute;
-  width: 84px;
   height: 42px;
-  border-radius: 7.5px; /* 4px + 3.5px ~ inner-border-radius + padding */
   margin-top: 3.5px;
-  transition: background var(--IVFade); /* LOCK TRANSITION */
-}
-
-.buttonBGTest {
-  display: flex;
-  position: absolute;
-  /* width: 84px; */
-  height: 42px;
-  /* border-radius: 7.5px; */
-  margin-top: 3.5px;
-  /* transition: background var(--IVFade); */
   left: 252px;
 }
 
 .fade {
   transition: fill var(--IVFade), stop-color var(--IVFade);
 }
-
-.position {
-  background: var(--IVPosition);
-  left: 0px;
-}
-
-.zoom {
-  background:
-    no-repeat
-    linear-gradient(
-      to bottom,
-      var(--IVZoomLine) 0px, var(--IVZoomLine) 1.5px,
-      var(--IVZoom) 1.5px, var(--IVZoom) 40.5px,
-      var(--IVZoomLine) 40.5px, var(--IVZoomLine) 42px
-    );
-  transition: --IVZoom var(--IVFade), --IVZoomLine var(--IVFade);
-
-
-  left: 168px;
-  will-change: background;
-}
-
-.zoom::after {
-  position: absolute;
-  content: "";
-  inset: 0;
-  z-index: -1;
-  border-top-left-radius: 7.5px;
-  border-bottom-left-radius: 7.5px;
-  background: var(--IVZoomFlip);
-  transition: --IVZoomFlip var(--IVFade);
-}
-
-.flip {
-  background:
-    no-repeat
-    linear-gradient(
-      to bottom,
-      var(--IVFlipLine) 0px, var(--IVFlipLine) 1.5px,
-      var(--IVFlip) 1.5px, var(--IVFlip) 40.5px,
-      var(--IVFlipLine) 40.5px, var(--IVFlipLine) 42px
-    );
-
-  transition: --IVFlip var(--IVFade), --IVFlipLine var(--IVFade);
-
-  left: 252px;
-}
-
-.flip::after {
-  position: absolute;
-  content: "";
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(
-      to left,
-      var(--IVFlipRotate) 0%, var(--IVFlipRotate) 50%,
-      var(--IVZoomFlip) 50%
-    );
-  transition: --IVFlipRotate var(--IVFade), --IVZoomFlip var(--IVFade);
-}
-
-.rotate {
-  background:
-    no-repeat
-    linear-gradient(
-      to bottom,
-      var(--IVRotateLine) 0px, var(--IVRotateLine) 1.5px,
-      var(--IVRotate) 1.5px, var(--IVRotate) 40.5px,
-      var(--IVRotateLine) 40.5px, var(--IVRotateLine) 42px
-    );
-  transition: --IVRotate var(--IVFade), --IVRotateLine var(--IVFade);
-
-  left: 336px;
-}
-
-
-.rotate::after {
-  position: absolute;
-  content: "";
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(
-      to left,
-      var(--IVRotateLock) 0%, var(--IVRotateLock) 50%,
-      var(--IVFlipRotate) 50%
-    );
-  transition: --IVRotateLock var(--IVFade), --IVFlipRotate var(--IVFade);
-}
-
-
-
-.lock {
-  width: 42px;
-  background: var(--IVLock);
-  left: 420px;
-}
-
-.lock::after {
-  position: absolute;
-  content: "";
-  inset: 0;
-  z-index: -1;
-  background: red;
-  background:
-    linear-gradient(
-      to left,
-      transparent 0%, transparent 50%,
-      var(--IVRotate) 50%
-    );
-  transition: --IVRotate var(--IVFade);
-}
-
-.IVLine {
-  position: absolute;
-  right: 21px;
-  width: 420px;
-  height: 2px;
-  z-index: -1;
-  /* z-index: 1000003; */
-  background:
-    no-repeat /* 1st BLOCK */
-    linear-gradient(
-      to left,
-      var(--IVRotateLine) 0px, var(--IVRotateLine) 84px, /* ROTATE SECTION */
-      var(--IVFlipLine) 84px, var(--IVFlipLine) 168px, /* FLIP SECTION */
-      var(--IVZoomLine) 168px, var(--IVZoomLine) 252px, /* ZOOM SECTION */
-      var(--IVPositionLine) 252px, var(--IVPositionLine) 420px /* ZOOM SECTION */
-    );
-  transition:
-    --IVPositionLine var(--IVFade), --IVZoomLine var(--IVFade),
-    --IVFlipLine var(--IVFade), --IVRotateLine var(--IVFade);
-}
-
-.IVUpperLine {
-  top: 2px;
-}
-
-.IVLowerLine {
-  bottom: 2px;
-}
-
 
 .lockSettings {
   display: flex;
