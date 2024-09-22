@@ -104,6 +104,16 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     //   restoreHandler()
     // })
   // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // let iVF = document.getElementById('imageViewerForeground');
+    // if (iVF !== null) {
+    //   if (enableImageAnimation) iVF.style.transition = `transform .2s, left .2s, top .2s`;
+    //   else iVF.style.transition = `unset`;
+    //   iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+    // }
+
+    
+
   }, [currentIndex, images])
 
 
@@ -231,6 +241,38 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   }
 
+  const [ locked, setLocked ] = useState(false)
+  //const [ locked, setLocked ] = useState(true)
+  //const [ showSettings, setShowSettings ] = useState(false)
+  const [ showSettings, setShowSettings ] = useState(true)
+  const [ enableLockPosition, setEnableLockPosition ] = useState(true)
+  const [ enableLockZoom, setEnableLockZoom ] = useState(true)
+  const [ enableLockFlip, setEnableLockFlip ] = useState(true)
+  const [ enableLockRotate, setEnableLockRotate ] = useState(true)
+
+  const [ enableImageAnimation, setEnableImageAnimation ] = useState(true)
+
+  const lockSettings = () => setLocked(!locked)
+  const handleSetEnableLockPosition = () => setEnableLockPosition(!enableLockPosition)
+  const handleSetEnableLockZoom = () => setEnableLockZoom(!enableLockZoom)
+  const handleSetEnableLockFlip = () => setEnableLockFlip(!enableLockFlip)
+  const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
+  const handleShowSettings = () => setShowSettings(!showSettings)
+
+  const handleSetEnableImageAnimation = () => setEnableImageAnimation(!enableImageAnimation)
+
+  useEffect(() => {
+    //console.log("ZZZZZZZZZZZZ")
+    let iVF = document.getElementById('imageViewerForeground');
+    if (iVF !== null) {
+      
+      //if (enableImageAnimation) iVF.style.transition = `transform .2s, left .2s, top .2s`;
+      if (enableImageAnimation) iVF.style.transition = `transform .2s`;
+      else iVF.style.transition = `unset`;
+      //iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+    }
+  }, [enableImageAnimation])
+
   const handlerGoLeft = () => {
     if (images !== undefined) {
       if (currentIndex === 0) setCurrentIndex(images.length - 1)
@@ -238,19 +280,36 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
       let iVF = document.getElementById('imageViewerForeground');
       if (iVF !== null) {
-        iVF.style.transition = `transform .2s, left .2s, top .2s`;
+        //iVF.style.transition = `transform .2s, left .2s, top .2s`;
+
+        if (enableImageAnimation) iVF.style.transition = `transform .2s, left .2s, top .2s`;
+        else iVF.style.transition = `unset`;
+        iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+
         if (!enableLockPosition || !locked) { // LOCK POSITION HANDLER
           iVF.style.left = `0px`;
           iVF.style.top = `0px`;
         }
-        iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+        //iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
       }
 
-      setImageProps({
-        zoomX: 1.0,
-        zoomY: 1.0,
-        angle: 0,
-      })
+      setImageProps(
+        (curr) =>
+        ({
+          ...curr,
+          zoomX:
+            (enableLockZoom && enableLockFlip && locked) ? curr.zoomX : // ZOOM & FLIP LOCKED
+            (enableLockZoom && locked) ? Math.abs(curr.zoomX) : // ZOOM LOCKED ONLY (CONVERT NUMBER TO POSITIVE)
+            (enableLockFlip && locked && curr.zoomX < 0) ? -1.0 : // X FLIP LOCKED ONLY (NEGATIVE NUMBER --> -1.0 || POSITIVE NUMBER --> 1.0 )
+            1.0, // DEFAULT VALUE
+          zoomY:
+            (enableLockZoom && enableLockFlip && locked) ? curr.zoomY : // ZOOM & FLIP LOCKED
+            (enableLockZoom && locked) ? Math.abs(curr.zoomY) : // ZOOM LOCKED ONLY (CONVERT NUMBER TO POSITIVE)
+            (enableLockFlip && locked && curr.zoomY < 0) ? -1.0 : // X FLIP LOCKED ONLY (NEGATIVE NUMBER --> -1.0 || POSITIVE NUMBER --> 1.0 )
+            1.0, // DEFAULT VALUE
+          angle: (enableLockRotate && locked) ? curr.angle : 0 // LOCK ROTATE HANDLER
+        })
+      )
 
       if (!enableLockPosition || !locked) { // LOCK POSITION HANDLER
         currentPos.current = { x: 0, y: 0 }
@@ -265,16 +324,18 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
       let iVF = document.getElementById('imageViewerForeground');
       if (iVF !== null) {
-        iVF.style.transition = `transform .2s, left .2s, top .2s`;
+        //iVF.style.transition = `transform .2s, left .2s, top .2s`;
+        //iVF.style.transition = `unset`;
+        if (enableImageAnimation) iVF.style.transition = `transform .2s, left .2s, top .2s`;
+        else iVF.style.transition = `unset`;
+        iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+
         if (!enableLockPosition || !locked) { // LOCK POSITION HANDLER
           iVF.style.left = `0px`;
           iVF.style.top = `0px`;
         }
-        iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+        
       }
-
-      // zoomX: (!enableLockZoom || !locked) ? 1.0 : (!enableLockFlip || !locked) ? 1.0 : curr.zoomX, // LOCK ZOOM HANDLER
-      // zoomY: (!enableLockZoom || !locked) ? 1.0 : (!enableLockFlip || !locked) ? 1.0 : curr.zoomY, // LOCK ZOOM HANDLER
 
       setImageProps(
         (curr) =>
@@ -286,15 +347,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             (enableLockFlip && locked && curr.zoomX < 0) ? -1.0 : // X FLIP LOCKED ONLY (NEGATIVE NUMBER --> -1.0 || POSITIVE NUMBER --> 1.0 )
             1.0, // DEFAULT VALUE
           zoomY:
-            (enableLockZoom && enableLockFlip && locked) ? curr.zoomY :
-            (enableLockZoom && locked) ? Math.abs(curr.zoomY) : // ZOOM LOCKED
-            (enableLockFlip && locked && curr.zoomY < 0) ? -1.0 : // Y FLIP LOCKED ONLY
+            (enableLockZoom && enableLockFlip && locked) ? curr.zoomY : // ZOOM & FLIP LOCKED
+            (enableLockZoom && locked) ? Math.abs(curr.zoomY) : // ZOOM LOCKED ONLY (CONVERT NUMBER TO POSITIVE)
+            (enableLockFlip && locked && curr.zoomY < 0) ? -1.0 : // X FLIP LOCKED ONLY (NEGATIVE NUMBER --> -1.0 || POSITIVE NUMBER --> 1.0 )
             1.0, // DEFAULT VALUE
           angle: (enableLockRotate && locked) ? curr.angle : 0 // LOCK ROTATE HANDLER
         })
       )
-
-      // const flipX = () => setImageProps((curr) => ({ ...curr, zoomX: curr.zoomX * -1 }))
 
       if (!enableLockPosition || !locked) { // LOCK POSITION HANDLER
         currentPos.current = { x: 0, y: 0 }
@@ -303,6 +362,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
     }
   }
+
+
+
+
 
   const restoreHandler = () => {
     setImageProps({
@@ -345,21 +408,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const rotateLeft = () => setImageProps((curr) => ({ ...curr, angle: curr.angle - 90 }))
   const rotateRight = () => setImageProps((curr) => ({ ...curr, angle: curr.angle + 90 }))
 
-  //const [ locked, setLocked ] = useState(false)
-  const [ locked, setLocked ] = useState(true)
-  //const [ showSettings, setShowSettings ] = useState(false)
-  const [ showSettings, setShowSettings ] = useState(true)
-  const [ enableLockPosition, setEnableLockPosition ] = useState(true)
-  const [ enableLockZoom, setEnableLockZoom ] = useState(true)
-  const [ enableLockFlip, setEnableLockFlip ] = useState(true)
-  const [ enableLockRotate, setEnableLockRotate ] = useState(true)
-
-  const lockSettings = () => setLocked(!locked)
-  const handleSetEnableLockPosition = () => setEnableLockPosition(!enableLockPosition)
-  const handleSetEnableLockZoom = () => setEnableLockZoom(!enableLockZoom)
-  const handleSetEnableLockFlip = () => setEnableLockFlip(!enableLockFlip)
-  const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
-  const handleShowSettings = () => setShowSettings(!showSettings)
+  
 
   //let color = 'yellow';
   //let color = useRef('yellow');
@@ -767,6 +816,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         </div>
         <div>
           Dont forget to 'lock the padlock' to changes take effect.
+        </div>
+        <div>
+          { MuiSwitch({ onClick: handleSetEnableImageAnimation, checked: enableImageAnimation ? true : false }) }
+          Image animation
         </div>
       </div>
     </div>
