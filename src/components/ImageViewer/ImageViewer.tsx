@@ -356,28 +356,31 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   useEffect(() => { // SLIDE TRANSITION ICON HANDLER
     //let qq: any
-    
+    //let interval
     if (slideStarted) {
       root.setProperty('--IVPlayOpacity', '0')
       //handlerGoRight()
       //qq(currentIndex)
-    interval.current = setInterval(() => {
-      console.log("currentIndex", currentIndex)
-      //handlerGoRight() // CONTINUE HERE // FIX RESTORE ANIMATION-NO ANIMATION BUG
-      //setCurrentIndex((curr: number) => (console.log("CURR", curr)))
-      if (images !== undefined) {
-        setCurrentIndex(
-          (curr: number) =>
-          curr === images.length - 1 ? 0 : curr + 1
-        )
-      }
-    }, 500)
+      interval.current = setInterval(() => {
+        console.log("currentIndex", currentIndex)
+        //handlerGoRight() // CONTINUE HERE // FIX RESTORE ANIMATION-NO ANIMATION BUG
+        //setCurrentIndex((curr: number) => (console.log("CURR", curr)))
+        if (images !== undefined) {
+          setCurrentIndex(
+            (curr: number) =>
+            curr === images.length - 1 ? 0 : curr + 1
+          )
+        }
+      }, 500)
 
       //return ()=>{clearInterval(qq)}
      
     }
     else {
       root.setProperty('--IVPlayOpacity', '1')
+      //clearInterval(interval)
+      clearInterval(interval.current)
+      //interval = null
     }
     //return ()=>clearInterval(qq)
   // eslint-disable-next-line react-hooks/exhaustive-deps
