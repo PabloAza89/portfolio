@@ -240,3 +240,64 @@
 }
 
 /* END SWITCH */
+
+/* BEGIN BASE NUMBER INPUT */
+
+.numberInputRoot {
+  font-family: IBM Plex Sans, sans-serif;
+  font-weight: 400;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-left: 12px;
+  /* background: red; */ /* DEV */
+  height: 36px;
+  align-self: center;
+}
+
+.numberInputInput {
+  font-size: 0.875rem;
+  font-family: inherit;
+  font-weight: 400;
+  height: 32px;
+  color: #212121;
+  background: #cfd8dc;
+  border: 0px solid #eeeeee;
+  box-shadow: 0px 2px 4px rgba(0,0,0, 0.05);
+  padding: 0px 10px;
+  outline: 0;
+  min-width: 0;
+  width: 40px;
+  text-align: center;
+}
+
+.numberInputButton {
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  line-height: 1.5;
+  border: 0px solid;
+  border-color: #eeeeee;
+  background: #78909c;
+  color: #212121;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 120ms;
+}
+
+.incrementButtonIcon {
+  pointer-events: none;
+}
+
+.increment {
+  order: 2;
+}
+
+/* END BASE NUMBER INPUT */

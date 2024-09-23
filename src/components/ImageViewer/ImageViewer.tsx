@@ -5,13 +5,15 @@ import css from './ImageViewerCSS.module.css';
 import {
   Forward, Add, Remove, Close, RotateLeft, RotateRight,
   Flip, Cached, LockOutlined, Settings,
-  PlayCircleOutline, LockOpenOutlined, PauseCircleOutline
+  PlayCircleOutline, LockOpenOutlined, PauseCircleOutline,
+  //Add, Remove
 } from '@mui/icons-material/';
 import { Button, Switch } from '@mui/material';
 import {
   ImageViewerI, operationI, comparisonI, currentZoomI
 } from '../../interfaces/interfaces';
 //import { consoleCSSParser } from './consoleCSSParser';
+import { Unstable_NumberInput as BaseNumberInput } from '@mui/base/Unstable_NumberInput';
 
 export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside, disableAnimation, timing, mode }: ImageViewerI): ReactElement => {
 
@@ -231,8 +233,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   const [ locked, setLocked ] = useState(false)
   //const [ locked, setLocked ] = useState(true)
-  const [ showSettings, setShowSettings ] = useState(false)
-  //const [ showSettings, setShowSettings ] = useState(true)
+  //const [ showSettings, setShowSettings ] = useState(false)
+  const [ showSettings, setShowSettings ] = useState(true)
   const [ enableLockPosition, setEnableLockPosition ] = useState(true)
   const [ enableLockZoom, setEnableLockZoom ] = useState(true)
   const [ enableLockFlip, setEnableLockFlip ] = useState(true)
@@ -241,6 +243,9 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const [ enableImageAnimation, setEnableImageAnimation ] = useState(true)
   const [ enableButtonsAnimation, setEnableButtonsAnimation ] = useState(true)
   const [ slideStarted, setSlideStarted ] = useState(false)
+  const [ playInterval, setPlayInterval ] = useState(1000)
+  //const playInterval = useRef(1000)
+  //console.log('playInterval --->', playInterval);
 
   const lockSettings = () => setLocked(!locked)
   const handleSetEnableLockPosition = () => setEnableLockPosition(!enableLockPosition)
@@ -248,6 +253,33 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const handleSetEnableLockFlip = () => setEnableLockFlip(!enableLockFlip)
   const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
   const handleShowSettings = () => setShowSettings(!showSettings)
+  const handlerSetPlayInterval = ({ type, value }: any) => {
+    switch (type) {
+      case 'decrementButton':
+        //setPlayInterval((curr) => curr - 1000)
+        setPlayInterval((curr) => curr - 500)
+        //playInterval.current -= 1000
+        //dispatch(setSettingsFilters({ type: `quantityUserRecipes`, value: settingsFilters.quantityUserRecipes - 1 }))
+        //localStorage.setItem('quantityUserRecipes', JSON.stringify(settingsFilters.quantityUserRecipes - 1))
+      break;
+      case 'incrementButton':
+        setPlayInterval((curr) => curr + 500)
+        //playInterval.current =  playInterval.current + 1000
+        //dispatch(setSettingsFilters({ type: `quantityUserRecipes`, value: settingsFilters.quantityUserRecipes + 1 }))
+        //localStorage.setItem('quantityUserRecipes', JSON.stringify(settingsFilters.quantityUserRecipes + 1))
+      break;
+      // case 'directChange':
+      //   if (parseInt(value, 10) > 100) {
+      //     dispatch(setSettingsFilters({ type: `quantityUserRecipes`, value: 100 }))
+      //     localStorage.setItem('quantityUserRecipes', JSON.stringify(100))
+      //   }
+      //   else if (parseInt(value, 10) >= 0 && parseInt(value, 10) <= 100) {
+      //     dispatch(setSettingsFilters({ type: `quantityUserRecipes`, value: parseInt(value, 10) }))
+      //     localStorage.setItem('quantityUserRecipes', JSON.stringify(parseInt(value, 10)))
+      //   }
+    }
+
+  }
 
   const handleSetEnableImageAnimation = () => setEnableImageAnimation(!enableImageAnimation)
   const handleSetEnableButtonsAnimation = () => setEnableButtonsAnimation(!enableButtonsAnimation)
@@ -342,21 +374,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     currentPos.current = { x: 0, y: 0 }
   }
 
-  let qq = (asd:any) => {
-    
-    //setInterval(() => {
-    setInterval(() => {
-      console.log("currentIndex", asd)
-      //currentSec.current -= 1
-      handlerGoRight()
-    }, 500)
-  }
-
   const interval = useRef<ReturnType<typeof setInterval>>();
 
-  useEffect(() => { // SLIDE TRANSITION ICON HANDLER
+  useEffect(() => { // SLIDE TRANSITION ICON & INTERVAL HANDLER
     //let qq: any
     //let interval
+    //if (playInterval) clearInterval(interval.current)
+    clearInterval(interval.current)
     if (slideStarted) {
       root.setProperty('--IVPlayOpacity', '0')
       //handlerGoRight()
@@ -371,7 +395,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             curr === images.length - 1 ? 0 : curr + 1
           )
         }
-      }, 500)
+      }, playInterval)
 
       //return ()=>{clearInterval(qq)}
      
@@ -384,7 +408,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     }
     //return ()=>clearInterval(qq)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slideStarted])
+  }, [slideStarted, playInterval])
 
   const handleRestoreWithoutAnimation = () => {
 
@@ -575,6 +599,36 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     )
   }
 
+  const NumberInput = ({value}:any) => {
+    return (
+      <BaseNumberInput
+        className={`numberInputUser`}
+        //value={settingsFilters.quantityUserRecipes}
+        value={value}
+        //onInputChange={(e) => quantityUserRecipesHandler({ type: `directChange`, value: (e.target as HTMLInputElement).value })} // DIRECT INPUT HANDLER
+        onChange={(e) => handlerSetPlayInterval({ type: (e.target as HTMLInputElement).value })} // - + BUTTONS HANDLER
+        min={0}
+        max={30000}
+        //readOnly={focusUser}
+        slotProps={{
+          root: { className: css.numberInputRoot },
+          input: { className: css.numberInputInput, id: `numberInputUser` },
+          decrementButton: {
+            value: `decrementButton`,
+            className: css.numberInputButton,
+            id: `decrementUser`,
+            children: <Remove className={css.incrementButtonIcon} fontSize="small" />
+          },
+          incrementButton: {
+            value: `incrementButton`,
+            className: `${css.numberInputButton} ${css.increment}`,
+            id: `incrementUser`,
+            children: <Add className={css.incrementButtonIcon} fontSize="small" />
+          }
+        }}
+      />
+    )
+  }
 
 
 
@@ -803,7 +857,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         className={css.lockSettings}
       >
         Enable lock over:
-        <div>
+        {/* <div>
           { MuiSwitch({ onClick: handleSetEnableLockPosition, checked: enableLockPosition ? true : false }) }
           Position
         </div>
@@ -814,7 +868,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         <div>
           { MuiSwitch({ onClick: handleSetEnableLockFlip, checked: enableLockFlip ? true : false }) }
           Flip
-        </div>
+        </div> */}
         <div>
           { MuiSwitch({ onClick: handleSetEnableLockRotate, checked: enableLockRotate ? true : false }) }
           Rotate
@@ -830,6 +884,12 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           { MuiSwitch({ onClick: handleSetEnableButtonsAnimation, checked: enableButtonsAnimation ? true : false }) }
           Buttons animation
         </div>
+
+
+        { NumberInput({ value: playInterval, checked: enableButtonsAnimation ? true : false }) }
+
+
+
       </div>
     </div>
   )
