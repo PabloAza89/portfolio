@@ -1,8 +1,9 @@
 :root {
   --IVBackgroundOpacity: rgba(0, 0, 0, 1.0);
   --IVBottomBarOpacity: rgb(77, 77, 77);
+  /* --IVFade: 2s; */
   --IVFade: 0.4s;
-  /* --IVOpacity: 0; */
+  /* --IVLockOpacity: 0; */
   /* --IVLock: rgb(77, 77, 77); */
 }
 
@@ -12,11 +13,18 @@
   inherits: true;
 }
 
-@property --IVOpacity {
+@property --IVLockOpacity {
   syntax: '<number>';
   initial-value: 0;
   inherits: true;
 }
+
+@property --IVPlayOpacity {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: true;
+}
+
 
 .IVBackground {
   /* background: green; */ /* DEV */
@@ -64,8 +72,6 @@
   max-height: 80vh;
   left: 0px;
   top: 0px;
-  /* transform: scale(1); */
-  /* transition: transform .2s; */
 }
 
 .imageCounter {
@@ -120,11 +126,20 @@
   height: 23px !important;
 }
 
-.opacity {
-  opacity: var(--IVOpacity) !important;
+.lockOpacity {
+  opacity: var(--IVLockOpacity) !important;
   transition: opacity var(--IVFade) !important;
 }
 
+.playOpacity {
+  opacity: var(--IVPlayOpacity) !important;
+  transition: opacity var(--IVFade) !important;
+}
+
+.pauseOpacity {
+  opacity: calc((var(--IVPlayOpacity) * -1) + 1) !important;
+  transition: opacity var(--IVFade) !important;
+}
 
 .rotateX {
   transform: rotate(180deg);
@@ -143,13 +158,9 @@
 }
 
 .lockContainer {
+  /* background: green !important; */ /* DEV */
   display: flex;
   position: relative;
-  /* background: green !important;
-  color: red !important; */
-  /* background: red; */
-  /* height: 42px; */
-  /* margin-top: 3.5px; */
 }
 
 .buttonOutline {
