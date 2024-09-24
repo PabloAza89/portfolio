@@ -256,7 +256,7 @@
   align-self: center;
 }
 
-.numberInputInput {
+/* .numberInputInput {
   font-size: 0.875rem;
   font-family: inherit;
   font-weight: 400;
@@ -270,6 +270,26 @@
   min-width: 0;
   width: 40px;
   text-align: center;
+} */
+
+.numberInputInput {
+  font-size: 0.875rem;
+  font-family: inherit;
+  font-weight: 400;
+  height: 32px;
+  color: #212121;
+  background: #cfd8dc;
+  box-shadow:inset 0px 0px 0px 2px #cfd8dc;
+  border: 0px;
+  padding: 0px 10px;
+  outline: 0px;
+  min-width: 0;
+  width: 40px;
+  text-align: center;
+}
+
+.numberInputInput:focus-visible {
+  box-shadow:inset 0px 0px 0px 2px #90caf9;
 }
 
 .numberInputButton {

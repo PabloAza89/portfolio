@@ -1,5 +1,5 @@
 import {
-  ReactElement, useEffect, useLayoutEffect, useState, useRef, ReactNode, MouseEvent, TouchEvent
+  ReactElement, useEffect, useLayoutEffect, useState, /* EventTarget, */ useRef, ReactNode, MouseEvent, TouchEvent
 } from 'react';
 import css from './ImageViewerCSS.module.css';
 import {
@@ -13,7 +13,7 @@ import {
   ImageViewerI, operationI, comparisonI, currentZoomI
 } from '../../interfaces/interfaces';
 //import { consoleCSSParser } from './consoleCSSParser';
-import { Unstable_NumberInput as BaseNumberInput } from '@mui/base/Unstable_NumberInput';
+import { Input } from '@mui/base/Input';
 
 export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside, disableAnimation, timing, mode }: ImageViewerI): ReactElement => {
 
@@ -243,9 +243,11 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const [ enableImageAnimation, setEnableImageAnimation ] = useState(true)
   const [ enableButtonsAnimation, setEnableButtonsAnimation ] = useState(true)
   const [ slideStarted, setSlideStarted ] = useState(false)
-  const [ playInterval, setPlayInterval ] = useState(1000)
+  //const [ playInterval, setPlayInterval ] = useState(1000)
+  const [ playInterval, setPlayInterval ] = useState("1.0")
   //const playInterval = useRef(1000)
-  //console.log('playInterval --->', playInterval);
+  //console.log('playInterval VALUE', playInterval);
+  //console.log('playInterval TYPE', typeof playInterval);
 
   const lockSettings = () => setLocked(!locked)
   const handleSetEnableLockPosition = () => setEnableLockPosition(!enableLockPosition)
@@ -253,30 +255,58 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const handleSetEnableLockFlip = () => setEnableLockFlip(!enableLockFlip)
   const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
   const handleShowSettings = () => setShowSettings(!showSettings)
-  const handlerSetPlayInterval = ({ type, value }: any) => {
+  const handlerKeyDown = (e: any) => {
+    //if (key === "1")
+    //console.log("VALUE TEST TEST", typeof key)
+    let key = e.key
+    if (
+      key === "0" || key === "1" || key === "2" || key === "3" ||
+      key === "4" || key === "5" || key === "6" || key === "7" ||
+      key === "8" || key === "9" || key === "." || key === "," ||
+      key === "Delete" || key === "Backspace"
+    ) e.preventDefault()
+
+  // 123456789 // CONTINUE HERE
+  // ., Delete Backspace
+
+  }
+  const handlerSetPlayInterval = ({ type, value, min, max }: any) => {
     switch (type) {
       case 'decrementButton':
-        //setPlayInterval((curr) => curr - 1000)
-        setPlayInterval((curr) => curr - 500)
-        //playInterval.current -= 1000
-        //dispatch(setSettingsFilters({ type: `quantityUserRecipes`, value: settingsFilters.quantityUserRecipes - 1 }))
-        //localStorage.setItem('quantityUserRecipes', JSON.stringify(settingsFilters.quantityUserRecipes - 1))
+
+        setPlayInterval(curr => {
+          let op = parseFloat(curr) - 0.5
+          return op < min ? min : op
+        })
+
       break;
       case 'incrementButton':
-        setPlayInterval((curr) => curr + 500)
-        //playInterval.current =  playInterval.current + 1000
-        //dispatch(setSettingsFilters({ type: `quantityUserRecipes`, value: settingsFilters.quantityUserRecipes + 1 }))
-        //localStorage.setItem('quantityUserRecipes', JSON.stringify(settingsFilters.quantityUserRecipes + 1))
+
+        setPlayInterval(curr => {
+          let op = parseFloat(curr) + 0.5
+          return op > max ? max : op
+        })
+
       break;
-      // case 'directChange':
-      //   if (parseInt(value, 10) > 100) {
-      //     dispatch(setSettingsFilters({ type: `quantityUserRecipes`, value: 100 }))
-      //     localStorage.setItem('quantityUserRecipes', JSON.stringify(100))
-      //   }
-      //   else if (parseInt(value, 10) >= 0 && parseInt(value, 10) <= 100) {
-      //     dispatch(setSettingsFilters({ type: `quantityUserRecipes`, value: parseInt(value, 10) }))
-      //     localStorage.setItem('quantityUserRecipes', JSON.stringify(parseInt(value, 10)))
-      //   }
+      case 'directChange':
+        console.log("VALUE", value)
+        //setPlayInterval(value)
+        //setPlayInterval(parseFloat(value))
+
+        let val = parseFloat(value)
+        setPlayInterval(curr =>
+          {
+            return (
+              val > max ?
+              max :
+              val < min ?
+              min :
+              value[value.length - 1] === "." ?
+              value :
+              value
+            )
+          }
+        )
     }
 
   }
@@ -380,7 +410,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     //let qq: any
     //let interval
     //if (playInterval) clearInterval(interval.current)
-    clearInterval(interval.current)
+    clearInterval(interval.current) // CLEAR INTERVAL IF playInterval CHANGES..
     if (slideStarted) {
       root.setProperty('--IVPlayOpacity', '0')
       //handlerGoRight()
@@ -395,7 +425,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             curr === images.length - 1 ? 0 : curr + 1
           )
         }
-      }, playInterval)
+      }, parseFloat(playInterval) * 1000)
 
       //return ()=>{clearInterval(qq)}
      
@@ -599,34 +629,40 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     )
   }
 
-  const NumberInput = ({value}:any) => {
+  const NumberInput = ({value, min, max}:any) => {
     return (
-      <BaseNumberInput
-        className={`numberInputUser`}
-        //value={settingsFilters.quantityUserRecipes}
-        value={value}
-        //onInputChange={(e) => quantityUserRecipesHandler({ type: `directChange`, value: (e.target as HTMLInputElement).value })} // DIRECT INPUT HANDLER
-        onChange={(e) => handlerSetPlayInterval({ type: (e.target as HTMLInputElement).value })} // - + BUTTONS HANDLER
-        min={0}
-        max={30000}
-        //readOnly={focusUser}
-        slotProps={{
-          root: { className: css.numberInputRoot },
-          input: { className: css.numberInputInput, id: `numberInputUser` },
-          decrementButton: {
-            value: `decrementButton`,
-            className: css.numberInputButton,
-            id: `decrementUser`,
-            children: <Remove className={css.incrementButtonIcon} fontSize="small" />
-          },
-          incrementButton: {
-            value: `incrementButton`,
-            className: `${css.numberInputButton} ${css.increment}`,
-            id: `incrementUser`,
-            children: <Add className={css.incrementButtonIcon} fontSize="small" />
-          }
-        }}
-      />
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div
+          id={`decrementButton`}
+          className={css.numberInputButton}
+          onClick={(e) => handlerSetPlayInterval({ type: (e.target as HTMLDivElement).id, min })}
+        >
+          <Remove className={css.incrementButtonIcon} fontSize="small" />
+        </div>
+        <Input
+          /* className={css.numberInputInput} */
+          value={value}
+          //onKeyDown={e => console.log("VALUE TEST", e.key)}
+          onKeyDown={e => handlerKeyDown(e)}
+          onChange={(e) => handlerSetPlayInterval({ type: `directChange`, value: e.target.value, max, min })} // - + BUTTONS HANDLER
+          onPaste={(e) => e.preventDefault()}
+          //onChange={(e) => console.log(e.target.value)}
+          slotProps={{
+            /* root: { className: css.numberInputRoot }, */
+            /* input: { className: css.numberInputInput, id: `numberInputUser` }, */
+            input: { className: css.numberInputInput, id: `numberInputUser` },
+          }}
+        >
+        </Input>
+        <div
+          id={`incrementButton`}
+          className={css.numberInputButton}
+          onClick={(e) => handlerSetPlayInterval({ type: (e.target as HTMLDivElement).id, max })}
+          //onClick={(e) => console.log(e)}
+        >
+          <Add className={css.incrementButtonIcon} fontSize="small" />
+        </div>
+      </div>
     )
   }
 
@@ -886,7 +922,15 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         </div>
 
 
-        { NumberInput({ value: playInterval, checked: enableButtonsAnimation ? true : false }) }
+        {
+          NumberInput({
+            //value: playInterval.toFixed(1),
+            value: playInterval,
+            min: 0,
+            max: 5
+            //checked: enableButtonsAnimation ? true : false
+          })
+        }
 
 
 
