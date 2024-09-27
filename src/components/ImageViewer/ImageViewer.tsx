@@ -1,5 +1,5 @@
 import React, {
-  ReactElement, useEffect, useLayoutEffect, useState, /* EventTarget, */ useRef, ReactNode, /* MouseEvent, */ TouchEvent
+  ReactElement, useEffect, useLayoutEffect, useState, /* EventTarget, */ useRef, ReactNode, /* MouseEvent, */ /* TouchEvent */
 } from 'react';
 import css from './ImageViewerCSS.module.css';
 import {
@@ -43,7 +43,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   let maxIntervalValue = 5 // MAXIMUN INTERVAL VALUE
   let defIntervalValue = 1 // DEFAULT INTERVAL VALUE
 
+
+  window.onmouseup = function(e: MouseEvent) {
+    allowMove.current = false // STOP DRAG & MOUSE UP OUTSIDE WINDOW
+  }
+
   window.onmousedown = function(e: MouseEvent) {
+
     let setInterval = document.getElementById('IVSetInterval');
 
     let parent = (e.target as HTMLElement).parentNode
@@ -59,6 +65,78 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       })
 
     }
+
+  }
+
+  window.onmouseenter = function(e: MouseEvent) {
+    console.log("ENTER")
+  }
+
+  window.onmousemove = function(e: MouseEvent) {
+    //console.log("MOOVINGGG")
+
+        //console.log("MOVEMENT")
+        if (allowMove.current) {
+          if ('touches' in e) { // TOUCH EVENT
+            // targetXPosition = imgPo.current.x + (e.touches[0].clientX - arbPos.current.x) * 3 // '* 3' = INCREASE SPEED HERE FOR MOBILE
+            // targetYPosition = imgPo.current.y + (e.touches[0].clientY - arbPos.current.y) * 3 // '* 3' = INCREASE SPEED HERE FOR MOBILE
+          } else { // MOUSE EVENT
+            // targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+            // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+            // targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+            // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+    
+            // arbPos.current = { x: e.clientX - arbPos.current.x, y: e.clientY - arbPos.current.y }
+    
+    
+    
+            // setCurrentPos((curr) => ({
+            //   x: curr.x + -1,
+            //   y: curr.y + -1,
+            // }))
+    
+            let qq = e.clientX - arbPos.current.x
+            let ww = e.clientY - arbPos.current.y
+    
+            // setCurrentPos((curr) => ({
+            //   x: curr.x + e.clientX - arbPos.current.x,
+            //   y: curr.y + e.clientY - arbPos.current.y
+            // }))
+    
+            currentPos.current = {
+              x: currentPos.current.x + (e.clientX - arbPos.current.x),
+              y: currentPos.current.y + (e.clientY - arbPos.current.y),
+            }
+    
+            let iVF = document.getElementById('imageViewerForeground');
+            if (iVF !== null) {
+              iVF.style.left = `${currentPos.current.x}px`
+              iVF.style.top = `${currentPos.current.y}px`
+            }
+    
+            // setLeft(curr => curr + qq)
+            // setTop(curr => curr + ww)
+    
+            // left = left + qq
+            // top = top + ww
+    
+            // setCurrentPos((curr) => ({
+            //   x: curr.x + (e.clientX - arbPos.current.x),
+            //   y: curr.y + (e.clientY - arbPos.current.y),
+            // }))
+    
+            //console.log("A VER", arbPos.current.x)
+            //console.log("A VER", e.clientX - arbPos.current.x) // CONTINUE HERE
+    
+    
+            arbPos.current = {
+              x: e.clientX,
+              y: e.clientY
+            }
+    
+    
+          }
+        }
 
   }
 
@@ -145,7 +223,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   }, [currentIndex, images])
 
 
-  let mouseDown = (e: TouchEvent | React.MouseEvent) => {
+  let mouseDown = (e: React.TouchEvent | React.MouseEvent) => {
     //console.log("MOUSE DOWN")
     if ('touches' in e) { // TOUCH EVENT
       arbPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
@@ -159,13 +237,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     }
   }
 
-  let mouseUp = (e: TouchEvent | React.MouseEvent) => allowMove.current = false
+  let mouseUp = (e: React.TouchEvent | React.MouseEvent) => allowMove.current = false
 
   let targetXPosition
   let targetYPosition
 
-  let mouseMove = (e: TouchEvent | React.MouseEvent) => {
-
+  let handlerMouseMove = (e: React.TouchEvent | React.MouseEvent) => {
+    //console.log("MOVEMENT")
     if (allowMove.current) {
       if ('touches' in e) { // TOUCH EVENT
         targetXPosition = imgPo.current.x + (e.touches[0].clientX - arbPos.current.x) * 3 // '* 3' = INCREASE SPEED HERE FOR MOBILE
@@ -259,8 +337,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   const [ locked, setLocked ] = useState(false)
   //const [ locked, setLocked ] = useState(true)
-  //const [ showSettings, setShowSettings ] = useState(false)
-  const [ showSettings, setShowSettings ] = useState(true)
+  const [ showSettings, setShowSettings ] = useState(false)
+  //const [ showSettings, setShowSettings ] = useState(true)
   const [ enableLockPosition, setEnableLockPosition ] = useState(true)
   const [ enableLockZoom, setEnableLockZoom ] = useState(true)
   const [ enableLockFlip, setEnableLockFlip ] = useState(true)
@@ -281,31 +359,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const handleSetEnableLockFlip = () => setEnableLockFlip(!enableLockFlip)
   const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
   const handleShowSettings = () => setShowSettings(!showSettings)
-  const firstClick = useRef(false)
-  const secondClick = useRef(false)
-  //const [ clickedOutside, setClickedOutside ] = useState(false)
-  const handlerClickOutside = (def: any) => {
-    
-    //if (clickedOutside.current === true) console.log("CLICKED OUTSIDE")
-    //if (clickedOutside1.current && clickedOutside2.current) console.log("CLICKED OUTSIDE")
-    if (firstClick.current && secondClick.current) console.log("CLICKED OUTSIDE")
-    // setPlayInterval(curr => {
-    //   return (
-    //     curr === "" ?
-    //     (def).toFixed(1) :
-    //     parseFloat(curr).toFixed(1)
-    //   )
-    // })
 
-  }
   const handlerKeyDown = (e: any) => {
-    //if (key === "1")
-    //console.log("VALUE TEST TEST", typeof key)
-    console.log("TEST", e.key)
-
-    //return e.key = "2"
-    // ArrowLeft
-    // ArrowRight
 
     let key = e.key
     if (
@@ -315,27 +370,18 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       key !== "Delete" && key !== "Backspace" &&
       key !== "ArrowLeft" && key !== "ArrowRight"
     ) e.preventDefault()
-
-  // 123456789 // CONTINUE HERE
-  // ., Delete Backspace
-
   }
+
   const handlerSetPlayInterval = ({ type, value, min, max, def }: any) => {
     switch (type) {
       case 'decrementButton':
-        secondClick.current = false
-        //clickedOutside2.current = false
-        //setClickedOutside(false)
         setPlayInterval(curr => {
           let op = parseFloat(curr) - 0.5
           return isNaN(op) ? (def).toFixed(1) : op <= min ? (min).toFixed(1) : (op).toFixed(1) // ADD '.0' WHEN NUMBER IS 2,3, etc..
         })
 
       break;
-      case 'incrementButton': // (def).toFixed(1)
-        secondClick.current = false
-        //clickedOutside2.current = false
-        //setClickedOutside(false)
+      case 'incrementButton':
         setPlayInterval(curr => {
           let op = parseFloat(curr) + 0.5
           return isNaN(op) ? (def).toFixed(1) : op >= max ? (max).toFixed(1) : (op).toFixed(1) // ADD '.0' WHEN NUMBER IS 2,3, etc..
@@ -344,11 +390,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       break;
       case 'directChange':
         console.log("VALUE 1", value)
-        
-        //setPlayInterval(value)
-        //setPlayInterval(parseFloat(value))
 
-        //"ab,".replace(/,/g,".")
         let val = parseFloat(value)
 
         let valueParsed =
@@ -364,13 +406,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         //(/\d+\.\d{1}$/g).test("123.0") // CHECK DECIMALS // CONTINUE HERE
         setPlayInterval(curr =>
           {
-            // return (
-            //   val > max ? // NUMBER EXCEEDS MAX VALUE
-            //   max :
-            //   val < min ? // NUMBER EXCEEDS MIN VALUE
-            //   min :
-            //   value
-            // )
             console.log("A VER", valueParsed)
             return (
               valueParsed > max ? // NUMBER EXCEEDS MAX VALUE
@@ -473,7 +508,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     })
     let iVF = document.getElementById('imageViewerForeground');
     if (iVF !== null) {
-      iVF.style.transition = `transform .2s, left .2s, top .2s`;
+      iVF.style.transition = enableImageAnimation ? `transform .2s, left .2s, top .2s` : `transform .2s`;
       iVF.style.left = `0px`;
       iVF.style.top = `0px`;
       iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
@@ -484,18 +519,11 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const interval = useRef<ReturnType<typeof setInterval>>();
 
   useEffect(() => { // SLIDE TRANSITION ICON & INTERVAL HANDLER
-    //let qq: any
-    //let interval
-    //if (playInterval) clearInterval(interval.current)
     clearInterval(interval.current) // CLEAR INTERVAL IF playInterval CHANGES..
     if (slideStarted) {
       root.setProperty('--IVPlayOpacity', '0')
-      //handlerGoRight()
-      //qq(currentIndex)
       interval.current = setInterval(() => {
         console.log("currentIndex", currentIndex)
-        //handlerGoRight() // CONTINUE HERE // FIX RESTORE ANIMATION-NO ANIMATION BUG
-        //setCurrentIndex((curr: number) => (console.log("CURR", curr)))
         if (images !== undefined) {
           setCurrentIndex(
             (curr: number) =>
@@ -503,19 +531,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           )
         }
       }, parseFloat(playInterval) * 1000)
-
-      //return ()=>{clearInterval(qq)}
-     
     }
     else {
       root.setProperty('--IVPlayOpacity', '1')
-      //clearInterval(interval)
       clearInterval(interval.current)
-      //interval = null
     }
-    //return ()=>clearInterval(qq)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slideStarted, playInterval])
+  }, [slideStarted, playInterval, currentIndex])
 
   const handleRestoreWithoutAnimation = () => {
 
@@ -711,13 +733,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       <div
         style={{ display: 'flex', flexDirection: 'row', background: 'green', width: 'fit-content' }}
         id={`IVSetInterval`}
-        //tabIndex={-1}
-        //onClick={() => {console.log("CLICKED DIV")}}
-        //onMouseLeave={() => console.log("MOUSE LEAVE")}
-        onFocus={() => console.log("MOUSE FOCUS")}
-        onBlur={() => console.log("MOUSE LEAVE")}
-        //onMouseOut={() => console.log("MOUSE LEAVE")}
-        //onBlurCapture={() => console.log("MOUSE LEAVE")}
       >
         <div
           id={`decrementButton`}
@@ -728,31 +743,12 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           }
         />
         <Input
-          /* className={css.numberInputInput} */
           value={value}
-          //onKeyDown={e => console.log("VALUE TEST", e.key)}
           onKeyDown={e => handlerKeyDown(e)}
           onChange={(e) => handlerSetPlayInterval({ type: `directChange`, value: e.target.value, max, min })} // - + BUTTONS HANDLER
           onPaste={(e) => e.preventDefault()}
-          onClick={() => {
-            //firstClick.current = true
-            //firstClick.current = false
-            //console.log("CLICKEDDD FIRST")
-            // clickedOutside2.current = true
-          }}
-          //onClick={() => setClickedOutside(true)}
-          //onClick={() => console.log("clicked")}
-          // onBlur={() => {
-          //   console.log("EJECUTADO BLUR")
-          //   firstClick.current = true;
-          //   secondClick.current = true;
-          //   handlerClickOutside(def)
-          // }}
           autoComplete={'off'}
-          //onChange={(e) => console.log(e.target.value)}
           slotProps={{
-            /* root: { className: css.numberInputRoot }, */
-            /* input: { className: css.numberInputInput, id: `numberInputUser` }, */
             input: { className: css.numberInputInput, id: `numberInputUser` },
           }}
         />
@@ -760,9 +756,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           id={`incrementButton`}
           className={css.numberInputButton}
           onClick={(e) => handlerSetPlayInterval({ type: (e.target as HTMLDivElement).id, max, def })}
-          //onClick={(e) => console.log(e)}
-          //onMouseOut={() => {}}
-          //onBlur={() => console.log("MOUSE LEAVE")}
           children={
             <Add className={css.incrementButtonIcon} fontSize="small" />
           }
@@ -775,10 +768,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
   const outlineButtons = (el:any) => {
-    //return "url(#gradient)"
-
-    //console.log("EL", el.id)
-    //console.dir(el)
 
     return (
       <div key={el.id} className={css.buttonOutline} style={{ left: el.left, width: el.width }}>
@@ -821,7 +810,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       id={`IVBackground`}
       className={css.IVBackground}
       onMouseDown={(e) => mouseDown(e)} // MOUSE START
-      onMouseMove={(e) => mouseMove(e)} // MOUSE MOVE
+      //onMouseMove={(e) => handlerMouseMove(e)} // MOUSE MOVE
       onMouseUp={(e) => mouseUp(e)} // MOUSE END
     >
       <img
@@ -844,6 +833,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       <div
         id={`bottomBar`}
         className={css.bottomBar}
+        // onMouseMove={(e) => {
+        //   //console.log("MOVEMENT")
+        //   allowMove.current = false
+        // }}
       >
         <div className={css.buttonsContainer}>
           <div className={css.imageCounter}>
@@ -1029,12 +1022,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
         {
           NumberInput({
-            //value: playInterval.toFixed(1),
             value: playInterval,
             min: minIntervalValue,
             max: maxIntervalValue,
             def: defIntervalValue
-            //checked: enableButtonsAnimation ? true : false
           })
         }
 
