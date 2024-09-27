@@ -1,5 +1,5 @@
-import {
-  ReactElement, useEffect, useLayoutEffect, useState, /* EventTarget, */ useRef, ReactNode, MouseEvent, TouchEvent
+import React, {
+  ReactElement, useEffect, useLayoutEffect, useState, /* EventTarget, */ useRef, ReactNode, /* MouseEvent, */ TouchEvent
 } from 'react';
 import css from './ImageViewerCSS.module.css';
 import {
@@ -17,8 +17,6 @@ import { Input } from '@mui/base/Input';
 
 export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside, disableAnimation, timing, mode }: ImageViewerI): ReactElement => {
 
-
-
   // let clickOnBG = useRef({ // CLICK ON BACKGROUND MODAL
   //   start: false, // CLICK BEGINS ON BG MODAL
   //   end: false    // CLICK ENDS ON BG MODAL
@@ -34,6 +32,35 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   //   if (e.target === modalDiv) clickOnBG.current.start =  true
   //   else clickOnBG.current.start =  false
   // }
+
+  // window.onmousedown = function(e) {
+  //   let modalDiv = document.getElementById('IVBackground');
+  //   if (e.target === modalDiv) clickOnBG.current.start =  true
+  //   else clickOnBG.current.start =  false
+  // }
+
+  let minIntervalValue = 0 // MINIMUM INTERVAL VALUE
+  let maxIntervalValue = 5 // MAXIMUN INTERVAL VALUE
+  let defIntervalValue = 1 // DEFAULT INTERVAL VALUE
+
+  window.onmousedown = function(e: MouseEvent) {
+    let setInterval = document.getElementById('IVSetInterval');
+
+    let parent = (e.target as HTMLElement).parentNode
+    if (parent !== null && parent !== setInterval && parent.parentNode !== setInterval) {
+      console.log("AFUERA") // CLICK OUTSIDE IVSetInterval
+
+      setPlayInterval(curr => {
+        return (
+          curr === "" ?
+          (defIntervalValue).toFixed(1) :
+          parseFloat(curr).toFixed(1)
+        )
+      })
+
+    }
+
+  }
 
   // window.onmouseup = function(e) {
   //   let modalDiv = document.getElementById('IVBackground');
@@ -55,7 +82,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   console.log("zoomX", imageProps.zoomX)
 
   let imageRef = useRef(new Image())
-
 
   //let initImgPos = useRef({ x: 0, y: 0 }) // INITIAL IMAGE POSITION
   let imgPo = useRef({ x: 0, y: 0 }) // IMAGE POSITION
@@ -119,7 +145,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   }, [currentIndex, images])
 
 
-  let mouseDown = (e: TouchEvent | MouseEvent) => {
+  let mouseDown = (e: TouchEvent | React.MouseEvent) => {
     //console.log("MOUSE DOWN")
     if ('touches' in e) { // TOUCH EVENT
       arbPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
@@ -133,12 +159,12 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     }
   }
 
-  let mouseUp = (e: TouchEvent | MouseEvent) => allowMove.current = false
+  let mouseUp = (e: TouchEvent | React.MouseEvent) => allowMove.current = false
 
   let targetXPosition
   let targetYPosition
 
-  let mouseMove = (e: TouchEvent | MouseEvent) => {
+  let mouseMove = (e: TouchEvent | React.MouseEvent) => {
 
     if (allowMove.current) {
       if ('touches' in e) { // TOUCH EVENT
@@ -255,55 +281,106 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const handleSetEnableLockFlip = () => setEnableLockFlip(!enableLockFlip)
   const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
   const handleShowSettings = () => setShowSettings(!showSettings)
+  const firstClick = useRef(false)
+  const secondClick = useRef(false)
+  //const [ clickedOutside, setClickedOutside ] = useState(false)
+  const handlerClickOutside = (def: any) => {
+    
+    //if (clickedOutside.current === true) console.log("CLICKED OUTSIDE")
+    //if (clickedOutside1.current && clickedOutside2.current) console.log("CLICKED OUTSIDE")
+    if (firstClick.current && secondClick.current) console.log("CLICKED OUTSIDE")
+    // setPlayInterval(curr => {
+    //   return (
+    //     curr === "" ?
+    //     (def).toFixed(1) :
+    //     parseFloat(curr).toFixed(1)
+    //   )
+    // })
+
+  }
   const handlerKeyDown = (e: any) => {
     //if (key === "1")
     //console.log("VALUE TEST TEST", typeof key)
+    console.log("TEST", e.key)
+
+    //return e.key = "2"
+    // ArrowLeft
+    // ArrowRight
+
     let key = e.key
     if (
-      key === "0" || key === "1" || key === "2" || key === "3" ||
-      key === "4" || key === "5" || key === "6" || key === "7" ||
-      key === "8" || key === "9" || key === "." || key === "," ||
-      key === "Delete" || key === "Backspace"
+      key !== "0" && key !== "1" && key !== "2" && key !== "3" &&
+      key !== "4" && key !== "5" && key !== "6" && key !== "7" &&
+      key !== "8" && key !== "9" && key !== "." && key !== "," &&
+      key !== "Delete" && key !== "Backspace" &&
+      key !== "ArrowLeft" && key !== "ArrowRight"
     ) e.preventDefault()
 
   // 123456789 // CONTINUE HERE
   // ., Delete Backspace
 
   }
-  const handlerSetPlayInterval = ({ type, value, min, max }: any) => {
+  const handlerSetPlayInterval = ({ type, value, min, max, def }: any) => {
     switch (type) {
       case 'decrementButton':
-
+        secondClick.current = false
+        //clickedOutside2.current = false
+        //setClickedOutside(false)
         setPlayInterval(curr => {
           let op = parseFloat(curr) - 0.5
-          return op < min ? min : op
+          return isNaN(op) ? (def).toFixed(1) : op <= min ? (min).toFixed(1) : (op).toFixed(1) // ADD '.0' WHEN NUMBER IS 2,3, etc..
         })
 
       break;
-      case 'incrementButton':
-
+      case 'incrementButton': // (def).toFixed(1)
+        secondClick.current = false
+        //clickedOutside2.current = false
+        //setClickedOutside(false)
         setPlayInterval(curr => {
           let op = parseFloat(curr) + 0.5
-          return op > max ? max : op
+          return isNaN(op) ? (def).toFixed(1) : op >= max ? (max).toFixed(1) : (op).toFixed(1) // ADD '.0' WHEN NUMBER IS 2,3, etc..
         })
 
       break;
       case 'directChange':
-        console.log("VALUE", value)
+        console.log("VALUE 1", value)
+        
         //setPlayInterval(value)
         //setPlayInterval(parseFloat(value))
 
+        //"ab,".replace(/,/g,".")
         let val = parseFloat(value)
+
+        let valueParsed =
+          value
+            .replace(/[.|,]/, "D") // CONVERT FIRST '.|,' to 'D' (Decimal) FLAG
+            .replace(/[.|,]/g, "") // DELETE ALL OTHERS '.|,'
+            .replace(/[D]/g, ".") // CONVERT 'D' to '.'
+            .replace(/(?<=\d*\.\d).*/, "") // ONLY ONE DECIMAL ALLOWED
+
+          // qq.replace(/(?<=\d*\.\d).*/, "")
+
+        //console.log("VALUE 2", qq) // ALLOW ONLY 1 DECIMAL
+        //(/\d+\.\d{1}$/g).test("123.0") // CHECK DECIMALS // CONTINUE HERE
         setPlayInterval(curr =>
           {
+            // return (
+            //   val > max ? // NUMBER EXCEEDS MAX VALUE
+            //   max :
+            //   val < min ? // NUMBER EXCEEDS MIN VALUE
+            //   min :
+            //   value
+            // )
+            console.log("A VER", valueParsed)
             return (
-              val > max ?
-              max :
-              val < min ?
-              min :
-              value[value.length - 1] === "." ?
-              value :
-              value
+              valueParsed > max ? // NUMBER EXCEEDS MAX VALUE
+              (max).toFixed(1) :
+              valueParsed < min ? // NUMBER EXCEEDS MIN VALUE
+              (min).toFixed(1) :
+              // isNaN(valueParsed) ?
+              // value :
+              valueParsed
+              //valueParsed
             )
           }
         )
@@ -629,16 +706,27 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     )
   }
 
-  const NumberInput = ({value, min, max}:any) => {
+  const NumberInput = ({ value, min, max, def }:any) => {
     return (
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div
+        style={{ display: 'flex', flexDirection: 'row', background: 'green', width: 'fit-content' }}
+        id={`IVSetInterval`}
+        //tabIndex={-1}
+        //onClick={() => {console.log("CLICKED DIV")}}
+        //onMouseLeave={() => console.log("MOUSE LEAVE")}
+        onFocus={() => console.log("MOUSE FOCUS")}
+        onBlur={() => console.log("MOUSE LEAVE")}
+        //onMouseOut={() => console.log("MOUSE LEAVE")}
+        //onBlurCapture={() => console.log("MOUSE LEAVE")}
+      >
         <div
           id={`decrementButton`}
           className={css.numberInputButton}
-          onClick={(e) => handlerSetPlayInterval({ type: (e.target as HTMLDivElement).id, min })}
-        >
-          <Remove className={css.incrementButtonIcon} fontSize="small" />
-        </div>
+          onClick={(e) => handlerSetPlayInterval({ type: (e.target as HTMLDivElement).id, min, def })}
+          children={
+            <Remove className={css.incrementButtonIcon} fontSize="small" />
+          }
+        />
         <Input
           /* className={css.numberInputInput} */
           value={value}
@@ -646,22 +734,39 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           onKeyDown={e => handlerKeyDown(e)}
           onChange={(e) => handlerSetPlayInterval({ type: `directChange`, value: e.target.value, max, min })} // - + BUTTONS HANDLER
           onPaste={(e) => e.preventDefault()}
+          onClick={() => {
+            //firstClick.current = true
+            //firstClick.current = false
+            //console.log("CLICKEDDD FIRST")
+            // clickedOutside2.current = true
+          }}
+          //onClick={() => setClickedOutside(true)}
+          //onClick={() => console.log("clicked")}
+          // onBlur={() => {
+          //   console.log("EJECUTADO BLUR")
+          //   firstClick.current = true;
+          //   secondClick.current = true;
+          //   handlerClickOutside(def)
+          // }}
+          autoComplete={'off'}
           //onChange={(e) => console.log(e.target.value)}
           slotProps={{
             /* root: { className: css.numberInputRoot }, */
             /* input: { className: css.numberInputInput, id: `numberInputUser` }, */
             input: { className: css.numberInputInput, id: `numberInputUser` },
           }}
-        >
-        </Input>
+        />
         <div
           id={`incrementButton`}
           className={css.numberInputButton}
-          onClick={(e) => handlerSetPlayInterval({ type: (e.target as HTMLDivElement).id, max })}
+          onClick={(e) => handlerSetPlayInterval({ type: (e.target as HTMLDivElement).id, max, def })}
           //onClick={(e) => console.log(e)}
-        >
-          <Add className={css.incrementButtonIcon} fontSize="small" />
-        </div>
+          //onMouseOut={() => {}}
+          //onBlur={() => console.log("MOUSE LEAVE")}
+          children={
+            <Add className={css.incrementButtonIcon} fontSize="small" />
+          }
+        />
       </div>
     )
   }
@@ -926,8 +1031,9 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           NumberInput({
             //value: playInterval.toFixed(1),
             value: playInterval,
-            min: 0,
-            max: 5
+            min: minIntervalValue,
+            max: maxIntervalValue,
+            def: defIntervalValue
             //checked: enableButtonsAnimation ? true : false
           })
         }
