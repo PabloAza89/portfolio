@@ -224,17 +224,25 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
   let mouseDown = (e: React.TouchEvent | React.MouseEvent) => {
-    //console.log("MOUSE DOWN")
-    if ('touches' in e) { // TOUCH EVENT
-      arbPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
-      allowMove.current = true
-    } else { // MOUSE EVENT
-      // arbPos.current = { x: e.clientX, y: e.clientY }
-      // allowMove.current = true
-      arbPos.current = { x: e.clientX, y: e.clientY }
-      //console.log("START POSITION", e.clientX)
-      allowMove.current = true
+    //console.log("EEEEE", e.target)
+
+    let elOne = document.getElementById('IVBackground');
+    let elTwo = document.getElementById('imageViewerForeground');
+
+    if (e.target === elOne || e.target === elTwo) { //console.log("RIGHT CLICKED !")
+      //console.log("MOUSE DOWN")
+      if ('touches' in e) { // TOUCH EVENT
+        arbPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+        allowMove.current = true
+      } else { // MOUSE EVENT
+        // arbPos.current = { x: e.clientX, y: e.clientY }
+        // allowMove.current = true
+        arbPos.current = { x: e.clientX, y: e.clientY }
+        //console.log("START POSITION", e.clientX)
+        allowMove.current = true
+      }
     }
+    
   }
 
   let mouseUp = (e: React.TouchEvent | React.MouseEvent) => allowMove.current = false
@@ -337,8 +345,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   const [ locked, setLocked ] = useState(false)
   //const [ locked, setLocked ] = useState(true)
-  const [ showSettings, setShowSettings ] = useState(false)
-  //const [ showSettings, setShowSettings ] = useState(true)
+  //const [ showSettings, setShowSettings ] = useState(false)
+  const [ showSettings, setShowSettings ] = useState(true)
   const [ enableLockPosition, setEnableLockPosition ] = useState(true)
   const [ enableLockZoom, setEnableLockZoom ] = useState(true)
   const [ enableLockFlip, setEnableLockFlip ] = useState(true)
@@ -833,6 +841,9 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       <div
         id={`bottomBar`}
         className={css.bottomBar}
+        // onMouseDown={() => {
+        //   allowMove.current = false
+        // }}
         // onMouseMove={(e) => {
         //   //console.log("MOVEMENT")
         //   allowMove.current = false
@@ -990,44 +1001,57 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         id={`lockSettings`}
         className={css.lockSettings}
       >
-        Enable lock over:
-        {/* <div>
-          { MuiSwitch({ onClick: handleSetEnableLockPosition, checked: enableLockPosition ? true : false }) }
-          Position
+        <div className={css.menuLeft}>
+          <div className={css.menu1}>
+            Lock over:
+          </div>
+          <div className={css.menu2}>
+            Animation over:
+          </div>
+          <div className={css.menu2}>
+            Timings:
+          </div>
         </div>
-        <div>
-          { MuiSwitch({ onClick: handleSetEnableLockZoom, checked: enableLockZoom ? true : false }) }
-          Zoom
+        <div className={css.menuRight}>
+          <div>
+            { MuiSwitch({ onClick: handleSetEnableLockPosition, checked: enableLockPosition ? true : false }) }
+            Position
+          </div>
+          <div>
+            { MuiSwitch({ onClick: handleSetEnableLockZoom, checked: enableLockZoom ? true : false }) }
+            Zoom
+          </div>
+          <div>
+            { MuiSwitch({ onClick: handleSetEnableLockFlip, checked: enableLockFlip ? true : false }) }
+            Flip
+          </div>
+          <div>
+            { MuiSwitch({ onClick: handleSetEnableLockRotate, checked: enableLockRotate ? true : false }) }
+            Rotate
+          </div>
         </div>
-        <div>
-          { MuiSwitch({ onClick: handleSetEnableLockFlip, checked: enableLockFlip ? true : false }) }
-          Flip
+
+        {/* <div className={css.div2}>
+          <div>
+            { MuiSwitch({ onClick: handleSetEnableImageAnimation, checked: enableImageAnimation ? true : false }) }
+            Image animation
+          </div>
+          <div>
+            { MuiSwitch({ onClick: handleSetEnableButtonsAnimation, checked: enableButtonsAnimation ? true : false }) }
+            Buttons animation
+          </div>
         </div> */}
-        <div>
-          { MuiSwitch({ onClick: handleSetEnableLockRotate, checked: enableLockRotate ? true : false }) }
-          Rotate
-        </div>
-        <div>
-          Dont forget to 'lock the padlock' to changes take effect.
-        </div>
-        <div>
-          { MuiSwitch({ onClick: handleSetEnableImageAnimation, checked: enableImageAnimation ? true : false }) }
-          Image animation
-        </div>
-        <div>
-          { MuiSwitch({ onClick: handleSetEnableButtonsAnimation, checked: enableButtonsAnimation ? true : false }) }
-          Buttons animation
-        </div>
 
-
-        {
-          NumberInput({
-            value: playInterval,
-            min: minIntervalValue,
-            max: maxIntervalValue,
-            def: defIntervalValue
-          })
-        }
+      {/*   <div className={css.div3}>
+          {
+            NumberInput({
+              value: playInterval,
+              min: minIntervalValue,
+              max: maxIntervalValue,
+              def: defIntervalValue
+            })
+          }
+        </div> */}
 
 
 
