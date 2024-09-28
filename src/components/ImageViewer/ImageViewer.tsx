@@ -219,7 +219,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     // }
 
 
-
+    // handlerAnimationTransition() // CONTINUE HERE
   }, [currentIndex, images])
 
 
@@ -458,36 +458,36 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   const handlerAnimationTransition = () => {
     let iVF = document.getElementById('imageViewerForeground');
-      if (iVF !== null) {
-        if (enableImageAnimation) iVF.style.transition = `transform .2s, left .2s, top .2s`;
-        else iVF.style.transition = `unset`;
-        iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+    if (iVF !== null) {
+      if (enableImageAnimation) iVF.style.transition = `transform .2s, left .2s, top .2s`;
+      else iVF.style.transition = `unset`;
+      iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
 
-        if (!enableLockPosition || !locked) { // LOCK POSITION HANDLER
-          iVF.style.left = `0px`;
-          iVF.style.top = `0px`;
-        }
+      if (!enableLockPosition || !locked) { // LOCK POSITION HANDLER
+        iVF.style.left = `0px`;
+        iVF.style.top = `0px`;
       }
+    }
 
-      setImageProps(
-        (curr) =>
-        ({
-          ...curr,
-          zoomX:
-            (enableLockZoom && enableLockFlip && locked) ? curr.zoomX : // ZOOM & FLIP LOCKED
-            (enableLockZoom && locked) ? Math.abs(curr.zoomX) : // ZOOM LOCKED ONLY (CONVERT NUMBER TO POSITIVE)
-            (enableLockFlip && locked && curr.zoomX < 0) ? -1.0 : // X FLIP LOCKED ONLY (NEGATIVE NUMBER --> -1.0 || POSITIVE NUMBER --> 1.0 )
-            1.0, // DEFAULT VALUE
-          zoomY:
-            (enableLockZoom && enableLockFlip && locked) ? curr.zoomY : // ZOOM & FLIP LOCKED
-            (enableLockZoom && locked) ? Math.abs(curr.zoomY) : // ZOOM LOCKED ONLY (CONVERT NUMBER TO POSITIVE)
-            (enableLockFlip && locked && curr.zoomY < 0) ? -1.0 : // X FLIP LOCKED ONLY (NEGATIVE NUMBER --> -1.0 || POSITIVE NUMBER --> 1.0 )
-            1.0, // DEFAULT VALUE
-          angle: (enableLockRotate && locked) ? curr.angle : 0 // LOCK ROTATE HANDLER
-        })
-      )
+    setImageProps(
+      (curr) =>
+      ({
+        ...curr,
+        zoomX:
+          (enableLockZoom && enableLockFlip && locked) ? curr.zoomX : // ZOOM & FLIP LOCKED
+          (enableLockZoom && locked) ? Math.abs(curr.zoomX) : // ZOOM LOCKED ONLY (CONVERT NUMBER TO POSITIVE)
+          (enableLockFlip && locked && curr.zoomX < 0) ? -1.0 : // X FLIP LOCKED ONLY (NEGATIVE NUMBER --> -1.0 || POSITIVE NUMBER --> 1.0 )
+          1.0, // DEFAULT VALUE
+        zoomY:
+          (enableLockZoom && enableLockFlip && locked) ? curr.zoomY : // ZOOM & FLIP LOCKED
+          (enableLockZoom && locked) ? Math.abs(curr.zoomY) : // ZOOM LOCKED ONLY (CONVERT NUMBER TO POSITIVE)
+          (enableLockFlip && locked && curr.zoomY < 0) ? -1.0 : // X FLIP LOCKED ONLY (NEGATIVE NUMBER --> -1.0 || POSITIVE NUMBER --> 1.0 )
+          1.0, // DEFAULT VALUE
+        angle: (enableLockRotate && locked) ? curr.angle : 0 // LOCK ROTATE HANDLER
+      })
+    )
 
-      if (!enableLockPosition || !locked) currentPos.current = { x: 0, y: 0 } // LOCK POSITION HANDLER
+    if (!enableLockPosition || !locked) currentPos.current = { x: 0, y: 0 } // LOCK POSITION HANDLER
   }
 
   const handlerGoLeft = () => {
@@ -739,7 +739,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const NumberInput = ({ value, min, max, def }:any) => {
     return (
       <div
-        style={{ display: 'flex', flexDirection: 'row', background: 'green', width: 'fit-content' }}
+        style={{ display: 'flex', flexDirection: 'row', /* background: 'green', */ width: 'fit-content' }}
         id={`IVSetInterval`}
       >
         <div
@@ -749,6 +749,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           children={
             <Remove className={css.incrementButtonIcon} fontSize="small" />
           }
+          style={{
+            background: value === min.toFixed(1) ? 'rgba(0, 0, 0, 0.2)' : '#78909c',
+            color: value === min.toFixed(1) ? 'rgba(0, 0, 0, 0.2)' : '#212121'
+          }}
         />
         <Input
           value={value}
@@ -767,6 +771,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           children={
             <Add className={css.incrementButtonIcon} fontSize="small" />
           }
+          style={{
+            background: value === max.toFixed(1) ? 'rgba(0, 0, 0, 0.2)' : '#78909c',
+            color: value === max.toFixed(1) ? 'rgba(0, 0, 0, 0.2)' : '#212121'
+          }}
         />
       </div>
     )
@@ -812,11 +820,17 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     )
   }
 
-  const [ menu, setMenu ] = useState({
-    a: 'flex',
-    b: 'none',
-    c: 'none',
+  // const [ menu, setMenu ] = useState({
+  //   a: { display: 'flex', color: locked ? color.active : color.inactive },
+  //   b: { display: 'none', color: color.disabled },
+  //   c: { display: 'none', color: color.disabled },
   
+  // })
+
+  const [ menu, setMenu ] = useState({
+    a: true,
+    b: false,
+    c: false,
   })
 
   const handlerMenuSelect = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -825,12 +839,25 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       //return curr.map((e: any) => e)
       const updated: any = {};
       Object.keys(curr).forEach(key => {
-        return updated[key] = 'none'
+        return updated[key] = false
       })
-      updated[(e.target as HTMLDivElement).id.slice(-1).toLowerCase()] = 'flex'
+      updated[(e.target as HTMLDivElement).id.slice(-1).toLowerCase()] = true
       return updated
     })
   }
+
+  // const handlerMenuSelect = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  //   //console.log("EEE", (e.target as HTMLDivElement).id.slice(-1).toLowerCase())
+  //   setMenu((curr:any) => {
+  //     //return curr.map((e: any) => e)
+  //     const updated: any = {};
+  //     Object.keys(curr).forEach(key => {
+  //       return updated[key] = { display: 'none', color: color.disabled }
+  //     })
+  //     updated[(e.target as HTMLDivElement).id.slice(-1).toLowerCase()] = { display: 'flex', color: locked ? color.active : color.inactive }
+  //     return updated
+  //   })
+  // }
 
   return (
     <div
@@ -1020,56 +1047,128 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         id={`lockSettings`}
         className={css.lockSettings}
       >
-        <div className={css.menuLeft}>
-          <div id={`menuLeftA`} className={css.menuLeftA} onClick={(e) => handlerMenuSelect(e)}>
-            Lock over:
+        <div className={css.menuLeftMain}>
+          <div
+            id={`menuLeftA`}
+            className={css.menuLeftSub}
+            onClick={(e) => handlerMenuSelect(e)}
+            style={{
+              background:
+                menu.a && locked ?
+                color.active :
+                menu.a ?
+                color.inactive :
+                color.disabled,
+              color:
+                menu.a && locked ?
+                color.disabled :
+                '#ffffff'
+            }}
+          >
+             Lock over:
           </div>
-          <div id={`menuLeftB`} className={css.menuLeftB} onClick={(e) => handlerMenuSelect(e)}>
-            Animation over:
+          <div
+            id={`menuLeftB`}
+            className={css.menuLeftSub}
+            onClick={(e) => handlerMenuSelect(e)}
+            style={{
+              background:
+                menu.b && locked ?
+                color.active :
+                menu.b ?
+                color.inactive :
+                color.disabled,
+              color:
+                menu.b && locked ?
+                color.disabled :
+                '#ffffff'
+            }}
+          >
+             Animation over:
           </div>
-          <div id={`menuLeftC`} className={css.menuLeftC} onClick={(e) => handlerMenuSelect(e)}>
-            Timings:
+          <div
+            id={`menuLeftC`}
+            className={css.menuLeftSub}
+            onClick={(e) => handlerMenuSelect(e)}
+            style={{
+              background:
+                menu.c && locked ?
+                color.active :
+                menu.c ?
+                color.inactive :
+                color.disabled,
+              color:
+                menu.c && locked ?
+                color.disabled :
+                '#ffffff'
+            }}
+          >
+             Timings:
           </div>
         </div>
-        <div className={css.menuRight}>
-          <div className={css.menuRightA} style={{ display: menu.a }}>
-            <div>
+        <div className={css.menuRightMain}>
+          <div
+            className={css.menuRightSub}
+            style={{
+              display:
+                menu.a ? 'flex' : 'none',
+                background: locked ? color.active : color.inactive,
+                color: locked ? color.disabled : '#ffffff'
+            }}
+          >
+            <div className={css.eachSwitch}>
               { MuiSwitch({ onClick: handleSetEnableLockPosition, checked: enableLockPosition ? true : false }) }
-              Position
+               Position
             </div>
-            <div>
+            <div className={css.eachSwitch}>
               { MuiSwitch({ onClick: handleSetEnableLockZoom, checked: enableLockZoom ? true : false }) }
-              Zoom
+               Zoom
             </div>
-            <div>
+            <div className={css.eachSwitch}>
               { MuiSwitch({ onClick: handleSetEnableLockFlip, checked: enableLockFlip ? true : false }) }
-              Flip
+               Flip
             </div>
-            <div>
+            <div className={css.eachSwitch}>
               { MuiSwitch({ onClick: handleSetEnableLockRotate, checked: enableLockRotate ? true : false }) }
-              Rotate
+               Rotate
             </div>
           </div>
-          <div className={css.menuRightB} style={{ display: menu.b }}>
-            <div>
+          <div
+            className={css.menuRightSub}
+            style={{
+              display: menu.b ? 'flex' : 'none',
+              background: locked ? color.active : color.inactive,
+              color: locked ? color.disabled : '#ffffff'
+            }}
+          >
+            <div className={css.eachSwitch}>
               { MuiSwitch({ onClick: handleSetEnableImageAnimation, checked: enableImageAnimation ? true : false }) }
-              Image
+               Image
             </div>
-            <div>
+            <div className={css.eachSwitch}>
               { MuiSwitch({ onClick: handleSetEnableButtonsAnimation, checked: enableButtonsAnimation ? true : false }) }
-              Buttons
+               Buttons
             </div>
           </div>
-          <div className={css.menuRightC} style={{ display: menu.c }}>
-            Play interval:
-            {
-              NumberInput({
-                value: playInterval,
-                min: minIntervalValue,
-                max: maxIntervalValue,
-                def: defIntervalValue
-              })
-            }
+          <div
+            className={css.menuRightSub}
+            style={{
+              display: menu.c ? 'flex' : 'none',
+              background: locked ? color.active : color.inactive,
+              color: locked ? color.disabled : '#ffffff'
+            }}
+          >
+            <div className={css.eachSwitch3}>
+              Play interval (secs):
+              {
+                NumberInput({
+                  value: playInterval,
+                  min: minIntervalValue,
+                  max: maxIntervalValue,
+                  def: defIntervalValue
+                })
+              }
+            </div>
           </div>
         </div>
 

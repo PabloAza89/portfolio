@@ -289,9 +289,6 @@
   box-sizing: border-box;
   line-height: 1.5;
   border: 0px solid;
-  border-color: #eeeeee;
-  background: #78909c;
-  color: #212121;
   width: 32px;
   height: 32px;
   display: flex;
@@ -314,9 +311,9 @@
 /* END BASE NUMBER INPUT */
 
 .lockSettings {
+  /* background: lightblue; */ /* DEV */
+  background: var(--IVBottomBarOpacity);
   display: flex;
-  /* flex-direction: column; */
-  background: lightblue;
   position: absolute;
   bottom: -200px;
   transition: bottom 1s;
@@ -324,10 +321,12 @@
   width: 300px;
   height: 200px;
   /* top: -500px; */
+  padding: 3px 3px 0px 3px;
+  border-radius: 4px 4px 0px 0px;
 }
 
-.menuLeft {
-  background: lightgreen;
+.menuLeftMain {
+  /* background: lightgreen; */ /* DEV */
   width: 130px;
   height: 200px;
   display: flex;
@@ -336,8 +335,8 @@
   /* width: fit-content; */
 }
 
-.menuLeftA {
-  background: lightcoral;
+.menuLeftSub {
+  /* background: lightcoral; */
   /* width: 100px; */
   height: 25px;
   display: flex;
@@ -345,80 +344,51 @@
   /* flex-direction: column; */
   /* width: fit-content; */
   width: 100%;
+  color: #ffffff;
+  border-radius: 4px 0px 0px 4px;
+  /* transition: background .1s; */
 }
 
-.menuLeftB {
-  background: lightcoral;
-  width: 100px;
+.menuRightMain {
+  /* background: red; */ /* DEV */
+  width: 170px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  /* width: fit-content; */
+}
+
+.menuRightSub {
+  /* background: red; */ /* DEV */
+  width: 170px;
+  /* display: flex; */
+  /* position: relative; */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 0px 4px 0px 0px;
+  padding-top: 2px;
+  /* margin-left: 12px; */
+  /* padding-left: 12px; */
+  /* margin-left: 12px; */
+  /* background: #f0f0f0; */
+  /* background: var(--IVLock); */
+}
+
+.eachSwitch {
   height: 25px;
-  display: flex;
+  /* font-size: 16px; */
+  /* line-height: 25px; */
+  /* background: red; */
+}
+
+.eachSwitch3 {
+  /* display: flex;
   position: relative;
-  /* flex-direction: row; */
-  width: 100%;
-}
-
-.menuLeftC {
-  background: lightcoral;
-  width: 100px;
-  height: 25px;
-  display: flex;
-  position: relative;
-  /* flex-direction: row; */
-  width: 100%;
-}
-
-.menuRight {
-  background: red;
-  width: 170px;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  /* width: fit-content; */
-}
-
-.menuRightA {
-  background: red;
-  width: 170px;
-  /* display: flex; */
-  /* position: relative; */
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  flex-direction: column;
-  height: 100%;
-  /* width: fit-content; */
-}
-
-.menuRightB {
-  background: red;
-  width: 170px;
-  /* display: flex; */
-  /* position: relative; */
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  flex-direction: column;
-  height: 100%;
-  /* width: fit-content; */
-}
-
-.menuRightC {
-  background: red;
-  width: 170px;
-  /* display: flex; */
-  /* position: relative; */
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  flex-direction: column;
-  height: 100%;
-  /* width: fit-content; */
-}
-
-.div2 {
-  background: green;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  width: fit-content;
+  flex-direction: column; */
+  height: 75px;
+  margin-left: 12px;
+  /* background: red; */ /* DEV */
 }
