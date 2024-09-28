@@ -43,6 +43,9 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   let maxIntervalValue = 5 // MAXIMUN INTERVAL VALUE
   let defIntervalValue = 1 // DEFAULT INTERVAL VALUE
 
+  let minZoom = '0.0'
+  let maxZoom = '5.0'
+
 
   window.onmouseup = function(e: MouseEvent) {
     allowMove.current = false // STOP DRAG & MOUSE UP OUTSIDE WINDOW
@@ -154,7 +157,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     angle: 0,
   })
 
-  console.log("zoomX", imageProps.zoomX)
+  //console.log("zoomX", imageProps.zoomX)
+  console.log("zoomX", Math.abs(imageProps.zoomX).toFixed(1))
+
+  //console.log("zoomX", imageProps.zoomX)
 
   let imageRef = useRef(new Image())
 
@@ -333,20 +339,38 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     }
   }, [imageProps])
 
-  const zoomIn = () => {
-    setImageProps((curr) => ({
-      ...curr,
-      zoomX: curr.zoomX < 0 ? curr.zoomX - 0.1 : curr.zoomX + 0.1,
-      zoomY: curr.zoomY < 0 ? curr.zoomY - 0.1 : curr.zoomY + 0.1,
-    }))
+  const zoomOut = () => {
+    console.log("ACA")
+    // setImageProps((curr) => ({
+    //   ...curr,
+    //   zoomX: Math.abs(curr.zoomX).toFixed(1) === minZoom ? curr.zoomX : curr.zoomX < 0 ? curr.zoomX + 0.1 : curr.zoomX - 0.1,
+    //   zoomY: Math.abs(curr.zoomX).toFixed(1) === minZoom ? curr.zoomY : curr.zoomY < 0 ? curr.zoomY + 0.1 : curr.zoomY - 0.1,
+    // }))
+    setImageProps((curr) => {
+      // ...curr,
+      // zoomX: Math.abs(curr.zoomX).toFixed(1) === minZoom ? curr.zoomX : curr.zoomX < 0 ? curr.zoomX + 0.1 : curr.zoomX - 0.1,
+      // zoomY: Math.abs(curr.zoomX).toFixed(1) === minZoom ? curr.zoomY : curr.zoomY < 0 ? curr.zoomY + 0.1 : curr.zoomY - 0.1,
+      let obj = {...curr}
+      let zoomReached = Math.abs(curr.zoomX).toFixed(1) === minZoom
+      obj.zoomX = zoomReached ? curr.zoomX : curr.zoomX < 0 ? curr.zoomX + 0.1 : curr.zoomX - 0.1;
+      obj.zoomY = zoomReached ? curr.zoomY : curr.zoomY < 0 ? curr.zoomY + 0.1 : curr.zoomY - 0.1;
+      return obj
+    })
   }
 
-  const zoomOut = () => {
-    setImageProps((curr) => ({
-      ...curr,
-      zoomX: curr.zoomX < 0 ? curr.zoomX + 0.1 : curr.zoomX - 0.1,
-      zoomY: curr.zoomY < 0 ? curr.zoomY + 0.1 : curr.zoomY - 0.1,
-    }))
+  const zoomIn = () => {
+    //console.log("ACA")
+    setImageProps((curr) => {
+      //...curr,
+      //let obj = ...curr
+      let obj = {...curr}
+      let zoomReached = Math.abs(curr.zoomX).toFixed(1) === maxZoom
+      obj.zoomX = zoomReached ? curr.zoomX : curr.zoomX < 0 ? curr.zoomX - 0.1 : curr.zoomX + 0.1;
+      obj.zoomY = zoomReached ? curr.zoomY : curr.zoomY < 0 ? curr.zoomY - 0.1 : curr.zoomY + 0.1;
+      return obj
+      // zoomX: curr.zoomX < 0 ? curr.zoomX - 0.1 : curr.zoomX + 0.1,
+      // zoomY: curr.zoomY < 0 ? curr.zoomY - 0.1 : curr.zoomY + 0.1,
+    })
   }
 
   const [ locked, setLocked ] = useState(false)
@@ -367,7 +391,12 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   //console.log('playInterval VALUE', playInterval);
   //console.log('playInterval TYPE', typeof playInterval);
 
-  const lockSettings = () => setLocked(!locked)
+  const lockSettings = () => {
+
+    if (enableButtonsAnimation) root.setProperty('--IVFadeMenu', '0.4s');
+    else root.setProperty('--IVFadeMenu', '0s');
+    setLocked(!locked)
+  }
   const handleSetEnableLockPosition = () => setEnableLockPosition(!enableLockPosition)
   const handleSetEnableLockZoom = () => setEnableLockZoom(!enableLockZoom)
   const handleSetEnableLockFlip = () => setEnableLockFlip(!enableLockFlip)
@@ -523,7 +552,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     })
     let iVF = document.getElementById('imageViewerForeground');
     if (iVF !== null) {
-      iVF.style.transition = enableImageAnimation ? `transform .2s, left .2s, top .2s` : `transform .2s`;
+      iVF.style.transition = enableImageAnimation ? `transform .2s, left .2s, top .2s` : `unset`;
       iVF.style.left = `0px`;
       iVF.style.top = `0px`;
       iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
@@ -841,9 +870,9 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   })
 
   const handlerMenuSelect = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    //console.log("EEE", (e.target as HTMLDivElement).id.slice(-1).toLowerCase())
+    root.setProperty('--IVFadeMenu', '0s');
+
     setMenu((curr:any) => {
-      //return curr.map((e: any) => e)
       const updated: any = {};
       Object.keys(curr).forEach(key => {
         return updated[key] = false
@@ -851,6 +880,17 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       updated[(e.target as HTMLDivElement).id.slice(-1).toLowerCase()] = true
       return updated
     })
+
+    // if (iVF !== null) {
+    //   //iVF.style.transition = `background 1ms, color 1ms`; // background var(--IVFade), color var(--IVFade)
+    //   //iVF.ontransitionend = () => { console.log("TERMINOO") }
+    //   iVF.style.transition = `background var(--IVFade), color var(--IVFade)`
+    // }
+
+    // if (iVF !== null) {
+    //   iVF.style.transition = `background var(--IVFade), color var(--IVFade)`;
+    // }
+
   }
 
   // const handlerMenuSelect = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

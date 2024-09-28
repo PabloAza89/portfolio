@@ -4,6 +4,7 @@
   /* --IVBottomBarOpacity: rgba(77, 255, 255); */
   /* --IVFade: 2s; */
   --IVFade: 0.4s;
+  --IVFadeMenu: 0.4s;
   /* --IVLockOpacity: 0; */
   /* --IVLock: rgb(77, 77, 77); */
 }
@@ -347,6 +348,7 @@
   color: #ffffff;
   border-radius: 4px 0px 0px 4px;
   /* transition: background .1s; */
+  transition: background var(--IVFadeMenu), color var(--IVFadeMenu);
 }
 
 .menuRightMain {
@@ -375,6 +377,8 @@
   /* margin-left: 12px; */
   /* background: #f0f0f0; */
   /* background: var(--IVLock); */
+  /* transition: background 2s; */
+  transition: background var(--IVFade), color var(--IVFade);
 }
 
 .eachSwitch {
