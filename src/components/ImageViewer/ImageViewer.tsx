@@ -68,10 +68,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   }
 
-  window.onmouseenter = function(e: MouseEvent) {
-    console.log("ENTER")
-  }
-
   window.onmousemove = function(e: MouseEvent) {
     //console.log("MOOVINGGG")
 
@@ -110,8 +106,9 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     
             let iVF = document.getElementById('imageViewerForeground');
             if (iVF !== null) {
-              iVF.style.left = `${currentPos.current.x}px`
-              iVF.style.top = `${currentPos.current.y}px`
+              iVF.style.transition = `unset`;
+              iVF.style.left = `${currentPos.current.x}px`;
+              iVF.style.top = `${currentPos.current.y}px`;
             }
     
             // setLeft(curr => curr + qq)
@@ -213,13 +210,22 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
     // let iVF = document.getElementById('imageViewerForeground');
     // if (iVF !== null) {
+    //   //if (enableImageAnimation) iVF.style.transition = `transform .2s`;
     //   if (enableImageAnimation) iVF.style.transition = `transform .2s, left .2s, top .2s`;
     //   else iVF.style.transition = `unset`;
     //   iVF.ontransitionend = () => { if (iVF !== null) iVF.style.transition = `transform .2s` }
+
+    //   if (!enableLockPosition || !locked) { // LOCK POSITION HANDLER
+    //     iVF.style.left = `0px`;
+    //     iVF.style.top = `0px`;
+    //     currentPos.current = { x: 0, y: 0 }
+    //   }
+
     // }
 
+    
 
-    // handlerAnimationTransition() // CONTINUE HERE
+    handlerAnimationTransition()
   }, [currentIndex, images])
 
 
@@ -466,6 +472,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       if (!enableLockPosition || !locked) { // LOCK POSITION HANDLER
         iVF.style.left = `0px`;
         iVF.style.top = `0px`;
+        currentPos.current = { x: 0, y: 0 }
       }
     }
 
@@ -487,7 +494,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       })
     )
 
-    if (!enableLockPosition || !locked) currentPos.current = { x: 0, y: 0 } // LOCK POSITION HANDLER
+    //if (!enableLockPosition || !locked) currentPos.current = { x: 0, y: 0 } // LOCK POSITION HANDLER
   }
 
   const handlerGoLeft = () => {
