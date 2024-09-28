@@ -336,7 +336,7 @@
   /* width: fit-content; */
 }
 
-.menu1 {
+.menuLeftA {
   background: lightcoral;
   /* width: 100px; */
   height: 25px;
@@ -347,7 +347,17 @@
   width: 100%;
 }
 
-.menu2 {
+.menuLeftB {
+  background: lightcoral;
+  width: 100px;
+  height: 25px;
+  display: flex;
+  position: relative;
+  /* flex-direction: row; */
+  width: 100%;
+}
+
+.menuLeftC {
   background: lightcoral;
   width: 100px;
   height: 25px;
@@ -363,6 +373,45 @@
   display: flex;
   position: relative;
   flex-direction: column;
+  /* width: fit-content; */
+}
+
+.menuRightA {
+  background: red;
+  width: 170px;
+  /* display: flex; */
+  /* position: relative; */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  flex-direction: column;
+  height: 100%;
+  /* width: fit-content; */
+}
+
+.menuRightB {
+  background: red;
+  width: 170px;
+  /* display: flex; */
+  /* position: relative; */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  flex-direction: column;
+  height: 100%;
+  /* width: fit-content; */
+}
+
+.menuRightC {
+  background: red;
+  width: 170px;
+  /* display: flex; */
+  /* position: relative; */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  flex-direction: column;
+  height: 100%;
   /* width: fit-content; */
 }
 

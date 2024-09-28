@@ -812,6 +812,25 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     )
   }
 
+  const [ menu, setMenu ] = useState({
+    a: 'flex',
+    b: 'none',
+    c: 'none',
+  
+  })
+
+  const handlerMenuSelect = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    //console.log("EEE", (e.target as HTMLDivElement).id.slice(-1).toLowerCase())
+    setMenu((curr:any) => {
+      //return curr.map((e: any) => e)
+      const updated: any = {};
+      Object.keys(curr).forEach(key => {
+        return updated[key] = 'none'
+      })
+      updated[(e.target as HTMLDivElement).id.slice(-1).toLowerCase()] = 'flex'
+      return updated
+    })
+  }
 
   return (
     <div
@@ -1002,56 +1021,57 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         className={css.lockSettings}
       >
         <div className={css.menuLeft}>
-          <div className={css.menu1}>
+          <div id={`menuLeftA`} className={css.menuLeftA} onClick={(e) => handlerMenuSelect(e)}>
             Lock over:
           </div>
-          <div className={css.menu2}>
+          <div id={`menuLeftB`} className={css.menuLeftB} onClick={(e) => handlerMenuSelect(e)}>
             Animation over:
           </div>
-          <div className={css.menu2}>
+          <div id={`menuLeftC`} className={css.menuLeftC} onClick={(e) => handlerMenuSelect(e)}>
             Timings:
           </div>
         </div>
         <div className={css.menuRight}>
-          <div>
-            { MuiSwitch({ onClick: handleSetEnableLockPosition, checked: enableLockPosition ? true : false }) }
-            Position
+          <div className={css.menuRightA} style={{ display: menu.a }}>
+            <div>
+              { MuiSwitch({ onClick: handleSetEnableLockPosition, checked: enableLockPosition ? true : false }) }
+              Position
+            </div>
+            <div>
+              { MuiSwitch({ onClick: handleSetEnableLockZoom, checked: enableLockZoom ? true : false }) }
+              Zoom
+            </div>
+            <div>
+              { MuiSwitch({ onClick: handleSetEnableLockFlip, checked: enableLockFlip ? true : false }) }
+              Flip
+            </div>
+            <div>
+              { MuiSwitch({ onClick: handleSetEnableLockRotate, checked: enableLockRotate ? true : false }) }
+              Rotate
+            </div>
           </div>
-          <div>
-            { MuiSwitch({ onClick: handleSetEnableLockZoom, checked: enableLockZoom ? true : false }) }
-            Zoom
+          <div className={css.menuRightB} style={{ display: menu.b }}>
+            <div>
+              { MuiSwitch({ onClick: handleSetEnableImageAnimation, checked: enableImageAnimation ? true : false }) }
+              Image
+            </div>
+            <div>
+              { MuiSwitch({ onClick: handleSetEnableButtonsAnimation, checked: enableButtonsAnimation ? true : false }) }
+              Buttons
+            </div>
           </div>
-          <div>
-            { MuiSwitch({ onClick: handleSetEnableLockFlip, checked: enableLockFlip ? true : false }) }
-            Flip
-          </div>
-          <div>
-            { MuiSwitch({ onClick: handleSetEnableLockRotate, checked: enableLockRotate ? true : false }) }
-            Rotate
+          <div className={css.menuRightC} style={{ display: menu.c }}>
+            Play interval:
+            {
+              NumberInput({
+                value: playInterval,
+                min: minIntervalValue,
+                max: maxIntervalValue,
+                def: defIntervalValue
+              })
+            }
           </div>
         </div>
-
-        {/* <div className={css.div2}>
-          <div>
-            { MuiSwitch({ onClick: handleSetEnableImageAnimation, checked: enableImageAnimation ? true : false }) }
-            Image animation
-          </div>
-          <div>
-            { MuiSwitch({ onClick: handleSetEnableButtonsAnimation, checked: enableButtonsAnimation ? true : false }) }
-            Buttons animation
-          </div>
-        </div> */}
-
-      {/*   <div className={css.div3}>
-          {
-            NumberInput({
-              value: playInterval,
-              min: minIntervalValue,
-              max: maxIntervalValue,
-              def: defIntervalValue
-            })
-          }
-        </div> */}
 
 
 
