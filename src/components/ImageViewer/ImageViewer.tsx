@@ -629,42 +629,42 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     pos: {
       id: 'pos',
       width: 84,
-      left: 0, //                           ↓ UNUSED ↓
+      left: /* 0  */ /* 75 */ 0, //                           ↓ UNUSED ↓
       line: { left: color.disabled, center: color.disabled, right: color.disabled },
       body: { left: color.disabled, center: color.disabled, right: color.disabled }
     },
     afterPos: {
       id: 'afterPos',
       width: 84,
-      left: 84,
+      left: /* 0 */ /* 159 */ 84,
       line: { left: color.disabled, center: color.disabled, right: color.disabled },
       body: { left: color.disabled, center: color.disabled, right: color.disabled }
     },
     zoom: {
       id: 'zoom',
       width: 84,
-      left: 168,
+      left: /* 0 */ /* 243 */ 168,
       line: { left: color.disabled, center: color.disabled, right: color.disabled },
       body: { left: color.disabled, center: color.disabled, right: color.disabled }
     },
     flip: {
       id: 'flip',
       width: 84,
-      left: 252,
+      left: /* 0 */ /* 327 */ 252,
       line: { left: color.disabled, center: color.disabled, right: color.disabled },
       body: { left: color.disabled, center: color.disabled, right: color.disabled }
     },
     rotate: {
       id: 'rotate',
       width: 84,
-      left: 336,
+      left: /* 0 */ /* 411 */ 336,
       line: { left: color.disabled, center: color.disabled, right: color.disabled },
       body: { left: color.disabled, center: color.disabled, right: color.disabled }
     },
     lock: {
       id: 'lock',
       width: 42,
-      left: 420,
+      left: /* 0 */ /* 495 */ 420,
       line: { left: color.disabled, center: color.disabled, right: color.disabled },
       body: { left: color.disabled, center: color.disabled, right: color.disabled }
     }
@@ -741,7 +741,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     if (lS !== null) showSettings ? lS.style.bottom = `49px` : lS.style.bottom = `-200px`
   }, [showSettings])
 
-  const MuiButton = ({ style, classButton, onClick, Icon, classIcon, styleIcon }: any) => {
+  const MuiButton = ({ style, classButton, onClick, Icon, classIcon, styleIcon, outline }: any) => {
     return (
       <Button
         disableElevation={true}
@@ -822,37 +822,39 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const outlineButtons = (el:any) => {
 
     return (
-      <div key={el.id} className={css.buttonOutline} style={{ left: el.left, width: el.width }}>
-        <svg width={el.width} height="42" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id={`background${el.id}`} x1="100%" x2="0%"> {/* SIMULATED BORDER-RADIUS */}
-              <stop className={css.fade} offset="50%" stopColor={el.body.right} />
-              <stop className={css.fade} offset="50%" stopColor={el.body.left} />
-            </linearGradient>
-            <linearGradient id={`line${el.id}`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
-              <stop className={css.fade} offset="50%" stopColor={el.line.right} />
-              <stop className={css.fade} offset="50%" stopColor={el.line.left} />
-            </linearGradient>
-            <clipPath id="upperSide" clipPathUnits="userSpaceOnUse"> {/* FG TOP LINE */}
-              <rect width={el.width} height="1.5" />
-            </clipPath>
-            <clipPath id="centerSide" clipPathUnits="userSpaceOnUse"> {/* FG CENTER */}
-              <rect width={el.width} height="39.2" y="1.4" /> {/* OVERLAPPING NEEDED TO HIDE GLITCHES */}
-            </clipPath>
-            <clipPath id="LowerSide" clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
-              <rect width={el.width} height="1.5" y="40.5" />
-            </clipPath>
-          </defs>
+      
+        
+          <svg key={el.left} x={el.left} shapeRendering="crispEdges">
+            <defs>
+              <linearGradient id={`background${el.id}`} x1="100%" x2="0%"> {/* SIMULATED BORDER-RADIUS */}
+                <stop className={css.fade} offset="50%" stopColor={el.body.right} />
+                <stop className={css.fade} offset="50%" stopColor={el.body.left} />
+              </linearGradient>
+              <linearGradient id={`line${el.id}`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
+                <stop className={css.fade} offset="50%" stopColor={el.line.right} />
+                <stop className={css.fade} offset="50%" stopColor={el.line.left} />
+              </linearGradient>
+              <clipPath id="upperSide" clipPathUnits="userSpaceOnUse"> {/* FG TOP LINE */}
+                <rect width={el.width} height="1.5" />
+              </clipPath>
+              <clipPath id="centerSide" clipPathUnits="userSpaceOnUse"> {/* FG CENTER */}
+                <rect width={el.width} height="39.2" y="1.4" /> {/* OVERLAPPING NEEDED TO HIDE GLITCHES */}
+              </clipPath>
+              <clipPath id="LowerSide" clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
+                <rect width={el.width} height="1.5" y="40.5" />
+              </clipPath>
+            </defs>
 
-          <rect className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
-          <rect className={css.fade} width={el.width} height="1.5" fill={`url(#line${el.id})`} /> {/* BG TOP LINE */}
-          <rect className={css.fade} width={el.width} height="1.5" y="40.5" fill={`url(#line${el.id})`} /> {/* BG BOTTOM LINE */}
-          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath="url(#centerSide)" /> {/* BODY CENTER */}
-          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#upperSide)" /> {/* LINE CENTER TOP */}
-          <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#LowerSide)" /> {/* LINE CENTER BOTTOM */}
-
-        </svg>
-      </div>
+        
+            <rect className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
+            <rect className={css.fade} width={el.width} height="1.5" fill={`url(#line${el.id})`} /> {/* BG TOP LINE */}
+            <rect className={css.fade} width={el.width} height="1.5" y="40.5" fill={`url(#line${el.id})`} /> {/* BG BOTTOM LINE */}
+            <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath="url(#centerSide)" /> {/* BODY CENTER */}
+            <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#upperSide)" /> {/* LINE CENTER TOP */}
+            <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#LowerSide)" /> {/* LINE CENTER BOTTOM */}
+          </svg>
+        
+      
     )
   }
 
@@ -915,7 +917,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       onMouseUp={(e) => mouseUp(e)} // MOUSE END
     >
       <img
-       // style={{ left, top }}
         id={`imageViewerForeground`}
         ref={imageRef}
         className={css.imageViewerForeground}
@@ -925,10 +926,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           images[currentIndex] :
           ""
         }
-        //src={""}
         alt=""
-      >
-      </img>
+      />
 
 
       <div
@@ -943,22 +942,28 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         // }}
       >
         <div className={css.buttonsContainer}>
+
+          {/* { Object.keys(styles).map((e: any) => { return outlineButtons(styles[e]) }) } */}
+           
+            <div /* key={styles.pos} */ className={css.buttonOutline} /* style={{ left: el.left, width: el.width }} */>
+              <svg width="946" height="42" xmlns="http://www.w3.org/2000/svg">
+                { Object.keys(styles).map((e: any) => { return outlineButtons(styles[e]) }) }
+              </svg>
+             
+            </div>
+          
+
           <div className={css.imageCounter}>
             { currentIndex !== undefined && images !== undefined ? currentIndex + 1 : 0 }/{ currentIndex !== undefined && images !== undefined ? images.length : 0 }
           </div>
-
-
-
-
-            { Object.keys(styles).map((e: any) => { return outlineButtons(styles[e]) }) }
-
 
           {
             MuiButton({ // GO LEFT
               classButton: css.button,
               onClick: handlerGoLeft,
               Icon: Forward,
-              classIcon: `${css.icon} ${css.rotateX}`
+              classIcon: `${css.icon} ${css.rotateX}`,
+              outline: styles.pos
             })
           }
 
@@ -978,7 +983,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classButton: css.button,
               onClick: handlerRestore,
               Icon: Cached,
-              classIcon: css.icon
+              classIcon: css.icon,
+              outline: styles.afterPos
             })
           }
 
@@ -999,7 +1005,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classButton: css.button,
               onClick: zoomOut,
               Icon: Remove,
-              classIcon: css.icon
+              classIcon: css.icon,
+              outline: styles.zoom
             })
           }
 
@@ -1021,7 +1028,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classButton: css.button,
               onClick: flipX,
               Icon: Flip,
-              classIcon: `${css.icon} ${css.rotateX}`
+              classIcon: `${css.icon} ${css.rotateX}`,
+              outline: styles.flip
             })
           }
 
@@ -1040,7 +1048,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classButton: css.button,
               onClick: rotateLeft,
               Icon: RotateLeft,
-              classIcon: `${css.icon} ${css.rotateX}`
+              classIcon: `${css.icon} ${css.rotateX}`,
+              outline: styles.rotate
             })
           }
 
