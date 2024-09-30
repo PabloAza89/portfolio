@@ -940,15 +940,15 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         <div className={css.buttonsContainer}>
 
 
-          {/* <svg width="946" height="42" xmlns="http://www.w3.org/2000/svg" className={css.outlineButtons}>
+          {/* <svg xmlns="http://www.w3.org/2000/svg" className={css.outlineButtons}>
             { Object.keys(styles).map((e: any) => { return outlineButtons(styles[e]) }) }
           </svg> */}
 
-          {/* <div className={css.imageCounter}>
+          <div className={`${css.container} ${css.left}`} id={css.imageCounter}>
             { currentIndex !== undefined && images !== undefined ? currentIndex + 1 : 0 }/{ currentIndex !== undefined && images !== undefined ? images.length : 0 }
-          </div> */}
+          </div>
 
-         {[
+          {[
             MuiButton({ // GO LEFT
               classButton: css.button,
               onClick: handlerGoLeft,
@@ -956,16 +956,15 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classIcon: `${css.icon} ${css.rotateX}`,
               id: css.goLeftButton
             }),
-        
-            
+
             MuiButton({ // GO RIGHT
               classButton: css.button,
               onClick: handlerGoRight,
               Icon: Forward,
               classIcon: css.icon,
               id: css.goRightButton
-            }), 
-            
+            }),
+
             MuiButton({ // RESTORE
               classButton: css.button,
               onClick: handlerRestore,
@@ -973,9 +972,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classIcon: css.icon,
               id: css.restoreButton
             }),
-
-          
-          
 
             MuiButton({ // PLAY
               classButton: css.button,
@@ -985,8 +981,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               id: css.playButton
             }),
 
-         
-
             MuiButton({ // ZOOM OUT
               classButton: css.button,
               onClick: zoomOut,
@@ -994,8 +988,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classIcon: css.icon,
               id: css.zoomOutButton
             }),
-            
-       
 
             MuiButton({ // ZOOM IN
               classButton: css.button,
@@ -1004,7 +996,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classIcon: css.icon,
               id: css.zoomInButton
             }),
-        
+
             MuiButton({ // FLIP X
               classButton: css.button,
               onClick: flipX,
@@ -1012,7 +1004,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classIcon: `${css.icon} ${css.rotateX}`,
               id: css.flipXButton
             }),
-        
+
             MuiButton({ // FLIP Y
               classButton: css.button,
               onClick: flipY,
@@ -1020,7 +1012,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classIcon: `${css.icon} ${css.rotateY}`,
               id: css.flipYButton
             }),
-         
+
             MuiButton({ // ROTATE LEFT
               classButton: css.button,
               onClick: rotateLeft,
@@ -1028,7 +1020,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classIcon: `${css.icon} ${css.rotateX}`,
               id: css.rotateLeftButton
             }),
-        
+
             MuiButton({ // ROTATE RIGHT
               classButton: css.button,
               onClick: rotateRight,
@@ -1051,12 +1043,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             }
           </div>
 
-          {/* {
+          {
             MuiButton({ // SETTINGS
               classButton: css.button,
               onClick: handleShowSettings,
               Icon: Settings,
-              classIcon: css.icon
+              classIcon: css.icon,
+              id: css.settingsButton
             })
           }
 
@@ -1065,13 +1058,14 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               classButton: css.button,
               onClick: setShowImageViewer,
               Icon: Close,
-              classIcon: css.icon
+              classIcon: css.icon,
+              id: css.closeButton
             })
           }
 
-          <div className={css.zoomContainer}>
+          <div className={`${css.container} ${css.right}`} id={css.zoomContainer}>
             { (Math.abs(imageProps.zoomX)).toFixed(1) }x
-          </div> */}
+          </div>
 
         </div>
       </div>
