@@ -84,57 +84,57 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
             // targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
             // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-    
+
             // arbPos.current = { x: e.clientX - arbPos.current.x, y: e.clientY - arbPos.current.y }
-    
-    
-    
+
+
+
             // setCurrentPos((curr) => ({
             //   x: curr.x + -1,
             //   y: curr.y + -1,
             // }))
-    
+
             let qq = e.clientX - arbPos.current.x
             let ww = e.clientY - arbPos.current.y
-    
+
             // setCurrentPos((curr) => ({
             //   x: curr.x + e.clientX - arbPos.current.x,
             //   y: curr.y + e.clientY - arbPos.current.y
             // }))
-    
+
             currentPos.current = {
               x: currentPos.current.x + (e.clientX - arbPos.current.x),
               y: currentPos.current.y + (e.clientY - arbPos.current.y),
             }
-    
+
             let iVF = document.getElementById('imageViewerForeground');
             if (iVF !== null) {
               iVF.style.transition = `unset`;
               iVF.style.left = `${currentPos.current.x}px`;
               iVF.style.top = `${currentPos.current.y}px`;
             }
-    
+
             // setLeft(curr => curr + qq)
             // setTop(curr => curr + ww)
-    
+
             // left = left + qq
             // top = top + ww
-    
+
             // setCurrentPos((curr) => ({
             //   x: curr.x + (e.clientX - arbPos.current.x),
             //   y: curr.y + (e.clientY - arbPos.current.y),
             // }))
-    
+
             //console.log("A VER", arbPos.current.x)
             //console.log("A VER", e.clientX - arbPos.current.x) // CONTINUE HERE
-    
-    
+
+
             arbPos.current = {
               x: e.clientX,
               y: e.clientY
             }
-    
-    
+
+
           }
         }
 
@@ -229,7 +229,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
     // }
 
-    
+
 
     handlerAnimationTransition()
   }, [currentIndex, images])
@@ -254,7 +254,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         allowMove.current = true
       }
     }
-    
+
   }
 
   let mouseUp = (e: React.TouchEvent | React.MouseEvent) => allowMove.current = false
@@ -694,7 +694,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       'rotate.line.center', 'rotate.line.right', 'lock.line.left' // 12 - 14
     ]
 
-    
+
 
     // BUTTON BACKGROUND & LINES COLOR
 
@@ -741,10 +741,12 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     if (lS !== null) showSettings ? lS.style.bottom = `49px` : lS.style.bottom = `-200px`
   }, [showSettings])
 
-  const MuiButton = ({ style, classButton, onClick, Icon, classIcon, styleIcon, outline }: any) => {
+  const MuiButton = ({ style, classButton, onClick, Icon, classIcon, styleIcon, id }: any) => {
     return (
       <Button
         disableElevation={true}
+        key={id}
+        id={id}
         style={style}
         variant="contained"
         className={`${classButton}`}
@@ -820,41 +822,35 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
   const outlineButtons = (el:any) => {
-
     return (
-      
-        
-          <svg key={el.left} x={el.left} shapeRendering="crispEdges">
-            <defs>
-              <linearGradient id={`background${el.id}`} x1="100%" x2="0%"> {/* SIMULATED BORDER-RADIUS */}
-                <stop className={css.fade} offset="50%" stopColor={el.body.right} />
-                <stop className={css.fade} offset="50%" stopColor={el.body.left} />
-              </linearGradient>
-              <linearGradient id={`line${el.id}`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
-                <stop className={css.fade} offset="50%" stopColor={el.line.right} />
-                <stop className={css.fade} offset="50%" stopColor={el.line.left} />
-              </linearGradient>
-              <clipPath id="upperSide" clipPathUnits="userSpaceOnUse"> {/* FG TOP LINE */}
-                <rect width={el.width} height="1.5" />
-              </clipPath>
-              <clipPath id="centerSide" clipPathUnits="userSpaceOnUse"> {/* FG CENTER */}
-                <rect width={el.width} height="39.2" y="1.4" /> {/* OVERLAPPING NEEDED TO HIDE GLITCHES */}
-              </clipPath>
-              <clipPath id="LowerSide" clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
-                <rect width={el.width} height="1.5" y="40.5" />
-              </clipPath>
-            </defs>
+      <svg key={el.left} x={el.left} shapeRendering="crispEdges">
+        <defs>
+          <linearGradient id={`background${el.id}`} x1="100%" x2="0%"> {/* SIMULATED BORDER-RADIUS */}
+            <stop className={css.fade} offset="50%" stopColor={el.body.right} />
+            <stop className={css.fade} offset="50%" stopColor={el.body.left} />
+          </linearGradient>
+          <linearGradient id={`line${el.id}`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
+            <stop className={css.fade} offset="50%" stopColor={el.line.right} />
+            <stop className={css.fade} offset="50%" stopColor={el.line.left} />
+          </linearGradient>
+          <clipPath id="upperSide" clipPathUnits="userSpaceOnUse"> {/* FG TOP LINE */}
+            <rect width={el.width} height="1.5" />
+          </clipPath>
+          <clipPath id="centerSide" clipPathUnits="userSpaceOnUse"> {/* FG CENTER */}
+            <rect width={el.width} height="39.2" y="1.4" /> {/* OVERLAPPING NEEDED TO HIDE GLITCHES */}
+          </clipPath>
+          <clipPath id="LowerSide" clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
+            <rect width={el.width} height="1.5" y="40.5" />
+          </clipPath>
+        </defs>
 
-        
-            <rect className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
-            <rect className={css.fade} width={el.width} height="1.5" fill={`url(#line${el.id})`} /> {/* BG TOP LINE */}
-            <rect className={css.fade} width={el.width} height="1.5" y="40.5" fill={`url(#line${el.id})`} /> {/* BG BOTTOM LINE */}
-            <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath="url(#centerSide)" /> {/* BODY CENTER */}
-            <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#upperSide)" /> {/* LINE CENTER TOP */}
-            <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#LowerSide)" /> {/* LINE CENTER BOTTOM */}
-          </svg>
-        
-      
+        <rect className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
+        <rect className={css.fade} width={el.width} height="1.5" fill={`url(#line${el.id})`} /> {/* BG TOP LINE */}
+        <rect className={css.fade} width={el.width} height="1.5" y="40.5" fill={`url(#line${el.id})`} /> {/* BG BOTTOM LINE */}
+        <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath="url(#centerSide)" /> {/* BODY CENTER */}
+        <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#upperSide)" /> {/* LINE CENTER TOP */}
+        <rect className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath="url(#LowerSide)" /> {/* LINE CENTER BOTTOM */}
+      </svg>
     )
   }
 
@@ -862,7 +858,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   //   a: { display: 'flex', color: locked ? color.active : color.inactive },
   //   b: { display: 'none', color: color.disabled },
   //   c: { display: 'none', color: color.disabled },
-  
+
   // })
 
   const [ menu, setMenu ] = useState({
@@ -943,128 +939,108 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       >
         <div className={css.buttonsContainer}>
 
-          {/* { Object.keys(styles).map((e: any) => { return outlineButtons(styles[e]) }) } */}
-           
-            <div /* key={styles.pos} */ className={css.buttonOutline} /* style={{ left: el.left, width: el.width }} */>
-              <svg width="946" height="42" xmlns="http://www.w3.org/2000/svg">
-                { Object.keys(styles).map((e: any) => { return outlineButtons(styles[e]) }) }
-              </svg>
-             
-            </div>
-          
 
-          <div className={css.imageCounter}>
+          {/* <svg width="946" height="42" xmlns="http://www.w3.org/2000/svg" className={css.outlineButtons}>
+            { Object.keys(styles).map((e: any) => { return outlineButtons(styles[e]) }) }
+          </svg> */}
+
+          {/* <div className={css.imageCounter}>
             { currentIndex !== undefined && images !== undefined ? currentIndex + 1 : 0 }/{ currentIndex !== undefined && images !== undefined ? images.length : 0 }
-          </div>
+          </div> */}
 
-          {
+         {[
             MuiButton({ // GO LEFT
               classButton: css.button,
               onClick: handlerGoLeft,
               Icon: Forward,
               classIcon: `${css.icon} ${css.rotateX}`,
-              outline: styles.pos
-            })
-          }
-
-
-          {
+              id: css.goLeftButton
+            }),
+        
+            
             MuiButton({ // GO RIGHT
               classButton: css.button,
               onClick: handlerGoRight,
               Icon: Forward,
-              classIcon: css.icon
-            })
-          }
-
-
-          {
+              classIcon: css.icon,
+              id: css.goRightButton
+            }), 
+            
             MuiButton({ // RESTORE
               classButton: css.button,
               onClick: handlerRestore,
               Icon: Cached,
               classIcon: css.icon,
-              outline: styles.afterPos
-            })
-          }
+              id: css.restoreButton
+            }),
 
+          
+          
 
-          {
             MuiButton({ // PLAY
               classButton: css.button,
               onClick: handleSetSlideStarted,
               Icon: [ PlayCircleOutline, PauseCircleOutline ], // PauseCircleOutline,
-              classIcon: [ `${css.icon} ${css.playOpacity}`, `${css.icon} ${css.pauseOpacity}` ]
-            })
-          }
+              classIcon: [ `${css.icon} ${css.playOpacity}`, `${css.icon} ${css.pauseOpacity}` ],
+              id: css.playButton
+            }),
 
+         
 
-
-          {
             MuiButton({ // ZOOM OUT
               classButton: css.button,
               onClick: zoomOut,
               Icon: Remove,
               classIcon: css.icon,
-              outline: styles.zoom
-            })
-          }
+              id: css.zoomOutButton
+            }),
+            
+       
 
-
-
-          {
             MuiButton({ // ZOOM IN
               classButton: css.button,
               onClick: zoomIn,
               Icon: Add,
-              classIcon: css.icon
-            })
-          }
-
-
-
-          {
+              classIcon: css.icon,
+              id: css.zoomInButton
+            }),
+        
             MuiButton({ // FLIP X
               classButton: css.button,
               onClick: flipX,
               Icon: Flip,
               classIcon: `${css.icon} ${css.rotateX}`,
-              outline: styles.flip
-            })
-          }
-
-          {
+              id: css.flipXButton
+            }),
+        
             MuiButton({ // FLIP Y
               classButton: css.button,
               onClick: flipY,
               Icon: Flip,
-              classIcon: `${css.icon} ${css.rotateY}`
-            })
-          }
-
-
-          {
+              classIcon: `${css.icon} ${css.rotateY}`,
+              id: css.flipYButton
+            }),
+         
             MuiButton({ // ROTATE LEFT
               classButton: css.button,
               onClick: rotateLeft,
               Icon: RotateLeft,
               classIcon: `${css.icon} ${css.rotateX}`,
-              outline: styles.rotate
-            })
-          }
-
-          {
+              id: css.rotateLeftButton
+            }),
+        
             MuiButton({ // ROTATE RIGHT
               classButton: css.button,
               onClick: rotateRight,
               Icon: RotateRight,
-              classIcon: `${css.icon} ${css.rotateX}`
+              classIcon: `${css.icon} ${css.rotateX}`,
+              id: css.rotateRightButton
             })
-          }
+          ]}
 
 
 
-          <div className={css.lockContainer}>
+          <div className={css.lockContainer} id={css.lockButton}>
             {
               MuiButton({ // LOCK
                 classButton: `${css.button} ${css.iconLock}`,
@@ -1075,7 +1051,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             }
           </div>
 
-          {
+          {/* {
             MuiButton({ // SETTINGS
               classButton: css.button,
               onClick: handleShowSettings,
@@ -1095,7 +1071,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
           <div className={css.zoomContainer}>
             { (Math.abs(imageProps.zoomX)).toFixed(1) }x
-          </div>
+          </div> */}
+
         </div>
       </div>
 
