@@ -83,8 +83,9 @@
   /* box-sizing: border-box; */
 }
 
-.outlineButtons {
+.svgBackground {
   /* background: lightblue; */ /* DEV */
+  /* fill: lightblue; */
   display: flex;
   position: absolute;
   width: 946px;
@@ -100,6 +101,59 @@
   /* width: 200px; */
   width: 462px;
 }
+
+/* svg svg { */
+/* svg.testASD:nth-of-type(1) { */
+/* .testASD > svg {
+  x: 100px;
+  fill: red
+} */
+
+#svgTest.asdasd {
+  /* fill: red; */
+  /* background: red; */
+  /* display: flex; */
+  /* position: absolute; */
+  /* left: 80px; */
+  /* x: 80px; */
+  /* margin-left: 150px; */
+  width: 60;
+  /* transform-origin: 100% 0%; */
+}
+
+.aAa {
+  /* transform-origin: 50px 0px; */
+  overflow: visible;
+}
+
+/* svg[class*="ImageViewerCSS_aaa"] {
+  x: 50px;
+} */
+
+/* [id*="aAa"] {
+  transition: fill var(--IVFade), stop-color var(--IVFade);
+  transform-origin: 50px 0px;
+} */
+
+#pos { x: 0px }
+#afterPos { x: 84px }
+#zoom { x: 168px }
+/* .zoom { x: 168px } */
+/* #zoom { x: 168px } */
+#flip { x: 252px }
+#rotate { x: 336px }
+#lock { x: 420px }
+
+
+
+/* 
+svg {
+  x: 200px
+}
+
+svg.identity {
+  x: 200px
+} */
 
 .imageViewerForeground {
   display: flex;
