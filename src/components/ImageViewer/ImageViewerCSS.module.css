@@ -117,7 +117,7 @@
 #rotate { x: 336px }
 #lock { x: 420px }
 
-#zoomHelper {
+#zoomCrop {
   display: none;
 }
 
@@ -551,39 +551,35 @@ and (width < 697px) {
 
   #restorePlay { x: 500px }  
   
-  .menuRightSub:nth-child(1) > .eachSwitch:nth-child(1) { /* SEND POSITION TO BOTTOM */
+  .menuRightSub:nth-child(1) > .eachSwitch:nth-child(1) { /* SEND Position TO BOTTOM */
     order: 1
   }
 
-  #zoom:nth-child(3) {  /* BG TOP LINE */
-    fill: url(#zoomAux1);
-  }
-
-  #zoom:nth-child(4) { /* BG BOTTOM LINE */
-    fill: url(#zoomAux1);
+  #zoom:nth-child(3), #zoom:nth-child(4) {  /* BG TOP LINE & BG BOTTOM LINE */
+    /* fill: url(#zoomAux1); */
+    fill: url(#zoomLineLinearGradient);
+    /* display: none; */
+    
   }
 
   #zoom:nth-child(5) { /* *** */ /* BODY CENTER */
-    /* fill: url(#zoomAux2); */
-    fill: url(#zoomAux2);
-    clip-path: url(#zoomAux4);
-    /* fill: url(#zoomAux2); */
-    /* clip-path: none; */
-    /* clip-path: url(#zoomAux3); */
+    /* fill: url(#zoomAux2); */ /* SIMULATED STROKE w/ BORDER-RADIUS */
+    /* fill: orange; */ /* OK */
+    fill: url(#zoomBodyLinearGradient); /* OK */
+    clip-path: none /* OK OK REMOVE CLIP-PATH ON BODY */
+    /* clip-path: url(#testbbb) */
+    /* clip-path: url(#zoomAux3); */ /* CUT RIGHT SIDE */
   }
 
-  #zoom:nth-child(6) { /* LINE CENTER TOP */
-    display: none
-  }
-  #zoom:nth-child(7) { /* LINE CENTER BOTTOM */
+  #zoom:nth-child(6), #zoom:nth-child(7) { /* LINE CENTER TOP & LINE CENTER BOTTOM */
     display: none
   }
 
-  #zoomHelper {
-    display: inline;
+  #zoomCrop {
+    display: inline; /* SIMULATED CROPPED ZOOM BG */
+    /* clip-path: url(#zoomCropClipPath); */
+    /* display: none */
   }
 
- /*  #pos:nth-child(4) {
-    fill: url(#zoomAux1);
-  } */
+
 }

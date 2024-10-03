@@ -839,36 +839,19 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.body.right} />
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.body.left} />
           </linearGradient>
-          <linearGradient id={`zoomAux1`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
-            <stop id={css[el.id]} className={css.fade} offset="50%" stopColor="green" />
-            <stop id={css[el.id]} className={css.fade} offset="50%" stopColor="black" />
-          </linearGradient>
-          <linearGradient id={`zoomAux2`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
-            <stop id={css[el.id]} className={css.fade} offset="50%" stopColor="red" />
-            <stop id={css[el.id]} className={css.fade} offset="50%" stopColor="blue" />
-          </linearGradient>
           <linearGradient id={`line${el.id}`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.line.right} />
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.line.left} />
           </linearGradient>
-          <clipPath id={`upperSide${el.id}`} clipPathUnits="userSpaceOnUse"> {/* FG TOP LINE */}
-            <rect id={css[el.id]} width={el.width} height="1.5" />
-          </clipPath>
           <clipPath id={`centerSide${el.id}`} clipPathUnits="userSpaceOnUse"> {/* FG CENTER */}
             <rect id={css[el.id]} width={el.width} height="81.2" y="1.4" /> {/* OVERLAPPING NEEDED TO HIDE GLITCHES */}
+          </clipPath>
+          <clipPath id={`upperSide${el.id}`} clipPathUnits="userSpaceOnUse"> {/* FG TOP LINE */}
+            <rect id={css[el.id]} width={el.width} height="1.5" />
           </clipPath>
           <clipPath id={`lowerSide${el.id}`} clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
             <rect id={css[el.id]} width={el.width} height="1.5" y="40.5" />
           </clipPath>
-
-          <clipPath id={`zoomAux3`} clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
-            <rect  width="60" height="30" x="3" /* id={css[el.id]} */ /* width={el.width} */ /* x="1.5" height="1.5" y="40.5" */ />
-          </clipPath>
-
-          <clipPath id={`zoomAux4`} clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
-            <rect width="42" height="42" /* id={css[el.id]} */ /* width={el.width} */ /* x="1.5" height="1.5" y="40.5" */ />
-          </clipPath>
-
         </defs>
 
         <rect id={css[el.id]} className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
@@ -878,10 +861,32 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath={`url(#centerSide${el.id})`} /> {/* BODY CENTER :nth-child(5) */}
         <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath={`url(#upperSide${el.id})`} /> {/* LINE CENTER TOP :nth-child(6) */}
         <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath={`url(#lowerSide${el.id})`} /> {/* LINE CENTER BOTTOM :nth-child(7) */}
+
+        { /* RENDER ONLY ON ZOOM */
+          el.id === 'zoom' &&
+          <defs>
+
+            <linearGradient id={`zoomBodyLinearGradient`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
+              <stop id={css[el.id]} className={css.fade} /* topColor="red" */ stopColor={el.line.center} /> {/* RIGHT */}
+            </linearGradient>
+
+            <linearGradient id={`zoomLineLinearGradient`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
+              <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.line.center} /* stopColor={el.line.right} */ /> {/* RIGHT */}
+              <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.body.left} /* stopColor={el.line.left} */ /> {/* LEFT */}
+            </linearGradient>
+
+            <clipPath id={`zoomCropClipPath`} clipPathUnits="userSpaceOnUse">
+              <rect x="-8.5" y="1.5" width="92.5" height="39" /* rx="6" ry="6" */ /* id={css[el.id]} */ /* width={el.width} */ /* x="1.5" height="1.5" y="40.5" */ />
+            </clipPath>
+          </defs>
+        }
         
-        <rect id={css.zoomHelper} x="1.5" y="1.5" className={css.fade} width="81" height="39" rx="6" ry="6" fill={el.body.center} />
+        { /* RENDER ONLY ON ZOOM */
+          el.id === 'zoom' &&
+          <rect id={css.zoomCrop} x="1.5" y="1.5" className={css.fade} width="92.5" height="39" rx="6" ry="6" fill="yellow" clipPath={`url(#zoomCropClipPath)`} /> /* CHECHED */
+        }
         
-        
+
       </svg>
     )
   }
@@ -977,6 +982,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
             {/* { outlineButtons(styles.zoom) } */}
             {/* { outlineButtons(styles.flip) } */}
+            { outlineButtons(styles.restorePlay) }
             { outlineButtons(styles.rotate) }
             { outlineButtons(styles.lock) }
             { outlineButtons(styles.pos) }
