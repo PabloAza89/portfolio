@@ -385,9 +385,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   //const [ showSettings, setShowSettings ] = useState(false)
   const [ showSettings, setShowSettings ] = useState(true)
   const [ enableLockPosition, setEnableLockPosition ] = useState(true)
-  const [ enableLockZoom, setEnableLockZoom ] = useState(true)
-  const [ enableLockFlip, setEnableLockFlip ] = useState(true)
-  const [ enableLockRotate, setEnableLockRotate ] = useState(true)
+
+  // const [ enableLockZoom, setEnableLockZoom ] = useState(true)
+  // const [ enableLockFlip, setEnableLockFlip ] = useState(true)
+  // const [ enableLockRotate, setEnableLockRotate ] = useState(true)
+  const [ enableLockZoom, setEnableLockZoom ] = useState(false)
+  const [ enableLockFlip, setEnableLockFlip ] = useState(false)
+  const [ enableLockRotate, setEnableLockRotate ] = useState(false)
 
   const [ enableImageAnimation, setEnableImageAnimation ] = useState(true)
   const [ enableButtonsAnimation, setEnableButtonsAnimation ] = useState(true)
@@ -640,8 +644,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       line: { left: color.disabled, center: color.disabled, right: color.disabled },
       body: { left: color.disabled, center: color.disabled, right: color.disabled }
     },
-    afterPos: {
-      id: 'afterPos',
+    restorePlay: {
+      id: 'restorePlay',
       width: 84,
       left: 84,
       line: { left: color.disabled, center: color.disabled, right: color.disabled },
@@ -695,7 +699,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     }
 
     let lines = [
-      'pos.line.center',  'pos.line.right','afterPos.line.left', 'afterPos.line.center', 'afterPos.line.right', 'zoom.line.left', // 0 - 5
+      'pos.line.center',  'pos.line.right','restorePlay.line.left', 'restorePlay.line.center', 'restorePlay.line.right', 'zoom.line.left', // 0 - 5
       'zoom.line.center', 'zoom.line.right', 'flip.line.left', // 6 - 8
       'flip.line.center', 'flip.line.right', 'rotate.line.left', // 9 - 11
       'rotate.line.center', 'rotate.line.right', 'lock.line.left' // 12 - 14
@@ -829,11 +833,19 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   const outlineButtons = (el:any) => {
     return (
-      <svg key={el.left} className={css.aAa} shapeRendering="crispEdges">
+      <svg key={el.left} className={css.eachSvgBackground} shapeRendering="crispEdges">
         <defs>
           <linearGradient id={`background${el.id}`} x1="100%" x2="0%"> {/* SIMULATED BORDER-RADIUS */}
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.body.right} />
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.body.left} />
+          </linearGradient>
+          <linearGradient id={`zoomAux1`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
+            <stop id={css[el.id]} className={css.fade} offset="50%" stopColor="green" />
+            <stop id={css[el.id]} className={css.fade} offset="50%" stopColor="black" />
+          </linearGradient>
+          <linearGradient id={`zoomAux2`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
+            <stop id={css[el.id]} className={css.fade} offset="50%" stopColor="red" />
+            <stop id={css[el.id]} className={css.fade} offset="50%" stopColor="blue" />
           </linearGradient>
           <linearGradient id={`line${el.id}`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.line.right} />
@@ -843,21 +855,31 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             <rect id={css[el.id]} width={el.width} height="1.5" />
           </clipPath>
           <clipPath id={`centerSide${el.id}`} clipPathUnits="userSpaceOnUse"> {/* FG CENTER */}
-            <rect id={css[el.id]} width={el.width} height="39.2" y="1.4" /> {/* OVERLAPPING NEEDED TO HIDE GLITCHES */}
+            <rect id={css[el.id]} width={el.width} height="81.2" y="1.4" /> {/* OVERLAPPING NEEDED TO HIDE GLITCHES */}
           </clipPath>
           <clipPath id={`lowerSide${el.id}`} clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
             <rect id={css[el.id]} width={el.width} height="1.5" y="40.5" />
           </clipPath>
+
+          <clipPath id={`zoomAux3`} clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
+            <rect  width="60" height="30" x="3" /* id={css[el.id]} */ /* width={el.width} */ /* x="1.5" height="1.5" y="40.5" */ />
+          </clipPath>
+
+          <clipPath id={`zoomAux4`} clipPathUnits="userSpaceOnUse"> {/* FG BOTTOM LINE */}
+            <rect width="42" height="42" /* id={css[el.id]} */ /* width={el.width} */ /* x="1.5" height="1.5" y="40.5" */ />
+          </clipPath>
+
         </defs>
 
         <rect id={css[el.id]} className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
-        <rect id={css[el.id]} className={css.fade} width={el.width} height="1.5" fill={`url(#line${el.id})`} /> {/* BG TOP LINE */}
-        <rect id={css[el.id]} className={css.fade} width={el.width} height="1.5" y="40.5" fill={`url(#line${el.id})`} /> {/* BG BOTTOM LINE */}
+        <rect id={css[el.id]} className={css.fade} width={el.width} height="1.5" fill={`url(#line${el.id})`} /> {/* BG TOP LINE :nth-child(3) */}
+        <rect id={css[el.id]} className={css.fade} width={el.width} height="1.5" y="40.5" fill={`url(#line${el.id})`} /> {/* BG BOTTOM LINE :nth-child(4) */}
         
-        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath={`url(#centerSide${el.id})`} /> {/* BODY CENTER */}
-        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath={`url(#upperSide${el.id})`} /> {/* LINE CENTER TOP */}
-        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath={`url(#lowerSide${el.id})`} /> {/* LINE CENTER BOTTOM */}
+        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath={`url(#centerSide${el.id})`} /> {/* BODY CENTER :nth-child(5) */}
+        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath={`url(#upperSide${el.id})`} /> {/* LINE CENTER TOP :nth-child(6) */}
+        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath={`url(#lowerSide${el.id})`} /> {/* LINE CENTER BOTTOM :nth-child(7) */}
         
+        <rect id={css.zoomHelper} x="1.5" y="1.5" className={css.fade} width="81" height="39" rx="6" ry="6" fill={el.body.center} />
         
         
       </svg>
@@ -953,13 +975,24 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           <svg xmlns="http://www.w3.org/2000/svg" className={css.svgBackground}>
             {/* { Object.keys(styles).map((e: any) => outlineButtons(styles[e]) ) } */}
 
-            {/* { outlineButtons(styles.pos) }
-            { outlineButtons(styles.afterPos) } */}
-            { outlineButtons(styles.zoom) }
-
-           {/*  { outlineButtons(styles.flip) }
+            {/* { outlineButtons(styles.zoom) } */}
+            {/* { outlineButtons(styles.flip) } */}
             { outlineButtons(styles.rotate) }
-            { outlineButtons(styles.lock) } */}
+            { outlineButtons(styles.lock) }
+            { outlineButtons(styles.pos) }
+
+            { outlineButtons(styles.flip) }
+            { outlineButtons(styles.zoom) }
+            
+            {/* { outlineButtons(styles.restorePlay) } */}
+            
+
+            {/* { outlineButtons(styles.pos) } */} {/* DT! */}
+            {/* { outlineButtons(styles.restorePlay) } */}
+            {/* { outlineButtons(styles.zoom) } */}
+            {/* { outlineButtons(styles.flip) } */}
+            {/* { outlineButtons(styles.rotate) } */}
+            {/* { outlineButtons(styles.lock) } */}
           </svg>
 
           <div className={`${css.container} ${css.left}`} id={css.imageCounter}>
