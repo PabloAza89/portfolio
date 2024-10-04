@@ -883,7 +883,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         
         { /* RENDER ONLY ON ZOOM */
           el.id === 'zoom' &&
-          <rect id={css.zoomCrop} x="1.5" y="1.5" className={css.fade} width="92.5" height="39" rx="6" ry="6" fill="yellow" clipPath={`url(#zoomCropClipPath)`} /> /* CHECHED */
+          <rect style={{ display: enableLockZoom ? 'none' : 'inline' }} id={css.zoomCrop} x="1.5" y="1.5" className={css.fade} width="92.5" height="39" rx="6" ry="6" fill="yellow" /* fill={el.body.left} */ clipPath={`url(#zoomCropClipPath)`} /> /* CHECHED */
         }
         
 

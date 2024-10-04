@@ -577,6 +577,12 @@ and (width < 697px) {
 
   #zoomCrop {
     display: inline; /* SIMULATED CROPPED ZOOM BG */
+    /* visibility: visible; */
+    /* visibility: hidden; */
+    /* transition: opacity var(--IVFade); */
+    /* transition: visibility 2s; */
+    /* transition: display 2s; */
+    /* display: none; */
     /* clip-path: url(#zoomCropClipPath); */
     /* display: none */
   }
