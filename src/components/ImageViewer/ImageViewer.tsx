@@ -833,13 +833,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   const outlineButtons = (el:any) => {
     return (
-      <svg key={el.left} className={css.eachSvgBackground} shapeRendering="crispEdges">
+      <svg key={el.left} className={css.eachSvgBackground} shapeRendering="geometricPrecision">
         <defs>
-          <linearGradient id={`background${el.id}`} x1="100%" x2="0%"> {/* SIMULATED BORDER-RADIUS */}
+          <linearGradient id={`background${el.id}`} x1="100%" x2="0%" > {/* SIMULATED BORDER-RADIUS */}
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.body.right} />
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.body.left} />
           </linearGradient>
-          <linearGradient id={`line${el.id}`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
+          <linearGradient id={`line${el.id}`} x1="100%" x2="0%"> {/* BG LEFT/RIGHT LINE */}
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.line.right} />
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.line.left} />
           </linearGradient>
@@ -854,13 +854,13 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           </clipPath>
         </defs>
 
-        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} /> {/* SIMULATED BORDER-RADIUS */}
+        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" fill={`url(#background${el.id})`} shapeRendering="crispEdges" /> {/* SIMULATED BORDER-RADIUS */}
         <rect id={css[el.id]} className={css.fade} width={el.width} height="1.5" fill={`url(#line${el.id})`} /> {/* BG TOP LINE :nth-child(3) */}
         <rect id={css[el.id]} className={css.fade} width={el.width} height="1.5" y="40.5" fill={`url(#line${el.id})`} /> {/* BG BOTTOM LINE :nth-child(4) */}
-        
+
         <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath={`url(#centerSide${el.id})`} /> {/* BODY CENTER :nth-child(5) */}
-        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath={`url(#upperSide${el.id})`} /> {/* LINE CENTER TOP :nth-child(6) */}
-        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.line.center} clipPath={`url(#lowerSide${el.id})`} /> {/* LINE CENTER BOTTOM :nth-child(7) */}
+        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.2" ry="7.2" fill={el.line.center} clipPath={`url(#upperSide${el.id})`} /> {/* LINE CENTER TOP :nth-child(6) */}
+        <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.2" ry="7.2" fill={el.line.center} clipPath={`url(#lowerSide${el.id})`} /> {/* LINE CENTER BOTTOM :nth-child(7) */}
 
         { /* RENDER ONLY ON ZOOM */
           el.id === 'zoom' &&
@@ -870,20 +870,20 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               <stop id={css[el.id]} className={css.fade} /* topColor="red" */ stopColor={el.line.center} /> {/* RIGHT */}
             </linearGradient>
 
-            <linearGradient id={`zoomLineLinearGradient`} x1="100%" x2="0%"> {/* BG TOP/BOTTOM LINE */}
+            <linearGradient id={`zoomLineLinearGradient`} x1="100%" x2="0%" > {/* BG TOP/BOTTOM LINE */}
               <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.line.center} /* stopColor={el.line.right} */ /> {/* RIGHT */}
               <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.body.left} /* stopColor={el.line.left} */ /> {/* LEFT */}
             </linearGradient>
 
-            <clipPath id={`zoomCropClipPath`} clipPathUnits="userSpaceOnUse">
-              <rect x="-8.5" y="1.5" width="92.5" height="39" /* rx="6" ry="6" */ /* id={css[el.id]} */ /* width={el.width} */ /* x="1.5" height="1.5" y="40.5" */ />
+            <clipPath id={`zoomCropClipPath`} clipPathUnits="userSpaceOnUse"> {/* SHIFTED TO THE RIGHT TO HANDLE RIGHT BORDER-RADIUS */}
+              <rect x="-8.5" y="1.5" width="92.5" height="39" rx="3.4" ry="6" /* id={css[el.id]} */ /* width={el.width} */ /* x="1.5" height="1.5" y="40.5" */ />
             </clipPath>
           </defs>
         }
         
         { /* RENDER ONLY ON ZOOM */
           el.id === 'zoom' &&
-          <rect style={{ display: enableLockZoom ? 'none' : 'inline' }} id={css.zoomCrop} x="1.5" y="1.5" className={css.fade} width="92.5" height="39" rx="6" ry="6" fill="yellow" /* fill={el.body.left} */ clipPath={`url(#zoomCropClipPath)`} /> /* CHECHED */
+          <rect id={css.zoomCrop} x="1.5" y="1.5" className={css.fade} width="92.5" height="39" rx="6" ry="6" /* fill="yellow" */ fill={ enableLockZoom ? el.body.center : el.body.left } /* fill={el.body.left} */ clipPath={`url(#zoomCropClipPath)`} /> /* CHECHED */
         }
         
 

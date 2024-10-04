@@ -99,7 +99,7 @@
   /* top: 0px; */
   /* z-index: -2; */
   /* width: 200px; */
-  width: 462px;
+  /* width: 462px; */
 }
 
 
@@ -481,9 +481,9 @@
 /* and (width < 2000px) { */
 
 @media screen
-and (width < 697px) {
+and (width < 99999px) {
   .bottomBar {
-    height: 114.5px;
+    height: 109.5px;
   }
 
   .buttonsContainer {
@@ -495,21 +495,24 @@ and (width < 697px) {
     /* grid-template-columns: repeat(7, 42px);
     grid-template-rows: repeat(2, 42px); */
     grid-template-columns: repeat(14, 21px);
-    grid-template-rows: 42px 39px auto;
+    grid-template-rows: 40.5px 40.5px 21.5px;
     /* flex-wrap: wrap; */
     /* width: 546px; */
     /* width: 696px; */
 
   }
 
-  /* .container {
-    margin-top: 0px;
-  } */
-
   .button {
     /* margin: 3.5px !important; */
-    margin: 3.5px !important;
-    /* margin-top: 7px !important; */
+    margin: 5px 3.5px 3.5px 3.5px !important;
+  }
+
+  .container {
+    align-self: flex-end;
+  }
+
+  .left {
+    justify-self: flex-end;
   }
 
   #zoomOutButton { grid-column: 1 / 3; grid-row: 1 / 2 }
@@ -527,12 +530,14 @@ and (width < 697px) {
   #settingsButton { grid-column: 10 / 12; grid-row: 2 / 3 }
   #closeButton { grid-column: 12 / 14; grid-row: 2 / 3 }
 
-  #imageCounter { grid-column: 3; grid-row: 3 / 4 }
+  #imageCounter { grid-column: 6; grid-row: 3 / 4 }
   #zoomContainer { grid-column: 9; grid-row: 3 / 4 }
 
   .svgBackground {
+    /* background: lightcoral; */ /* DEV */
     margin-left: 0px;
-    height: 100px; /* CHECK */
+    width: 294px;
+    height: 82.5px; /* CHECK */
   }
 
   /* #pos { x: 0px }
@@ -571,21 +576,11 @@ and (width < 697px) {
     /* clip-path: url(#zoomAux3); */ /* CUT RIGHT SIDE */
   }
 
-  #zoom:nth-child(6), #zoom:nth-child(7) { /* LINE CENTER TOP & LINE CENTER BOTTOM */
-    display: none
-  }
+
 
   #zoomCrop {
-    display: inline; /* SIMULATED CROPPED ZOOM BG */
-    /* visibility: visible; */
-    /* visibility: hidden; */
-    /* transition: opacity var(--IVFade); */
-    /* transition: visibility 2s; */
-    /* transition: display 2s; */
+    display: inline;
     /* display: none; */
-    /* clip-path: url(#zoomCropClipPath); */
-    /* display: none */
   }
-
 
 }
