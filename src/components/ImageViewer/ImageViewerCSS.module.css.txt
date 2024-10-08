@@ -117,12 +117,7 @@
 #rotate { x: 336px }
 #lock { x: 420px }
 
-/* #zoomCrop, #posHelper {
-  display: none;
-}
- */
-
- #zoomCrop {
+#zoomCrop, #posHelper {
   display: none;
 }
 
@@ -486,7 +481,7 @@
 /* and (width < 2000px) { */
 
 @media screen
-and (width < 99999999999px) {
+and (width < 1px) {
   .bottomBar {
     height: 109.5px;
   }
@@ -560,13 +555,13 @@ and (width < 99999999999px) {
   /* #pos { x: 21px; y: 40.5px } */
   #pos { x: 21px; y: 40.5px }
 
-  #restorePlay { x: 500px }
+  #restorePlay { x: 500px }  
   
   .menuRightSub:nth-child(1) > .eachSwitch:nth-child(1) { /* SEND Position TO BOTTOM */
-    /* order: 1 */
+    order: 1
   }
 
-  #zoom:nth-child(3), #zoom:nth-child(4) {  /* DISABLE LEFT TOP & BOTTOM LINE */
+  #zoom:nth-child(3), #zoom:nth-child(4) {  /* BG TOP LINE & BG BOTTOM LINE */
     /* fill: url(#zoomAux1); */
     fill: url(#zoomLineLinearGradient);
     /* display: none; */
@@ -575,8 +570,8 @@ and (width < 99999999999px) {
   #zoom:nth-child(5) { /* *** */ /* BODY CENTER */
     /* fill: url(#zoomAux2); */ /* SIMULATED STROKE w/ BORDER-RADIUS */
     /* fill: orange; */ /* OK */
-    /* fill: url(#zoomBodyLinearGradient); */ /* OK */
-    /* clip-path: none */ /* OK OK REMOVE CLIP-PATH ON BODY */
+    fill: url(#zoomBodyLinearGradient); /* OK */
+    clip-path: none /* OK OK REMOVE CLIP-PATH ON BODY */
     /* clip-path: url(#testbbb) */
     /* clip-path: url(#zoomAux3); */ /* CUT RIGHT SIDE */
   }
@@ -589,14 +584,14 @@ and (width < 99999999999px) {
   #zoom:nth-child(2), #flip:nth-child(2) {
     /* fill: rgb(158, 158, 158); */
     /* fill: yellow; */
-    /* height: 41.8px */
+    height: 41.8px
   }
 
   #flip:nth-child(5) {
     /* fill: rgb(158, 158, 158); */
     /* fill: yellow; */
-    /* height: 41.8px;
-    rx: 6.9px; */
+    height: 41.8px;
+    rx: 6.9px;
   }
 
   #zoom:nth-child(4) {
@@ -632,57 +627,13 @@ and (width < 99999999999px) {
   } */
 
   #zoomCrop, #posHelper {
-    /* display: inline; */
+    display: inline;
     /* transition: opacity var(--IVFade); */
     /* display: none; */
   }
 
   #posHelper {
-    /* transition: opacity var(--IVFade); */
+    transition: opacity var(--IVFade);
   }
-
-  #pos:nth-child(6), #pos:nth-child(7) {
-    /* fill: rgb(158, 158, 158); */
-    /* fill: yellow; */
-    /* height: 41.8px */
-    display: none; /* DISABLE TOP & BOTTOM LINE */
-  }
-
-  #zoom:nth-child(4) { /* DISABLES LEFT BOTTOM LINE */
-    /* fill: yellow; */
-    width: 42px;
-    x: 42px;
-    fill: url(#zoomLineHelper);
-    /* display: none; */
-    /* fill: rgb(158, 158, 158) */
-  }
-
-  #pos:nth-child(5) {
-    /* fill: rgb(158, 158, 158); */
-    /* fill: yellow; */
-    /* height: 41.8px */
-    clip-path: none; /* DISABLE CLIP-PATH ON BODY */
-  }
-
-  #zoom:nth-child(5) {
-    /* fill: yellow; */
-    fill: url(#zoomLineHelper);
-  }
-
-  #zoomCrop {
-    /* display: none; */
-    display: inline;
-    transition: fill var(--IVFade);
-  }
-
-  /* #zoom:nth-child(1),
-  #zoom:nth-child(2),
-  #zoom:nth-child(3),
-  #zoom:nth-child(5),
-  #zoom:nth-child(6),
-  #zoom:nth-child(7),
-  #zoom:nth-child(8) {
-    display: none;
-  } */
 
 }

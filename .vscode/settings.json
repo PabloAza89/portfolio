@@ -1,3 +1,4 @@
 {
-  "extension.customText": ""
+  "extension.customText": "",
+  "css.lint.validProperties": [ "x", "y", "rx", "ry" ]
 }

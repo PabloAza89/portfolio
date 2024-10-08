@@ -829,6 +829,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     )
   }
 
+
+
   const outlineButtons = (el:any) => {
     return (
       <svg key={el.left} className={css.eachSvgBackground} shapeRendering="crispEdges">
@@ -842,7 +844,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.line.left} />
           </linearGradient>
           <clipPath id={`centerSide${el.id}`} clipPathUnits="userSpaceOnUse"> {/* BODY CENTER */}
-            <rect id={css[el.id]} width={el.width} height="40" y="1" />
+            <rect id={css[el.id]} width={el.width} height="81.2" y="1.4" />
           </clipPath>
           <clipPath id={`upperSide${el.id}`} clipPathUnits="userSpaceOnUse"> {/* LINE CENTER (TOP) */}
             <rect id={css[el.id]} width={el.width} height="1.5" />
@@ -852,32 +854,40 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           </clipPath>
         </defs>
 
-        <rect id={css[el.id]} className={css.fade} width={el.width} y="1" height="40" /* fill={`yellow`} */ fill={`url(#background${el.id})`} /> {/* BODY LEFT-RIGHT :nth-child(2) */}
-        <rect id={css[el.id]} className={css.fade} width={el.width} /* width={el.width+0.1} */ height="1.5" fill={`url(#line${el.id})`} shapeRendering="geometricPrecision"/> {/* LINE LEFT-RIGHT (TOP) :nth-child(3) */}
-        <rect id={css[el.id]} className={css.fade} width={el.width} /* width={el.width+0.1} */ height="1.5" y="40.5" fill={`url(#line${el.id})`} shapeRendering="geometricPrecision"/> {/* LINE LEFT-RIGHT (BOTTOM) :nth-child(4) */}
+        <rect id={css[el.id]} className={css.fade} width={ el.id === 'zoom' && enableLockPosition ? 42 : el.width} height="42" fill={`url(#background${el.id})`} /> {/* BODY LEFT-RIGHT :nth-child(2) */}
+        <rect id={css[el.id]} className={css.fade} width={el.width+0.1} height="1.5" fill={`url(#line${el.id})`} shapeRendering="geometricPrecision"/> {/* LINE LEFT-RIGHT (TOP) :nth-child(3) */}
+        <rect id={css[el.id]} className={css.fade} width={el.width+0.1} height={ el.id === 'zoom' && enableLockPosition ? 1.0 : 1.5 }  y="40.5" fill={`url(#line${el.id})`} shapeRendering="geometricPrecision"/> {/* LINE LEFT-RIGHT (BOTTOM) :nth-child(4) */}
 
         <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath={`url(#centerSide${el.id})`} shapeRendering="geometricPrecision"/> {/* BODY CENTER :nth-child(5) */}
         <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.2" ry="7.5" fill={el.line.center} clipPath={`url(#upperSide${el.id})`} shapeRendering="geometricPrecision" /> {/* LINE CENTER (TOP) :nth-child(6) */}
         <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.2" ry="7.5" fill={el.line.center} clipPath={`url(#lowerSide${el.id})`} shapeRendering="geometricPrecision"/> {/* LINE CENTER (BOTTOM) :nth-child(7) */}
 
-        { /* RENDER ONLY ONE TIME */
+
+        
+        { /* RENDER ONLY ON ZOOM */
           el.id === 'zoom' &&
           <>
             <defs>
+              <linearGradient id={`zoomBodyLinearGradient`} x1="100%" x2="0%"> {/* BODY */}
+                <stop id={css[el.id]} className={css.fade} stopColor={el.line.center} />
+              </linearGradient>
               <linearGradient id={`zoomLineLinearGradient`} x1="100%" x2="0%" > {/* LINE LEFT-RIGHT */}
                 <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.line.center} /> {/* RIGHT */}
                 <stop id={css[el.id]} className={css.fade} offset="50%" stopColor={el.body.left} /> {/* LEFT */}
               </linearGradient>
               <clipPath id={`zoomCropClipPath`} clipPathUnits="userSpaceOnUse"> {/* FAKE ZOOM CROP CLIP-PATH */}
-                <rect /* x="-8.3" */ x="1.5" y="1.5" width="104" height="39" rx="6" ry="6" />
+                <rect x="-8.3" y="1.5" width="92.5" height="39" rx="3.4" ry="5.2" />
               </clipPath>
-              <linearGradient id={`zoomLineHelper`} x1="100%" x2="0%"> {/* LINE LEFT-RIGHT */}
-                <stop id={css[el.id]} className={css.fade} stopColor={el.line.right} />
+              <linearGradient id={`qweqwe`} x1="50%" y1="50%" x2="50%" y2="100%"  > {/* LINE LEFT-RIGHT */}
+                <stop id={css[el.id]} className={css.fade} stopColor={el.line.center} /> {/* TOP */}
+                <stop id={css[el.id]} className={css.fade} stopColor={styles.pos.body.center} /> {/* BOTTOM */}
               </linearGradient>
             </defs>
-            <rect id={css.zoomCrop} width={"84"} y="1" height="40" rx="4.75" ry="6" fill={ enableLockZoom ? el.body.center : el.body.left } clipPath={`url(#zoomCropClipPath)`} shapeRendering="geometricPrecision"/> {/* FAKE ZOOM CROP */}
+            <rect id={css.zoomCrop} x="1.5" y="1.5" className={css.fade} width="122.5" height="39" rx="6" ry="6" fill={ enableLockZoom ? el.body.center : el.body.left } clipPath={`url(#zoomCropClipPath)`} shapeRendering="geometricPrecision"/> {/* FAKE ZOOM CROP */}
+            <rect style={{ display: 'none' }}/* style={{opacity: enableLockPosition ? '1' : '0' }} */id={css.posHelper} x="24" y="41" className={css.fade} width="78" height="2" fill={`yellow`} /* fill={`url(#qweqwe)`} */ shapeRendering="geometricPrecision" />
           </>
         }
+        
 
       </svg>
     )
