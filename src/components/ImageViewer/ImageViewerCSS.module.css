@@ -7,8 +7,10 @@
   --IVFadeMenu: 0.4s;
   /* --IVLockOpacity: 0; */
   /* --IVLock: rgb(77, 77, 77); */
-  --IVSettingsVisible: 49px;
-  --IVSettingsHidden: -76px;
+  /* --IVSettingsVisible: 49px;
+  --IVSettingsHidden: -76px; */
+  --IVSettingsVisible: -125px;
+  --IVSettingsHidden: 0px;
   --IVBottomBarVisible: 0px;
   --IVBottomBarHidden: -49px;
 }
@@ -66,7 +68,7 @@
   /* background: green; */ /* DEV */
   /* background: rgba(0, 128, 0, .5); */ /* DEV */
   background: var(--IVBottomBarOpacity);
-  z-index: 1000001;
+  /* z-index: 1000002; */
   display: flex;
   position: absolute;
   flex-direction: row;
@@ -153,6 +155,7 @@
   max-height: 80vh;
   left: 0px;
   top: 0px;
+  z-index: -1;
 }
 
 .container {
@@ -189,7 +192,7 @@
   width: 35px !important;
   height: 35px !important;
   margin: 7px 3.5px !important;
-  z-index: 1000002;
+  /* z-index: 1000003; */
 }
 
 .iconLock {
@@ -422,7 +425,7 @@
   /* width: 100%; */
   /* width: 300px; */
   /* top: -125px; */
-  top: -10px;
+  /* top: -10px; */
 
   width: 294px;
   /* height: 200px; */
@@ -431,6 +434,12 @@
   padding: 3px 3px 0px 3px;
   border-radius: 7px 7px 0px 0px;
   box-sizing: border-box;
+  /* z-index: -1; */
+  /* z-index: 1000000; */
+  /* z-index: 999999 !important; */
+  /* z-index: 1000001; */
+  z-index: -1;
+  transition: top var(--IVFade)
 }
 
 .menuLeftMain {
@@ -547,8 +556,10 @@
 and (width < 697px) {
 
   :root {
-    --IVSettingsVisible: 109.5px;
-    --IVSettingsHidden: -16px;
+    /* --IVSettingsVisible: 109.5px;
+    --IVSettingsHidden: -16px; */
+    --IVBottomBarVisible: 0px;
+    --IVBottomBarHidden: -109.5px;
   }
 
   .bottomBar {

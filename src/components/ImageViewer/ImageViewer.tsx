@@ -7,7 +7,7 @@ import {
   Forward, Add, Remove, Close, RotateLeft, RotateRight,
   Flip, Cached, LockOutlined, Settings,
   PlayCircleOutline, LockOpenOutlined, PauseCircleOutline,
-  KeyboardDoubleArrowDown
+  KeyboardDoubleArrowDown, KeyboardDoubleArrowUp
   //Add, Remove
 } from '@mui/icons-material/';
 import { Button, Switch } from '@mui/material';
@@ -56,6 +56,15 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
   window.onmouseup = function(e: MouseEvent) {
+    allowMove.current = false // STOP DRAG & MOUSE UP OUTSIDE WINDOW
+    let iVF = document.getElementById('imageViewerForeground');
+    if (iVF !== null) {
+      if (enableImageAnimation) iVF.style.transition = `transform .2s`;
+      else iVF.style.transition = `unset`;
+    }
+  }
+
+  window.ontouchend = function(e: TouchEvent) {
     allowMove.current = false // STOP DRAG & MOUSE UP OUTSIDE WINDOW
   }
 
@@ -399,7 +408,18 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   const [ hideBottomBar, setHideBottomBar ] = useState(false)
 //console.log('hideBottomBar --->', hideBottomBar);
-  const handlerSetHideBottomBar = () => setHideBottomBar(!hideBottomBar)
+  const handlerSetHideBottomBar = () => {
+
+    //!hideBottomBar && setShowSettings(false)
+    showSettings && handleShowSettings()
+
+    setHideBottomBar(!hideBottomBar)
+
+    let lS = document.getElementById('bottomBar');
+    if (lS !== null) { lS.ontransitionend = () => currentArrows() }
+  }
+
+  
 
   useEffect(() => { // SHOW-HIDE BOTTOM BAR
     let bB = document.getElementById('bottomBar');
@@ -418,15 +438,14 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
   const handleShowSettings = () => {
     setShowSettings(!showSettings)
-    let lS = document.getElementById('lockSettings');
-    if (lS !== null) {
-      lS.style.transition = `bottom 1s`;
-      lS.ontransitionend = () => { if (lS !== null) lS.style.transition = `unset` }
-    }
+    // let lS = document.getElementById('lockSettings');
+    // if (lS !== null) {
+    //   lS.style.transition = `top var(--IVFade)`;
+    //   lS.ontransitionend = () => { if (lS !== null) lS.style.transition = `unset` }
+    // }
   }
 
-  const handlerKeyDown = (e: any) => {
-
+  const handlerKeyDown = (e: any) => { // LIMIT KEY PRESSED
     let key = e.key
     if (
       key !== "0" && key !== "1" && key !== "2" && key !== "3" &&
@@ -509,7 +528,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   // CONTINUE WITH FADE VAR & FADE BUTTONS
   useEffect(() => { // BUTTONS TRANSITION HANDLER
     if (enableButtonsAnimation) root.setProperty('--IVFade', '0.4s');
-    else root.setProperty('--IVFade', '0s');
+    else root.setProperty('--IVFade', '1ms'); // LAUNCH ontransitionend EVENT
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [enableButtonsAnimation])
 
@@ -758,10 +777,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locked, enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate])
 
-  // useEffect(() => {
-  //   let lS = document.getElementById('lockSettings');
-  //   if (lS !== null) showSettings ? lS.style.bottom = `var(--IVSettingsVisible)` : lS.style.bottom = `var(--IVSettingsHidden)`
-  // }, [showSettings])
+  useEffect(() => {
+    let lS = document.getElementById('lockSettings');
+    if (lS !== null) showSettings ? lS.style.top = `var(--IVSettingsVisible)` : lS.style.top = `var(--IVSettingsHidden)`
+  }, [showSettings])
 
   const MuiButton = ({ style, classButton, onClick, Icon, classIcon, styleIcon, id }: any) => {
     return (
@@ -944,15 +963,26 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   //   })
   // }
 
+  //let arrows;
+
+  const [ arrow, setArrow ] = useState(<KeyboardDoubleArrowDown fontSize='small' />)
+
+  const Arrow = () => arrow
+
+  const currentArrows = () => {
+    hideBottomBar ?
+    setArrow(<KeyboardDoubleArrowDown fontSize='small' />) :
+    setArrow(<KeyboardDoubleArrowUp fontSize='small' />)
+  }
+
   return (
     <div
       id={`IVBackground`}
       className={css.IVBackground}
       onMouseDown={(e) => handlerMouseDown(e)} // MOUSE START
       onTouchStart={(e) => handlerMouseDown(e)} // MOUSE START
-      //onMouseMove={(e) => handlerMouseMove(e)} // MOUSE MOVE
-      onMouseUp={(e) => handlerMouseUp(e)} // MOUSE END
-      onTouchEnd={(e) => handlerMouseUp(e)} // MOUSE END
+      //onMouseUp={(e) => handlerMouseUp(e)} // MOUSE END
+      //onTouchEnd={(e) => handlerMouseUp(e)} // MOUSE END
     >
       <img
         id={`imageViewerForeground`}
@@ -1120,19 +1150,17 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             })
           }
 
-          <div className={`${css.container} ${css.right}`} id={css.zoomContainer}>
-            { (Math.abs(imageProps.zoomX)).toFixed(1) }x
-          </div>
+          <div
+            className={`${css.container} ${css.right}`}
+            id={css.zoomContainer}
+            children={`${(Math.abs(imageProps.zoomX)).toFixed(1)}x`}
+          />
 
           <div
             className={css.hideBottomBarButton}
             onClick={() => handlerSetHideBottomBar()}
-          >
-            <KeyboardDoubleArrowDown fontSize='small' />
-            <KeyboardDoubleArrowDown fontSize='small' />
-            <KeyboardDoubleArrowDown fontSize='small' />
-
-          </div>
+            children={ [...Array(3)].map((e, i) => <Arrow key={i} />) }
+          />
 
         </div>
 
