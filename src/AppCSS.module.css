@@ -15,22 +15,31 @@
 
 .background {
   display: flex;
-  position: relative;
+  /* position: relative; */
+  position: fixed;
   justify-content: center;
   overflow: hidden;
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
+  /* height: 500px; */
+  height: 100%;
+  /* z-index: -1; */
+  /* height: 100dvh; */
+  /* height: calc(100vh - 100%); */
 }
 
 .blackWhite {
   display: flex;
-  position: relative;
+  /* position: relative; */
+  position: fixed;
   flex-direction: column;
   align-self: center;
   width: calc(100vw - 12px);
-  height: calc(100vh - 12px);
+  /* height: calc(100vh - 12px); */
+  height: calc(100% - 12px);
   background: linear-gradient(to bottom right, black 49.9%, white 50.1%);
   justify-content: flex-start;
+  z-index: 10000;
 }
 
 .blackWhite::before {
@@ -44,11 +53,14 @@
 
 .grey {
   display: flex;
-  position: absolute;
+  /* position: absolute; */
+  position: fixed;
   /* background: orange; */ /* DEV */
   background: var(--borderApp);
   transition: background 1s;
-  z-index: 10000
+  /* z-index: 10000; */
+  /* z-index: -1 */
+  /* display: none; */
 }
 
 .topBottom {

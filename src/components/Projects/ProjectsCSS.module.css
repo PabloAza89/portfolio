@@ -27,12 +27,13 @@
 }
 
 .background {
+  /* background: yellow; */ /* DEV */
   display: flex;
   position: relative;
-  /* background: yellow; */ /* DEV */
+  /* position: fixed; */
   flex-wrap: wrap;
   justify-content: center;
-  position: relative;
+  /* position: relative; */
   align-items: center;
   height: calc(100vh - 12px);
   -webkit-touch-callout: none;
@@ -45,6 +46,8 @@
   scrollbar-width: thin;
   scrollbar-color: var(--scrollThumb) var(--scrollTrack);
   transition: scrollbar-color 1s;
+  /* z-index: 10000; */
+  /* z-index: 9999; */
 }
 
 .projectsOuterContainer {

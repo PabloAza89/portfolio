@@ -7,6 +7,7 @@ import {
   Forward, Add, Remove, Close, RotateLeft, RotateRight,
   Flip, Cached, LockOutlined, Settings,
   PlayCircleOutline, LockOpenOutlined, PauseCircleOutline,
+  KeyboardDoubleArrowDown
   //Add, Remove
 } from '@mui/icons-material/';
 import { Button, Switch } from '@mui/material';
@@ -78,36 +79,43 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   }
 
-  window.onmousemove = function(e: MouseEvent) {
+  window.ontouchmove = function(e: TouchEvent) {
     //console.log("MOOVINGGG")
+    //alert("MOVING")
 
         //console.log("MOVEMENT")
         if (allowMove.current) {
-          if ('touches' in e) { // TOUCH EVENT
+          
             // targetXPosition = imgPo.current.x + (e.touches[0].clientX - arbPos.current.x) * 3 // '* 3' = INCREASE SPEED HERE FOR MOBILE
             // targetYPosition = imgPo.current.y + (e.touches[0].clientY - arbPos.current.y) * 3 // '* 3' = INCREASE SPEED HERE FOR MOBILE
-          } else { // MOUSE EVENT
-            // targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-            // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-            // targetXPosition = imgPo.current.x + (e.clientX - arbPos.current.x) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
-            // targetYPosition = imgPo.current.y + (e.clientY - arbPos.current.y) * 1 // '* 1' = INCREASE SPEED HERE FOR DESKTOP
+            currentPos.current = {
+              x: currentPos.current.x + (e.touches[0].clientX - arbPos.current.x),
+              y: currentPos.current.y + (e.touches[0].clientY - arbPos.current.y),
+            }
 
-            // arbPos.current = { x: e.clientX - arbPos.current.x, y: e.clientY - arbPos.current.y }
+            let iVF = document.getElementById('imageViewerForeground');
+            if (iVF !== null) {
+              iVF.style.transition = `unset`;
+              iVF.style.left = `${currentPos.current.x}px`;
+              iVF.style.top = `${currentPos.current.y}px`;
+            }
 
+            arbPos.current = {
+              x: e.touches[0].clientX,
+              y: e.touches[0].clientY
+            }
 
+          
+        }
 
-            // setCurrentPos((curr) => ({
-            //   x: curr.x + -1,
-            //   y: curr.y + -1,
-            // }))
+  }
 
-            let qq = e.clientX - arbPos.current.x
-            let ww = e.clientY - arbPos.current.y
+  window.onmousemove = function(e: MouseEvent) {
+    //console.log("MOOVINGGG")
+    //alert("MOVING")
 
-            // setCurrentPos((curr) => ({
-            //   x: curr.x + e.clientX - arbPos.current.x,
-            //   y: curr.y + e.clientY - arbPos.current.y
-            // }))
+        //console.log("MOVEMENT")
+        if (allowMove.current) {         
 
             currentPos.current = {
               x: currentPos.current.x + (e.clientX - arbPos.current.x),
@@ -121,28 +129,12 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               iVF.style.top = `${currentPos.current.y}px`;
             }
 
-            // setLeft(curr => curr + qq)
-            // setTop(curr => curr + ww)
-
-            // left = left + qq
-            // top = top + ww
-
-            // setCurrentPos((curr) => ({
-            //   x: curr.x + (e.clientX - arbPos.current.x),
-            //   y: curr.y + (e.clientY - arbPos.current.y),
-            // }))
-
-            //console.log("A VER", arbPos.current.x)
-            //console.log("A VER", e.clientX - arbPos.current.x) // CONTINUE HERE
-
 
             arbPos.current = {
               x: e.clientX,
               y: e.clientY
             }
-
-
-          }
+          
         }
 
   }
@@ -242,7 +234,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   }, [currentIndex, images])
 
 
-  let mouseDown = (e: React.TouchEvent | React.MouseEvent) => {
+  let handlerMouseDown = (e: React.TouchEvent | React.MouseEvent) => {
     //console.log("EEEEE", e.target)
 
     let elOne = document.getElementById('IVBackground');
@@ -264,7 +256,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   }
 
-  let mouseUp = (e: React.TouchEvent | React.MouseEvent) => allowMove.current = false
+  let handlerMouseUp = (e: React.TouchEvent | React.MouseEvent) => {
+    console.log("MOUSE UP")
+    allowMove.current = false
+  }
 
   let targetXPosition
   let targetYPosition
@@ -402,6 +397,15 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   //console.log('playInterval VALUE', playInterval);
   //console.log('playInterval TYPE', typeof playInterval);
 
+  const [ hideBottomBar, setHideBottomBar ] = useState(false)
+//console.log('hideBottomBar --->', hideBottomBar);
+  const handlerSetHideBottomBar = () => setHideBottomBar(!hideBottomBar)
+
+  useEffect(() => { // SHOW-HIDE BOTTOM BAR
+    let bB = document.getElementById('bottomBar');
+    if (bB !== null) hideBottomBar ? bB.style.bottom = `var(--IVBottomBarHidden)` : bB.style.bottom = `var(--IVBottomBarVisible)`
+  }, [hideBottomBar])
+
   const lockSettings = () => {
 
     if (enableButtonsAnimation) root.setProperty('--IVFadeMenu', '0.4s');
@@ -412,7 +416,14 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const handleSetEnableLockZoom = () => setEnableLockZoom(!enableLockZoom)
   const handleSetEnableLockFlip = () => setEnableLockFlip(!enableLockFlip)
   const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
-  const handleShowSettings = () => setShowSettings(!showSettings)
+  const handleShowSettings = () => {
+    setShowSettings(!showSettings)
+    let lS = document.getElementById('lockSettings');
+    if (lS !== null) {
+      lS.style.transition = `bottom 1s`;
+      lS.ontransitionend = () => { if (lS !== null) lS.style.transition = `unset` }
+    }
+  }
 
   const handlerKeyDown = (e: any) => {
 
@@ -747,10 +758,10 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locked, enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate])
 
-  useEffect(() => {
-    let lS = document.getElementById('lockSettings');
-    if (lS !== null) showSettings ? lS.style.bottom = `49px` : lS.style.bottom = `-200px`
-  }, [showSettings])
+  // useEffect(() => {
+  //   let lS = document.getElementById('lockSettings');
+  //   if (lS !== null) showSettings ? lS.style.bottom = `var(--IVSettingsVisible)` : lS.style.bottom = `var(--IVSettingsHidden)`
+  // }, [showSettings])
 
   const MuiButton = ({ style, classButton, onClick, Icon, classIcon, styleIcon, id }: any) => {
     return (
@@ -853,8 +864,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         </defs>
 
         <rect id={css[el.id]} className={css.fade} width={el.width} y="1" height="40" /* fill={`yellow`} */ fill={`url(#background${el.id})`} /> {/* BODY LEFT-RIGHT :nth-child(2) */}
-        <rect id={css[el.id]} className={css.fade} width={el.width} /* width={el.width+0.1} */ height="1.5" fill={`url(#line${el.id})`} shapeRendering="geometricPrecision"/> {/* LINE LEFT-RIGHT (TOP) :nth-child(3) */}
-        <rect id={css[el.id]} className={css.fade} width={el.width} /* width={el.width+0.1} */ height="1.5" y="40.5" fill={`url(#line${el.id})`} shapeRendering="geometricPrecision"/> {/* LINE LEFT-RIGHT (BOTTOM) :nth-child(4) */}
+        <rect id={css[el.id]} className={css.fade} width={el.width+0.1} /* width={el.width+0.1} */ height="1.5" fill={`url(#line${el.id})`} shapeRendering="geometricPrecision"/> {/* LINE LEFT-RIGHT (TOP) :nth-child(3) */}
+        <rect id={css[el.id]} className={css.fade} width={el.width+0.1} /* width={el.width+0.1} */ height="1.5" y="40.5" fill={`url(#line${el.id})`} shapeRendering="geometricPrecision"/> {/* LINE LEFT-RIGHT (BOTTOM) :nth-child(4) */}
 
         <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.5" ry="7.5" fill={el.body.center} clipPath={`url(#centerSide${el.id})`} shapeRendering="geometricPrecision"/> {/* BODY CENTER :nth-child(5) */}
         <rect id={css[el.id]} className={css.fade} width={el.width} height="42" rx="7.2" ry="7.5" fill={el.line.center} clipPath={`url(#upperSide${el.id})`} shapeRendering="geometricPrecision" /> {/* LINE CENTER (TOP) :nth-child(6) */}
@@ -875,7 +886,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
                 <stop id={css[el.id]} className={css.fade} stopColor={el.line.right} />
               </linearGradient>
             </defs>
-            <rect id={css.zoomCrop} width={"84"} y="1" height="40" rx="4.75" ry="6" fill={ enableLockZoom ? el.body.center : el.body.left } clipPath={`url(#zoomCropClipPath)`} shapeRendering="geometricPrecision"/> {/* FAKE ZOOM CROP */}
+            <rect id={css.zoomCrop} width={"84.3"} y="1" height="40" rx="4.75" ry="6" fill={ enableLockZoom ? el.body.center : el.body.left } clipPath={`url(#zoomCropClipPath)`} shapeRendering="geometricPrecision"/> {/* FAKE ZOOM CROP */}
           </>
         }
 
@@ -937,9 +948,11 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     <div
       id={`IVBackground`}
       className={css.IVBackground}
-      onMouseDown={(e) => mouseDown(e)} // MOUSE START
+      onMouseDown={(e) => handlerMouseDown(e)} // MOUSE START
+      onTouchStart={(e) => handlerMouseDown(e)} // MOUSE START
       //onMouseMove={(e) => handlerMouseMove(e)} // MOUSE MOVE
-      onMouseUp={(e) => mouseUp(e)} // MOUSE END
+      onMouseUp={(e) => handlerMouseUp(e)} // MOUSE END
+      onTouchEnd={(e) => handlerMouseUp(e)} // MOUSE END
     >
       <img
         id={`imageViewerForeground`}
@@ -953,7 +966,6 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
         }
         alt=""
       />
-
 
       <div
         id={`bottomBar`}
@@ -1082,7 +1094,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
                 classButton: `${css.button} ${css.iconLock}`,
                 onClick: lockSettings,
                 Icon: [ LockOpenOutlined, LockOutlined ],
-                classIcon: [ css.icon, `${css.icon} ${css.lockOpacity}` ]
+                classIcon: [ css.icon, `${css.icon} ${css.lockOpacity}` ],
+                //id: `settingsButton`
               })
             }
           </div>
@@ -1111,141 +1124,155 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
             { (Math.abs(imageProps.zoomX)).toFixed(1) }x
           </div>
 
-        </div>
-      </div>
+          <div
+            className={css.hideBottomBarButton}
+            onClick={() => handlerSetHideBottomBar()}
+          >
+            <KeyboardDoubleArrowDown fontSize='small' />
+            <KeyboardDoubleArrowDown fontSize='small' />
+            <KeyboardDoubleArrowDown fontSize='small' />
 
-      <div
-        id={`lockSettings`}
-        className={css.lockSettings}
-      >
-        <div className={css.menuLeftMain}>
-          <div
-            id={`menuLeftA`}
-            className={css.menuLeftSub}
-            onClick={(e) => handlerMenuSelect(e)}
-            style={{
-              background:
-                menu.a && locked ?
-                color.active :
-                menu.a ?
-                color.inactive :
-                color.disabled,
-              color:
-                menu.a && locked ?
-                color.disabled :
-                '#ffffff'
-            }}
-          >
-             Lock over:
           </div>
-          <div
-            id={`menuLeftB`}
-            className={css.menuLeftSub}
-            onClick={(e) => handlerMenuSelect(e)}
-            style={{
-              background:
-                menu.b && locked ?
-                color.active :
-                menu.b ?
-                color.inactive :
-                color.disabled,
-              color:
-                menu.b && locked ?
-                color.disabled :
-                '#ffffff'
-            }}
-          >
-             Animation over:
-          </div>
-          <div
-            id={`menuLeftC`}
-            className={css.menuLeftSub}
-            onClick={(e) => handlerMenuSelect(e)}
-            style={{
-              background:
-                menu.c && locked ?
-                color.active :
-                menu.c ?
-                color.inactive :
-                color.disabled,
-              color:
-                menu.c && locked ?
-                color.disabled :
-                '#ffffff'
-            }}
-          >
-             Timings:
-          </div>
+
         </div>
-        <div className={css.menuRightMain}>
-          <div
-            className={css.menuRightSub}
-            style={{
-              display:
-                menu.a ? 'flex' : 'none',
+
+
+        <div
+          id={`lockSettings`}
+          className={css.lockSettings}
+        >
+          <div className={css.menuLeftMain}>
+            <div
+              id={`menuLeftA`}
+              className={css.menuLeftSub}
+              onClick={(e) => handlerMenuSelect(e)}
+              style={{
+                background:
+                  menu.a && locked ?
+                  color.active :
+                  menu.a ?
+                  color.inactive :
+                  color.disabled,
+                color:
+                  menu.a && locked ?
+                  color.disabled :
+                  '#ffffff'
+              }}
+            >
+               Lock over:
+            </div>
+            <div
+              id={`menuLeftB`}
+              className={css.menuLeftSub}
+              onClick={(e) => handlerMenuSelect(e)}
+              style={{
+                background:
+                  menu.b && locked ?
+                  color.active :
+                  menu.b ?
+                  color.inactive :
+                  color.disabled,
+                color:
+                  menu.b && locked ?
+                  color.disabled :
+                  '#ffffff'
+              }}
+            >
+               Animation over:
+            </div>
+            <div
+              id={`menuLeftC`}
+              className={css.menuLeftSub}
+              onClick={(e) => handlerMenuSelect(e)}
+              style={{
+                background:
+                  menu.c && locked ?
+                  color.active :
+                  menu.c ?
+                  color.inactive :
+                  color.disabled,
+                color:
+                  menu.c && locked ?
+                  color.disabled :
+                  '#ffffff'
+              }}
+            >
+               Timings:
+            </div>
+          </div>
+          <div className={css.menuRightMain}>
+            <div
+              className={css.menuRightSub}
+              style={{
+                display:
+                  menu.a ? 'flex' : 'none',
+                  background: locked ? color.active : color.inactive,
+                  color: locked ? color.disabled : '#ffffff'
+              }}
+            >
+              <div className={css.eachSwitch}>
+                { MuiSwitch({ onClick: handleSetEnableLockPosition, checked: enableLockPosition ? true : false }) }
+                 Position
+              </div>
+              <div className={css.eachSwitch}>
+                { MuiSwitch({ onClick: handleSetEnableLockZoom, checked: enableLockZoom ? true : false }) }
+                 Zoom
+              </div>
+              <div className={css.eachSwitch}>
+                { MuiSwitch({ onClick: handleSetEnableLockFlip, checked: enableLockFlip ? true : false }) }
+                 Flip
+              </div>
+              <div className={css.eachSwitch}>
+                { MuiSwitch({ onClick: handleSetEnableLockRotate, checked: enableLockRotate ? true : false }) }
+                 Rotate
+              </div>
+            </div>
+            <div
+              className={css.menuRightSub}
+              style={{
+                display: menu.b ? 'flex' : 'none',
                 background: locked ? color.active : color.inactive,
                 color: locked ? color.disabled : '#ffffff'
-            }}
-          >
-            <div className={css.eachSwitch}>
-              { MuiSwitch({ onClick: handleSetEnableLockPosition, checked: enableLockPosition ? true : false }) }
-               Position
+              }}
+            >
+              <div className={css.eachSwitch}>
+                { MuiSwitch({ onClick: handleSetEnableImageAnimation, checked: enableImageAnimation ? true : false }) }
+                 Image
+              </div>
+              <div className={css.eachSwitch}>
+                { MuiSwitch({ onClick: handleSetEnableButtonsAnimation, checked: enableButtonsAnimation ? true : false }) }
+                 Buttons
+              </div>
             </div>
-            <div className={css.eachSwitch}>
-              { MuiSwitch({ onClick: handleSetEnableLockZoom, checked: enableLockZoom ? true : false }) }
-               Zoom
-            </div>
-            <div className={css.eachSwitch}>
-              { MuiSwitch({ onClick: handleSetEnableLockFlip, checked: enableLockFlip ? true : false }) }
-               Flip
-            </div>
-            <div className={css.eachSwitch}>
-              { MuiSwitch({ onClick: handleSetEnableLockRotate, checked: enableLockRotate ? true : false }) }
-               Rotate
-            </div>
-          </div>
-          <div
-            className={css.menuRightSub}
-            style={{
-              display: menu.b ? 'flex' : 'none',
-              background: locked ? color.active : color.inactive,
-              color: locked ? color.disabled : '#ffffff'
-            }}
-          >
-            <div className={css.eachSwitch}>
-              { MuiSwitch({ onClick: handleSetEnableImageAnimation, checked: enableImageAnimation ? true : false }) }
-               Image
-            </div>
-            <div className={css.eachSwitch}>
-              { MuiSwitch({ onClick: handleSetEnableButtonsAnimation, checked: enableButtonsAnimation ? true : false }) }
-               Buttons
+            <div
+              className={css.menuRightSub}
+              style={{
+                display: menu.c ? 'flex' : 'none',
+                background: locked ? color.active : color.inactive,
+                color: locked ? color.disabled : '#ffffff'
+              }}
+            >
+              <div className={css.eachSwitch3}>
+                Play interval (secs):
+                {
+                  NumberInput({
+                    value: playInterval,
+                    min: minIntervalValue,
+                    max: maxIntervalValue,
+                    def: defIntervalValue
+                  })
+                }
+              </div>
             </div>
           </div>
-          <div
-            className={css.menuRightSub}
-            style={{
-              display: menu.c ? 'flex' : 'none',
-              background: locked ? color.active : color.inactive,
-              color: locked ? color.disabled : '#ffffff'
-            }}
-          >
-            <div className={css.eachSwitch3}>
-              Play interval (secs):
-              {
-                NumberInput({
-                  value: playInterval,
-                  min: minIntervalValue,
-                  max: maxIntervalValue,
-                  def: defIntervalValue
-                })
-              }
-            </div>
-          </div>
+
+
+
         </div>
 
-
-
       </div>
+
+      
     </div>
   )
 }

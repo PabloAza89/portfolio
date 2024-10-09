@@ -7,6 +7,10 @@
   --IVFadeMenu: 0.4s;
   /* --IVLockOpacity: 0; */
   /* --IVLock: rgb(77, 77, 77); */
+  --IVSettingsVisible: 49px;
+  --IVSettingsHidden: -76px;
+  --IVBottomBarVisible: 0px;
+  --IVBottomBarHidden: -49px;
 }
 
 @property --IVLock {
@@ -30,16 +34,29 @@
 
 .IVBackground {
   /* background: green; */ /* DEV */
+  /* position: fixed; */
+  /* position: relative; */
+  display: flex;
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  /* position: absolute; */
+  /* left: 0px;
+  top: 0px; */
+  /* height: 100vh; */
+  /* height: 500px; */
+  /* height: 100%; */
+  /* width: 100vw;
+  height: 100vh; */
+  width: 100%;
+  height: 100%;
   /* background: rgba(0,0,0,0.4); */ /* AROUND IMAGE */
   /* background: rgba(0, 0, 0, 1.0); */
-  background: var(--IVBackgroundOpacity);
   /* background: rgba(0, 0, 0, 1); */
   /* background: black; */
-  z-index: 1000000; /* MORE THAN APP GRAY STRIPS */
-  display: flex;
+  background: var(--IVBackgroundOpacity);
+  /* z-index: 1000000; */ /* MORE THAN APP GRAY STRIPS */
+  z-index: 1000000;
+  /* z-index: 1; */
+  /* display: flex; */
   justify-content: center;
   align-items: center;
 }
@@ -61,6 +78,7 @@
   /* box-sizing: content-box; */
   /* box-sizing: border-box; */
   justify-content: center;
+  transition: bottom var(--IVFade)
 }
 
 .buttonsContainer {
@@ -88,7 +106,8 @@
   /* fill: lightblue; */
   display: flex;
   position: absolute;
-  width: 946px;
+  /* width: 946px; */
+  width: 462px;
   height: 42px;
   /* left: 75px; */
   top: 3.5px;
@@ -137,7 +156,7 @@
 }
 
 .container {
-  background: blue; /* DEV */
+  /* background: blue; */ /* DEV */
   width: 75px;
   align-items: center;
   display: flex;
@@ -236,7 +255,7 @@
 
 .switch {
   /* background: red !important; */ /* DEV */
-  margin-left: 12px;
+  margin-left: 10px;
   width: 38px !important;
   height: 22px !important;
   padding: 0px !important;
@@ -295,7 +314,7 @@
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  margin-left: 12px;
+  /* margin-left: 10px; */
   /* background: red; */ /* DEV */
   height: 36px;
   align-self: center;
@@ -393,20 +412,36 @@
   background: var(--IVBottomBarOpacity);
   display: flex;
   position: absolute;
-  bottom: -200px;
-  transition: bottom 1s;
+  /* bottom: -200px; */
+  /* bottom: -109.5px; */
+  /* bottom: 49px; */
+
+  /* bottom: -76px; */
+  /* bottom: 10%; */
+  /* transition: bottom 1s; */
   /* width: 100%; */
-  width: 300px;
-  height: 200px;
+  /* width: 300px; */
+  /* top: -125px; */
+  top: -10px;
+
+  width: 294px;
+  /* height: 200px; */
+  height: 125px;
   /* top: -500px; */
   padding: 3px 3px 0px 3px;
-  border-radius: 4px 4px 0px 0px;
+  border-radius: 7px 7px 0px 0px;
+  box-sizing: border-box;
 }
 
 .menuLeftMain {
   /* background: lightgreen; */ /* DEV */
-  width: 130px;
-  height: 200px;
+  /* width: 130px; */
+  /* width: 125px; */
+  /* width: 130px; */
+  width: 132px;
+  box-sizing: border-box;
+  /* height: 200px; */
+  height: 122px;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -414,9 +449,10 @@
 }
 
 .menuLeftSub {
-  /* background: lightcoral; */
+  /* background: lightcoral; */ /* DEV */
   /* width: 100px; */
   height: 25px;
+  line-height: 25px;
   display: flex;
   position: relative;
   /* flex-direction: column; */
@@ -430,28 +466,33 @@
 
 .menuRightMain {
   /* background: red; */ /* DEV */
-  width: 170px;
+  /* width: 170px; */
+  /* width: 163px; */
+  width: 158px;
   display: flex;
-  position: relative;
+  /* position: relative; */
+  position: absolute;
+  left: 133px;
   flex-direction: column;
   /* width: fit-content; */
 }
 
 .menuRightSub {
   /* background: red; */ /* DEV */
-  width: 170px;
+  /* width: 170px; */
+  /* width: 163px; */
+  width: 100%;
   /* display: flex; */
   /* position: relative; */
   position: absolute;
   top: 0px;
   right: 0px;
   flex-direction: column;
-  height: 100%;
+  /* height: 100%; */
+  height: 122px;
   border-radius: 0px 4px 0px 0px;
   padding-top: 2px;
-  /* margin-left: 12px; */
-  /* padding-left: 12px; */
-  /* margin-left: 12px; */
+  box-sizing: border-box;
   /* background: #f0f0f0; */
   /* background: var(--IVLock); */
   /* transition: background 2s; */
@@ -460,6 +501,7 @@
 
 .eachSwitch {
   height: 25px;
+  line-height: 25px;
   /* font-size: 16px; */
   /* line-height: 25px; */
   /* background: red; */
@@ -478,15 +520,37 @@
   position: relative;
   flex-direction: column; */
   height: 75px;
-  margin-left: 12px;
+  line-height: 25px;
+  margin-left: 10px;
   /* background: red; */ /* DEV */
 }
+
+.hideBottomBarButton {
+  background: lightblue; /* DEV */
+  display: flex;
+  justify-content: center;
+  /* width: 72px; */ /* 24x3 */
+  width: 70px; /* 20x3 + 10 */
+  height: 20px;
+  grid-column: 15 / 16; grid-row: 1 / 2;
+  /* margin-bottom: 50px; */
+  align-self: start;
+  /* margin-top: -27.5px; */ /* 24 + 3.5 */
+  margin-top: -23.5px; /* 20 + 3.5 */
+}
+
 
 /* and (width < 697px) { */
 /* and (width < 2000px) { */
 
 @media screen
-and (width < 99999999999px) {
+and (width < 697px) {
+
+  :root {
+    --IVSettingsVisible: 109.5px;
+    --IVSettingsHidden: -16px;
+  }
+
   .bottomBar {
     height: 109.5px;
   }
@@ -501,11 +565,17 @@ and (width < 99999999999px) {
     grid-template-rows: repeat(2, 42px); */
     grid-template-columns: repeat(14, 21px);
     grid-template-rows: 40.5px 40.5px 21.5px;
+    
     /* flex-wrap: wrap; */
     /* width: 546px; */
     /* width: 696px; */
 
   }
+
+  /* button[id*="ImageViewerCSS_settingsButton_"]:active > .lockSettings {
+    background: red !important;
+    transition: bottom 1s;
+  } */
 
   .button {
     /* margin: 3.5px !important; */
@@ -562,8 +632,8 @@ and (width < 99999999999px) {
 
   #restorePlay { x: 500px }
   
-  .menuRightSub:nth-child(1) > .eachSwitch:nth-child(1) { /* SEND Position TO BOTTOM */
-    /* order: 1 */
+  .menuRightSub:nth-child(1) > .eachSwitch:nth-child(1) { /* SEND 'Position' TO BOTTOM */
+    order: 1
   }
 
   #zoom:nth-child(3), #zoom:nth-child(4) {  /* DISABLE LEFT TOP & BOTTOM LINE */
@@ -572,74 +642,6 @@ and (width < 99999999999px) {
     /* display: none; */
   }
 
-  #zoom:nth-child(5) { /* *** */ /* BODY CENTER */
-    /* fill: url(#zoomAux2); */ /* SIMULATED STROKE w/ BORDER-RADIUS */
-    /* fill: orange; */ /* OK */
-    /* fill: url(#zoomBodyLinearGradient); */ /* OK */
-    /* clip-path: none */ /* OK OK REMOVE CLIP-PATH ON BODY */
-    /* clip-path: url(#testbbb) */
-    /* clip-path: url(#zoomAux3); */ /* CUT RIGHT SIDE */
-  }
-
-  #zoom:nth-child(4) {
-    /* fill: rgb(158, 158, 158); */
-    /* fill: red; */
-  }
-
-  #zoom:nth-child(2), #flip:nth-child(2) {
-    /* fill: rgb(158, 158, 158); */
-    /* fill: yellow; */
-    /* height: 41.8px */
-  }
-
-  #flip:nth-child(5) {
-    /* fill: rgb(158, 158, 158); */
-    /* fill: yellow; */
-    /* height: 41.8px;
-    rx: 6.9px; */
-  }
-
-  #zoom:nth-child(4) {
-    /* fill: rgb(158, 158, 158); */
-    /* height: 1.4px */
-    /* fill: yellow; */
-  }
-
-  #flip:nth-child(5) {
-    /* fill: rgb(158, 158, 158); */
-    /* fill: yellow; */
-  }
-
-  #pos:nth-child(4) {
-    /* fill: rgb(158, 158, 158); */
-    /* fill: yellow; */
-  }
-
-  #zoom:nth-child(2) {
-    /* fill: rgb(77, 77, 77); */
-    /* fill: rgb(158, 158, 158); */
-    /* fill: yellow; */
-    /* width: 42px; */
-    /* x: 78px; */
-    /* display: none; */
-    /* shape-rendering: geometricPrecision; */
-    /* width: 100px; */
-  }
-
-  /* LINE CENTER TOP & LINE CENTER BOTTOM */
-  /* #zoom:nth-child(6), #zoom:nth-child(7) {
-    display: none
-  } */
-
-  #zoomCrop, #posHelper {
-    /* display: inline; */
-    /* transition: opacity var(--IVFade); */
-    /* display: none; */
-  }
-
-  #posHelper {
-    /* transition: opacity var(--IVFade); */
-  }
 
   #pos:nth-child(6), #pos:nth-child(7) {
     /* fill: rgb(158, 158, 158); */
@@ -674,15 +676,4 @@ and (width < 99999999999px) {
     display: inline;
     transition: fill var(--IVFade);
   }
-
-  /* #zoom:nth-child(1),
-  #zoom:nth-child(2),
-  #zoom:nth-child(3),
-  #zoom:nth-child(5),
-  #zoom:nth-child(6),
-  #zoom:nth-child(7),
-  #zoom:nth-child(8) {
-    display: none;
-  } */
-
 }
