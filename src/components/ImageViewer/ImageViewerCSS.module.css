@@ -9,8 +9,8 @@
   /* --IVLock: rgb(77, 77, 77); */
   /* --IVSettingsVisible: 49px;
   --IVSettingsHidden: -76px; */
-  --IVSettingsVisible: -125px;
-  --IVSettingsHidden: 0px;
+  --IVSettingsVisible: -125px; /* CURRENT SETTINGS HEIGHT */
+  --IVSettingsHidden: 0px; /* SETTINGS HIDDEN */
   --IVBottomBarVisible: 0px;
   --IVBottomBarHidden: -49px;
 }
@@ -61,6 +61,7 @@
   /* display: flex; */
   justify-content: center;
   align-items: center;
+  /* display: none; */
 }
 
 
@@ -434,12 +435,15 @@
   padding: 3px 3px 0px 3px;
   border-radius: 7px 7px 0px 0px;
   box-sizing: border-box;
+
+  top: 0px; /* DEFAULT HIDDEN POSITION */
   /* z-index: -1; */
   /* z-index: 1000000; */
   /* z-index: 999999 !important; */
   /* z-index: 1000001; */
   z-index: -1;
-  transition: top var(--IVFade)
+  transition: top var(--IVFade);
+  /* transition: top 1s; */
 }
 
 .menuLeftMain {
@@ -547,6 +551,7 @@
   /* margin-top: -27.5px; */ /* 24 + 3.5 */
   margin-top: -23.5px; /* 20 + 3.5 */
 }
+
 
 
 /* and (width < 697px) { */
@@ -686,5 +691,34 @@ and (width < 697px) {
     /* display: none; */
     display: inline;
     transition: fill var(--IVFade);
+  }
+}
+
+@media screen
+and (width < 435px) { /* 70 + 294 + 70 */
+  .hideBottomBarButton {
+    width: 50px; /* 20x2 + 10 */
+  }
+  .hideBottomBarButton > svg:nth-child(1) {
+    display: none;
+  }
+}
+
+@media screen
+and (width < 395px) { /* 50 + 294 + 50 */
+  .hideBottomBarButton {
+    width: 30px; /* 20x1 + 10 */
+  }
+  .hideBottomBarButton > svg:nth-child(1), .hideBottomBarButton > svg:nth-child(2) {
+    display: none;
+  }
+}
+
+@media screen
+and (width < 355px) { /* 30 + 294 + 30 */
+  .hideBottomBarButton {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
   }
 }

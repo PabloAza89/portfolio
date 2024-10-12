@@ -43,7 +43,8 @@ export interface ImageViewerI {
   controlsOutside?: boolean,
   disableAnimation?: boolean,
   timing?: number,
-  mode?: string
+  mode?: string,
+  display?: { display: boolean }
 }
 
 export interface operationI {

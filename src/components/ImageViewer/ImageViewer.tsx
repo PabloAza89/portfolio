@@ -1,5 +1,5 @@
 import React, {
-  ReactElement, useEffect, useLayoutEffect, useState, /* EventTarget, */ useRef, ReactNode, /* MouseEvent, */ /* TouchEvent */
+  ReactElement, useEffect, Fragment, useLayoutEffect, useState, /* EventTarget, */ useRef, ReactNode, /* MouseEvent, */ /* TouchEvent */
 } from 'react';
 import css from './ImageViewerCSS.module.css';
 //import './testTest.css';
@@ -14,31 +14,93 @@ import { Button, Switch } from '@mui/material';
 import {
   ImageViewerI, operationI, comparisonI, currentZoomI
 } from '../../interfaces/interfaces';
-//import { consoleCSSParser } from './consoleCSSParser';
+import { consoleCSSParser } from './consoleCSSParser';
 import { Input } from '@mui/base/Input';
 
-export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside, disableAnimation, timing, mode }: ImageViewerI): ReactElement => {
+export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside, disableAnimation, timing, mode, display }: ImageViewerI): ReactElement => {
 
-  // useEffect(() => {
-  //   const $style = document.createElement("style");
-  //   document.head.appendChild($style);
-  //   $style.innerHTML = `#testTest { fill: red }`;
-  // }, []);
+  //console.log("INDEX", index)
 
-  // let clickOnBG = useRef({ // CLICK ON BACKGROUND MODAL
-  //   start: false, // CLICK BEGINS ON BG MODAL
-  //   end: false    // CLICK ENDS ON BG MODAL
-  // })
+  useEffect(() => { // CONSOLE WARNING
+    if (images === undefined || images.length === 0) {  // NO images[] ARRAY PROVIDED
+      let eachRowText: string[] = [
+        `Please, provide an array with imported images as property`,
+        `to handle the images to be shown. e.g.:`,
+        `  import image1 from '../../images/image1.png'`,
+        `  import image2 from '../../images/image2.jpg'`,
+        `  <ImageViewer`,
+        `    images={[image1, image2]}`,
+        `  />`
+      ]
+      console.log.apply(null, consoleCSSParser(eachRowText))
+    }
+
+  },[images])
+
+  useEffect(() => { // CONSOLE WARNING
+    if (index === undefined) {  // NO index (of images[] ↑↑↑) PROVIDED
+      //console.log("ENTRO ACA")
+      let eachRowText: string[] = [
+        `Please, provide an index for the image to be shown`,
+        `from the images[] array property. Otherwise images[0] of`,
+        `provided array always will be shown. e.g.:`,
+        `  import image1 from '../../images/image1.png'`,
+        `  import image2 from '../../images/image2.jpg'`,
+        `  <ImageViewer`,
+        `    images={[image1, image2]}`,
+        `    index={1}`,
+        `  />`,
+        `  `,
+        ` ** Will display images[1] (image2.jpg) on ImageViewer Component **`
+      ]
+      console.log.apply(null, consoleCSSParser(eachRowText))
+    }
+  },[index])
+
+  useEffect(() => { // CONSOLE WARNING
+    if (
+
+      !(typeof display === 'object' && !Array.isArray(display))
+
+    ) { // NO { display: boolean } OBJECT PROVIDED
+      let eachRowText: string[] = [
+        `Please, provide a { display: boolean } object as display property`,
+        `to handle show/hide ImageViewer component. e.g.:`,
+        `  const [ showImageViewer, setShowImageViewer ] = useState({ display: true })`,
+        `  return (`,
+        `    <ImageViewer`,
+        `      display={showImageViewer}`,
+        `    />`,
+        `  )`
+      ]
+      console.log.apply(null, consoleCSSParser(eachRowText))
+    }
+  },[display])
+
+
+
+  let clickOnBG = useRef({ // CLICK ON (BLACK) BACKGROUND MODAL
+    start: false, // CLICK BEGINS ON BG MODAL
+    end: false,    // CLICK ENDS ON BG MODAL
+    timestamp: 0
+  })
 
   // useEffect(() => { // DISABLES MOUSE (DESKTOP) EVENT WHEN MOUSE DRAG LEAVE CANVAS
   //   let canvas = document.getElementById('canvasImage')
   //   if (canvas !== null) canvas.onmouseout = function() { allowMove.current = false }
   // }, [])
 
-  // window.onmousedown = function(e) {
+
+
+  // window.onmouseup = function(e) {
+  //   console.log("AAA 2")
   //   let modalDiv = document.getElementById('IVBackground');
-  //   if (e.target === modalDiv) clickOnBG.current.start =  true
-  //   else clickOnBG.current.start =  false
+  //   if (e.target === modalDiv) clickOnBG.current.end =  true
+  //   else clickOnBG.current.end =  false
+  //   if (clickOnBG.current.start && clickOnBG.current.end) {
+  //     //setShowImageViewer(false)
+  //     handlerCloseImageViewer()
+  //   }
   // }
 
   // window.onmousedown = function(e) {
@@ -56,12 +118,28 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
   window.onmouseup = function(e: MouseEvent) {
-    allowMove.current = false // STOP DRAG & MOUSE UP OUTSIDE WINDOW
-    let iVF = document.getElementById('imageViewerForeground');
-    if (iVF !== null) {
-      if (enableImageAnimation) iVF.style.transition = `transform .2s`;
-      else iVF.style.transition = `unset`;
+    
+
+    const modalDiv = document.getElementById('IVBackground');
+    if (modalDiv !== null) { // ONLY TRIGGER WHEN ImageViewer IS SHOWN
+
+      // CLICK UP ON (BLACK) BACKGROUND MODAL HANDLER // ONLY WHEN CLIP DOWN+UP IS LESS THAN 300ms
+      if (e.target === modalDiv) clickOnBG.current.end =  true
+      else clickOnBG.current.end =  false
+      if (clickOnBG.current.start && clickOnBG.current.end && (Date.now() - clickOnBG.current.timestamp) < 300) handlerCloseImageViewer()
+      // CLICK UP ON (BLACK) BACKGROUND MODAL HANDLER
+
+      allowMove.current = false // STOP DRAG & MOUSE UP OUTSIDE WINDOW
+      let iVF = document.getElementById('imageViewerForeground');
+      if (iVF !== null) {
+        if (enableImageAnimation) iVF.style.transition = `transform .2s`;
+        else iVF.style.transition = `unset`;
+      }
+
     }
+
+
+
   }
 
   window.ontouchend = function(e: TouchEvent) {
@@ -70,20 +148,20 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   window.onmousedown = function(e: MouseEvent) {
 
-    let setInterval = document.getElementById('IVSetInterval');
+    const modalDiv = document.getElementById('IVBackground');
+    if (modalDiv !== null) { // ONLY TRIGGER WHEN ImageViewer IS SHOWN
 
-    let parent = (e.target as HTMLElement).parentNode
-    if (parent !== null && parent !== setInterval && parent.parentNode !== setInterval) {
-      console.log("AFUERA") // CLICK OUTSIDE IVSetInterval
-
-      setPlayInterval(curr => {
-        return (
-          curr === "" ?
-          (defIntervalValue).toFixed(1) :
-          parseFloat(curr).toFixed(1)
-        )
-      })
-
+      let setInterval = document.getElementById('IVSetInterval');
+      let parent = (e.target as HTMLElement).parentNode
+      if (parent !== null && parent !== setInterval && parent.parentNode !== setInterval) { // PARSE CORRECT playInterval VALUE
+        setPlayInterval(curr => {
+          return (
+            curr === "" ?
+            (defIntervalValue).toFixed(1) :
+            parseFloat(curr).toFixed(1)
+          )
+        })
+      }
     }
 
   }
@@ -123,6 +201,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     //console.log("MOOVINGGG")
     //alert("MOVING")
 
+    clickOnBG.current.start = false // DISABLE CLICK ON (BLACK) BACKGROUND MODAL WHEN DRAG
+
         //console.log("MOVEMENT")
         if (allowMove.current) {         
 
@@ -148,16 +228,14 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
   }
 
-  // window.onmouseup = function(e) {
-  //   let modalDiv = document.getElementById('IVBackground');
-  //   if (e.target === modalDiv) clickOnBG.current.end =  true
-  //   else clickOnBG.current.end =  false
-  //   if (setShowImageViewer !== undefined && clickOnBG.current.start && clickOnBG.current.end) {
-  //     setShowImageViewer(false)
-  //   }
-  // }
 
+
+  
+  //console.log("index FIRST", index)
+  //const [ currentIndex, setCurrentIndex ] = useState<number>(index!)
   const [ currentIndex, setCurrentIndex ] = useState<number>(index !== undefined ? index : 0)
+  //console.log("index currentIndex DESPUES", currentIndex)
+
 
   const [ imageProps, setImageProps ] = useState({
     zoomX: 1.0,
@@ -166,7 +244,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   })
 
   //console.log("zoomX", imageProps.zoomX)
-  console.log("zoomX", Math.abs(imageProps.zoomX).toFixed(1))
+  //console.log("zoomX", Math.abs(imageProps.zoomX).toFixed(1))
 
   //console.log("zoomX", imageProps.zoomX)
 
@@ -187,13 +265,19 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   let arbPos = useRef({ x: 0, y: 0 }) // ARBITRARY POSITION
 
   useEffect(() => { // LOAD NEW IMAGE
-    console.log("ENTRO ACA")
+    console.log("LOAD NEW IMAGE")
 
     // if (locked) {
 
     // } else {
     //   handleRestoreWithoutAnimation()
     // }
+
+    imageRef.current = new Image()
+
+    console.log("INDEX 2", index)
+    console.log("INDEX currentIndex", currentIndex)
+
 
     if (images !== undefined && currentIndex !== undefined) {
       imageRef.current.src = images[currentIndex]
@@ -243,11 +327,24 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   }, [currentIndex, images])
 
 
-  let handlerMouseDown = (e: React.TouchEvent | React.MouseEvent) => {
+  let handlerMouseAndTouchDown = (e: React.TouchEvent | React.MouseEvent) => {
     //console.log("EEEEE", e.target)
+    //console.log("AAAAAAAAAAAAAAAAAAA")
+
+    // CLICK DOWN ON (BLACK) BACKGROUND MODAL HANDLER
+    let modalDiv = document.getElementById('IVBackground');
+    if (e.target === modalDiv) {
+      clickOnBG.current.start =  true
+      clickOnBG.current.timestamp = Date.now();
+    }
+    else clickOnBG.current.start = false
+    // CLICK DOWN ON (BLACK) BACKGROUND MODAL HANDLER
+
 
     let elOne = document.getElementById('IVBackground');
     let elTwo = document.getElementById('imageViewerForeground');
+
+    //if (e.target === elOne) console.log("AAAAAAAAAAAAAAAAAAA")
 
     if (e.target === elOne || e.target === elTwo) { //console.log("RIGHT CLICKED !")
       //console.log("MOUSE DOWN")
@@ -387,7 +484,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const [ locked, setLocked ] = useState(false)
   //const [ locked, setLocked ] = useState(true)
   //const [ showSettings, setShowSettings ] = useState(false)
-  const [ showSettings, setShowSettings ] = useState(true)
+  const [ showSettings, setShowSettings ] = useState(false) // false DEFAULT VALUE
   const [ enableLockPosition, setEnableLockPosition ] = useState(true)
 
   const [ enableLockZoom, setEnableLockZoom ] = useState(true)
@@ -411,6 +508,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const handlerSetHideBottomBar = () => {
 
     //!hideBottomBar && setShowSettings(false)
+    //console.log("ENTRO EN ESTE")
     showSettings && handleShowSettings()
 
     setHideBottomBar(!hideBottomBar)
@@ -437,6 +535,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const handleSetEnableLockFlip = () => setEnableLockFlip(!enableLockFlip)
   const handleSetEnableLockRotate = () => setEnableLockRotate(!enableLockRotate)
   const handleShowSettings = () => {
+    console.log("ENTRO EN ESTE")
     setShowSettings(!showSettings)
     // let lS = document.getElementById('lockSettings');
     // if (lS !== null) {
@@ -777,9 +876,14 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locked, enableLockPosition, enableLockZoom, enableLockFlip, enableLockRotate])
 
-  useEffect(() => {
+  useEffect(() => { // LOCK SETTINGS POSITION & TRANSITION HANDLER
     let lS = document.getElementById('lockSettings');
-    if (lS !== null) showSettings ? lS.style.top = `var(--IVSettingsVisible)` : lS.style.top = `var(--IVSettingsHidden)`
+    if (lS !== null) {
+      showSettings ? lS.style.top = `var(--IVSettingsVisible)` : lS.style.top = `var(--IVSettingsHidden)`
+      lS.style.transition = `top var(--IVFade)`;
+      //lS.ontransitionend = () => { if (lS !== null) lS.style.transition = `unset` }
+    }
+
   }, [showSettings])
 
   const MuiButton = ({ style, classButton, onClick, Icon, classIcon, styleIcon, id }: any) => {
@@ -975,12 +1079,53 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     setArrow(<KeyboardDoubleArrowUp fontSize='small' />)
   }
 
+  //let currVal: any
+  //let currVal = useRef<any>(display)
+  const [shouldDisplay, setShouldDisplay] = useState<any>(false)
+
+  useEffect(() => {
+    //console.log("A VER ESTE", display)
+    //console.log("A VER ESTE", currVal)
+    //console.log("ENTRO ACA ASD")
+    //currVal = display
+    //currVal.current = display
+     // display = { display: boolean }
+    if (typeof display === 'object' && !Array.isArray(display)) {
+      setCurrentIndex(index !== undefined ? index : 0) // UPDATE OUTER INDEX
+      setShouldDisplay(display.display)
+    }
+    else setShouldDisplay(true) // BY DEFAULT, ImageViewer IS SHOWN
+
+  }, [display, index])
+
+  //console.log("A VER ESTE", currVal)
+
+  const handlerCloseImageViewer = () => {
+    //currVal.current = false
+    //setCurrVal(false)
+    //clearInterval(interval.current) // CLEAR playInterval
+    setSlideStarted(false) // STOPS SLIDESHOW
+    setShowSettings(false) // HIDE SETTINGS MENU
+    handlerRestore()
+    setShouldDisplay(false)
+    //display = false
+  }
+
+  // console.log("currVal", shouldDisplay)
+  // console.log("display", display)
+
+  // useEffect(() => { // IF ImageViewer IS SHOWN, 
+  //   shouldDisplay && 
+  // }, [index, shouldDisplay])
+  
+
   return (
+    shouldDisplay ?
     <div
       id={`IVBackground`}
       className={css.IVBackground}
-      onMouseDown={(e) => handlerMouseDown(e)} // MOUSE START
-      onTouchStart={(e) => handlerMouseDown(e)} // MOUSE START
+      onMouseDown={(e) => handlerMouseAndTouchDown(e)} // MOUSE START
+      onTouchStart={(e) => handlerMouseAndTouchDown(e)} // MOUSE START
       //onMouseUp={(e) => handlerMouseUp(e)} // MOUSE END
       //onTouchEnd={(e) => handlerMouseUp(e)} // MOUSE END
     >
@@ -1143,7 +1288,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           {
             MuiButton({ // CLOSE
               classButton: css.button,
-              onClick: setShowImageViewer,
+              //onClick: setShowImageViewer,
+              onClick: handlerCloseImageViewer,
               Icon: Close,
               classIcon: css.icon,
               id: css.closeButton
@@ -1301,6 +1447,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       </div>
 
       
-    </div>
+    </div> :
+    <Fragment />
   )
 }

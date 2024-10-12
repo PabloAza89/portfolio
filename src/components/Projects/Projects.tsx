@@ -28,7 +28,12 @@ function Projects() {
   const imageClickHandler = (e: MouseEvent, m: string) => {
     e.preventDefault();
     if (scrollEl.current.allow) {
-      setShowImageViewer(true);
+      //setShowImageViewer({val:true});
+      //setShowImageViewer({true});
+      //setShowImageViewer(cutrue);
+      //showImageViewer = {val:true}
+      setShowImageViewer({ display: true })
+      //setShowImageViewer((curr) => ({val: true}));
       setIndex(array.map(e => e.media).flat().indexOf(m))
     }
   }
@@ -200,7 +205,9 @@ function Projects() {
   }
 
   const [ index, setIndex ] = useState(0)
-  const [ showImageViewer, setShowImageViewer ] = useState(false)
+  const [ showImageViewer, setShowImageViewer ] = useState({ display: false })
+  //const [ showImageViewer, setShowImageViewer ] = useState({"false"})
+  //let showImageViewer = {val:false}
 
   return (
     <div
@@ -344,12 +351,22 @@ function Projects() {
         </div>
       </div>
 
-      {
+      { // true
         /* showImageViewer && */
         <ImageViewer
           images={array.map(e => e.media).flat()} // OK
           index={index} // DEFAULT 0
-          setShowImageViewer={setShowImageViewer} // OK
+          //setShowImageViewer={setShowImageViewer} // OK
+          //setShowImageViewer={setShowImageViewer} // OK
+          //display={{"asd"}}
+          display={showImageViewer}
+          //display={undefined}
+          //display={{ display: true }}
+          //display={{display:true}}
+          //display={{display: false}}
+          //display={{display: true}}
+          //display={{display: true}}
+          
           //disableAnimation={true} // DEFAULT FALSE
           //timing={10} // DEFAULT 10
           //mode={"vertical"} // vertical | horizontal | auto // DEFAULT AUTO
