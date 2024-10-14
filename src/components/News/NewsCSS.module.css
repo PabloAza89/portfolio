@@ -17,12 +17,13 @@
 
 .background {
   display: flex !important;
-  position: fixed;
-  z-index: 2001 !important;
+  /* position: fixed; */
+  position: absolute;
+  /* z-index: 2001 !important; */
   width: 35px !important;
   height: 35px !important;
-  left: 20px !important;
-  bottom: 20px !important;
+  left: 14px !important;
+  bottom: 14px !important;
   /* background: yellow !important; */ /* DEV */
   border-radius: 4px;
   -webkit-touch-callout: none;
@@ -31,6 +32,8 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  /* z-index: -1 !important; */
+  /* display: none !important; */
 }
 
 .buttonSettings {

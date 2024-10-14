@@ -44,6 +44,7 @@
   scrollbar-width: thin;
   scrollbar-color: var(--scrollThumb) var(--scrollTrack);
   transition: scrollbar-color 1s;
+  overflow: hidden;
 }
 
 .mainContainer {

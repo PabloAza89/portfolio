@@ -32,9 +32,10 @@ function Projects() {
       //setShowImageViewer({true});
       //setShowImageViewer(cutrue);
       //showImageViewer = {val:true}
-      setShowImageViewer({ display: true })
+      //setShowImageViewer({ display: true })
       //setShowImageViewer((curr) => ({val: true}));
-      setIndex(array.map(e => e.media).flat().indexOf(m))
+      //setIndex(array.map(e => e.media).flat().indexOf(m))
+      setIndex({ index: array.map(e => e.media).flat().indexOf(m) })
     }
   }
 
@@ -204,10 +205,15 @@ function Projects() {
     }
   }
 
-  const [ index, setIndex ] = useState(0)
+  const [ index, setIndex ] = useState({ index: 0 })
   const [ showImageViewer, setShowImageViewer ] = useState({ display: false })
   //const [ showImageViewer, setShowImageViewer ] = useState({"false"})
   //let showImageViewer = {val:false}
+
+  //let qq = array.map(e => e.media).flat()
+
+  const [ qq, setqq ] = useState(array.map(e => e.media).flat())
+  //const qq = array.map(e => e.media).flat()
 
   return (
     <div
@@ -354,14 +360,19 @@ function Projects() {
       { // true
         /* showImageViewer && */
         <ImageViewer
-          images={array.map(e => e.media).flat()} // OK
-          index={index} // DEFAULT 0
+          images={qq} // OK
+          //images={array.map(e => e.media).flat()} // OK
+          //index={index} // DEFAULT 0
+          //display={{index: index}} // DEFAULT 0
+          display={index} // DEFAULT 0
+          //display={{index: 4}} // DEFAULT 0
           //setShowImageViewer={setShowImageViewer} // OK
           //setShowImageViewer={setShowImageViewer} // OK
           //display={{"asd"}}
-          display={showImageViewer}
-          //display={undefined}
+          //display={showImageViewer}
           //display={{ display: true }}
+          //display={undefined}
+          
           //display={{display:true}}
           //display={{display: false}}
           //display={{display: true}}

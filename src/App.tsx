@@ -54,10 +54,6 @@ function App() {
           </>}/>
         </Routes>
       </div>
-      <div className={`${css.grey} ${css.leftRight} ${css.left}`} />
-      <div className={`${css.grey} ${css.leftRight} ${css.right}`} />
-      <div className={`${css.grey} ${css.topBottom} ${css.top}`} />
-      <div className={`${css.grey} ${css.topBottom} ${css.bottom}`} />
     </div>
   );
 }

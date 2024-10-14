@@ -38,13 +38,12 @@ export interface arraySkillsI {
 
 export interface ImageViewerI {
   images?: string[],
-  index?: number,
   setShowImageViewer?: Dispatch<SetStateAction<boolean>>,
   controlsOutside?: boolean,
   disableAnimation?: boolean,
   timing?: number,
   mode?: string,
-  display?: { display: boolean }
+  display?: { index: number }
 }
 
 export interface operationI {

@@ -9,13 +9,16 @@
 }
 
 .background {
-  display: flex;
-  position: fixed;
-  justify-content: space-evenly;
   /* background: darkred; */ /* DEV */
-  height: 100vh;
+  display: flex;
+  /* position: fixed; */
+  position: absolute;
+  justify-content: space-evenly;
   width: 100vw;
+  /* height: 100vh; */
+  height: calc(100vh - 12px);
   left: 0px;
+  /* overflow: hidden; */
 }
 
 .eachCircle {

@@ -17,9 +17,50 @@ import {
 import { consoleCSSParser } from './consoleCSSParser';
 import { Input } from '@mui/base/Input';
 
-export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside, disableAnimation, timing, mode, display }: ImageViewerI): ReactElement => {
+export const ImageViewer = ({ images, display, setShowImageViewer, controlsOutside, disableAnimation, timing, mode/* , display */ }: ImageViewerI): ReactElement => {
 
-  //console.log("INDEX", index)
+  //let currVal: any
+  //let currVal = useRef<any>(display)
+  //const [shouldDisplay, setShouldDisplay] = useState<any>(false)
+  const [shouldDisplay, setShouldDisplay] = useState<any>({
+    once: false,
+    next: false,
+  })
+
+  console.log("DISPLAY", display)
+
+  const [ displayUnlocked, setDisplayUnlocked ] = useState(false)
+
+  const checkIndex = () => {
+    if (
+      images !== undefined && display !== undefined &&
+      display.index !== undefined && display.index < images.length &&
+      Number.isInteger(display.index) && display.index > -1
+    ) return display.index
+    else return 0
+  }
+
+  useEffect(() => { // EXECUTED ONLY ONCE
+    console.log("111111111111")
+    setShouldDisplay((curr:any) => ({ ...curr, once: true }))
+  }, [])
+
+  useEffect(() => { // EXECUTED NEXT TIMES
+    console.log("ENTRO 123")
+    if (shouldDisplay.once) {
+      console.log("44444444444")
+      setCurrentIndex(checkIndex())
+      setShouldDisplay((curr:any) => ({ ...curr, next: true }))
+    }
+  }, [display]) // eslint-disable-line
+
+  // useEffect(() => {
+  //   console.log("ENTRO ASDASDASD")
+  // }, [images])
+
+ 
+
+  console.log('shouldDisplay --->', shouldDisplay);
 
   useEffect(() => { // CONSOLE WARNING
     if (images === undefined || images.length === 0) {  // NO images[] ARRAY PROVIDED
@@ -38,38 +79,18 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   },[images])
 
   useEffect(() => { // CONSOLE WARNING
-    if (index === undefined) {  // NO index (of images[] ↑↑↑) PROVIDED
-      //console.log("ENTRO ACA")
-      let eachRowText: string[] = [
-        `Please, provide an index for the image to be shown`,
-        `from the images[] array property. Otherwise images[0] of`,
-        `provided array always will be shown. e.g.:`,
-        `  import image1 from '../../images/image1.png'`,
-        `  import image2 from '../../images/image2.jpg'`,
-        `  <ImageViewer`,
-        `    images={[image1, image2]}`,
-        `    index={1}`,
-        `  />`,
-        `  `,
-        ` ** Will display images[1] (image2.jpg) on ImageViewer Component **`
-      ]
-      console.log.apply(null, consoleCSSParser(eachRowText))
-    }
-  },[index])
-
-  useEffect(() => { // CONSOLE WARNING
     if (
 
-      !(typeof display === 'object' && !Array.isArray(display))
+      display === undefined
 
-    ) { // NO { display: boolean } OBJECT PROVIDED
+    ) { // NO { index: number } OBJECT PROVIDED
       let eachRowText: string[] = [
-        `Please, provide a { display: boolean } object as display property`,
+        `Please, provide a { index: number } object as display property`,
         `to handle show/hide ImageViewer component. e.g.:`,
-        `  const [ showImageViewer, setShowImageViewer ] = useState({ display: true })`,
+        `  const [ currIndex, setCurrIndex ] = useState({ index: 0 })`,
         `  return (`,
         `    <ImageViewer`,
-        `      display={showImageViewer}`,
+        `      display={currIndex}`,
         `    />`,
         `  )`
       ]
@@ -233,7 +254,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   
   //console.log("index FIRST", index)
   //const [ currentIndex, setCurrentIndex ] = useState<number>(index!)
-  const [ currentIndex, setCurrentIndex ] = useState<number>(index !== undefined ? index : 0)
+  const [ currentIndex, setCurrentIndex ] = useState<number>(checkIndex())
   //console.log("index currentIndex DESPUES", currentIndex)
 
 
@@ -275,7 +296,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
     imageRef.current = new Image()
 
-    console.log("INDEX 2", index)
+    //console.log("INDEX 2", display.index)
     console.log("INDEX currentIndex", currentIndex)
 
 
@@ -324,7 +345,9 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
 
 
     handlerAnimationTransition()
-  }, [currentIndex, images])
+  //}, [currentIndex, images])
+  }, [display])
+  
 
 
   let handlerMouseAndTouchDown = (e: React.TouchEvent | React.MouseEvent) => {
@@ -703,6 +726,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   const interval = useRef<ReturnType<typeof setInterval>>();
 
   useEffect(() => { // SLIDE TRANSITION ICON & INTERVAL HANDLER
+    console.log("AQUI")
     clearInterval(interval.current) // CLEAR INTERVAL IF playInterval CHANGES..
     if (slideStarted) {
       root.setProperty('--IVPlayOpacity', '0')
@@ -720,6 +744,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
       root.setProperty('--IVPlayOpacity', '1')
       clearInterval(interval.current)
     }
+    handlerAnimationTransition()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slideStarted, playInterval, currentIndex])
 
@@ -880,7 +905,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     let lS = document.getElementById('lockSettings');
     if (lS !== null) {
       showSettings ? lS.style.top = `var(--IVSettingsVisible)` : lS.style.top = `var(--IVSettingsHidden)`
-      lS.style.transition = `top var(--IVFade)`;
+      //lS.style.transition = `top var(--IVFade)`;
       //lS.ontransitionend = () => { if (lS !== null) lS.style.transition = `unset` }
     }
 
@@ -1079,24 +1104,23 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     setArrow(<KeyboardDoubleArrowUp fontSize='small' />)
   }
 
-  //let currVal: any
-  //let currVal = useRef<any>(display)
-  const [shouldDisplay, setShouldDisplay] = useState<any>(false)
+  
 
   useEffect(() => {
     //console.log("A VER ESTE", display)
     //console.log("A VER ESTE", currVal)
-    //console.log("ENTRO ACA ASD")
+    console.log("ENTRO ACA ASD")
     //currVal = display
     //currVal.current = display
      // display = { display: boolean }
     if (typeof display === 'object' && !Array.isArray(display)) {
-      setCurrentIndex(index !== undefined ? index : 0) // UPDATE OUTER INDEX
-      setShouldDisplay(display.display)
+      //setCurrentIndex(display.index !== undefined ? display.index : 0) // UPDATE OUTER INDEX
+      //setShouldDisplay(display.display)
+      //setShouldDisplay(true)
     }
-    else setShouldDisplay(true) // BY DEFAULT, ImageViewer IS SHOWN
+    //else setShouldDisplay(true) // BY DEFAULT, ImageViewer IS SHOWN
 
-  }, [display, index])
+  }, [/* display, index *//* display.index */])
 
   //console.log("A VER ESTE", currVal)
 
@@ -1107,7 +1131,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     setSlideStarted(false) // STOPS SLIDESHOW
     setShowSettings(false) // HIDE SETTINGS MENU
     handlerRestore()
-    setShouldDisplay(false)
+    //setShouldDisplay(false)
+    setShouldDisplay((curr:any) => ({ ...curr, next: false }))
     //display = false
   }
 
@@ -1120,7 +1145,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
   
 
   return (
-    shouldDisplay ?
+    shouldDisplay.once && shouldDisplay.next ?
     <div
       id={`IVBackground`}
       className={css.IVBackground}
@@ -1131,8 +1156,8 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
     >
       <img
         id={`imageViewerForeground`}
-        ref={imageRef}
         className={css.imageViewerForeground}
+        ref={imageRef}
         onDragStart={(e) => e.preventDefault()}
         src={
           images !== undefined ?
@@ -1180,7 +1205,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
           </div>
 
           {[
-            MuiButton({ // GO LEFT
+            MuiButton({ // LEFT
               classButton: css.button,
               onClick: handlerGoLeft,
               Icon: Forward,
@@ -1188,7 +1213,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               id: css.goLeftButton
             }),
 
-            MuiButton({ // GO RIGHT
+            MuiButton({ // RIGHT
               classButton: css.button,
               onClick: handlerGoRight,
               Icon: Forward,
@@ -1415,7 +1440,7 @@ export const ImageViewer = ({ images, index, setShowImageViewer, controlsOutside
               </div>
               <div className={css.eachSwitch}>
                 { MuiSwitch({ onClick: handleSetEnableButtonsAnimation, checked: enableButtonsAnimation ? true : false }) }
-                 Buttons
+                 Menu
               </div>
             </div>
             <div
