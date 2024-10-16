@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { efSet, fccCertJS, henry, attention, loadingImage } from '../../images/images';
+import asdasd from '../../images/efSet.png';
 import css from './CertificationsCSS.module.css';
 import Bubbles from '../Bubbles/Bubbles';
 import { arrayCertificationsI } from '../../interfaces/interfaces';
@@ -42,9 +43,11 @@ function Certifications() {
 
   const loadedUpdater = (id: any) => {
     let backgroundPH = document.getElementById(`backgroundPH${id}`)
-    if (backgroundPH !== null) backgroundPH.style.display = "none"
     let animationPH = document.getElementById(`animationPH${id}`)
-    if (animationPH !== null) animationPH.style.display = "none"
+    if (backgroundPH !== null && animationPH !== null) {
+      backgroundPH.style.display = "none";
+      animationPH.style.display = "none"
+    }
   }
 
   const certificationsBGHandler: () => void = () => {
@@ -78,16 +81,31 @@ function Certifications() {
                     href={e.href}
                     target="_blank"
                     rel="noreferrer"
-                  >
-                    <img
-                      draggable="false"
-                      className={css.boxMedia}
-                      onLoad={() => loadedUpdater(e.id)}
-                      src={e.media}
-                      alt=""
-                    />
-                  </a>
-                  <img
+                    className={css.aaaasdsdas}
+                    onLoad={(e) => {
+                      //console.log(e.target)
+                      //console.log("LOADED")
+                      //console.dir(e.target)
+                      //(e.target as HTMLImageElement).style.background = "yellow"
+                      // @ts-ignore
+                      (e.target as HTMLElement).style.contentVisibility = 'visible'
+                    }}
+                    children={
+                    
+                        <img
+                          draggable="false"
+                          className={css.boxMedia}
+                          //onLoad={() => loadedUpdater(e.id)}
+                          style={{ backgroundImage: asdasd }}
+                          
+                          src={e.media}
+                          alt=""
+                        />
+                      
+                    }
+                  />
+
+              {/*     <img
                     id={`backgroundPH${e.id}`}
                     className={css.placeholderBackground}
                     alt=""
@@ -97,16 +115,15 @@ function Certifications() {
                     className={css.placeholderAnimation}
                     src={loadingImage}
                     alt=""
-                  />
+                  /> */}
                 </div>
                 <a
                   className={`${css.url} ${css.anchor}`}
                   href={e.href}
                   target="_blank"
                   rel="noreferrer"
-                >
-                  {e.url}
-                </a>
+                  children={e.url}
+                />
               </div>
             )
           })

@@ -118,43 +118,93 @@
 
 .boxMedia {
   display: flex;
+  position: relative;
   width: 220px;
   height: 120px;
   filter: var(--filterCert);
   transition: filter 1s;
-  z-index: 1000,
+  z-index: 1000;
+  /* background-image: url("../../images/food1.png"); */
+  /* background: yellow; */
+  /* background-color: var(--placeholderCert); */
+  content-visibility: hidden;
+  /* background: url("../../images/loadingImage.png"); */
+  /* src: url("../../images/food1.png"); */
+  /* content: url("../../images/loadingImage.png"); */
+  /* src: url("../../images/loadingImage.png"); */
+  /* background-image: url("../../images/javascript.png"); */
+  
+  /* background: url() */
+  /* animation: spinnerrr .8s linear infinite; */
+  /* animation: spinnerrr 1s linear infinite; */
+  /* animation-timing-function: steps(12, end); */
+  /* z-index: -1; */
+  /* background-color: var(--placeholderCert); */
+  
 }
+
+.aaaasdsdas::after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  width: 120px;
+  /* z-index: 1001; */
+  /* left: 50px; */
+  left: calc((100% - 120px) / 2);
+  /* z-index: 9999999; */
+  /* left: calc(100% / 2); */
+  /* left: 10px;
+  top: 10px; */
+  /* z-index: 9999999;
+  background: red; */
+  /* background: gray; */ /* DEV */
+  /* background: red; */
+  /* background-color: var(--placeholderCert); */
+  /* background-image: url("../../images/darth-vader.svg"); */
+  background-size: cover;
+  /* background-image: url("../../images/loadingImage.png"); */
+  background-image: url("../../images/loading.svg");
+  animation: spinnerrr .8s linear infinite;
+  /* animation: spinnerrr 4s linear infinite; */
+  animation-timing-function: steps(12, end);
+}
+
+.aaaasdsdas::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  /* width: 120px; */
+  /* z-index: 1001; */
+  /* left: 50px; */
+  /* left: calc((100% - 120px) / 2); */
+  /* background-color: darkred; */
+  background-color: var(--placeholderCert);
+  
+}
+
+@keyframes spinnerrr {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+
+  /* 0% { background-position: 0% 0% }
+  100% { background-position: 50% 0% } */
+}
+
+
+
+
+
+
 
 .boxMedia:hover {
   filter: var(--hoverCert);
   transition: filter 0s;
 }
 
-.placeholderBackground {
-  display: flex;
-  position: relative;
-  background: var(--placeholderCert);
-  margin-left: -220px;
-  width: 220px;
-  height: 120px;
-  z-index: 1000,
-}
+/* BEGIN PLACEHOLDER SECTION */
 
-.placeholderAnimation {
-  display: flex;
-  position: relative;
-  margin-left: -170px;
-  width: 120px;
-  height: 120px;
-  z-index: 1001;
-  animation: spinner .8s linear infinite;
-  animation-timing-function: steps(12, end);
-}
 
-@keyframes spinner {
-  0% { transform: rotate(0deg) }
-  100% { transform: rotate(360deg) }
-}
+/* END PLACEHOLDER SECTION */
 
 @media screen
 and (width <= 460px) {
